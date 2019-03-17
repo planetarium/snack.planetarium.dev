@@ -1,0 +1,14 @@
+name = "Hugo Planetarium"
+license = "MIT"
+licenselink = "https://github.com/siegerts/hugo-theme-basic/blob/master/LICENSE"
+description = "Planetarium's fork of https://github.com/siegerts/hugo-theme-basic"
+homepage = "https://github.com/siegerts/hugo-theme-basic"
+tags = []
+features = ["blog", "blog series", "syntax highlighting", "google analytics", "tachyons"]
+min_version = "0.41"
+
+[author]
+name = "Hong Minhee"
+homepage = "https://github.com/dahlia"
+
+

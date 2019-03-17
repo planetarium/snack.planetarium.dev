@@ -1,0 +1,71 @@
+{{ partial "header.html" . }}
+<body
+  class="sans-serif w-90 w-60-ns center center-ns mv2 mv5-ns"
+  itemscope
+  itemtype="http://schema.org/Article"
+>
+  {{ $baseurl := .Site.BaseURL }}
+  <a
+    href="{{ .Site.BaseURL  }}"
+    id="site-title"
+    class="b bb bw1 pb1 no-underline black"
+    >{{ .Site.Title }}</a
+  >
+
+  <section id="main" class="mt5">
+    <h1 itemprop="name" id="title" class="mb1">{{ .Title }}</h1>
+    <div class="f6 gray dib-ns">
+      <time itemprop="datePublished"
+        datetime="{{ .Date.Format "2006-01-02" }}">
+        {{ .Date.Format (.Site.Params.dateFormat | default "January 2, 2006") }}
+      </time>
+      {{ if .IsTranslated }}
+        (<strong>{{ .Page.Language.LanguageName }}</strong>
+        {{- range .Translations }}
+          {{- if (not (eq .Language.Lang "mis")) }}
+            &bull;
+            <a href="{{ .Permalink }}"
+              hreflang="{{ .Language.Params.ianasubtag }}"
+              title="{{- .Title -}}"
+              class="gray">{{ .Language.LanguageName }}</a>
+          {{- end -}}
+        {{- end -}}
+        )
+      {{ end }}
+    </div>
+
+    <article itemprop="articleBody" id="content" class="w-90 lh-copy">
+      {{ .Content }}
+    </article>
+
+    {{ if isset .Params "authors" }}
+      {{ $authors := .Site.Data.authors }}
+      {{ range $authorHandle := .Params.authors }}
+        <div itemprop="author" class="fl w-10 tc">
+          {{ $author := index $authors $authorHandle }}
+          {{ $authorT := index $author $.Page.Language.Lang }}
+          {{ if isset $author.social "github" }}
+            <a href="https://github.com/{{ $author.social.github }}"
+              rel="author" itemprop="url" class="no-underline mid-gray b f6">
+              <img src="https://avatars.githubusercontent.com/
+                        {{- $author.social.github }}"
+                itemprop="image" class="w3 h3 br-100 mb1">
+              <br>{{ $authorT.name }}
+            </a>
+          {{ else }}
+            <a href="mailto:{{ $author.social.email }}" rel="author"
+              itemprop="email" class="no-underline mid-gray b f6">
+              <img src="https://avatars.githubusercontent.com/
+                        {{- $author.social.github }}"
+                itemprop="image" class="w3 h3 br-100 mb1">
+              <br>{{ $authorT.name }}
+            </a>
+          {{ end }}
+        </div>
+      {{ end }}
+    {{ end }}
+  </section>
+
+  {{ partial "footer.html" . }}
+</body>
+</html>

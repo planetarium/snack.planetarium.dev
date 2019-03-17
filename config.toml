@@ -1,0 +1,46 @@
+baseURL = "https://snack.planetariumhq.dev/"
+theme = "hugo-planetarium"
+copyright = '''
+    &copy; 2019
+    <a href="https://planetariumhq.com/"
+        style="color: inherit; text-decoration: inherit;">Planetarium</a>.
+'''
+
+# We use ISO 639-3 (so-called "three-letter code") instead of
+# ISO 639-1 (so-called "two-letter code") here.
+# Instead, we have a custom attribute named "ianaSubtag" which is used for
+# HTML lang attribute, etc.
+defaultContentLanguage = "mis"
+disableLanguages = []
+[languages.mis]
+title = "Planetarium Engineering Snack"
+weight = 999
+[languages.eng]
+weight = 1
+title = "Planetarium Engineering Snack"
+languageName = "English"
+ianaSubtag = "en"
+dateFormat = "January 2, 2006"
+[languages.kor]
+weight = 2
+title = "플라네타리움 엔지니어링 스낵"
+languageName = "한국어"
+ianaSubtag = "ko"
+dateFormat = "2006년 1월 2일"
+#[languages.jpn]
+#weight = 2
+#title = "プラネタリウム エンジニアリング スナック"
+#languageName = "日本語"
+#ianaSubtag = "ja"
+#dateFormat = "2006年1月2日"
+
+[[params.menu]]
+name = "Posts"
+url = "posts/"
+
+[permalinks]
+posts = "/:year/:month/:filename/"
+
+[blackfriday]
+extensionsmask = ["noIntraEmphasis", "strikethrough"]
+taskLists = false

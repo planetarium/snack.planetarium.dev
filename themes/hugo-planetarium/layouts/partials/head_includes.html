@@ -1,0 +1,18 @@
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css"
+/>
+
+{{ $scss := resources.Get "scss/style.scss" }}
+{{ $preprocessedScss := $scss | resources.ExecuteAsTemplate "css/style.css" . }}
+{{ $css := $preprocessedScss | toCSS | minify | fingerprint }}
+<link
+  rel="stylesheet" href="{{ $css.Permalink }}"
+  integrity="{{ $css.Data.Integrity }}">
+
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/highlightjs@9.12.0/styles/github-gist.css"
+/>
+
+{{ template "_internal/google_analytics_async.html" . }}
