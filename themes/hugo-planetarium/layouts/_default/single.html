@@ -47,7 +47,9 @@
           {{ if isset $author.social "github" }}
             <a href="https://github.com/{{ $author.social.github }}"
               rel="author" itemprop="url" class="no-underline mid-gray b f6">
-              <img src="https://avatars.githubusercontent.com/
+              <img src="https://www.gravatar.com/avatar/
+                        {{- md5 $author.social.email -}}
+                        ?d=https://avatars.githubusercontent.com/
                         {{- $author.social.github }}"
                 itemprop="image" class="w3 h3 br-100 mb1">
               <br>{{ $authorT.name }}
@@ -55,8 +57,8 @@
           {{ else }}
             <a href="mailto:{{ $author.social.email }}" rel="author"
               itemprop="email" class="no-underline mid-gray b f6">
-              <img src="https://avatars.githubusercontent.com/
-                        {{- $author.social.github }}"
+              <img src="https://www.gravatar.com/avatar/
+                        {{- md5 $author.social.email }}"
                 itemprop="image" class="w3 h3 br-100 mb1">
               <br>{{ $authorT.name }}
             </a>
