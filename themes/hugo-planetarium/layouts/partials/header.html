@@ -27,9 +27,9 @@
     {{ end }}
 
     <link
-      href="{{ .RSSLink }}"
+      href="{{ .Site.BaseURL }}index.xml"
       rel="alternate"
-      type="application/rss+xml"
+      type="application/atom+xml"
       title="{{ .Title }}"
     />
 

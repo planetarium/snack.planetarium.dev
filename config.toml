@@ -5,6 +5,7 @@ copyright = '''
     <a href="https://planetariumhq.com/"
         style="color: inherit; text-decoration: inherit;">Planetarium</a>.
 '''
+disableKinds = ["RSS"]  # We use Atom instead.  See the below.
 
 # We use ISO 639-3 (so-called "three-letter code") instead of
 # ISO 639-1 (so-called "two-letter code") here.
@@ -34,9 +35,16 @@ dateFormat = "2006년 1월 2일"
 #ianaSubtag = "ja"
 #dateFormat = "2006年1月2日"
 
-[[params.menu]]
-name = "Posts"
-url = "posts/"
+[outputs]
+home = ["HTML", "Atom"]
+
+[mediaTypes."application/atom"]
+suffixes = ["xml"]
+
+[outputFormats.Atom]
+mediaType = "application/atom"
+isPlainText = false
+isHTML = false
 
 [permalinks]
 posts = "/:year/:month/:filename/"

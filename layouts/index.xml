@@ -1,0 +1,62 @@
+<feed
+  xmlns="http://www.w3.org/2005/Atom"
+  xml:lang="{{ .Language.Params.ianasubtag }}">
+
+  <title>{{ .Title }}</title>
+  <link
+    rel="self"
+    href="{{ .Permalink }}index.xml" />
+  <link
+    rel="alternate"
+    href="{{ .Permalink }}"
+    title="{{- .Title -}}" />
+  {{ range .Translations }}
+    {{ if (not (eq .Language.Lang "mis")) }}
+      <link
+        rel="alternate"
+        href="{{ .Permalink }}"
+        hreflang="{{ .Language.Params.ianasubtag }}"
+        title="{{- .Title -}}" />
+    {{ end }}
+  {{ end }}
+  <updated>{{ .Date.Format "2006-01-02T15:04:05-07:00" }}</updated>
+  <id>{{ .Permalink }}</id>
+  {{ range first 15 .Data.Pages }}
+  <entry>
+    <title>{{ .Title }}</title>
+    <link
+      rel="alternate"
+      href="{{ .Permalink }}"
+      title="{{ .Title }}" />
+    {{ if .IsTranslated }}
+      {{ range .Translations }}
+        <link
+          rel="alternate"
+          href="{{ .Permalink }}"
+          hreflang="{{ .Language.Params.ianasubtag }}"
+          title="{{- .Title -}}" />
+      {{ end }}
+    {{ end }}
+    <id>{{ .Permalink }}</id>
+    <published>{{ .Date.Format "2006-01-02T15:04:05-07:00" }}</published>
+    <updated>{{ .Lastmod.Format "2006-01-02T15:04:05-07:00" }}</updated>
+    <content type="html">{{ .Content | html }}</content>
+    {{ if isset .Params "authors" }}
+      {{ $authors := .Site.Data.authors }}
+      {{ range $authorHandle := .Params.authors }}
+        <author>
+          {{ $author := index $authors $authorHandle }}
+          {{ $authorT := index $author $.Page.Language.Lang }}
+          <name>{{ $authorT.name }}</name>
+          {{ if isset $author.social "github" }}
+            <uri>https://github.com/{{ $author.social.github }}</uri>
+          {{ end }}
+          {{ if isset $author.social "email" }}
+            <email>{{ $author.social.email }}</email>
+          {{ end }}
+        </author>
+      {{ end }}
+    {{ end }}
+  </entry>
+  {{ end }}
+</feed>
