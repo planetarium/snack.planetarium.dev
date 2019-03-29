@@ -41,7 +41,7 @@
     {{ if isset .Params "authors" }}
       {{ $authors := .Site.Data.authors }}
       {{ range $authorHandle := .Params.authors }}
-        <div itemprop="author" class="fl w-10 tc">
+        <div itemprop="author" class="fl tc mr3">
           {{ $author := index $authors $authorHandle }}
           {{ $authorT := index $author $.Page.Language.Lang }}
           {{ if isset $author.social "github" }}
