@@ -26,12 +26,26 @@
       {{ end }}
     {{ end }}
 
-    <link
-      href="{{ .Site.BaseURL }}index.xml"
-      rel="alternate"
-      type="application/atom+xml"
-      title="{{ .Title }}"
-    />
+    {{ if (eq .Site.Language.Lang "mis") }}
+      {{ range .Translations }}
+        {{ if (not (eq .Language.Lang "mis")) }}
+          <link
+            href="{{ .URL }}index.xml"
+            hreflang="{{ .Language.Params.ianasubtag }}"
+            rel="alternate"
+            type="application/atom+xml"
+            title="{{- .Title -}}"
+          />
+        {{ end }}
+      {{ end }}
+    {{ else }}
+      <link
+        href="{{ .Site.BaseURL }}index.xml"
+        rel="alternate"
+        type="application/atom+xml"
+        title="{{ .Title }}"
+      />
+    {{ end }}
 
     {{ partial "head_includes.html" . }}
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />

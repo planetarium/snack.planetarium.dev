@@ -7,7 +7,9 @@
         'link[rel=alternate][hreflang]');
       var languages = {};
       langLinks.forEach(function (link) {
-        languages[link.hreflang] = link.href;
+        if (link.type != 'application/atom+xml') {
+          languages[link.hreflang] = link.href;
+        }
       });
       for (var langs = navigator.languages, i = 0; i < langs.length; ++i) {
         var lang = langs[i];
