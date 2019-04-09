@@ -15,12 +15,13 @@
 <meta property="og:description" content="{{ .Description }}" />
 <meta property="og:title" content="{{ .Title }}" />
 <meta property="og:site_name" content="{{ .Site.Title }}" />
-<meta property="og:image" content="https://planetariumhq.com/assets/img/press/190124.png" />
-<meta property="og:image:type" content="image/png" />
-<meta property="og:image:width" content="" />
-<meta property="og:image:height" content="" />
+{{ if (fileExists (print (print "static/og/" .Site.Language) ".png")) }}
+  <meta property="og:image"
+    content="{{ (print (print "og/" .Site.Language) ".png") | absURL }}" />
+  <meta property="og:image:type" content="image/png" />
+{{ end }}
 <meta property="og:url" content="{{ .Permalink }}" />
-<meta property="og:locale" content="{{ .Site.Language }}" />
+<meta property="og:locale" content="{{ .Site.Language.Params.ianaSubtag }}" />
 <meta property="article:published_time"
   content="{{ .Date.Format "2006-01-02" }}">
 <meta property="article:modified_time"
