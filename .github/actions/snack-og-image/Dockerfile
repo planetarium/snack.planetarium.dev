@@ -1,6 +1,6 @@
 FROM alpine:3.9
 
-RUN apk add --no-cache font-noto font-noto-extra imagemagick jq pango
+RUN apk add --no-cache font-noto font-noto-extra imagemagick librsvg jq pango
 RUN wget -O /usr/bin/yj \
   https://github.com/sclevine/yj/releases/download/v3.1.0/yj-linux \
   && chmod +x /usr/bin/yj
