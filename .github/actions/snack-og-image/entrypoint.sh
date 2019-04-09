@@ -10,26 +10,57 @@ for language in $(jq -r '.|keys|join("\n")' /tmp/languages.json); do
     pango-view \
       -t "$text" \
       --no-display \
-      --font='Noto Sans bold 32px' \
+      --font='Noto Sans bold 40px' \
       --language "$iana" \
       --hinting=full \
-      --margin="50 50 65 90" \
       --pixels \
       -o "/tmp/text-$language.png"
-    width="$(identify -format '%w' "/tmp/text-$language.png")"
-    right=$((width-50))
-    convert "/tmp/text-$language.png" \
-      -fill none \
-      -stroke black \
-      -strokewidth 5 \
-      -draw "line 50,100 $right,100" \
-      "/tmp/text-$language.png"
+    text_width="$(identify -format '%w' "/tmp/text-$language.png")"
+    text_height="$(identify -format '%h' "/tmp/text-$language.png")"
+    logo_width=45
+    logo_margin=5
+    rsvg-convert "themes/hugo-planetarium/static/logo.svg" \
+      --format png \
+      --width "$logo_width" \
+      --keep-aspect-ratio \
+      --output /tmp/logo.png
+    logo_height="$(identify -format '%h' "/tmp/logo.png")"
+    line_width=6
+    # canvas
+    convert \
+      -size "$((text_width+logo_width))x$((text_height+line_width))" \
+      xc:white \
+      "static/og/$language.png"
+    # text
     composite \
       -compose multiply \
-      -geometry +50+60 \
-      -density 125 \
-      "themes/hugo-planetarium/static/logo.svg" \
       "/tmp/text-$language.png" \
+      -geometry "+$((logo_width+logo_margin))+0" \
+      "static/og/$language.png" \
+      "static/og/$language.png"
+    # logo
+    composite \
+      -compose multiply \
+      "/tmp/logo.png" \
+      -geometry "+0+$(((text_height-logo_height)/2+3))" \
+      "static/og/$language.png" \
+      "static/og/$language.png"
+    # underline
+    line="0,$text_height $((text_width+logo_width+logo_margin)),$text_height"
+    convert "static/og/$language.png" \
+      -fill none \
+      -stroke black \
+      -strokewidth "$line_width" \
+      -draw "line $line" \
+      "static/og/$language.png"
+    width="$(identify -format '%w' "static/og/$language.png")"
+    height="$(identify -format '%h' "static/og/$language.png")"
+    # margin
+    convert "static/og/$language.png" \
+        -gravity north \
+        -extent "${width}x$((height+10))" \
+        -bordercolor white \
+        -border 100x100 \
       "static/og/$language.png"
   fi
 done
