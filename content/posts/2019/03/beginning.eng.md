@@ -1,7 +1,9 @@
 ---
 title: Prologue
 date: 2019-03-29
+translated: 2019-04-04
 authors: [swen.mun, hong.minhee]
+translators: [kidon.seo]
 ---
 
 Hello World. This is Team [Planetarium] --- builders of [open source library that allows anyone to create decentralized multi-play game through blockchain technology][1].

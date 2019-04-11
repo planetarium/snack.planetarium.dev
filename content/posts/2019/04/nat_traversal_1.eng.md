@@ -1,7 +1,9 @@
 ---
 title: Moving Beyond NAT
 date: 2019-04-04
+translated: 2019-04-08
 authors: [swen.mun]
+translators: [kidon.seo]
 ---
 
 Hello, I'm Swen Mun from the Planetarium Engineering Team.
