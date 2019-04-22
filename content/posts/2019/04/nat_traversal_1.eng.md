@@ -7,7 +7,7 @@ translators: [kidon.seo]
 ---
 
 Hello, I'm Swen Mun from the Planetarium Engineering Team.
-Today we're going to talk about what's known as [<abbr title="Network Address Translation">NAT</abbr> transversal techniques][1].
+Today we're going to talk about what's known as [<abbr title="Network Address Translation">NAT</abbr> traversal techniques][1].
 
 [1]: https://en.wikipedia.org/wiki/NAT_traversal
 
@@ -32,7 +32,7 @@ In the server-client model, accessing the Internet through NAT is not a problem.
 If the server has an authorized IP, the client can access it, whether through NAT or not.
 However, if you need to connect to a device inside the NAT/firewall, you've got a problem.
 Because devices outside NAT cannot access the IP of a private network inside the NAT.
-Techniques to address these situations are called [NAT transversal techniques][1].
+Techniques to address these situations are called [NAT traversal techniques][1].
 
 [IP address]: https://en.wikipedia.org/wiki/IP_address
 [IPv4]: https://en.wikipedia.org/wiki/IPv4
@@ -96,6 +96,6 @@ Specifically, this technique is only applicable to NAT that follows endpoint ind
 Next Story
 ----------
 
-The NAT transversal techniques we have discussed today have different applicable situations and they all have different pros and cons.
+The NAT traversal techniques we have discussed today have different applicable situations and they all have different pros and cons.
 Therefore, people in our field use these methods in combination.
 Next time we'll look have a closer look on [TURN], which is the most expensive but the most reliable communication method to move beyond NAT.
