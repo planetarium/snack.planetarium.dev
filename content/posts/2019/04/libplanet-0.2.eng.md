@@ -166,7 +166,7 @@ For example, changing `Transaction<AbstractAction>` to
 in most cases.
 Of course, the `PolymorphicAction<T>` class uses .NET reflection under the hood.
 
-[14]: https://docs.microsoft.com/ko-kr/dotnet/framework/reflection-and-codedom/reflection
+[14]: https://docs.microsoft.com/en-us/dotnet/framework/reflection-and-codedom/reflection
 [15]: https://docs.libplanet.io/0.2.1/api/Libplanet.Action.PolymorphicAction-1.html
 
 
