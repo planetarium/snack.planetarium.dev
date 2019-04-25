@@ -24,22 +24,23 @@ so let me briefly explain it to you.
 
 Libplanet is a common library that solves game implementation problems such as
 <abbr title="Peer-to-Peer">P2P</abbr> communication and data synchronization
-when creating online multi-play games that run on distributed P2P.
+when creating online multiplay games that run on distributed P2P.
 
 Libplanet is now being developed in C# language,
 with the aim of being used in conjunction with the popular Unity engine.
 Of course, even if you don't use Unity,
-Libplanet targets [.NET Standard 2.0][3] so that it's easy to attach to
-games that are implemented on a .NET or Mono platform.
+Libplanet targets [.NET Standard 2.0][3] so that it's easy to use for
+games that are implemented on .NET or Mono.
 
 Another feature of Libplanet is that it is a library,
 not an engine or a framework.
-While engines and frameworks control the entry point (`Main()` method) of
-the game/program process and preempt the control flow,
-only letting game programmers script custom code in only allowed portions,
-Libplanet does not preempt the game process and operates unobtrusively,
-operating only where it is explicitly invoked by the game programmer.
-This allows us to work with already-established game engines like Unity.
+Since engines and frameworks control the entry point (`Main()` method) of
+a process and dictate its execution flow, game programmers have limited control
+and can only program essentially through scripts within sections explictly allowed.
+Libplanet does not preempt the game process and operates only when it is
+explicitly invoked by the game programmer.
+This allows Libplanet to function with game engines like Unity without imposing
+additional limitations on the developer.
 
 Libplanet is listed on [NuGet] along with [API docs][4].
 
@@ -54,16 +55,15 @@ Libplanet is listed on [NuGet] along with [API docs][4].
 Although P2P communication was possible from [Libplanet 0.1][5],
 all peers had to have a public IP.
 In other words, because we couldn't reach peers behind routers,
-communication was actually limited in reality.
-Solving this issue was a top priority for us and so,
+network communication was actually limited in reality.
+Solving this issue was a top priority for us and so
 traversing NAT was a major goal in the 0.2 roadmap.
-Even though our strategy was a bit inefficient,
+To cover most cases,
 we implemented [RFC 5766] and [RFC 5389],
 called <abbr title="Traversal Using Relays around NAT">TURN</abbr> and
-<abbr title="Session Traversal Utilities for NAT">STUN</abbr>,
-to cover most cases.
+<abbr title="Session Traversal Utilities for NAT">STUN</abbr>.
 Also, there weren't any open source C# implementation to ease the process,
-so our team's Swen Mun had to implement all the necessary parts of
+so our team's Swen Mun implemented the necessary parts of
 the specification from scratch.
 If you're interested in Swen's journey, please also read the article,
 [*Moving Beyond NAT*][6], in which he explains how he solved this problem.
@@ -82,9 +82,8 @@ Up to the previous version of Libplanet,
 we referred to existing technologies such as [Bitcoin]
 that solve similar problems and took on the concept
 that all transactions had a sender and a recipient.
-In the case of Bitcoin, it deals with monetary transactions,
-so the goods are only moved and shouldn't be replicated.
-Therefore, the notion that there are senders and recipients in
+In the case of Bitcoin, it deals with monetary transactions so
+the notion that there are senders and recipients in
 every transaction comes naturally.
 In games, however, there are often actions that do not carry a recipient
 concept, such as the movement of a character,
@@ -160,7 +159,7 @@ and the presence of subtypes is completely ignored.
 
 Instead, if you want to select the behavior of an action through
 subtype polymorphism, you can use `PolymorphicAction<T>`, a new action class to
-decorate an other action.
+decorate another action.
 For example, changing `Transaction<AbstractAction>` to
 `Transaction<PolymorphicAction<AbstractionAction>>` will work as it has been
 in most cases.
