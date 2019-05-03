@@ -1,13 +1,13 @@
 ---
 title: Libplanet 처음 기여하기
-date: 2019-04-26
+date: 2019-05-07
 authors: [seunghun.lee]
 ---
 
 안녕하세요. 플라네타리움 개발팀 이승훈입니다. 플라네타리움에서 일하는 것이 매력적인 이유 중 하나는 오픈 소스 개발자로 일할 수 있다는 게 아닐까 합니다. 이번 글은 제가 [Libplanet][] 프로젝트에 했던 첫 기여에 대한 이야기입니다. Libplanet에 대한 소개는 〈[Libplanet 0.2 릴리스][1]〉를 참고해주세요.
 
 [Libplanet]: https://github.com/planetarium/libplanet
-[1]: https://snack.planetarium.dev/kor/2019/04/libplanet-0.2/
+[1]: {{< ref "libplanet-0.2.kor.md" >}}
 
 왜 Libplanet에 기여했을까?
 ----------------------------
@@ -55,11 +55,11 @@ C#에서의 개발 경험이 거의 없었고 프로젝트 배경지식도 별�
 
 저는 첫 기여 후에 플라네타리움팀에 합류한 지 약 한 달 정도 되었고 함께 즐겁게 일하고 있습니다.
 
-플라네타리움은 Libplanet 기여를 활성화하기 위해 [코드먹는하마][8], [스프린트서울][9] 등의 행사에 참여했고 앞으로도 활발하게 참여할 예정입니다. 또한 처음 기여하시는 분들을 위한 [Good First Issue][] 들이 있으니 관심 있는 분들은 참고하시면 좋을 것 같습니다.
+플라네타리움은 Libplanet 기여를 활성화하기 위해 [코드먹는하마][8], [스프린트서울][9] 등의 행사에 참여했고 앞으로도 활발하게 참여할 예정입니다. 또한 처음 기여하시는 분들을 위한 [초심자용 이슈][10]들이 있으니 관심 있는 분들은 참고하시면 좋을 것 같습니다.
 
-프로젝트에 궁금한 점이 있으신 분들은 언제든 저희 팀이 상주해 있는 [디스코드 대화방][10]에 놀러 오시길 바랍니다!
+프로젝트에 궁금한 점이 있으신 분들은 언제든 저희 팀이 상주해 있는 [디스코드 대화방][11]에 놀러 오시길 바랍니다!
 
 [8]: https://comuka.nonce.community/
 [9]: https://sprintseoul.org/
-[Good First Issue]: https://github.com/planetarium/libplanet/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22
-[10]: https://discord.gg/ue9fgc3
+[10]: https://github.com/planetarium/libplanet/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22
+[11]: https://discord.gg/ue9fgc3
