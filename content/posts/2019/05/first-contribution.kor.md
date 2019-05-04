@@ -53,13 +53,15 @@ C#에서의 개발 경험이 거의 없었고 프로젝트 배경지식도 별�
 
 ## 마치며
 
-저는 첫 기여 후에 플라네타리움팀에 합류한 지 약 한 달 정도 되었고 함께 즐겁게 일하고 있습니다.
+저는 첫 기여 후에 플라네타리움팀에 합류한 지 약 한 달 정도 되었고 함께 즐겁게 일하고 있습니다. 플라네타리움에서 함께 Libplanet을 만들 [소프트웨어 엔지니어][8]를 찾고 있으니 관심있는 분들은 [채용 정보][9] 페이지를 확인해주세요.
 
-플라네타리움은 Libplanet 기여를 활성화하기 위해 [코드먹는하마][8], [스프린트서울][9] 등의 행사에 참여했고 앞으로도 활발하게 참여할 예정입니다. 또한 처음 기여하시는 분들을 위한 [초심자용 이슈][10]들이 있으니 관심 있는 분들은 참고하시면 좋을 것 같습니다.
+플라네타리움은 Libplanet 기여를 활성화하기 위해 [코드먹는하마][10], [스프린트서울][11] 등의 행사에 참여했고 앞으로도 활발하게 참여할 예정입니다. 또한 처음 기여하시는 분들을 위한 [초심자용 이슈][12]들이 있으니 관심 있는 분들은 참고하시면 좋을 것 같습니다.
 
-프로젝트에 궁금한 점이 있으신 분들은 언제든 저희 팀이 상주해 있는 [디스코드 대화방][11]에 놀러 오시길 바랍니다!
+프로젝트에 궁금한 점이 있으신 분들은 언제든 저희 팀이 상주해 있는 [디스코드 대화방][13]에 놀러 오시길 바랍니다!
 
-[8]: https://comuka.nonce.community/
-[9]: https://sprintseoul.org/
-[10]: https://github.com/planetarium/libplanet/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22
-[11]: https://discord.gg/ue9fgc3
+[8]: https://www.notion.so/8996647777d24491a5dc92d82ba37ec2
+[9]: https://www.notion.so/98129a2f333d4d17b25ce268d72d326c
+[10]: https://comuka.nonce.community/
+[11]: https://sprintseoul.org/
+[12]: https://github.com/planetarium/libplanet/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22
+[13]: https://discord.gg/ue9fgc3
