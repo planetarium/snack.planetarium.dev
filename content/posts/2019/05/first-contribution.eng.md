@@ -6,7 +6,7 @@ translators: [kidon.seo]
 ---
 
 
-Hello, I'm Seung Hoon Lee, member of Planetarium Dev Team. I believe one of the reasons why working at Planetarium is so attractive is that I can work as an open source developer. This piece is about my first contribution to Project [Libplanet][]. For an introduction to Libplanet, please see 〈[Libplanet 0.2 릴리스][1]〉
+Hello, I'm Seunghun Lee, member of Planetarium Dev Team. I believe one of the reasons why working at Planetarium is so attractive is that I can work as an open source developer. This piece is about my first contribution to Project [Libplanet][]. For an introduction to Libplanet, please see 〈[Libplanet 0.2 Released][1]〉.
 
 [Libplanet]: https://github.com/planetarium/libplanet
 [1]: {{< ref "libplanet-0.2.eng.md" >}}
