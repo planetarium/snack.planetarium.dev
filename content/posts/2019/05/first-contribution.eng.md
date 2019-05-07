@@ -39,7 +39,7 @@ EIP-55 Checksum
 :  `0xD1220A0cf47c7B9Be7A2E6BA89F429762e7b9aDb`
 
 
-When I first contributed to Libplanet, the project used a hexadecimal method consisting of only lowercase letters for its address format. Therefore, this issue had to be implemented so that the address string representation was expressed in the EIP-55 checksum format used by Ethereum. For more information, see the corresponding [issue][6] and [PR][7].
+When I first contributed to Libplanet, the project used a hexadecimal consisting of only lowercase letters for its address format. Therefore, this issue had to be implemented so that the address string representation was expressed in the EIP-55 checksum format used by Ethereum. For more information, see the corresponding [issue][6] and [pull request][7].
 
 Although I had little development experience and background in C#, it was a simple issue that did not require many modules to be fixed, so I was able to make my first contribution rather easily.
 
