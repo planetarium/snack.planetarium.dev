@@ -30,7 +30,7 @@ As mentioned earlier, I used to mainly develop in Python on Mac. I often contrib
 What to Contribute?
 ------------------
 
-Libplanet’s address uses [Ethereum's][5] address format, which uses a checksum in a combination of upper and lower case letters proposed in [EIP-55][]. For example:
+Libplanet’s address uses [Ethereum][5]'s address format, which uses a checksum in a combination of upper and lower case letters proposed in [EIP-55][]. For example:
 
 Hexadecimal Method
 :  `0xd1220a0cf47c7b9be7a2e6ba89f429762e7b9adb`
