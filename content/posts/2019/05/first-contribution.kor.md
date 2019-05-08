@@ -4,7 +4,7 @@ date: 2019-05-07
 authors: [seunghun.lee]
 ---
 
-안녕하세요. 플라네타리움 개발팀 이승훈입니다. 플라네타리움에서 일하는 것이 매력적인 이유 중 하나는 오픈 소스 개발자로 일할 수 있다는 게 아닐까 합니다. 이번 글은 제가 [Libplanet][] 프로젝트에 했던 첫 기여에 대한 이야기입니다. Libplanet에 대한 소개는 〈[Libplanet 0.2 릴리스][1]〉를 참고해주세요.
+안녕하세요. 플라네타리움 개발팀 이승훈입니다. 플라네타리움에서 일하는 것이 매력적인 이유 중 하나는 오픈 소스 개발자로 일할 수 있다는 게 아닐까 합니다. 이번 글은 제가 [Libplanet][] 프로젝트에 했던 첫 기여에 대한 이야기입니다. Libplanet에 대한 소개는 <cite>[Libplanet 0.2 릴리스][1]</cite>를 참고해주세요.
 
 [Libplanet]: https://github.com/planetarium/libplanet
 [1]: {{< ref "libplanet-0.2.kor.md" >}}

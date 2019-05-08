@@ -66,7 +66,8 @@ Also, there weren't any open source C# implementation to ease the process,
 so our team's Swen Mun implemented the necessary parts of
 the specification from scratch.
 If you're interested in Swen's journey, please also read the article,
-[*Moving Beyond NAT*][6], in which he explains how he solved this problem.
+<cite>[Moving Beyond NAT][6]</cite>, in which he explains how he solved
+this problem.
 
 [5]: https://github.com/planetarium/libplanet/releases/tag/0.1.0
 [6]: {{< ref "nat_traversal_1.eng.md" >}}
