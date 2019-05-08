@@ -19,7 +19,7 @@ In January, Planetarium announced its first recruiting notice and revealed a rep
 C# Development Environment 
 ------------
 
-As mentioned earlier, I used to mainly develop in Python on Mac. I often contributed to Python open source projects that interested me and this was easy because most Python developers also developed on Mac and were familiar with the open source environment. But as I was about to build a C# development environment on Mac, I found myself stuck from the very first step, unsure about what to install. Fortunately, there were projects like [Mono][] and [.NET Core][2] that enabled .NET development on Mac, and editors such as [VS Code][] that also supported plug-ins for C# development. So I was able to set up an environment without much difficulty. Now that Libplanet also provides a [developer guide][3] and a [environment setup guide][4], I think it will be much easier for developers who want to contribute to the project.
+As mentioned earlier, I used to mainly develop in Python on Mac. I often contributed to Python open source projects that interested me and this was easy because most Python developers also developed on Mac and were familiar with the open source environment. But as I was about to build a C# development environment on Mac, I found myself stuck from the very first step, unsure about what to install. Fortunately, there were projects like [Mono][] and [.NET Core][2] that enabled .NET development on Mac, and editors such as [VS Code][] that also supported plug-ins for C# development. So I was able to set up an environment without much difficulty. Now that Libplanet also provides a [developer guide][3] and an [environment setup guide][4], I think it will be much easier for developers who want to contribute to the project.
 
 [Mono]: https://www.mono-project.com/
 [2]: https://en.wikipedia.org/wiki/.NET_Core
@@ -39,7 +39,7 @@ EIP-55 Checksum
 :  `0xD1220A0cf47c7B9Be7A2E6BA89F429762e7b9aDb`
 
 
-When I first contributed to Libplanet, the project used a hexadecimal consisting of only lowercase letters for its address format. Therefore, this issue had to be implemented so that the address string representation was expressed in the EIP-55 checksum format used by Ethereum. For more information, see the corresponding [issue][6] and [pull request][7].
+When I first contributed to Libplanet, the project used hexadecimal consisting of only lowercase letters for its address format. Therefore, this issue had to be implemented so that the address string representation was expressed in the EIP-55 checksum format used by Ethereum. For more information, see the corresponding [issue][6] and [pull request][7].
 
 Although I had little development experience and background in C#, it was a simple issue that did not require many modules to be fixed, so I was able to make my first contribution rather easily.
 
@@ -50,7 +50,8 @@ Although I had little development experience and background in C#, it was a simp
 
 ## What I Learned Through My First Contribution
 
-What I found out from my first contribution was that the C# development environment on Mac was more easy than I had anticipated. The language itself was not difficult because C# was oriented towards a popularized multi-paradigm programming language. While the .NET development environment on Mac was not too difficult to develop, support for various tools on third-party libraries and non-window platforms was still insufficient. However, this is expected to improve gradually thanks to Microsoft's recent open source and multi-platform policies. 
+What I found out from my first contribution was that the C# development environment on Mac was more easy than I had anticipated. The language itself was not difficult because C# was oriented towards a popularized multi-paradigm programming language. While the .NET development environment on Mac was not too difficult to develop, support for various tools on third-party libraries and non-window platforms was still insufficient. However, this is expected to improve gradually thanks to Microsoft's recent open source and multi-platform policies.
+
 I was also able to experience the development culture of Planetarium Team, and it was impressive that all issues were recorded on Github and that members all used English to communicate with the open source community around the world. And since the project was being externally contributed, code reviews were required and management systems like testing and changelogs were being automated and managed through CI.
 
 ## Epilogue
