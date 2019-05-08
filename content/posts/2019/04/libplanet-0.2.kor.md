@@ -51,7 +51,7 @@ Libplanet은 [NuGet]에 올라가 있으며, [API 문서][4]도 있습니다.
 <abbr title="Session Traversal Utilities for NAT">STUN</abbr>이라 불리는
 [RFC 5766] 및 [RFC 5389]를 구현했습니다. 이 과정에서 오픈 소스 C# 구현을 찾지 못해
 스펙에서 필요한 부분들을 모두 직접 구현하는 수고를 같은 팀의 문성원 님이 해주셨습니다.
-이 경험을 풀어서 쓴 〈[NAT를 넘어서 가자][6]〉라는 글도 읽어주시기 바랍니다!
+이 경험을 풀어서 쓴 <cite>[NAT를 넘어서 가자][6]</cite>라는 글도 읽어주시기 바랍니다!
 
 [5]: https://github.com/planetarium/libplanet/releases/tag/0.1.0
 [6]: {{< ref "nat_traversal_1.kor.md" >}}

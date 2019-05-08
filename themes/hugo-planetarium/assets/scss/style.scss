@@ -34,6 +34,10 @@ code {
   -moz-osx-font-smoothing: grayscale;
 }
 
+cite:lang(ko)        { font-style: normal; }
+cite:lang(ko):before { content: '\3008'; }
+cite:lang(ko):after  { content: '\3009'; }
+
 #main h1#site-title {
   background-image: url(../logo.svg);
   background-repeat: no-repeat;
