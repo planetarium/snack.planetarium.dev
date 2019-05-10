@@ -19,13 +19,12 @@ In January, Planetarium announced its first recruiting notice and revealed a rep
 C# Development Environment 
 ------------
 
-As mentioned earlier, I used to mainly develop in Python on Mac. I often contributed to Python open source projects that interested me and this was easy because most Python developers also developed on Mac and were familiar with the open source environment. But as I was about to build a C# development environment on Mac, I found myself stuck from the very first step, unsure about what to install. Fortunately, there were projects like [Mono][] and [.NET Core][2] that enabled .NET development on Mac, and editors such as [VS Code][] that also supported plug-ins for C# development. So I was able to set up an environment without much difficulty. Now that Libplanet also provides a [developer guide][3] and an [environment setup guide][4], I think it will be much easier for developers who want to contribute to the project.
+As mentioned earlier, I used to mainly develop in Python on Mac. I often contributed to Python open source projects that interested me and this was easy because most Python developers also developed on Mac and were familiar with the open source environment. But as I was about to build a C# development environment on Mac, I found myself stuck from the very first step, unsure about what to install. Fortunately, there were projects like [Mono][] and [.NET Core][2] that enabled .NET development on Mac, and editors such as [VS Code][] that also supported plug-ins for C# development. So I was able to set up an environment without much difficulty. Now that Libplanet also provides a [developer guide][3], I think it will be much easier for developers who want to contribute to the project.
 
 [Mono]: https://www.mono-project.com/
 [2]: https://en.wikipedia.org/wiki/.NET_Core
 [VS Code]: https://code.visualstudio.com/
 [3]: https://github.com/planetarium/libplanet/blob/master/CONTRIBUTING.md
-[4]: https://gist.github.com/dahlia/5333634f62509293cd46c0e4ba65b2f5
 
 What to Contribute?
 ------------------
@@ -56,14 +55,12 @@ I was also able to experience the development culture of Planetarium Team, and i
 
 ## Epilogue
 
-Being on Planetarium for about a month since my first contribution, I’m happy to say that I really enjoy working with them. We're looking for additional [software engineers][8] to develop Libplanet together at Planetarium, so if you're interested, please check the [recruitment information page][9].
+Being on Planetarium for about a month since my first contribution, I’m happy to say that I really enjoy working with them.
 
 Planetarium has participated in events such as [Code-Eating Hippo][10] and [Sprint Seoul][11] to promote Libplanet contribution and will continue to actively participate in these events. For those in a similar situation as I was a month ago, there are [beginners' issues][12] for those wanting to contribute for the first time so please check it out.
 
 As always, if you have any questions about the project, please visit our [Discord chat room][13] anytime!
 
-[8]: https://www.notion.so/8996647777d24491a5dc92d82ba37ec2
-[9]: https://www.notion.so/98129a2f333d4d17b25ce268d72d326c
 [10]: https://comuka.nonce.community/
 [11]: https://sprintseoul.org/
 [12]: https://github.com/planetarium/libplanet/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22
