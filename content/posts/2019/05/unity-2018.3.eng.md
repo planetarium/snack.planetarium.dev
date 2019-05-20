@@ -5,7 +5,7 @@ authors: [hyun.seungmin]
 translators: [kidon.seo]
 ---
 
-Hello, I'm Seungmin Hyun from Planetarium Game-Dev Team. We’ve been preparing a migration to utilize some of the features added or improved on Unity 2018.3.
+Hello, I'm Hyun Seungmin from Planetarium Game-Dev Team. We’ve been preparing a migration to utilize some of the features added or improved on Unity 2018.3.
 
 Nested Prefab
 -------------
