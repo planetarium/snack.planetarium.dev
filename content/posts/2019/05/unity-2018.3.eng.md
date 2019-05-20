@@ -1,5 +1,5 @@
 ---
-title: " Migrating from Unity 2018.2 to 2018.3"
+title: Migrating from Unity 2018.2 to 2018.3
 date: 2019-05-17
 authors: [hyun.seungmin]
 translators: [kidon.seo]
