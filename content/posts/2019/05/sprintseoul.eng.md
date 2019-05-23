@@ -14,7 +14,7 @@ Even those who are interested in open source but have not been able to contribut
 
 Our team has already participated in the event last April, and we’re continuing our participation this coming June. We are participating as the leader of [Libplanet] Project, and we look forward to meeting you all at the event to further develop our project.
 
-Applications for Sprint Seoul will only be accepted until June 20th, and details of the [application form][2] and the event can be found on the [official website][1].
+Applications for Sprint Seoul will only be accepted until June 20th, and details of the [application form] and the event can be found on the [official website][1].
 
 [1]: https://sprintseoul.org/
 [Libplanet]: https://libplanet.io/
