@@ -6,7 +6,7 @@ translators: [kidon.seo]
 ---
 
 Did you know [Sprint Seoul][1] will be held in Gangnam this June 29th (Sat)? 
-Sprint Seoul is an open source event that gathers people passionate about open source culture and encourage them to contribute codes and/or documents to open source projects. 
+Sprint Seoul is an open source event that gathers people passionate about open source culture and encourages them to contribute codes and/or documents to open source projects. 
 Even those who are interested in open source but have not been able to contribute can also come to the event and experience their first open source contribution.
 
 > Sprint invites both authors and contributors of open source projects to get together and find/resolve issues in a short period of time,
