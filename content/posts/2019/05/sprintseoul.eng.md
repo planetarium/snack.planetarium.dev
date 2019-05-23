@@ -18,7 +18,7 @@ Applications for Sprint Seoul will only be accepted until June 20th, and details
 
 [1]: https://sprintseoul.org/
 [Libplanet]: https://libplanet.io/
-[2]: https://forms.gle/DHjbhgpWz9QgzpFo8
+[application form]: https://forms.gle/DHjbhgpWz9QgzpFo8
 
 
 Introducing Project Libplanet 
