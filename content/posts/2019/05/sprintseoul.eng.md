@@ -85,6 +85,6 @@ If you're worried about what and how to contribute, I think Seunghun's post, <ci
 Reach Out!
 --------------
 
-If you have any questions, please visit [our Discord server] at #libplanet-users-kr channel and ask away! You’re all welcome to come in before or even after the event to chat with us.
+If you have any questions, please visit [our Discord server] at #libplanet-users channel and ask away! You’re all welcome to come in before or even after the event to chat with us.
 
 [our Discord server]: https://discord.gg/wUgwkYW
