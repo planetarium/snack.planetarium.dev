@@ -19,15 +19,15 @@ Libplanet은 분산 P2P로 돌아가는 온라인 멀티플레이 게임을 만�
 액션 렌더링 API 추가
 --------------------
 
-기존에는 게임에서 액션이 실제로 처리되었는지, 즉 액션이 포함된 블록이 마이닝 되어 실제로 체인에 추가되었는지 전달받을 수 있는 방법이 없었습니다.
+기존에는 게임에서 액션이 실제로 처리되었는지, 즉 액션의 실행 결과가 `GetStates()` 메소드의 결과에 언제 반영되는지 신호(이벤트)를 받을 수 없었습니다.
 따라서 특정 주소의 액션이 처리되었다는 것을 확인하기 위해서는 [폴링][3] 등의 방법을 이용해 해당 주소의 상태가 액션 이후의 상태로 변경되었는지 확인해야 했습니다.
-이런 방식은 구현이 복잡하고 번거로울 뿐 아니라 액션의 처리가 확인될 때까지 주소의 상태를 가져와야 하므로 성능적인 측면에서도 문제가 있습니다.
+이런 방식은 구현이 복잡하고 번거로울 뿐 아니라 액션의 처리가 확인될 때까지 주소의 상태를 수차례 가져와야 하므로 성능적인 측면에서도 문제가 있습니다.
 
 이런 문제를 해결하기 위해 이번 버전에서는 액션 렌더링 API가 추가되었습니다. 
-[`IAction.Render()`][4] 메서드 구현을 통해 게임에서는 이벤트 기반으로 해당 액션의 결과를 표시할 수 있게 됩니다.
-또, 체인이 변경되어 처리된 액션이 포함된 블록이 유효하지 않게 될 경우 [`IAction.Unrender()`][5] 메서드를 통해 이미 렌더링 된 액션을 되돌릴 수 있도록 했습니다.
+[`IAction.Render()`][4] 메서드 구현을 통해 게임에서는 액션의 결과가 로컬 상태에 반영되는 순간을 이벤트로 받을 수 있게 됩니다.
+또, 다수 체인(majority chain)이 변경되어 처리된 액션이 포함된 블록이 유효하지 않게 될 경우 [`IAction.Unrender()`][5] 메서드를 통해 이미 렌더링 된 액션을 되돌릴 수 있도록 했습니다.
 
-[3]: https://en.wikipedia.org/wiki/Polling_(computer_science)
+[3]: https://ko.wikipedia.org/wiki/폴링_(컴퓨터_과학)
 [4]: https://docs.libplanet.io/0.3.0/api/Libplanet.Action.IAction.html#Libplanet_Action_IAction_Render_Libplanet_Action_IActionContext_Libplanet_Action_IAccountStateDelta_
 [5]: https://docs.libplanet.io/0.3.0/api/Libplanet.Action.IAction.html#Libplanet_Action_IAction_Unrender_Libplanet_Action_IActionContext_Libplanet_Action_IAccountStateDelta_
 
