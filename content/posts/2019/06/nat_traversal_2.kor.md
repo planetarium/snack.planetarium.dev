@@ -61,8 +61,8 @@ TURN 서버에 중계를 요청한 노드가 이 연결을 수락하려면, 제�
 [TURN]: https://en.wikipedia.org/wiki/Traversal_Using_Relays_around_NAT
 [Libplanet]: https://libplanet.io/
 [노드(node)]: https://ko.wikipedia.org/wiki/%EB%85%B8%EB%93%9C_(%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC)
-[P2P]: https://en.wikipedia.org/wiki/Peer-to-peer
-[IPC]: https://en.wikipedia.org/wiki/Inter-process_communication
+[P2P]: https://ko.wikipedia.org/wiki/P2P
+[IPC]: https://ko.wikipedia.org/wiki/%ED%94%84%EB%A1%9C%EC%84%B8%EC%8A%A4_%EA%B0%84_%ED%86%B5%EC%8B%A0
 [ICE]: https://tools.ietf.org/html/rfc8445
 [WebRTC]: https://webrtc.org/
 [시그널링(signalling)]: https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API/Signaling_and_video_calling
