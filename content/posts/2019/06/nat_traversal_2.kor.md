@@ -59,7 +59,7 @@ TURN 서버에 중계를 요청한 노드가 이 연결을 수락하려면, 제�
 [NAT 통과 기법]: https://en.wikipedia.org/wiki/NAT_traversal
 [NAT를 넘어서 가자]: {{< ref "nat_traversal_1.kor.md" >}}
 [TURN]: https://en.wikipedia.org/wiki/Traversal_Using_Relays_around_NAT
-[Libplanet]: https://libplanet.io
+[Libplanet]: https://libplanet.io/
 [노드(node)]: https://en.wikipedia.org/wiki/Node_(networking)
 [P2P]: https://en.wikipedia.org/wiki/Peer-to-peer
 [IPC]: https://en.wikipedia.org/wiki/Inter-process_communication
