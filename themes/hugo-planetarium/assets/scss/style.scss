@@ -58,6 +58,18 @@ cite:lang(ko)        { font-style: normal; }
 cite:lang(ko):before { content: '\3008'; }
 cite:lang(ko):after  { content: '\3009'; }
 
+figure {
+  margin: 0;
+  text-align: center;
+}
+figcaption {
+  font-size: small;
+  color: #666;
+}
+figcaption :first-child {
+  margin-top: 0;
+}
+
 #main h1#site-title {
   background-image: url(../logo.svg);
   background-repeat: no-repeat;
