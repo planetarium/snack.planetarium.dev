@@ -10,7 +10,7 @@ authors: [swen.mun]
 
 ## 블록 체인과 NAT 
 
-Libplanet은 블록체인 기술을 게임 개발에 쉽게 사용할 수 있게끔 하는 라이브러리입니다. 많은 블록체인 구현체들은 분산된 노드간의 통신에 [P2P] 형태의 네트워크를 사용하며, 이는 저희 Libplanet도 마찬가지입니다. 다만 다른 블록체인 구현체들과는 다르게, Libplanet을 통해 블록체인이 구현되는 애플리케이션은 게임입니다. 일반적으로 이러한 게임은 개인용 컴퓨터나 거치형 콘솔, 그리고 스마트폰과 같은 개인용 장비에서 실행되는데, 이런 장비의 대부분은 NAT로 구성된 네트워크 위에서 별도의 공인 IP를 가지지 않습니다. 즉 이러한 장비에서 실행되는 애플리케이션이 P2P 통신을 하려면 NAT를 통과하지 않을 수 없습니다.
+Libplanet은 블록체인 기술을 게임 개발에 쉽게 사용할 수 있게끔 하는 라이브러리입니다. 많은 블록체인 구현체들은 분산된 [노드(node)]간의 통신에 [P2P] 형태의 네트워크를 사용하며, 이는 저희 Libplanet도 마찬가지입니다. 다만 다른 블록체인 구현체들과는 다르게, Libplanet을 통해 블록체인이 구현되는 애플리케이션은 게임입니다. 일반적으로 이러한 게임은 개인용 컴퓨터나 거치형 콘솔, 그리고 스마트폰과 같은 개인용 장비에서 실행되는데, 이런 장비의 대부분은 NAT로 구성된 네트워크 위에서 별도의 공인 IP를 가지지 않습니다. 즉 이러한 장비에서 실행되는 애플리케이션이 P2P 통신을 하려면 NAT를 통과하지 않을 수 없습니다.
  
 이때문에 Libplanet은 0.2.0부터 TURN을 이용한 릴레이를 지원합니다. 바로 다음과 같은 과정을 통해서요.
 
@@ -60,6 +60,7 @@ TURN에 요청한 노드가 이 연결을 수락하려면, 제어 연결이 아�
 [NAT를 넘어서 가자]: {{< ref "nat_traversal_1.kor.md" >}}
 [TURN]: https://en.wikipedia.org/wiki/Traversal_Using_Relays_around_NAT
 [Libplanet]: https://libplanet.io
+[노드(node)]: https://en.wikipedia.org/wiki/Node_(networking)
 [P2P]: https://en.wikipedia.org/wiki/Peer-to-peer
 [IPC]: https://en.wikipedia.org/wiki/Inter-process_communication
 [ICE]: https://tools.ietf.org/html/rfc8445
