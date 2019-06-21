@@ -9,6 +9,20 @@ a {
   color: #007a8f;
 }
 
+abbr {
+  &, &[title] {
+    text-decoration: none;
+  }
+
+  &:after {
+    margin-left: -0.2em;
+    content: ' (' attr(title) ')';
+    color: gray;
+    font-size: smaller;
+    font-weight: normal;
+  }
+}
+
 blockquote {
   background: #f9f9f9;
   border-left: 10px solid #ccc;
@@ -97,5 +111,12 @@ article .footnotes {
 
   > ol {
     padding-left: 1em;
+
+    > li {
+      margin-top: 0.5em;
+
+      p:first-of-type { margin-top: 0; }
+      p:last-of-type { margin-bottom: 0; }
+    }
   }
 }
