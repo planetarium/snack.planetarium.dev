@@ -5,7 +5,7 @@ authors: [swen.mun]
 translators: [kidon.seo]
 ---
 
-Hello, I'm Swen Mun from the Planetarium Dev Team. I introduced you all to [NAT traversal] [in my earlier post][Moving Beyond NAT]. Today, let’s take a deeper look at [TURN].
+Hello, I'm Swen Mun from the Planetarium Dev Team. I introduced you all to [NAT traversal][] [in my earlier post][Moving Beyond NAT]. Today, let’s take a deeper look at [TURN].
 
 As the name "Traversal Using Relays around NAT" suggests, TURN refers to the way servers with authorized IP relay peers that want to communicate. It might be difficult to understand this concept simply by listing the functions and sequences, so let me just give you an example of how we actually use TURN in [Libplanet].
 
