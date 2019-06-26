@@ -19,7 +19,7 @@ For this reason, Libplanet supports relaying using TURN from 0.2.0. And here's h
 
 The first step in relaying over the TURN is a step known as port allocation. Nodes that want to broadcast from outside of NAT send an allocation request (with the appropriate credentials, if necessary) to the TURN server. The request dialogue will be something like this.
 
-> Node: I'd like to receive a relay through an authorized IP and port. Please allot an appropriate IP and port.
+> Node: I'd like to receive a relay through an authorized IP and port. Please allocate an appropriate IP and port.
 
 If the request is correct, the TURN server will select and open the appropriate IP and port to receive the connection depending on the settings, and send the following response.
 
