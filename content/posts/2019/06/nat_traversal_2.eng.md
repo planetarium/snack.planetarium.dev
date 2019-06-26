@@ -66,4 +66,4 @@ In order to actually send a response properly, it is necessary to re-relay the d
 [IPC]: https://en.wikipedia.org/wiki/Inter-process_communication
 [ICE]: https://tools.ietf.org/html/rfc8445
 [WebRTC]: https://webrtc.org/
-[signalling]: https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API/Signaling_and_video_calling
+[signaling]: https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API/Signaling_and_video_calling
