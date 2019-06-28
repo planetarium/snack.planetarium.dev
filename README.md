@@ -13,6 +13,9 @@ Local setup
 
  1. Install [Hugo].
 
+    (You can install it by `brew install hugo` on macOS or
+    `choco install hugo-extended` on Windows.)
+
  2. Clone this Git repository.
 
  3. In the cloned repository directory, type the following command:
