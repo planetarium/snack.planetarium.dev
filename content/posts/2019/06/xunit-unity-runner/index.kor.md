@@ -25,8 +25,7 @@ Libplanet은 분산 P2P로 돌아가는 온라인 멀티플레이 게임을 만�
 
 그래서 저희 팀은 Libplanet 저장소에 푸시나 풀 리퀘스트가 생길 때마다
 [Azure Pipelines][^1]에서 (Linux, macOS, Windows) ×
-(.NET Framework, Mono, .NET Core) 조합[^2]으로 테스트가 돌게
-해뒀었습니다.
+(.NET Framework, Mono, .NET Core) 조합[^2]으로 테스트했습니다.
 
 {{<
 figure
