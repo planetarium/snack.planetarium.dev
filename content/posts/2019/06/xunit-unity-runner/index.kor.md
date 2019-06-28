@@ -96,7 +96,7 @@ API는 전형적인 [<abbr title="inversion of control">IoC</abbr>][IoC]
 Unity로 <abbr title="command-line interface">CLI</abbr> 프로그램 만들기
 -----------------------------------------------------------------------
 
-Unity로 테스트 실행기를 만드려고 할 때 가장 고민했던 점은, 처음부터
+Unity로 테스트 실행기를 만들려고 할 때 가장 고민했던 점은, 처음부터
 <abbr title="continuous integration">CI</abbr>에서 실행하기 위한 것이니 만큼
 그래픽 화면이 아닌 <abbr title="command-line interface">CLI</abbr>로
 조작되고 결과가 보여야 한다는 점이었습니다. 그런데 Unity는 게임 등을 만들기 위한
