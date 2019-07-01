@@ -3,7 +3,7 @@
   <a
     href="{{ .Site.BaseURL  }}"
     id="site-title"
-    class="b bw1 bb pb1 no-underline black"
+    class="b bw1 bb pb1 no-underline dark-gray"
     >{{ .Site.Title  }}</a
   >
   <section id="main" class="mt5">
@@ -13,7 +13,7 @@
         {{ range .Data.Pages.ByDate.Reverse }}
         <li class="list pl0 lh-copy">
           <a
-            class="f3 b dib black no-underline"
+            class="f3 b dib dark-gray no-underline"
             href="{{ .Permalink}}"
             >{{ .Title }}</a
           >

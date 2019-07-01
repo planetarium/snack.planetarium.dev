@@ -7,9 +7,9 @@
 >
   
   <span class="b">/ </span>
-  <a href="{{ .Site.BaseURL  }}" class="b bb bw1 pb1 no-underline black">{{ .Site.Title }}</a>
+  <a href="{{ .Site.BaseURL  }}" class="b bb bw1 pb1 no-underline dark-gray">{{ .Site.Title }}</a>
   <span class="b"> / </span>
-  <a href="/post" class="b bb bw1 pb1 no-underline black">blog</a>
+  <a href="/post" class="b bb bw1 pb1 no-underline dark-gray">blog</a>
 
   <section id="main" class="mt5">
     <h1 itemprop="name" id="title">{{ .Title }}</h1>
@@ -30,7 +30,7 @@
         <section class="mt4">
           {{ $readMore := ":wave:" }}
           {{ $series := .Params.series | urlize}}
-          <h3>{{ $readMore | emojify }} Related posts in the <a href="/series/{{ $series }}" class="b bb bw1 pb1 no-underline black">{{ .Params.Series }}</a> series...</h3>
+          <h3>{{ $readMore | emojify }} Related posts in the <a href="/series/{{ $series }}" class="b bb bw1 pb1 no-underline dark-gray">{{ .Params.Series }}</a> series...</h3>
       
           {{ $posts := index .Site.Taxonomies.series $series }}
          
@@ -39,7 +39,7 @@
               {{ range where $posts "Title" "!=" .Title }}
                 <li class="list pl0 lh-copy">
                   <a
-                    class="f4 b dib black no-underline"
+                    class="f4 b dib dark-gray no-underline"
                     href="{{ .Permalink}}"
                     >{{ .Title }}</a
                   >

@@ -6,12 +6,12 @@
   <span class="b">/ </span>
   <a
     href="{{ .Site.BaseURL  }}"
-    class="b bw1 bb pb1 no-underline black"
+    class="b bw1 bb pb1 no-underline dark-gray"
     >{{ .Site.Title }}</a
   >
   <span class="b"> / </span>
   <!-- prettier-ignore -->
-  <span class="b pb1 no-underline black">{{ lower .Title }}</span>
+  <span class="b pb1 no-underline dark-gray">{{ lower .Title }}</span>
 
   <section id="main" class="mt5">
     <div>
@@ -21,7 +21,7 @@
         {{ if ne .Title "" }}
         <li class="list pl0 lh-copy hide-child">
           <a
-            class="f4 b dib black no-underline"
+            class="f4 b dib dark-gray no-underline"
             href="{{ .Permalink}}"
             >{{ .Title }}</a
           >
