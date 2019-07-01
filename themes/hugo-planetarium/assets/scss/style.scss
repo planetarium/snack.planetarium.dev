@@ -2,7 +2,7 @@ body {
   -webkit-font-smoothings: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  color: #1a1a1a;
+  color: #404040;
 }
 
 a {
@@ -119,4 +119,8 @@ article .footnotes {
       p:last-of-type { margin-bottom: 0; }
     }
   }
+}
+
+.lh-copy {
+  line-height: 1.75;
 }

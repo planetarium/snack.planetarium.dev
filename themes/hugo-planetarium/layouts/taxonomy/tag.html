@@ -6,14 +6,14 @@
   <span class="b">/ </span>
   <a
     href="{{ .Site.BaseURL  }}"
-    class="b bw1 bb pb1 no-underline black"
+    class="b bw1 bb pb1 no-underline dark-gray"
     >{{ .Site.Title  }}</a
   >
   <span class="b"> / </span>
-  <a href="/tags" class="b bw1 bb pb1 no-underline black">tags</a>
+  <a href="/tags" class="b bw1 bb pb1 no-underline dark-gray">tags</a>
   <span class="b"> / </span>
   <!-- prettier-ignore -->
-  <span class="b pb1 no-underline black">{{ .Title | lower }}</span>
+  <span class="b pb1 no-underline dark-gray">{{ .Title | lower }}</span>
 
   <section id="main" class="mt5">
     <div>
@@ -22,7 +22,7 @@
         {{ range .Data.Pages.ByDate.Reverse }}
         <li class="list pl0 lh-copy">
           <a
-            class="f3 b dib black no-underline"
+            class="f3 b dib dark-gray no-underline"
             href="{{ .Permalink}}"
             >{{ .Title }}</a
           >
