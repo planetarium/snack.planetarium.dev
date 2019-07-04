@@ -44,7 +44,7 @@ This access expires after a 300-second lifetime, and to prevent this, the node t
 
 After authorization request and approval has been completed, other nodes that have been approved with the allocated IP and port can finally connect. When the nodes make a connection, the TURN server detects it and sends the following message to the control connection.
 
-> TURN Server: A connection attempt was made from '10.1.1.1' to '54.12.1.3:65002'. (Connection ID: '1234')
+> TURN Server: A connection attempt was made from `10.1.1.1` to `54.12.1.3:65002`. (Connection ID: `1234`)
 
 For the node that requested TURN Server relay to accept this connection, it can create a new connection (not the control connection) and request it to the TURN server. In order to distinguish the external connection request, connection ID should be included in the connection notification message.
 
