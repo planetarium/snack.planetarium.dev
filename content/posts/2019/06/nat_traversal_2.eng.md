@@ -48,7 +48,7 @@ After authorization request and approval has been completed, other nodes that ha
 
 For the node that requested TURN Server relay to accept this connection, it can create a new connection (not the control connection) and request it to the TURN server. In order to distinguish the external connection request, connection ID should be included in the connection notification message.
 
-> Node: Please transfer data from connection ID: '1234' to this connection from now on.
+> Node: Please transfer data from connection ID: `1234` to this connection from now on.
 
 This new connection is called a *data connection*. Subsequent requests to `54.12.1.3:65002` are passed through this data connection, and responses to the nodes connected to that IP/port are sent to this data connection, goes through the TURN server, and finally to the node.
 
