@@ -36,7 +36,7 @@ But in real life, many users don't know or care about their own public IP, so it
 
 If a node knows the public IP (`10.1.1.1`) of another node that it wants to connect to, the authorization request will probably be as follows.
 
-> Node: Requesting Authorization from '10.1.1.1' to '54.12.1.3:65002'.
+> Node: Requesting Authorization from `10.1.1.1` to `54.12.1.3:65002`.
 
 This access expires after a 300-second lifetime, and to prevent this, the node that requested the authorization must re-request to the TURN server.
 
