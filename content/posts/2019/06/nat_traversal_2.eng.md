@@ -34,7 +34,7 @@ With the assigned IP and port (`54.12.1.3:65002`), it would be great if other no
 
 But in real life, many users don't know or care about their own public IP, so it's very difficult to communicate this information directly. To resolve this, use cases such as [WebRTC] often figure out the IP information of the node to access at the [signaling] stage. Meanwhile, Libplanet uses the STUN protocol to check if the IP is behind NAT, and if so, it will send the IP to other nodes along with the IP/port that is relayed as public IP. The nodes that receive this information go through the process of requesting permission first via an public IP before they can access the information that has been relayed.
 
-If a node knows the public IP ('10.1.1.1') of another node that it wants to connect to, the authorization request will probably be as follows.
+If a node knows the public IP (`10.1.1.1`) of another node that it wants to connect to, the authorization request will probably be as follows.
 
 > Node: Requesting Authorization from '10.1.1.1' to '54.12.1.3:65002'.
 
