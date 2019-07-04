@@ -24,7 +24,7 @@ The first step in relaying over the TURN is a step known as port allocation. Nod
 If the request is correct, the TURN server will select and open the appropriate IP and port to receive the connection depending on the settings, and send the following response.
 
 
-> TURN Server: Port assigned. The address to be relayed in the future is '54.12.1.3:65002'. (Nonce: 'xyz')
+> TURN Server: Port assigned. The address to be relayed in the future is `54.12.1.3:65002`. (Nonce: `xyz`)
 
 This connection that requests port allocation is called *control connection* and it is used for communications between TURN server and the node. One caveat here is the nonce that the TURN server sends with its response. Nonce is unique for each control connection and the acquired nonce must be included in all requests of the control connection. (Or, you may receive a stale nonce error and request it again.)
 
