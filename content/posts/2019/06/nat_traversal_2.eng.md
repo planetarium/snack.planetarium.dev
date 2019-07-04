@@ -50,7 +50,7 @@ For the node that requested TURN Server relay to accept this connection, it can 
 
 > Node: Please transfer data from connection ID: '1234' to this connection from now on.
 
-This new connection is called a *data connection*. Subsequent requests to '54.12.1.3:65002' are passed through this data connection, and responses to the nodes connected to that IP/port are sent to this data connection, goes through the TURN server, and finally to the node.
+This new connection is called a *data connection*. Subsequent requests to `54.12.1.3:65002` are passed through this data connection, and responses to the nodes connected to that IP/port are sent to this data connection, goes through the TURN server, and finally to the node.
 
 ## Remaining Steps
 
