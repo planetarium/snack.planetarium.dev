@@ -84,7 +84,7 @@ visible. So with Unity being a platform for making graphic games, we were worrie
 actually create a CLI app.
 
 Fortunately, we found out that Unity has a <dfn>headless mode</dfn>, which means that all logs taken in 
-[‘Debug.Log()’][Debug.Log()] method are output as [standard output][stdout], without graphical display.
+[`Debug.Log()`][Debug.Log()] method are output as [standard output][stdout], without graphical display.
 
 {{< 
 figure 
