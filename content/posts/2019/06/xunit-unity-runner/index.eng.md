@@ -36,7 +36,7 @@ Unity ≠ Mono
 ------------
 
 At first, we thought this was enough because Unity uses Mono Runtime. But as we used Libplanet to develop 
-our game on Unity, we had to watch unexpected moves in the game several times, and it became increasingly 
+our game on Unity, we had to encounter unexpected behaviors in the game several times, and it became increasingly 
 evident that just passing the test on Mono was not enough.
 
 [In fact, the Mono used in Unity seems to be a fairly long-standing downstream, with a lot of patches added 
