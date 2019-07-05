@@ -8,7 +8,7 @@ translators: [kidon.seo]
 
 
 Hello, I'm Hong Minhee, [Libplanet] commiter at Planetarium. 
-In this post, I want to talk about why we came to a conclusion to conduct Unit Tests on Unity, 
+In this post, I want to talk about why we came to a conclusion to run unit tests on Unity too, 
 the most widely used game engine, and how we actually approached it.
 
 Supporting Different Environments on Libplanet
