@@ -69,7 +69,7 @@ The test runner API on xUnit.net is roughly as follows: First, the client code l
 methods within those classes from the assembly files (*.dll*) passed through the input. After, the client code can 
 decide which test to run. Then, the test cases are run by the test runner. Because the test discovery and execution 
 can be done in parallel for performance, the API follows a typical [<abbr title="inversion of control">IoC</abbr>][IoC] 
-pattern. An interface called [‘IMessageSinkWithTypes’][IMessageSinkWithTypes], which receives events such as test 
+pattern. An interface called [`IMessageSinkWithTypes`][IMessageSinkWithTypes], which receives events such as test 
 discovery, start running, failure, success, skip, and so on in the form of a message, must be implemented in the client 
 code to show the log on screen when such events occur. Because our team didn't run the tests in parallel, it was quite 
 frustrating to have a less liberal API with a lengthy client code. 🙄
