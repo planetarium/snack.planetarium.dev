@@ -23,7 +23,7 @@ difficult to determine which operating system and .NET runtime each game or app 
 tests in as many different environments as possible.
 
 So our team had run tests on [Azure Pipelines][^1] with (Linux, macOS, Windows) × (.NET Framework, Mono, .NET Core) 
-combination[^2] whenever a push or a pull was requested in the Libplanet repository.
+combination[^2] whenever a push or a pull request was made in the Libplanet repository.
 
 {{< 
 figure 
