@@ -182,7 +182,6 @@ file is available on the [release page][8], so if you want to try it out, it's a
 
 
 [^1]: As of June 2019, <abbr title= “continuous integration”>CI</abbr> services that support all Linux, macOS, and Windows include [Travis CI] and Azure Pipelines. Our team used Travis CI at first, but it didn't perform well, so we're now using Azure Pipelines. 
-we're now using Azure Pipelines. 
 [^2]: Because the .NET Framework supports only Windows, it will be tested in 7 environments instead of 9. 
 [^3]: Because the .NET <abbr title="integrated development environment">IDE</abbr> has become very common for quite 
 some time, there are many projects that don't post API documents on the Web and simply leave [XML document annotations][xmldoc] 
