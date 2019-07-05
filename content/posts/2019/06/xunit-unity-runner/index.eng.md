@@ -58,7 +58,7 @@ codes, to NUnit, but with such a high volume of codes to change at once, we didn
 that are hard to notice.
 
 So we decided to create a test runner app instead of a game app with Unity. Fortunately, xUnit.net was well divided 
-between APIs for writing tests and APIs for running tests. This is probably due to the diverse front end plug-ins to 
+between APIs for writing tests and APIs for running tests. This is probably due to the diverse frontend plug-ins to 
 various IDE, GUI and CLI. In fact, if you search "xunit runner" on NuGet, you'll get a xUnit.net test runner for a 
 variety of environments.
 
