@@ -98,7 +98,7 @@ typical application the [‘Console’][Console] class provided by the .NET stan
 
 However, since the ‘Main()’ method cannot be defined, the command line factor was not accepted as the ‘string[] args’ 
 parameter of the `Main()` method, but instead had to be obtained as the [`Environment.GetCommandLineArgs()`][GetCommandLineArgs] 
-method. Similarly, the program's termination required an explicit call to the [‘Application.Quit()’][Quit] method to 
+method. Similarly, the program's termination required an explicit call to the [`Application.Quit()`][Quit] method to 
 terminate the process directly.
 
 Lastly, there were messages being output from Unity player itself, but we couldn't find a way to block it, so we had 
