@@ -52,7 +52,7 @@ Testing xUnit.net on Unity
 --------------------------
 
 Because there is a unit testing feature available in Unity, we tried to use it at first. Unfortunately, Unity's 
-unit testing was done in an editor environment used by game developers, not in a player environment, and the 
+unit testing was done in an Editor environment used by game developers, not in a Player environment, and the 
 testing framework supported only [NUnit]. We thought about changing all of Libplanet's [xUnit.net]-based test 
 codes, to NUnit, but with such a high volume of codes to change at once, we didn't want to risk making mistakes 
 that are hard to notice.
