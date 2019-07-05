@@ -97,7 +97,7 @@ Even if you don't use the ‘Debug.Log()’ method provided by Unity, we've also
 typical application the [‘Console’][Console] class provided by the .NET standard works as well.
 
 However, since the ‘Main()’ method cannot be defined, the command line factor was not accepted as the ‘string[] args’ 
-factor of the ‘Main()’ method, but instead had to be obtained as the [‘Environment.GetCommandLineArgs()’][GetCommandLineArgs] 
+parameter of the `Main()` method, but instead had to be obtained as the [`Environment.GetCommandLineArgs()`][GetCommandLineArgs] 
 method. Similarly, the program's termination required an explicit call to the [‘Application.Quit()’][Quit] method to 
 terminate the process directly.
 
