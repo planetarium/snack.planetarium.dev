@@ -7,7 +7,7 @@ translators: [kidon.seo]
 ---
 
 
-Hello, I'm Minhee Hong, [Libplanet] developer at Planetarium. 
+Hello, I'm Hong Minhee, [Libplanet] commiter at Planetarium. 
 In this post, I want to talk about why we came to a conclusion to conduct Unit Tests on Unity, 
 the most widely used game engine, and how we actually approached it.
 
