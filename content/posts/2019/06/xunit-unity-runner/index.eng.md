@@ -120,7 +120,7 @@ and when pushed, and it'll automatically build for Linux, macOS, and Windows.
 
 Although we thought about putting CI on the board, we decided that it was unnecessary and used [GitHub Actions] to build it.
 
-[Referring to Kawai Yoshifumi(河合宜文)'s post][5], we were able to carry out the entire build process inside the Docker. 
+[Referring to Kawai Yoshifumi's post][5], we were able to carry out the entire build process inside the Docker. 
 In the process, we experienced things that we hadn't experienced in other environments:
 
 Because Unity was a commercial product, we needed to activate the license.
