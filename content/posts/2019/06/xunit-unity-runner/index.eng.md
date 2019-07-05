@@ -116,7 +116,7 @@ Build Automation
 
 Building a CLI app with Unity and writing a document on how to build one on Windows as well as Linux or macOS makes 
 the process tricky and easier for people to get inconsistent results. So we decided to make a tag in the repository 
-and when pushed, and it'll automatically build for Linux, MacOS, and Windows.
+and when pushed, and it'll automatically build for Linux, macOS, and Windows.
 
 Although we thought about putting CI on the board, we decided that it was unnecessary and used [GitHub Actions] to build it.
 
