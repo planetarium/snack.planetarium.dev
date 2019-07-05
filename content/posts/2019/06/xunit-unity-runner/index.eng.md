@@ -79,7 +79,7 @@ Building a <abbr title="command-line interface">CLI</abbr> with Unity
 
 Our greatest concern when creating a Unity test runner was that since this was to be done on 
 <abbr title="continuous integration">CI</abbr> in the first place, we believed that the test runner had to be manipulated 
-by the <abbr title= “command-line interface”>CLI</abbr> rather than by the graphics screen, and the results should be 
+by the <abbr title="command-line interface">CLI</abbr> rather than by the graphics screen, and the results should be 
 visible. So with Unity being a platform for making graphic games, we were worried whether it'd be a good idea or not to 
 actually create a CLI app.
 
