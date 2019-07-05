@@ -93,7 +93,7 @@ width="356"
 caption="<q>Server Build</q> option in Unity build settings that turn on headless mode"
 >}}
 
-Even if you don't use the ‘Debug.Log()’ method provided by Unity, we've also figured out that just like creating a 
+Even if you don't use the `Debug.Log()` method provided by Unity, we've also figured out that just like creating a 
 typical application the [‘Console’][Console] class provided by the .NET standard works as well.
 
 However, since the `Main()` method cannot be defined, the command line factor was not accepted as the `string[] args`
