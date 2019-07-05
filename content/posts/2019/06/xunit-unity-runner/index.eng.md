@@ -22,7 +22,7 @@ that are prone to [regressions] or corner cases. Furthermore, Libplanet is a lib
 difficult to determine which operating system and .NET runtime each game or app will use, we need to run all 
 tests in as many different environments as possible.
 
-So our team ran tests on [Azure Pipelines][^1] with (Lux, macOS, Windows) × (.NET Framework, Mono, .NET Core) 
+So our team had run tests on [Azure Pipelines][^1] with (Linux, macOS, Windows) × (.NET Framework, Mono, .NET Core) 
 combination[^2] whenever a push or a pull was requested in the Libplanet repository.
 
 {{< 
