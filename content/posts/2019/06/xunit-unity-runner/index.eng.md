@@ -15,7 +15,7 @@ Supporting Different Environments on Libplanet
 ---------------------------------------
 
 Libplanet is a common library that solves game implementation problems such as P2P communication and 
-data synchronization when creating online multiplay games that run on distributed P2P.
+data synchronization when creating online multiplayer games that run on distributed P2P.
 
 Testing codes, especially unit tests, are needed to achieve rapid improvement while minimizing malfunctions 
 that are prone to [regressions] or corner cases. Furthermore, Libplanet is a library and because it is 
