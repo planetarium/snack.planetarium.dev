@@ -74,7 +74,7 @@ discovery, start running, failure, success, skip, and so on in the form of a mes
 code to show the log on screen when such events occur. Because our team didn't run the tests in parallel, it was quite 
 frustrating to have a less liberal API with a lengthy client code. 🙄
 
-Building a <abbr title= “command-line interface”>CLI</abbr> with Unity
+Building a <abbr title="command-line interface">CLI</abbr> with Unity
 ----------------------------------------------------------------------
 
 Our greatest concern when creating a Unity test runner was that since this was to be done on 
