@@ -114,7 +114,7 @@ caption="Unity player's own message, printed on the first and last line, was nev
 Build Automation
 ----------------
 
-Building a CLI app with Unity and writing a document on how to build one on Windows as well as Linux or MacOS makes 
+Building a CLI app with Unity and writing a document on how to build one on Windows as well as Linux or macOS makes 
 the process tricky and easier for people to get inconsistent results. So we decided to make a tag in the repository 
 and when pushed, and it'll automatically build for Linux, MacOS, and Windows.
 
