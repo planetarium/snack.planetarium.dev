@@ -41,7 +41,7 @@ evident that just passing the test on Mono was not enough.
 
 [In fact, the Mono used in Unity seems to be a fairly long-standing downstream, with a lot of patches added 
 to the upstream.][unity-mono] And even if they were tested at the exact same Mono runtime, there were a lot 
-of special conditions created by Unity players. For instance, [NetMQ], [ZeroMQ]'s C# implementation, had 
+of special conditions created by Unity Player. For instance, [NetMQ], [ZeroMQ]'s C# implementation, had 
 numerous library malfunctions due to many complicated things happening inside compared to the simplicity of 
 the APIs revealed on the outer layer.
 
