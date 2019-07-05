@@ -130,7 +130,7 @@ can also be scripted, and this enables the app to be built by itself because Uni
 part of the app and then runs it. 
 
 At first, we thought we needed to build on all three operating systems, but fortunately, Unity supported [cross-compiling][6] 
-and we were able to build the app for MacOS and Windows on Linux.
+and we were able to build the app for macOS and Windows on Linux.
 
 {{< 
 figure 
