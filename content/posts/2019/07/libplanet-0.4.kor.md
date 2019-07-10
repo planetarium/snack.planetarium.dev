@@ -1,6 +1,6 @@
 ---
 title: Libplanet 0.4 릴리스
-date: 2019-07-12
+date: 2019-07-10
 authors: [swen.mun]
 ---
 
