@@ -21,7 +21,7 @@ Local setup
  3. In the cloned repository directory, type the following command:
 
     ~~~~ bash
-    hugo server -w
+    hugo server -w -F
     ~~~~
 
     This watches all file changes so that automatically recompiles them and
