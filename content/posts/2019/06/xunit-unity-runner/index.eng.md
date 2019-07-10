@@ -1,11 +1,10 @@
 ---
-title: Unit Testing in Unity Environment
+title: Unit Testing in Unity Player
 date: 2019-06-28
 authors: [hong.minhee]
 translators: [kidon.seo]
 
 ---
-
 
 Hello, I'm Hong Minhee, [Libplanet] committer at Planetarium. 
 In this post, I want to talk about why we came to a conclusion to run unit tests on Unity too, 
@@ -152,10 +151,10 @@ caption="Current Build with Unit Test Added in Unity Environment"
 The newly built xUnit.net test runner for Unity has been applied on Libplanet project and is currently working well. 
 By working well, we mean that the tests are often breaking due to
 different actions that are only seen in Unity environments. 😇 Of course, we're glad to accept it because that's the 
-point of building a unit test-- to find bugs as early as possible.
+point of building a unit test --- to find bugs as early as possible.
 
 The runner is not yet neatly organized, but we have still [put it up as an open source on GitHub][7]. The executable 
-file is available on the [release page][8], so if you want to try it out, it's all yours!
+file is available on the [releases page][8], so if you want to try it out, it's all yours!
 
 [Libplanet]: https://libplanet.io/
 [regressions]: https://en.wikipedia.org/wiki/Software_regression
@@ -181,7 +180,7 @@ file is available on the [release page][8], so if you want to try it out, it's a
 [8]: https://github.com/planetarium/xunit-unity-runner/releases
 
 
-[^1]: As of June 2019, <abbr title= “continuous integration”>CI</abbr> services that support all Linux, macOS, and Windows include [Travis CI] and Azure Pipelines. Our team used Travis CI at first, but it didn't perform well, so we're now using Azure Pipelines. 
+[^1]: As of June 2019, <abbr title="continuous integration">CI</abbr> services that support all Linux, macOS, and Windows include [Travis CI] and Azure Pipelines. Our team used Travis CI at first, but it didn't perform well, so we're now using Azure Pipelines.
 [^2]: Because the .NET Framework supports only Windows, it will be tested in 7 environments instead of 9. 
 [^3]: Because the .NET <abbr title="integrated development environment">IDE</abbr> has become very common for quite some time, there are many projects that don't post API documents on the Web and simply leave [XML document annotations][xmldoc] in the source code. Those annotations will appear small as a tooltip when the class or method is automatically completed in IDE.
 [^4]: If anyone knows how, please let us know. Or better, send us a pull request!
