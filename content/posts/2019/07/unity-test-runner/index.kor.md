@@ -1,6 +1,6 @@
 ---
 title: Unity 테스트 러너 도입기
-date: 2019-07-11
+date: 2019-07-12
 authors: [yang.chunung]
 ---
 
