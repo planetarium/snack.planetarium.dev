@@ -60,7 +60,7 @@ figure
   caption="Test Results"
 >}}
 
-Although there are still more codes in the current project that have not been tested, since the Unity Test Runner has been applied, we've been writing tests together for bug fixes and new add-ons, which has saved us a lot of time in checking production and logic-- something we used to check by running the game every time.
+Although there are still more codes in the current project that have not been tested, since the Unity Test Runner has been applied, we've been writing tests together for bug fixes and new add-ons, which has saved us a lot of time in checking production and logic --- something we used to check by running the game every time.
 For other projects that also use Unity, I confidently recommend that you apply the Unity Test Runner to increase productivity and enhance overall project experience. Thank you!
 
 
