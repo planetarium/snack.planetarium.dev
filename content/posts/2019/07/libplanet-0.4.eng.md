@@ -52,7 +52,7 @@ In order for games using previous versions of Libplanet to broadcast transaction
 
 (Although `.BroadcastTxs()` is still usable) Now, direct implementation isn’t necessary from games. Instead, they can put their own chains when making `Swarm<T>` and create a transaction (using `BlockChain<T>.MakeTransaction()` as introduced above). The rest will be carried out by `Swarm<T>`. 
 
-In this process, since `Swarm` now directly manages chains, it has been modified to `Swarm<T>`, indicating that it contains a type factor(`T`), just like` BlockChain<T>`.
+In this process, since `Swarm` now directly manages the chain, it has been modified to `Swarm<T>`, indicating that it contains a type parameter(`T`), just like` BlockChain<T>`.
 
 
 
