@@ -31,7 +31,7 @@ figure
 
 Creating an assembly definition file that defines a project script and then adding dependencies to the assembly definition file[^2] defined for testing will solve the problem.
 
-Please refer to the [relevant documentation] (https://docs.unity3d.com/2018.3/Documentation/Manual/ScriptCompilationAssemblyDefinitionFiles.html) for more information. 
+Please refer to the [relevant documentation](https://docs.unity3d.com/2018.3/Documentation/Manual/ScriptCompilationAssemblyDefinitionFiles.html) for more information. 
 
 
 Platform Settings for Assembly Definition Files
