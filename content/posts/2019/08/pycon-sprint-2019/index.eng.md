@@ -27,7 +27,7 @@ The Pycon Preparation Committee awarded us a balloon whenever we send a PR (pull
 
 When a node (A) receives a query from another node (B) about a block’s content that the node (B) doesn't have, it (A) divides the block into a certain number and passes the block hash to the node (B) that sent the query.
 
-But there was a problem in this process in which apart from the first response, the number of block hash received was one less than the expected amount. Contributor [Baek Daehyun][gurrpi] set off on a quest to solve this problem. 
+But there was a problem in this process in which apart from the first response, the number of block hash received was one less than the expected amount. Contributor [Daehyun Paik][gurrpi] set off on a quest to solve this problem. 
 
 And thanks to his contribution, we now can send and receive block hashes in the right amount.
 
