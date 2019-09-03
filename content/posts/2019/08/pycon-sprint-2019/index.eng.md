@@ -11,7 +11,7 @@ This past August 15th and 16th, our team participated at [Pycon 2019 Sprint] as 
 
 [Pycon 2019 Sprint]: https://www.pycon.kr/program/sprint?lang=en-US
 
-## Contributions at Pycon 2019 Sprint
+## Contributions at PyCon 2019 Sprint
 
 Thanks to all our participants at the Sprint, many features were added to [Libplanet], as well as [Libplanet Explorer] and [Libplanet Explorer Frontend]!
 
