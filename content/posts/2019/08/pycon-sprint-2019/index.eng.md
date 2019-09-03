@@ -9,7 +9,7 @@ Hello, I'm Lee Dogeon, [Libplanet] committer at Planetarium!
 
 This past August 15th and 16th, our team participated at [Pycon 2019 Sprint] as leader of Project [Libplanet]. In this article, I'd like to briefly talk about the contributions we received at Pycon Sprint.
 
-[Pycon 2019 Sprint]: https://www.pycon.kr/program/sprint?&lang=en-US
+[Pycon 2019 Sprint]: https://www.pycon.kr/program/sprint?lang=en-US
 
 ## Contributions at Pycon 2019 Sprint
 
