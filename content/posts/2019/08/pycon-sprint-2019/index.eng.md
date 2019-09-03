@@ -19,7 +19,7 @@ Thanks to all our participants at the Sprint, many features were added to [Libpl
 
 ![balloon](./balloon.jpg)
 
-The Pycon Preparation Committee awarded us a balloon whenever we send a PR (pull request) and so I'd like to share some of the PR's that helped us receive a bunch of these balloons at the event!
+The PyCon Organizing Team awarded us a balloon whenever we send a <abbr title="pull request">PR</abbr> and so I'd like to share some of the PR's that helped us receive a bunch of these balloons at the event!
 
 [GraphQL]: https://graphql.org/
 
