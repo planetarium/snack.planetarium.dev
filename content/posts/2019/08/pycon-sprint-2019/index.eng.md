@@ -1,5 +1,5 @@
 ---
-title: Libplanet at Pycon 2019 Sprint
+title: Libplanet at PyCon 2019 Sprint
 date: 2019-08-21
 authors: [dogeon.lee]
 translators: [kidon.seo]
