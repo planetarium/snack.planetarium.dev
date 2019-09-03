@@ -48,7 +48,7 @@ Now we have an option to only see the blocks with transactions.
 
 [Docker] is a tool that make it easy to create, deploy, and run applications using containers.
 
-Contributor [Ryang Minho][minhoryang] helped us create a docker file for [Libplanet Explorer Frontend], providing us with an environment in which we can easily distribute Libplanet Explorer anywhere or run it locally.
+Contributor [Minho Ryang][minhoryang] helped us create a docker file for [Libplanet Explorer Frontend], providing us with an environment in which we can easily distribute Libplanet Explorer anywhere or run it locally.
 
 [Docker]: https://docker.io/
 [minhoryang]: https://github.com/minhoryang
