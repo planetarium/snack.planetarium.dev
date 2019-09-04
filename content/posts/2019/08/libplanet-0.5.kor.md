@@ -12,7 +12,7 @@ Libplanet은 분산 P2P로 돌아가는 온라인 멀티플레이어 게임을 �
 
 [Libplanet]: https://libplanet.io/
 
-IBD 속도 개선
+밀린 블록 다운로드(a.k.a. Initial Block Download, IBD) 속도 개선
 -----------
 
 이전까지의 [IBD] 과정은 굉장히 오래 걸리는 작업이었습니다. 블록들을 다운받은 후 상태 값들을 스스로 연산하여 얻었어야 했었기 때문이죠.
@@ -55,14 +55,14 @@ Double 상수를 대입 할 때 플랫폼에 따라서 결과가 영향을 받�
 `FileStore` 제거
 ---------------
 
-Libplanet은 저장 계층을 간추리기 위해 [`IStore`]라는 인터페이스와 이를 파일 기반으로 구현한 [`FileStore`]를 비롯하여 [LiteDB]를 기반으로 구현한 [`LiteDBStore`]를 추가적으로 [0.4] 버전 부터 제공하고 있었습니다.  그러나 `FileStore`는 구현이 내부 구현이 간소한다는 장점에도 불구하고 다음과 같은 한계점도 있었습니다.
+Libplanet은 저장 계층을 간추리기 위해 [`IStore`]라는 인터페이스와 이를 파일 기반으로 구현한 [`FileStore`]를 비롯하여 [LiteDB]를 기반으로 구현한 [`LiteDBStore`]를 추가적으로 [0.4] 버전 부터 제공하고 있었습니다.  그러나 `FileStore`는 구현이 내부 구현이 간소하다는 장점에도 불구하고 다음과 같은 한계점도 있었습니다.
 
 - 모든 블록과 트랜잭션 그리고 계정의 매 블록마다의 상태 등이 각기 별도의 파일로 저장되는 방식이었기 때문에, 파일이 너무 많이 생겼습니다.
 - 별도의 캐시나 버퍼가 없어서 어떤 물리 저장 장치를 쓰느냐에 따라 입출력 성능이 크게 영향을 받았습니다.
 
-LiteDB를 사용하기 시작하면서 `FileStore`의 사용 빈도는 줄어들었고, 그에 비해 [`FileStore`]를 지속적으로 관리하기는 어렵다고 판단, 이번 0.5 버전부터는 `FileStore` 구현체를 제공하지 않기로 결정하였습니다.
+LiteDB를 사용하기 시작하면서 `FileStore`의 사용 빈도는 줄어들었고, 그에 비해 `FileStore`를 지속적으로 관리하기는 어렵다고 판단, 이번 0.5 버전부터는 `FileStore` 구현체를 제공하지 않기로 결정하였습니다.
 
-[0.4]: ../07/libplanet-0.4/
+[0.4]: {{< ref "../07/libplanet-0.4" >}}
 [`IStore`]: https://docs.libplanet.io/0.5.0/api/Libplanet.Store.IStore.html
 [`FileStore`]: https://docs.libplanet.io/0.4.0/api/Libplanet.Store.FileStore.html
 [LiteDB]: https://www.litedb.org/
