@@ -4,7 +4,7 @@ date: 2019-09-06
 authors: [dogeon.lee]
 ---
 
-안녕하세요. 저희 팀은 [Libplanet]의 다섯 번째 마이너 버전인 [0.5 버전][1]을 릴리스했습니다.
+안녕하세요. 저희 팀은 [Libplanet]의 다섯 번째 마이너 버전인 [0.5 버전][0.5.0], 그리고 그 패치 버전인 [0.5.1] 및 [0.5.2] 버전을 릴리스했습니다.
 
 Libplanet은 분산 P2P로 돌아가는 온라인 멀티플레이어 게임을 만들 때, 그러한 게임들이 매번 구현해야 하는 P2P 통신이나 데이터 동기화 등의 문제를 푸는 공용 라이브러리입니다.
 
@@ -92,10 +92,12 @@ LiteDB를 사용하기 시작하면서 `FileStore`의 사용 빈도는 줄어들
 그 외
 ----
 
-그 외의 여러 가지 변경 사항은 [전체 변경 내역][1]에서 확인하실 수 있습니다.
+그 외의 여러 가지 변경 사항은 [0.5.0] 및 [0.5.1], [0.5.2] 전체 변경 내역에서 확인하실 수 있습니다.
 
 이번 변경 사항이나 Libplanet에 대해 궁금한 점이 있으시다면 언제든 저희 팀이 상주해 있는 [디스코드 대화방]에 놀러 오세요!
 
 
-[1]: https://github.com/planetarium/libplanet/releases/tag/0.5.2
+[0.5.0]: https://github.com/planetarium/libplanet/releases/tag/0.5.0
+[0.5.1]: https://github.com/planetarium/libplanet/releases/tag/0.5.1
+[0.5.2]: https://github.com/planetarium/libplanet/releases/tag/0.5.2
 [디스코드 대화방]: https://discord.gg/ue9fgc3
