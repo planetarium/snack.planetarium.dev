@@ -1,6 +1,6 @@
 ---
 title: Libplanet 0.5 릴리스
-date: 2019-08-22
+date: 2019-09-06
 authors: [dogeon.lee]
 ---
 
@@ -97,5 +97,5 @@ LiteDB를 사용하기 시작하면서 `FileStore`의 사용 빈도는 줄어들
 이번 변경 사항이나 Libplanet에 대해 궁금한 점이 있으시다면 언제든 저희 팀이 상주해 있는 [디스코드 대화방]에 놀러 오세요!
 
 
-[1]: https://github.com/planetarium/libplanet/releases/tag/0.5.0
+[1]: https://github.com/planetarium/libplanet/releases/tag/0.5.2
 [디스코드 대화방]: https://discord.gg/ue9fgc3
