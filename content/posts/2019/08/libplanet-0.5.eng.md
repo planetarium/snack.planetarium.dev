@@ -21,7 +21,7 @@ Previously, [<abbr title="initial block download">IBD</abbr>][IBD] used to take 
 
 However, if you have a reliable node, it is quite possible to effectively reduce computing time by using precalculated results from that node.
 
-So, from Version 0.5, by handing over trusted nodes as parameters to [‘Swarm<T>.PreloadAsync()’], we’re now able to receive, store, and use the most recent state values already computed from those trusted nodes.
+So, from Version 0.5, by handing over trusted nodes as parameters to [`Swarm<T>.PreloadAsync()`], we’re now able to receive, store, and use the most recent state values already computed from those trusted nodes.
 
 If there aren’t any trusted nodes or the process fails for another reason, IBD computes in the same process as previous versions.
 
