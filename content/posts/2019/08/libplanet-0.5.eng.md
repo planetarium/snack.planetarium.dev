@@ -79,7 +79,7 @@ To carry out the IBD mentioned above, you can call the [`Swarm<T>.PreloadAsync()
 
 Therefore, the waiting time of this previous method had to be quite boring for players since the loading message only showed either <q>loading</q> or <q>100%</q> and no specific progress of the block download.
 
-However, from Version 0.5, by receiving the ‘IProgress<PreloadState>’ type parameter instead of ‘IProgress<BlockDownloadState>’, this allows us to get a detailed view of the entire preload progress.
+However, from Version 0.5, by receiving the `IProgress<PreloadState>` type parameter instead of `IProgress<BlockDownloadState>`, this allows us to get a detailed view of the entire preload progress.
 
 Through `IProgress<PreloadState>` object which receives [`BlockDownloadState`], [`BlockStateDownloadState`], [`StateReferenceDownloadState`] and [`ActionExecutionState`] as parameters inherited from [`PreloadState`], users are provided with more detailed information.
 
