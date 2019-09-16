@@ -63,7 +63,7 @@ Libplanet had been providing an interface called [`IStore`], [`FileStore`][] (a 
 - There were just too many files created because every block, every transaction, and the status of every account block were stored as separate files.
 - With no separate cache or buffer, I/O performance was significantly affected by what physical storage device were used.
 
-As we started using LiteDB, `FileStore` usage rate began to diminish. And so, considering the difficulty of continuously managing ‘FileStore’, we decided not to provide `FileStore` implementation from Version 0.5.
+As we started using LiteDB, `FileStore` usage rate began to diminish. And so, considering the difficulty of continuously managing `FileStore`, we decided not to provide `FileStore` implementation from Version 0.5.
 
 [0.4]: {{< ref "../07/libplanet-0.4" >}}
 [`IStore`]: https://docs.libplanet.io/0.5.0/api/Libplanet.Store.IStore.html
