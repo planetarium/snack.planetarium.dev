@@ -75,7 +75,7 @@ As we started using LiteDB, ‘FileStore’ usage rate began to diminish. And so
 More Detailed Preload Progress
 ---------------------------
 
-To carry out the IBD mentioned above, you can call the [‘Swarm<T>.PreloadAsync()’] method. And previously, sending ‘IProgress<BlockDownloadState>’ to this method’s parameter could tell us about the progress of the block download, but it couldn’t tell us about the specific progress from running actions to the final status after the block download (or from a trusted node).
+To carry out the IBD mentioned above, you can call the [`Swarm<T>.PreloadAsync()`] method. And previously, sending `IProgress<BlockDownloadState>` to this method’s parameter could tell us about the progress of the block download, but it couldn’t tell us about the specific progress from running actions to the final status after the block download (or from a trusted node).
 
 Therefore, the waiting time of this previous method had to be quite boring for players since the loading message only showed either <q>loading</q> or <q>100%</q> and no specific progress of the block download.
 
