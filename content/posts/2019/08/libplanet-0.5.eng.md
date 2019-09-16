@@ -81,7 +81,7 @@ Therefore, the waiting time of this previous method had to be quite boring for p
 
 However, from Version 0.5, by receiving the ‘IProgress<PreloadState>’ type parameter instead of ‘IProgress<BlockDownloadState>’, this allows us to get a detailed view of the entire preload progress.
 
-Through ‘IProgress<PreloadState>’ object which receives [‘BlockDownloadState’], [‘BlockStateDownloadState’], [‘StateReferenceDownloadState’] and [‘ActionExecutionState’] as parameters inherited from [‘PreloadState’], users are provided with more detailed information.
+Through `IProgress<PreloadState>` object which receives [`BlockDownloadState`], [`BlockStateDownloadState`], [`StateReferenceDownloadState`] and [`ActionExecutionState`] as parameters inherited from [`PreloadState`], users are provided with more detailed information.
 
 [`Swarm<T>.PreloadAsync()`]: https://docs.libplanet.io/0.5.0/api/Libplanet.Net.Swarm-1.html#Libplanet_Net_Swarm_1_PreloadAsync_System_IProgress_Libplanet_Net_PreloadState__System_Collections_Immutable_IImmutableSet_Libplanet_Address__System_Threading_CancellationToken_
 [`RecentStates`]: https://github.com/planetarium/libplanet/blob/master/Libplanet/Net/Messages/RecentStates.cs
