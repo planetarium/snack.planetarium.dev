@@ -5,7 +5,7 @@ authors: [swen.mun]
 translators: [kidon.seo]
 ---
 
-Hello everyone, we are happy to announce that the third minor version of [Libplanet]—[Version 0.4][1], has been released.
+Hello everyone, we are happy to announce that the fourth minor version of [Libplanet]—[Version 0.4][1], has been released.
 
 Libplanet is a common library that solves game implementation problems such as P2P communication and data synchronization when creating online multiplayer games that run on distributed P2P.
 
