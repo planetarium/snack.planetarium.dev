@@ -34,7 +34,7 @@ If there aren’t any trusted nodes or the process fails for another reason, IBD
 
 Quoting from the [System.Double section of .NET Standard Official Document][official-docs], it states: 
 
->In addition, the result of arithmetic and assignment operations with ‘Double’ values may differ slightly by platform because of the loss of precision of the ‘Double’ type. For example, the result of assigning a literal ‘Double’ value may differ in the 32-bit and 64-bit versions of the .NET Framework. 
+>In addition, the result of arithmetic and assignment operations with `Double` values may differ slightly by platform because of the loss of precision of the `Double` type. For example, the result of assigning a literal `Double` value may differ in the 32-bit and 64-bit versions of the .NET Framework. 
 
 As stated above, arithmetic operations and substitution of Double can cause indeterminant results. Because of this, we’ve decided not to provide [‘IRandom.NextDouble()’] from this version onwards.
 
