@@ -50,7 +50,7 @@ Block Action
 
 In order to keep chains secure, we need miners to mine the blocks, and we need to reward miners to recruit and keep them.
 
-Previously for miners to be rewarded, they had to add a transaction with reward actions to the block each time. But from this version, the new [`BlockPolicy<T>.BlockAction`] property enables miners to implement a code that rewards them for each block action. 
+Previously for miners to be rewarded, they had to add a transaction with reward actions to the block each time. But from this version, the new [‘BlockPolicy<T>.BlockAction’] property, which is executed for every block, enables code implementation that rewards miners for each block action. 
 
 [`BlockPolicy<T>.BlockAction`]: https://docs.libplanet.io/0.5.0/api/Libplanet.Blockchain.Policies.BlockPolicy-1.html#Libplanet_Blockchain_Policies_BlockPolicy_1_BlockAction
 
