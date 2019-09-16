@@ -58,7 +58,7 @@ Previously for miners to be rewarded, they had to add a transaction with reward 
 `FileStore` Removed
 ---------------
 
-Libplanet had been providing an interface called [‘IStore’], [‘FileStore’] (a file-based implementation of IStore), as well as [‘LiteDBStore’] (implementation based on [LiteDB]) since Version [0.4] to simplify the storage layer. Despite the benefits of its simplistic implementation, however, ‘FileStore’ also had the following limitations:
+Libplanet had been providing an interface called [`IStore`], [`FileStore`][] (a file-based implementation of `IStore`), as well as [`LiteDBStore`][] (implementation based on [LiteDB]) since Version [0.4] to simplify the storage layer. Despite the benefits of its simplistic implementation, however, `FileStore` also had the following limitations:
 
 - There were just too many files created because every block, every transaction, and the status of every account block were stored as separate files.
 - With no separate cache or buffer, I/O performance was significantly affected by what physical storage device were used.
