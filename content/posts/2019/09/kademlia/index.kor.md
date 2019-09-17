@@ -1,6 +1,6 @@
 ---
 title: Kademlia 분산 해시 테이블 적용기
-date: 2019-09-16
+date: 2019-09-17
 authors: [chanhyuck.ko]
 ---
 
