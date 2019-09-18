@@ -48,9 +48,9 @@ Libplanet은 분산 P2P로 돌아가는 온라인 멀티플레이어 게임을 �
 
 체인을 안전하게 유지하기 위해서는 블록들을 채굴할 마이너들이 필요하고, 그러한 마이너들을 모으고 유지하기 위해 보상을 주어야 할 것입니다.
  
-기존에는 마이너들에게 보상을 주기 위해선 직접 마이너가 블록에 리워드 액션을 가진 트랜잭션을 스스로 추가해야 했었지만, 이번 버전부터는 매 블록마다 실행되는 [`BlockPolicy<T>.BlockAction`] 속성이 생겨 이 블록 액션을 통해 마이너에게 보상금을 주는 코드를 구현할 수 있습니다.
+기존에는 마이너들에게 보상을 주기 위해선 직접 마이너가 블록에 리워드 액션을 가진 트랜잭션을 스스로 추가해야 했었지만, 이번 버전부터는 매 블록마다 실행되는 [`IBlockPolicy<T>.BlockAction`] 속성이 생겨 이 블록 액션을 통해 마이너에게 보상금을 주는 코드를 구현할 수 있습니다.
 
-[`BlockPolicy<T>.BlockAction`]: https://docs.libplanet.io/0.5.0/api/Libplanet.Blockchain.Policies.BlockPolicy-1.html#Libplanet_Blockchain_Policies_BlockPolicy_1_BlockAction
+[`IBlockPolicy<T>.BlockAction`]: https://docs.libplanet.io/0.5.0/api/Libplanet.Blockchain.Policies.IBlockPolicy-1.html#Libplanet_Blockchain_Policies_IBlockPolicy_1_BlockAction
 
 
 `FileStore` 제거
