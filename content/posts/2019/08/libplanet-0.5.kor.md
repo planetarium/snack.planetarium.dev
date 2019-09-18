@@ -15,13 +15,14 @@ Libplanet은 분산 P2P로 돌아가는 온라인 멀티플레이어 게임을 �
 <abbr title="Initial Block Download">IBD</abbr> 속도 개선
 -------------------------------------------------------
 
-이전까지의 [<abbr title="initial block download, 밀린 블록 다운로드">IBD</abbr>][IBD]는 블록이 조금만 많이 쌓여도 굉장히 오래 걸리는 작업이었습니다. 블록들을 다운받은 후 최종 상태를 첫 블록에서부터 스스로 연산하여 얻었어야 했었기 때문이죠.
+이전까지의 [IBD][](밀린 블록 다운로드)는 블록이 조금만 많이 쌓여도 굉장히 오래 걸리는 작업이었습니다. 블록들을 다운받은 후 최종 상태를 첫 블록에서부터 스스로 연산하여 얻었어야 했었기 때문이죠.
 
 하지만 신뢰할 수 있는 노드가 있다면 그 노드로부터 미리 연산돼 있는 결과를 받아와 연산에 드는 시간 효과적으로 줄일 수도 있을 것입니다.
 
 그래서 0.5 버전 부터는 [`Swarm<T>.PreloadAsync()`]에 신뢰할 수 있는 노드들을 인자로 넘겨주어 신뢰할 수 있는 노드들로 부터 이미 연산되어 있는 최근 상태 값들을 받아와 저장, 사용할 수도 있게 되었습니다.  
 
 만약 신뢰할 수 있는 노드들이 없거나 다른 이유로 그 과정에 실패했을 때에는 기존과 같이 직접 연산해서 사용합니다.
+
 [IBD]: https://bitcoin.org/en/glossary/initial-block-download
 [`Swarm<T>.PreloadAsync()`]: https://docs.libplanet.io/0.5.0/api/Libplanet.Net.Swarm-1.html#Libplanet_Net_Swarm_1_PreloadAsync_System_IProgress_Libplanet_Net_PreloadState__System_Collections_Immutable_IImmutableSet_Libplanet_Address__System_Threading_CancellationToken_
 
