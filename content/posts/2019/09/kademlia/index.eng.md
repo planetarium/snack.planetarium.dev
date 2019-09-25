@@ -46,7 +46,7 @@ In a traditional Libplanet, we built a network like this. It was a configuration
 {{<
 figure
   src="1.png"
-  caption=" All the peers are connected to each other."
+  caption="All the peers are connected to each other."
 >}}
 
 This is not a big deal when the network is small, but if you have, say 1,000 peers, or 10,000 peers, it's a lot of pressure every time you send that message to the network. 
