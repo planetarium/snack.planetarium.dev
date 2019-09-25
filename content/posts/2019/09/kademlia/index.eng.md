@@ -36,7 +36,7 @@ Instead of containing information from every peer on the network in their routin
 [exclusive disjunction]: https://en.wikipedia.org/wiki/Exclusive_or#Computer_science
 
 
-Reason for Applying Kademlia?
+Reason for Applying Kademlia
 ----------------------------------
 
 To configure a P2P network that communicates without a server, communication between all peers must be guaranteed. But not all peers have to be directly connected to each other. Take a look at these three peers- A, B and C.
