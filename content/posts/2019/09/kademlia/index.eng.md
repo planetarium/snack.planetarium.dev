@@ -54,7 +54,7 @@ This is not a big deal when the network is small, but if you have, say 1,000 pee
 {{<
 figure
   src="2.png"
-  caption=" Peers overloaded with excessive transmission."
+  caption="Peers overloaded with excessive transmission."
 >}}
 
 Using Kademlia, each row of routing tables will consist of peers whose distances are within the same range. When transmitting data, you select and send message to all peers in each row of the routing table, and those peers will do the same for all peers in their own tables. Eventually, every peer on the network will be able to receive the message. In this way, when N peers are on the network, one peer will only send a message log(N) times, preventing the network load from being concentrated on one peer.
