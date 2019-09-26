@@ -15,7 +15,7 @@
 <meta property="og:description" content="{{ .Description }}" />
 <meta property="og:title" content="{{ .Title }}" />
 <meta property="og:site_name" content="{{ .Site.Title }}" />
-{{ range .Resources.ByType "image" }}
+{{ range sort (.Resources.ByType "image") "Name" }}
 {{ if eq .ResourceType "image" }}
   <meta property="og:image" content="{{ .Permalink }}" />
 {{ end }}
