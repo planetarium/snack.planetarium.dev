@@ -1,6 +1,6 @@
 ---
 title: 저희와 함께 Hacktoberfest에 기여해봅시다!
-date: 2019-09-25
+date: 2019-09-26
 authors: [dogeon.lee]
 ---
 
