@@ -1,5 +1,5 @@
 ---
-title: 저희와 함께 Hacktoberfest에 기여해봅시다!
+title: 저희와 함께 Hacktoberfest에 참가해봅시다!
 date: 2019-09-26
 authors: [dogeon.lee]
 ---
