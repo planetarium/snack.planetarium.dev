@@ -1,6 +1,6 @@
 ---
 title: Applying Kademlia Distributed Hash Table to Libplanet
-date: 2019-09-17
+date: 2019-09-27
 authors: [chanhyuck.ko]
 translators: [kidon.seo]
 ---
