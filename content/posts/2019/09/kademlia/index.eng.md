@@ -1,6 +1,6 @@
 ---
 title: Applying Kademlia Distributed Hash Table to Libplanet
-date: 2019-09-17
+date: 2019-09-27
 authors: [chanhyuck.ko]
 translators: [kidon.seo]
 ---
@@ -29,7 +29,7 @@ Without much choice, Kim first heads to Seoul city. And there, he goes up to peo
 
 Although Kim didn't know the exact location of the address, he gradually narrowed it down and eventually reached his friend's house. Similar to Kim’s example, each peer on a Kademlia network also maintains and searches for peer information.
 
-Peers of a network have virtual addresses. It's not a geographical address like <i>"1-91 Sejong-ro, Jongno-gu, Seoul"</i>, but a series of bytes assigned at random or by set rules. As for distance, it’s defined as an [exclusive disjunction] of the address values of two peers, rather than the physical distance between the actual peers.
+Peers of a network have virtual addresses. It's not a geographical address like *"1-91 Sejong-ro, Jongno-gu, Seoul"*, but a series of bytes assigned at random or by set rules. As for distance, it’s defined as an [exclusive disjunction] of the address values of two peers, rather than the physical distance between the actual peers.
 
 Instead of containing information from every peer on the network in their routing tables, peers using Kademlia protocol classify them according to the distance defined above and store only a limited number of peers per distance range. Peers with a distance of at least 2<sup>i</sup> and up to 2<sup>i+1</sup> are stored in the i-th row of the routing table. This optional storing of peer information in a routing table allows you to locate peer B by requesting information to a peer that is closest to B that you know, and then repeating this series of request until it leads to B.
 
