@@ -18,7 +18,7 @@ So How Do We Get Started?
 -------------------------
 
 If you’d like to participate in Hacktoberfest, but just don’t know what to contribute to and send a pull request, you’re in luck.  
-We’ve put up <q>*hacktoberfest*</q> labels on issues that are great for new contributors trying to participate in Hacktoberfest. So, you can pick the issues with the <q>hacktobberfest</q> label that you’d like to work on and leave a comment saying you're starting your work. Please take a look at the issues tracker of our projects—[Libplanet], [Libplanet Explorer], and [Libplanet Explorer Frontend]. 
+We’ve put up <q>*hacktoberfest*</q> labels on issues that are great for new contributors trying to participate in Hacktoberfest. So, you can pick the issues with the <q>hacktoberfest</q> label that you’d like to work on and leave a comment saying you're starting your work. Please take a look at the issues tracker of our projects—[Libplanet], [Libplanet Explorer], and [Libplanet Explorer Frontend]. 
 
 {{<
 figure
