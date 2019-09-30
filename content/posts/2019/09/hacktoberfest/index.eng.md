@@ -24,7 +24,7 @@ We’ve put up <q>*hacktoberfest*</q> labels on issues that are great for new co
 figure
   src="hacktoberfest-issues.png"
   width="500"
-  caption="Issues labeled <q>hacktobberfest</q> "
+  caption="Issues labeled <q>hacktoberfest</q> "
 >}}
 
 Once you get started, you'll be talking to other open source contributors through comments and chat. If it’s your first time participating in an open source project, maintainers and other contributors will help so don’t worry.
