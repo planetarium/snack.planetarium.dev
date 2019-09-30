@@ -5,7 +5,7 @@ authors: [dogeon.lee]
 translators: [kidon.seo]
 ---
 
-<div style="display: block; margin: auto; width: 500px;"><a href="https://hacktoberfest.digitalocean.com/"><img src="_hacktoberfest.png" width="500"></a></div>
+<div style="display: block; margin: auto; margin-top: 30px; width: 500px;"><a href="https://hacktoberfest.digitalocean.com/"><img src="_hacktoberfest.png" width="500"></a></div>
 
 Greetings All! The month of Hacktoberfest has finally arrived.
 
