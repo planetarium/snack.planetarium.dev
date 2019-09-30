@@ -12,7 +12,7 @@ Greetings All! The month of Hacktoberfest has finally arrived.
 
 Is this your first time hearing about <dfn>[Hacktoberfest]</dfn>? Hacktoberfest is an open source event that lasts for a month from October 1st to 31st. The event is open to everyone around the world and all you have to do is participate anytime within October and submit 4 pull requests to the Github Public Repository.
 
-Send 4 pull requests and you'll get either a T-shirt or a sticker from the event host like DigitalOcean.  And we’re happy to announce that Project [Libplanet] is also participating in the event this year!
+Send 4 pull requests and you'll get either a T-shirt or a sticker from the event host like DigitalOcean.   And we’re happy to announce that Project [Libplanet] is also participating in the event this year!
 
 So How Do We Get Started?
 -------------------------
