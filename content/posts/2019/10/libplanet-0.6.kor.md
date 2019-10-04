@@ -1,6 +1,6 @@
 ---
 title: Libplanet 0.6 릴리스
-date: 2019-10-02
+date: 2019-10-04
 authors: [chanhyuck.ko]
 ---
 
