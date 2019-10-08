@@ -1,0 +1,19 @@
+on:
+  push:
+    branches:
+      - master
+
+name: Deploy to GitHub Pages
+
+jobs:
+  snack-og-image:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: snack-og-image
+      uses: ./.github/actions/snack-og-image
+    - name: hugo-deploy-gh-pages
+      uses: khanhicetea/gh-actions-hugo-deploy-gh-pages@master
+      env:
+        GIT_DEPLOY_KEY: ${{ secrets.GIT_DEPLOY_KEY }}
+        HUGO_VERSION: "0.53"
