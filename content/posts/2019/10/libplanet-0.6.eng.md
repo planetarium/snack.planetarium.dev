@@ -41,7 +41,7 @@ In order to meet the above conditions, this update allows all clients to run act
 
 Asynchronous Block Mining 
 ---------------
-Since Libplanet works based on a [Proof of Work] system, it uses a lot of CPU resources during block mining process. In the previous version, because `Hashcash.Answer()` which looks for `Nonc`e in a block was a synchronous function, the running thread was blocked and it was difficult to abort operation.
+Since Libplanet works based on a [Proof of Work] system, it uses a lot of CPU resources during block mining process. In the previous version, because `Hashcash.Answer()` which looks for `Nonce` in a block was a synchronous function, the running thread was blocked and it was difficult to abort operation.
 
 From this version, `BlockChain<T>.Mine()` is an asynchronous function, meaning users can abort operation at a desired time by using `CancellationToken`. Also, when blockchain tip changes during mining, `Blockchain <T>.TipChanged` event, which can be subscribed externally, will be called and the mining process will halt when that event occurs.
 
