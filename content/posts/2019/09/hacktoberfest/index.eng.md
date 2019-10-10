@@ -3,9 +3,10 @@ title: Join Us for Hacktoberfest!
 date: 2019-09-26
 authors: [dogeon.lee]
 translators: [kidon.seo]
+ogimage: hacktoberfest.png
 ---
 
-<div style="display: block; margin: auto; margin-top: 30px; width: 500px;"><a href="https://hacktoberfest.digitalocean.com/"><img src="_hacktoberfest.png" width="500"></a></div>
+<div style="display: block; margin: auto; margin-top: 30px; width: 500px;"><a href="https://hacktoberfest.digitalocean.com/"><img src="hacktoberfest.png" width="500"></a></div>
 
 Greetings All! The month of Hacktoberfest has finally arrived.
 

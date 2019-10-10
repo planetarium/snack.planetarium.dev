@@ -2,9 +2,10 @@
 title: 저희와 함께 Hacktoberfest에 참가해봅시다!
 date: 2019-09-26
 authors: [dogeon.lee]
+ogimage: hacktoberfest.png
 ---
 
-<div style="display: block; margin: auto; margin-top: 30px; width: 500px;"><a href="https://hacktoberfest.digitalocean.com/"><img src="_hacktoberfest.png" width="500"></a></div>
+<div style="display: block; margin: auto; margin-top: 30px; width: 500px;"><a href="https://hacktoberfest.digitalocean.com/"><img src="hacktoberfest.png" width="500"></a></div>
 
 안녕하세요, 어느새 Hacktoberfest의 달, 10월이 찾아왔습니다.   
 
