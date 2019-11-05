@@ -15,6 +15,12 @@
 <meta property="og:description" content="{{ .Description }}" />
 <meta property="og:title" content="{{ .Title }}" />
 <meta property="og:site_name" content="{{ .Site.Title }}" />
+{{ if isset .Params "ogimage" }}
+{{- /* FIXME: restrict them to bring exactly the same resources */ -}}
+<meta property="og:image"
+  content="{{ (.Resources.GetMatch .Params.ogimage).Permalink }}"
+/>
+{{ else }}
 {{ range sort (.Resources.ByType "image") "Name" }}
 {{ if eq .ResourceType "image" }}
   <meta property="og:image" content="{{ .Permalink }}" />
@@ -23,6 +29,7 @@
 {{ if (fileExists (print (print "static/og/" .Site.Language) ".png")) }}
   <meta property="og:image"
     content="{{ (print (print "og/" .Site.Language) ".png") | absURL }}" />
+{{ end }}
 {{ end }}
 <meta property="og:url" content="{{ .Permalink }}" />
 <meta property="og:locale" content="{{ .Site.Language.Params.ianaSubtag }}" />
