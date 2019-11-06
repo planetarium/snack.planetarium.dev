@@ -26,7 +26,7 @@ figure
 
 # 기억에 남는 기여들
 
-- [@MaxStalker] 님이 작업해 주신 [Auto refresh when block mined][planetarium/libplanet-explorer-frontend#37]는 코멘트 숫자에서도 알 수 있듯이, 꽤 난항을 겪은 이슈였습니다. Libplanet Explorer Frontend는 특성상 백엔드 서비스인 Libplanet Explorer가 있어야 하는데, 저희가 준비한 서비스가 계속 내려가는 문제가 있어서 꽤 기다리셔야 했거든요. 😢 서비스가 정상화된 뒤에도 [저희 디스코드 서버][2]에서 이런저런 트러블 슈팅을 함께 해가면서 기여를 마무리해 주신 @MaxStalker 님께 이 자리를 빌려 감사의 말씀을 전합니다. 🙇
+- [@MaxStalker] 님이 작업해 주신 [Auto refresh when block mined][planetarium/libplanet-explorer-frontend#37]는 코멘트 숫자에서도 알 수 있듯이, 꽤 난항을 겪은 이슈였습니다. Libplanet Explorer Frontend는 특성상 GraphQL 백엔드인 Libplanet Explorer가 있어야 하는데, 저희가 준비한 GraphQL 백엔드가 계속 내려가는 문제가 있어서 꽤 기다리셔야 했거든요. 😢 서비스가 정상화된 뒤에도 [저희 디스코드 서버][2]에서 이런저런 트러블슈팅을 함께 해가면서 기여를 마무리해 주신 @MaxStalker 님께 이 자리를 빌려 감사의 말씀을 전합니다. 🙇
 
 - [@RozzaysRed] 님은 Hackoberfest 기간 중, *hacktoberfest* 레이블이 붙어있는 이슈뿐만 아니라 그렇지 않은 이슈들에도 [많은 기여][3]를 해주셨습니다. 이럴 줄 알았으면 저희가 *hacktoberfest* 레이블을 좀 더 빨리, 많이 붙여둘 걸 그랬네요. 😊
 
