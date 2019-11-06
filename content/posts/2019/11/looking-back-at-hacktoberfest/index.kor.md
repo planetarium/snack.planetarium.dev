@@ -7,9 +7,9 @@ authors: [swen.mun]
 안녕하세요. 오늘은 저희 [플라네타리움] 팀이 지난 10월 한 달간 [Hacktoberfest]에 참가하여 받은 기여들을 소개해보려 합니다.
 
 
-# 둘러 보기
+# 둘러보기
 
-Hacktoberfest를 맞아 저희는 36개의 이슈를 준비했고, 그 중 15개의 이슈가 기여를 통해 처리가 되었습니다.
+Hacktoberfest를 맞아 저희는 36개의 이슈를 준비했고, 그중 15개의 이슈가 기여를 통해 처리되었습니다.
 
 {{<
 figure
@@ -21,7 +21,7 @@ figure
 
 - 절반 정도의 기여가 월초에 집중되었습니다. 초반 스퍼트가 중요해 보이네요. 🏃
 - 대부분의 이슈가 초심자를 위한 이슈(`label:"good first issue"`)였습니다.
-- [Libplanet] [Libplanet Explorer], [Libplanet Explorer Frontend] 3개 프로젝트가 고르게 기여를 받았습니다.
+- [Libplanet], [Libplanet Explorer], [Libplanet Explorer Frontend] 3개 프로젝트가 고르게 기여를 받았습니다.
 
 
 # 기억에 남는 기여들
@@ -30,7 +30,7 @@ figure
 
 - [@RozzaysRed] 님은 Hackoberfest 기간 중, *hacktoberfest* 레이블이 붙어있는 이슈뿐만 아니라 그렇지 않은 이슈들에도 [많은 기여][3]를 해주셨습니다. 이럴 줄 알았으면 저희가 *hacktoberfest* 레이블을 좀 더 빨리, 많이 붙여둘 걸 그랬네요. 😊
 
-- [Rename “maxValue” parameters in IRandom.Next() methods](planetarium/libplanet#555) 이슈에서는 [@pBouillon] 님께 기여뿐 아니라 적당한 파라미터 명(`lowerBound`, `upperBound`)을 제안받기도 했습니다. 💬
+- [Rename “maxValue” parameters in IRandom.Next() methods][planetarium/libplanet#555] 이슈에서는 [@pBouillon] 님께 기여뿐 아니라 적당한 파라미터 명(`lowerBound`, `upperBound`)을 제안받기도 했습니다. 💬
 
 # 마치며
 
