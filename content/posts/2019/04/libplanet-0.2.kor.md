@@ -152,4 +152,4 @@ API도 매우 불편했습니다.
 [디스코드 대화방][16]에 놀러오세요!
 
 [15]: https://github.com/planetarium/libplanet/releases/tag/0.2.1
-[16]: https://discord.gg/ue9fgc3
+[16]: https://discord.gg/planetarium

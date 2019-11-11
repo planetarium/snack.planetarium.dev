@@ -184,4 +184,4 @@ If you're curious, install and have a look around.
 And If you have any questions, please join our [Discord chatroom][16]!
 
 [15]: https://github.com/planetarium/libplanet/releases/tag/0.2.1
-[16]: https://discord.gg/ue9fgc3
+[16]: https://discord.gg/planetarium

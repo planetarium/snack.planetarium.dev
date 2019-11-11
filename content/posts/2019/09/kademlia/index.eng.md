@@ -73,4 +73,4 @@ In order to give users a sense that their actions are processing fast, you need 
 
 If you have any questions about Kademlia distributed hash table or Libplanet, please visit our [Discord chatroom] and let’s chat!
 
-[1]: https://discord.gg/ue9fgc3
+[1]: https://discord.gg/planetarium

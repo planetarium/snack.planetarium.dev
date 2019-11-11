@@ -54,4 +54,4 @@ Libplanet은 [작업 증명 시스템]을 기반으로 블록을 합의하기 �
 
 
 [0.6.0]: https://github.com/planetarium/libplanet/releases/tag/0.6.0
-[디스코드 대화방]: https://discord.gg/ue9fgc3
+[디스코드 대화방]: https://discord.gg/planetarium

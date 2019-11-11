@@ -58,4 +58,4 @@ And as always, if you have any questions about the new release or Libplanet in g
 
 
 [0.6.0]: https://github.com/planetarium/libplanet/releases/tag/0.6.0
-[Discord chatroom]: https://discord.gg/ue9fgc3
+[Discord chatroom]: https://discord.gg/planetarium
