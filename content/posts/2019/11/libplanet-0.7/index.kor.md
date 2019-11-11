@@ -30,7 +30,7 @@ Libplanet은 분산 P2P로 돌아가는 온라인 멀티플레이어 게임을 �
 [Binary Serialization]: https://docs.microsoft.com/en-us/dotnet/standard/serialization/binary-serialization
 [Libplanet Explorer]: https://github.com/planetarium/libplanet-explorer
 [Bencodex]: https://github.com/planetarium/bencodex.net
-[IValue]: https://github.com/planetarium/bencodex.net/blob/master/Bencodex/Types/IValue.cs
+[IValue]: https://github.com/planetarium/bencodex.net/blob/0.2.0/Bencodex/Types/IValue.cs
 
 
 BlockChain<T>의 IReadOnlyList 구현 제거
