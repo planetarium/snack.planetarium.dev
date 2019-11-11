@@ -65,4 +65,4 @@ Libplanet은 저장 계층을 간추리기 위해 [`IStore`]라는 인터페이�
 
 이번 변경 사항이나 Libplanet에 대해 궁금한 점이 있으시다면 언제든 저희 팀이 상주해 있는 [디스코드 대화방][2]에 놀러 오세요!
 
-[2]: https://discord.gg/ue9fgc3
+[2]: https://discord.gg/planetarium

@@ -45,4 +45,4 @@ Hacktoberfest 기간 동안 기여하면서 궁금한 점이 생기거나 어려
 [Libplanet Explorer]: https://github.com/planetarium/libplanet-explorer/issues?q=label:hacktoberfest+is:open+is:issue
 [Libplanet Explorer Frontend]: https://github.com/planetarium/libplanet-explorer-frontend/issues?q=label:hacktoberfest+is:open+is:issue
 [hacktoberfest]: https://hacktoberfest.digitalocean.com/
-[1]: https://discord.gg/ue9fgc3
+[1]: https://discord.gg/planetarium

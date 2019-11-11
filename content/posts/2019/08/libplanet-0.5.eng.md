@@ -102,5 +102,5 @@ And as always, if you have any questions about the new release or Libplanet in g
 [0.5.0]: https://github.com/planetarium/libplanet/releases/tag/0.5.0
 [0.5.1]: https://github.com/planetarium/libplanet/releases/tag/0.5.1
 [0.5.2]: https://github.com/planetarium/libplanet/releases/tag/0.5.2
-[Discord Chatroom]: https://discord.gg/ue9fgc3
+[Discord Chatroom]: https://discord.gg/planetarium
 

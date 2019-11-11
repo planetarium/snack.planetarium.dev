@@ -75,4 +75,4 @@ Libplanet은 분산 P2P로 돌아가는 온라인 멀티플레이 게임을 만�
 
 이번 변경 사항이나 Libplanet에 대해 궁금한 점이 있으시다면 언제든 저희 팀이 상주해 있는 [디스코드 대화방][6]에 놀러 오세요!
 
-[6]: https://discord.gg/ue9fgc3
+[6]: https://discord.gg/planetarium

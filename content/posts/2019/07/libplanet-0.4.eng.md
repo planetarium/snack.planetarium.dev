@@ -66,7 +66,7 @@ You can learn more about additional changes in [our release notes][1].
 
 And as always, if you have any questions about the new release or Libplanet in general, please visit [our Discord chatroom][2] and let’s chat!
 
-[2]: https://discord.gg/ue9fgc3
+[2]: https://discord.gg/planetarium
 
 
 

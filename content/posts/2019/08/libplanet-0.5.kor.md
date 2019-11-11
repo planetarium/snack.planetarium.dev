@@ -101,4 +101,4 @@ LiteDB를 사용하기 시작하면서 `FileStore`의 사용 빈도는 줄어들
 [0.5.0]: https://github.com/planetarium/libplanet/releases/tag/0.5.0
 [0.5.1]: https://github.com/planetarium/libplanet/releases/tag/0.5.1
 [0.5.2]: https://github.com/planetarium/libplanet/releases/tag/0.5.2
-[디스코드 대화방]: https://discord.gg/ue9fgc3
+[디스코드 대화방]: https://discord.gg/planetarium

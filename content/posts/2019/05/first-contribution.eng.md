@@ -64,5 +64,5 @@ As always, if you have any questions about the project, please visit our [Discor
 [10]: https://comuka.nonce.community/
 [11]: https://sprintseoul.org/
 [12]: https://github.com/planetarium/libplanet/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22
-[13]: https://discord.gg/ue9fgc3
+[13]: https://discord.gg/planetarium
 

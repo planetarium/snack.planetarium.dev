@@ -77,4 +77,4 @@ BlockChain<T>의 IReadOnlyList 구현 제거
 [Hacktoberfest]: https://hacktoberfest.digitalocean.com/
 [looking-back-at-hacktoberfest]: {{< ref "../11/looking-back-at-hacktoberfest/" >}}
 [0.7.0]: https://github.com/planetarium/libplanet/releases/tag/0.7.0
-[Discord]: https://discord.gg/ue9fgc3
+[Discord]: https://discord.gg/planetarium
