@@ -15,7 +15,7 @@ For Hacktoberfest, we prepared a total of 36 issues, and 15 were handled through
 {{<
 figure
   src="1.png"
-  caption=”Contributed Issues"
+  caption="Contributed Issues"
 >}}
 
 After a month of contributions, we learned some interesting facts:
