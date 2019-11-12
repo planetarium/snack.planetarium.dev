@@ -21,7 +21,7 @@ figure
 After a month of contributions, we learned some interesting facts:
 
 - Half the contributions were focused at the beginning of the month. It appears that our contributors were quite eager from the start of Hacktoberfest. 🏃
-- Most issues contributed were for beginners (`label: “good first issue”`).
+- Most issues contributed were for beginners (`label:"good first issue"`).
 - Our 3 projects-- [Libplanet], [Libplanet Explorer], and [Libplanet Explorer Frontend]—all received fairly equal contributions.
 
 
@@ -29,9 +29,9 @@ After a month of contributions, we learned some interesting facts:
 
 - [Auto refresh when block mined][planetarium/libplanet-explorer-frontend#37] contributed by [@MaxStalker] was quite a tough issue, as the number of issue comments indicates. While Libplanet Explorer Frontend requires the GraphQL backend, Libplanet Explorer, the GraphQL backend we prepared kept malfunctioning, causing a long wait for our contributor. 😢 So, we would like to take this opportunity to thank @MaxStalker for completing his contribution by walking us through trouble shooting at our [Discord Chatroom] [2] even after the service had been normalized. 🙇
 
-- We thank [@RozzaysRed] for contributing to issues labeled *hacktobberfest as well as those that weren’t [3]. If we knew this would’ve happen, we certainly would have put *hacktobberfest* label on way more issues. 😊
+- We thank [@RozzaysRed] for contributing to issues labeled *hacktobberfest* as well as those that weren’t [3]. If we knew this would’ve happen, we certainly would have put *hacktobberfest* label on way more issues. 😊
 
-- In issue [Rename “maxValue” parameters in IRandom.Next() methods][planetarium/libplanet#555], [@pBouillon] not only made contributions, but also suggested a suitable parameter name ('lowerBound' and 'upperBound'). 💬
+- In issue [Rename “maxValue” parameters in IRandom.Next() methods][planetarium/libplanet#555], [@pBouillon] not only made contributions, but also suggested a suitable parameter name (`lowerBound` and `upperBound`). 💬
 
 
 # Closing
