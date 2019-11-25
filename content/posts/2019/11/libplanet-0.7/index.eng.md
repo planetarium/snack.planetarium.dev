@@ -54,11 +54,11 @@ In this version, we have added a Key Store to help you encrypt and secure your p
 [ProtectedPrivateKey]: https://docs.libplanet.io/0.7.0/api/Libplanet.KeyStore.ProtectedPrivateKey.html
 [ProtectedPrivateKey.WriteJson]: https://docs.libplanet.io/0.7.0/api/Libplanet.KeyStore.ProtectedPrivateKey.html#Libplanet_KeyStore_ProtectedPrivateKey_WriteJson_Stream_System_Nullable_Guid___
 
-Currently, [key derivation function] implements [PBKDF2] and [Scrypt], and supports [AES]-128-[CTR] encryption algorithms. The Scrypt implementation has been contributed as [contribution][#654] by [minhoryang]. 🎉
+Currently, Liplanet implements [PBKDF2] and [Scrypt] [key derivation functions], and supports [AES]-128-[CTR] encryption algorithm. The Scrypt implementation has been contributed as [contribution][#654] by [minhoryang]. 🎉
 
 [Ethereum]: https://en.wikipedia.org/wiki/Ethereum
 [Web3 Secret Storage Definition]: https://github.com/ethereum/wiki/wiki/Web3-Secret-Storage-Definition
-[key derivation function]: https://en.wikipedia.org/wiki/Key_derivation_function
+[key derivation functions]: https://en.wikipedia.org/wiki/Key_derivation_function
 [PBKDF2]: https://en.wikipedia.org/wiki/PBKDF2
 [Scrypt]: https://en.wikipedia.org/wiki/Scrypt
 [AES]: https://en.wikipedia.org/wiki/Advanced_Encryption_Standard
@@ -70,7 +70,7 @@ Currently, [key derivation function] implements [PBKDF2] and [Scrypt], and suppo
 Furthermore,
 ----
 
-This version includes many contributions from the [Hacktobberfest] event. You can learn more about the event in [Looking Back on Hacktoberfest] [Looking-back-at-hacktobberfest] written by Swen Mun, and all other changes made to this version can be found in [Full Changes] [0.7.0].
+This version includes many contributions from the [Hacktoberfest] event. You can learn more about the event in [Looking Back on Hacktoberfest][looking-back-at-hacktoberfest] written by Swen Mun, and all other changes made to this version can be found in [Full Changes] [0.7.0].
 
 And as always, if you have any questions about the new release or Libplanet in general, please visit our [Discord chatroom][Discord] and let’s chat!
 
