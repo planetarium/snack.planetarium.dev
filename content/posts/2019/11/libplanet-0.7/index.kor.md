@@ -33,8 +33,8 @@ Libplanet은 분산 P2P로 돌아가는 온라인 멀티플레이어 게임을 �
 [IValue]: https://github.com/planetarium/bencodex.net/blob/0.2.0/Bencodex/Types/IValue.cs
 
 
-BlockChain<T>의 IReadOnlyList 구현 제거
----------------------------------------
+`BlockChain<T>`의 `IReadOnlyList<T>` 구현 제거
+----------------------------------------------
 
 이전 버전까지 `BlockChain<T>` 클래스는 `IReadOnlyList<T>` 인터페이스를 구현하고 있었고, 그에 따라 `BlockChain<T>` 객체에 직접 [LINQ] 확장 메서드들을 사용할 수 있었습니다. LINQ 확장 메서드는 선형적인 객체를 다룰 때 다양한 편리를 제공하지만, 사용 방법에 따라 상당한 성능상의 차이를 가져올 수 있습니다. 예를 들어 `BlockChain<T>` 객체에 10,000개의 블록이 있을 때 LINQ의 `.Last()` 메서드를 사용하여 10,000 번째 블록을 가져오고자 한다면 마지막 블록만을 저장소에서 바로 가져온다고 생각하기 쉽습니다. 하지만 실제로는 `BlockChain<T>`의 첫 블록부터 마지막 블록까지 조회하며 각 블록에 대해 스토리지에 저장된 내용을 메모리에 올리고 해석하는 작업이 이뤄지게 됩니다. 저장된 블록이 적을 때는 이런 점이 큰 문제가 되지 않지만, 블록이 많아질수록 이런 사용방식이 큰 성능 문제로 이어질 수 있습니다.
 
@@ -53,11 +53,11 @@ BlockChain<T>의 IReadOnlyList 구현 제거
 [ProtectedPrivateKey]: https://docs.libplanet.io/0.7.0/api/Libplanet.KeyStore.ProtectedPrivateKey.html
 [ProtectedPrivateKey.WriteJson]: https://docs.libplanet.io/0.7.0/api/Libplanet.KeyStore.ProtectedPrivateKey.html#Libplanet_KeyStore_ProtectedPrivateKey_WriteJson_Stream_System_Nullable_Guid___
 
-현재 [키 유도함수][Key Derive Function]는 [PBKDF2]와 [Scrypt]가 구현되어있고, [AES]-128-[CTR] 암호화 알고리즘을 지원하고 있습니다. 이 중 Scrypt 구현은 [minhoryang] 님의 [기여][#654]로 추가되었습니다. 🎉
+현재 [키 유도함수][KDF]는 [PBKDF2]와 [Scrypt]가 구현되어있고, [AES]-128-[CTR] 암호화 알고리즘을 지원하고 있습니다. 이 중 Scrypt 구현은 [minhoryang] 님의 [기여][#654]로 추가되었습니다. 🎉
 
 [Ethereum]: https://en.wikipedia.org/wiki/Ethereum
 [Web3 Secret Storage Definition]: https://github.com/ethereum/wiki/wiki/Web3-Secret-Storage-Definition
-[Key Derive Function]: https://en.wikipedia.org/wiki/Key_derivation_function
+[KDF]: https://en.wikipedia.org/wiki/Key_derivation_function
 [PBKDF2]: https://en.wikipedia.org/wiki/PBKDF2
 [Scrypt]: https://en.wikipedia.org/wiki/Scrypt
 [AES]: https://ko.wikipedia.org/wiki/%EA%B3%A0%EA%B8%89_%EC%95%94%ED%98%B8%ED%99%94_%ED%91%9C%EC%A4%80
