@@ -70,7 +70,7 @@ Currently, Liplanet implements [PBKDF2] and [Scrypt] [key derivation functions],
 Furthermore,
 ----
 
-This version includes many contributions from the [Hacktoberfest] event. You can learn more about the event in [Looking Back on Hacktoberfest][looking-back-at-hacktobberfest] written by Swen Mun, and all other changes made to this version can be found in [Full Changes] [0.7.0].
+This version includes many contributions from the [Hacktoberfest] event. You can learn more about the event in [Looking Back on Hacktoberfest][looking-back-at-hacktoberfest] written by Swen Mun, and all other changes made to this version can be found in [Full Changes] [0.7.0].
 
 And as always, if you have any questions about the new release or Libplanet in general, please visit our [Discord chatroom][Discord] and let’s chat!
 
