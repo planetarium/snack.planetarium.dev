@@ -1,7 +1,7 @@
 ---
 title: Libplanet 0.8 릴리스
-date: 2020-02-04
-authors: [hong.minhee]
+date: 2020-02-05
+authors: [chanhyuck.ko, hong.minhee]
 ---
 
 안녕하세요.
@@ -96,6 +96,43 @@ CryptoConfig.CryptoBackend = new MyCryptoBackend();
 [DefaultCryptoBackend]: https://docs.libplanet.io/0.8.0/api/Libplanet.Crypto.DefaultCryptoBackend.html
 [CryptoConfig.CryptoBackend]: https://docs.libplanet.io/0.8.0/api/Libplanet.Crypto.CryptoConfig.html#Libplanet_Crypto_CryptoConfig_CryptoBackend
 [secp256k1]: https://github.com/bitcoin-core/secp256k1
+
+
+라우팅 테이블 개선
+------------------
+
+Libplanet은 [분산 해시 테이블 방식][DHT]을 적용하여 다른 피어와 통신하기 때문에
+라우팅 테이블의 자신과 연결된 피어들의 정보를 저장합니다.
+
+기존에는 이 라우팅 테이블에 해당 피어와 가장 최근에 통신한 시점만을
+저장하고 있었는데,
+추가로 해당 피어와의 통신 딜레이를 추가하여 사용자가 네트워크 환경에 대한
+자세한 정보를 알 수 있도록 하였습니다.
+
+개발자들은 새로 추가된
+[`Swarm<T>.CheckAllPeersAsync()` 메서드][Swarm{T}.CheckAllPeersAsync()]를
+이용하여 라우팅 테이블에 저장된 피어들을 갱신할 수 있고,
+[`Swarm<T>.Peers` 속성][Swarm{T}.Peers]에 접근해 Libplanet의 외부에서도 현재
+자신의 라우팅 테이블에 들어있는 피어들을 확인할 수 있게 되었습니다.
+
+[DHT]: {{< ref "../../2019/09/kademlia/" >}}
+[Swarm{T}.CheckAllPeersAsync()]: https://docs.libplanet.io/0.8.0/api/Libplanet.Net.Swarm-1.html#Libplanet_Net_Swarm_1_CheckAllPeersAsync_System_Nullable_TimeSpan__CancellationToken_
+[Swarm{T}.Peers]: https://docs.libplanet.io/0.8.0/api/Libplanet.Net.Swarm-1.html#Libplanet_Net_Swarm_1_Peers
+
+
+블록 구조 및 직렬화 방식의 변경
+-------------------------------
+
+블록체인을 구성하는 요소인 블록은 크게 트랜잭션을 제외한 메타데이터 부분과
+트랜잭션, 이렇게 두 부분로 나눌 수 있습니다.
+
+많은 블록체인 프로젝트들이 그렇듯 저희 역시 여기서 트랜잭션을 뺀
+부분을 블록 헤더로 정의하였고,
+기존에 블록 해시로만 수행하던 연산들을 좀더 풍부한 정보를 담은 블록 헤더를
+이용해 수행하게 바꾸어 기존보다 효율적인 연산을 할 수 있게 되었습니다.
+
+더불어, 블록과 트랜잭션을 직렬화할 때 필드 키를 짧게 줄이고,
+비어있는 필드는 아예 배제함으로써 직렬화된 표현을 경량화했습니다.
 
 
 문서 개선
