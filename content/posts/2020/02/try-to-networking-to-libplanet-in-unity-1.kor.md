@@ -1,6 +1,6 @@
 ---
 title: "Unity에서 Libplanet과 통신하기 - 1"
-date: 2020-01-14
+date: 2020-02-25
 authors: [hyun.seungmin]
 ---
 
