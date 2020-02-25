@@ -1,5 +1,5 @@
 ---
-title: "Unity에서 Libplanet과 통신하기 - 1"
+title: "게임 개발자, Libplanet을 처음 만났을 때 😂"
 date: 2020-02-25
 authors: [hyun.seungmin]
 ---
