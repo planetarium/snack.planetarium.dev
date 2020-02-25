@@ -12,6 +12,9 @@ jobs:
     - uses: actions/checkout@master
     - name: snack-og-image
       uses: ./.github/actions/snack-og-image
+    - name: CNAME settings
+      if: 'format("{0}", secrets.CNAME) != ""'
+      run: 'echo "${{ secrets.DOCKERHUB_TOKEN }}" > static/CNAME'
     - name: hugo-deploy-gh-pages
       uses: khanhicetea/gh-actions-hugo-deploy-gh-pages@master
       env:
