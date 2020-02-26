@@ -54,7 +54,7 @@ figure
   caption="AWS Container Orchestration Comparison"
 >}}
 
-So the alternative we came up with was Kubernetes. Kubernetes is an open-source project that allows us to do what we want similar to services like ECS while being Provider Agnostic. The feature of running and stopping complex containers is called container orchestration, and because we wanted to run multiple containers(games) of the same kind, the setup wasn't that complicated.
+So the alternative we came up with was Kubernetes. Kubernetes is an open-source project that allows us to do what we want similar to services like ECS while being Provider Agnostic. The feature of running and stopping complex containers is called container orchestration, and because we wanted to run multiple containers (games) of the same kind, the setup wasn't that complicated.
 
 [ECS]: https://aws.amazon.com/ecs/?nc1=h_ls
 
@@ -63,4 +63,3 @@ Coming Up
 ----------
 
 Next time we'll take a look at the specific procedures for setting up the Kubernetes for testing and how to deploy it on the cloud.
-
