@@ -1,6 +1,6 @@
 ---
 title: "게임 개발자, Libplanet을 처음 만났을 때 😂"
-date: 2020-02-25
+date: 2020-02-26
 authors: [hyun.seungmin]
 ---
 
