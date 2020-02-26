@@ -69,7 +69,7 @@ Even though the method may be non-deterministic, the API designed to follow the 
 
 Now that we know the cause, we have solved the urgent problem by [finding a method that has the `CultureInfo` or `IFormatProvider` parameters omitted, and patching it to explicitly designate `CultureInfo.InvariantCulture`, just like the method `DateTimeOffset.ToString`()][libplanet#734].
 
-CI has also been reinforced with unit testing in Arabic, French, Hebrew locale and so on. Since there are a lot of countries in Europe that use comma(`,`) instead of period(`.`) in decimal places, and countries in the Middle East that writes from right to left, we deliberately chose language regions that were somewhat unfamiliar to us.
+CI has also been reinforced with unit testing in Arabic, French, Hebrew locale and so on. Since there are a lot of countries in Europe that use comma (`,`) instead of period (`.`) in decimal places, and countries in the Middle East that writes from right to left, we deliberately chose language regions that were somewhat unfamiliar to us.
 
 In addition, because similar mistakes can happen in the future, we have [introduced static analysis][libplanet#737] that finds codes whose behavior depends on the locale of the execution environment.
 
@@ -91,4 +91,3 @@ In addition, because similar mistakes can happen in the future, we have [introdu
 As mentioned earlier, using APIs with non-determinant behaviors such as formatting in functions that calculate cryptographic hash is not a good decision in the long run. Typically, because strings are heavily formatted, it's safe to avoid them from data level perspective.
 
 But unfortunately, we found this problem in the middle of the test, and we haven't made any major modifications yet because changing the hash method was a decision that would break the compatibility of previous data. However, these parts will be modified before releasing Libplanet 1.0.
-
