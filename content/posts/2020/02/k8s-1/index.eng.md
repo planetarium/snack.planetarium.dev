@@ -17,7 +17,7 @@ Hello, I am Swen Mun, [Libplanet] developer at [Planetarium]. From December 16th
 What Did We Need?
 -----------------
 
-A game developed with Libplanet is considered a blockchain node, and the same goes for Nine Chronicles. That is, every game client can play a role that is in itself similar to a typical game server (data storage, judgment). To hold a test as close to a game environment in this P2P environment, we needed to run as many of these game clients at the same time.
+A game developed with Libplanet is considered a blockchain node, and the same goes for Nine Chronicles. That is, every game client can play a role that is in itself similar to a typical game server (data storage, refereeing). To hold a test as close to a game environment in this P2P environment, we needed to run as many of these game clients at the same time.
 
 Although we will be running the games, we’re focused on executing as many game clients at the same time so it's not that important to see the screen of each client. Therefore, we’re OK with running headless without any UI.
 
