@@ -35,7 +35,7 @@ Test Conditions
 Docker
 -----------
 
-To meet these conditions, we needed to run and manage multiple processes at the same time, and that led us to use [Docker]. Docker is a popular solutions for containerizing and running Linux applications throughout your environment. Although we’re not considering Linux as a major platform for Nine Chronicle’s first launch, developing games with Unity has made it relatively easy to produce a build for Linux, and apart from minor UI bugs (which doesn't matter much for the headless test node), behavior didn't changed much.
+To meet these conditions, we needed to run and manage multiple processes at the same time, and that led us to use [Docker]. Docker is a popular solution for containerizing and running Linux applications throughout your environment. Although we’re not considering Linux as a major platform for Nine Chronicle’s first launch, developing games with Unity has made it relatively easy to produce a build for Linux, and apart from minor UI bugs (which doesn't matter much for the headless test node), the behavior didn't change much.
 
 
 [Docker]: https://docker.com
