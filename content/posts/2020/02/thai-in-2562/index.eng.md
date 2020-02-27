@@ -88,6 +88,6 @@ In addition, because similar mistakes can happen in the future, we have [introdu
 
 ## Closing
 
-As mentioned earlier, using APIs with non-determinant behaviors such as formatting in functions that calculate cryptographic hash is not a good decision in the long run. Typically, because strings are heavily formatted, it's safe to avoid them from data level perspective.
+As mentioned earlier, using APIs with non-determinant behaviors such as formatting in functions that calculate the cryptographic hash is not a good decision in the long run. Typically, because strings are heavily formatted, it's safe to avoid them from data level perspective.
 
 But unfortunately, we found this problem in the middle of the test, and we haven't made any major modifications yet because changing the hash method was a decision that would break the compatibility of previous data. However, these parts will be modified before releasing Libplanet 1.0.
