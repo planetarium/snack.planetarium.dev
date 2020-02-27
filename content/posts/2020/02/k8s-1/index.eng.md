@@ -5,7 +5,7 @@ authors: [swen.mun]
 translators: [kidon.seo]
 ---
 
-Hello, I am Swen Mun, [Libplanet] developer at [Planetarium]. From December 16th last year, we held a 2-week alpha test of [Nine Chronicles], a completely decentralized MMORPG. Today, we're going to share our experience deploying headless games on [Kubernetes].
+Hello, I am Swen Mun, [Libplanet] developer at [Planetarium]. From December 16th last year, we held a 2-week alpha test of [Nine Chronicles], a fully decentralized MMORPG. Today, we're going to share our experience deploying headless games on [Kubernetes].
 
 
 [Planetarium]: https://planetariumhq.com
