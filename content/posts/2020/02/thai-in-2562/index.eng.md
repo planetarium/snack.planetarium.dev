@@ -35,7 +35,7 @@ figure
   caption="Year Displayed as 2019 in Gregorian calendar"
 >}}
 
-No one in our development team could read Thai, but looking at "Date in Gregorian”, we noticed that "2562" was a different expression of "2019." So we changed the format, and as expected, December 16th, 2019 was displayed. And when we launched the game for testing, it went smoothly at the IBD stage.
+No one in our development team could read Thai, but looking at "Date in Gregorian”, we noticed that "2562" was a different expression of "2019". So we changed the format, and as expected, December 16th, 2019 was displayed. And when we launched the game for testing, it went smoothly at the IBD stage.
 
 ## Buddhist Calendar
 
