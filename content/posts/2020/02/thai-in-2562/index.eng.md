@@ -10,7 +10,7 @@ Last December, we finally conducted our first alpha test, and thankfully, many p
 
 <abbr title="initial block download">IBD</abbr> is a stage that occurs when you turn on a game, download blocks from other peers in the network and sync them to the latest state. Since we had participants from all over the world, IBD often took a long time or even ended abnormally due to network delays.
 
-One of our participants reported a very unusual symptom. Unlike other problems we had at that time, the participant successfully downloaded the first block but couldn’t download the rest afterwards.
+One of our participants reported a very unusual symptom. Unlike other problems we had at that time, the participant successfully downloaded the first block but couldn’t download the rest afterward.
 
 {{<
 figure
