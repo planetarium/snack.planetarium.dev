@@ -67,7 +67,7 @@ However, if you omit the parameter without setting any locale, the method will f
 
 Even though the method may be non-deterministic, the API designed to follow the locale of the execution environment is probably intended because such formatting operations are usually used for a user interface, and coding can naturally look appropriate to the cultural community without much concern about internationalization. But the reason why we used this method was not for a user interface, but for the cryptographic hash input that had to be deterministic— this turned out to be a mistake.
 
-Now that we know the cause, we have solved the urgent problem by [finding a method that has the `CultureInfo` or `IFormatProvider` parameters omitted, and patching it to explicitly designate `CultureInfo.InvariantCulture`, just like the method `DateTimeOffset.ToString`()][libplanet#734].
+Now that we know the cause, we have solved the urgent problem by [finding a method that has the `CultureInfo` or `IFormatProvider` parameters omitted, and patching it to explicitly designate `CultureInfo.InvariantCulture`, just like the method `DateTimeOffset.ToString()`][libplanet#734].
 
 CI has also been reinforced with unit testing in Arabic, French, Hebrew locale and so on. Since there are a lot of countries in Europe that use comma (`,`) instead of a period (`.`) in decimal places, and countries in the Middle East that writes from right to left, we deliberately chose language regions that were somewhat unfamiliar to us.
 
