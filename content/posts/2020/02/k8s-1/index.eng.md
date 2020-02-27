@@ -44,7 +44,7 @@ To meet these conditions, we needed to run and manage multiple processes at the 
 Kubernetes
 --------------------
 
-Even though we used a Docker to make a container that easily runs game build, that wasn't the end. Our goal was to easily run/end/update many clients while maintaining test environment. To do this, just using Docker wasn’t enough.
+Even though we used a Docker to make a container that easily runs a game build, that wasn't the end. Our goal was to easily run/end/update many clients while maintaining a test environment. To do this, just using Docker wasn’t enough.
 
 Our first option was the execution environment offered by cloud providers, such as <abbr title="Elastic Container Service">[ECS]</abbr>. These execution environments are designed to efficiently set up complex workflows. But in other words, they're complex to set up and we wouldn’t be using a lot of functionality provided since we’re just using it in a test environment. Also, a test environment dependent on a particular cloud provider would likely to be a burden on future operations.
 
