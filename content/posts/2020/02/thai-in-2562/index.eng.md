@@ -69,7 +69,7 @@ Even though the method may be non-deterministic, the API designed to follow the 
 
 Now that we know the cause, we have solved the urgent problem by [finding a method that has the `CultureInfo` or `IFormatProvider` parameters omitted, and patching it to explicitly designate `CultureInfo.InvariantCulture`, just like the method `DateTimeOffset.ToString`()][libplanet#734].
 
-CI has also been reinforced with unit testing in Arabic, French, Hebrew locale and so on. Since there are a lot of countries in Europe that use comma (`,`) instead of period (`.`) in decimal places, and countries in the Middle East that writes from right to left, we deliberately chose language regions that were somewhat unfamiliar to us.
+CI has also been reinforced with unit testing in Arabic, French, Hebrew locale and so on. Since there are a lot of countries in Europe that use comma (`,`) instead of a period (`.`) in decimal places, and countries in the Middle East that writes from right to left, we deliberately chose language regions that were somewhat unfamiliar to us.
 
 In addition, because similar mistakes can happen in the future, we have [introduced static analysis][libplanet#737] that finds codes whose behavior depends on the locale of the execution environment.
 
