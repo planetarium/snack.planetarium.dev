@@ -1,5 +1,5 @@
 ---
-title: " Game Developer Meets Libplanet 😂 "
+title: "Game Developer Meets Libplanet 😂"
 date: 2020-02-26
 authors: [hyun.seungmin]
 translators: [kidon.seo]
