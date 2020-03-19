@@ -41,4 +41,4 @@ figure
 마치며
 ---
 
-게임잼이니만큼 간단한 예제로써 사용하기 적합한 게임으로 클리커 게임인 Planet Clicker의 [Github 저장소](https://github.com/planetarium/planet-clicker)를 둘러보시면서 간단한 액션과 상태 구조를 둘러보시는 건 어떠신가요? 더 자세한 용법이나 질문이 있으시다면 언제든 플라네타리움 팀원이 상주한 [디스코드 서버](https://discord.gg/planetarium)로 놀러 와주세요!
+게임잼이니만큼 간단한 예제로써 사용하기 적합한 게임으로 클리커 게임인 Planet Clicker의 [GitHub 저장소](https://github.com/planetarium/planet-clicker)를 둘러보시면서 간단한 액션과 상태 구조를 둘러보시는 건 어떠신가요? 더 자세한 용법이나 질문이 있으시다면 언제든 플라네타리움 팀원이 상주한 [디스코드 서버](https://discord.gg/planetarium)로 놀러 와주세요!
