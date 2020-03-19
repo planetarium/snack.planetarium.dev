@@ -72,4 +72,4 @@ figure
 
 Kademlia 분산 해시 테이블이나 Libplanet에 대해 더 궁금한 점이 있으시다면 언제든 저희 팀이 상주해 있는 [디스코드 대화방][1]에 놀러 오세요!
 
-[1]: https://discord.gg/ue9fgc3
+[1]: https://discord.gg/planetarium

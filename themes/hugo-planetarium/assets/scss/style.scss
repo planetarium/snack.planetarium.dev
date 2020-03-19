@@ -50,6 +50,11 @@ code {
   /* border-radius: 4px; */
 }
 
+dfn:lang(ko) {
+  font-style: normal;
+  font-weight: bolder;
+}
+
 pre {
   display: block;
   padding: 9.5px;
@@ -124,4 +129,12 @@ article .footnotes {
 
 .lh-copy {
   line-height: 1.75;
+}
+
+.recruit {
+  line-height: 1.8;
+  background-color: #f4f6f6;
+  padding: 1em;
+  border-radius: 0.3em;
+  margin-bottom: 1.5em;
 }

@@ -3,15 +3,20 @@ on:
     branches:
       - master
 
-name: Deploy to GitHub Pages
+name: Publish
 
 jobs:
-  snack-og-image:
+  publish:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
     - name: snack-og-image
       uses: ./.github/actions/snack-og-image
+    - name: CNAME settings
+      run: |
+        if [[ "${{ secrets.CNAME }}" != "" ]]; then
+          echo "${{ secrets.CNAME }}" > static/CNAME
+        fi
     - name: hugo-deploy-gh-pages
       uses: khanhicetea/gh-actions-hugo-deploy-gh-pages@master
       env:
