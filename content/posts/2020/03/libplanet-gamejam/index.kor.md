@@ -13,7 +13,6 @@ authors: [seunggeol.song]
 {{<
 figure
   src="screenshot.png"
-  width="500"
   caption="저희가 만든 오목 게임의 멋진 모습입니다!"
 >}}
 
