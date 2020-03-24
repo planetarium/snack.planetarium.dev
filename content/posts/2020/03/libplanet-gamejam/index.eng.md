@@ -8,7 +8,7 @@ translators: [kidon.seo]
 Hello, I'm Seunggeol Song, a game client programmer at Planetarium. This time, I'd like to share with you my experience in the in-house [game jam][]
 held at Planetarium.
 
-Here at Planetarium, we use our own blockchain game library, [Libplanet][], to create games. Because Libplanet is currently being developed with the assumption that it will be primarily used in [Unity][], we have decided to build an [SDK][] for Unity enhance usability within the engine. To aid our development process, we held an in-house game Jam of creating small example Unity projects using Libplanet.
+Here at Planetarium, we use our own blockchain game library, [Libplanet][], to create games. Because Libplanet is currently being developed with the assumption that it will be primarily used in [Unity][], we have decided to build an [SDK][] for Unity to enhance usability within the engine. To aid our development process, we held an in-house game Jam of creating small example Unity projects using Libplanet.
 
 Groups of 2 or 3 people were formed and for 2 days before the opening day, we got together to brainstorm potential game projects and eventually came up with 5 dazzling game proposals to apply blockchain technology. I teamed up with [Chanhyuck Ko][] to make a game of [Omok (Five in a Row)]( https://en.wikipedia.org/wiki/Gomoku). To make two players battle, we implemented the concept of session (i.e. the **room** of the game), using the concept of `Action` and `State` in Libplanet.
 
