@@ -34,7 +34,7 @@ First, let me introduce some key states and the actions that change them.
 
 For more specific internal implementation or code, visit the [Github repository][]!
 
-From the overall experience, I felt that the key to developing blockchain games using Libplanet is ultimately knowing how to deal with these states and actions. Action changes states and we take those states in game logic to play the game. Before game jam, I didn't have the chance to develop an action myself because I had only recently joined Planetarium. But after implementing the general concept of session with Chanhyuck Ko, I was able to understand the meaning of action and state and their general usage. It was a great learning experience in many ways.
+From the overall experience, I felt that the key to developing blockchain games using Libplanet is ultimately knowing how to deal with these states and actions. Action changes states and we take those states in-game logic to play the game. Before game jam, I didn't have the chance to develop an action myself because I had only recently joined Planetarium. But after implementing the general concept of the session with Chanhyuck Ko, I was able to understand the meaning of action and state and their general usage. It was a great learning experience in many ways.
 
 [game jam]: https://en.wikipedia.org/wiki/Game_jam
 [Libplanet]: https://github.com/planetarium/libplanet
