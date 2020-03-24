@@ -20,7 +20,7 @@ figure
 
 First, let me introduce some key states and the actions that change them.
 
-`SessionState`: This state saves session’s information. There is a unique key (room title concept) to distinguish a session from a list in `AgentState`, which is the player information in the session. There is also an address that lets you have access to this state.
+`SessionState`: This state saves the session’s information. There is a unique key (room title concept) to distinguish a session from a list in `AgentState`, which is the player information in the session. There is also an address that lets you have access to this state.
 
 `AgentState`: This state saves account information of a player. Here we have the player's information (typically wins and losses) and address.
 
