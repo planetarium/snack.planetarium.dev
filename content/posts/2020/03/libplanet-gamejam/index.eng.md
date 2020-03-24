@@ -5,7 +5,7 @@ authors: [seunggeol.song]
 translators: [kidon.seo]
 ---
 
-Hello, I'm Seunggeol Song, game client programmer at Planetarium. This time, I'd like to share with you my experience in the in-house [game jam][]
+Hello, I'm Seunggeol Song, a game client programmer at Planetarium. This time, I'd like to share with you my experience in the in-house [game jam][]
 held at Planetarium.
 
 Here at Planetarium, we use our own blockchain game library, [Libplanet][], to create games. Because Libplanet is currently being developed with the assumption that it will be primarily used in [Unity][], we have decided to build an [SDK][] for Unity enhance usability within the engine. To aid our development process, we held an in-house game Jam of creating small example Unity projects using Libplanet.
