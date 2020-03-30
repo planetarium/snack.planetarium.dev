@@ -1,5 +1,5 @@
 ---
-title: " Libplanet Game Jam"
+title: "Libplanet Game Jam"
 date: 2020-03-19
 authors: [seunggeol.song]
 translators: [kidon.seo]
