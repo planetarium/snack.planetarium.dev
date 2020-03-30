@@ -39,7 +39,7 @@ From the overall experience, I felt that the key to developing blockchain games 
 [game jam]: https://en.wikipedia.org/wiki/Game_jam
 [Libplanet]: https://github.com/planetarium/libplanet
 [Chanhyuck Ko]: https://github.com/limebell
-[Github repository]: https://github.com/planetarium/planet-omok
+[GitHub repository]: https://github.com/planetarium/planet-omok
 [Unity]: https://unity.com/
 [SDK]: https://en.wikipedia.org/wiki/Software_development_kit
 
