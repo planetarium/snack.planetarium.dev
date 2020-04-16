@@ -19,7 +19,7 @@ Libplanet은 분산 P2P로 돌아가는 온라인 멀티플레이어 게임을 �
 
 하지만 신뢰할 수 있는 노드가 있다면 그 노드로부터 미리 연산돼 있는 결과를 받아와 연산에 드는 시간 효과적으로 줄일 수도 있을 것입니다.
 
-그래서 0.5 버전 부터는 [`Swarm<T>.PreloadAsync()`]에 신뢰할 수 있는 노드들을 인자로 넘겨주어 신뢰할 수 있는 노드들로 부터 이미 연산되어 있는 최근 상태 값들을 받아와 저장, 사용할 수도 있게 되었습니다.  
+그래서 0.5 버전 부터는 [`Swarm<T>.PreloadAsync()`]에 신뢰할 수 있는 노드들을 인자로 넘겨주어 신뢰할 수 있는 노드들로 부터 이미 연산되어 있는 최근 상태 값들을 받아와 저장, 사용할 수도 있게 되었습니다.
 
 만약 신뢰할 수 있는 노드들이 없거나 다른 이유로 그 과정에 실패했을 때에는 기존과 같이 직접 연산해서 사용합니다.
 
@@ -47,7 +47,7 @@ Libplanet은 분산 P2P로 돌아가는 온라인 멀티플레이어 게임을 �
 -------
 
 체인을 안전하게 유지하기 위해서는 블록들을 채굴할 마이너들이 필요하고, 그러한 마이너들을 모으고 유지하기 위해 보상을 주어야 할 것입니다.
- 
+
 기존에는 마이너들에게 보상을 주기 위해선 직접 마이너가 블록에 리워드 액션을 가진 트랜잭션을 스스로 추가해야 했었지만, 이번 버전부터는 매 블록마다 실행되는 [`IBlockPolicy<T>.BlockAction`] 속성이 생겨 이 블록 액션을 통해 마이너에게 보상금을 주는 코드를 구현할 수 있습니다.
 
 [`IBlockPolicy<T>.BlockAction`]: https://docs.libplanet.io/0.5.0/api/Libplanet.Blockchain.Policies.IBlockPolicy-1.html#Libplanet_Blockchain_Policies_IBlockPolicy_1_BlockAction
@@ -63,7 +63,7 @@ Libplanet은 저장 계층을 간추리기 위해 [`IStore`]라는 인터페이�
 
 LiteDB를 사용하기 시작하면서 `FileStore`의 사용 빈도는 줄어들었고, 그에 비해 `FileStore`를 지속적으로 관리하기는 어렵다고 판단, 이번 0.5 버전부터는 `FileStore` 구현체를 제공하지 않기로 결정하였습니다.
 
-[0.4]: {{< ref "../07/libplanet-0.4" >}}
+[0.4]: {{< relref "../07/libplanet-0.4/index.kor.md" >}}
 [`IStore`]: https://docs.libplanet.io/0.5.0/api/Libplanet.Store.IStore.html
 [`FileStore`]: https://docs.libplanet.io/0.4.0/api/Libplanet.Store.FileStore.html
 [LiteDB]: https://www.litedb.org/
@@ -73,12 +73,12 @@ LiteDB를 사용하기 시작하면서 `FileStore`의 사용 빈도는 줄어들
 좀 더 상세한 프리로드 진행 상황 전달
 ---------------------------
 
-위에서 언급했던 IBD 과정을 수행하기 위해서는 [`Swarm<T>.PreloadAsync()`] 메서드를 호출 할 수 있습니다. 이 메서드의 인자로 `IProgress<BlockDownloadState>`를 전달하면 이를 통해 블록 다운로드 진행 상황을 알 수 있었지만, 블록 다운로드 이후 액션들을 실행하여 (또는 신뢰할 수 있는 노드로부터) 최종 상태를 구하는 작업의 진척 상황은 알려주지 않았습니다.  
+위에서 언급했던 IBD 과정을 수행하기 위해서는 [`Swarm<T>.PreloadAsync()`] 메서드를 호출 할 수 있습니다. 이 메서드의 인자로 `IProgress<BlockDownloadState>`를 전달하면 이를 통해 블록 다운로드 진행 상황을 알 수 있었지만, 블록 다운로드 이후 액션들을 실행하여 (또는 신뢰할 수 있는 노드로부터) 최종 상태를 구하는 작업의 진척 상황은 알려주지 않았습니다.
 이로 인해 블록을 모두 다운로드 받은 이후 로딩 메시지에는 <q>100%</q>라고 보여줌에도 불구하고 여전히 아무런 변화 없이 <q>로딩 중</q>과 같은 고정된 메시지를 얼마간 동안 보게 된다면, 게임을 플레이하는 유저 입장에서는 기다리는 시간이 매우 지루하게 느껴질 것입니다.
 
 하지만 0.5 버전부터는 `IProgress<BlockDownloadState>` 대신 `IProgress<PreloadState>` 타입의 인자를 받음으로써 프리로드 전반의 진행 상황을 세부적으로 전달받을 수 있도록 되었습니다.
 
-[`PreloadState`]를 상속 받은 [`BlockDownloadState`], [`BlockStateDownloadState`],  
+[`PreloadState`]를 상속 받은 [`BlockDownloadState`], [`BlockStateDownloadState`],
 [`StateReferenceDownloadState`], [`ActionExecutionState`]를 인자로 받은 `IProgress<PreloadState>` 객체를 통해 알림으로써 이용자에게 더 자세한 정보를 제공할 수 있습니다.
 
 [`Swarm<T>.PreloadAsync()`]: https://docs.libplanet.io/0.5.0/api/Libplanet.Net.Swarm-1.html#Libplanet_Net_Swarm_1_PreloadAsync_System_IProgress_Libplanet_Net_PreloadState__System_Collections_Immutable_IImmutableSet_Libplanet_Address__System_Threading_CancellationToken_

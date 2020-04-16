@@ -65,7 +65,7 @@ Libplanet had been providing an interface called [`IStore`], [`FileStore`][] (a 
 
 As we started using LiteDB, `FileStore` usage rate began to diminish. And so, considering the difficulty of continuously managing `FileStore`, we decided not to provide `FileStore` implementation from Version 0.5.
 
-[0.4]: {{< ref "../07/libplanet-0.4" >}}
+[0.4]: {{< relref "../07/libplanet-0.4/index.eng.md" >}}
 [`IStore`]: https://docs.libplanet.io/0.5.0/api/Libplanet.Store.IStore.html
 [`FileStore`]: https://docs.libplanet.io/0.4.0/api/Libplanet.Store.FileStore.html
 [LiteDB]: https://www.litedb.org/

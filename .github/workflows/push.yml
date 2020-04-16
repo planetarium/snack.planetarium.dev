@@ -21,4 +21,4 @@ jobs:
       uses: khanhicetea/gh-actions-hugo-deploy-gh-pages@master
       env:
         GIT_DEPLOY_KEY: ${{ secrets.GIT_DEPLOY_KEY }}
-        HUGO_VERSION: "0.53"
+        HUGO_VERSION: "0.69.0"
