@@ -30,7 +30,7 @@
       {{ range .Translations }}
         {{ if (not (eq .Language.Lang "mis")) }}
           <link
-            href="{{ .URL }}index.xml"
+            href="{{ .Permalink }}index.xml"
             hreflang="{{ .Language.Params.ianasubtag }}"
             rel="alternate"
             type="application/atom+xml"
