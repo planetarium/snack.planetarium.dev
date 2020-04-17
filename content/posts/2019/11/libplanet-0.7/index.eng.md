@@ -75,6 +75,6 @@ This version includes many contributions from the [Hacktoberfest] event. You can
 And as always, if you have any questions about the new release or Libplanet in general, please visit our [Discord chatroom][Discord] and let’s chat!
 
 [Hacktoberfest]: https://hacktoberfest.digitalocean.com/
-[looking-back-at-hacktoberfest]: {{< ref "../11/looking-back-at-hacktoberfest/" >}}
+[looking-back-at-hacktoberfest]: {{< relref "../looking-back-at-hacktoberfest/index.eng.md" >}}
 [0.7.0]: https://github.com/planetarium/libplanet/releases/tag/0.7.0
 [Discord]: https://discord.gg/planetarium

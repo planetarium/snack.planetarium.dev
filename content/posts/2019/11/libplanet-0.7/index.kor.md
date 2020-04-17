@@ -75,6 +75,6 @@ Libplanet은 분산 P2P로 돌아가는 온라인 멀티플레이어 게임을 �
 이번 변경 사항이나 Libplanet에 대해 궁금한 점이 있으시다면 언제든 저희 팀이 상주해 있는 [디스코드 대화방][Discord]에 방문해 주세요!
 
 [Hacktoberfest]: https://hacktoberfest.digitalocean.com/
-[looking-back-at-hacktoberfest]: {{< ref "../11/looking-back-at-hacktoberfest/" >}}
+[looking-back-at-hacktoberfest]: {{< relref "../looking-back-at-hacktoberfest/index.kor.md" >}}
 [0.7.0]: https://github.com/planetarium/libplanet/releases/tag/0.7.0
 [Discord]: https://discord.gg/planetarium

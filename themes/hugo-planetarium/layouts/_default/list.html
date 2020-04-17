@@ -10,7 +10,11 @@
     <div>
       <ul id="list" class="pl0">
         <!-- prettier-ignore -->
-        {{ range .Data.Pages.ByDate.Reverse }}
+        {{ range .Pages.ByDate.Reverse }}
+        {{/* Dont know why, but without piling up two ranges, it shows the
+             only entry at the first level, which is the title of
+             the "Posts" section... */}}
+        {{ range .Pages.ByDate.Reverse }}
         <li class="list pl0 lh-copy">
           <a
             class="f3 b dib dark-gray no-underline"
@@ -24,6 +28,7 @@
           </time>
         </li>
         <!-- prettier-ignore -->
+        {{ end }}
         {{ end }}
       </ul>
     </div>
