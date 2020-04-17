@@ -18,15 +18,15 @@ Libplanet에서는 [`IStore`]라는 저장계층 추상화 인터페이스와 �
 [Key-Value Database]: https://ko.wikipedia.org/wiki/%ED%82%A4-%EA%B0%92_%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4
 [`RocksDBStore`]: https://github.com/planetarium/libplanet/tree/master/RocksDBStore
 
-## 공유 라이브러리 포함시키기
+## 의존하는 라이브러리 포함시키기
 
-RocksDB는 압축이나 메모리 할당을 위해 또다른 라이브러리들에 의존합니다. [Windows 빌드][Windows build]와 다르게 macOS와 Linux의 경우 RocksDB 네이티브 라이브러리를 공유 라이브러리 형태(*.so* 및 *.dylib*)로 사용하기 위해서는 RocksDB가 의존하는 라이브러리들도 시스템에 설치되어 있어야 합니다.
+RocksDB는 압축이나 메모리 할당을 위해 또다른 라이브러리들에 의존합니다. [Windows 빌드][Windows build]와 다르게 macOS와 Linux의 경우 RocksDB 네이티브 라이브러리를 동적 링크 라이브러리 형태(*.so* 및 *.dylib*)로 사용하기 위해서는 RocksDB가 의존하는 라이브러리들도 시스템에 설치되어 있어야 합니다.
 
 일반적인 서버 앱에서는 시스템에 모든 의존 라이브러리들을 다 설치하는 것이 자연스러운 일입니다. 서버 앱을 구동하는 시스템은 보통 그 서버 앱만을 위해 운영되기 때문입니다. 하지만 저희는 블록체인 노드인 동시에 게이머의 시스템에서 돌아가는 앱을 만들고 있기 때문에 모든 게이머에게 이런 라이브러리들을 따로 설치하라고 요구하는 건 어려웠습니다.
 
-그래서 생각한 것이 게임 클라이언트 내에 RocksDB가 의존하는 라이브러리들도 함께 넣어 배포하는 것이었습니다. 하지만 별도의 수정 없이 RocksDB에서 가이드하는 대로 공유 라이브러리를 빌드할 경우, 빌드된 RocksDB 네이티브 라이브러리에서 게임 클라이언트에 함께 포함된 의존 라이브러리들을 찾지 못하는 문제가 있었습니다.
+그래서 생각한 것이 게임 클라이언트 내에 RocksDB가 의존하는 라이브러리들도 함께 넣어 배포하는 것이었습니다. 하지만 별도의 수정 없이 가이드대로 RocksDB를 동적 링크 라이브러리 형태로 빌드할 경우, 빌드된 RocksDB 라이브러리에서 게임 클라이언트에 함께 포함된 의존 라이브러리들을 찾지 못하는 문제가 있었습니다.
 
-이 문제를 해결하기 위해 RocksDB 공유 라이브러리 파일의 [rpath]를 수정하는 방식을 사용했습니다. rpath란 <q>run-time search path</q>를 가리키는 말로, 라이브러리 파일이나 실행 파일 내에 하드코딩 되어서 [동적 링킹][] [로더][]가 해당 파일에서 필요한 라이브러리를 찾기 위한 경로입니다. 처음에는 RocksDB 라이브러리를 빌드할때 rpath를 수정하는 방법을 고려했지만 RocksDB의 빌드 스크립트가 생각보다 복잡해 보였기 때문에 빌드가 완료된 공유 라이브러리 파일의 rpath를 수정하기로 했습니다. 다행히 macOS에서는 [`install_name_tool`], Linux에서는 [`patchelf`]라는 툴로 다음과 같이 간단하게 rpath를 현재 RocksDB 라이브러리가 존재하는 디렉터리로 수정할 수 있습니다.
+이 문제를 해결하기 위해 RocksDB 동적 링크 라이브러리 파일의 [rpath]를 수정하는 방식을 사용했습니다. rpath란 <q>run-time search path</q>를 가리키는 말로, 라이브러리 파일이나 실행 파일 내에 하드코딩 되어서 [동적 링킹][] [로더][]가 해당 파일에서 필요한 라이브러리를 찾기 위한 경로입니다. 처음에는 RocksDB 라이브러리를 빌드할때 rpath를 수정하는 방법을 고려했지만 RocksDB의 빌드 스크립트가 생각보다 복잡해 보였기 때문에 빌드가 완료된 라이브러리 파일의 rpath를 수정하기로 했습니다. 다행히 macOS에서는 [`install_name_tool`], Linux에서는 [`patchelf`]라는 툴로 다음과 같이 간단하게 rpath를 현재 RocksDB 라이브러리가 존재하는 디렉터리로 수정할 수 있습니다.
 
 ```
 # macOS
@@ -79,7 +79,7 @@ RocksDB의 API와 문서화는 기대했던 것에 비해 친절하게 되어있
 
     ExecutionEngineException: String conversion error: Illegal byte sequence encounted in the input.
 
-코드를 살펴본 결과 이는 rocksdb-sharp에서 RocksDB에서 발생한 에러메시지를 인코딩할 때 [`Marshal.PtrToStringAnsi()`] 메서드를 사용했기 때문에 발생한 문제였습니다. 저희는 위에서 얘기한 공유 라이브러리 문제를 해결하기 위해 rocksdb-sharp을 포크해서 사용하고 있었기 때문에 해당 부분에 [`Marshal.PtrToStringUni()`] 메서드를 사용하도록 변경함으로써 어렵지 않게 해당 문제를 해결할 수 있었습니다.
+코드를 살펴본 결과 이는 rocksdb-sharp에서 RocksDB에서 발생한 에러메시지를 인코딩할 때 [`Marshal.PtrToStringAnsi()`] 메서드를 사용했기 때문에 발생한 문제였습니다. 저희는 위에서 얘기한 라이브러리 의존성 문제를 해결하기 위해 rocksdb-sharp을 포크해서 사용하고 있었기 때문에 해당 부분에 [`Marshal.PtrToStringUni()`] 메서드를 사용하도록 변경함으로써 어렵지 않게 해당 문제를 해결할 수 있었습니다.
 
 [rocksdb-sharp]: https://github.com/warrenfalk/rocksdb-sharp
 [`Marshal.PtrToStringAnsi()`]: https://docs.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.marshal.ptrtostringansi?view=netframework-4.8
