@@ -18,7 +18,7 @@ Libplanet에서는 [`IStore`]라는 저장계층 추상화 인터페이스와 �
 [Key-Value Database]: https://ko.wikipedia.org/wiki/%ED%82%A4-%EA%B0%92_%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4
 [`RocksDBStore`]: https://github.com/planetarium/libplanet/tree/master/RocksDBStore
 
-## 의존하는 라이브러리 포함시키기
+## 의존하는 라이브러리 포함시키기[^1]
 
 RocksDB는 압축이나 메모리 할당을 위해 또다른 라이브러리들에 의존합니다. [Windows 빌드][Windows build]와 다르게 macOS와 Linux의 경우 RocksDB 네이티브 라이브러리를 동적 링크 라이브러리 형태(*.so* 및 *.dylib*)로 사용하기 위해서는 RocksDB가 의존하는 라이브러리들도 시스템에 설치되어 있어야 합니다.
 
@@ -47,6 +47,7 @@ rpath 수정에 관한 보다 자세한 내용은 제가 참조한 아래 페이
 [로더]: https://ko.wikipedia.org/wiki/%EB%A1%9C%EB%8D%94_(%EC%BB%B4%ED%93%A8%ED%8C%85)
 [`install_name_tool`]: https://www.unix.com/man-page/osx/1/install_name_tool/
 [`patchelf`]: https://github.com/NixOS/patchelf
+[^1]: 이 작업을 진행할 당시, Nine Chronicles은 아직 소수의 테스트 플레이어를 대상으로 인스톨러 없이 간소하게 배포할 때였기 때문에, 이런 접근을 하게 되었습니다. 그러나 최근에는 인스톨러를 포함하여 배포하게 되면서 다른 접근도 가능하게 되었습니다. 기회가 된다면 이후 스낵에 다른 접근을 소개하도록 하겠습니다.
 
 ## 애플리케이션에서의 데이터베이스 기능 구현
 
