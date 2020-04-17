@@ -10,7 +10,7 @@
     <div>
       <ul id="list" class="pl0">
         <!-- prettier-ignore -->
-        {{ range .Pages.ByDate.Reverse }}
+        {{ range .Pages }}
         {{/* Dont know why, but without piling up two ranges, it shows the
              only entry at the first level, which is the title of
              the "Posts" section... */}}
