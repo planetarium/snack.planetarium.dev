@@ -16,7 +16,7 @@ Libplanet에서는 [`IStore`]라는 저장계층 추상화 인터페이스와 �
 [RocksDB]: https://rocksdb.org/
 [Nine Chronicles]: https://nine-chronicles.com/
 [Key-Value Database]: https://ko.wikipedia.org/wiki/%ED%82%A4-%EA%B0%92_%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4
-[`RocksDBStore`]: https://github.com/planetarium/libplanet/tree/master/RocksDBStore
+[`RocksDBStore`]: https://github.com/planetarium/libplanet/blob/master/Libplanet.RocksDBStore/RocksDBStore.cs
 
 ## 의존하는 라이브러리 포함시키기[^1]
 
