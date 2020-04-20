@@ -46,8 +46,10 @@ blockquote p {
 code {
   padding: 2px 4px;
   font-size: 90%;
+}
+
+:not(pre) > code {
   background-color: #eeeeee;
-  /* border-radius: 4px; */
 }
 
 dfn:lang(ko) {
