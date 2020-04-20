@@ -52,3 +52,8 @@ posts = "/:year/:month/:filename/"
 [blackfriday]
 extensionsmask = ["noIntraEmphasis", "strikethrough"]
 taskLists = false
+
+[markup.highlight]
+guessSyntax = false
+style = "pastie"
+tabWidth = 8

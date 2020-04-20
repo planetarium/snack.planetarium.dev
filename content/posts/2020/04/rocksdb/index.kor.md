@@ -28,13 +28,13 @@ RocksDB는 압축이나 메모리 할당을 위해 또다른 라이브러리들�
 
 이 문제를 해결하기 위해 RocksDB 동적 링크 라이브러리 파일의 [rpath]를 수정하는 방식을 사용했습니다. rpath란 <q>run-time search path</q>를 가리키는 말로, 라이브러리 파일이나 실행 파일 내에 하드코딩 되어서 [동적 링킹][] [로더][]가 해당 파일에서 필요한 라이브러리를 찾기 위한 경로입니다. 처음에는 RocksDB 라이브러리를 빌드할때 rpath를 수정하는 방법을 고려했지만 RocksDB의 빌드 스크립트가 생각보다 복잡해 보였기 때문에 빌드가 완료된 라이브러리 파일의 rpath를 수정하기로 했습니다. 다행히 macOS에서는 [`install_name_tool`], Linux에서는 [`patchelf`]라는 툴로 다음과 같이 간단하게 rpath를 현재 RocksDB 라이브러리가 존재하는 디렉터리로 수정할 수 있습니다.
 
-```
+~~~~ bash
 # macOS
 $ install_name_tool -add-rpath '@loader_path' librocksdb.dylib
 
 # linux
 $ patchelf --set-rpath $ORIGIN librocksdb.so
-```
+~~~~
 
 rpath 수정에 관한 보다 자세한 내용은 제가 참조한 아래 페이지들을 참조하시면 좋을 것 같습니다.
 
