@@ -7,7 +7,7 @@ translators: [kidon.seo]
 
 Hello, I'm Seunghun Lee, [Libplanet] developer at Planetarium.
 
-Libplanet provides a storage layer abstraction interface called [`IStore`]and its basic implementation called [`DefaultStore`]. `DefaultStore` had been used to develop [Nine Chronicles] and although it was included as a base in Libplanet and had the upside of being able to use it immediately, there were certainly limitations in terms of performance and storage efficiency.
+Libplanet provides a storage layer abstraction interface called [`IStore`] and its basic implementation called [`DefaultStore`]. `DefaultStore` had been used to develop [Nine Chronicles] and although it was included as a base in Libplanet and had the upside of being able to use it immediately, there were certainly limitations in terms of performance and storage efficiency.
 
 After reviewing various alternative storage methods, we decided that [RocksDB], a [Key-Value Database] library developed by Facebook, was our best option. We decided to create an `IStore` implementation called [`RocksDBStore`] to use as a backend. In this article, I would like to share our experiences in developing `RocksDBStore`.
 
@@ -100,4 +100,3 @@ And as always, if you have any questions about RocksDBStore or Libplanet in gene
 
 
 [Discord]: https://discord.gg/planetarium
-
