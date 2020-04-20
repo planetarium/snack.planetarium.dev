@@ -78,7 +78,7 @@ RocksDB의 API와 문서화는 기대했던 것에 비해 친절하게 되어있
 
 `RocksDBStore`코드중 rocksdb-sharp의 `RocksDBException` 예외를 잡아서 처리하는 코드가 있습니다. 그런데 일부 플랫폼에서는 이 예외를 처리하는 도중 아래와 같은 엉뚱한 예외가 발생하는 경우가 있었습니다.
 
-    ExecutionEngineException: String conversion error: Illegal byte sequence encounted in the input.
+    ExecutionEngineException: String conversion error: Illegal byte sequence encounterd in the input.
 
 코드를 살펴본 결과 이는 rocksdb-sharp에서 RocksDB에서 발생한 에러메시지를 인코딩할 때 [`Marshal.PtrToStringAnsi()`] 메서드를 사용했기 때문에 발생한 문제였습니다. 저희는 위에서 얘기한 라이브러리 의존성 문제를 해결하기 위해 rocksdb-sharp을 포크해서 사용하고 있었기 때문에 해당 부분에 [`Marshal.PtrToStringUni()`] 메서드를 사용하도록 변경함으로써 어렵지 않게 해당 문제를 해결할 수 있었습니다.
 
