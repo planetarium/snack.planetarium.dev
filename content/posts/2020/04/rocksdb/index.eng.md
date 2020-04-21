@@ -70,7 +70,7 @@ Another example is the key search feature. RocksDB's `Seek` takes the prefix of 
 
 The APIs and documentation of RocksDB were not as user-friendly as expected, so extra attention was needed to use it.
 
-One example was the [Column Family], which acts like a namespace. After creating a column family in the database, we expected the column family to be brought up automatically when using the database again. However, there was an exception if we did not specify all column families in the database using the API called `ListColumnFamilies` when opening the database.
+One example was the [Column Family], which acts like a namespace. After creating a column family in the database, we expected the column family to be brought up automatically when using the database again. However, an exception occurs if we did not specify all column families in the database using the API called `ListColumnFamilies` when opening the database.
 
 Also, although RocksDB uses GitHub Wiki for documentation, there is no separate arrangement such as documents divided by version. For example, if you look at the document for [prefix seek], the most recent usage is written at the end of the document, making it easy to use the outdated one if you only read the first part of the document.
 
