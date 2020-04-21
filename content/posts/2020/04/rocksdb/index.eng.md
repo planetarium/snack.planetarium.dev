@@ -31,13 +31,13 @@ So what we came up with was to put the libraries that RocksDB relies on in the g
 To resolve this issue, we used a method of modifying [rpath] in the RocksDB dynamic link library file. rpath refers to <q>run-time search path</q>, which is hard-coded within a library file or executable file so the [dynamic linking] [loader] can find the required library in that file. Initially, we considered modifying the rpath when building the RocksDB library, but we eventually decided to modify the rpath in the completed library file because the build script in RocksDB turned out to be more complicated than we thought. Fortunately, with tools called [`install_name_tool`] on macOS and [`patchelf`] on Linux, you can simply modify the rpath to the directory where the current RocksDB library exists.
 
 
-```
+~~~~ bash
 # macOS
 $ install_name_tool -add-rpath '@loader_path' librocksdb.dylib
 
 # linux
 $ patchelf --set-rpath $ORIGIN librocksdb.so
-```
+~~~~
 
 For more information on rpath modification, please refer to the pages below:
 
