@@ -22,7 +22,7 @@ After reviewing various alternative storage methods, we decided that [RocksDB], 
 
 ## Including Dependent Libraries[^1]
 
-RocksDB relies on other libraries for compression or memory allocation purposes. Unlike [Windows build], for macOS and Linux, the dependent libraries must also be installed in the system to use the RocksDB native library in the form of a dynamic link library (*.so* and .*dylib*).
+RocksDB relies on other libraries for compression or memory allocation purposes. Unlike [Windows build], for macOS and Linux, the dependent libraries must also be installed in the system to use the RocksDB native library in the form of dynamic link libraries (*.so* and .*dylib*).
 
 In a typical server app, it is natural to install all dependent libraries in your system. This is because the system that runs the server app is usually operated only for that server app. But because we're building an app that serves as blockchain nodes and runs on gamers' systems, it's hard to ask all gamers to install these libraries separately.
 
