@@ -45,10 +45,10 @@ Libplanet은 분산 P2P로 돌아가는 온라인 멀티플레이어 게임을 �
 [LINQ]: https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/
 
 
-개인키를 안전하게 저장할 수 있는 키스토어 구현
+개인키를 안전하게 저장할 수 있는 키 저장소 구현
 -----------------------------------------------
 
-이번 버전에서는 개인키를 암호화하여 안전하게 보호할 수 있도록 키스토어가 추가되었습니다. 키스토어 내 각각의 키 파일은 [`ProtectedPrivateKey`][ProtectedPrivateKey] 클래스로 표현되며, 사용자가 입력한 암호(passphrase)로 개인키를 암호화 하여 저장할 수 있습니다. 또한, [`ProtectedPrivateKey.WriteJson()`][ProtectedPrivateKey.WriteJson] 메서드를 이용해 [이더리움][Ethereum]의 [Web3 Secret Storage Definition]에 따라 JSON 형식으로 저장할 수 있습니다. 추후 키스토어 디렉터리를 통합적으로 관리하는 기능도 추가될 예정입니다.
+이번 버전에서는 개인키를 암호화하여 안전하게 보호할 수 있도록 키 저장소가 추가되었습니다. 키 저장소 내 각각의 키 파일은 [`ProtectedPrivateKey`][ProtectedPrivateKey] 클래스로 표현되며, 사용자가 입력한 암호(passphrase)로 개인키를 암호화 하여 저장할 수 있습니다. 또한, [`ProtectedPrivateKey.WriteJson()`][ProtectedPrivateKey.WriteJson] 메서드를 이용해 [이더리움][Ethereum]의 [Web3 Secret Storage Definition]에 따라 JSON 형식으로 저장할 수 있습니다. 추후 키 저장소 디렉터리를 통합적으로 관리하는 기능도 추가될 예정입니다.
 
 [ProtectedPrivateKey]: https://docs.libplanet.io/0.7.0/api/Libplanet.KeyStore.ProtectedPrivateKey.html
 [ProtectedPrivateKey.WriteJson]: https://docs.libplanet.io/0.7.0/api/Libplanet.KeyStore.ProtectedPrivateKey.html#Libplanet_KeyStore_ProtectedPrivateKey_WriteJson_Stream_System_Nullable_Guid___
