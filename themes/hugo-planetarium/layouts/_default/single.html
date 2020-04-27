@@ -36,6 +36,38 @@
     <article itemprop="articleBody" id="content" class="w-100 lh-copy">
       {{ .Content }}
     </article>
+    <script>
+    // Highlight the section referred by the anchor (in the URL)
+    (function () {
+      if (!location.hash.match(/^#/)) {
+        return;
+      }
+      var article = document.getElementById('content');
+      var id = window.decodeURIComponent(location.hash.substring(1));
+      var heading = document.getElementById(id);
+      var match = heading.nodeName.match(/^H([123456])$/);
+      if (!match || heading.parentNode !== article) {
+        return;
+      }
+      var headingLevel = window.parseInt(match[1]);
+      var highlighted = false;
+      for (var i = 0; i < article.childNodes.length; i++) {
+        var child = article.childNodes[i];
+        if (highlighted) {
+          match = child.nodeName.match(/^H([123456])$/);
+          if (match && window.parseInt(match[1]) >= headingLevel) {
+            highlighted = false;
+          }
+        }
+        else if (child === heading) {
+          highlighted = true;
+        }
+        if (!highlighted && !child.nodeName.match(/^#/)) {
+          child.className += ' dim';
+        }
+      }
+    })();
+    </script>
     {{ if (eq .Language.Lang "kor") }}
     <div class="recruit">
       <a href="https://planetariumhq.com">플라네타리움</a>은 게임에 특화된 오픈 소스 P2P 라이브러리 <a href="https://libplanet.io/">Libplanet</a>과, 그 위에서 중앙 서버 없는 온라인 게임 <a href="https://nine-chronicles.com/">Nine Chronicles</a>를 만들고 있습니다. 저희와 흥미로운 기술적 도전을 함께 하실 분들을 모시고 있습니다. 지금 <a href="https://bit.ly/join-planet">채용 페이지</a>를 확인해주세요!
