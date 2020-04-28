@@ -49,9 +49,18 @@ isHTML = false
 [permalinks]
 posts = "/:year/:month/:filename/"
 
-[blackfriday]
-extensionsmask = ["noIntraEmphasis", "strikethrough"]
-taskLists = false
+[markup.goldmark.extensions]
+definitionList = true
+footnote = true
+strikethrough = false
+table = true
+taskList = false
+typographer = true
+
+[markup.goldmark.renderer]
+hardWraps = false
+unsafe = true
+xhtml = false
 
 [markup.highlight]
 guessSyntax = false
