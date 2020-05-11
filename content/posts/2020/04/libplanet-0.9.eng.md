@@ -23,7 +23,7 @@ This piece introduces the new NuGet packages and addresses key major changes in 
 
 A newly added Nuget package, Libplanet.RocksDBStore includes `RocksDBStore` class, which is Lipblanet's [`IStore` interface][IStore] implemented as [RocksDB] backend. Through internal testing, `RocksDBStore` has shown to be about 10 times faster to write, 2 times faster to read, and thanks to compression, takes 15% less storage space than [`DefaultStore`][DefaultStore].
 
-Despite the advantages mentioned above, it might be difficult to use RocksDBStore on some platforms because the RocksDB native binary, written in C++, needs to be distributed together with an application.
+Despite the advantages mentioned above, it might be difficult to use `RocksDBStore` on some platforms because the RocksDB native binary, written in C++, needs to be distributed together with an application.
 Therefore, `RocksDBStore` class is not distributed as a Libplanet package, but as a separate NuGet package called Libplanet.RocksDBStore. `DefaultStore` is still available in the Libplanet package. And so when developing, you can first use `DefaultStore` that's easy to install and use `RocksDBStore` only for testing and actual deployment. Or, for platforms that are difficult to provide RocksDB binaries, you can just go with the `DefaultStore`.
 
 For more information, see [Applying RocksDB to Libplanet][1] written by Seunghun Lee.
@@ -114,4 +114,3 @@ If you’re interested, install and try it out! And as always, if you have any q
 
 [Nine Chronicles]: https://nine-chronicles.com/
 [Discord]: https://discord.gg/planetarium
-
