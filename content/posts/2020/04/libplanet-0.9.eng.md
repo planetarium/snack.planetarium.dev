@@ -100,7 +100,7 @@ If the .NET Core SDK is not installed, you can also download and install the off
 
 
 [4]: {{< ref "../../2020/02/libplanet-0.8.eng.md" >}}#%EC%A0%9C%EB%84%88%EC%8B%9C%EC%8A%A4-%EB%B8%94%EB%A1%9D-%EC%83%81%EC%A0%95
-[5]: #%EC%84%9C%EB%AA%85%EB%90%9C-%EC%95%B1-%ED%94%84%EB%A1%9C%ED%86%A0%EC%BD%9C-%EB%B2%84%EC%A0%84
+[5]: #signed-app-protocol-version
 [Swarm()]: https://docs.libplanet.io/0.9.0/api/Libplanet.Net.Swarm-1.html#Libplanet_Net_Swarm_1__ctor_Libplanet_Blockchain_BlockChain__0__Libplanet_Crypto_PrivateKey_Libplanet_Net_AppProtocolVersion_System_Int32_System_String_System_Nullable_System_Int32__IEnumerable_Libplanet_Net_IceServer__Libplanet_Net_DifferentAppProtocolVersionEncountered_IEnumerable_Libplanet_Crypto_PublicKey__
 [Libplanet.Tools]: https://www.nuget.org/packages/Libplanet.Tools/
 
