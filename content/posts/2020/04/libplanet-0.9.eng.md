@@ -38,7 +38,7 @@ For more information, see [Applying RocksDB to Libplanet][1] written by Seunghun
 Receiving Blocks from Multiple Peers
 ------------------------------------
 
-Up to this version, [`PreloadAsync()`][Swarm.PreloadAsync] and [`StartAsync()` Method][Swarm.StartAsync] of [`Swarm<T>` Class][Swarm] requested and received all blocks from a single peer to catch up with blocks piled up on the network. But unfortunately, if there were many piles of blocks, it would take a long time to get them from just one peer.
+Up to this version, [`PreloadAsync()`][Swarm.PreloadAsync] and [`StartAsync()` method][Swarm.StartAsync] of [`Swarm<T>` class][Swarm] requested and received all blocks from a single peer to catch up with blocks piled up on the network. But unfortunately, if there were many piles of blocks, it would take a long time to get them from just one peer.
 And if you were unlucky, you might request blocks from a peer with a very slow connection which would take extra longer time. It also put a lot of pressure on the peer that’s sending the blocks and it was especially hard to ignore the burden for seed nodes that were set by default for deployed applications.
 
 So starting with this version, block downloads are improved to be evenly distributed across multiple peers and even when there’s a slow peer among the senders, the downloading speed has been significantly reduced. 
