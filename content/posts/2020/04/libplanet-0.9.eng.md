@@ -56,7 +56,7 @@ Last year, [Libplanet 0.3 added `appProtocolVersion` parameter in the `Swarm<T`(
 
 Our team also took advantage of this feature and used it for software updates when encountering a higher version of the node. But with this use, we realized that a modulated software could be used to maliciously display high-version numbers (which have never been reported) and attack other nodes to attempt false software updates.
 
-To avoid this, the application protocol version that used to be described as [`System.Int32`][System.Int32] is now changed to [`AppProtocolVersion` Data Type][AppProtocolVersion], which includes multiple metadata such as signatures and signers. The app protocol version must be signed, and each node will *individually* determine which signer's version of the app protocol it will trust using the `trustedAppProtocolVersionSigners` parameter in the `Swarm<T>()` constructor.
+To avoid this, the application protocol version that used to be described as [`System.Int32`][System.Int32] is now changed to [`AppProtocolVersion` type][AppProtocolVersion], which includes multiple metadata such as signatures and signers. The app protocol version must be signed, and each node will *individually* determine which signer's version of the app protocol it will trust using the `trustedAppProtocolVersionSigners` parameter in the `Swarm<T>()` constructor.
 
 This approach protects each node from unintended (modified) software updates, while also giving each node the freedom to choose a different application roadmap that is freely forked if desired.
 
