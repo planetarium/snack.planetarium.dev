@@ -81,7 +81,7 @@ So from this version, [`Web3KeyStore`][Web3KeyStore] class, which physically pre
 [IKeyStore]: https://docs.libplanet.io/0.9.0/api/Libplanet.KeyStore.IKeyStore.html
 
 
-`planet`: CLI Tool
+`planet`: CLI Utility
 ---------------------
 
 [`Swarm<T>()` constructor][Swarm()] has [assumed a specific genesis block since last version][4] and [from this version, it signs the app protocol version.][5] Because these values include the results of cryptographic algorithm, it is impossible for a human to randomly generate the value. However, since the development process does require a lot of filling up random values, it was definitely a hassle to call up Libplanet APIs from C# interactive shells or PowerShell to calculate the desired values.
