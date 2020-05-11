@@ -99,7 +99,7 @@ dotnet tool install -g Libplanet.Tools
 If the .NET Core SDK is not installed, you can also download and install the official binary uploaded on the [Release Page][0.9.0]. The official binary is available in three versions: Linux (x64), macOS (x64), and Windows (x64).
 
 
-[4]: {{< ref "../../2020/02/libplanet-0.8.eng.md" >}}#%EC%A0%9C%EB%84%88%EC%8B%9C%EC%8A%A4-%EB%B8%94%EB%A1%9D-%EC%83%81%EC%A0%95
+[4]: {{< ref "../../2020/02/libplanet-0.8.eng.md" >}}#genesis-block-anticipation
 [5]: #signed-app-protocol-version
 [Swarm()]: https://docs.libplanet.io/0.9.0/api/Libplanet.Net.Swarm-1.html#Libplanet_Net_Swarm_1__ctor_Libplanet_Blockchain_BlockChain__0__Libplanet_Crypto_PrivateKey_Libplanet_Net_AppProtocolVersion_System_Int32_System_String_System_Nullable_System_Int32__IEnumerable_Libplanet_Net_IceServer__Libplanet_Net_DifferentAppProtocolVersionEncountered_IEnumerable_Libplanet_Crypto_PublicKey__
 [Libplanet.Tools]: https://www.nuget.org/packages/Libplanet.Tools/
