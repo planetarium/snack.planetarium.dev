@@ -86,7 +86,7 @@ So from this version, [`Web3KeyStore`][Web3KeyStore] class, which physically pre
 
 [`Swarm<T>()` constructor][Swarm()] has [assumed a specific genesis block since last version][4] and [from this version, it signs the app protocol version.][5] Because these values include the results of cryptographic algorithm, it is impossible for a human to randomly generate the value. However, since the development process does require a lot of filling up random values, it was definitely a hassle to call up Libplanet APIs from C# interactive shells or PowerShell to calculate the desired values.
 
-To make this easier, we are deploying a (<abbr title="command-line interface">CLI</abbr>)tool called `planet` from this version. The `planet` command contains multiple subcommands, and currently provides key storage management and app protocol version signing feature. In the future, features such as creating a random genesis block will be added. Please check the `planet --help` command for detailed instructions.
+To make this easier, we are deploying a <abbr title="command-line interface">CLI</abbr> utility called `planet` from this version. The `planet` command contains multiple subcommands, and currently provides key storage management and app protocol version signing feature. In the future, features such as creating a random genesis block will be added. Please check the `planet --help` command for detailed instructions.
 
 The `planet` command is distributed in a NuGet package called [Libplanet.Tools], which can be installed on systems with .NET Core SDK using the following command:
 
