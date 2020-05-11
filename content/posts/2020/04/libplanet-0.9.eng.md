@@ -96,7 +96,7 @@ dotnet tool install -g Libplanet.Tools
 ~~~~
 
 
-If the .NET Core SDK is not installed, you can also download and install the official binary uploaded on the [Release Page] [0.9.0]. The official binary is available in three versions: Linux (x64), MacOS (x64), and Windows (x64).
+If the .NET Core SDK is not installed, you can also download and install the official binary uploaded on the [Release Page][0.9.0]. The official binary is available in three versions: Linux (x64), macOS (x64), and Windows (x64).
 
 
 [4]: {{< ref "../../2020/02/libplanet-0.8.eng.md" >}}#%EC%A0%9C%EB%84%88%EC%8B%9C%EC%8A%A4-%EB%B8%94%EB%A1%9D-%EC%83%81%EC%A0%95
