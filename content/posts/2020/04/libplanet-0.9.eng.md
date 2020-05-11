@@ -61,7 +61,7 @@ To avoid this, the application protocol version that used to be described as [`S
 This approach protects each node from unintended (modified) software updates, while also giving each node the freedom to choose a different application roadmap that is freely forked if desired.
 
 
-[2]: {{< ref "../../2019/05/libplanet-0.3.eng.md" >}}#%EB%B2%84%EC%A0%84%EC%9D%B4-%EB%8B%A4%EB%A5%B8-%EB%85%B8%EB%93%9C%EB%A5%BC-%EB%A7%8C%EB%82%AC%EC%9D%84-%EB%95%8C-%EB%B0%98%EC%9D%91%ED%95%98%EB%8A%94-api
+[2]: {{< ref "../../2019/05/libplanet-0.3.eng.md" >}}#responsive-apis-for-nodes-with-different-versions
 [System.Int32]: https://docs.microsoft.com/en-us/dotnet/api/system.int32
 [AppProtocolVersion]: https://docs.libplanet.io/0.9.0/api/Libplanet.Net.AppProtocolVersion.html
 
