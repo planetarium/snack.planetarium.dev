@@ -74,7 +74,7 @@ Last year, [Libplanet added a `ProtectedPrivateKey` class to safely store `Priva
 So from this version, [`Web3KeyStore`][Web3KeyStore] class, which physically preserves and manages keys, are now available, eliminating the need to implement these features separately. In addition to the `Web3KeyStore` that preserves keys in [Web3 Secret Storage Definition] format, we have also introduced [`IKeyStore` Interface][IKeyStore], which abstracts specific preservation methods (implementation details).
 
 
-[3]: {{< ref "../../2019/11/libplanet-0.7/index.eng.md" >}}#%EA%B0%9C%EC%9D%B8%ED%82%A4%EB%A5%BC-%EC%95%88%EC%A0%84%ED%95%98%EA%B2%8C-%EC%A0%80%EC%9E%A5%ED%95%A0-%EC%88%98-%EC%9E%88%EB%8A%94-%ED%82%A4-%EC%A0%80%EC%9E%A5%EC%86%8C-%EA%B5%AC%ED%98%84
+[3]: {{< ref "../../2019/11/libplanet-0.7/index.eng.md" >}}#key-store-implementation-to-safely-store-personal-keys
 [ProtectedPrivateKey]: https://docs.libplanet.io/0.9.0/api/Libplanet.KeyStore.ProtectedPrivateKey.html
 [Web3KeyStore]: https://docs.libplanet.io/0.9.0/api/Libplanet.KeyStore.Web3KeyStore.html
 [Web3 Secret Storage Definition]: https://github.com/ethereum/wiki/wiki/Web3-Secret-Storage-Definition
