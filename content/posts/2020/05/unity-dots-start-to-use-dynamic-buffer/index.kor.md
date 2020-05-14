@@ -1,6 +1,6 @@
 ---
 title: Unity DOTS DynamicBuffer 사용하기
-date: 2020-05-13
+date: 2020-05-14
 authors: [hyun.seungmin]
 ---
 
@@ -36,7 +36,7 @@ Unity
     ~~~~ cs
     using Unity.Entities;
 
-    namespace Hoiys.DOTS_DynamicBuffer
+    namespace DOTS_DynamicBuffer
     {
       public struct IntBufferElement : IBufferElementData
       {
@@ -51,7 +51,7 @@ Unity
 
 ## [`EntityManager.AddBuffer<T>()`][EntityManager.AddBuffer<T>()] 사용하기
 
-엔티티에 컴포넌트를 더하는 방법과 같이 `DynamicBuffer<T>`를 더할 때도 [`EntityManager`][EntityManager]를 활용해요. 아래에서는 게임 오브젝트에 더해서 사용할 `PlayModeTest`라는 컴포넌트를 작성하고 플레이 모드에서 *Entity Debugger*를 확인해 볼게요.
+엔티티에 컴포넌트를 더하는 방법과 같이 버퍼를 더할 때도 [`EntityManager`][EntityManager]를 활용해요. 아래에서는 게임 오브젝트에 더해서 사용할 `PlayModeTest`라는 컴포넌트를 작성하고 플레이 모드에서 *Entity Debugger*를 확인해 볼게요.
 
  -  엔티티에 `IntBufferElement` 버퍼를 더하고, 그 버퍼에 값을 좀 넣어 볼게요.
 
@@ -59,7 +59,7 @@ Unity
     using UnityEngine;
     using Unity.Entities;
 
-    namespace Hoiys.DOTS_DynamicBuffer
+    namespace DOTS_DynamicBuffer
     {
       public class PlayModeTest : MonoBehaviour
       {
@@ -190,21 +190,21 @@ Unity
 
     ![](images/06.png)
 
- -  이후 과정을 위해 `BoscoTag`와 `RanTag`, `SuhoTag` 컴포넌트를 작성해서 각 컴포넌트를 포함하는 엔티티에 `IntBufferElement` 버퍼를 더해 볼게요.
+ -  이후 과정을 위해 `UnitTag`와 `PlayerTag`, `EnemyTag` 컴포넌트를 작성해서 각 컴포넌트를 포함하는 엔티티에 `IntBufferElement` 버퍼를 더해 볼게요.
 
     ~~~~ cs
     using Unity.Entities;
 
-    namespace Hoiys.CommonTags
+    namespace DOTS_DynamicBuffer
     {
       [GenerateAuthoringComponent]
-      public struct BoscoTag : IComponentData { }
+      public struct UnitTag : IComponentData { }
 
       [GenerateAuthoringComponent]
-      public struct RanTag : IComponentData { }
+      public struct PlayerTag : IComponentData { }
 
       [GenerateAuthoringComponent]
-      public struct SuhoTag : IComponentData { }
+      public struct EnemyTag : IComponentData { }
     }
     ~~~~
 
@@ -217,15 +217,14 @@ Unity
 
 ## `ComponentSystem`에서 사용하기
 
-`ComponentSystem`을 상속하는 시스템을 작성해서 `BoscoTag` 컴포넌트를 포함하는 엔티티의 `IntBufferElement` `DynamicBuffer`에 접근해 볼게요.
+`ComponentSystem`을 상속하는 시스템을 작성해서 `UnitTag` 컴포넌트를 포함하는 엔티티의 `IntBufferElement` `DynamicBuffer`에 접근해 볼게요.
 
- -  `TestBufferFromEntitySystem`을 작성했어요. `BoscoTag`를 포함하는 엔티티들의 `IntBufferElement`형 `DynamicBuffer`에 접근해서 값을 변경하는 로직이에요. 20번 줄과 같이 사용하는 것은 안 되니 23--28번 줄과 같이 사용해요. 물론 `Reinterpret<T>()`도 사용할 수 있겠죠?
+ -  `TestBufferFromEntitySystem`을 작성했어요. `UnitTag`를 포함하는 엔티티들의 `IntBufferElement`형 `DynamicBuffer`에 접근해서 값을 변경하는 로직이에요. 20번 줄과 같이 사용하는 것은 안 되니 23--28번 줄과 같이 사용해요. 물론 `Reinterpret<T>()`도 사용할 수 있겠죠?
 
     ~~~~ cs
-    using Hoiys.CommonTags;
     using Unity.Entities;
 
-    namespace Hoiys.DOTS_DynamicBuffer
+    namespace DOTS_DynamicBuffer
     {
       public class TestBufferFromEntitySystem : ComponentSystem
       {
@@ -233,24 +232,24 @@ Unity
         {
           var bufferFromEntity = GetBufferFromEntity<IntBufferElement>();
           Entities
-            .WithAll<BoscoTag>()
+            .WithAll<UnitTag>()
             .ForEach(entity =>
             {
               if (bufferFromEntity.Exists(entity))
               {
-                var dynamicBufferFromBoscoTag = bufferFromEntity[entity];
-                foreach (var intBufferElement in dynamicBufferFromBoscoTag)
+                var dynamicBufferFromUnitTag = bufferFromEntity[entity];
+                foreach (var intBufferElement in dynamicBufferFromUnitTag)
                 {
                   // Foreach iteration variable 'intBufferElement' is immutable.
                   // Cannot modify struct member when accessed struct is not classified as a variable
                   // intBufferElement.Value++;
                 }
 
-                for (var i = 0; i < dynamicBufferFromBoscoTag.Length; i++)
+                for (var i = 0; i < dynamicBufferFromUnitTag.Length; i++)
                 {
-                  var intBufferElement = dynamicBufferFromBoscoTag[i];
+                  var intBufferElement = dynamicBufferFromUnitTag[i];
                   intBufferElement.Value++;
-                  dynamicBufferFromBoscoTag[i] = intBufferElement;
+                  dynamicBufferFromUnitTag[i] = intBufferElement;
                 }
               }
             });
@@ -259,30 +258,29 @@ Unity
     }
     ~~~~
 
- -  플레이 모드에서 *Entity Debugger*를 보면 `BoscoTag` 컴포넌트를 포함하는 엔티티의 `IntBufferElement` `DynamicBuffer`의 값이 변하는 것을 확인할 수 있어요.
+ -  플레이 모드에서 *Entity Debugger*를 보면 `UnitTag` 컴포넌트를 포함하는 엔티티의 `IntBufferElement` `DynamicBuffer`의 값이 변하는 것을 확인할 수 있어요.
 
     ![](images/09.png)
 
 
 ## `JobComponentSystem`에서 사용하기
 
-`JobComponentSystem`을 상속하는 시스템을 작성해서 `RanTag` 컴포넌트를 포함하는 엔티티의 `IntBufferElement` `DynamicBuffer`에 접근해 볼게요.
+`JobComponentSystem`을 상속하는 시스템을 작성해서 `PlayerTag` 컴포넌트를 포함하는 엔티티의 `IntBufferElement` `DynamicBuffer`에 접근해 볼게요.
 
- -  `TestBufferFromEntityJobSystem`을 작성했어요. `RanTag`를 포함하는 엔티티들의 `IntBufferElement`형 `DynamicBuffer`에 접근해서 값을 변경하는 로직이에요. 이번에는 `Reinterpret<T>()`를 사용해 봤어요.
+ -  `TestBufferFromEntityJobSystem`을 작성했어요. `PlayerTag`를 포함하는 엔티티들의 `IntBufferElement`형 `DynamicBuffer`에 접근해서 값을 변경하는 로직이에요. 이번에는 `Reinterpret<T>()`를 사용해 봤어요.
 
     ~~~~ cs
-    using Hoiys.CommonTags;
     using Unity.Entities;
     using Unity.Jobs;
 
-    namespace Hoiys.DOTS_DynamicBuffer
+    namespace DOTS_DynamicBuffer
     {
       public class TestBufferFromEntityJobSystem : JobComponentSystem
       {
         protected override JobHandle OnUpdate(JobHandle inputDeps)
         {
           return Entities
-            .WithAll<RanTag>()
+            .WithAll<PlayerTag>()
             .ForEach((ref DynamicBuffer<IntBufferElement> dynamicBuffer) =>
             {
               var intDynamicBuffer = dynamicBuffer.Reinterpret<int>();
@@ -321,13 +319,13 @@ Unity
     }
     ~~~~
 
- -  그리고 같은 청크에서 테스트하기 위해서 `BoscoTag`를 포함하는 Bosco 게임 오브젝트를 두 개 더 복재했어요.
+ -  그리고 같은 청크에서 테스트하기 위해서 `EnemyTag`를 포함하는 Enemy 게임 오브젝트를 두 개 더 복재했어요.
 
     ![](images/11.png)
 
  -  *Entity Debugger*를 확인해 봤어요. 그런데 `IntBufferElement`가 여전히 청크에 남아 있는 것 처럼 보이네요. 힙 메모리로 이동됐어도 편의를 위해서 이렇게 보여주는 것인지는 확인이 필요하겠어요.
 
-    !12](images/12.png)
+    ![](images/12.png)
 
 [InternalBufferCapacityAttribute]: https://docs.unity3d.com/Packages/com.unity.entities@0.10/api/Unity.Entities.InternalBufferCapacityAttribute.html
 
@@ -339,7 +337,7 @@ Unity
 ~~~~ cs
 using Unity.Entities;
 
-namespace Hoiys.DOTS_DynamicBuffer
+namespace DOTS_DynamicBuffer
 {
   // InternalBufferCapacity specifies how many elements a buffer can have before
   // the buffer storage is moved outside the chunk.
