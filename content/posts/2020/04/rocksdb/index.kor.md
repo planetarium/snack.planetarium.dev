@@ -6,7 +6,7 @@ authors: [seunghun.lee]
 
 안녕하세요. 플라네타리움에서 [Libplanet]을 만들고 있는 이승훈입니다.
 
-Libplanet에서는 [`IStore`]라는 저장계층 추상화 인터페이스와 기본 구현인 [`DefaultStore`]를 제공하고 있고, Libplanet을 이용하여 만들고 있는 게임 [Nine Chronicles]도 이를 쓰고 있었습니다. `DefaultStore`는 Libplanet에 기본으로 포함되어 곧바로 쓸 수 있다는 장점이 있었지만, 성능이나 저장 공간 효율 측면에서 한계가 있었습니다.
+Libplanet에서는 [`IStore`]라는 저장계층 추상화 인터페이스와 기본 구현인 [`DefaultStore`]를 제공하고 있고, Libplanet을 이용하여 만들고 있는 게임 [나인 크로니클][Nine Chronicles]도 이를 쓰고 있었습니다. `DefaultStore`는 Libplanet에 기본으로 포함되어 곧바로 쓸 수 있다는 장점이 있었지만, 성능이나 저장 공간 효율 측면에서 한계가 있었습니다.
 
 이에 따라 저희는 여러 대안 저장 방식을 검토한 끝에 Facebook에서 제작한 [키–값 데이터베이스][Key-Value Database] 라이브러리인 [RocksDB]가 적합하다고 판단했고, 이를 백엔드로 사용하는 `IStore` 구현체인 [`RocksDBStore`]를 만들기로 했습니다. 이번 글에서는 `RocksDBStore`를 만들면서 경험한 일들을 공유하려고 합니다.
 
@@ -47,7 +47,7 @@ rpath 수정에 관한 보다 자세한 내용은 제가 참조한 아래 페이
 [로더]: https://ko.wikipedia.org/wiki/%EB%A1%9C%EB%8D%94_(%EC%BB%B4%ED%93%A8%ED%8C%85)
 [`install_name_tool`]: https://www.unix.com/man-page/osx/1/install_name_tool/
 [`patchelf`]: https://github.com/NixOS/patchelf
-[^1]: 이 작업을 진행할 당시, Nine Chronicles은 아직 소수의 테스트 플레이어를 대상으로 인스톨러 없이 간소하게 배포할 때였기 때문에, 이런 접근을 하게 되었습니다. 그러나 최근에는 인스톨러를 포함하여 배포하게 되면서 다른 접근도 가능하게 되었습니다. 기회가 된다면 이후 스낵에 다른 접근을 소개하도록 하겠습니다.
+[^1]: 이 작업을 진행할 당시, [나인 크로니클][Nine Chronicles]은 아직 소수의 테스트 플레이어를 대상으로 인스톨러 없이 간소하게 배포할 때였기 때문에, 이런 접근을 하게 되었습니다. 그러나 최근에는 인스톨러를 포함하여 배포하게 되면서 다른 접근도 가능하게 되었습니다. 기회가 된다면 이후 스낵에 다른 접근을 소개하도록 하겠습니다.
 
 ## 애플리케이션에서의 데이터베이스 기능 구현
 
