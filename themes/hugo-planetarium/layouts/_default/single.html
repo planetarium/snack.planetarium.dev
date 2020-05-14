@@ -1,97 +1,107 @@
 {{ partial "header.html" . }}
-
-<body class="sans-serif w-90 w-60-ns center center-ns mv2 mv5-ns" itemscope itemtype="http://schema.org/Article">
+<body
+  class="sans-serif w-90 w-60-ns center center-ns mv2 mv5-ns"
+  itemscope
+  itemtype="http://schema.org/Article"
+>
   {{ $baseurl := .Site.BaseURL }}
-  <a href="{{ .Site.Home.Permalink }}" id="site-title" class="b bb bw1 pb1 no-underline dark-gray">{{ .Site.Title }}</a>
+  <a
+    href="{{ .Site.Home.Permalink }}"
+    id="site-title"
+    class="b bb bw1 pb1 no-underline dark-gray"
+    >{{ .Site.Title }}</a
+  >
 
   <section id="main" class="mt5">
     <h1 itemprop="name" id="title" class="mb1">{{ .Title }}</h1>
     <div class="f6 gray dib-ns">
-      <time itemprop="datePublished" datetime="{{ .Date.Format "2006-01-02" }}">
+      <time itemprop="datePublished"
+        datetime="{{ .Date.Format "2006-01-02" }}">
         {{ .Date.Format (.Site.Params.dateFormat | default "January 2, 2006") }}
       </time>
       {{ if .IsTranslated }}
-      (<strong>{{ .Page.Language.LanguageName }}</strong>
-      {{- range .Translations }}
-      {{- if (not (eq .Language.Lang "mis")) }}
-      &bull;
-      <a href="{{ .Permalink }}" hreflang="{{ .Language.Params.ianasubtag }}" title="{{- .Title -}}"
-        class="gray">{{ .Language.LanguageName }}</a>
-      {{- end -}}
-      {{- end -}}
-      )
+        (<strong>{{ .Page.Language.LanguageName }}</strong>
+        {{- range .Translations }}
+          {{- if (not (eq .Language.Lang "mis")) }}
+            &bull;
+            <a href="{{ .Permalink }}"
+              hreflang="{{ .Language.Params.ianasubtag }}"
+              title="{{- .Title -}}"
+              class="gray">{{ .Language.LanguageName }}</a>
+          {{- end -}}
+        {{- end -}}
+        )
       {{ end }}
     </div>
     <article itemprop="articleBody" id="content" class="w-100 lh-copy">
       {{ .Content }}
     </article>
     <script>
-      // Highlight the section referred by the anchor (in the URL)
-      (function () {
-        if (!location.hash.match(/^#/)) {
-          return;
-        }
-        var article = document.getElementById('content');
-        var id = window.decodeURIComponent(location.hash.substring(1));
-        var heading = document.getElementById(id);
-        var match = heading.nodeName.match(/^H([123456])$/);
-        if (!match || heading.parentNode !== article) {
-          return;
-        }
-        var headingLevel = window.parseInt(match[1]);
-        var highlighted = false;
-        for (var i = 0; i < article.childNodes.length; i++) {
-          var child = article.childNodes[i];
-          if (highlighted) {
-            match = child.nodeName.match(/^H([123456])$/);
-            if (match && window.parseInt(match[1]) >= headingLevel) {
-              highlighted = false;
-            }
-          }
-          else if (child === heading) {
-            highlighted = true;
-          }
-          if (!highlighted && !child.nodeName.match(/^#/)) {
-            child.className += ' dim';
+    // Highlight the section referred by the anchor (in the URL)
+    (function () {
+      if (!location.hash.match(/^#/)) {
+        return;
+      }
+      var article = document.getElementById('content');
+      var id = window.decodeURIComponent(location.hash.substring(1));
+      var heading = document.getElementById(id);
+      var match = heading.nodeName.match(/^H([123456])$/);
+      if (!match || heading.parentNode !== article) {
+        return;
+      }
+      var headingLevel = window.parseInt(match[1]);
+      var highlighted = false;
+      for (var i = 0; i < article.childNodes.length; i++) {
+        var child = article.childNodes[i];
+        if (highlighted) {
+          match = child.nodeName.match(/^H([123456])$/);
+          if (match && window.parseInt(match[1]) >= headingLevel) {
+            highlighted = false;
           }
         }
-      })();
+        else if (child === heading) {
+          highlighted = true;
+        }
+        if (!highlighted && !child.nodeName.match(/^#/)) {
+          child.className += ' dim';
+        }
+      }
+    })();
     </script>
     {{ if (eq .Language.Lang "kor") }}
     <div class="recruit">
-      <a href="https://planetariumhq.com">플라네타리움</a>은 게임에 특화된 오픈 소스 P2P 라이브러리 <a
-        href="https://libplanet.io/">Libplanet</a>과, 그 위에서 중앙 서버 없는 온라인 게임 <a href="https://nine-chronicles.com/">나인
-        크로니클</a>을 만들고 있습니다. 저희와 흥미로운 기술적 도전을 함께 하실 분들을 모시고 있습니다. 지금 <a href="https://bit.ly/join-planet">채용 페이지</a>를
-      확인해주세요!
+      <a href="https://planetariumhq.com">플라네타리움</a>은 게임에 특화된 오픈 소스 P2P 라이브러리 <a href="https://libplanet.io/">Libplanet</a>과, 그 위에서 중앙 서버 없는 온라인 게임 <a href="https://nine-chronicles.com/">나인 크로니클</a>을 만들고 있습니다. 저희와 흥미로운 기술적 도전을 함께 하실 분들을 모시고 있습니다. 지금 <a href="https://bit.ly/join-planet">채용 페이지</a>를 확인해주세요!
     </div>
     {{ end }}
     {{ if isset .Params "authors" }}
-    {{ $authors := .Site.Data.authors }}
-    {{ range $authorHandle := .Params.authors }}
-    <div itemprop="author" class="fl tc mr3">
-      {{ $author := index $authors $authorHandle }}
-      {{ $authorT := index $author $.Page.Language.Lang }}
-      {{ if isset $author.social "github" }}
-      <a href="https://github.com/{{ $author.social.github }}" rel="author" itemprop="url"
-        class="no-underline mid-gray b f6">
-        <img src="https://www.gravatar.com/avatar/
+      {{ $authors := .Site.Data.authors }}
+      {{ range $authorHandle := .Params.authors }}
+        <div itemprop="author" class="fl tc mr3">
+          {{ $author := index $authors $authorHandle }}
+          {{ $authorT := index $author $.Page.Language.Lang }}
+          {{ if isset $author.social "github" }}
+            <a href="https://github.com/{{ $author.social.github }}"
+              rel="author" itemprop="url" class="no-underline mid-gray b f6">
+              <img src="https://www.gravatar.com/avatar/
                         {{- md5 $author.social.email -}}
                         ?d=https://avatars.githubusercontent.com/
-                        {{- $author.social.github }}" itemprop="image" class="w3 h3 br-100 mb1">
-        <br>{{ $authorT.name }}
-      </a>
-      {{ else }}
-      <a href="mailto:{{ $author.social.email }}" rel="author" itemprop="email" class="no-underline mid-gray b f6">
-        <img src="https://www.gravatar.com/avatar/
-                        {{- md5 $author.social.email }}" itemprop="image" class="w3 h3 br-100 mb1">
-        <br>{{ $authorT.name }}
-      </a>
+                        {{- $author.social.github }}"
+                itemprop="image" class="w3 h3 br-100 mb1">
+              <br>{{ $authorT.name }}
+            </a>
+          {{ else }}
+            <a href="mailto:{{ $author.social.email }}" rel="author"
+              itemprop="email" class="no-underline mid-gray b f6">
+              <img src="https://www.gravatar.com/avatar/
+                        {{- md5 $author.social.email }}"
+                itemprop="image" class="w3 h3 br-100 mb1">
+              <br>{{ $authorT.name }}
+            </a>
+          {{ end }}
+        </div>
       {{ end }}
-    </div>
-    {{ end }}
     {{ end }}
   </section>
   {{ partial "footer.html" . }}
 </body>
-
 </html>
