@@ -7,8 +7,9 @@ authors: [hong.minhee]
 안녕하세요. 지난주 저희 팀은 [Libplanet]의 두번째 마이너 버전[^1]인 [0.2 버전][2]을 릴리스했습니다.
 여러 변화가 있었지만, 이 글에서는 몇 가지 주요 기능 추가 및 API 변경에 대해 다루겠습니다.
 
-[Libplanet]: https://libplanet.io/
 [^1]: 저희는 아직 메이저 릴리스를 한 적이 없습니다.
+
+[Libplanet]: https://libplanet.io/
 [2]: https://github.com/planetarium/libplanet/releases/tag/0.2.0
 
 
