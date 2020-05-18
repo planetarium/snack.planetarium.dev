@@ -27,7 +27,7 @@ authors: [suho.lee]
 - [Libplanet Explorer]
 - [Libplanet Explorer Frontend]
 
-특히 이 중에서 **Libplanet Explorer Frontend** 는 Typesciprt로 되어 있어, 블록체인 기술이나
+특히 이 중에서 **Libplanet Explorer Frontend** 는 TypeScript로 되어 있어, 블록체인 기술이나
 C#을 잘 모르지만, Libplanet에 대해 관심이 있던 참가자 분들도 기여하실 수 있습니다.
 
 [Libplanet]: https://github.com/planetarium/libplanet
@@ -55,10 +55,10 @@ Rider 또는 Visual Studio Code를 쓴다는 가정 하에 Libplanet의 개발 �
 [6]: https://gist.github.com/dahlia/08f6e659e2266e941ad026f591c30c9a
 [CONTRIBUTING.md]: https://github.com/planetarium/libplanet/blob/master/CONTRIBUTING.md
 
-Typescript 개발 환경
+TypeScript 개발 환경
 -------------------
 
-Typescript 개발 환경은 C# 개발 환경에 비해 간단합니다. Libplanet Explorer Frontend 저장소의 *[README.md]*
+TypeScript 개발 환경은 C# 개발 환경에 비해 간단합니다. Libplanet Explorer Frontend 저장소의 *[README.md]*
 에 잘 정리되어 있으니, 어렵지 않게 따라하실 수 있을 것입니다.
 
 [README.md]: https://github.com/planetarium/libplanet-explorer-frontend/blob/master/README.md
