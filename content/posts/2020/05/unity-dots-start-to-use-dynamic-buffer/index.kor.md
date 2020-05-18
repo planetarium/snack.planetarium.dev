@@ -1,6 +1,6 @@
 ---
 title: Unity DOTS DynamicBuffer 사용하기
-date: 2020-05-14
+date: 2020-05-18
 authors: [hyun.seungmin]
 ---
 
