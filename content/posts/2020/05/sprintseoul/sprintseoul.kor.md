@@ -21,7 +21,6 @@ authors: [suho.lee]
 [1]: https://sprintseoul.org/
 [Libplanet]: https://libplanet.io/
 
-
 기여하실 수 있는 프로젝트들
 ------------------------
 
@@ -67,7 +66,6 @@ TypeScript 개발 환경은 C# 개발 환경에 비해 간단합니다. Libplane
 
 [README.md]: https://github.com/planetarium/libplanet-explorer-frontend/blob/master/README.md
 
-
 살펴볼 만한 이슈
 ----------------
 
@@ -83,13 +81,13 @@ TypeScript 개발 환경은 C# 개발 환경에 비해 간단합니다. Libplane
 - [Libplanet Explorer][11]
 - [Libplanet Explorer Frontend][12]
 
-
 [7]: https://github.com/planetarium/libplanet/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22
 [8]: https://github.com/planetarium/libplanet-explorer/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22
 [9]: https://github.com/planetarium/libplanet-explorer-frontend/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22
 [10]: https://github.com/planetarium/libplanet/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22
 [11]: https://github.com/planetarium/libplanet-explorer/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22 
 [12]: https://github.com/planetarium/libplanet-explorer-frontend/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22
+
 고민되거나 망설여진다면
 ----------------------
 
