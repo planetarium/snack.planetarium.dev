@@ -44,11 +44,11 @@ blockquote p {
 }
 
 code {
-  padding: 2px 4px;
   font-size: 90%;
 }
 
 :not(pre) > code {
+  padding: 2px 4px;
   background-color: #eeeeee;
 }
 
