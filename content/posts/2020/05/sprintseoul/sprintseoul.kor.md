@@ -1,15 +1,19 @@
 ---
-title: Libplanet 팀이 2020 스프린트 서울에도 참여합니다!
+title: Libplanet 팀이 2020 스프린트서울에도 참여합니다!
 date: 2020-05-19
 authors: [suho.lee]
 ---
 
-오랜만입니다! 이번에도 [스프린트서울][1]에 프로젝트 리더로 참가하게 된
+오랜만입니다! [스프린트서울][1]에 프로젝트 리더로 참가하게 된
 [Libplanet] 팀입니다.
 
 저희 팀은 꾸준히 행사에 참여하고 있으며, 이번 스프린트에도 참여했습니다!
-저희 팀은 [Libplanet] 프로젝트 리더로 참가하며,
-이 행사를 통해 여러분들의 기여를 기대하고 있습니다.
+그동안 스프린트서울은 하루라는 짧은 시간동안 함께 문제를 해결해 나가는 행사였지만,
+이번 스프린트서울은 5월 한 달 내내 진행됩니다.
+
+그에 맞춰 저희도 이번엔 조금 더 긴 시간동안 도전적인 문제를 해결해 보고 싶은 분들이
+관심이 있어할 만한 이슈들과, 처음 기여하시는 분들이 부담 없이 기여하실 수 있는 이슈
+두 가지 모두 준비해 보았습니다.
 
 또한 스프린트에 참가하여 저희 저장소에 기여해 주신 분들에 대해 **소정의 상품**도 준비하고 있으니,
 많은 참여 부탁드립니다!
@@ -27,7 +31,7 @@ authors: [suho.lee]
 - [Libplanet Explorer]
 - [Libplanet Explorer Frontend]
 
-특히 이 중에서 **Libplanet Explorer Frontend** 는 TypeScript로 되어 있어, 블록체인 기술이나
+특히 이 중에서 **Libplanet Explorer Frontend**는 TypeScript로 되어 있어, 블록체인 기술이나
 C#을 잘 모르지만, Libplanet에 대해 관심이 있던 참가자 분들도 기여하실 수 있습니다.
 
 [Libplanet]: https://github.com/planetarium/libplanet
@@ -58,8 +62,8 @@ Rider 또는 Visual Studio Code를 쓴다는 가정 하에 Libplanet의 개발 �
 TypeScript 개발 환경
 -------------------
 
-TypeScript 개발 환경은 C# 개발 환경에 비해 간단합니다. Libplanet Explorer Frontend 저장소의 *[README.md]*
-에 잘 정리되어 있으니, 어렵지 않게 따라하실 수 있을 것입니다.
+TypeScript 개발 환경은 C# 개발 환경에 비해 간단합니다. Libplanet Explorer Frontend 저장소의 *[README.md]*에
+잘 정리되어 있으니, 어렵지 않게 따라하실 수 있을 것입니다.
 
 [README.md]: https://github.com/planetarium/libplanet-explorer-frontend/blob/master/README.md
 
@@ -74,10 +78,18 @@ TypeScript 개발 환경은 C# 개발 환경에 비해 간단합니다. Libplane
 
 프로젝트 구조를 자세히 파악하지 못한 상태에서도 깊게 들어가지 않고 해볼 수 있을 만한 것들입니다.
 
+뿐만 아니라, 좀 더 도전적인 문제를 찾는 분들을 위한 *help wanted* 레이블 또한 준비되어 있습니다.
+- [Libplanet][10]
+- [Libplanet Explorer][11]
+- [Libplanet Explorer Frontend][12]
+
+
 [7]: https://github.com/planetarium/libplanet/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22
 [8]: https://github.com/planetarium/libplanet-explorer/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22
 [9]: https://github.com/planetarium/libplanet-explorer-frontend/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22
-
+[10]: https://github.com/planetarium/libplanet/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22
+[11]: https://github.com/planetarium/libplanet-explorer/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22 
+[12]: https://github.com/planetarium/libplanet-explorer-frontend/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22
 고민되거나 망설여진다면
 ----------------------
 
@@ -87,8 +99,8 @@ TypeScript 개발 환경은 C# 개발 환경에 비해 간단합니다. Libplane
 - 이승훈 님께서 쓰신 <cite>[Libplanet 처음 기여하기][10]</cite>
 - 이수호 님께서 쓰신 <cite>[2019 스프린트 서울 6월 행사를 참여하고 나서...][11]</cite>
 
-[10]: {{< ref "first-contribution.kor.md" >}}
-[11]: https://blog.hanaoto.me/sprint_seoul_2019_june/
+[13]: {{< ref "first-contribution.kor.md" >}}
+[14]: https://blog.hanaoto.me/sprint_seoul_2019_june/
 
 질문 및 대화방
 --------------
