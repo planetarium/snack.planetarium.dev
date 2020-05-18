@@ -11,8 +11,9 @@ Hello, last week our team released the second minor version[^1] of [Libplanet],
 Although there have been several changes,
 this article will cover some key feature additions and API changes.
 
-[Libplanet]: https://libplanet.io/
 [^1]: We have not yet released a major version.
+
+[Libplanet]: https://libplanet.io/
 [2]: https://github.com/planetarium/libplanet/releases/tag/0.2.0
 
 

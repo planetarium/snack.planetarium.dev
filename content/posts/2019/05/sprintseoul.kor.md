@@ -16,12 +16,12 @@ authors: [hong.minhee]
 저희 팀은 [Libplanet] 프로젝트 리더로 참가하며,
 이 행사를 통해 여러분들의 기여를 기대하고 있습니다.
 
-스프린트 참가 신청은 6월 20일까지만 받는다고 하며, 신청 양식 및 스프린트서울의 상세한 안내는
+스프린트 참가 신청은 6월 20일까지만 받는다고 하며, [신청 양식] 및 스프린트서울의 상세한 안내는
 [공식 홈페이지][1]에서 살펴보실 수 있습니다.
 
 [1]: https://sprintseoul.org/
 [Libplanet]: https://libplanet.io/
-[2]: https://forms.gle/DHjbhgpWz9QgzpFo8
+[신청 양식]: https://forms.gle/DHjbhgpWz9QgzpFo8
 
 
 Libplanet 프로젝트 소개
