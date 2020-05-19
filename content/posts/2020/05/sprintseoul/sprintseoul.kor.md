@@ -114,8 +114,8 @@ TypeScript 개발 환경은 C# 개발 환경에 비해 간단합니다. Libplane
 어떤 기여를 어떻게 해야 할지 고민이 되는 분들은, 저희 프로젝트에 기여하신 분들의 경험담을 읽어보시고
 결정하셔도 좋을 것 같습니다.
 
-- 이승훈 님께서 쓰신 <cite>[Libplanet 처음 기여하기][10]</cite>
-- 이수호 님께서 쓰신 <cite>[2019 스프린트 서울 6월 행사를 참여하고 나서...][11]</cite>
+- 이승훈 님께서 쓰신 <cite>[Libplanet 처음 기여하기][13]</cite>
+- 이수호 님께서 쓰신 <cite>[2019 스프린트 서울 6월 행사를 참여하고 나서...][14]</cite>
 
 [13]: {{< ref "first-contribution.kor.md" >}}
 [14]: https://blog.hanaoto.me/sprint_seoul_2019_june/
