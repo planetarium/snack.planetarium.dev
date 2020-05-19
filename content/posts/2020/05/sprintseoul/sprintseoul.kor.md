@@ -61,7 +61,7 @@ Rider 또는 Visual Studio Code를 쓴다는 가정 하에 Libplanet의 개발 �
 TypeScript 개발 환경
 -------------------
 
-TypeScript 개발 환경은 C# 개발 환경에 비해 간단합니다. Libplanet Explorer Frontend 저장소의 *[README.md]*에
+TypeScript 개발 환경은 C# 개발 환경에 비해 간단합니다. Libplanet Explorer Frontend 저장소의 *[README.md]* 문서에
 잘 정리되어 있으니, 어렵지 않게 따라하실 수 있을 것입니다.
 
 [README.md]: https://github.com/planetarium/libplanet-explorer-frontend/blob/master/README.md
