@@ -21,21 +21,41 @@ authors: [suho.lee]
 [1]: https://sprintseoul.org/
 [Libplanet]: https://libplanet.io/
 
-기여하실 수 있는 프로젝트들
-------------------------
 
-이번 스프린트에는 Libplanet 말고도 여러 프로젝트를 준비했습니다.
+프로젝트 소개
+-------------
 
-- [Libplanet]
-- [Libplanet Explorer]
-- [Libplanet Explorer Frontend]
+[Libplanet]은 BitTorrent처럼 서버 없이 돌아가는 P2P 멀티플레이 게임을 만들기
+위한 네트워킹・스토리지 라이브러리로, 이를 달성하기 위해 블록체인 기술을
+구현합니다.  이용자 각각이 실행하는 게임 앱들이 네트워크에서 서로 연결되며,
+게임의 공정한 판정과 기록을 위해 운영되는 서버가 없는 대신,
+공정한 판정은 합의 알고리즘을 통해, 기록은 리플리케이션을 통해 이뤄집니다.
 
-특히 이 중에서 **Libplanet Explorer Frontend**는 TypeScript로 되어 있어, 블록체인 기술이나
+이번 스프린트에서 다룰 저장소로는 아래 세 곳이 있습니다.
+각자 익숙하거나 선호하는 환경에 따라 다른 저장소에 기여해 주시면 될 것 같습니다.
+참고로 세 저장소 모두 Linux, macOS, Windows 세 플랫폼에서 개발 가능합니다.
+
+ -  [Libplanet][libplanet-core]: 네트워킹 및 스토리지, 블록체인 등을 구현하는
+    프로젝트의 핵심으로, Unity 등의 게임 엔진과 함께 쓰일 수 있도록 C#으로
+    작성되어 있으며 멀티플랫폼입니다.
+
+ -  [Libplanet Explorer (서버)][libplanet-explorer]: Libplanet을 이용해 만든
+    게임이 분산 네트워크 위에서 쌓아 올린 블록체인 데이터를 게임 외부에서도
+    열람할 수 있도록 GraphQL 프로토콜로 노출하는 C# 앱입니다.
+
+ -  [Libplanet Explorer (웹)][libplanet-explorer-frontend]: 웹 서버가 GraphQL을
+    통해 제공하는 데이터를 웹 프론트엔드로 구현한 비교적 최종 사용자 지향의
+    웹 앱(클라이언트)입니다.  TypeScript, React, Gatsby, Apollo를 이용해
+    작성되어 있습니다.
+
+특히 이 중에서 *Libplanet Explorer (웹)*은 TypeScript로 되어 있어, 블록체인 기술이나
 C#을 잘 모르지만, Libplanet에 대해 관심이 있던 참가자 분들도 기여하실 수 있습니다.
 
-[Libplanet]: https://github.com/planetarium/libplanet
-[Libplanet Explorer]: https://github.com/planetarium/libplanet-explorer
-[Libplanet Explorer Frontend]: https://github.com/planetarium/libplanet-explorer-frontend
+[Libplanet]: https://libplanet.io/
+[libplanet-core]: https://github.com/planetarium/libplanet
+[libplanet-explorer]: https://github.com/planetarium/libplanet-explorer
+[libplanet-explorer-frontend]: https://github.com/planetarium/libplanet-explorer-frontend
+
 
 C# 개발 환경
 ---------
@@ -52,7 +72,7 @@ Rider 또는 Visual Studio Code를 쓴다는 가정 하에 Libplanet의 개발 �
 
 그 외에, Libplanet 저장소의 *[CONTRIBUTING.md]* 문서는 CLI 도구만을 이용해서 개발하는 아주
 기본적인 개발 환경 설정을 안내합니다.  꼭 자신이 이용하는 에디터를 쓰고 싶은 분들은 이쪽을 읽어주시면
-되겠습니다. 
+되겠습니다.
 
 [5]: https://gist.github.com/dahlia/5333634f62509293cd46c0e4ba65b2f5
 [6]: https://gist.github.com/dahlia/08f6e659e2266e941ad026f591c30c9a
@@ -61,7 +81,7 @@ Rider 또는 Visual Studio Code를 쓴다는 가정 하에 Libplanet의 개발 �
 TypeScript 개발 환경
 -------------------
 
-TypeScript 개발 환경은 C# 개발 환경에 비해 간단합니다. Libplanet Explorer Frontend 저장소의 *[README.md]* 문서에
+TypeScript 개발 환경은 C# 개발 환경에 비해 간단합니다. Libplanet Explorer (웹) 저장소의 *[README.md]* 문서에
 잘 정리되어 있으니, 어렵지 않게 따라하실 수 있을 것입니다.
 
 [README.md]: https://github.com/planetarium/libplanet-explorer-frontend/blob/master/README.md
@@ -71,21 +91,21 @@ TypeScript 개발 환경은 C# 개발 환경에 비해 간단합니다. Libplane
 
 처음 기여하시는 분들을 위한 각 프로젝트 별 초심자용 이슈들을 모아놨습니다.
 - [Libplanet][7]
-- [Libplanet Explorer][8]
-- [Libplanet Explorer Frontend][9]
+- [Libplanet Explorer (서버)][8]
+- [Libplanet Explorer (웹)][9]
 
 프로젝트 구조를 자세히 파악하지 못한 상태에서도 깊게 들어가지 않고 해볼 수 있을 만한 것들입니다.
 
 뿐만 아니라, 좀 더 도전적인 문제를 찾는 분들을 위한 *help wanted* 레이블 또한 준비되어 있습니다.
 - [Libplanet][10]
-- [Libplanet Explorer][11]
-- [Libplanet Explorer Frontend][12]
+- [Libplanet Explorer (서버)][11]
+- [Libplanet Explorer (웹)][12]
 
 [7]: https://github.com/planetarium/libplanet/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22
 [8]: https://github.com/planetarium/libplanet-explorer/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22
 [9]: https://github.com/planetarium/libplanet-explorer-frontend/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22
 [10]: https://github.com/planetarium/libplanet/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22
-[11]: https://github.com/planetarium/libplanet-explorer/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22 
+[11]: https://github.com/planetarium/libplanet-explorer/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22
 [12]: https://github.com/planetarium/libplanet-explorer-frontend/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22
 
 고민되거나 망설여진다면
