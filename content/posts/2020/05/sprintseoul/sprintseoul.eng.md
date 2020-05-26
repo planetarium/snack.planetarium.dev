@@ -102,4 +102,4 @@ Questions & Conversations
 If you have any questions or concerns, please join the #libplanet-users channel at [our Discord server] and ask away! We’re open for any questions before the event and after the event. If you want to just come and hang out, our doors always open!
 
 
-[our Discord server]: https://discord.gg/wUgwkYW
+[our Discord server]: https://discord.gg/planetarium
