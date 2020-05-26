@@ -67,7 +67,7 @@ Issues Worth Looking At
 For first-time contributors, we’ve organized first-timer issues for each project.
 - [Libplanet][7]
 - [Libplanet Explorer (Server)][8]
-- [Libplanet Explorer (WEb)][9]
+- [Libplanet Explorer (Web)][9]
 
 These are things that you can do without getting a detailed understanding of the project structure.
 
