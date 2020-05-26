@@ -347,7 +347,7 @@ Since entities are generally included in chunks, applying `InternalBufferCapacit
     }
     ~~~~
 
- -  And to hold tests in the same chunk, I’ve copied two more Enemy game objects that includes `EnemyTag`.
+ -  And to hold tests in the same chunk, I’ve copied two more `Enemy` game objects that includes `EnemyTag`.
 
 
     ![](images/11.png)
