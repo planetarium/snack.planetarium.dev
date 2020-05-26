@@ -280,7 +280,7 @@ Now, let’s access the entity’s `IntBufferElement` `DynamicBuffer` that inclu
     }
     ~~~~
 
- -  If you look at *Entity Debugger* in play mode, you can see that the value of UnitTag` component including entity's `IntBufferElement` `DynamicBuffer` changes.
+ -  If you look at *Entity Debugger* in play mode, you can see that the value of `UnitTag` component including entity's `IntBufferElement` `DynamicBuffer` changes.
 
 
     ![](images/09.png)
