@@ -23,7 +23,7 @@ Project Intro
 
 [Libplanet] is a networking ・ storage library for creating P2P multiplayer games that run without servers like BitTorrent, and to achieve this, it implements block chain technology. The game apps that each user runs are connected to each other on the network, and instead of having a main server for fair judgment and keeping record of the game, fair judgments are made through consensus algorithms and records are made through replication.
 
-There are three repositories to cover in this Sprint: You can contribute to different repositories depending on your familiarity or preferred environment. For your information, all three repositories can be developed on three platforms: Linux, MacOS, and Windows.
+There are three repositories to cover in this Sprint: You can contribute to different repositories depending on your familiarity or preferred environment. For your information, all three repositories can be developed on three platforms: Linux, macOS, and Windows.
 
  -   [Libplanet][libplanet-core]: This is the core of our project that implements networking, storage, and blockchain, on a multi-platform, written in C# for use with game engines such as Unity.
 
