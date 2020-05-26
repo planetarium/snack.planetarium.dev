@@ -91,7 +91,7 @@ For those of you who are either worried or hesitant about contributing to the pr
 
 
 - <cite>[First Contribution to Libplanet][13]</cite> by Seunghun Lee
-- <cite>[ After participating in the 2019 Sprint Seoul June event...14]</cite> by Suho Lee
+- <cite>[After participating in the 2019 Sprint Seoul June event…][14]</cite> by Suho Lee
 
 [13]: {{< ref "first-contribution.eng.md" >}}
 [14]: https://blog.hanaoto.me/sprint_seoul_2019_june/
@@ -103,4 +103,3 @@ If you have any questions or concerns, please join the #libplanet-users channel 
 
 
 [our Discord server]: https://discord.gg/wUgwkYW
-
