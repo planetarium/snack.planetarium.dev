@@ -396,7 +396,7 @@ namespace DOTS_DynamicBuffer
 
 ## Closing
 
-Today, we took a quick look at `IBufferElementData` and DynamicBuffer<T>`.
+Today, we took a quick look at `IBufferElementData` and `DynamicBuffer<T>`.
 
 You've probably heard a lot about object pooling when you’re making games.  Since creating single-use objects is basically the same as creating garbage, pooling and reusing them can reduce frequent [garbage collection] and manage instance creation timing, which ultimately creates a smoother game.
 
