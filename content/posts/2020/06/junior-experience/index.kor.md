@@ -24,7 +24,7 @@ authors: [suho.lee]
 figure
   src="images/resolved-issue.png"
   caption="한 달 동안 제거해나간 이슈 목록"
-}}
+>}}
 
 개인적으로 매우 효과를 본 방법이라고 생각합니다. 설명을 들을 때는 높은 문맥의 이야기만 대부분 듣기 때문에, 이 높은 문맥에서 일어나는 일들이 낮은 문맥에서 어떻게 일어나는지 직접 알아가며 체득하고, 실제로 문제를 해결하기 위해 분석하다 보니 이해도가 높았습니다.
 
@@ -34,13 +34,13 @@ figure
 figure
   src="images/daily-reports.png"
   caption="업무일지 목록"
-}}
+>}}
 
 {{<
 figure
   src="images/daily-report.png"
   caption="업무일지"
-}}
+>}}
 
 이렇게 간단하게 독백하듯 막히는 것을 적어놓는 습관을 들이게 된 이유는 바로 *데일리 미팅* 때문입니다.
 
