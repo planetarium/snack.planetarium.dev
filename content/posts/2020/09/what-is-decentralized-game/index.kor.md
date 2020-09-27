@@ -35,7 +35,7 @@ authors: [muhun.kim]
 
 {{<
 figure
-  src="images/single-chian.png"
+  src="images/single-chain.png"
   caption="블록을 연결하는 체인은 단 하나다"
 >}}
 
