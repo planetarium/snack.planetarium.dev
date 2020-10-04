@@ -88,6 +88,7 @@ figure {
 figcaption {
   font-size: small;
   color: #666;
+  word-break: keep-all;
 }
 figcaption :first-child {
   margin-top: 0;
