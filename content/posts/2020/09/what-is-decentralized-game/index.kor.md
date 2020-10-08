@@ -113,4 +113,4 @@ figure
 
 이 글은 앞으로 시리즈로 연재되며, 다음 발행 때에는 나인 크로니클이 리오그 현상과 체인 리셋을 어떻게 대처하였는지 소개하는 시간을 가질 예정입니다. 읽어주셔서 감사합니다.
 
-[^GitHub]: P2P 온라인 게임을 위한 블록체인 코어 - [libplanet](https://github.com/planetarium/libplanet), 나인 크로니클을 위한 Libplanet 기반의 SDK - [Lib9c](https://github.com/planetarium/lib9c), 나인 크로니클 클라이언트 전용의 블록체인 노드 서비스 - [NineChronicles.Standalone](https://github.com/planetarium/ninechronicles.standalone)
+[^GitHub]: P2P 온라인 게임을 위한 블록체인 코어 - [libplanet](https://github.com/planetarium/libplanet), 나인 크로니클을 위한 Libplanet 기반의 SDK - [Lib9c](https://github.com/planetarium/lib9c), 나인 크로니클 클라이언트 전용의 블록체인 노드 서비스 - [NineChronicles.Standalone](https://github.com/planetarium/ninechronicles.standalone), 이 밖에도 나인 크로니클 론처와 게임 클라이언트의 저장소를 공개할 예정입니다.
