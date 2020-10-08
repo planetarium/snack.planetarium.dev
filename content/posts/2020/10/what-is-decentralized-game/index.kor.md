@@ -1,6 +1,6 @@
 ---
 title: 탈중앙과 온라인 게임이 교차하다
-date: 2020-09-24
+date: 2020-10-08
 authors: [muhun.kim]
 ---
 
