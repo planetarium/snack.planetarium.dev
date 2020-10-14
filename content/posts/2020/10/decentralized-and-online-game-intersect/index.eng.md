@@ -103,7 +103,7 @@ If a costume element is updated within the game, a new property is added, such a
 
 In these cases, other blockchains usually add protocols to interpret blocks differently after a certain number of blocks. Nine Chronicles may do the same, but we found this method to be unnecessary during the beta period, when changes are frequent, large and small. That's why we decided to reset the chain every time.
 
-Of course, we will be maintaining the chain after the official launch. A number of suggestions have been reviewed, and if there is a chance, we will introduce them on this blog moving forward.
+Of course, we will be maintaining the chain after the official launch. A number of suggestions have been reviewed, and if there is a chance, we will introduce them on this blog.
 
 [^hash]: A blockchain connects the chain using the hash of the previous block as a meta information, similar to a linked list.
 [^expansion]: It is possible that game clients with expanded specifications may not be able to interpret the previous block correctly.
