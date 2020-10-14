@@ -48,10 +48,9 @@ Instead of choosing its own chain, each node chooses the chain that best fits th
 
 {{<
 figure
-src="images/orphaned-blocks.png"
-caption=" The blue chain with 5 blocks, is reorg-ed to red blocks. (Deep Reorg)"
-
-> }}
+  src="images/orphaned-blocks.png"
+  caption=" The blue chain with 5 blocks, is reorg-ed to red blocks. (Deep Reorg)"
+>}}
 
 But when another chain that better meets this rule than the adopted chain appears in the network, the network will adopt the new chain which will cause a flip.
 
