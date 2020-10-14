@@ -33,7 +33,9 @@ figure
 
 Before explaining reorg, I’d like to point out that a blockchain network always points to a single chain as its original copy.
 
-Blocks in a blockchain can be created by anyone. However, if nodes create blocks simultaneously, multiple chains with the same beginning but different ends appear. If so, how can we adopt a chain as the original even though there’s no central figure to decide?
+Blocks in a blockchain can be created by anyone. However, if nodes[^node] create blocks simultaneously, multiple chains with the same beginning but different ends appear. If so, how can we adopt a chain as the original even though there’s no central figure to decide?
+
+[^node]: Computer that participates in the blockchain network.
 
 {{<
 figure
