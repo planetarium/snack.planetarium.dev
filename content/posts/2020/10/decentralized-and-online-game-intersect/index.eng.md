@@ -39,10 +39,9 @@ Blocks in a blockchain can be created by anyone. However, if nodes create blocks
 
 {{<
 figure
-src="images/orphaned-block.png"
-caption="At similar points in time, the chain with more resources used will be adopted."
-
-> }}
+  src="images/orphaned-block.png"
+  caption="At similar points in time, the chain with more resources used will be adopted."
+>}}
 
 Instead of choosing its own chain, each node chooses the chain that best fits the rule shared by all nodes. The <abbr title="proof-of-work">PoW</abbr> approach used by Nine Chronicles and Libplanet, adopts the chain with more resources invested in among blocks created at a similar time.
 
