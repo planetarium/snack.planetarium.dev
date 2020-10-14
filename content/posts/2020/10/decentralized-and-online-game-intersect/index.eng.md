@@ -29,10 +29,9 @@ Meanwhile, when you store game data in the blockchain, sometimes the information
 
 {{<
 figure
-src="images/single-chain.png"
-caption="Blocks connected in order are called a chain."
-
-> }}
+  src="images/single-chain.png"
+  caption="Blocks connected in order are called a chain."
+>}}
 
 Before explaining reorg, I’d like to point out that a blockchain network always points to a single chain as its original copy.
 
