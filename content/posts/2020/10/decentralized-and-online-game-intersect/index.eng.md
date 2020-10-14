@@ -71,10 +71,9 @@ Normally, a shallow reorg occurs with one or two blocks, but if the depth of div
 
 {{<
 figure
-src="images/bug-report.png"
-caption="A user who owned 10,000 gold yesterday reported having less than 1,000 gold."
-
-> }}
+  src="images/bug-report.png"
+  caption="A user who owned 10,000 gold yesterday reported having less than 1,000 gold."
+>}}
 
 So, as I have said earlier, it's been often mentioned in the Nine Chronicles community that the level and items users originally had ended up reverting back to what they were a few minutes or hours ago due to reorg.[^nonce] Because this occurs on a decentralized network, players unfortunately can't ask a central operator(i.e. game company) to restore it.
 
