@@ -17,8 +17,6 @@ Online games use servers to operate services, such as multi-play and user data. 
 
 If everyone can divide online game services and maintain them, people won’t need to worry about shutting down as long as players keep playing. Decentralization, which fits this concept, means sharing the role of traditional central servers with fellow users. You've probably heard of <abbr title="Peer to peer">P2P</abbr> or distributed technology at least once.
 
-[^1]: Computer that participates in the blockchain network.
-
 ## Chain Reorganization
 
 Planetarium utilizes blockchain among many decentralized technologies to preserve data such as game assets, user items, and quests achieved.
