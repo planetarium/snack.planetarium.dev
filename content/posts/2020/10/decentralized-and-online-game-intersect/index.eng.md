@@ -78,7 +78,7 @@ caption="A user who owned 10,000 gold yesterday reported having less than 1,000 
 
 So, as I have said earlier, it's been often mentioned in the Nine Chronicles community that the level and items users originally had ended up reverting back to what they were a few minutes or hours ago due to reorg.[^nonce] Because this occurs on a decentralized network, players unfortunately can't ask a central operator(i.e. game company) to restore it.
 
-[^nonce]: The player's perspective was well explained in the [game review](https://www.facebook.com/unseenone.flohsdpsyphle/posts/1027765500973348) written by See-eun Ha, Co-founder of Blockchain Co-living and Co-working Community, Nonce.
+[^nonce]: The player's perspective was well explained in the [game review](https://dpsyphle.ninja/2020/08/16/rollbacks-in-decentralized-games.html) written by See-eun Ha, Co-founder of Blockchain Co-living and Co-working Community, Nonce.
 
 ## Blockchain Network Reset
 
