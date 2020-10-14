@@ -86,7 +86,7 @@ So, as I have said earlier, it's been often mentioned in the Nine Chronicles com
 
 Nine Chronicles has reset its blockchain network seven times during the beta period. When the network is reset, all players’ game data becomes reset as well. Here’s the reason why the reset was carried out despite certain risks:
 
-The blockchain network core [Libplanet] stores the state of the game in blocks. Player’s behavior is stored with a data structure called [Action] (https://docs.libplanet.io/0.9.5/api/Libplanet.Action.IAction.html).
+The blockchain network core [Libplanet] stores the state of the game in blocks. Player’s behavior is stored with a data structure called [Action](https://docs.libplanet.io/0.9.5/api/Libplanet.Action.IAction.html).
 
 ```json
 {
