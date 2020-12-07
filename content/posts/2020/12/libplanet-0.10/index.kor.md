@@ -1,6 +1,6 @@
 ---
 title: Libplanet 0.10 릴리스
-date: 2020-12-04
+date: 2020-12-08
 authors: [suho.lee]
 ---
 
@@ -8,10 +8,10 @@ authors: [suho.lee]
 릴리스되었습니다.
 
 Libplanet은 분산 P2P로 돌아가는 온라인 멀티플레이어 게임을 만들 때,
-그러한 게임들이 매번 구현해야 하는 P2P 통신이나 데이터 동기화 등의 문제를 푸는
+매번 구현해야 하는 P2P 통신이나 데이터 동기화 등의 문제를 푸는
 공용 라이브러리입니다.
 
-이번 버전부터 Libplanet은 상태를 관리하기 위해 [Merkle Patricia Trie(MPT)][MPT]를
+이번 버전부터 Libplanet은 상태를 관리하기 위해 [<abbr title="Merkle–Patricia Trie">MPT</abbr>][MPT]를
 사용하고, 자산 관리를 위한 별도의 API가 추가되는 등, 여기서 소개하는 내용 이외에도
 인터페이스 내외로 많은 변경점이 있었습니다.
 
@@ -21,48 +21,52 @@ Libplanet은 분산 P2P로 돌아가는 온라인 멀티플레이어 게임을 �
 [0.10.0]: https://github.com/planetarium/libplanet/releases/tag/0.10.0
 [MPT]: https://eth.wiki/en/fundamentals/patricia-tree 
 
-[Block<T>.PreEvaluationHash]
----------------------------
+결과 상태를 포함하여 유도된 [`Block<T>.Hash`]
+--------------------------------------------
 
-그동안 [`Block<T>`] 는 해당 블록이 가지고 있는 상태에 대한 정보를 따로 들고 있지 않았습니다.
-따라서 상태에서 블록을 유도할 수는 있어도, 블록에서 상태의 정합성 등을 검증할 수 있는 방법은
-오직 액션을 직접 실행하는 방법 뿐이었습니다. 하지만 이제 [`Block<T>.Hash`] 는 해당 블록에 대한 정보 뿐만 아니라, 
-액션을 평가하고 나온 결과의 해시값인 [`Block<T>.StateRootHash`] 도 포함되어 유도됩니다. 이전과 같이 액션을 평가하지 않고 블록 정보만을 가진
-해시값은 `Block<T>.PreEvaluationHash` 로 저장됩니다.
+그동안 [`Block<T>`]은 해당 블록이 가지고 있는 상태에 대한 정보를 따로 들고 있지 않았습니다.
+따라서 블록에서 상태를 유도할 수는 있어도, 블록에서 상태의 정합성 등을 검증할 수 있는 방법은
+오직 액션을 직접 실행하는 방법 뿐이었습니다. 하지만 이제 `Block<T>.Hash` 는 해당 블록에 대한 정보 뿐만 아니라, 
+블록 내 액션을 평가하고 나온 결과의 해시값인 [`Block<T>.StateRootHash`]도 포함되어 유도됩니다. 이전과 같이 액션을 평가하지 않고 블록 정보만을 가진
+해시는 [`Block<T>.PreEvaluationHash`] 속성에 들어갑니다.
 
 [`Block<T>`]: https://docs.libplanet.io/0.10.2/api/Libplanet.Blocks.Block-1.html
-[Block<T>.PreEvaluationHash]: https://docs.libplanet.io/0.10.2/api/Libplanet.Blocks.Block-1.html#Libplanet_Blocks_Block_1_PreEvaluationHash
+[`Block<T>.PreEvaluationHash`]: https://docs.libplanet.io/0.10.2/api/Libplanet.Blocks.Block-1.html#Libplanet_Blocks_Block_1_PreEvaluationHash
 [`Block<T>.Hash`]: https://docs.libplanet.io/0.10.2/api/Libplanet.Blocks.Block-1.html#Libplanet_Blocks_Block_1_Hash
 [`Block<T>.StateRootHash`]: https://docs.libplanet.io/0.10.2/api/Libplanet.Blocks.Block-1.html#Libplanet_Blocks_Block_1_StateRootHash
 
-[Block<T>.TotalDifficulty]
+[`Block<T>.TotalDifficulty`]
 ---------------------------
 
-그동안은 블록체인의 정본(正本, Canonical chain)을 고르는 데 [`Block<T>.Index`]가 사용되었습니다.
-하지만 이 방법은 네트워크에 같은 인덱스지만 다른 블록이 비슷한 속도로 나오는 경우가 자주 발생하여, 장기간 리오그가 일어나지 않다가
-한 번에 깊은 리오그가 발생하는 일이 잦았습니다. 따라서 저희는 체인 내 모든 블록의 난이도 총 합인
-`Block<T>.TotalDifficulty` 를 정본을 고르는 기준으로 삼게 되었습니다.
+그동안은 블록체인의 정본 체인(canonical chain)의 선출 기준에는 블록 높이([`Block<T>.Index`])만 고려되었습니다.
+하지만 네트워크에 같은 높이의 블록이 비슷한 속도로 여럿 나오는 경우는 흔하기에, 합의가 지역적으로만 이뤄지는 경우가 잦았습니다.
+같은 높이라면 어떤 블록을 선택해도 괜찮으니, 선택지가 많아 모호성이 생기기 때문입니다.
+이 문제를 바로잡기 위해, 새 버전부터는 사실상 선택지가 언제나 하나가 되도록 [`Block<T>.TotalDifficulty`] 속성을 추가하고, 이 속성을 정본의 기준으로 삼게 되었습니다.
+`Block<T>.TotalDifficulty` 속성은 해당 블록에서부터 제너시스 블록에 이르는 모든 블록(자기 자신과 제너시스 포함)의 난이도([`Block<T>.Difficulty`])의 합입니다.
+따라서 단순히 난이도가 낮은 블록을 빨리 찍어서 블록을 높게 쌓는 것만으로 정본을 취할 수 없기에 보안 측면에서도 향상됐습니다.
 
-[Block<T>.TotalDifficulty]: https://docs.libplanet.io/0.10.2/api/Libplanet.Blocks.Block-1.html#Libplanet_Blocks_Block_1_TotalDifficulty
+
+[`Block<T>.TotalDifficulty`]: https://docs.libplanet.io/0.10.2/api/Libplanet.Blocks.Block-1.html#Libplanet_Blocks_Block_1_TotalDifficulty
+[`Block<T>.Difficulty`]: https://docs.libplanet.io/0.10.2/api/Libplanet.Blocks.Block-1.html#Libplanet_Blocks_Block_1_Difficulty
 [`Block<T>.Index`]: https://docs.libplanet.io/0.10.2/api/Libplanet.Blocks.Block-1.html#Libplanet_Blocks_Block_1_Index 
 
-[Merkle Patricia Trie (MPT)]
+<abbr title="Merkle–Patricia Trie">MPT</abbr>
 ----------------------------
 
-Merkle Patricia Trie (이하 MPT)는 Ethereum 등지에서 상태를 관리하는 데 사용되는 트리 구조입니다.
-기존에는 상태를 저장하는 데 `BlockState` - `StateReference` 방식을 사용했었는데, 이 방식은 예전
-상태를 조회할 때 비교적 비효율적인 방식으로 저장되고 있었습니다. 이제는 MPT 방식으로 상태를 저장하여
-효율적인 방식으로 상태를 찾을 수 있게 하였습니다. 또한 `planet mpt` 명령어를 이용하여 블록 간 상태를
-비교하거나, 특정 블록에서의 상태를 손쉽게 가져올 수 있게 되었습니다. 사용법은 `planet mpt --help` 를
-참고해 주십시오.
+<abbr title="Merkle–Patricia Trie">MPT</abbr>는 이더리움 등에서 상태를 저장하는 데에 사용되는 트라이(trie) 자료 구조입니다.
+기존에는 상태를 저장하는 데 블록 단위로 전약 상태의 변량을 보존하고 상태 참조라는 색인을 통해
+조회하는 방식을 사용했었는데, 이 방식은 오랫동안 갱신되지 않은 상태를 조회할 때
+시간이 많이 걸리는 문제가 있었습니다. 이제는 MPT 구조를 통해 훨씬 빠르게 상태를 조회할 수 있게 하였습니다.
 
-[Merkle Patricia Trie (MPT)]: https://eth.wiki/en/fundamentals/patricia-tree 
+또한 디버깅을 돕기 위해 새로 추가된 `planet mpt` 명령어로 블록 간 상태를
+비교하거나, 특정 블록에서의 상태를 손쉽게 가져올 수 있게 되었습니다. 사용법은 `planet mpt --help` 옵션을
+참고해 주십시오.
 
 자산을 위한 별도 상태 API
 ---------------------------
 
 이제까지 Libplanet으로 게임을 만들 때 게임 내 재화는 다른 게임 내 상태와 같은 방식으로 다뤄졌습니다.
-이를테면 나인 크로니클 골드는 정수 자료형의 값으로 구현되었습니다. 그러나 그러한 재화는 일반적으로
+이를테면 NCG(〈나인 크로니클〉 골드)는 정수 자료형의 값으로 구현되었습니다. 그러나 그러한 재화는
 복제되거나 함부로 소멸되어서는 안 되는데, 사칙연산이 자유롭고 재화 특유의 성질을 내제하고 있지 않은
 정수 자료형으로 재화를 구현하다 보면 버그가 끼어들기 쉬웠습니다. 예를 들어, 돈을 이체할 경우에도,
 원래 소유자의 잔고는 줄이고 새 소유자의 잔고는 늘려야 하는데, 원래 소유자의 잔고에서 금액을 빼는 것을
@@ -72,12 +76,12 @@ Merkle Patricia Trie (이하 MPT)는 Ethereum 등지에서 상태를 관리하�
 잔고에 돈을 더해주는 식의 코드만 짜도, 게임 전체의 경제상으로는 사실상 화폐를 사적으로 주조를 하는 것과 다름 없어집니다.
 
 이러한 실수들을 일찍부터 방지하기 위해, 이번 버전에서는 자산만을 다루기 위한 별도의 상태 API가 생겼습니다.
-기존의 [`BlockChain<T>.GetState()`] / [`IAccountStateDelta.GetState()`] 메서드와 나란히 [`BlockChain<T>.GetBalance()`]
-/ [`IAccountStateDelta.GetBalance()`] 메서드가 생겼고, 상태를 자유롭게 덮어 쓸 수 있는 [`IAccountStateDelta.SetState()`] 메서드와
-달리 이체를 위한 [`IAccountStateDelta.TransferAsset()`]과 주조를 위한 [`IAccountStateDelta.MintAsset()`]등 용도별 메서드가 생겼습니다.
+기존의 [`BlockChain<T>.GetState()`] 및 [`IAccountStateDelta.GetState()`] 메서드와 나란히 [`BlockChain<T>.GetBalance()`]
+및 [`IAccountStateDelta.GetBalance()`] 메서드가 생겼고, 상태를 자유롭게 덮어 쓸 수 있는 [`IAccountStateDelta.SetState()`] 메서드와
+달리 이체를 위한 [`IAccountStateDelta.TransferAsset()`]과 주조를 위한 [`IAccountStateDelta.MintAsset()`] 등 용도별 메서드가 생겼습니다.
 
 또, 자산을 값으로 다룰 때도 .NET의 내장 정수 자료형을 쓰는 대신, Libplanet에 새롭게 더해진
-[`FungibleAssetValue`] 자료형을 써야 합니다. `FungibleAssetValue`는 기본적으로 [`BigInteger`] 처럼 생겼지만,
+[`FungibleAssetValue`] 자료형을 써야 합니다. `FungibleAssetValue`는 기본적으로 [`BigInteger`]처럼 생겼지만,
 몇 몇 부분에서 차이가 있습니다.
 
 1. 나눗셈을 할 때 나머지 값을 암시적으로 버리지 않고, 항상 나머지를 명시적으로 다뤄야 합니다.
@@ -88,7 +92,7 @@ Merkle Patricia Trie (이하 MPT)는 Ethereum 등지에서 상태를 관리하�
 해당 자료형은 화폐 단위의 명칭이나 티커 심볼, 하부 단위의 자릿수 등을 속성으로 갖습니다.
 
 현재 자산 상태 API는 게임 머니 같은 변용성 자산(fungible assets)만 지원하지만, 추후 버전에서는 게임 아이템 같은 대체 불가 자산
-[(Non-Fungible Token)][NFT]도 지원할 예정입니다.
+[<abbr title="non-fungible token">NFT</abbr>][NFT]도 지원할 예정입니다.
 
 [`BlockChain<T>.GetState()`]: https://docs.libplanet.io/0.10.2/api/Libplanet.Blockchain.BlockChain-1.html#Libplanet_Blockchain_BlockChain_1_GetState_Libplanet_Address_System_Nullable_Libplanet_HashDigest_SHA256___Libplanet_Blockchain_StateCompleter__0__
 [`IAccountStateDelta.GetState()`]: https://docs.libplanet.io/0.10.2/api/Libplanet.Action.IAccountStateDelta.html#Libplanet_Action_IAccountStateDelta_GetState_Libplanet_Address_
@@ -108,13 +112,13 @@ Merkle Patricia Trie (이하 MPT)는 Ethereum 등지에서 상태를 관리하�
 기존에는 액션의 결과를 화면 등에 반영하기 위해 액션 클래스에 [`Render()`]  메서드를
 구현해야 했습니다. 그러나 이러한 기존 API는 순수한 로직에 해당하는 액션 클래스에 뷰가 섞이게
 만드는 문제가 있었습니다. 예를 들어 같은 블록체인에 대해 3D 게임 엔진을 탑재한 풀 게임 프론트엔드와,
-간단한 알림 기능과 게임 내 자산만 보여주는 지갑 프론트엔드를 만드려고 하면, Render() 메서드에는
+간단한 알림 기능과 게임 내 자산만 보여주는 지갑 프론트엔드를 만드려고 하면, `Render()` 메서드에는
 양쪽에 필요한 모든 코드가 들어가거나, 콜백을 전역 상태로 두고 이를 호출하는 패턴을 따르게 됩니다.
 하나의 액션에 다양한 렌더링을 구현할 수 없기 때문입니다.
 
 이를 해결하기 위해 새 버전부터는 [`IAction`] 인터페이스에 `Render()` 및 [`Unrender()`]
 메서드가 사라지고, 대신 [`IRenderer<T>`] 및 그 서브타입인 [`IActionRenderer<T>`]
-인터페이스가 새롭게 생겼습니다. 프론트엔드는 각자를 위한 IRenderer<T> 또는 IActionRenderer<T> 구현을 갖고,
+인터페이스가 새롭게 생겼습니다. 프론트엔드는 각자를 위한 `IRenderer<T>` 또는 `IActionRenderer<T>` 구현을 갖고,
 이를 [`BlockChain<T>`] 객체 생성시에 연결하면 됩니다. 간단한 렌더링만이 필요할 때는 인터페이스를 구현하는
 클래스를 직접 짜는 대신, [`AnonymousRenderer<T>`] 클래스를 써보는 것을 추천합니다.[^1]
 또한, 새 렌더링 API는 [`IActionRenderer<T>.RenderActionError()`] 메서드를 통해 액션에서 난 예외를 다루거나,
@@ -157,19 +161,20 @@ Libplanet에서 모든 블록체인 내 상태는 액션을 통해서만 변경�
 따라서 블록체인 네트워크의 모든 노드가 일관된 상태를 합의하려면, 액션은 반드시 결정적(deterministic)이어야 합니다.
 그러나 아무리 어떠한 요소가 코드를 비결정적으로 만드는지 알고 있다고 하더라도, 복잡한 로직을 결정적으로 짜는 것은 쉽지 않습니다.
 알고도 실수할 수 있고, 여러 사람들이 함께 만지다보면 각자 수정한 부분은 결정적으로 보여도 다 합쳐놓고 보니 비결정적으로 되기도 쉽습니다.
-이러한 실수를 완화하기 위해, 새 버전부터는 Libplanet 액션 코드의 실수를 정적 분석으로 체크하는 Libplanet.Analyzers 패키지가 도입되었습니다.
+이러한 실수를 완화하기 위해, 새 버전부터는 Libplanet 액션 코드의 실수를 정적 분석으로 체크하는 [Libplanet.Analyzers 패키지]가 도입되었습니다.
 이 정적 분석기는 저희가 실제로 나인 크로니클을 개발하면서 반복적으로 만났던 실수들을 토대로 흔한 잠재적 버그들을 미리 경고해 줍니다.
 사용법은 아주 쉬운데, NuGet 패키지 의존성으로 추가하기만 하면 빌드할 때 C# 컴파일러 오류와 함께 경고로 출력됩니다.
 다만, 아직 초기 버전이기 때문에, 아직 체크의 수가 다양하지 않고, 또 사람이 보기에는 명백하게 바른 코드인데도 잠재적 버그로 경고하는 경우가 여전히 많습니다.
 이러한 부분들은 추후 버전에서 점진적으로 개선될 예정입니다.
 
-[정적 분석기]: https://github.com/planetarium/libplanet/tree/main/Libplanet.Analyzershttps://github.com/planetarium/libplanet/tree/main/Libplanet.Analyzers
+[Libplanet.Analyzers]: https://www.nuget.org/packages/Libplanet.Analyzers
+[정적 분석기]: https://github.com/planetarium/libplanet/tree/main/Libplanet.Analyzers
 
 블록당 바이트 사이즈 및 트랜잭션 수 제한
 ---------------------------------------
 이제까지 Libplanet은 한 블록의 용량이 아무리 크거나 트랜잭션이 아무리 많이 들어가도 이를 제한하지 않았습니다.
 그렇지만 이러한 제한이 없을 경우 악의적 공격에 노출되기 쉽고, 아무도 악의적이지 않더라도 너무 많은 트랜잭션을 한 블록에 담으려다 보니
-레이턴시가 지나치가 떨어지는 현상이 왕왕 발생했습니다.
+레이턴시가 지나치게 떨어지는 현상이 왕왕 발생했습니다.
 이를 완화하기 위해, 새 버전에서는 [`IBlockPolicy<T>`] 인터페이스에서 [`GetMaxBlockBytes()`] 메서드 및 [`MaxTransactionsPerBlock`] 속성을 통해
 블럭 하나에 최대 몇 바이트까지 차지할 수 있는지, 그리고 한 블럭에 최대 몇 개의 트랜잭션까지 수용할 수 있는지를 네트워크 단위로 설정 가능하게 됐습니다.
 마이너는 블록을 만들 때 설정된 수를 초과하지 않는 선에서 알아서 트랜잭션들을 나눠 담게 되며, 악의적인 노드가 네트워크 설정을 초과하는 블록을
