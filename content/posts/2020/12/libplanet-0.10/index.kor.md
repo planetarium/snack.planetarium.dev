@@ -27,20 +27,21 @@ Libplanet은 분산 P2P로 돌아가는 온라인 멀티플레이어 게임을 �
 그동안 [`Block<T>`] 는 해당 블록이 가지고 있는 상태에 대한 정보를 따로 들고 있지 않았습니다.
 따라서 상태에서 블록을 유도할 수는 있어도, 블록에서 상태의 정합성 등을 검증할 수 있는 방법은
 오직 액션을 직접 실행하는 방법 뿐이었습니다. 하지만 이제 [`Block<T>.Hash`] 는 해당 블록에 대한 정보 뿐만 아니라, 
-액션을 평가하고 나온 결과의 `Hash` 도 포함되어 유도됩니다. 이전과 같이 액션을 평가하지 않고 블록 정보만을 가진
-`Hash` 는 `Block<T>.PreEvaluationHash` 로 저장됩니다.
+액션을 평가하고 나온 결과의 해시값인 [`Block<T>.StateRootHash`] 도 포함되어 유도됩니다. 이전과 같이 액션을 평가하지 않고 블록 정보만을 가진
+해시값은 `Block<T>.PreEvaluationHash` 로 저장됩니다.
 
 [`Block<T>`]: https://docs.libplanet.io/0.10.2/api/Libplanet.Blocks.Block-1.html
 [Block<T>.PreEvaluationHash]: https://docs.libplanet.io/0.10.2/api/Libplanet.Blocks.Block-1.html#Libplanet_Blocks_Block_1_PreEvaluationHash
 [`Block<T>.Hash`]: https://docs.libplanet.io/0.10.2/api/Libplanet.Blocks.Block-1.html#Libplanet_Blocks_Block_1_Hash
+[`Block<T>.StateRootHash`]: https://docs.libplanet.io/0.10.2/api/Libplanet.Blocks.Block-1.html#Libplanet_Blocks_Block_1_StateRootHash
 
 [Block<T>.TotalDifficulty]
 ---------------------------
 
 그동안은 블록체인의 정본(正本, Canonical chain)을 고르는 데 [`Block<T>.Index`]가 사용되었습니다.
-하지만 이 방법은 리오그가 발생해도 블록 인덱스가 같은 경우가 자주 발생하여, 장기간 리오그가 일어나지 않다가
-한 번에 깊은 리오그가 발생하는 일이 잦았습니다. 따라서 저희는 `Block<T>.TotalDifficulty` 를 정본을 고르는 기준으로
-삼게 되었습니다.
+하지만 이 방법은 네트워크에 같은 인덱스지만 다른 블록이 비슷한 속도로 나오는 경우가 자주 발생하여, 장기간 리오그가 일어나지 않다가
+한 번에 깊은 리오그가 발생하는 일이 잦았습니다. 따라서 저희는 체인 내 모든 블록의 난이도 총 합인
+`Block<T>.TotalDifficulty` 를 정본을 고르는 기준으로 삼게 되었습니다.
 
 [Block<T>.TotalDifficulty]: https://docs.libplanet.io/0.10.2/api/Libplanet.Blocks.Block-1.html#Libplanet_Blocks_Block_1_TotalDifficulty
 [`Block<T>.Index`]: https://docs.libplanet.io/0.10.2/api/Libplanet.Blocks.Block-1.html#Libplanet_Blocks_Block_1_Index 
@@ -71,8 +72,8 @@ Merkle Patricia Trie (이하 MPT)는 Ethereum 등지에서 상태를 관리하�
 잔고에 돈을 더해주는 식의 코드만 짜도, 게임 전체의 경제상으로는 사실상 화폐를 사적으로 주조를 하는 것과 다름 없어집니다.
 
 이러한 실수들을 일찍부터 방지하기 위해, 이번 버전에서는 자산만을 다루기 위한 별도의 상태 API가 생겼습니다.
-기존의 [`BlockChain<T>.GetState()`] 메서드나 [`IAccountStateDelta.GetState()`] 메서드와 나란히 [`BlockChain<T>.GetBalance()`]
-메서드나 [`IAccountStateDelta.GetBalance()`] 메서드가 생겼고, 자유롭게 덮어 쓸 수 있는 [`IAccountStateDelta.SetState()`] 메서드와
+기존의 [`BlockChain<T>.GetState()`] / [`IAccountStateDelta.GetState()`] 메서드와 나란히 [`BlockChain<T>.GetBalance()`]
+/ [`IAccountStateDelta.GetBalance()`] 메서드가 생겼고, 상태를 자유롭게 덮어 쓸 수 있는 [`IAccountStateDelta.SetState()`] 메서드와
 달리 이체를 위한 [`IAccountStateDelta.TransferAsset()`]과 주조를 위한 [`IAccountStateDelta.MintAsset()`]등 용도별 메서드가 생겼습니다.
 
 또, 자산을 값으로 다룰 때도 .NET의 내장 정수 자료형을 쓰는 대신, Libplanet에 새롭게 더해진
@@ -80,7 +81,7 @@ Merkle Patricia Trie (이하 MPT)는 Ethereum 등지에서 상태를 관리하�
 몇 몇 부분에서 차이가 있습니다.
 
 1. 나눗셈을 할 때 나머지 값을 암시적으로 버리지 않고, 항상 나머지를 명시적으로 다뤄야 합니다.
-따라서 / 연산자를 구현하지 않고 [`DivRem()`] 메서드만 구현합니다.
+따라서 나눗셈 연산자(`/`)를 구현하지 않고 [`DivRem()`] 메서드만 구현합니다.
 2. 달러–센트 같이 하부 화폐 단위(minor currency units)를 지원하며, 하부 단위의 자릿수에 한계를 둡니다.
 3. 서로 통화끼리는 섞이지 않도록, 각 값의 화폐 단위를 보존합니다.
 마지막으로, 위의 3번을 구현하기 위해 화폐 단위를 정의하는 [`Currency`] 자료형이 생겼습니다.
@@ -144,9 +145,10 @@ Libplanet은 현재 종국성(finality)이 없는 작업 증명(PoW) 방식을 �
 컨펌 수가 높을 수록 리오그가 일어날 개연성이 떨어지기 때문입니다. 게임 내 행동의 결과가 리오그로 인해 너무 자주 변동될 경우 너무 혼란스러우므로,
 이를 완화하기 위해 지연 렌더러가 추가됐습니다. [`DelayedRenderer<T>`]는 `IRenderer<T>`를 입력으로 받으며 그 스스로도 `IRenderer<T>`를 구현하는 데코레이터로,
 이름처럼 렌더링 이벤트를 다소 지연시키는 미들웨어입니다. 블록체인에 새 블록이 쌓여도 바로 관련된 이벤트를 발생시키는 대신, 잠시 기다린 뒤 설정한 컨펌 수를 만족하게 되는 순간 이벤트를 발생시킵니다.
-나인 크로니클에서도 지연 렌더러를 쓰고 있으며, 컨펌 수는 플레이어가 설정 가능하게 옵션으로 제공하고 있습니다.[^3]
+[나인 크로니클]에서도 지연 렌더러를 쓰고 있으며, 컨펌 수는 플레이어가 설정 가능하게 옵션으로 제공하고 있습니다.[^3]
 
 [`DelayedRenderer<T>`]: https://docs.libplanet.io/0.10.2/api/Libplanet.Blockchain.Renderers.DelayedRenderer-1.html
+[나인 크로니클]: https://nine-chronicles.com/
 [^3]: 현재 UI로 설정 가능하지는 않지만, 설정 파일을 직접 고칠 수 있습니다.
 
 [정적 분석기]
@@ -181,7 +183,7 @@ Libplanet에서 모든 블록체인 내 상태는 액션을 통해서만 변경�
 
 그 외
 ----
-그 외에도 여러 성능 개선이나 자잘한 마이너 패치가 있었습니다. [전체 변경 내용] 에서 확인해 주세요.
+그 외에도 여러 성능 개선이나 자잘한 마이너 패치가 있었습니다. 자세한 내용은 [전체 변경 내용] 에서 확인해 주세요.
 
 질문이나 관심이 있으신 분들은 또한 저희 [Discord] 채널에 놀러와 주세요!
 
