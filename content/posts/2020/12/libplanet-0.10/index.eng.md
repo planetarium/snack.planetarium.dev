@@ -49,7 +49,7 @@ Separate State API for Assets
 
 So far, in-game goods have been treated in the same way as in-game states when creating games with Libplanet. For example, NCG (〈Nine Chronicles〉 Gold) is implemented as an integer data type value. Although such goods should never be replicated or destroyed carelessly, implementing them in a data type that is free of proprietary computation and doesn't necessarily hold the characteristics of the goods is prone to bugs.
 
-For instance, when money is transferred, the sender's balance should be reduced and the receipient's balance should be increased. However, bugs that skip updating either the sender's or the recipient's balance could possibly take place. Also, bugs that distribute the money to multiple people and bugs that unintentionally delete remaining amounts after division are also possible.
+For instance, when money is transferred, the sender's balance should be reduced and the recipient's balance should be increased. However, bugs that skip updating either the sender's or the recipient's balance could take place. Also, bugs that distribute the money to multiple people and bugs that unintentionally delete remaining amounts after division are possible.
 
 And even more critically, when a programmer carelessly writes a code that just adds money to players' balance as game reward, this could affect the game economy as a whole and is practically like casting money privately.
 
