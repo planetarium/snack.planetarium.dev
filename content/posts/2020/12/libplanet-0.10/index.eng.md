@@ -109,7 +109,7 @@ Since Libplanet currently uses a proof-of-work(PoW) method without finality, rec
 
 [`DelayedRenderer<T>`]: https://docs.libplanet.io/0.10.2/api/Libplanet.Blockchain.Renderers.DelayedRenderer-1.html
 [Nine Chronicles]: https://nine-chronicles.com/
-[^3]: The number of confirmations currently can't be adjusted on the UI, but it can be change directly in the configuration file.
+[^3]: The number of confirmations currently can't be adjusted on the UI, but it can be changed directly in the configuration file.
 
 [Static Analyzer]
 ------------------
