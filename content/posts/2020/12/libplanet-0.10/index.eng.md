@@ -117,7 +117,7 @@ In Libplanet, the state within all blockchain can only be changed through an act
 
 To address this issue, the new version introduces [Libplanet.Analyzers Package], which checks for errors in the Libplanet action code through static analysis. This static analyzer alerts you in advance to potential bugs that are common, based on repeated mistakes we've made in developing Nine Chronicles. It's very easy to use, just add it as a NuGet package dependency and it will output as a warning along with a C# compiler error when built.
 
-However, since it's still an early version, the number of checks is not diversified, and there are some potential bug warnings even though the code is written in the correct way. These will gradually be improved in future versions.
+However, since it's still an early version, the number of checks is not diversified, and there are some potential bug warnings even though the code is written correctly. These will gradually be improved in future versions.
 
 [Libplanet.Analyzers Package]: https://www.nuget.org/packages/Libplanet.Analyzers
 [Static Analyzer]: https://github.com/planetarium/libplanet/tree/main/Libplanet.Analyzers
