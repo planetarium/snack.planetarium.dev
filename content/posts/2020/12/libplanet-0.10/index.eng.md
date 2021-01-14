@@ -126,7 +126,7 @@ Byte Size and Number of Transactions per Block Limited
 --------------------------------------------------------
 Until now, Libplanet did not limit the block size or the number of transactions a block could take. Without this limitation, however, the network was open to malicious attacks and too many transactions contained in a single block often caused latency issues.
 
-To address this issue, the new version allows the [`GetMaxBlockBytes()`] method and [`MaxTransactionsPerBlock`] properties in the [`IBlockPolicy<T>`] interface to provide network settings that limits the block size and the maximum number of transactions per block. When the miner creates a block, it takes in the number of transactions limited by the network, and even if a malicious node creates and propagates blocks that exceed the network settings, other nodes will see the block as invalid.
+To address this issue, the new version allows the [`GetMaxBlockBytes()`] method and [`MaxTransactionsPerBlock`] properties in the [`IBlockPolicy<T>`] interface to provide network settings that limit the block size and the maximum number of transactions per block. When the miner creates a block, it takes in the number of transactions limited by the network, and even if a malicious node creates and propagates blocks that exceed the network settings, other nodes will see the block as invalid.
 
 Since optimal settings may vary depending on the network or application, it is recommended to adjust the settings by operating a pilot network during the development phase.
 
