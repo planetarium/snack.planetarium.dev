@@ -51,7 +51,7 @@ So far, in-game goods have been treated in the same way as in-game states when c
 
 For instance, when money is transferred, the sender's balance should be reduced and the recipient's balance should be increased. However, bugs that skip updating either the sender's or the recipient's balance could take place. Also, bugs that distribute the money to multiple people and bugs that unintentionally delete remaining amounts after division are possible.
 
-And even more critically, when a programmer carelessly writes a code that just adds money to players' balance as game reward, this could affect the game economy as a whole and is practically like casting money privately.
+And even more critically, when a programmer carelessly writes a code that just adds money to players' balance as a game reward, this could affect the game economy as a whole and is practically like casting money privately.
 
 To prevent these issues early on, this version has a separate state API for primarily dealing with assets. The [`BlockChain<T>.GetBalance()`] and [`IAccountStateDelta.GetBalance()`] methods are created alongside the existing [`BlockChain<T>.GetState()`] and [`IAccountStateDelta.GetState()`] methods. And in addition to the [`IAccountStateDelta.SetState()`] method which can freely update states, [`IAccountStateDelta.TransferAsset()`] method for transferring assets and [`IAccountStateDelta.MintAsset()`] method for minting assets have been created.
 
