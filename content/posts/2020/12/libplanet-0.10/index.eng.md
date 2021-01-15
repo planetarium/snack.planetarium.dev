@@ -40,7 +40,7 @@ Originally, the block height ([`Block<T>.Index`]) was the only criteria for sele
 <abbr title="Merkle–Patricia Trie">MPT</abbr>
 ----------------------------------------------
 
-<abbr title="Merkle–Patricia Trie">MPT</abbr> is a trie data structure used to store states in Ethereum, etc. Previously, the block state stored change in the global state on a block-by-block basis and it was retrieved by querying through an index called the state reference. This took a long time when looking up a state that had not been updated for a while. Now we can check the state much faster through the MPT structure.
+<abbr title="Merkle–Patricia Trie">MPT</abbr> is a trie data structure used to store states in Ethereum, etc. Previously, the block state stored changes in the global state on a block-by-block basis and it was retrieved by querying through an index called the state reference. This took a long time when looking up a state that had not been updated for a while. Now we can check the state much faster through the MPT structure.
 
 And to help with debugging, the newly added `planet mpt` command makes it easy to compare the status between blocks, or import the status from a specific block. Please refer to the `planet mpt --help` option for instructions on how to use it.
 
