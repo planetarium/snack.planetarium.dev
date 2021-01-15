@@ -101,7 +101,7 @@ Also, in the new rendering API, the [`IActionRenderer<T>.RenderActionError()`] m
 [`IRenderer<T>.RenderReorg()`]: https://docs.libplanet.io/0.10.2/api/Libplanet.Blockchain.Renderers.IRenderer-1.html#Libplanet_Blockchain_Renderers_IRenderer_1_RenderReorg_Libplanet_Blocks_Block__0__Libplanet_Blocks_Block__0__Libplanet_Blocks_Block__0__
 [`LoggedRenderer<T>`]: https://docs.libplanet.io/0.10.2/api/Libplanet.Blockchain.Renderers.LoggedRenderer-1.html
 [^1]: Unlike Java, C# doesn't have an anonymous class.
-[^2]: For more information on reorg, refer to Muhun Kim's [〈Decentralization Intersects with Online Game]({{< ref "../../10/decentralized-and-online-game-intersect/index.eng.md" >}}).
+[^2]: For more information on reorg, refer to Muhun Kim's [Decentralization Intersects with Online Game]({{< ref "../../10/decentralized-and-online-game-intersect/index.eng.md" >}}).
 
 Delayed Renderer
 ----------
