@@ -47,7 +47,7 @@ And to help with debugging, the newly added `planet mpt` command makes it easy t
 Separate State API for Assets
 ------------------------------
 
-So far, in-game goods have been treated in the same way as in-game states when creating games with Libplanet. For example, <abbr title="Nine Chronicles Gold">NCG</abbr> is implemented as an arbitrarily large integer. Although such goods should never be replicated or destroyed carelessly, implementing them in a data type that is free of proprietary computation and doesn't necessarily hold the characteristics of the goods is prone to bugs.
+So far, in-game goods have been treated the same way as in-game states when creating games with Libplanet. For example, <abbr title="Nine Chronicles Gold">NCG</abbr> is implemented as an arbitrarily large integer. Although such goods should never be replicated or destroyed carelessly, implementing them in a data type that is free of proprietary computation and doesn't necessarily hold the characteristics of the goods is prone to bugs.
 
 For instance, when money is transferred, the sender's balance should be reduced and the recipient's balance should be increased. However, bugs that skip updating either the sender's or the recipient's balance could take place. Also, bugs that distribute the money to multiple people and bugs that unintentionally delete remaining amounts after division are possible.
 
