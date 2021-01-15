@@ -63,7 +63,7 @@ Therefore, instead of implementing the division operator( `/`), only the [`DivRe
 3. It preserves the unit of currency of each value so that different currencies do not mix.
 To implement No.3 above, the data type [`Currency`] is created to define the monetary unit. Its property includes the name of the currency unit, ticker symbol, and the number of digits in the lower unit.
 
-Currently, asset state API only supports fungible assets such as game money, but it will also support Non-Fungible Assets([<abbr title="non-fungible token">NFT</abbr>][NFT]) such as game items in the future.
+Currently, asset state API only supports fungible assets such as game money, but it will also support [<abbr title="non-fungible token">NFT</abbr>][NFT] such as game items in the future.
 
 [`BlockChain<T>.GetState()`]: https://docs.libplanet.io/0.10.2/api/Libplanet.Blockchain.BlockChain-1.html#Libplanet_Blockchain_BlockChain_1_GetState_Libplanet_Address_System_Nullable_Libplanet_HashDigest_SHA256___Libplanet_Blockchain_StateCompleter__0__
 [`IAccountStateDelta.GetState()`]: https://docs.libplanet.io/0.10.2/api/Libplanet.Action.IAccountStateDelta.html#Libplanet_Action_IAccountStateDelta_GetState_Libplanet_Address_
