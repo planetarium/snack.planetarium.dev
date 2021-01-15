@@ -58,7 +58,7 @@ To prevent these issues early on, this version has a separate state API for prim
 Also, instead of using .NET's built-in [`BigInteger`] type, you need to use the new [`FungibleAssetValue`] type added to Libplanet. `FungibleAssetValue` basically looks like a [`BigInteger`], but there are some differences.
 
 1. In division, the remaining values are never implicitly discarded and are always treated explicitly.
-Therefore, instead of implementing the division operator(`/`), only the [`DivRem()`] method is implemented.
+Therefore, instead of implementing the division operator( `/`), only the [`DivRem()`] method is implemented.
 2. It supports minor currency units, such as dollar–cent, and limits the number of digits in the lower unit.
 3. It preserves the unit of currency of each value so that different currencies do not mix.
 To implement No.3 above, the data type [`Currency`] is created to define the monetary unit. Its property includes the name of the currency unit, ticker symbol, and the number of digits in the lower unit.
