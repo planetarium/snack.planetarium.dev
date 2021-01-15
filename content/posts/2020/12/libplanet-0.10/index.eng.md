@@ -73,7 +73,7 @@ Currently, asset state API only supports fungible assets such as game money, but
 [`IAccountStateDelta.TransferAsset()`]: https://docs.libplanet.io/0.10.2/api/Libplanet.Action.IAccountStateDelta.html#Libplanet_Action_IAccountStateDelta_SetState_Libplanet_Address_IValue_
 [`IAccountStateDelta.MintAsset()`]: https://docs.libplanet.io/0.10.2/api/Libplanet.Action.IAccountStateDelta.html#Libplanet_Action_IAccountStateDelta_MintAsset_Libplanet_Address_Libplanet_Assets_FungibleAssetValue_
 [`FungibleAssetValue`]: https://docs.libplanet.io/0.10.2/api/Libplanet.Assets.FungibleAssetValue.html
-[`BigInteger`]: https://docs.microsoft.com/ko-kr/dotnet/api/system.numerics.biginteger?view=net-5.0
+[`BigInteger`]: https://docs.microsoft.com/en-us/dotnet/api/system.numerics.biginteger?view=net-5.0
 [`DivRem()`]: https://docs.libplanet.io/0.10.2/api/Libplanet.Assets.FungibleAssetValue.html#Libplanet_Assets_FungibleAssetValue_DivRem_Libplanet_Assets_FungibleAssetValue_
 [`Currency`]: https://docs.libplanet.io/0.10.2/api/Libplanet.Assets.Currency.html
 [NFT]: https://en.wikipedia.org/wiki/Non-fungible_token
