@@ -55,7 +55,7 @@ And even more critically, when a programmer carelessly writes a code that just a
 
 To prevent these issues early on, this version has a separate state API for primarily dealing with assets. The [`BlockChain<T>.GetBalance()`] and [`IAccountStateDelta.GetBalance()`] methods are created alongside the existing [`BlockChain<T>.GetState()`] and [`IAccountStateDelta.GetState()`] methods. And in addition to the [`IAccountStateDelta.SetState()`] method which can freely update states, [`IAccountStateDelta.TransferAsset()`] method for transferring assets and [`IAccountStateDelta.MintAsset()`] method for minting assets have been created.
 
-Also, instead of using .NET's built-in integer data type, you need to use the new [`FungibleAssetValue`] data type added to Libplanet. `FungibleAssetValue` basically looks like a [`BigInteger`], but there are some differences.
+Also, instead of using .NET's built-in [`BigInteger`] type, you need to use the new [`FungibleAssetValue`] type added to Libplanet. `FungibleAssetValue` basically looks like a [`BigInteger`], but there are some differences.
 
 1. In division, the remaining values are never implicitly discarded and are always treated explicitly.
 Therefore, instead of implementing the division operator(`/`), only the [`DivRem()`] method is implemented.
