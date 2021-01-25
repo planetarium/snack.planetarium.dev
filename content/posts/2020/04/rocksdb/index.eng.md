@@ -33,7 +33,7 @@ To resolve this issue, we used a method of modifying [rpath] in the RocksDB dyna
 
 ~~~~ bash
 # macOS
-$ install_name_tool -add-rpath '@loader_path' librocksdb.dylib
+$ install_name_tool -add_rpath '@loader_path' librocksdb.dylib
 
 # linux
 $ patchelf --set-rpath $ORIGIN librocksdb.so
