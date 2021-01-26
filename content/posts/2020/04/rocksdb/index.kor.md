@@ -30,7 +30,7 @@ RocksDB는 압축이나 메모리 할당을 위해 또다른 라이브러리들�
 
 ~~~~ bash
 # macOS
-$ install_name_tool -add-rpath '@loader_path' librocksdb.dylib
+$ install_name_tool -add_rpath '@loader_path' librocksdb.dylib
 
 # linux
 $ patchelf --set-rpath $ORIGIN librocksdb.so
