@@ -1,0 +1,815 @@
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><title>Planetarium Engineering Snack</title><link rel="self" href="https://snack.planetarium.dev/eng/index.xml"/><link rel="alternate" href="https://snack.planetarium.dev/eng/" title="Planetarium Engineering Snack"/><link rel="alternate" href="https://snack.planetarium.dev/kor/" hreflang="ko" title="플라네타리움 엔지니어링 스낵"/><updated>2020-12-08T00:00:00+00:00</updated><id>https://snack.planetarium.dev/eng/</id><entry><title>Libplanet 0.10 Released</title><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/12/libplanet-0.10/" title="Libplanet 0.10 Released"/><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/12/libplanet-0.10/" hreflang="ko" title="Libplanet 0.10 릴리스"/><id>https://snack.planetarium.dev/eng/2020/12/libplanet-0.10/</id><published>2020-12-08T00:00:00+00:00</published><updated>2020-12-08T00:00:00+00:00</updated><content type="html">&lt;p>Hello Everyone! We have released the tenth minor version of &lt;a href="https://libplanet.io/">Libplanet&lt;/a>, &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.10.0">Version 0.10&lt;/a>.&lt;/p>
+&lt;p>Libplanet is a common library that solves game implementation problems such as P2P communication and data synchronization when creating online multiplayer games that run on distributed P2P.&lt;/p>
+&lt;p>In this version, Libplanet has made many changes both inside and outside the interface, including the use of &lt;a href="https://eth.wiki/en/fundamentals/patricia-tree">&lt;abbr title="Merkle–Patricia Trie">MPT&lt;/abbr>&lt;/a> to manage Libplanet&amp;rsquo;s state and additional APIs for asset management.&lt;/p>
+&lt;p>This piece addresses key major changes in Version 0.10.&lt;/p>
+&lt;h2 id="result-state-is-now-included-in-blockthash">Result State is Now Included in &lt;a href="https://docs.libplanet.io/0.10.2/api/Libplanet.Blocks.Block-1.html#Libplanet_Blocks_Block_1_Hash">&lt;code>Block&amp;lt;T&amp;gt;.Hash&lt;/code>&lt;/a>&lt;/h2>
+&lt;p>Until now, &lt;a href="https://docs.libplanet.io/0.10.2/api/Libplanet.Blocks.Block-1.html">&lt;code>Block&amp;lt;T&amp;gt;&lt;/code>&lt;/a> did not have any information about the state of the block. And while you could derive the state from the block itself, the only way to verify the consistency of the block&amp;rsquo;s state was to run the action directly. However, &lt;code>Block&amp;lt;T&amp;gt;.Hash&lt;/code> is now derived not only with information about the block, but also with &lt;a href="https://docs.libplanet.io/0.10.2/api/Libplanet.Blocks.Block-1.html#Libplanet_Blocks_Block_1_StateRootHash">&lt;code>Block&amp;lt;T&amp;gt;.StateRootHash&lt;/code>&lt;/a>, which is the hash value of the evaluated actions in the block. As before, the hash value without the evaluated actions is placed in the &lt;a href="https://docs.libplanet.io/0.10.2/api/Libplanet.Blocks.Block-1.html#Libplanet_Blocks_Block_1_PreEvaluationHash">&lt;code>Block&amp;lt;T&amp;gt;.PreEvaluationHash&lt;/code>&lt;/a> property.&lt;/p>
+&lt;h2 id="blockttotaldifficulty">&lt;a href="https://docs.libplanet.io/0.10.2/api/Libplanet.Blocks.Block-1.html#Libplanet_Blocks_Block_1_TotalDifficulty">&lt;code>Block&amp;lt;T&amp;gt;.TotalDifficulty&lt;/code>&lt;/a>&lt;/h2>
+&lt;p>Originally, the block height (&lt;a href="https://docs.libplanet.io/0.10.2/api/Libplanet.Blocks.Block-1.html#Libplanet_Blocks_Block_1_Index">&lt;code>Block&amp;lt;T&amp;gt;.Index&lt;/code>&lt;/a>) was the only criteria for selecting a canonical chain in the blockchain. However, since it is common for a network to have multiple blocks of the same height at a similar rate, agreements were often only made locally, causing the canonical chain to be indeterministic. To fix this ambiguity, the new version includes &lt;a href="https://docs.libplanet.io/0.10.2/api/Libplanet.Blocks.Block-1.html#Libplanet_Blocks_Block_1_TotalDifficulty">&lt;code>Block&amp;lt;T&amp;gt;.TotalDifficulty&lt;/code>&lt;/a> in the selection criteria to always have one option for the canonical chain. &lt;code>Block&amp;lt;T&amp;gt;.TotalDifficulty&lt;/code> property is the difficulty level of all blocks from itself to the genesis block. This has also improved security to some level because you can&amp;rsquo;t force your chain as canonical simply by quickly stacking low-difficulty blocks.&lt;/p>
+&lt;h2 id="abbr-titlemerklepatricia-triemptabbr">&lt;abbr title="Merkle–Patricia Trie">MPT&lt;/abbr>&lt;/h2>
+&lt;p>&lt;abbr title="Merkle–Patricia Trie">MPT&lt;/abbr> is a trie data structure used to store states in Ethereum, etc. Previously, the block state stored changes in the global state on a block-by-block basis and it was retrieved by querying through an index called the state reference. This took a long time when looking up a state that had not been updated for a while. Now we can check the state much faster through the MPT structure.&lt;/p>
+&lt;p>And to help with debugging, the newly added &lt;code>planet mpt&lt;/code> command makes it easy to compare states between blocks, or import them from specific block. Please refer to the &lt;code>planet mpt --help&lt;/code> option for instructions on how to use it.&lt;/p>
+&lt;h2 id="separate-state-api-for-assets">Separate State API for Assets&lt;/h2>
+&lt;p>So far, in-game goods have been treated the same way as in-game states when creating games with Libplanet. For example, &lt;abbr title="Nine Chronicles Gold">NCG&lt;/abbr> is implemented as an arbitrarily large integer. Although such goods should never be replicated or destroyed carelessly, implementing them in a data type that is free of proprietary computation and doesn&amp;rsquo;t necessarily hold the characteristics of the goods is prone to bugs.&lt;/p>
+&lt;p>For instance, when money is transferred, the sender&amp;rsquo;s balance should be reduced and the recipient&amp;rsquo;s balance should be increased. However, bugs that skip updating either the sender&amp;rsquo;s or the recipient&amp;rsquo;s balance could take place. Also, bugs that distribute the money to multiple people and bugs that unintentionally delete remaining amounts after division are possible.&lt;/p>
+&lt;p>And even more critically, when a programmer carelessly writes a code that just adds money to players&amp;rsquo; balance as a game reward, this could affect the game economy as a whole and is practically like casting money privately.&lt;/p>
+&lt;p>To prevent these issues early on, this version has a separate state API for primarily dealing with assets. The &lt;a href="https://docs.libplanet.io/0.10.2/api/Libplanet.Blockchain.BlockChain-1.html#Libplanet_Blockchain_BlockChain_1_GetBalance_Libplanet_Address_Libplanet_Assets_Currency_System_Nullable_Libplanet_HashDigest_SHA256___Libplanet_Blockchain_FungibleAssetStateCompleter__0__">&lt;code>BlockChain&amp;lt;T&amp;gt;.GetBalance()&lt;/code>&lt;/a> and &lt;a href="https://docs.libplanet.io/0.10.2/api/Libplanet.Action.IAccountStateDelta.html#Libplanet_Action_IAccountStateDelta_GetBalance_Libplanet_Address_Libplanet_Assets_Currency_">&lt;code>IAccountStateDelta.GetBalance()&lt;/code>&lt;/a> methods are created alongside the existing &lt;a href="https://docs.libplanet.io/0.10.2/api/Libplanet.Blockchain.BlockChain-1.html#Libplanet_Blockchain_BlockChain_1_GetState_Libplanet_Address_System_Nullable_Libplanet_HashDigest_SHA256___Libplanet_Blockchain_StateCompleter__0__">&lt;code>BlockChain&amp;lt;T&amp;gt;.GetState()&lt;/code>&lt;/a> and &lt;a href="https://docs.libplanet.io/0.10.2/api/Libplanet.Action.IAccountStateDelta.html#Libplanet_Action_IAccountStateDelta_GetState_Libplanet_Address_">&lt;code>IAccountStateDelta.GetState()&lt;/code>&lt;/a> methods. And in addition to the &lt;a href="https://docs.libplanet.io/0.10.2/api/Libplanet.Action.IAccountStateDelta.html#Libplanet_Action_IAccountStateDelta_SetState_Libplanet_Address_IValue_">&lt;code>IAccountStateDelta.SetState()&lt;/code>&lt;/a> method which can freely update states, &lt;a href="https://docs.libplanet.io/0.10.2/api/Libplanet.Action.IAccountStateDelta.html#Libplanet_Action_IAccountStateDelta_SetState_Libplanet_Address_IValue_">&lt;code>IAccountStateDelta.TransferAsset()&lt;/code>&lt;/a> method for transferring assets and &lt;a href="https://docs.libplanet.io/0.10.2/api/Libplanet.Action.IAccountStateDelta.html#Libplanet_Action_IAccountStateDelta_MintAsset_Libplanet_Address_Libplanet_Assets_FungibleAssetValue_">&lt;code>IAccountStateDelta.MintAsset()&lt;/code>&lt;/a> method for minting assets have been created.&lt;/p>
+&lt;p>Also, instead of using .NET&amp;rsquo;s built-in &lt;a href="https://docs.microsoft.com/en-us/dotnet/api/system.numerics.biginteger?view=net-5.0">&lt;code>BigInteger&lt;/code>&lt;/a> type, you need to use the new &lt;a href="https://docs.libplanet.io/0.10.2/api/Libplanet.Assets.FungibleAssetValue.html">&lt;code>FungibleAssetValue&lt;/code>&lt;/a> type added to Libplanet. &lt;code>FungibleAssetValue&lt;/code> basically looks like a &lt;a href="https://docs.microsoft.com/en-us/dotnet/api/system.numerics.biginteger?view=net-5.0">&lt;code>BigInteger&lt;/code>&lt;/a>, but there are some differences.&lt;/p>
+&lt;ol>
+&lt;li>In division, the remaining values are never implicitly discarded and are always treated explicitly.
+Therefore, instead of implementing the division operator( &lt;code>/&lt;/code>), only the &lt;a href="https://docs.libplanet.io/0.10.2/api/Libplanet.Assets.FungibleAssetValue.html#Libplanet_Assets_FungibleAssetValue_DivRem_Libplanet_Assets_FungibleAssetValue_">&lt;code>DivRem()&lt;/code>&lt;/a> method is implemented.&lt;/li>
+&lt;li>It supports minor currency units, such as dollar–cent, and limits the number of digits in the lower unit.&lt;/li>
+&lt;li>It preserves the unit of currency of each value so that different currencies do not mix.
+To implement No.3 above, the data type &lt;a href="https://docs.libplanet.io/0.10.2/api/Libplanet.Assets.Currency.html">&lt;code>Currency&lt;/code>&lt;/a> is created to define the monetary unit. Its property includes the name of the currency unit, ticker symbol, and the number of digits in the lower unit.&lt;/li>
+&lt;/ol>
+&lt;p>Currently, asset state API only supports fungible assets such as game money, but it will also support &lt;a href="https://en.wikipedia.org/wiki/Non-fungible_token">&lt;abbr title="non-fungible token">NFT&lt;/abbr>&lt;/a> such as game items in the future.&lt;/p>
+&lt;h2 id="new-rendering-api">New Rendering API&lt;/h2>
+&lt;p>Previously, the action class had to implement the &lt;a href="https://docs.libplanet.io/0.9.2/api/Libplanet.Action.IAction.html#Libplanet_Action_IAction_Render_Libplanet_Action_IActionContext_Libplanet_Action_IAccountStateDelta_">&lt;code>Render()&lt;/code>&lt;/a> method to reflect the result of the action on the screen. However, this previous API caused the view to mix into the action class that corresponded to pure logic.&lt;/p>
+&lt;p>For example, if you try to create a full game frontend with a 3D game engine and a wallet frontend that only shows simple notification and in-game assets based on the same blockchain, the &lt;code>Render()&lt;/code> method either contains all the code required on both sides or follows the call pattern that places the callback in the global state. This is because a single action cannot implement various renderings.&lt;/p>
+&lt;p>To address this problem, the new version eliminates the &lt;code>Render()&lt;/code> and &lt;a href="https://docs.libplanet.io/0.9.2/api/Libplanet.Action.IAction.html#Libplanet_Action_IAction_Unrender_Libplanet_Action_IActionContext_Libplanet_Action_IAccountStateDelta_">&lt;code>Unrender()&lt;/code>&lt;/a> methods in the &lt;a href="https://docs.libplanet.io/0.9.2/api/Libplanet.Action.IAction.html">&lt;code>IAction&lt;/code>&lt;/a> interface, and instead introduces a new &lt;a href="https://docs.libplanet.io/0.10.2/api/Libplanet.Blockchain.Renderers.IRenderer-1.html">&lt;code>IRenderer&amp;lt;T&amp;gt;&lt;/code>&lt;/a> interface and its subtype &lt;a href="https://docs.libplanet.io/0.10.2/api/Libplanet.Blockchain.Renderers.IActionRenderer-1.html">&lt;code>IActionRenderer&amp;lt;T&amp;gt;&lt;/code>&lt;/a>. The frontend has its own implementation of &lt;code>IRenderer&amp;lt;T&amp;gt;&lt;/code> or &lt;code>IActionRenderer&amp;lt;T&amp;gt;&lt;/code>, and they can be connected at creation of the &lt;a href="https://docs.libplanet.io/0.10.2/api/Libplanet.Blockchain.BlockChain-1.html">&lt;code>BlockChain&amp;lt;T&amp;gt;&lt;/code>&lt;/a> object.&lt;/p>
+&lt;p>When you only need a simple rendering, we recommend that you use the &lt;a href="https://docs.libplanet.io/0.10.2/api/Libplanet.Blockchain.Renderers.AnonymousRenderer-1.html">&lt;code>AnonymousRenderer&amp;lt;T&amp;gt;&lt;/code>&lt;/a> class instead of creating your own class that implements the interface.&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>
+Also, in the new rendering API, the &lt;a href="https://docs.libplanet.io/0.10.2/api/Libplanet.Blockchain.Renderers.IActionRenderer-1.html#Libplanet_Blockchain_Renderers_IActionRenderer_1_RenderActionError_Libplanet_Action_IAction_Libplanet_Action_IActionContext_Exception_">&lt;code>IActionRenderer&amp;lt;T&amp;gt;.RenderActionError()&lt;/code>&lt;/a> method addresses exceptions from actions, the &lt;a href="https://docs.libplanet.io/0.10.2/api/Libplanet.Blockchain.Renderers.IRenderer-1.html#Libplanet_Blockchain_Renderers_IRenderer_1_RenderBlock_Libplanet_Blocks_Block__0__Libplanet_Blocks_Block__0__">&lt;code>IRenderer&amp;lt;T&amp;gt;.RenderBlock()&lt;/code>&lt;/a> method detects the height change in the blockchain, and the &lt;a href="https://docs.libplanet.io/0.10.2/api/Libplanet.Blockchain.Renderers.IRenderer-1.html#Libplanet_Blockchain_Renderers_IRenderer_1_RenderReorg_Libplanet_Blocks_Block__0__Libplanet_Blocks_Block__0__Libplanet_Blocks_Block__0__">&lt;code>IRenderer&amp;lt;T&amp;gt;.RenderReorg()&lt;/code>&lt;/a> method detects the occurrence of a reorg&lt;sup id="fnref:2">&lt;a href="#fn:2" class="footnote-ref" role="doc-noteref">2&lt;/a>&lt;/sup>. The separation of the rendering code from the action into an independent unit called renderer allows middleware structure through decorator pattern. For example, the new version&amp;rsquo;s &lt;a href="https://docs.libplanet.io/0.10.2/api/Libplanet.Blockchain.Renderers.LoggedRenderer-1.html">&lt;code>LoggedRenderer&amp;lt;T&amp;gt;&lt;/code>&lt;/a> class wraps other &lt;code>IRenderer&amp;lt;T&amp;gt;&lt;/code> implementations and logs which rendering events occurred at what point. When debugging, you can wrap the game renderer with &lt;code>LoggedRenderer&amp;lt;T&amp;gt;&lt;/code> and take it out in the actual production.&lt;/p>
+&lt;h2 id="delayed-renderer">Delayed Renderer&lt;/h2>
+&lt;p>Since Libplanet currently uses a &lt;abbr title="proof-of-work">PoW&lt;/abbr> mechanism which has only &lt;em>probabilistic&lt;/em> finality, recent blocks are prone to reorg. For this reason, many cryptocurrency wallets and exchanges often show transactions&amp;rsquo; number of confirmations because the higher the number of confirmations, the less likely a reorg occurs. In order to prevent confusion in the game due to frequent reorg in the blockchain, a delayed renderer has been added. &lt;a href="https://docs.libplanet.io/0.10.2/api/Libplanet.Blockchain.Renderers.DelayedRenderer-1.html">&lt;code>DelayedRenderer&amp;lt;T&amp;gt;&lt;/code>&lt;/a> is a decorator that receives &lt;code>IRenderer&amp;lt;T&amp;gt;&lt;/code> as an input and implements &lt;code>IRenderer&amp;lt;T&amp;gt;&lt;/code> on its own, virtually acting as a middleware that delays rendering events. So instead of immediately generating related events when new blocks are stacked in the blockchain, the delayed renderer waits until it meets the number of confirmations you have set. &lt;a href="https://nine-chronicles.com/">Nine Chronicles&lt;/a> also uses a delayed renderer, and the number of confirmations is available as an option for the player to set.&lt;sup id="fnref:3">&lt;a href="#fn:3" class="footnote-ref" role="doc-noteref">3&lt;/a>&lt;/sup>&lt;/p>
+&lt;h2 id="static-analyzer">&lt;a href="https://github.com/planetarium/libplanet/tree/main/Libplanet.Analyzers">Static Analyzer&lt;/a>&lt;/h2>
+&lt;p>In Libplanet, the state within all blockchain can only be changed through an action. Because actions are executed separately on each node to derive a new state from the previous state and all nodes need to agree on a consistent state, an action must be deterministic. However, despite knowing what makes the code non-deterministic, it&amp;rsquo;s not that simple to make a complex logic deterministic. You can make mistakes knowingly, and especially when multiple people work on the code, each deterministic portion implemented by different people can easily be combined to derive a non-deterministic result.&lt;/p>
+&lt;p>To address this issue, the new version introduces &lt;a href="https://www.nuget.org/packages/Libplanet.Analyzers">Libplanet.Analyzers Package&lt;/a>, which checks for errors in the Libplanet action code through static analysis. This static analyzer alerts you in advance to potential bugs that are common, based on repeated mistakes we&amp;rsquo;ve made in developing Nine Chronicles. It&amp;rsquo;s very easy to use, just add it as a NuGet package dependency and it will output as a warning along with a C# compiler error when built.&lt;/p>
+&lt;p>However, since it&amp;rsquo;s still an early version, the number of checks is not diversified, and there are some potential bug warnings even though the code is written correctly. These will gradually be improved in future versions.&lt;/p>
+&lt;h2 id="byte-size-and-number-of-transactions-per-block-limited">Byte Size and Number of Transactions per Block Limited&lt;/h2>
+&lt;p>Until now, Libplanet did not limit the block size or the number of transactions a block could take. Without this limitation, however, the network was open to malicious attacks and too many transactions contained in a single block often caused latency issues.&lt;/p>
+&lt;p>To address this issue, the new version allows the &lt;a href="https://docs.libplanet.io/0.10.2/api/Libplanet.Blockchain.Policies.IBlockPolicy-1.html#Libplanet_Blockchain_Policies_IBlockPolicy_1_GetMaxBlockBytes_System_Int64_">&lt;code>GetMaxBlockBytes()&lt;/code>&lt;/a> method and &lt;a href="https://docs.libplanet.io/0.10.2/api/Libplanet.Blockchain.Policies.IBlockPolicy-1.html#Libplanet_Blockchain_Policies_IBlockPolicy_1_MaxTransactionsPerBlock">&lt;code>MaxTransactionsPerBlock&lt;/code>&lt;/a> properties in the &lt;a href="https://docs.libplanet.io/0.10.2/api/Libplanet.Blockchain.Policies.IBlockPolicy-1.html">&lt;code>IBlockPolicy&amp;lt;T&amp;gt;&lt;/code>&lt;/a> interface to provide network settings that limit the block size and the maximum number of transactions per block. When the miner creates a block, it takes in the number of transactions limited by the network, and even if a malicious node creates and propagates blocks that exceed the network settings, other nodes will see the block as invalid.&lt;/p>
+&lt;p>Since optimal settings may vary depending on the network or application, it is recommended to adjust the settings by operating a pilot network during the development phase.&lt;/p>
+&lt;h2 id="furthermore">Furthermore&lt;/h2>
+&lt;p>You can learn more about additional changes in our &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.10.0">release notes&lt;/a>.&lt;/p>
+&lt;p>And as always, if you have any questions about the new release or Libplanet in general, please visit our &lt;a href="https://discord.gg/planetarium">Discord chatroom&lt;/a> and let’s chat!&lt;/p>
+&lt;section class="footnotes" role="doc-endnotes">
+&lt;hr>
+&lt;ol>
+&lt;li id="fn:1" role="doc-endnote">
+&lt;p>Unlike Java, C# doesn&amp;rsquo;t have an anonymous class. &lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li id="fn:2" role="doc-endnote">
+&lt;p>For more information on reorg, refer to Muhun Kim&amp;rsquo;s &lt;a href="https://snack.planetarium.dev/eng/2020/10/decentralized-and-online-game-intersect/">Decentralization Intersects with Online Game&lt;/a>. &lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li id="fn:3" role="doc-endnote">
+&lt;p>The number of confirmations currently can&amp;rsquo;t be adjusted on the UI, but it can be changed directly in the configuration file. &lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;/section></content><author><name>Suho Lee</name><uri>https://github.com/riemannulus</uri><email>suho@planetariumhq.com</email></author></entry><entry><title>Decentralization Intersects with Online Game</title><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/10/decentralized-and-online-game-intersect/" title="Decentralization Intersects with Online Game"/><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/10/decentralized-and-online-game-intersect/" hreflang="ko" title="탈중앙과 온라인 게임이 교차하다"/><id>https://snack.planetarium.dev/eng/2020/10/decentralized-and-online-game-intersect/</id><published>2020-10-08T00:00:00+00:00</published><updated>2020-10-08T00:00:00+00:00</updated><content type="html">&lt;p>Hello all! I&amp;rsquo;m Muhun Kim, an engineering intern at Planetarium for the past two months. I was involved in the beta process prior to the launch of &lt;a href="https://nine-chronicles.com">Nine Chronicles&lt;/a>.&lt;/p>
+&lt;p>In this post, I’d like to introduce a technical example that I thought was unique when combining blockchain and games.&lt;/p>
+&lt;h2 id="decentralization">Decentralization&lt;/h2>
+&lt;p>Online games use servers to operate services, such as multi-play and user data. However, if services go down for a number of reasons, such as when game companies shut down, you will no longer be able to play the games.&lt;/p>
+&lt;p>If everyone can divide online game services and maintain them, people won’t need to worry about shutting down as long as players keep playing. Decentralization, which fits this concept, means sharing the role of traditional central servers with fellow users. You&amp;rsquo;ve probably heard of &lt;abbr title="Peer to peer">P2P&lt;/abbr> or distributed technology at least once.&lt;/p>
+&lt;h2 id="chain-reorganization">Chain Reorganization&lt;/h2>
+&lt;p>Planetarium utilizes blockchain among many decentralized technologies to preserve data such as game assets, user items, and quests achieved.&lt;/p>
+&lt;p>Meanwhile, when you store game data in the blockchain, sometimes the information reverts back a few hours. This is a known defect called &lt;dfn>reorganization&lt;/dfn> in the blockchain network.&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup> In the blockchain community, this is called &lt;dfn>reorg&lt;/dfn> for short. I’ll also refer to this concept as reorg.&lt;/p>
+&lt;figure>
+&lt;img src="images/single-chain.png"
+alt="Blocks connected in order are called a chain."/> &lt;figcaption>
+&lt;p>Blocks connected in order are called a chain.&lt;/p>
+&lt;/figcaption>
+&lt;/figure>
+&lt;p>Before explaining reorg, I’d like to point out that a blockchain network always points to a single chain as its original copy.&lt;/p>
+&lt;p>Blocks in a blockchain can be created by anyone. However, if nodes&lt;sup id="fnref:2">&lt;a href="#fn:2" class="footnote-ref" role="doc-noteref">2&lt;/a>&lt;/sup> create blocks simultaneously, multiple chains with the same beginning but different ends appear. If so, how can we adopt a chain as the original even though there’s no central figure to decide?&lt;/p>
+&lt;figure>
+&lt;img src="images/orphaned-block.png"
+alt="At similar points in time, the chain with more resources used will be adopted."/> &lt;figcaption>
+&lt;p>At similar points in time, the chain with more resources used will be adopted.&lt;/p>
+&lt;/figcaption>
+&lt;/figure>
+&lt;p>Instead of choosing its own chain, each node chooses the chain that best fits the rule shared by all nodes. The &lt;abbr title="proof-of-work">PoW&lt;/abbr> approach used by Nine Chronicles and Libplanet, adopts the chain with more resources invested in among blocks created at a similar time.&lt;/p>
+&lt;figure>
+&lt;img src="images/orphaned-blocks.png"
+alt="The blue chain with 5 blocks, is reorg-ed to red blocks. (Deep Reorg)"/> &lt;figcaption>
+&lt;p>The blue chain with 5 blocks, is reorg-ed to red blocks. (Deep Reorg)&lt;/p>
+&lt;/figcaption>
+&lt;/figure>
+&lt;p>But when another chain that better meets this rule than the adopted chain appears in the network, the network will adopt the new chain which will cause a flip.&lt;/p>
+&lt;p>Normally, a shallow reorg occurs with one or two blocks, but if the depth of divided blocks is greater than a certain number, a deep reorg occurs. For example:&lt;/p>
+&lt;ol>
+&lt;li>Chains are divided at A and B and broadcasted to other nodes.&lt;/li>
+&lt;li>The number of nodes that either received chain at A or B increases at a similar rate and the length of the chain increases.&lt;/li>
+&lt;li>All nodes have adopted either chain at A or B, and because the chain at A is longer than B, the rate of adoption is higher.&lt;/li>
+&lt;li>All nodes that have adopted chain at B will be reorg-ed to A.&lt;/li>
+&lt;/ol>
+&lt;style>
+@media screen and (min-width: 70em) {
+img[src="images/bug-report.png"] {
+width: 60%
+}
+}
+&lt;/style>
+&lt;figure>
+&lt;img src="images/bug-report.png"
+alt="A user who owned 10,000 gold yesterday reported having less than 1,000 gold."/> &lt;figcaption>
+&lt;p>A user who owned 10,000 gold yesterday reported having less than 1,000 gold.&lt;/p>
+&lt;/figcaption>
+&lt;/figure>
+&lt;p>So, as I have said earlier, it&amp;rsquo;s been often mentioned in the Nine Chronicles community that the level and items users originally had ended up reverting back to what they were a few minutes or hours ago due to reorg.&lt;sup id="fnref:3">&lt;a href="#fn:3" class="footnote-ref" role="doc-noteref">3&lt;/a>&lt;/sup> Because this occurs on a decentralized network, players unfortunately can&amp;rsquo;t ask a central operator(i.e. game company) to restore it.&lt;/p>
+&lt;h2 id="blockchain-network-reset">Blockchain Network Reset&lt;/h2>
+&lt;p>Nine Chronicles has reset its blockchain network seven times during the beta period. When the network is reset, all players’ game data becomes reset as well. Here’s the reason why the reset was carried out despite certain risks:&lt;/p>
+&lt;p>The blockchain network core &lt;a href="https://libplanet.io/">Libplanet&lt;/a> stores the state of the game in blocks. Player’s behavior is stored with a data structure called &lt;a href="https://docs.libplanet.io/0.9.5/api/Libplanet.Action.IAction.html">Action&lt;/a>.&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#fff">&lt;code class="language-json" data-lang="json">{
+&lt;span style="color:#b06;font-weight:bold">&amp;#34;stageId&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;123&amp;#34;&lt;/span>,
+&lt;span style="color:#b06;font-weight:bold">&amp;#34;id&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;ntPSdIREOUOARaRYJHlGEg==&amp;#34;&lt;/span>,
+&lt;span style="color:#b06;font-weight:bold">&amp;#34;equipments&amp;#34;&lt;/span>: [&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;KTm6cLkrtEWs6k4A821K3Q==&amp;#34;&lt;/span>],
+&lt;span style="color:#b06;font-weight:bold">&amp;#34;avatarAddress&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;sGo0bo0VwrYA7ubq6yV8ctiU2vc=&amp;#34;&lt;/span>,
+&lt;span style="color:#b06;font-weight:bold">&amp;#34;foods&amp;#34;&lt;/span>: [],
+&lt;span style="color:#b06;font-weight:bold">&amp;#34;worldId&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;3&amp;#34;&lt;/span>
+}
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>If a costume element is updated within the game, a new property is added, such as &lt;code>costumes&lt;/code>, and the hash&lt;sup id="fnref:4">&lt;a href="#fn:4" class="footnote-ref" role="doc-noteref">4&lt;/a>&lt;/sup> of the block containing this information does not match the protocol that creates the hash of the previous block. And if the protocol changes, previous block data will not be able to be used consecutively.&lt;sup id="fnref:5">&lt;a href="#fn:5" class="footnote-ref" role="doc-noteref">5&lt;/a>&lt;/sup> In addition, the protocol changes if the unique values are different, or if the code in &lt;a href="https://libplanet.io/">Libplanet&lt;/a> or its SDK is modified that affects the hash.&lt;/p>
+&lt;p>In these cases, other blockchains usually add protocols to interpret blocks differently after a certain number of blocks. Nine Chronicles may do the same, but we found this method to be unnecessary during the beta period, when changes are frequent, large and small. That&amp;rsquo;s why we decided to reset the chain every time.&lt;/p>
+&lt;p>Of course, we will be maintaining the chain after the official launch. A number of suggestions have been reviewed, and if there is a chance, we will introduce them on this blog.&lt;/p>
+&lt;h2 id="closing">Closing&lt;/h2>
+&lt;p>Planetarium is looking forward to establishing a new type of game culture with &amp;ldquo;community-run online games.&amp;rdquo; Sometimes we see on the media that an employee of an online game company embezzled game resources, destroying the game&amp;rsquo;s ecosystem. Nine Chronicles can&amp;rsquo;t do that in principle because the rules of the game are transparent to the protocol level.&lt;/p>
+&lt;p>Despite these advantages, the blockchain protocol used by Libplanet can be felt as an entry barrier. It&amp;rsquo;s similar to the shock I felt when I first saw Git, which distributes the work by line and merges automatically. So we’d love to hear about your experience, thoughts, and concerns playing Nine Chronicles on our &lt;a href="https://discord.gg/planetarium">discord channel&lt;/a> and on GitHub&lt;sup id="fnref:6">&lt;a href="#fn:6" class="footnote-ref" role="doc-noteref">6&lt;/a>&lt;/sup>.&lt;/p>
+&lt;p>This post will be published as a series, and the next issue will introduce Nine Chronicles&amp;rsquo; handling of reorg and chain resets. Thanks!&lt;/p>
+&lt;section class="footnotes" role="doc-endnotes">
+&lt;hr>
+&lt;ol>
+&lt;li id="fn:1" role="doc-endnote">
+&lt;p>Our engineering team calls this a mirage phenomenon because the game data disappears like a dream. &lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li id="fn:2" role="doc-endnote">
+&lt;p>Computer that participates in the blockchain network. &lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li id="fn:3" role="doc-endnote">
+&lt;p>The player&amp;rsquo;s perspective was well explained in the &lt;a href="https://dpsyphle.ninja/2020/08/16/rollbacks-in-decentralized-games.html">game review&lt;/a> written by See-eun Ha, Co-founder of Blockchain Co-living and Co-working Community, Nonce. &lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li id="fn:4" role="doc-endnote">
+&lt;p>A blockchain connects the chain using the hash of the previous block as a meta information, similar to a linked list. &lt;a href="#fnref:4" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li id="fn:5" role="doc-endnote">
+&lt;p>It is possible that game clients with expanded specifications may not be able to interpret the previous block correctly. &lt;a href="#fnref:5" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li id="fn:6" role="doc-endnote">
+&lt;p>In addition to the Blockchain Core for P2P online games — &lt;a href="https://github.com/planetarium/libplanet">Libplanet&lt;/a>,
+Libplanet-based SDK for Nine Chronicles — &lt;a href="https://github.com/planetarium/lib9c">Lib9c&lt;/a>, Blockchain Node Service dedicated to Nine Chronicle Clients — &lt;a href="https://github.com/planetarium/ninechronicles.standalone">NineChronicles.Standalone&lt;/a>, we will also be releasing the repositories of the launcher and game client for Nine Chronicles. &lt;a href="#fnref:6" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;/section></content><author><name>Muhun Kim</name><uri>https://github.com/x86chi</uri><email>iam@muhun.kim</email></author></entry><entry><title>My First Month at Planetarium</title><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/06/junior-experience/" title="My First Month at Planetarium"/><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/06/junior-experience/" hreflang="ko" title="플라네타리움에서 한 달동안 경험한 이야기"/><id>https://snack.planetarium.dev/eng/2020/06/junior-experience/</id><published>2020-06-02T00:00:00+00:00</published><updated>2020-06-02T00:00:00+00:00</updated><content type="html">&lt;p>Hello, I’m Suho Lee, the newest member of Team Libplanet at &lt;a href="https://planetariumhq.com/">Planetarium&lt;/a>. To celebrate my first month of working in the company, I would like to take this opportunity to talk about my expectations joining the team, what I did for a month, and how we work at Planetarium.&lt;/p>
+&lt;h2 id="how-i-applied-to-planetarium">How I Applied to Planetarium&lt;/h2>
+&lt;p>In June 2019, I participated in an event called &lt;a href="https://www.sprintseoul.org/2019-06-29/">2019 Sprint Seoul&lt;/a>. While deciding which open-source project to contribute to, Hong Minhee, a member of Planetarium reached out to me and suggested me to take a look at &lt;a href="https://libplanet.io/">Libplanet&lt;/a>. My experience contributing to Libplanet turned out to be extremely memorable and I decided to apply for a job at Planetarium as soon as open positions were posted. My main motivation for applying was that I wanted to continue this positive experience working with the members at Planetarium and I also wanted to make an impact in the company by sharing my positivity.&lt;/p>
+&lt;h2 id="what-i-did-in-the-first-month">What I Did in the First Month&lt;/h2>
+&lt;p>During the first month, I spent most of my time reviewing the structure of Libplanet and C#. I developed Libplanet from scratch to a &lt;abbr title="proof of concept">PoC&lt;/abbr> level to get a deeper understanding of the project. Also, every time I was introduced to a module, I fixed issues in that module to further my understanding.&lt;/p>
+&lt;figure>
+&lt;img src="images/resolved-issue.png"
+alt="List of Fixed Issues in the First Month"/> &lt;figcaption>
+&lt;p>List of Fixed Issues in the First Month&lt;/p>
+&lt;/figcaption>
+&lt;/figure>
+&lt;p>Personally, I felt that this was a very effective way of understanding the material within a short amount of time. Because overall briefings on project structure and modules are quite conceptual in general, it was my job to dive deeper into the concepts and to understand how things work in low-level. Therefore, going head first and experiencing the workings of the project directly by solving real-issues really helped me solidify the concepts in and out.&lt;/p>
+&lt;p>I also personally started writing daily reports on my work.&lt;/p>
+&lt;figure>
+&lt;img src="images/daily-reports.png"
+alt="List of Daily Reports"/> &lt;figcaption>
+&lt;p>List of Daily Reports&lt;/p>
+&lt;/figcaption>
+&lt;/figure>
+&lt;figure>
+&lt;img src="images/daily-report.png"
+alt="Daily Report"/> &lt;figcaption>
+&lt;p>Daily Report&lt;/p>
+&lt;/figcaption>
+&lt;/figure>
+&lt;p>The reason for making daily reports a habit was to get the most out of our &lt;em>daily meetings&lt;/em>.&lt;/p>
+&lt;h2 id="meeting-culture">Meeting Culture&lt;/h2>
+&lt;p>Team Libplanet holds 3 types of meetings.&lt;/p>
+&lt;ul>
+&lt;li>Daily Meetings&lt;/li>
+&lt;li>Weekly Meetings&lt;/li>
+&lt;li>Quarterly Retrospectives&lt;/li>
+&lt;/ul>
+&lt;p>Among them, &lt;dfn>daily meetings&lt;/dfn> (&lt;dfn>daily&lt;/dfn> in short) are held at 2pm every day to share what we are currently working on. In general, when someone goes into a ‘deep dive mode,’ it’s very easy to find oneself overengineering until someone else tells you so. The daily meetings work to prevent each other from going overboard and help each other out by giving updates to our work progress. Personally, keeping a daily report for these meetings has helped me objectify my work progress which in turn has helped with the work itself.&lt;/p>
+&lt;p>Typically, daily meetings can turn into &lt;em>show me evidence that you are really working&lt;/em> type of meetings (ex: teams with vertical hierarchy). However, I’ve noticed that our team’s daily meetings are not for exaggerating our progress but are mainly used for updating each other with things that aren’t working out and things that we aren’t sure about— this is what I really liked about our culture.&lt;/p>
+&lt;h2 id="members-that-walk-the-talk">Members that Walk the Talk&lt;/h2>
+&lt;p>Everyone knows that it’s meaningless to hold a person responsible for failure in decision making. So we are taught that if you fail, you should share and get feedback quickly, and find an alternative. But it&amp;rsquo;s not as easy as it sounds.&lt;/p>
+&lt;p>Not long after I came in, our team was in the middle of creating a small GUI app that works on both Windows and macOS. We ended up realizing that the cross-platform GUI framework that we decided to use 15 days ago was not suitable for the problem we were trying to solve entirely. However, because the person working on the project focused on solving the issue at hand, this ended up delaying our decision to replace the GUI framework for over a week, which eventually pushed back the overall schedule. Such failures usually result in criticism of wasted time, even if it was unintentional.&lt;/p>
+&lt;p>But rather, our team said, &lt;q>We found this choice to be wrong. We gained something.&lt;/q> We focused on not making this decision in the future. We reached a conclusion to &lt;q>get together more often to find overlooked problems we could miss while focusing on solving issues.&lt;/q> As a concrete solution, we decided to create a mini-update session in the evening besides our daily meetings.&lt;/p>
+&lt;p>Through these mini sessions, we found out that our team often held onto same issues from the morning despite feeling that progress was going smoothly. This was a great feedback for us.&lt;/p>
+&lt;p>I really enjoyed our team’s &lt;q>let’s try another way&lt;/q> as opposed to &lt;q>why didn’t you do as we planned&lt;/q> mentality when things didn’t go as we expected.&lt;/p>
+&lt;h2 id="other-perks">Other Perks&lt;/h2>
+&lt;p>Planetarium has lots of perks, but these below are the most memorable:&lt;/p>
+&lt;ul>
+&lt;li>Remote Work Schedule&lt;/li>
+&lt;li>Completely Horizontal Decision Making (true story)&lt;/li>
+&lt;li>Accomplished &amp;amp; Capable Members&lt;/li>
+&lt;/ul>
+&lt;h2 id="closing">Closing&lt;/h2>
+&lt;p>While writing this piece, someone made this comment during our engineering workshop.&lt;/p>
+&lt;blockquote>
+&lt;p>We named our blog “Snack”, and yet we’ve been serving “main dishes” to our readers. (LOL)&lt;/p>
+&lt;/blockquote>
+&lt;p>So true. For this piece, I’ve cut down on words and tried putting in lots of screen shots for better experience. Hope this makes it more enjoyable.&lt;/p>
+&lt;p>Finally, our team is always open to your contributions to &lt;a href="https://libplanet.io/">Libplanet&lt;/a>! If you are interested in our open-source project, we welcome you to hang out in our &lt;a href="https://discord.gg/planetarium">discord channel&lt;/a>. Thanks everyone!&lt;/p></content><author><name>Suho Lee</name><uri>https://github.com/riemannulus</uri><email>suho@planetariumhq.com</email></author></entry><entry><title>Team Libplanet is Participating in 2020 Sprint Seoul!</title><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/05/sprintseoul/" title="Team Libplanet is Participating in 2020 Sprint Seoul!"/><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/05/sprintseoul/" hreflang="ko" title="Libplanet 팀이 2020 스프린트서울에도 참여합니다!"/><id>https://snack.planetarium.dev/eng/2020/05/sprintseoul/</id><published>2020-05-19T00:00:00+00:00</published><updated>2020-05-19T00:00:00+00:00</updated><content type="html">&lt;p>Hello all! We are Team &lt;a href="https://libplanet.io/">Libplanet&lt;/a>, participating in this year’s &lt;a href="https://sprintseoul.org/">Sprint Seoul&lt;/a> as project lead.&lt;/p>
+&lt;p>We have been consistently participating in Sprint Seoul, and this year’s no different! Although Sprint Seoul has been an event to solve problems together in a short time, this year’s Sprint Seoul is being held throughout May.&lt;/p>
+&lt;p>Due to this change, we have prepared long issues for people who want to take longer period of time to solve as well as short issues that are great for first time contributors.&lt;/p>
+&lt;p>Also, we are preparing &lt;strong>small gifts&lt;/strong> for those who participate in the sprint and contribute to our repository, so please do participate!&lt;/p>
+&lt;h2 id="project-intro">Project Intro&lt;/h2>
+&lt;p>&lt;a href="https://libplanet.io/">Libplanet&lt;/a> is a networking ・ storage library for creating P2P multiplayer games that run without servers like BitTorrent, and to achieve this, it implements block chain technology. The game apps that each user runs are connected to each other on the network, and instead of having a main server for fair judgment and keeping record of the game, fair judgments are made through consensus algorithms and records are made through replication.&lt;/p>
+&lt;p>There are three repositories to cover in this Sprint: You can contribute to different repositories depending on your familiarity or preferred environment. For your information, all three repositories can be developed on three platforms: Linux, macOS, and Windows.&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="https://github.com/planetarium/libplanet">Libplanet&lt;/a>: This is the core of our project that implements networking, storage, and blockchain, on a multi-platform, written in C# for use with game engines such as Unity.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="https://github.com/planetarium/libplanet-explorer">Libplanet Explorer (Server)&lt;/a>: This is a C# app that makes accumulated blockchain data on distributed networks of games created with Libplanet viewable outside the game through the GraphQL protocol.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="https://github.com/planetarium/libplanet-explorer-frontend">Libplanet Explorer (Web)&lt;/a>: This is a relatively end-user-oriented Web app (client) that implements the web server’s data provided via GraphQL as a Web front end. It is written using TypeScript, React, Gatsby, and Apollo.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>Since &lt;em>Libplanet Explorer (Web)&lt;/em> is written in TypeScript, for those of you who are not familiar with Blockchain technology or C# but are interested in Libplanet, you can definitely contribute.&lt;/p>
+&lt;h2 id="c-dev-environment">C# Dev Environment&lt;/h2>
+&lt;p>First, we need to set up a development environment to participate in C# projects. Unlike Python or JavaScript, C# is a language that is difficult to code without IDE. For Windows, you can install the latest version of Visual Studio, but we recommend Rider or VS Code as an IDE that can be written across multiple platforms. The documents below guide you in Korean on how to install the development environment of Libplanet assuming that you use Rider or Visual Studio Code (we recommend using Google Translate for English).&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://gist.github.com/dahlia/5333634f62509293cd46c0e4ba65b2f5">Libplanet Dev Environment Configuration (VS Code)&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://gist.github.com/dahlia/08f6e659e2266e941ad026f591c30c9a">Libplanet Dev Environment Configuration (Rider)&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>In addition, the &lt;em>&lt;a href="https://github.com/planetarium/libplanet/blob/master/CONTRIBUTING.md">CONTRIBUTING.md&lt;/a>&lt;/em> document in the Libplanet repository guides you through the very basic development environment using CLI tools only. If you really want to use your own editor, please read this.&lt;/p>
+&lt;h2 id="typescript-dev-environment">TypeScript Dev Environment&lt;/h2>
+&lt;p>The TypeScript development environment is much simpler than the C# development environment. It&amp;rsquo;s well organized in the &lt;em>&lt;a href="https://github.com/planetarium/libplanet-explorer-frontend/blob/master/README.md">README.md&lt;/a>&lt;/em> document of the Libplanet Explorer (Web) repository, so you can easily follow it.&lt;/p>
+&lt;h2 id="issues-worth-looking-at">Issues Worth Looking At&lt;/h2>
+&lt;p>For first-time contributors, we’ve organized first-timer issues for each project.&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/planetarium/libplanet/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22">Libplanet&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/planetarium/libplanet-explorer/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22">Libplanet Explorer (Server)&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/planetarium/libplanet-explorer-frontend/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22">Libplanet Explorer (Web)&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>These are things that you can do without getting a detailed understanding of the project structure.&lt;/p>
+&lt;p>We also have a &lt;em>help wanted&lt;/em> label for those looking for more challenging issues.&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/planetarium/libplanet/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22">Libplanet&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/planetarium/libplanet-explorer/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22">Libplanet Explorer (Server)&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://github.com/planetarium/libplanet-explorer-frontend/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22">Libplanet Explorer (Web)&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="see-yourself-a-bit-hesitating">See Yourself a Bit Hesitating?&lt;/h2>
+&lt;p>For those of you who are either worried or hesitant about contributing to the project, we recommend reading the experiences of our past contributors and decide.&lt;/p>
+&lt;ul>
+&lt;li>&lt;cite>&lt;a href="https://snack.planetarium.dev/eng/2019/05/first-contribution/">First Contribution to Libplanet&lt;/a>&lt;/cite> by Seunghun Lee&lt;/li>
+&lt;li>&lt;cite>&lt;a href="https://blog.hanaoto.me/sprint_seoul_2019_june/">After participating in the 2019 Sprint Seoul June event…&lt;/a>&lt;/cite> by Suho Lee&lt;/li>
+&lt;/ul>
+&lt;h2 id="questions--conversations">Questions &amp;amp; Conversations&lt;/h2>
+&lt;p>If you have any questions or concerns, please join the #libplanet-users channel at &lt;a href="https://discord.gg/planetarium">our Discord server&lt;/a> and ask away! We’re open for any questions before the event and after the event. If you want to just come and hang out, our doors always open!&lt;/p></content><author><name>Suho Lee</name><uri>https://github.com/riemannulus</uri><email>suho@planetariumhq.com</email></author></entry><entry><title>How to Use Unity DOTS DynamicBuffer</title><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/05/unity-dots-start-to-use-dynamic-buffer/" title="How to Use Unity DOTS DynamicBuffer"/><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/05/unity-dots-start-to-use-dynamic-buffer/" hreflang="ko" title="Unity DOTS DynamicBuffer 사용하기"/><id>https://snack.planetarium.dev/eng/2020/05/unity-dots-start-to-use-dynamic-buffer/</id><published>2020-05-18T00:00:00+00:00</published><updated>2020-05-18T00:00:00+00:00</updated><content type="html">&lt;p>Hello, I&amp;rsquo;m Hyun Seungmin, &lt;a href="https://nine-chronicles.com/">Nine Chronicles&lt;/a> developer at &lt;a href="https://planetariumhq.com/">Planetarium&lt;/a>. Our project is not yet using Unity &lt;a href="https://unity.com/dots">&lt;abbr title="Data-Oriented Technology Stack">DOTS&lt;/abbr>&lt;/a> but we are working hard to apply it to our next project. So from now on, I will be sharing what I&amp;rsquo;ve learned in my studies.&lt;/p>
+&lt;p>This time, let&amp;rsquo;s have a look at &lt;a href="https://docs.unity3d.com/Packages/com.unity.entities@0.10/api/Unity.Entities.DynamicBuffer-1.html">&lt;code>DynamicBuffer&amp;lt;T&amp;gt;&lt;/code>&lt;/a>. We’re going to talk about setting up a dynamic buffer on an entity and using it. Although we’re starting a few steps ahead for our very first DOTS article, I think you can catch on right away by following this piece because the skipped portion isn’t that substantial.&lt;/p>
+&lt;p>This article refers to the &lt;a href="https://docs.unity3d.com/Packages/com.unity.entities@0.10/manual/dynamic_buffers.html">Unity Official Docs&lt;/a> and the &lt;a href="https://www.youtube.com/watch?v=XC84bc95heI">tutorial video&lt;/a>.&lt;/p>
+&lt;h2 id="dev-environment">Dev Environment&lt;/h2>
+&lt;dl>
+&lt;dt>Unity&lt;/dt>
+&lt;dd>2019.3.12f1&lt;/dd>
+&lt;dt>&lt;code>com.unity.entities&lt;/code>&lt;/dt>
+&lt;dd>0.10.0-preview.6&lt;/dd>
+&lt;/dl>
+&lt;h2 id="ibufferelementdataibufferelementdata-implementation">&lt;a href="https://docs.unity3d.com/Packages/com.unity.entities@0.10/api/Unity.Entities.IBufferElementData.html">&lt;code>IBufferElementData&lt;/code>&lt;/a> Implementation&lt;/h2>
+&lt;p>Just as components that are added to an entity must implement the &lt;a href="https://docs.unity3d.com/Packages/com.unity.entities@0.10/api/Unity.Entities.IComponentData.html">&lt;code>IComponentData&lt;/code> Interface&lt;/a>, &lt;code>DynamicBuffer&amp;lt;T&amp;gt;&lt;/code> must also implement the &lt;a href="https://docs.unity3d.com/Packages/com.unity.entities@0.10/api/Unity.Entities.IBufferElementData.html">&lt;code>IBufferElementData&lt;/code> Interface&lt;/a>.&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>I’ve created an &lt;code>IntBufferElement&lt;/code> structure that implements &lt;code>IBufferElementData&lt;/code>. It’s format is similar to &lt;code>IComponentData&lt;/code>, right?&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#fff">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#080;font-weight:bold">using&lt;/span> &lt;span style="color:#b06;font-weight:bold">Unity.Entities&lt;/span>;
+&lt;span style="color:#080;font-weight:bold">namespace&lt;/span> &lt;span style="color:#b06;font-weight:bold">DOTS_DynamicBuffer&lt;/span>
+{
+&lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#080;font-weight:bold">struct&lt;/span> &lt;span style="color:#b06;font-weight:bold">IntBufferElement&lt;/span> : IBufferElementData
+{
+&lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#888;font-weight:bold">int&lt;/span> Value;
+}
+}
+&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;h2 id="using-entitymanageraddbuffertentitymanageraddbuffert">Using &lt;a href="https://docs.unity3d.com/Packages/com.unity.entities@0.10/api/Unity.Entities.EntityManager.html#Unity_Entities_EntityManager_AddBuffer__1_Unity_Entities_Entity_">&lt;code>EntityManager.AddBuffer&amp;lt;T&amp;gt;()&lt;/code>&lt;/a>&lt;/h2>
+&lt;p>Just like adding a component to an entity, we need to use &lt;a href="https://docs.unity3d.com/Packages/com.unity.entities@0.10/api/Unity.Entities.EntityManager.html">&lt;code>EntityManager&lt;/code>&lt;/a> when adding buffers. Below, I’ve written a component called &lt;code>PlayModeTest&lt;/code> that will be added to game objects and with that, let’s check the &lt;em>Entity Debugger&lt;/em> in play mode.&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Let’s add an &lt;code>IntBufferElement&lt;/code> buffer to the entity and put some values in it.&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#fff">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#080;font-weight:bold">using&lt;/span> &lt;span style="color:#b06;font-weight:bold">UnityEngine&lt;/span>;
+&lt;span style="color:#080;font-weight:bold">using&lt;/span> &lt;span style="color:#b06;font-weight:bold">Unity.Entities&lt;/span>;
+&lt;span style="color:#080;font-weight:bold">namespace&lt;/span> &lt;span style="color:#b06;font-weight:bold">DOTS_DynamicBuffer&lt;/span>
+{
+&lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#080;font-weight:bold">class&lt;/span> &lt;span style="color:#b06;font-weight:bold">PlayModeTest&lt;/span> : MonoBehaviour
+{
+&lt;span style="color:#080;font-weight:bold">private&lt;/span> &lt;span style="color:#080;font-weight:bold">void&lt;/span> Awake()
+{
+&lt;span style="color:#888;font-weight:bold">var&lt;/span> entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
+&lt;span style="color:#888;font-weight:bold">var&lt;/span> entity = entityManager.CreateEntity();
+&lt;span style="color:#888;font-weight:bold">var&lt;/span> dynamicBuffer = entityManager.AddBuffer&amp;lt;IntBufferElement&amp;gt;(entity);
+dynamicBuffer.Add(&lt;span style="color:#080;font-weight:bold">new&lt;/span> IntBufferElement { Value = &lt;span style="color:#00d;font-weight:bold">1&lt;/span> });
+dynamicBuffer.Add(&lt;span style="color:#080;font-weight:bold">new&lt;/span> IntBufferElement { Value = &lt;span style="color:#00d;font-weight:bold">2&lt;/span> });
+dynamicBuffer.Add(&lt;span style="color:#080;font-weight:bold">new&lt;/span> IntBufferElement { Value = &lt;span style="color:#00d;font-weight:bold">3&lt;/span> });
+}
+}
+}
+&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>I’ve created &lt;em>DOTS_DynamicBufferScene&lt;/em> and added the &lt;code>PlayModeTest&lt;/code> script to a game object with the same name.&lt;/p>
+&lt;p>&lt;img src="images/01.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>In play mode, you can check the entity created by the &lt;code>PlayModeTest.Awake()&lt;/code> method through &lt;em>Entity Debugger&lt;/em>. Can you see that the &lt;code>IntBufferElement&lt;/code> buffer has three values?&lt;/p>
+&lt;p>&lt;img src="images/02.png" alt="">&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="using-dynamicbuffertreinterpretudynamicbuffertreinterpretu">Using &lt;a href="https://docs.unity3d.com/Packages/com.unity.entities@0.10/api/Unity.Entities.DynamicBuffer-1.html#Unity_Entities_DynamicBuffer_1_Reinterpret__1">&lt;code>DynamicBuffer&amp;lt;T&amp;gt;.Reinterpret&amp;lt;U&amp;gt;()&lt;/code>&lt;/a>&lt;/h2>
+&lt;p>Now let&amp;rsquo;s find out how to modify the values contained in the structure of the buffer.&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>I’ve used &lt;a href="https://docs.unity3d.com/Packages/com.unity.entities@0.10/api/Unity.Entities.DynamicBuffer-1.html#Unity_Entities_DynamicBuffer_1_Reinterpret__1">&lt;code>DynamicBuffer&amp;lt;T&amp;gt;.Reinterpret&amp;lt;U&amp;gt;()&lt;/code> Method&lt;/a>, which is a minor modification of &lt;code>PlayModeTest.Awake()&lt;/code>. And as shown on line 12, structure that’s accessed with index values cannot be changed because it is a temporary value that is not classified as a variable. However, the values can be modified using the reinterpret method as you can see on line 14&amp;ndash;15.&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#fff">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#080;font-weight:bold">private&lt;/span> &lt;span style="color:#080;font-weight:bold">void&lt;/span> Awake()
+{
+&lt;span style="color:#888;font-weight:bold">var&lt;/span> entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
+&lt;span style="color:#888;font-weight:bold">var&lt;/span> entity = entityManager.CreateEntity();
+&lt;span style="color:#888;font-weight:bold">var&lt;/span> dynamicBuffer = entityManager.AddBuffer&amp;lt;IntBufferElement&amp;gt;(entity);
+dynamicBuffer.Add(&lt;span style="color:#080;font-weight:bold">new&lt;/span> IntBufferElement {Value = &lt;span style="color:#00d;font-weight:bold">1&lt;/span>});
+dynamicBuffer.Add(&lt;span style="color:#080;font-weight:bold">new&lt;/span> IntBufferElement {Value = &lt;span style="color:#00d;font-weight:bold">2&lt;/span>});
+dynamicBuffer.Add(&lt;span style="color:#080;font-weight:bold">new&lt;/span> IntBufferElement {Value = &lt;span style="color:#00d;font-weight:bold">3&lt;/span>});
+&lt;span style="color:#888">// ERROR: Indexer access returns temporary value.
+&lt;/span>&lt;span style="color:#888">&lt;/span> &lt;span style="color:#888">// Cannot modify struct member when accessed struct is not classified as a variable
+&lt;/span>&lt;span style="color:#888">&lt;/span> &lt;span style="color:#888">// dynamicBuffer[0].Value *= 10;
+&lt;/span>&lt;span style="color:#888">&lt;/span>
+&lt;span style="color:#888;font-weight:bold">var&lt;/span> intDynamicBuffer = dynamicBuffer.Reinterpret&amp;lt;&lt;span style="color:#888;font-weight:bold">int&lt;/span>&amp;gt;();
+intDynamicBuffer[&lt;span style="color:#00d;font-weight:bold">0&lt;/span>] *= &lt;span style="color:#00d;font-weight:bold">10&lt;/span>;
+}
+&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Let’s check the play mode to see if the value has changed. Great! So our takeaway is that the buffer’s value changed despite not putting in the value of &lt;code>intDynamicBuffer[0]&lt;/code>back into &lt;code>dynamicBuffer[0]&lt;/code>.&lt;/p>
+&lt;p>&lt;img src="images/03.png" alt="">&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="using-entitymanagergetbuffertentitymanagergetbuffert">Using &lt;a href="https://docs.unity3d.com/Packages/com.unity.entities@0.10/api/Unity.Entities.EntityManager.html#Unity_Entities_EntityManager_GetBuffer__1_Unity_Entities_Entity_">&lt;code>EntityManager.GetBuffer&amp;lt;T&amp;gt;()&lt;/code>&lt;/a>&lt;/h2>
+&lt;p>We also need a way to access the buffer on the entity.&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>I’ve modified the &lt;code>PlayModeTest&lt;/code> class. And I’ve changed the value by importing the entity generated by the &lt;code>Awake()&lt;/code> method and the buffer added to it using the &lt;code>Start()&lt;/code> method.&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#fff">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#080;font-weight:bold">class&lt;/span> &lt;span style="color:#b06;font-weight:bold">PlayModeTest&lt;/span> : MonoBehaviour
+{
+&lt;span style="color:#080;font-weight:bold">private&lt;/span> Entity _entity;
+&lt;span style="color:#080;font-weight:bold">private&lt;/span> &lt;span style="color:#080;font-weight:bold">void&lt;/span> Awake()
+{
+&lt;span style="color:#888;font-weight:bold">var&lt;/span> entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
+_entity = entityManager.CreateEntity();
+&lt;span style="color:#888;font-weight:bold">var&lt;/span> dynamicBuffer = entityManager.AddBuffer&amp;lt;IntBufferElement&amp;gt;(_entity);
+dynamicBuffer.Add(&lt;span style="color:#080;font-weight:bold">new&lt;/span> IntBufferElement { Value = &lt;span style="color:#00d;font-weight:bold">1&lt;/span> });
+dynamicBuffer.Add(&lt;span style="color:#080;font-weight:bold">new&lt;/span> IntBufferElement { Value = &lt;span style="color:#00d;font-weight:bold">2&lt;/span> });
+dynamicBuffer.Add(&lt;span style="color:#080;font-weight:bold">new&lt;/span> IntBufferElement { Value = &lt;span style="color:#00d;font-weight:bold">3&lt;/span> });
+&lt;span style="color:#888">// ERROR: Indexer access returns temporary value.
+&lt;/span>&lt;span style="color:#888">&lt;/span> &lt;span style="color:#888">// Cannot modify struct member when accessed struct is not classified as a variable
+&lt;/span>&lt;span style="color:#888">&lt;/span> &lt;span style="color:#888">// dynamicBuffer[0].Value *= 10;
+&lt;/span>&lt;span style="color:#888">&lt;/span> &lt;span style="color:#888;font-weight:bold">var&lt;/span> intDynamicBuffer = dynamicBuffer.Reinterpret&amp;lt;&lt;span style="color:#888;font-weight:bold">int&lt;/span>&amp;gt;();
+intDynamicBuffer[&lt;span style="color:#00d;font-weight:bold">0&lt;/span>] *= &lt;span style="color:#00d;font-weight:bold">10&lt;/span>;
+}
+&lt;span style="color:#080;font-weight:bold">private&lt;/span> &lt;span style="color:#080;font-weight:bold">void&lt;/span> Start()
+{
+&lt;span style="color:#888;font-weight:bold">var&lt;/span> entityManger = World.DefaultGameObjectInjectionWorld.EntityManager;
+&lt;span style="color:#888;font-weight:bold">var&lt;/span> dynamicBuffer = entityManger.GetBuffer&amp;lt;IntBufferElement&amp;gt;(_entity);
+&lt;span style="color:#888;font-weight:bold">var&lt;/span> intDynamicBuffer = dynamicBuffer.Reinterpret&amp;lt;&lt;span style="color:#888;font-weight:bold">int&lt;/span>&amp;gt;();
+&lt;span style="color:#080;font-weight:bold">for&lt;/span> (&lt;span style="color:#888;font-weight:bold">var&lt;/span> i = &lt;span style="color:#00d;font-weight:bold">0&lt;/span>; i &amp;lt; intDynamicBuffer.Length; i++)
+{
+intDynamicBuffer[i]++;
+}
+}
+}
+&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Let’s check if it works well. All values in the buffer have increased by one! &lt;code>Reinterpret&amp;lt;T&amp;gt;()&lt;/code> is fascinating.&lt;/p>
+&lt;p>&lt;img src="images/04.png" alt="">&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="authoring">Authoring&lt;/h2>
+&lt;p>&lt;a href="https://docs.unity3d.com/Packages/com.unity.entities@0.10/api/Unity.Entities.GenerateAuthoringComponentAttribute.html">&lt;code>GenerateAuthoringComponentAttribute&lt;/code>&lt;/a> allows you to add Authoring Component to a game object to make an entity. &lt;code>IBufferElementData&lt;/code> can use the same method.&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Let’s modify &lt;code>IntBufferElement&lt;/code> and apply &lt;code>GenerateAuthoringComponentAttribute&lt;/code>.&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#fff">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#369">[GenerateAuthoringComponent]&lt;/span>
+&lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#080;font-weight:bold">struct&lt;/span> &lt;span style="color:#b06;font-weight:bold">IntBufferElement&lt;/span> : IBufferElementData
+{
+&lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#888;font-weight:bold">int&lt;/span> Value;
+}
+&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>And I’ve added &lt;code>IntBufferElementAuthoring&lt;/code> component that was automatically generated by modifying Scene and added value to the game object. I’ve also added &lt;code>ConvertToEntity&lt;/code> component to make the game object into an entity.&lt;/p>
+&lt;p>&lt;img src="images/05.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The &lt;em>Entity Debugger&lt;/em> shows that an entity with the same name is created as a game object with &lt;strong>Authoring&lt;/strong> components.&lt;/p>
+&lt;p>&lt;img src="images/06.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>For our next step, let’s write &lt;code>UnitTag&lt;/code>, &lt;code>PlayerTag&lt;/code> and &lt;code>EnemyTag&lt;/code> components and add an &lt;code>IntBufferElement&lt;/code> buffer to the entity that includes each component.&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#fff">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#080;font-weight:bold">using&lt;/span> &lt;span style="color:#b06;font-weight:bold">Unity.Entities&lt;/span>;
+&lt;span style="color:#080;font-weight:bold">namespace&lt;/span> &lt;span style="color:#b06;font-weight:bold">DOTS_DynamicBuffer&lt;/span>
+{
+&lt;span style="color:#369"> [GenerateAuthoringComponent]&lt;/span>
+&lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#080;font-weight:bold">struct&lt;/span> &lt;span style="color:#b06;font-weight:bold">UnitTag&lt;/span> : IComponentData { }
+&lt;span style="color:#369">
+&lt;/span>&lt;span style="color:#369"> [GenerateAuthoringComponent]&lt;/span>
+&lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#080;font-weight:bold">struct&lt;/span> &lt;span style="color:#b06;font-weight:bold">PlayerTag&lt;/span> : IComponentData { }
+&lt;span style="color:#369">
+&lt;/span>&lt;span style="color:#369"> [GenerateAuthoringComponent]&lt;/span>
+&lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#080;font-weight:bold">struct&lt;/span> &lt;span style="color:#b06;font-weight:bold">EnemyTag&lt;/span> : IComponentData { }
+}
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="images/07.png" alt="">&lt;/p>
+&lt;p>&lt;img src="images/08.png" alt="">&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="using-the-dynamicbuffer-in-componentsystem">Using the &lt;code>DynamicBuffer&lt;/code> in &lt;code>ComponentSystem&lt;/code>&lt;/h2>
+&lt;p>Now, let’s access the entity’s &lt;code>IntBufferElement&lt;/code> &lt;code>DynamicBuffer&lt;/code> that includes the &lt;code>UnitTag&lt;/code> component by creating a system that inherits &lt;code>ComponentSystem&lt;/code>.&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>I’ve written a &lt;code>TestBufferFromEntitySystem&lt;/code>. This logic changes the value by accessing an entity’s &lt;code>IntBufferElement&lt;/code>type &lt;code>DynamicBuffer&lt;/code> that includes &lt;code>UnitTag&lt;/code>. Implementing this like on line 20 doesn’t work, so refer to line 23&amp;ndash;28. And of course, we can also use &lt;code>Reinterpret&amp;lt;T&amp;gt;()&lt;/code>.&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#fff">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#080;font-weight:bold">using&lt;/span> &lt;span style="color:#b06;font-weight:bold">Unity.Entities&lt;/span>;
+&lt;span style="color:#080;font-weight:bold">namespace&lt;/span> &lt;span style="color:#b06;font-weight:bold">DOTS_DynamicBuffer&lt;/span>
+{
+&lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#080;font-weight:bold">class&lt;/span> &lt;span style="color:#b06;font-weight:bold">TestBufferFromEntitySystem&lt;/span> : ComponentSystem
+{
+&lt;span style="color:#080;font-weight:bold">protected&lt;/span> &lt;span style="color:#080;font-weight:bold">override&lt;/span> &lt;span style="color:#080;font-weight:bold">void&lt;/span> OnUpdate()
+{
+&lt;span style="color:#888;font-weight:bold">var&lt;/span> bufferFromEntity = GetBufferFromEntity&amp;lt;IntBufferElement&amp;gt;();
+Entities
+.WithAll&amp;lt;UnitTag&amp;gt;()
+.ForEach(entity =&amp;gt;
+{
+&lt;span style="color:#080;font-weight:bold">if&lt;/span> (bufferFromEntity.Exists(entity))
+{
+&lt;span style="color:#888;font-weight:bold">var&lt;/span> dynamicBufferFromUnitTag = bufferFromEntity[entity];
+&lt;span style="color:#080;font-weight:bold">foreach&lt;/span> (&lt;span style="color:#888;font-weight:bold">var&lt;/span> intBufferElement &lt;span style="color:#080;font-weight:bold">in&lt;/span> dynamicBufferFromUnitTag)
+{
+&lt;span style="color:#888">// Foreach iteration variable &amp;#39;intBufferElement&amp;#39; is immutable.
+&lt;/span>&lt;span style="color:#888">&lt;/span> &lt;span style="color:#888">// Cannot modify struct member when accessed struct is not classified as a variable
+&lt;/span>&lt;span style="color:#888">&lt;/span> &lt;span style="color:#888">// intBufferElement.Value++;
+&lt;/span>&lt;span style="color:#888">&lt;/span> }
+&lt;span style="color:#080;font-weight:bold">for&lt;/span> (&lt;span style="color:#888;font-weight:bold">var&lt;/span> i = &lt;span style="color:#00d;font-weight:bold">0&lt;/span>; i &amp;lt; dynamicBufferFromUnitTag.Length; i++)
+{
+&lt;span style="color:#888;font-weight:bold">var&lt;/span> intBufferElement = dynamicBufferFromUnitTag[i];
+intBufferElement.Value++;
+dynamicBufferFromUnitTag[i] = intBufferElement;
+}
+}
+});
+}
+}
+}
+&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>If you look at &lt;em>Entity Debugger&lt;/em> in play mode, you can see that the value of &lt;code>UnitTag&lt;/code> component including entity&amp;rsquo;s &lt;code>IntBufferElement&lt;/code> &lt;code>DynamicBuffer&lt;/code> changes.&lt;/p>
+&lt;p>&lt;img src="images/09.png" alt="">&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="using-the-dynamicbuffer-in-jobcomponentsystem">Using the &lt;code>DynamicBuffer&lt;/code> in &lt;code>JobComponentSystem&lt;/code>&lt;/h2>
+&lt;p>Let’s create a system that inherits &lt;code>JobComponentSystem&lt;/code> and try to access &lt;code>IntBufferElement&lt;/code> &lt;code>DynamicBuffer&lt;/code> of an entity that includes the &lt;code>PlayerTag&lt;/code> component.&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>I’ve written a &lt;code>TestBufferFromEntityJobSystem&lt;/code>. This logic changes the value by accessing &lt;code>IntBufferElement&lt;/code> type &lt;code>DynamicBuffer&lt;/code> of entities that include &lt;code>PlayerTag&lt;/code>. This time I tried &lt;code>Reinterpret&amp;lt;T&amp;gt;()&lt;/code>.&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#fff">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#080;font-weight:bold">using&lt;/span> &lt;span style="color:#b06;font-weight:bold">Unity.Entities&lt;/span>;
+&lt;span style="color:#080;font-weight:bold">using&lt;/span> &lt;span style="color:#b06;font-weight:bold">Unity.Jobs&lt;/span>;
+&lt;span style="color:#080;font-weight:bold">namespace&lt;/span> &lt;span style="color:#b06;font-weight:bold">DOTS_DynamicBuffer&lt;/span>
+{
+&lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#080;font-weight:bold">class&lt;/span> &lt;span style="color:#b06;font-weight:bold">TestBufferFromEntityJobSystem&lt;/span> : JobComponentSystem
+{
+&lt;span style="color:#080;font-weight:bold">protected&lt;/span> &lt;span style="color:#080;font-weight:bold">override&lt;/span> JobHandle OnUpdate(JobHandle inputDeps)
+{
+&lt;span style="color:#080;font-weight:bold">return&lt;/span> Entities
+.WithAll&amp;lt;PlayerTag&amp;gt;()
+.ForEach((&lt;span style="color:#080;font-weight:bold">ref&lt;/span> DynamicBuffer&amp;lt;IntBufferElement&amp;gt; dynamicBuffer) =&amp;gt;
+{
+&lt;span style="color:#888;font-weight:bold">var&lt;/span> intDynamicBuffer = dynamicBuffer.Reinterpret&amp;lt;&lt;span style="color:#888;font-weight:bold">int&lt;/span>&amp;gt;();
+&lt;span style="color:#080;font-weight:bold">for&lt;/span> (&lt;span style="color:#888;font-weight:bold">var&lt;/span> i = &lt;span style="color:#00d;font-weight:bold">0&lt;/span>; i &amp;lt; intDynamicBuffer.Length; i++)
+{
+intDynamicBuffer[i]++;
+}
+})
+.Schedule(inputDeps);
+}
+}
+}
+&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>It&amp;rsquo;s working! The value is increasing just like we wanted.&lt;/p>
+&lt;p>&lt;img src="images/10.png" alt="">&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="additional-tips">Additional Tips&lt;/h2>
+&lt;h3 id="internalbuffercapacityattributeinternalbuffercapacityattribute">&lt;a href="https://docs.unity3d.com/Packages/com.unity.entities@0.10/api/Unity.Entities.InternalBufferCapacityAttribute.html">&lt;code>InternalBufferCapacityAttribute&lt;/code>&lt;/a>&lt;/h3>
+&lt;p>Since entities are generally included in chunks, applying &lt;code>InternalBufferCapacityAttribute&lt;/code> to a structure that implements &lt;code>IBufferElementData&lt;/code> can specify the maximum number of elements that can exist in chunks. When the elements go over the specified limit, the buffer movers over to the heap memory. Of course, you can access the buffer through &lt;code>DynamicBuffer&lt;/code> API as well.&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Here, I&amp;rsquo;ve set the number of elements to two.&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#fff">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#888">// InternalBufferCapacity specifies how many elements a buffer can have before
+&lt;/span>&lt;span style="color:#888">// the buffer storage is moved outside the chunk.
+&lt;/span>&lt;span style="color:#888">&lt;/span>&lt;span style="color:#369">[InternalBufferCapacity(2)]&lt;/span>
+&lt;span style="color:#369">[GenerateAuthoringComponent]&lt;/span>
+&lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#080;font-weight:bold">struct&lt;/span> &lt;span style="color:#b06;font-weight:bold">IntBufferElement&lt;/span> : IBufferElementData
+{
+&lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#888;font-weight:bold">int&lt;/span> Value;
+}
+&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>And to hold tests in the same chunk, I’ve copied two more &lt;code>Enemy&lt;/code> game objects that includes &lt;code>EnemyTag&lt;/code>.&lt;/p>
+&lt;p>&lt;img src="images/11.png" alt="">&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Let’s check the &lt;em>Entity Debugger&lt;/em>. But it looks like &lt;code>IntBufferElement&lt;/code> is still in the chunk. This may be for convenience even though the buffer has been moved to the heap memory.&lt;/p>
+&lt;p>&lt;img src="images/12.png" alt="">&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="implicit-operator">&lt;code>implicit&lt;/code> Operator&lt;/h3>
+&lt;p>We can also write our code this way for convenience.&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#fff">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#080;font-weight:bold">using&lt;/span> &lt;span style="color:#b06;font-weight:bold">Unity.Entities&lt;/span>;
+&lt;span style="color:#080;font-weight:bold">namespace&lt;/span> &lt;span style="color:#b06;font-weight:bold">DOTS_DynamicBuffer&lt;/span>
+{
+&lt;span style="color:#888">// InternalBufferCapacity specifies how many elements a buffer can have before
+&lt;/span>&lt;span style="color:#888">&lt;/span> &lt;span style="color:#888">// the buffer storage is moved outside the chunk.
+&lt;/span>&lt;span style="color:#888">&lt;/span>&lt;span style="color:#369"> [InternalBufferCapacity(2)]&lt;/span>
+&lt;span style="color:#369"> [GenerateAuthoringComponent]&lt;/span>
+&lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#080;font-weight:bold">struct&lt;/span> &lt;span style="color:#b06;font-weight:bold">IntBufferElement&lt;/span> : IBufferElementData
+{
+&lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#888;font-weight:bold">int&lt;/span> Value;
+&lt;span style="color:#888">// The following implicit conversions are optional, but can be convenient.
+&lt;/span>&lt;span style="color:#888">&lt;/span> &lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#080;font-weight:bold">static&lt;/span> &lt;span style="color:#080;font-weight:bold">implicit&lt;/span> &lt;span style="color:#080;font-weight:bold">operator&lt;/span> &lt;span style="color:#888;font-weight:bold">int&lt;/span>(IntBufferElement e)
+{
+&lt;span style="color:#080;font-weight:bold">return&lt;/span> e.Value;
+}
+&lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#080;font-weight:bold">static&lt;/span> &lt;span style="color:#080;font-weight:bold">implicit&lt;/span> &lt;span style="color:#080;font-weight:bold">operator&lt;/span> IntBufferElement(&lt;span style="color:#888;font-weight:bold">int&lt;/span> e)
+{
+&lt;span style="color:#080;font-weight:bold">return&lt;/span> &lt;span style="color:#080;font-weight:bold">new&lt;/span> IntBufferElement { Value = e };
+}
+}
+}
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="closing">Closing&lt;/h2>
+&lt;p>Today, we took a quick look at &lt;code>IBufferElementData&lt;/code> and &lt;code>DynamicBuffer&amp;lt;T&amp;gt;&lt;/code>.&lt;/p>
+&lt;p>You&amp;rsquo;ve probably heard a lot about object pooling when you’re making games. Since creating single-use objects is basically the same as creating garbage, pooling and reusing them can reduce frequent &lt;a href="https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)">garbage collection&lt;/a> and manage instance creation timing, which ultimately creates a smoother game.&lt;/p>
+&lt;p>Next time, let&amp;rsquo;s find out how to apply this feature and compare the before and after to see how much improvement you can get.&lt;/p></content><author><name>Hyun Seungmin</name><uri>https://github.com/boscohyun</uri><email>seungmin@planetariumhq.com</email></author></entry><entry><title>Libplanet 0.9 Released</title><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/04/libplanet-0.9/" title="Libplanet 0.9 Released"/><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/04/libplanet-0.9/" hreflang="ko" title="Libplanet 0.9 릴리스"/><id>https://snack.planetarium.dev/eng/2020/04/libplanet-0.9/</id><published>2020-04-28T00:00:00+00:00</published><updated>2020-04-28T00:00:00+00:00</updated><content type="html">&lt;p>Hello Everyone! We have released the ninth minor version of &lt;a href="https://libplanet.io/">Libplanet&lt;/a>, &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.9.0">Version 0.9&lt;/a>.&lt;/p>
+&lt;p>Libplanet is a common library that solves game implementation problems such as P2P communication and data synchronization when creating online multiplayer games that run on distributed P2P.&lt;/p>
+&lt;p>From this version, Libplanet will be distributed in several NuGet packages. This is because Libplanet&amp;rsquo;s externalities have expanded, making it too heavy to include some of the dependent libraries across all applications.&lt;/p>
+&lt;p>This piece introduces the new NuGet packages and addresses key major changes in Version 0.9.&lt;/p>
+&lt;h2 id="libplanetrocksdbstore">&lt;a href="https://www.nuget.org/packages/Libplanet.RocksDBStore/">Libplanet.RocksDBStore&lt;/a>&lt;/h2>
+&lt;p>A newly added Nuget package, Libplanet.RocksDBStore includes &lt;code>RocksDBStore&lt;/code> class, which is Lipblanet&amp;rsquo;s &lt;a href="https://docs.libplanet.io/0.9.0/api/Libplanet.Store.IStore.html">&lt;code>IStore&lt;/code> interface&lt;/a> implemented as &lt;a href="https://rocksdb.org/">RocksDB&lt;/a> backend. Through internal testing, &lt;code>RocksDBStore&lt;/code> has shown to be about 10 times faster to write, 2 times faster to read, and thanks to compression, takes 15% less storage space than &lt;a href="https://docs.libplanet.io/0.9.0/api/Libplanet.Store.DefaultStore.html">&lt;code>DefaultStore&lt;/code>&lt;/a>.&lt;/p>
+&lt;p>Despite the advantages mentioned above, it might be difficult to use &lt;code>RocksDBStore&lt;/code> on some platforms because the RocksDB native binary, written in C++, needs to be distributed together with an application.
+Therefore, &lt;code>RocksDBStore&lt;/code> class is not distributed as a Libplanet package, but as a separate NuGet package called Libplanet.RocksDBStore. &lt;code>DefaultStore&lt;/code> is still available in the Libplanet package. And so when developing, you can first use &lt;code>DefaultStore&lt;/code> that&amp;rsquo;s easy to install and use &lt;code>RocksDBStore&lt;/code> only for testing and actual deployment. Or, for platforms that are difficult to provide RocksDB binaries, you can just go with the &lt;code>DefaultStore&lt;/code>.&lt;/p>
+&lt;p>For more information, see &lt;a href="https://snack.planetarium.dev/eng/2020/04/rocksdb/">Applying RocksDB to Libplanet&lt;/a> written by Seunghun Lee.&lt;/p>
+&lt;h2 id="receiving-blocks-from-multiple-peers">Receiving Blocks from Multiple Peers&lt;/h2>
+&lt;p>Up to this version, &lt;a href="https://docs.libplanet.io/0.9.0/api/Libplanet.Net.Swarm-1.html#Libplanet_Net_Swarm_1_PreloadAsync_System_Nullable_TimeSpan__IProgress_Libplanet_Net_PreloadState__IImmutableSet_Libplanet_Address__EventHandler_Libplanet_Net_PreloadBlockDownloadFailEventArgs__CancellationToken_">&lt;code>PreloadAsync()&lt;/code>&lt;/a> and &lt;a href="https://docs.libplanet.io/0.9.0/api/Libplanet.Net.Swarm-1.html#Libplanet_Net_Swarm_1_StartAsync_TimeSpan_TimeSpan_CancellationToken_">&lt;code>StartAsync()&lt;/code> method&lt;/a> of &lt;a href="https://docs.libplanet.io/0.9.0/api/Libplanet.Net.Swarm-1.html">&lt;code>Swarm&amp;lt;T&amp;gt;&lt;/code> class&lt;/a> requested and received all blocks from a single peer to catch up with blocks piled up on the network. But unfortunately, if there were many piles of blocks, it would take a long time to get them from just one peer.
+And if you were unlucky, you might request blocks from a peer with a very slow connection which would take extra longer time. It also put a lot of pressure on the peer that’s sending the blocks and it was especially hard to ignore the burden for seed nodes that were set by default for deployed applications.&lt;/p>
+&lt;p>So starting with this version, block downloads are improved to be evenly distributed across multiple peers and even when there’s a slow peer among the senders, the downloading speed has been significantly reduced.&lt;/p>
+&lt;h2 id="signed-app-protocol-version">Signed App Protocol Version&lt;/h2>
+&lt;p>Last year, &lt;a href="https://snack.planetarium.dev/eng/2019/05/libplanet-0.3/#responsive-apis-for-nodes-with-different-versions">Libplanet 0.3 added &lt;code>appProtocolVersion&lt;/code> parameter in the &lt;code>Swarm&amp;lt;T&lt;/code>() constructor.&lt;/a> This allowed nodes with compatible protocols to communicate with each other and adequately handled nodes without compatible protocols according to the application.&lt;/p>
+&lt;p>Our team also took advantage of this feature and used it for software updates when encountering a higher version of the node. But with this use, we realized that a modulated software could be used to maliciously display high-version numbers (which have never been reported) and attack other nodes to attempt false software updates.&lt;/p>
+&lt;p>To avoid this, the application protocol version that used to be described as &lt;a href="https://docs.microsoft.com/en-us/dotnet/api/system.int32">&lt;code>System.Int32&lt;/code>&lt;/a> is now changed to &lt;a href="https://docs.libplanet.io/0.9.0/api/Libplanet.Net.AppProtocolVersion.html">&lt;code>AppProtocolVersion&lt;/code> type&lt;/a>, which includes multiple metadata such as signatures and signers. The app protocol version must be signed, and each node will &lt;em>individually&lt;/em> determine which signer&amp;rsquo;s version of the app protocol it will trust using the &lt;code>trustedAppProtocolVersionSigners&lt;/code> parameter in the &lt;code>Swarm&amp;lt;T&amp;gt;()&lt;/code> constructor.&lt;/p>
+&lt;p>This approach protects each node from unintended (modified) software updates, while also giving each node the freedom to choose a different application roadmap that is freely forked if desired.&lt;/p>
+&lt;h2 id="key-storage">Key Storage&lt;/h2>
+&lt;p>Last year, &lt;a href="https://snack.planetarium.dev/eng/2019/11/libplanet-0.7/#key-store-implementation-to-safely-store-personal-keys">Libplanet added a &lt;code>ProtectedPrivateKey&lt;/code> class to safely store &lt;code>PrivateKey&lt;/code> in Version 0.7.&lt;/a> However, because &lt;a href="https://docs.libplanet.io/0.9.0/api/Libplanet.KeyStore.ProtectedPrivateKey.html">&lt;code>ProtectedPrivateKey&lt;/code>&lt;/a> deals with only one key, handling multiple keys required a separate implementation for the application to create a directory, set a file name, and write the file.&lt;/p>
+&lt;p>So from this version, &lt;a href="https://docs.libplanet.io/0.9.0/api/Libplanet.KeyStore.Web3KeyStore.html">&lt;code>Web3KeyStore&lt;/code>&lt;/a> class, which physically preserves and manages keys, are now available, eliminating the need to implement these features separately. In addition to the &lt;code>Web3KeyStore&lt;/code> that preserves keys in &lt;a href="https://github.com/ethereum/wiki/wiki/Web3-Secret-Storage-Definition">Web3 Secret Storage Definition&lt;/a> format, we have also introduced &lt;a href="https://docs.libplanet.io/0.9.0/api/Libplanet.KeyStore.IKeyStore.html">&lt;code>IKeyStore&lt;/code> Interface&lt;/a>, which abstracts specific preservation methods (implementation details).&lt;/p>
+&lt;h2 id="planet-cli-utility">&lt;code>planet&lt;/code>: CLI Utility&lt;/h2>
+&lt;p>&lt;a href="https://docs.libplanet.io/0.9.0/api/Libplanet.Net.Swarm-1.html#Libplanet_Net_Swarm_1__ctor_Libplanet_Blockchain_BlockChain__0__Libplanet_Crypto_PrivateKey_Libplanet_Net_AppProtocolVersion_System_Int32_System_String_System_Nullable_System_Int32__IEnumerable_Libplanet_Net_IceServer__Libplanet_Net_DifferentAppProtocolVersionEncountered_IEnumerable_Libplanet_Crypto_PublicKey__">&lt;code>Swarm&amp;lt;T&amp;gt;()&lt;/code> constructor&lt;/a> has &lt;a href="https://snack.planetarium.dev/eng/2020/02/libplanet-0.8/#genesis-block-anticipation">assumed a specific genesis block since last version&lt;/a> and &lt;a href="#signed-app-protocol-version">from this version, it signs the app protocol version.&lt;/a> Because these values include the results of cryptographic algorithm, it is impossible for a human to randomly generate the value. However, since the development process does require a lot of filling up random values, it was definitely a hassle to call up Libplanet APIs from C# interactive shells or PowerShell to calculate the desired values.&lt;/p>
+&lt;p>To make this easier, we are deploying a &lt;abbr title="command-line interface">CLI&lt;/abbr> utility called &lt;code>planet&lt;/code> from this version. The &lt;code>planet&lt;/code> command contains multiple subcommands, and currently provides key storage management and app protocol version signing feature. In the future, features such as creating a random genesis block will be added. Please check the &lt;code>planet --help&lt;/code> command for detailed instructions.&lt;/p>
+&lt;p>The &lt;code>planet&lt;/code> command is distributed in a NuGet package called &lt;a href="https://www.nuget.org/packages/Libplanet.Tools/">Libplanet.Tools&lt;/a>, which can be installed on systems with .NET Core SDK using the following command:&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#fff">&lt;code class="language-bash" data-lang="bash">dotnet tool install -g Libplanet.Tools
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>If the .NET Core SDK is not installed, you can also download and install the official binary uploaded on the &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.9.0">Release Page&lt;/a>. The official binary is available in three versions: Linux (x64), macOS (x64), and Windows (x64).&lt;/p>
+&lt;h2 id="furthermore">Furthermore&lt;/h2>
+&lt;p>You can learn more about additional changes in our &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.9.0">release notes&lt;/a>.&lt;/p>
+&lt;p>If you’re interested, install and try it out! And as always, if you have any questions about the new release or Libplanet in general, please visit our &lt;a href="https://discord.gg/planetarium">Discord chatroom&lt;/a> and let’s chat!&lt;/p></content><author><name>Hong Minhee</name><uri>https://github.com/dahlia</uri><email>hong.minhee@planetariumhq.com</email></author></entry><entry><title>Applying RocksDB to Libplanet</title><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/04/rocksdb/" title="Applying RocksDB to Libplanet"/><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/04/rocksdb/" hreflang="ko" title="Libplanet RocksDB 적용기"/><id>https://snack.planetarium.dev/eng/2020/04/rocksdb/</id><published>2020-04-17T00:00:00+00:00</published><updated>2020-04-17T00:00:00+00:00</updated><content type="html">&lt;p>Hello, I&amp;rsquo;m Seunghun Lee, &lt;a href="https://libplanet.io/">Libplanet&lt;/a> developer at Planetarium.&lt;/p>
+&lt;p>Libplanet provides a storage layer abstraction interface called &lt;a href="https://docs.libplanet.io/0.8.0/api/Libplanet.Store.IStore.html">&lt;code>IStore&lt;/code>&lt;/a> and its basic implementation called &lt;a href="https://docs.libplanet.io/0.8.0/api/Libplanet.Store.DefaultStore.html">&lt;code>DefaultStore&lt;/code>&lt;/a>. &lt;code>DefaultStore&lt;/code> had been used to develop &lt;a href="https://nine-chronicles.com/">Nine Chronicles&lt;/a> and although it was included as a base in Libplanet and had the upside of being able to use it immediately, there were certainly limitations in terms of performance and storage efficiency.&lt;/p>
+&lt;p>After reviewing various alternative storage methods, we decided that &lt;a href="https://rocksdb.org/">RocksDB&lt;/a>, a &lt;a href="https://en.wikipedia.org/wiki/Key-value_database">Key-Value Database&lt;/a> library developed by Facebook, was our best option. We decided to create an &lt;code>IStore&lt;/code> implementation called &lt;a href="https://github.com/planetarium/libplanet/blob/master/Libplanet.RocksDBStore/RocksDBStore.cs">&lt;code>RocksDBStore&lt;/code>&lt;/a> to use as a backend. In this article, I would like to share our experiences in developing &lt;code>RocksDBStore&lt;/code>.&lt;/p>
+&lt;h2 id="including-dependent-libraries1">Including Dependent Libraries&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>&lt;/h2>
+&lt;p>RocksDB relies on other libraries for compression or memory allocation purposes. Unlike &lt;a href="https://github.com/facebook/rocksdb/wiki/Building-on-Windows">Windows build&lt;/a>, for macOS and Linux, the dependent libraries must also be installed in the system to use the RocksDB native library in the form of dynamic link libraries (&lt;em>.so&lt;/em> and .&lt;em>dylib&lt;/em>).&lt;/p>
+&lt;p>In a typical server app, it is natural to install all dependent libraries in your system. This is because the system that runs the server app is usually operated only for that server app. But because we&amp;rsquo;re building an app that serves as blockchain nodes and runs on gamers&amp;rsquo; systems, it&amp;rsquo;s hard to ask all gamers to install these libraries separately.&lt;/p>
+&lt;p>So what we came up with was to put the libraries that RocksDB relies on in the game client and distribute them. However, building RocksDB in the form of a dynamic link library without any modifications caused the built RocksDB library to not be able to find the dependent libraries that were included in the game clients.&lt;/p>
+&lt;p>To resolve this issue, we used a method of modifying &lt;a href="https://en.wikipedia.org/wiki/Rpath">rpath&lt;/a> in the RocksDB dynamic link library file. rpath refers to &lt;q>run-time search path&lt;/q>, which is hard-coded within a library file or executable file so the &lt;a href="https://en.wikipedia.org/wiki/Dynamic_linker">dynamic linking&lt;/a> &lt;a href="https://en.wikipedia.org/wiki/Loader_(computing)">loader&lt;/a> can find the required library in that file. Initially, we considered modifying the rpath when building the RocksDB library, but we eventually decided to modify the rpath in the completed library file because the build script in RocksDB turned out to be more complicated than we thought. Fortunately, with tools called &lt;a href="https://www.unix.com/man-page/osx/1/install_name_tool/">&lt;code>install_name_tool&lt;/code>&lt;/a> on macOS and &lt;a href="https://github.com/NixOS/patchelf">&lt;code>patchelf&lt;/code>&lt;/a> on Linux, you can simply modify the rpath to the directory where the current RocksDB library exists.&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#fff">&lt;code class="language-bash" data-lang="bash">&lt;span style="color:#888"># macOS&lt;/span>
+$ install_name_tool -add_rpath &lt;span style="color:#d20;background-color:#fff0f0">&amp;#39;@loader_path&amp;#39;&lt;/span> librocksdb.dylib
+&lt;span style="color:#888"># linux&lt;/span>
+$ patchelf --set-rpath &lt;span style="color:#369">$ORIGIN&lt;/span> librocksdb.so
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>For more information on rpath modification, please refer to the pages below:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://medium.com/@donblas/fun-with-rpath-otool-and-install-name-tool-e3e41ae86172">Fun with rpath, otool, and install_name_tool&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://mindonmind.github.io/notes/linux/change_rpath.html">Change Library Search Path For Binary Files in Linux&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="implementing-database-capabilities-in-applications">Implementing Database Capabilities in Applications&lt;/h2>
+&lt;p>RocksDB supports relatively simple functionality, unlike the common &lt;a href="https://en.wikipedia.org/wiki/Relational_database">relational database&lt;/a> or &lt;a href="https://www.litedb.org/">LiteDB&lt;/a> used in &lt;code>DefaultStore&lt;/code>. Therefore, commonly supported features are often required to be directly implemented by the application when using RocksDB.&lt;/p>
+&lt;p>For instance, since there is no method to count the number of rows of stored data, it is necessary to implement them using various ways, such as storing the number separately every time data is updated or counting while traversing the entire data on each update.&lt;/p>
+&lt;p>Another example is the key search feature. RocksDB&amp;rsquo;s &lt;code>Seek&lt;/code> takes the prefix of the key as input to locate the key. While it&amp;rsquo;s easy to assume that this feature will only find keys that match the prefix like a typical database search, it&amp;rsquo;s actually more similar to &lt;a href="http://man7.org/linux/man-pages/man2/lseek.2.html">&lt;code>lseek()&lt;/code>&lt;/a>, which moves the offset of the file. Therefore, when using this feature to traverse a key, you need to check at each key that the first head of that key matches the string parts you are looking for.&lt;/p>
+&lt;h2 id="common-mistakes-when-overlooking-the-docs">Common Mistakes when Overlooking the Docs&lt;/h2>
+&lt;p>The APIs and documentation of RocksDB were not as user-friendly as expected, so extra attention was needed to use it.&lt;/p>
+&lt;p>One example was the &lt;a href="https://github.com/facebook/rocksdb/wiki/Column-Families">Column Family&lt;/a>, which acts like a namespace. After creating a column family in the database, we expected the column family to be brought up automatically when using the database again. However, an exception occurs if we did not specify all column families in the database using the API called &lt;code>ListColumnFamilies&lt;/code> when opening the database.&lt;/p>
+&lt;p>Also, although RocksDB uses GitHub Wiki for documentation, there is no separate arrangement such as documents divided by version. For example, if you look at the document for &lt;a href="https://github.com/facebook/rocksdb/wiki/Prefix-Seek">prefix seek&lt;/a>, the most recent usage is written at the end of the document, making it easy to use the outdated one if you only read the first part of the document.&lt;/p>
+&lt;h2 id="problems-with-binding-libraries">Problems with Binding Libraries&lt;/h2>
+&lt;p>Finally, let’s talk about &lt;a href="https://github.com/warrenfalk/rocksdb-sharp">rocksdb-sharp&lt;/a>, a C# binding library of RocksDB.&lt;/p>
+&lt;p>Among &lt;code>RocksDBStore&lt;/code> codes, one code handles &lt;code>RocksDBException&lt;/code> of rocksdb-sharp. But on some platforms, we experienced the following unusual issue while handling this exception.&lt;/p>
+&lt;pre>&lt;code>ExecutionEngineException: String conversion error: Illegal byte sequence encounted in the input.
+&lt;/code>&lt;/pre>
+&lt;p>After looking at the code, we figured out that this was caused by rocksdb-sharp using the &lt;a href="https://docs.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.marshal.ptrtostringansi?view=netframework-4.8">&lt;code>Marshal.PtrToStringAnsi()&lt;/code>&lt;/a> method when encoding an error message generated by RocksDB. Since we were forking rocksdb-sharp to solve the library dependency problem discussed above, we were able to solve the problem without much difficulty by changing the particular method to &lt;a href="https://docs.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.marshal.ptrtostringuni?view=netframework-4.8">&lt;code>Marshal.PtrToStringUni()&lt;/code>&lt;/a>.&lt;/p>
+&lt;h2 id="closing">Closing&lt;/h2>
+&lt;p>Through many different processes, we have applied RocksDB and experienced improvements in storage space and speed. Please refer to our &lt;a href="https://github.com/planetarium/libplanet/blob/master/Libplanet.RocksDBStore/RocksDBStore.cs">code&lt;/a> for detailed implementation.&lt;/p>
+&lt;p>And as always, if you have any questions about RocksDBStore or Libplanet in general, please visit our &lt;a href="https://discord.gg/planetarium">Discord&lt;/a> and let’s chat!&lt;/p>
+&lt;section class="footnotes" role="doc-endnotes">
+&lt;hr>
+&lt;ol>
+&lt;li id="fn:1" role="doc-endnote">
+&lt;p>We took this approach during this phase because Nine Chronicles was being tested to only a small number of players, enabling us to distribute files without an installer. However, now that we’re deploying Nine Chronicles with an installer, other approaches have been developed. We will introduce some of them on Snack in the near future. &lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;/section></content><author><name>Seunghun Lee</name><uri>https://github.com/earlbread</uri><email>seunghun@planetariumhq.com</email></author></entry><entry><title>Libplanet Game Jam</title><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/03/libplanet-gamejam/" title="Libplanet Game Jam"/><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/03/libplanet-gamejam/" hreflang="ko" title="Libplanet 게임잼"/><id>https://snack.planetarium.dev/eng/2020/03/libplanet-gamejam/</id><published>2020-03-19T00:00:00+00:00</published><updated>2020-03-19T00:00:00+00:00</updated><content type="html">&lt;p>Hello, I&amp;rsquo;m Seunggeol Song, a game client programmer at Planetarium. This time, I&amp;rsquo;d like to share with you my experience in the in-house &lt;a href="https://en.wikipedia.org/wiki/Game_jam">game jam&lt;/a>
+held at Planetarium.&lt;/p>
+&lt;p>Here at Planetarium, we use our own blockchain game library, &lt;a href="https://github.com/planetarium/libplanet">Libplanet&lt;/a>, to create games. Because Libplanet is currently being developed with the assumption that it will be primarily used in &lt;a href="https://unity.com/">Unity&lt;/a>, we have decided to build an &lt;a href="https://en.wikipedia.org/wiki/Software_development_kit">SDK&lt;/a> for Unity to enhance usability within the engine. To aid our development process, we held an in-house game Jam of creating small example Unity projects using Libplanet.&lt;/p>
+&lt;p>Groups of 2 or 3 people were formed and for 2 days before the opening day, we got together to brainstorm potential game projects and eventually came up with 5 dazzling game proposals to apply blockchain technology. I teamed up with &lt;a href="https://github.com/limebell">Chanhyuck Ko&lt;/a> to make a game of &lt;a href="https://en.wikipedia.org/wiki/Gomoku">Omok (Five in a Row)&lt;/a>. To make two players battle, we implemented the concept of a session (i.e. the &lt;strong>room&lt;/strong> of the game), using the concept of &lt;code>Action&lt;/code> and &lt;code>State&lt;/code> in Libplanet.&lt;/p>
+&lt;figure>
+&lt;img src="screenshot.png"
+alt="The Great Looking Omok Game We Created!"/> &lt;figcaption>
+&lt;p>The Great Looking Omok Game We Created!&lt;/p>
+&lt;/figcaption>
+&lt;/figure>
+&lt;p>First, let me introduce some key states and the actions that change them.&lt;/p>
+&lt;p>&lt;code>SessionState&lt;/code>: This state saves the session’s information. There is a unique key (room title concept) to distinguish a session from a list in &lt;code>AgentState&lt;/code>, which is the player information in the session. There is also an address that lets you have access to this state.&lt;/p>
+&lt;p>&lt;code>AgentState&lt;/code>: This state saves account information of a player. Here we have the player&amp;rsquo;s information (typically wins and losses) and address.&lt;/p>
+&lt;p>&lt;code>PlayerState&lt;/code>: This state saves information about the Go stones used by a player in the game. The coordinates of the stones in the Omok table are stored.&lt;/p>
+&lt;p>&lt;code>JoinSession&lt;/code>: This action joins a session with the key a player enters. If there’s no session with the entered key, this action creates a new session with that key. This will change &lt;code>SessionState&lt;/code>.&lt;/p>
+&lt;p>&lt;code>PlaceAction&lt;/code>: This action places a Go stone on the Omok table. This changes the stone information of &lt;code>PlayerState&lt;/code>.&lt;/p>
+&lt;p>&lt;code>ResignAction&lt;/code>: This action surrenders the game. It changes both players&amp;rsquo; &lt;code>AgentState&lt;/code>, recording a loss to the loser and a win to the winner.&lt;/p>
+&lt;p>For more specific internal implementation or code, visit the &lt;a href="https://github.com/planetarium/planet-omok">GitHub repository&lt;/a>!&lt;/p>
+&lt;p>From the overall experience, I felt that the key to developing blockchain games using Libplanet is ultimately knowing how to deal with these states and actions. Action changes states and we take those states in-game logic to play the game. Before game jam, I didn&amp;rsquo;t have the chance to develop an action myself because I had only recently joined Planetarium. But after implementing the general concept of the session with Chanhyuck Ko, I was able to understand the meaning of action and state and their general usage. It was a great learning experience in many ways.&lt;/p>
+&lt;h2 id="closing">Closing&lt;/h2>
+&lt;p>If you’re also interested in learning these concepts, I recommend you to take a look at the &lt;a href="https://github.com/planetarium/planet-clicker">Planet Clicker GitHub repository&lt;/a>, which is a clicker game that&amp;rsquo;s easy to use while getting familiar with the action and state structure. And as always, if you have any questions, please visit our &lt;a href="https://discord.gg/planetarium">Discord chatroom&lt;/a> and let’s chat!&lt;/p></content><author><name>Seunggeol Song</name><uri>https://github.com/unengine</uri><email>ssg@planetariumhq.com</email></author></entry><entry><title>Game Developer Meets Libplanet 😂</title><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/02/hi-libplanet-i-am-game-developer/" title="Game Developer Meets Libplanet 😂"/><id>https://snack.planetarium.dev/eng/2020/02/hi-libplanet-i-am-game-developer/</id><published>2020-02-26T00:00:00+00:00</published><updated>2020-02-26T00:00:00+00:00</updated><content type="html">&lt;p>Hello, I&amp;rsquo;m Hyun Seungmin from Planetarium game dev team. Today, I’ll talk about applying &lt;dfn>&lt;abbr title="peer-to-peer">P2P&lt;/abbr>&lt;/dfn> structure to a game using Libplanet instead of the typical &lt;dfn>client–server&lt;/dfn> structure. Please note that the contents are entirely based on my experience.&lt;/p>
+&lt;p>First, let&amp;rsquo;s talk about the &lt;em>client–server&lt;/em> structure. Most projects I&amp;rsquo;ve participated in dealt with client-server structures. In these structures, protocols are constructed for communication purposes, designed to be similar to Web communication. When a client makes a request and hands it over to a server, the server makes a response and returns it to the client. The request mainly consists of a user input, and the response contains error codes with the protocol&amp;rsquo;s success or failure information and the affected status value (i.e. the &lt;dfn>change&lt;/dfn>). Of course, the response doesn&amp;rsquo;t need to include changes that could be predicted by the client (including the amount of gold remaining after purchase in response to a purchase request).&lt;/p>
+&lt;p>Next, let&amp;rsquo;s look at the &lt;em>P2P&lt;/em> structure that I&amp;rsquo;m currently developing. Libplanet constructs the protocol mentioned above in a class (i.e. &lt;dfn>action&lt;/dfn>) that implements the &lt;code>IAction&lt;/code> interface. When a client creates an action and hands it over to a node, the node collects the actions, creates a transaction, collects the transactions, and then creates a block. In this process, a &lt;code>Render&lt;/code> and an &lt;code>Unrender&lt;/code> event occur for each action, which allow the client to know whether the action is &lt;em>successful&lt;/em> or has been &lt;em>rolled back&lt;/em>.&lt;/p>
+&lt;p>Although it may seem like a similar structure, on a client–server, the request and response may be separated so the response can contain request information (success or failure, the detailed reason if it fails) as well as the changes. On P2P the other hand, only the request (action) exists and only its information (even render or unrender information requires the node to meet a condition in which it does not stop) can be known. Instead, an interface to access the &lt;em>before and after status of the action&lt;/em> in each render or unrender stage is provided.&lt;/p>
+&lt;p>The difference addressed above created a concern for me.&lt;/p>
+&lt;blockquote>
+&lt;p>How can we know the changes?&lt;/p>
+&lt;/blockquote>
+&lt;p>The issue was that when executing the action of adding an item to the character inventory, I wanted to avoid recreating the entire inventory.&lt;/p>
+&lt;h3 id="1-compare-before-and-after-status-values-of-an-actions-render">1. Compare Before and After Status Values of an Action&amp;rsquo;s Render&lt;/h3>
+&lt;p>The 1st option I thought of was to compare status values before and after the render of an action and extract the changes. However, I was worried that there would be performance issues while deserializing information serialized in blocks, casting them into status values A and B, and then comparing the two at every render·unrender stage. Status values A and B were already large, and there was plenty of room for further growth.&lt;/p>
+&lt;h3 id="2-include-changes-in-each-action">2. Include Changes in Each Action&lt;/h3>
+&lt;p>With my 2nd option, I thought that I could accomplish my goals without changing the existing structure and started right away. Despite the feeling that everything was going the way I wanted it to go, I realized that the tests we&amp;rsquo;ve done so far were on single nodes, and that there would be problems in a multi-node environment. Here’s why.&lt;/p>
+&lt;p>All nodes participating in the network process a specific action, and &lt;code>IAction.PlainValue&lt;/code> property and &lt;code>IAction.LoadPlainValue()&lt;/code> method ensure that two processing results will be the same even if an action is processed and transmitted from another node. Although it seemed to work on a single node, I realized that in order for it to work on a multi-node, you had to include changes in the property, not somewhere else in the action. And if you actually went through this process (which I did to see what would happen), an &lt;code>InvalidTxSignatureException&lt;/code> occurs. This happens when the status value of an action changes. So the exception obviously occurs because the change is empty when you create an action and is filled after the action is rendered. From this process, I realized that the &lt;em>status value of an action is written so that it wouldn&amp;rsquo;t change&lt;/em>.&lt;/p>
+&lt;p>Then I thought maybe I could include &lt;em>predictable changes&lt;/em> when creating an action. Unfortunately, this was easy to hack since the node would simply believe what the client created, so I cleared this idea from my mind in no time. But what if there was a way to verify the &lt;em>predictable change&lt;/em> within the action? So I asked the engine team, and they responded that the &lt;code>IRandom&lt;/code> interface provided by the engine is completely objective and therefore, a &lt;em>predictable change&lt;/em> does not exist. Now that’s good news.&lt;/p>
+&lt;h3 id="3-include-changes-in-target-status-value-of-each-action">3. Include Changes in Target Status Value of Each Action&lt;/h3>
+&lt;p>This method seemed fine, too. I had an expectation that including changes of an action in the target status value would allow us to achieve our goal with a simple expansion without structural modification. The changes of each action piled up in the target status value, and the client would refer to those changess stacked in the target status value at the render stage of a particular action. The change already calculated once didn’t need to be recalculated, and the reference timing of the change was also contextually secure, so client development was smooth. But of course, problems were bound to rise.&lt;/p>
+&lt;blockquote>
+&lt;p>How do we manage life cycles of specific actions’ changes that accumulate in the target status value?&lt;/p>
+&lt;/blockquote>
+&lt;p>Since change in status value only occurred through an action, a separate action was required to eliminate any changes that were no longer needed. If a target status value is changed to stack changes of Action A, and Action B is used to remove changes that are no longer needed, should those changes be put in the target status value? Yes, there was a logical exception so I&amp;rsquo;ve put this plan on hold.&lt;/p>
+&lt;hr>
+&lt;p>Even while writing this piece, Libplanet has become continuously powerful. The &lt;code>IActionContext&lt;/code> type factor, which is achieved in the execution stage of an action, provides an &lt;code>IRandom&lt;/code> interface so that the same result can be conclusively obtained across all nodes regardless of the action&amp;rsquo;s status value. While the random object provided by Unity cannot provide the same result across all nodes, the &lt;code>IRandom&lt;/code> interface can provide one. Do you see how option 2 might once again be possible?&lt;/p>
+&lt;p>Next time, I&amp;rsquo;ll talk about the &lt;code>IRandom&lt;/code> interface and how to create a beautiful client environment.&lt;/p></content><author><name>Hyun Seungmin</name><uri>https://github.com/boscohyun</uri><email>seungmin@planetariumhq.com</email></author></entry><entry><title>Software from Year 2562 Emerges in Thailand?</title><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/02/thai-in-2562/" title="Software from Year 2562 Emerges in Thailand?"/><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/02/thai-in-2562/" hreflang="ko" title="태국에서만 2562년으로 가는 소프트웨어?"/><id>https://snack.planetarium.dev/eng/2020/02/thai-in-2562/</id><published>2020-02-25T00:00:00+00:00</published><updated>2020-02-25T00:00:00+00:00</updated><content type="html">&lt;h2 id="guest-from-the-future">Guest from the Future&lt;/h2>
+&lt;p>Last December, we finally conducted our first alpha test, and thankfully, many people from all over the world participated. It was both a great opportunity and a challenge for the team. Of course, there were big and small problems. Among them, one problem that took us by surprise was IBD.&lt;/p>
+&lt;p>&lt;abbr title="initial block download">IBD&lt;/abbr> is a stage that occurs when you turn on a game, download blocks from other peers in the network and sync them to the latest state. Since we had participants from all over the world, IBD often took a long time or even ended abnormally due to network delays.&lt;/p>
+&lt;p>One of our participants reported a very unusual symptom. Unlike other problems we had at that time, the participant successfully downloaded the first block but couldn’t download the rest afterward.&lt;/p>
+&lt;figure>
+&lt;img src="1.png"
+alt="Screenshot of Our Participant"/> &lt;figcaption>
+&lt;p>Screenshot of Our Participant&lt;/p>
+&lt;/figcaption>
+&lt;/figure>
+&lt;p>We checked the screenshot our user sent us and realized one strange thing. The date was 2562 instead of 2019. So we came up with a hypothesis. For some reason, the file system was broken and the hash of the block header was being miscalculated.&lt;/p>
+&lt;p>To verify this, we asked for permission to investigate the problem directly through remote desktop.&lt;/p>
+&lt;h2 id="the-date-was-not-wrong">The Date Was Not Wrong&lt;/h2>
+&lt;p>Fortunately, the user experiencing this problem kindly accepted our request for remote access. And once we were able to access the desktop, we saw that the date was still in 2562 as it appeared in the screenshot. First, we opened the Control Panel to sync time. Like most modern operating systems, Windows has the ability to synchronize time over the network. But when we resynchronized time, the control panel and the system&amp;rsquo;s year didn&amp;rsquo;t change and remained in 2562. Notably, apart from the year, date and time were no different from the system on our side.&lt;/p>
+&lt;p>We decided to explore the problem a little bit more, and while checking out the control panel, one detail caught our attention.&lt;/p>
+&lt;figure>
+&lt;img src="2.png"
+alt="Year Displayed as 2019 in Gregorian calendar"/> &lt;figcaption>
+&lt;p>Year Displayed as 2019 in Gregorian calendar&lt;/p>
+&lt;/figcaption>
+&lt;/figure>
+&lt;p>No one in our development team could read Thai, but looking at &amp;ldquo;Date in Gregorian”, we noticed that &amp;ldquo;2562&amp;rdquo; was a different expression of &amp;ldquo;2019&amp;rdquo;. So we changed the format, and as expected, December 16th, 2019 was displayed. And when we launched the game for testing, it went smoothly at the IBD stage.&lt;/p>
+&lt;h2 id="buddhist-calendar">Buddhist Calendar&lt;/h2>
+&lt;p>Now that we had found a clue and a way to reproduce the issue, we suggested our user to set up the region in the US for the time being, and thankfully, our user agreed to our proposal.&lt;/p>
+&lt;p>To reproduce this problem on our side, we changed the regional setting of our OS to Thailand in the local development environment and then ran the unit test of Libplanet. Sure enough, we were able to see some of them fail. The most crucial problem was that the hash of the same block was changing. As we looked closer, the result of &lt;a href="https://github.com/planetarium/libplanet/blob/82aaba0c37591ebf51207038e8c5c122272ce98b/Libplanet/Blocks/Block.cs#L488">serializing &lt;code>Block&amp;lt;T&amp;gt;.Timestamp&lt;/code> field&lt;/a> in the process of creating a hash input was different than expected. The behavior of the &lt;code>DateTimeOffset.ToString()&lt;/code> method was affected by the locale of the operating system.&lt;/p>
+&lt;p>In Indochina Peninsula, Buddhism takes the same place as Christianity in Europe. So, instead of the &lt;a href="https://en.wikipedia.org/wiki/Gregorian_calendar">Gregorian calendar&lt;/a>, which uses the birth of Jesus Christ as an epoch, countries in Indochina Peninsula had used the &lt;a href="https://en.wikipedia.org/wiki/Buddhist_calendar">Buddhist calendar&lt;/a> which takes Buddha’s attainment of parinirvana (nirvana after death) as an epoch. Although countries like Cambodia and Laos eventually took on the Gregorian calendar, Thailand still uses the &lt;a href="https://en.wikipedia.org/wiki/Thai_solar_calendar">Thai solar calendar&lt;/a>, which is a solar modification of the traditional Buddhist lunar calendar. Buddha’s parinirvana was in 543 BC, and so the year 2019 A.D. becomes 2562 under the Thai solar calendar.&lt;/p>
+&lt;p>As such, the world uses various calendars depending on the cultural region. So when displaying a user interface, time should be displayed in the appropriate date format for each region. In fact, &lt;code>DateTimeOffset.ToString()&lt;/code> method has an overload that also receives &lt;a href="https://docs.microsoft.com/en-us/dotnet/api/system.iformatprovider?view=netstandard-2.0">&lt;code>IFormatProvider&lt;/code>&lt;/a> objects as parameters for this purpose. &lt;a href="https://docs.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo?view=netstandard-2.0">&lt;code>CultureInfo&lt;/code>&lt;/a> is the most common class to implement the &lt;code>IFormatProvider&lt;/code> interface. As the name suggests, &lt;code>CultureInfo&lt;/code> is the same concept that the Unix family calls locale. As shown below, the result of &lt;code>DateTimeOffset.ToString()&lt;/code> method depends on which locale you set up as the parameter.&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#fff">&lt;code class="language-csharp" data-lang="csharp">&amp;gt; &lt;span style="color:#080;font-weight:bold">using&lt;/span> &lt;span style="color:#b06;font-weight:bold">System.Globalization&lt;/span>;
+&amp;gt; &lt;span style="color:#888;font-weight:bold">var&lt;/span> now = DateTimeOffset.Now;
+&amp;gt; now.ToString(&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;yyyy-MM-ddTHH:mm:ss.ffffffZ&amp;#34;&lt;/span>, &lt;span style="color:#080;font-weight:bold">new&lt;/span> CultureInfo(&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;ko-KR&amp;#34;&lt;/span>))
+&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;2020-02-13T17:37:16.436163Z&amp;#34;&lt;/span>
+&amp;gt; now.ToString(&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;yyyy-MM-ddTHH:mm:ss.ffffffZ&amp;#34;&lt;/span>, &lt;span style="color:#080;font-weight:bold">new&lt;/span> CultureInfo(&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;th-TH&amp;#34;&lt;/span>))
+&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;2563-02-13T17:37:16.436163Z&amp;#34;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>However, if you omit the parameter without setting any locale, the method will follow the locale of the environment in which the code is executed. The code below is the result of setting up the operating system region in Korea.&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#fff">&lt;code class="language-csharp" data-lang="csharp">&amp;gt; now.ToString(&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;yyyy-MM-ddTHH:mm:ss.ffffffZ&amp;#34;&lt;/span>)
+&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;2020-02-13T17:37:16.436163Z&amp;#34;&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;a href="https://docs.microsoft.com/en-us/dotnet/api/system.datetimeoffset.tostring?view=netstandard-2.0#System_DateTimeOffset_ToString">According to the docs, the overload with the omitted parameter&lt;/a> follows &lt;a href="https://docs.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo.currentculture?view=netstandard-2.0">&lt;code>CultureInfo.CurrentCulture&lt;/code>&lt;/a>. As you can infer from its name, the &lt;code>CultureInfo.CurrentCulture&lt;/code> property points to the locale of the execution environment. Therefore, you must explicitly specify &lt;a href="https://docs.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo.invariantculture?view=netstandard-2.0">&lt;code>CultureInfo.InvariantCulture&lt;/code>&lt;/a> if you want a deterministic action at all times regardless of the locale of your execution environment.&lt;/p>
+&lt;p>Even though the method may be non-deterministic, the API designed to follow the locale of the execution environment is probably intended because such formatting operations are usually used for a user interface, and coding can naturally look appropriate to the cultural community without much concern about internationalization. But the reason why we used this method was not for a user interface, but for the cryptographic hash input that had to be deterministic— this turned out to be a mistake.&lt;/p>
+&lt;p>Now that we know the cause, we have solved the urgent problem by &lt;a href="https://github.com/planetarium/libplanet/pull/734">finding a method that has the &lt;code>CultureInfo&lt;/code> or &lt;code>IFormatProvider&lt;/code> parameters omitted, and patching it to explicitly designate &lt;code>CultureInfo.InvariantCulture&lt;/code>, just like the method &lt;code>DateTimeOffset.ToString()&lt;/code>&lt;/a>.&lt;/p>
+&lt;p>CI has also been reinforced with unit testing in Arabic, French, Hebrew locale and so on. Since there are a lot of countries in Europe that use comma (&lt;code>,&lt;/code>) instead of a period (&lt;code>.&lt;/code>) in decimal places, and countries in the Middle East that writes from right to left, we deliberately chose language regions that were somewhat unfamiliar to us.&lt;/p>
+&lt;p>In addition, because similar mistakes can happen in the future, we have &lt;a href="https://github.com/planetarium/libplanet/pull/737">introduced static analysis&lt;/a> that finds codes whose behavior depends on the locale of the execution environment.&lt;/p>
+&lt;h2 id="closing">Closing&lt;/h2>
+&lt;p>As mentioned earlier, using APIs with non-determinant behaviors such as formatting in functions that calculate the cryptographic hash is not a good decision in the long run. Typically, because strings are heavily formatted, it&amp;rsquo;s safe to avoid them from data level perspective.&lt;/p>
+&lt;p>But unfortunately, we found this problem in the middle of the test, and we haven&amp;rsquo;t made any major modifications yet because changing the hash method was a decision that would break the compatibility of previous data. However, these parts will be modified before releasing Libplanet 1.0.&lt;/p></content><author><name>Hong Minhee</name><uri>https://github.com/dahlia</uri><email>hong.minhee@planetariumhq.com</email></author><author><name>Swen Mun</name><uri>https://github.com/longfin</uri><email>swen@planetariumhq.com</email></author></entry><entry><title>Testing P2P Game with Kubernetes</title><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/02/k8s-1/" title="Testing P2P Game with Kubernetes"/><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/02/k8s-1/" hreflang="ko" title="쿠버네티스로 P2P 게임 테스트하기"/><id>https://snack.planetarium.dev/eng/2020/02/k8s-1/</id><published>2020-02-20T00:00:00+00:00</published><updated>2020-02-20T00:00:00+00:00</updated><content type="html">&lt;p>Hello, I am Swen Mun, &lt;a href="https://libplanet.io">Libplanet&lt;/a> developer at &lt;a href="https://planetariumhq.com">Planetarium&lt;/a>. From December 16th last year, we held a 2-week alpha test of &lt;a href="https://nine-chronicles.com">Nine Chronicles&lt;/a>, a fully decentralized MMORPG. Today, we&amp;rsquo;re going to share our experience deploying headless games on &lt;a href="https://kubernetes.io/">Kubernetes&lt;/a>.&lt;/p>
+&lt;h2 id="what-did-we-need">What Did We Need?&lt;/h2>
+&lt;p>A game developed with Libplanet is considered a blockchain node, and the same goes for Nine Chronicles. That is, every game client can play a role that is in itself similar to a typical game server (data storage, refereeing). To hold a test as close to a game environment in this P2P environment, we needed to run as many of these game clients at the same time.&lt;/p>
+&lt;p>Although we will be running the games, we’re focused on executing as many game clients at the same time so it&amp;rsquo;s not that important to see the screen of each client. Therefore, we’re OK with running headless without any UI.&lt;/p>
+&lt;h2 id="test-conditions">Test Conditions&lt;/h2>
+&lt;ul>
+&lt;li>Games under testing (as with software in general) may need to be updated as necessary. It&amp;rsquo;s not a good strategy to go around all running clients and update them one by one.&lt;/li>
+&lt;li>While it&amp;rsquo;s easy for an individual developer to run one or two clients, we want to test far more than just a handful.&lt;/li>
+&lt;li>Although we will be running the games, we’re focused on executing as many game clients at the same time so it&amp;rsquo;s not that important to see the screen of each client. Therefore, we’re OK with running &lt;a href="https://en.wikipedia.org/wiki/Headless_software">headless&lt;/a> without any UI.&lt;/li>
+&lt;/ul>
+&lt;h2 id="docker">Docker&lt;/h2>
+&lt;p>To meet these conditions, we needed to run and manage multiple processes at the same time, and that led us to use &lt;a href="https://docker.com">Docker&lt;/a>. Docker is a popular solution for containerizing and running Linux applications throughout your environment. Although we’re not considering Linux as a major platform for Nine Chronicle’s first launch, developing games with Unity has made it relatively easy to produce a build for Linux, and apart from minor UI bugs (which doesn&amp;rsquo;t matter much for the headless test node), the behavior didn&amp;rsquo;t change much.&lt;/p>
+&lt;h2 id="kubernetes">Kubernetes&lt;/h2>
+&lt;p>Even though we used a Docker to make a container that easily runs a game build, that wasn&amp;rsquo;t the end. Our goal was to easily run/end/update many clients while maintaining a test environment. To do this, just using Docker wasn’t enough.&lt;/p>
+&lt;p>Our first option was the execution environment offered by cloud providers, such as &lt;abbr title="Elastic Container Service">&lt;a href="https://aws.amazon.com/ecs/?nc1=h_ls">ECS&lt;/a>&lt;/abbr>. These execution environments are designed to efficiently set up complex workflows. But in other words, they&amp;rsquo;re complex to set up and we wouldn’t be using a lot of functionality provided since we’re just using it in a test environment. Also, a test environment dependent on a particular cloud provider would likely to be a burden on future operations.&lt;/p>
+&lt;figure>
+&lt;img src="comparison.png"
+alt="AWS Container Orchestration Comparison"/> &lt;figcaption>
+&lt;p>AWS Container Orchestration Comparison&lt;/p>
+&lt;/figcaption>
+&lt;/figure>
+&lt;p>So the alternative we came up with was Kubernetes. Kubernetes is an open-source project that allows us to do what we want similar to services like ECS while being Provider Agnostic. The feature of running and stopping complex containers is called container orchestration, and because we wanted to run multiple containers (games) of the same kind, the setup wasn&amp;rsquo;t that complicated.&lt;/p>
+&lt;h2 id="coming-up">Coming Up&lt;/h2>
+&lt;p>Next time we&amp;rsquo;ll take a look at the specific procedures for setting up the Kubernetes for testing and how to deploy it on the cloud.&lt;/p></content><author><name>Swen Mun</name><uri>https://github.com/longfin</uri><email>swen@planetariumhq.com</email></author></entry><entry><title>Libplanet 0.8 Released</title><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/02/libplanet-0.8/" title="Libplanet 0.8 Released"/><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/02/libplanet-0.8/" hreflang="ko" title="Libplanet 0.8 릴리스"/><id>https://snack.planetarium.dev/eng/2020/02/libplanet-0.8/</id><published>2020-02-05T00:00:00+00:00</published><updated>2020-02-05T00:00:00+00:00</updated><content type="html">&lt;p>Hello All.&lt;/p>
+&lt;p>Our team has released the eighth minor version of &lt;a href="https://libplanet.io/">Libplanet&lt;/a>, &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.8.0">Version 0.8&lt;/a>.&lt;/p>
+&lt;p>Libplanet is a common library that solves game implementation problems such as P2P communication and data synchronization when creating online multiplayer games that run on distributed P2P.&lt;/p>
+&lt;p>With the new version updated in nearly three months, there have been many improvements in version 0.8 including storage optimization. This article will cover major changes of Version 0.8.&lt;/p>
+&lt;h2 id="genesis-block-anticipation">Genesis Block Anticipation&lt;/h2>
+&lt;p>&lt;code>BlockChain&amp;lt;T&amp;gt;&lt;/code> now anticipates a particular genesis block. This is to prevent mistakes such as multiple games attempting to connect to the wrong network. Mistakes like above might occur because although games made from Libplanet form separate networks, Libplanet behaves in a type of metaprotocol.&lt;/p>
+&lt;p>&lt;a href="https://docs.libplanet.io/0.8.0/api/Libplanet.Blockchain.BlockChain-1.html#Libplanet_Blockchain_BlockChain_1__ctor_Libplanet_Blockchain_Policies_IBlockPolicy__0__Libplanet_Store_IStore_Libplanet_Blocks_Block__0__">&lt;code>BlockChain&amp;lt;T&amp;gt;()&lt;/code> constructor&lt;/a> takes the &lt;code>Block&amp;lt;T&amp;gt;&lt;/code> object as a factor and the block becomes the first block. If genesis block contained in &lt;code>IStore&lt;/code> and the genesis block expected by the &lt;code>BlockChain&amp;lt;T&amp;gt;()&lt;/code> constructor do not match, &lt;a href="https://docs.libplanet.io/0.8.0/api/Libplanet.Blocks.InvalidGenesisBlockException.html">&lt;code>InvalidGenesisBlockException&lt;/code>&lt;/a> will occur.&lt;/p>
+&lt;p>Currently, the constructor receives the entire &lt;code>Block&amp;lt;T&amp;gt;&lt;/code> object, but &lt;a href="https://github.com/planetarium/libplanet/pull/769">the next version will have the constructor only receive the genesis block hash and the actual block content to be received from other nodes on the network.&lt;/a>&lt;/p>
+&lt;h2 id="defaultstoredefaultstore--litedbstore">&lt;a href="https://docs.libplanet.io/master/api/Libplanet.Store.DefaultStore.html">&lt;code>DefaultStore&lt;/code>&lt;/a> ← &lt;code>LiteDBStore&lt;/code>&lt;/h2>
+&lt;p>&lt;code>LiteDBStore&lt;/code>, a built-in &lt;code>IStore&lt;/code> implementation, has been removed and &lt;a href="https://docs.libplanet.io/master/api/Libplanet.Store.DefaultStore.html">&lt;code>DefaultStore&lt;/code>&lt;/a> has replaced it.&lt;/p>
+&lt;p>The reason for this replacement is that while only a single LiteDB file was stored before, more files with multiple formats have been added to be stored within a directory from this version.&lt;/p>
+&lt;p>Another reason was our intention to remove implementation details from the name, with efforts to optimize the repository until the 1.0.0 release.&lt;/p>
+&lt;p>In addition, a &lt;code>compress&lt;/code> option has been created in the &lt;a href="https://docs.libplanet.io/master/api/Libplanet.Store.DefaultStore.html#Libplanet_Store_DefaultStore__ctor_System_String_System_Boolean_System_Boolean_System_Int32_System_Int32_System_Int32_System_Int32_System_Boolean_System_Boolean_">&lt;code>DefaultStore()&lt;/code> constructor&lt;/a> to reduce storage space. Although the option is still turned off by default in this version, the default will be changed to &lt;code>true&lt;/code> in the next version.&lt;/p>
+&lt;h2 id="icryptobackendicryptobackend">&lt;a href="https://docs.libplanet.io/0.8.0/api/Libplanet.Crypto.ICryptoBackend.html">&lt;code>ICryptoBackend&lt;/code>&lt;/a>&lt;/h2>
+&lt;p>To be used on a variety of platforms, Libplanet has been using a cryptographic library written in pure C#, &lt;a href="http://www.bouncycastle.org/csharp/">Bouncy Castle&lt;/a>. Although pure C# implementations are a great advantage in portability, they serve as a penalty in performance.&lt;/p>
+&lt;p>In the new version, an abstraction layer called &lt;a href="https://docs.libplanet.io/0.8.0/api/Libplanet.Crypto.ICryptoBackend.html">&lt;code>ICryptoBackend&lt;/code>&lt;/a> has been added to allow game developers to choose between portability and performance. While the default implementation, &lt;a href="https://docs.libplanet.io/0.8.0/api/Libplanet.Crypto.DefaultCryptoBackend.html">&lt;code>DefaultCryptoBackend&lt;/code>&lt;/a>, is still internally dependent on Bouncy Castle, game developers can achieve performance benefits by implementing the &lt;code>ICryptoBackend&lt;/code> interface appropriately, depending on the game’s target platform.&lt;/p>
+&lt;p>For example, if you want Libplanet to use &lt;code>MyCryptoBackend&lt;/code> class that implements &lt;code>ICryptoBackend&lt;/code>, you can overwrite &lt;a href="https://docs.libplanet.io/0.8.0/api/Libplanet.Crypto.CryptoConfig.html#Libplanet_Crypto_CryptoConfig_CryptoBackend">&lt;code>CryptoConfig.CryptoBackend&lt;/code> property&lt;/a> as shown below.&lt;/p>
+&lt;div class="highlight">&lt;pre style="background-color:#fff">&lt;code class="language-csharp" data-lang="csharp">CryptoConfig.CryptoBackend = &lt;span style="color:#080;font-weight:bold">new&lt;/span> MyCryptoBackend();
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>In the case of &lt;a href="https://nine-chronicles.com/">Nine Chronicles&lt;/a>, a game currently being developed by our team, we have also improved game performance by implementing &lt;code>ICryptoBackend&lt;/code> interface that calls &lt;a href="https://github.com/bitcoin-core/secp256k1">secp256k1&lt;/a> C library unveiled in the Bitcoin project.&lt;/p>
+&lt;h2 id="routing-table-improvement">Routing Table Improvement&lt;/h2>
+&lt;p>Because Libplanet uses &lt;a href="https://snack.planetarium.dev/eng/2019/09/kademlia/">&lt;abbr title="distributed hash table">DHT&lt;/abbr>&lt;/a> to communicate with other peers, it stores information about the peers associated with itself on the routing table.&lt;/p>
+&lt;p>Traditionally, this routing table only stored the most recent communication points with that peer. But now, we&amp;rsquo;ve also added a communication delay info to give you more information about the network environment.&lt;/p>
+&lt;p>Developers can use the newly added &lt;a href="https://docs.libplanet.io/0.8.0/api/Libplanet.Net.Swarm-1.html#Libplanet_Net_Swarm_1_CheckAllPeersAsync_System_Nullable_TimeSpan__CancellationToken_">&lt;code>Swarm&amp;lt;T&amp;gt;.CheckAllPeersAsync()&lt;/code> method&lt;/a> to update peers stored on routing tables, and access &lt;a href="https://docs.libplanet.io/0.8.0/api/Libplanet.Net.Swarm-1.html#Libplanet_Net_Swarm_1_Peers">&lt;code>Swarm&amp;lt;T&amp;gt;.Peers&lt;/code> property&lt;/a> from outside Libplanet to identify the peers currently on its routing tables.&lt;/p>
+&lt;h2 id="changed-block-structure-and-serialization">Changed Block Structure and Serialization&lt;/h2>
+&lt;p>A block that is a component of the blockchain can be divided into two parts: the transactions and the metadata excluding the transactions.&lt;/p>
+&lt;p>As with many blockchain projects, we&amp;rsquo;ve defined the part minus the transactions as block headers, and we are now able to compute more efficiently than ever before by using a block header that contains more information compared to only using block hash for computation.&lt;/p>
+&lt;p>In addition, when serializing blocks and transactions, field keys are shortened and the empty fields are completely excluded, making the serialized expression lighter.&lt;/p>
+&lt;h2 id="documentation-improvement">Documentation Improvement&lt;/h2>
+&lt;p>Although not a change to the library itself, there have been improvements in the design of the &lt;a href="https://docs.libplanet.io/0.8.0/">docs website&lt;/a> and a new &lt;a href="https://docs.libplanet.io/0.8.0/articles/overview.html">Overview&lt;/a> document written by Swen Mun has been added.&lt;/p>
+&lt;h2 id="furthermore">Furthermore,&lt;/h2>
+&lt;p>In addition, there have been a number of other changes while fixing many problems that we found during our 3 months of &lt;a href="https://nine-chronicles.com/">Nine Chronicles&lt;/a> public testing. Details can be found in the &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.8.0">entire change history&lt;/a>.&lt;/p>
+&lt;p>If you&amp;rsquo;re curious, install it and try it. And as always, if you have any questions about the new release or Libplanet in general, please visit our &lt;a href="https://discord.gg/planetarium">Discord&lt;/a> chatroom and let’s chat!&lt;/p></content><author><name>Chanhyuck Ko</name><uri>https://github.com/limebell</uri><email>lime@planetariumhq.com</email></author><author><name>Hong Minhee</name><uri>https://github.com/dahlia</uri><email>hong.minhee@planetariumhq.com</email></author></entry><entry><title>Libplanet 0.7 Released</title><link rel="alternate" href="https://snack.planetarium.dev/eng/2019/11/libplanet-0.7/" title="Libplanet 0.7 Released"/><link rel="alternate" href="https://snack.planetarium.dev/kor/2019/11/libplanet-0.7/" hreflang="ko" title="Libplanet 0.7 릴리스"/><id>https://snack.planetarium.dev/eng/2019/11/libplanet-0.7/</id><published>2019-11-11T00:00:00+00:00</published><updated>2019-11-11T00:00:00+00:00</updated><content type="html">&lt;p>Hello everyone, our team has released the 7th minor version of &lt;a href="https://libplanet.io/">Libplanet&lt;/a>, &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.7.0">Version 0.7&lt;/a>.&lt;/p>
+&lt;p>Libplanet is a common library that solves game implementation problems such as P2P communication and data synchronization when creating online multiplayer games that run on distributed P2P.&lt;/p>
+&lt;p>Major changes in version 0.7 deal with stability and performance related improvements, as well as various usage improvements. In this article we will cover those key changes of Version 0.7.&lt;/p>
+&lt;h2 id="type-limitations-of-actions-and-states">Type Limitations of Actions and States&lt;/h2>
+&lt;p>In previous versions of Libplanet, states and properties of action were expressed in the &lt;code>object&lt;/code> type and serialized in &lt;a href="https://docs.microsoft.com/en-us/dotnet/standard/serialization/binary-serialization">.NET&amp;rsquo;s Binary Serialization&lt;/a> format when saved. Because this method allows you to serialize .NET objects as they are, there&amp;rsquo;s less burden for both parties that use or develop Libplanet. But ever since we started using this method, we decided to only use it short-term, recognizing the following limitations:&lt;/p>
+&lt;ul>
+&lt;li>The specific way serialization and deserialization takes place is implicit. While changes in type implementation affects the format being serialized, it&amp;rsquo;s difficult to determine what specific changes takes place.&lt;/li>
+&lt;li>After type values of previously different shapes are serialized, stored in blockchain and then attempted deserialization to the current type, a runtime error may occur or the value may be interpreted as a different meaning than originally intended.&lt;/li>
+&lt;li>If a type is defined by the team, you may use techniques such as &lt;a href="https://docs.microsoft.com/en-us/dotnet/standard/serialization/version-tolerant-serialization">VTS&lt;/a>, but if the type imported through a package other than an assembly made by the team is accidently mixed and serialized, it will be difficult to respond to serial format changes due to the changed inner expression of that type.&lt;/li>
+&lt;li>Serialized results are difficult to interpret on platforms other than .NET, and also, deserialization is difficult if assembly including serialized type is not shared on .NET platform. This makes it difficult for people to see the properties of an action or the states of a particular point in time in an app such as &lt;a href="https://github.com/planetarium/libplanet-explorer">Libplanet Explorer&lt;/a> or &lt;a href="https://docs.microsoft.com/en-us/dotnet/standard/serialization/version-tolerant-serialization">Libplanet Explorer Frontend&lt;/a>.&lt;/li>
+&lt;/ul>
+&lt;p>So from this version, states and properties of action have been changed to be expressed as &lt;a href="https://github.com/planetarium/bencodex.net/blob/0.2.0/Bencodex/Types/IValue.cs">&lt;code>IValue&lt;/code>&lt;/a> type of &lt;a href="https://github.com/planetarium/bencodex.net">Bencodex&lt;/a>. Therefore, you must explicitly write a code that converts the types that you define and use inside the game into &lt;code>IValue&lt;/code> format, as well as a code that interprets what is expressed in the &lt;code>IValue&lt;/code> format back into the types in the game. It&amp;rsquo;s a little inconvenient, but even when the type of internal expression you&amp;rsquo;re trying to serialize changes, you can easily add processing logic to your serialization or reverse-serialization method, and it&amp;rsquo;s also easier to implement compatibility between different versions.&lt;/p>
+&lt;h2 id="removed-ireadonlylistt-implementation-from-blockchaint">Removed &lt;code>IReadOnlyList&amp;lt;T&amp;gt;&lt;/code> Implementation from &lt;code>BlockChain&amp;lt;T&amp;gt;&lt;/code>&lt;/h2>
+&lt;p>Up until the previous version, &lt;code>BlockChain&amp;lt;T&amp;gt;&lt;/code> class was implementing &lt;code>IReadOnlyList&amp;lt;T&amp;gt;&lt;/code> interface, which allowed us to use &lt;a href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/linq/">LINQ&lt;/a> extension methods directly on the &lt;code>BlockChain&amp;lt;T&amp;gt;&lt;/code> object. The LINQ extension method provides a variety of convenience when handling linear objects, but depending on how you use it, it can significantly alter performance levels. For example, when there are 10,000 blocks in the &lt;code>BlockChain&amp;lt;T&amp;gt;&lt;/code> object and you want to import the 10,000th block using the &lt;code>.Last()&lt;/code> method of LINQ, it&amp;rsquo;s easy to think that only the last block is imported directly from the repository. But in reality, from the first block of &lt;code>BlockChain&amp;lt;T&amp;gt;&lt;/code>, to the last block, each block is loaded on memory and interpreted. This is not a big problem when few blocks are stored, but the more blocks are stored, the more performance issues they may lead to.&lt;/p>
+&lt;p>Starting with this version, we removed the implementation of &lt;code>IReadOnlyList&amp;lt;T&amp;gt;&lt;/code> from the &lt;code>BlockChain&amp;lt;T&amp;gt;&lt;/code> class altogether to prevent problems that might result from misusing LINQ extension methods. Instead, often used computations such as &lt;a href="https://docs.libplanet.io/0.7.0/api/Libplanet.Blockchain.BlockChain-1.html#Libplanet_Blockchain_BlockChain_1_Contains_Libplanet_Blocks_Block__0__">&lt;code>BlockChain&amp;lt;T&amp;gt;.Contains()&lt;/code>&lt;/a> will be directly provided for efficient implementation.&lt;/p>
+&lt;h2 id="key-store-implementation-to-safely-store-personal-keys">Key Store Implementation to Safely Store Personal Keys&lt;/h2>
+&lt;p>In this version, we have added a Key Store to help you encrypt and secure your private key. Each key file in the Key Store is represented by the [&lt;code>ProtectedPrivateKey&lt;/code>] &lt;a href="https://docs.libplanet.io/0.7.0/api/Libplanet.KeyStore.ProtectedPrivateKey.html">ProtectedPrivateKey&lt;/a> class and can be saved by encrypting the private key with the passphrase you enter. Also, you can save it in JSON format based on &lt;a href="https://github.com/ethereum/wiki/wiki/Web3-Secret-Storage-Definition">Web3 Secret Storage Definition&lt;/a> of &lt;a href="https://en.wikipedia.org/wiki/Ethereum">Ethereum&lt;/a> using the method &lt;a href="https://docs.libplanet.io/0.7.0/api/Libplanet.KeyStore.ProtectedPrivateKey.html#Libplanet_KeyStore_ProtectedPrivateKey_WriteJson_Stream_System_Nullable_Guid___">&lt;code>ProtectedPrivateKey.WriteJson()&lt;/code>&lt;/a>. In the future, there will be additional features for integrated management of Key Store directory.&lt;/p>
+&lt;p>Currently, Liplanet implements &lt;a href="https://en.wikipedia.org/wiki/PBKDF2">PBKDF2&lt;/a> and &lt;a href="https://en.wikipedia.org/wiki/Scrypt">Scrypt&lt;/a> &lt;a href="https://en.wikipedia.org/wiki/Key_derivation_function">key derivation functions&lt;/a>, and supports &lt;a href="https://en.wikipedia.org/wiki/Advanced_Encryption_Standard">AES&lt;/a>-128-&lt;a href="https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation#Counter_(CTR)">CTR&lt;/a> encryption algorithm. The Scrypt implementation has been contributed as &lt;a href="https://github.com/planetarium/libplanet/pull/654">contribution&lt;/a> by &lt;a href="https://github.com/minhoryang">minhoryang&lt;/a>. 🎉&lt;/p>
+&lt;h2 id="furthermore">Furthermore,&lt;/h2>
+&lt;p>This version includes many contributions from the &lt;a href="https://hacktoberfest.digitalocean.com/">Hacktoberfest&lt;/a> event. You can learn more about the event in &lt;a href="/eng/2019/11/looking-back-at-hacktoberfest/">Looking Back on Hacktoberfest&lt;/a> written by Swen Mun, and all other changes made to this version can be found in [Full Changes] &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.7.0">0.7.0&lt;/a>.&lt;/p>
+&lt;p>And as always, if you have any questions about the new release or Libplanet in general, please visit our &lt;a href="https://discord.gg/planetarium">Discord chatroom&lt;/a> and let’s chat!&lt;/p></content><author><name>Seunghun Lee</name><uri>https://github.com/earlbread</uri><email>seunghun@planetariumhq.com</email></author></entry><entry><title>Looking Back on Hacktoberfest</title><link rel="alternate" href="https://snack.planetarium.dev/eng/2019/11/looking-back-at-hacktoberfest/" title="Looking Back on Hacktoberfest"/><link rel="alternate" href="https://snack.planetarium.dev/kor/2019/11/looking-back-at-hacktoberfest/" hreflang="ko" title="Hacktoberfest를 돌아보며"/><id>https://snack.planetarium.dev/eng/2019/11/looking-back-at-hacktoberfest/</id><published>2019-11-08T00:00:00+00:00</published><updated>2019-11-08T00:00:00+00:00</updated><content type="html">&lt;p>Hello, today we&amp;rsquo;d like to present you with some of the contributions &lt;a href="https://planetariumhq.com">Planetarium&lt;/a> received from participating in &lt;a href="https://hacktoberfest.digitalocean.com/">Hacktoberfest&lt;/a> during the month of October.&lt;/p>
+&lt;h1 id="overview">Overview&lt;/h1>
+&lt;p>For Hacktoberfest, we prepared a total of 36 issues, and 15 were handled through contributions.&lt;/p>
+&lt;figure>
+&lt;img src="1.png"
+alt="Contributed Issues"/> &lt;figcaption>
+&lt;p>Contributed Issues&lt;/p>
+&lt;/figcaption>
+&lt;/figure>
+&lt;p>After a month of contributions, we learned some interesting facts:&lt;/p>
+&lt;ul>
+&lt;li>Half the contributions were focused at the beginning of the month. It appears that our contributors were quite eager from the start of Hacktoberfest. 🏃&lt;/li>
+&lt;li>Most issues contributed were for beginners (&lt;code>label:&amp;quot;good first issue&amp;quot;&lt;/code>).&lt;/li>
+&lt;li>Our 3 projects&amp;ndash; &lt;a href="https://github.com/planetarium/libplanet/">Libplanet&lt;/a>, &lt;a href="https://github.com/planetarium/libplanet-explorer/">Libplanet Explorer&lt;/a>, and &lt;a href="https://github.com/planetarium/libplanet-explorer-frontend/">Libplanet Explorer Frontend&lt;/a>—all received fairly equal contributions.&lt;/li>
+&lt;/ul>
+&lt;h1 id="memorable-contributions">Memorable Contributions&lt;/h1>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="https://github.com/planetarium/libplanet-explorer-frontend/issues/37">Auto refresh when block mined&lt;/a> contributed by &lt;a href="https://github.com/MaxStalker">@MaxStalker&lt;/a> was quite a tough issue, as the number of issue comments indicates. While Libplanet Explorer Frontend requires the GraphQL backend, Libplanet Explorer, the GraphQL backend we prepared kept malfunctioning, causing a long wait for our contributor. 😢 So, we would like to take this opportunity to thank @MaxStalker for completing his contribution by walking us through trouble shooting at our [Discord Chatroom] &lt;a href="https://discord.gg/planetarium">2&lt;/a> even after the service had been normalized. 🙇&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>We thank &lt;a href="https://github.com/RozzaysRed">@RozzaysRed&lt;/a> for contributing to issues labeled &lt;em>hacktobberfest&lt;/em> as well as those that weren’t &lt;a href="https://github.com/issues?q=assignee%3ARozzaysRed+is%3Aclosed">3&lt;/a>. If we knew this would’ve happen, we certainly would have put &lt;em>hacktobberfest&lt;/em> label on way more issues. 😊&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>In issue &lt;a href="https://github.com/planetarium/libplanet/issues/555">Rename “maxValue” parameters in IRandom.Next() methods&lt;/a>, &lt;a href="https://github.com/pBouillon">@pBouillon&lt;/a> not only made contributions, but also suggested a suitable parameter name (&lt;code>lowerBound&lt;/code> and &lt;code>upperBound&lt;/code>). 💬&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h1 id="closing">Closing&lt;/h1>
+&lt;p>Furthermore, we would like to thank every single one of you for your interest and contribution to our project during Hacktoberfest.&lt;/p>
+&lt;p>Hacktoberfest is over, but fortunately, we&amp;rsquo;re always open and waiting for you. If you&amp;rsquo;re interested in a problem we&amp;rsquo;re working on or would like to join us, please let us know at our [Discord Chatroom] &lt;a href="https://discord.gg/planetarium">2&lt;/a>!&lt;/p></content><author><name>Swen Mun</name><uri>https://github.com/longfin</uri><email>swen@planetariumhq.com</email></author></entry><entry><title>Libplanet 0.6 Released</title><link rel="alternate" href="https://snack.planetarium.dev/eng/2019/10/libplanet-0.6/" title="Libplanet 0.6 Released"/><link rel="alternate" href="https://snack.planetarium.dev/kor/2019/10/libplanet-0.6/" hreflang="ko" title="Libplanet 0.6 릴리스"/><id>https://snack.planetarium.dev/eng/2019/10/libplanet-0.6/</id><published>2019-10-04T00:00:00+00:00</published><updated>2019-10-04T00:00:00+00:00</updated><content type="html">&lt;p>Hello everyone, our team has released the 6th minor version of &lt;a href="https://libplanet.io/">Libplanet&lt;/a>, &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.6.0">Version 0.6&lt;/a>.&lt;/p>
+&lt;p>Libplanet is a common library that solves game implementation problems such as P2P communication and data synchronization when creating online multiplayer games that run on distributed P2P.&lt;/p>
+&lt;p>In version 0.6 there are significant changes to Libplanet&amp;rsquo;s network configuration, and many bugs are fixed that had not been found before. In this article we will cover those key changes of Version 0.6.&lt;/p>
+&lt;h2 id="kademlia-distributed-hash-table-applied">Kademlia Distributed Hash Table Applied&lt;/h2>
+&lt;p>In the traditional Libplanet, each peer managed all other peers on the network. Due to the nature of blockchain that transmits every data created, this method manages to work when only a handful of peers are connected to the network, but when the number of peers increase, network communication problem occurs.&lt;/p>
+&lt;p>To address this issue, Kademlia protocol, one of the distributed hash table techniques, has been applied to manage more peers in a network. If you are curious about the operation of Kademlia distributed hash table, please refer to &lt;cite>&lt;a href="https://snack.planetarium.dev/eng/2019/09/kademlia/">Applying Kademlia Distributed Hash Table to Libplanet&lt;/a>&lt;/cite>.&lt;/p>
+&lt;h2 id="transaction-transmission-method-changed">Transaction Transmission Method Changed&lt;/h2>
+&lt;p>When a client creates a transaction, it transmits that data to peers on its routing table, which then synchronizes all peers on the blockchain network.&lt;/p>
+&lt;p>The traditional Libplanet worked by transmitting transaction data at regular intervals, and since each peer had a list of all other peers on a network, the entire network was synchronized with one wave. However, with Kademlia distributed hash table applied, a single wave alone could not guarantee synchronization of the entire network. Because each peer re-transmits data it receives from another peer at an interval until the whole network is synchronized, there’s certainly a possibility that the process will take much longer time than we’d like.&lt;/p>
+&lt;p>Therefore, from this version, we’ve modified the logic to transmit transaction immediately when transmission begins, preventing long delays in the network synchronization process.&lt;/p>
+&lt;h2 id="ensuring-transaction-order-within-a-block">Ensuring Transaction Order within a Block&lt;/h2>
+&lt;p>When multiple transactions are included within a block, we must ensure that all clients run the actions in the same order. At the same time, the order of execution must not be predictable until the blocks are mined.&lt;/p>
+&lt;p>In order to meet the above conditions, this update allows all clients to run actions in the same order by utilizing the block&amp;rsquo;s &lt;code>Hash&lt;/code> value and the transaction&amp;rsquo;s &lt;code>Id&lt;/code>.&lt;/p>
+&lt;h2 id="asynchronous-block-mining">Asynchronous Block Mining&lt;/h2>
+&lt;p>Since Libplanet works based on a &lt;a href="https://en.wikipedia.org/wiki/Proof_of_work">Proof of Work&lt;/a> system, it uses a lot of CPU resources during block mining process. In the previous version, because &lt;code>Hashcash.Answer()&lt;/code> which looks for &lt;code>Nonce&lt;/code> in a block was a synchronous function, the running thread was blocked and it was difficult to abort operation.&lt;/p>
+&lt;p>From this version, &lt;code>BlockChain&amp;lt;T&amp;gt;.Mine()&lt;/code> is an asynchronous function, meaning users can abort operation at a desired time by using &lt;code>CancellationToken&lt;/code>. Also, when blockchain tip changes during mining, &lt;code>Blockchain &amp;lt;T&amp;gt;.TipChanged&lt;/code> event, which can be subscribed externally, will be called and the mining process will halt when that event occurs.&lt;/p>
+&lt;h2 id="furthermore">Furthermore&lt;/h2>
+&lt;p>You can learn more about additional changes in our &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.6.0">release notes&lt;/a>.&lt;/p>
+&lt;p>And as always, if you have any questions about the new release or Libplanet in general, please visit our &lt;a href="https://discord.gg/planetarium">Discord chatroom&lt;/a> and let’s chat!&lt;/p></content><author><name>Chanhyuck Ko</name><uri>https://github.com/limebell</uri><email>lime@planetariumhq.com</email></author></entry></feed>

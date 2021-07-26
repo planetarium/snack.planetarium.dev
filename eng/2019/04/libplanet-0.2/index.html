@@ -1,0 +1,99 @@
+<!doctype html><html lang=en prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#"><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=description content><meta name=HandheldFriendly content="True"><meta name=MobileOptimized content="320"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=keywords content><meta property="og:type" content="article"><meta property="og:description" content><meta property="og:title" content="Libplanet 0.2 Released"><meta property="og:site_name" content="Planetarium Engineering Snack"><meta property="og:image" content="https://snack.planetarium.dev/og/eng.png"><meta property="og:url" content="https://snack.planetarium.dev/eng/2019/04/libplanet-0.2/"><meta property="og:locale" content="en"><meta property="article:published_time" content="2019-04-09"><meta property="article:modified_time" content="2019-04-09"><meta name=twitter:card content="summary"><meta name=twitter:site content="@"><meta name=twitter:creator content="@"><meta name=twitter:title content="Libplanet 0.2 Released | Planetarium Engineering Snack"><meta name=twitter:description content="Hello, last week our team released the second minor version1 of Libplanet, Version 0.2. Although there have been several changes, this article will cover some key feature additions and API changes.
+Introduction to Libplanet Before getting into our updates, I haven&rsquo;t introduced Libplanet on this blog, so let me briefly explain it to you.
+Libplanet is a common library that solves game implementation problems such as P2P communication and data synchronization when creating online multiplay games that run on distributed P2P.|"><meta name=twitter:image:src content><meta name=twitter:domain content="https://snack.planetarium.dev/eng/2019/04/libplanet-0.2/"><title>Libplanet 0.2 Released</title><link rel=canonical href=https://snack.planetarium.dev/eng/2019/04/libplanet-0.2/><link rel=alternate href=https://snack.planetarium.dev/kor/2019/04/libplanet-0.2/ hreflang=ko title="Libplanet 0.2 릴리스"><link href=https://snack.planetarium.dev/index.xml rel=alternate type=application/atom+xml title="Libplanet 0.2 Released"><link rel=stylesheet href=https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css><link rel=stylesheet href=https://snack.planetarium.dev/css/style.min.e1d6437358a5772f79ae0fd01e6ee2736e7fc6536065652581cf2a9c461d4bb0.css integrity="sha256-4dZDc1ildy95rg/QHm7ic25/xlNgZWUlgc8qnEYdS7A="><script async src="https://www.googletagmanager.com/gtag/js?id=UA-132504786-2"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','UA-132504786-2');</script><link rel=icon href=/favicon-32x32.png type=image/png sizes=32x32><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><link rel=apple-touch-icon href=/apple-touch-icon.png></head><body class="sans-serif w-90 w-60-ns center center-ns mv2 mv5-ns" itemscope itemtype=http://schema.org/Article><a href=https://snack.planetarium.dev/eng/ id=site-title class="b bb bw1 pb1 no-underline dark-gray">Planetarium Engineering Snack</a><section id=main class=mt5><h1 itemprop=name id=title class=mb1>Libplanet 0.2 Released</h1><div class="f6 gray dib-ns"><time itemprop=datePublished datetime=2019-04-09>April 9, 2019</time>
+(<strong>English</strong>
+&bull;
+<a href=https://snack.planetarium.dev/kor/2019/04/libplanet-0.2/ hreflang=ko title="Libplanet 0.2 릴리스" class=gray>한국어</a>)</div><article itemprop=articleBody id=content class="w-100 lh-copy"><p>Hello, last week our team released the second minor version<sup id=fnref:1><a href=#fn:1 class=footnote-ref role=doc-noteref>1</a></sup> of <a href=https://libplanet.io/>Libplanet</a>,
+<a href=https://github.com/planetarium/libplanet/releases/tag/0.2.0>Version 0.2</a>.
+Although there have been several changes,
+this article will cover some key feature additions and API changes.</p><h2 id=introduction-to-libplanet>Introduction to Libplanet</h2><p>Before getting into our updates, I haven&rsquo;t introduced <a href=https://libplanet.io/>Libplanet</a> on this blog,
+so let me briefly explain it to you.</p><p>Libplanet is a common library that solves game implementation problems such as
+<abbr title=Peer-to-Peer>P2P</abbr> communication and data synchronization
+when creating online multiplay games that run on distributed P2P.</p><p>Libplanet is now being developed in C# language,
+with the aim of being used in conjunction with the popular Unity engine.
+Of course, even if you don&rsquo;t use Unity,
+Libplanet targets <a href=https://github.com/dotnet/standard/blob/master/docs/versions/netstandard2.0.md>.NET Standard 2.0</a> so that it&rsquo;s easy to use for
+games that are implemented on .NET or Mono.</p><p>Another feature of Libplanet is that it is a library,
+not an engine or a framework.
+Since engines and frameworks control the entry point (<code>Main()</code> method) of
+a process and dictate its execution flow, game programmers have limited control
+and can only program essentially through scripts within sections explictly allowed.
+Libplanet does not preempt the game process and operates only when it is
+explicitly invoked by the game programmer.
+This allows Libplanet to function with game engines like Unity without imposing
+additional limitations on the developer.</p><p>Libplanet is listed on <a href=https://www.nuget.org/packages/Libplanet/>NuGet</a> along with <a href=https://docs.libplanet.io/>API docs</a>.</p><h2 id=abbr-titlenetwork-address-translationnatabbr-traversal><abbr title="Network Address Translation">NAT</abbr> Traversal</h2><p>Although P2P communication was possible from <a href=https://github.com/planetarium/libplanet/releases/tag/0.1.0>Libplanet 0.1</a>,
+all peers had to have a public IP.
+In other words, because we couldn&rsquo;t reach peers behind routers,
+network communication was actually limited in reality.
+Solving this issue was a top priority for us and so
+traversing NAT was a major goal in the 0.2 roadmap.
+To cover most cases,
+we implemented <a href=https://tools.ietf.org/html/rfc5766>RFC 5766</a> and <a href=https://tools.ietf.org/html/rfc5389>RFC 5389</a>,
+called <abbr title="Traversal Using Relays around NAT">TURN</abbr> and
+<abbr title="Session Traversal Utilities for NAT">STUN</abbr>.
+Also, there weren&rsquo;t any open source C# implementation to ease the process,
+so our team&rsquo;s Swen Mun implemented the necessary parts of
+the specification from scratch.
+If you&rsquo;re interested in Swen&rsquo;s journey, please also read the article,
+<cite><a href=https://snack.planetarium.dev/eng/2019/04/nat_traversal_1/>Moving Beyond NAT</a></cite>, in which he explains how he solved
+this problem.</p><h2 id=more-game-fitting-transaction>More Game-fitting Transaction</h2><p><a href=https://docs.libplanet.io/0.2.1/api/Libplanet.Tx.Transaction-1.html><code>Transaction&lt;T></code></a> is a unit that synchronizes data between network members.
+Up to the previous version of Libplanet,
+we referred to existing technologies such as <a href=https://bitcoin.org/>Bitcoin</a>
+that solve similar problems and took on the concept
+that all transactions had a sender and a recipient.
+In the case of Bitcoin, it deals with monetary transactions so
+the notion that there are senders and recipients in
+every transaction comes naturally.
+In games, however, there are often actions that do not carry a recipient
+concept, such as the movement of a character,
+or actions that may have more than one recipient, such as wide range skills.</p><p>So to make this transaction more game-fitting,
+Libplanet from this version on will dismiss the <code>Sender</code>–<code>Recipient</code> concept of
+<code>Transaction&lt;T></code> and instead,
+replace it with the <a href=https://docs.libplanet.io/0.2.1/api/Libplanet.Tx.Transaction-1.html#Libplanet_Tx_Transaction_1_Signer><code>Signer</code></a>–<a href=https://docs.libplanet.io/0.2.1/api/Libplanet.Tx.Transaction-1.html#Libplanet_Tx_Transaction_1_UpdatedAddresses><code>UpdatedAddress</code></a> concept.</p><h2 id=new-status-access-api>New Status Access API</h2><p>Previously, all <a href=https://docs.libplanet.io/0.2.1/api/Libplanet.Action.IAction.html><code>IAction</code></a> implementations had to request a set of account
+addresses to be accessed within the <code>Execute()</code> method through
+the <code>RequestStates()</code> method.
+Ones that attempted to read or write status of addresses that weren&rsquo;t requested
+in advance were treated as invalid.</p><p>However, we came to the conclusion that, since the status shared
+in the public network through blockchain could be read anyway,
+the limitation on reading didn&rsquo;t mean much, only the limit on updating.</p><p>Additionally, the duplicated information on the accounts to be accessed
+in both the <code>RequestStates()</code> method and the <code>Execute()</code> method was bug-prone.
+And even if you were careful, fixing the both methods together was a big hassle.</p><p>To solve these problems, the <code>IAction</code> interface&rsquo;s status access API
+has been greatly improved on this version of Libplanet.
+The <code>RequestStates()</code> method has disappeared altogether,
+and the <a href=https://docs.libplanet.io/0.2.1/api/Libplanet.Action.IActionContext.html#Libplanet_Action_IActionContext_PreviousStates><code>PreviousStates</code> property</a> of the <a href=https://docs.libplanet.io/0.2.1/api/Libplanet.Action.IActionContext.html><code>IActionContext</code></a> object,
+which entered the factor in <a href=https://docs.libplanet.io/0.2.1/api/Libplanet.Action.IAction.html#Libplanet_Action_IAction_Execute_Libplanet_Action_IActionContext_><code>IAction.Execute()</code> method</a>,
+now provides a kind of &ldquo;record of changes&rdquo; API.
+This &ldquo;record of changes&rdquo; is stacked inside the <code>Execute()</code> method and
+when it finally returns the change history, the status is then updated.</p><p>Also, when a transaction is created, the action is executed in &ldquo;rehearsal mode,&rdquo;
+which obtains a set of addresses that the <code>Execute()</code> method is
+trying to update.
+The address set is then included in the transaction with a signature.
+This prevents a recipient node from changing the account status of addresses
+not included in the address set of the signed transaction.</p><h2 id=optional-subtype-polymorphism>Optional Subtype Polymorphism</h2><p>Up to the previous version, the only usage of Libplanet actions was that
+each game defines an abstract classs which implements <code>IAction</code> and
+has multiple concrete classes inheriting it.
+But depending on the game, there are cases where it might be better to implement
+<code>IAction</code> as an only class and select a behavior based on data that goes into
+the action than to define multiple types of action at the <code>IAction</code> level.
+Moreover, some projects might face difficulties because the dynamic dispatcher
+for <code>IAction</code> types is internally implemented using <a href=https://docs.microsoft.com/en-us/dotnet/framework/reflection-and-codedom/reflection>.NET reflection</a>.</p><p>Hence, from this version of Libplanet, <code>T</code> in <code>Transaction&lt;T></code> needs not only to
+implement <code>IAction</code> but also to concrete classes.
+Abstraction classes or interfaces aren&rsquo;t acceptable
+even if they implement <code>IAction</code>,
+and the presence of subtypes is completely ignored.</p><p>Instead, if you want to select the behavior of an action through
+subtype polymorphism, you can use <code>PolymorphicAction&lt;T></code>, a new action class to
+decorate another action.
+For example, changing <code>Transaction&lt;AbstractAction></code> to
+<code>Transaction&lt;PolymorphicAction&lt;AbstractionAction>></code> will work as it has been
+in most cases.
+Of course, the <code>PolymorphicAction&lt;T></code> class uses .NET reflection under the hood.</p><h2 id=furthermore>Furthermore,</h2><p>There have been lots of other changes on Libplanet 0.2.0, so check them out in
+our <a href=https://github.com/planetarium/libplanet/releases/tag/0.2.0>release notes</a>.</p><p>FYI, two days after the release of <em>0.2.0</em>, a new version with some
+troubleshooting issues is now released, with the latest version being
+<a href=https://docs.libplanet.io/0.2.1/api/Libplanet.Action.PolymorphicAction-1.html>0.2.1</a> (as of April 9, 2019).</p><p>If you&rsquo;re curious, install and have a look around.
+And If you have any questions, please join our <a href=https://discord.gg/planetarium>Discord chatroom</a>!</p><section class=footnotes role=doc-endnotes><hr><ol><li id=fn:1 role=doc-endnote><p>We have not yet released a major version. <a href=#fnref:1 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li></ol></section></article><script>(function(){if(!location.hash.match(/^#/)){return;}
+var article=document.getElementById('content');var id=window.decodeURIComponent(location.hash.substring(1));var heading=document.getElementById(id);var match=heading.nodeName.match(/^H([123456])$/);if(!match||heading.parentNode!==article){return;}
+var headingLevel=window.parseInt(match[1]);var highlighted=false;for(var i=0;i<article.childNodes.length;i++){var child=article.childNodes[i];if(highlighted){match=child.nodeName.match(/^H([123456])$/);if(match&&window.parseInt(match[1])>=headingLevel){highlighted=false;}}
+else if(child===heading){highlighted=true;}
+if(!highlighted&&!child.nodeName.match(/^#/)){child.className+=' dim';}}})();</script><div itemprop=author class="fl tc mr3"><a href=https://github.com/dahlia rel=author itemprop=url class="no-underline mid-gray b f6"><img src="https://www.gravatar.com/avatar/03acbf60571d4ef2bf3741aecfa1b8cb?d=https://avatars.githubusercontent.com/dahlia" itemprop=image class="w3 h3 br-100 mb1"><br>Hong Minhee</a></div></section><footer><div><p class="f6 gray mt6 lh-copy">&copy; 2019&ndash;2021
+<a href=https://planetariumhq.com/ style=color:inherit;text-decoration:inherit>Planetarium</a>.</p></div></footer></body></html>
