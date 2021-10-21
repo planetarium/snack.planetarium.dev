@@ -110,13 +110,13 @@
 &lt;hr>
 &lt;ol>
 &lt;li id="fn:1" role="doc-endnote">
-&lt;p>Java와 달리 C#에는 익명 클래스가 없습니다. &lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;p>Java와 달리 C#에는 익명 클래스가 없습니다.&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;li id="fn:2" role="doc-endnote">
-&lt;p>리오그에 관해서는 김무훈 님의 지난 스낵 글 &lt;a href="https://snack.planetarium.dev/kor/2020/10/decentralized-and-online-game-intersect/">〈탈중앙과 온라인 게임이 교차하다〉&lt;/a>를 참고하세요. &lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;p>리오그에 관해서는 김무훈 님의 지난 스낵 글 &lt;a href="https://snack.planetarium.dev/kor/2020/10/decentralized-and-online-game-intersect/">〈탈중앙과 온라인 게임이 교차하다〉&lt;/a>를 참고하세요.&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;li id="fn:3" role="doc-endnote">
-&lt;p>현재 UI로 설정 가능하지는 않지만, 설정 파일을 직접 고칠 수 있습니다. &lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;p>현재 UI로 설정 가능하지는 않지만, 설정 파일을 직접 고칠 수 있습니다.&amp;#160;&lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;/section></content><author><name>이수호</name><uri>https://github.com/riemannulus</uri><email>suho@planetariumhq.com</email></author></entry><entry><title>탈중앙과 온라인 게임이 교차하다</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/10/decentralized-and-online-game-intersect/" title="탈중앙과 온라인 게임이 교차하다"/><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/10/decentralized-and-online-game-intersect/" hreflang="en" title="Decentralization Intersects with Online Game"/><id>https://snack.planetarium.dev/kor/2020/10/decentralized-and-online-game-intersect/</id><published>2020-10-08T00:00:00+00:00</published><updated>2020-10-08T00:00:00+00:00</updated><content type="html">&lt;p>안녕하세요! 지난 2개월 간 플라네타리움의 엔지니어링 인턴으로 일한 김무훈입니다. 저는 &lt;a href="https://nine-chronicles.com">나인 크로니클&lt;/a> 출시 직전의 베타 과정을 함께했는데요.&lt;/p>
@@ -127,24 +127,21 @@
 &lt;h2 id="재구성-현상">재구성 현상&lt;/h2>
 &lt;p>플라네타리움은 여러 분산화 기술 중에 블록체인을 활용해서 게임 내 재화, 보유한 아이템, 달성한 퀘스트 등의 데이터를 보존합니다.&lt;/p>
 &lt;p>블록체인에 게임 플레이 데이터를 보관하면 간혹 이 정보가 몇시간 전으로 되돌아가는 문제가 있습니다. 블록체인 네트워크에서 일어나는 &lt;dfn>재구성 현상&lt;/dfn>이라는 결함인데요.&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup> 블록체인 커뮤니티에서는 이를 &lt;dfn>리오그&lt;/dfn>(&lt;abbr title="reorganization">reorg&lt;/abbr>)라 줄여서 부릅니다. 이 글에서도 편의상 리오그라 칭하겠습니다.&lt;/p>
-&lt;figure>
-&lt;img src="images/single-chain.png"
-alt="블록이 순서대로 연결되어 있는 것을 체인이라 한다."/> &lt;figcaption>
+&lt;figure>&lt;img src="images/single-chain.png"
+alt="블록이 순서대로 연결되어 있는 것을 체인이라 한다."/>&lt;figcaption>
 &lt;p>블록이 순서대로 연결되어 있는 것을 체인이라 한다.&lt;/p>
 &lt;/figcaption>
 &lt;/figure>
 &lt;p>리오그 현상에 대해 설명하기 전에 블록체인 네트워크에는 언제나 하나의 체인을 정본으로 지목한다는 사실부터 짚고 넘어가야 합니다.&lt;/p>
 &lt;p>블록체인의 블록은 누구나 생성할 수 있습니다. 그러나 블록을 생성하는 여러 노드가&lt;sup id="fnref:2">&lt;a href="#fn:2" class="footnote-ref" role="doc-noteref">2&lt;/a>&lt;/sup> 같은 시점에 블록을 동시에 만든다면 시작은 같은데 끝 부분이 서로 다른 여러 체인이 나타납니다. 어떻게 하면 하나의 체인을 정본으로 지목할 수 있는 것일까요? 중앙의 누군가가 정해주는 것도 아닌데도 말입니다.&lt;/p>
-&lt;figure>
-&lt;img src="images/orphaned-block.png"
-alt="비슷한 시점에 더 많은 자원이 투입된 체인을 채택한다."/> &lt;figcaption>
+&lt;figure>&lt;img src="images/orphaned-block.png"
+alt="비슷한 시점에 더 많은 자원이 투입된 체인을 채택한다."/>&lt;figcaption>
 &lt;p>비슷한 시점에 더 많은 자원이 투입된 체인을 채택한다.&lt;/p>
 &lt;/figcaption>
 &lt;/figure>
 &lt;p>각 노드가 제멋대로 체인을 고르지는 않고, 모든 노드가 공유한 규칙에 따라 가장 규칙에 적합한 체인을 고릅니다. 나인 크로니클 및 Libplanet이 따르고 있는 작업 증명(&lt;abbr title="proof-of-work">PoW&lt;/abbr>) 방식에서는 비슷한 시점에 블록을 생성하는데 더 많은 자원이 투자된 체인을 채택합니다.&lt;/p>
-&lt;figure>
-&lt;img src="images/orphaned-blocks.png"
-alt="5개의 길이를 가졌던 파란 블록의 체인이 빨간 블록으로 리오그된다. (깊은 리오그)"/> &lt;figcaption>
+&lt;figure>&lt;img src="images/orphaned-blocks.png"
+alt="5개의 길이를 가졌던 파란 블록의 체인이 빨간 블록으로 리오그된다. (깊은 리오그)"/>&lt;figcaption>
 &lt;p>5개의 길이를 가졌던 파란 블록의 체인이 빨간 블록으로 리오그된다. (깊은 리오그)&lt;/p>
 &lt;/figcaption>
 &lt;/figure>
@@ -163,9 +160,8 @@ width: 60%
 }
 }
 &lt;/style>
-&lt;figure>
-&lt;img src="images/bug-report.png"
-alt="어제 10,000 골드를 보유했던 사용자가 1,000 미만의 골드를 보유하게 되었다고 제보를 했다."/> &lt;figcaption>
+&lt;figure>&lt;img src="images/bug-report.png"
+alt="어제 10,000 골드를 보유했던 사용자가 1,000 미만의 골드를 보유하게 되었다고 제보를 했다."/>&lt;figcaption>
 &lt;p>어제 10,000 골드를 보유했던 사용자가 1,000 미만의 골드를 보유하게 되었다고 제보를 했다.&lt;/p>
 &lt;/figcaption>
 &lt;/figure>
@@ -173,7 +169,7 @@ alt="어제 10,000 골드를 보유했던 사용자가 1,000 미만의 골드를
 &lt;h2 id="블록체인-네트워크-초기화">블록체인 네트워크 초기화&lt;/h2>
 &lt;p>나인 크로니클은 베타 기간 동안 체인 네트워크를 일곱 번 초기화했습니다. 체인 네트워크가 초기화되면 게임 플레이어가 일구었던 게임 데이터가 모두 사라지게 됩니다. 이런 위험을 감수하고도 초기화를 감행한 이유는 다음과 같습니다.&lt;/p>
 &lt;p>블록체인 네트워크 코어 &lt;a href="https://libplanet.io/">Libplanet&lt;/a>에서는 게임의 상태를 블록에 저장합니다. 사용자의 행동은 경우 &lt;a href="https://docs.libplanet.io/0.9.5/api/Libplanet.Action.IAction.html">액션&lt;/a>이라는 이름의 자료 구조에 맞추어 저장됩니다.&lt;/p>
-&lt;div class="highlight">&lt;pre style="background-color:#fff">&lt;code class="language-json" data-lang="json">{
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-json" data-lang="json">{
 &lt;span style="color:#b06;font-weight:bold">&amp;#34;stageId&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;123&amp;#34;&lt;/span>,
 &lt;span style="color:#b06;font-weight:bold">&amp;#34;id&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;ntPSdIREOUOARaRYJHlGEg==&amp;#34;&lt;/span>,
 &lt;span style="color:#b06;font-weight:bold">&amp;#34;equipments&amp;#34;&lt;/span>: [&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;KTm6cLkrtEWs6k4A821K3Q==&amp;#34;&lt;/span>],
@@ -192,22 +188,22 @@ alt="어제 10,000 골드를 보유했던 사용자가 1,000 미만의 골드를
 &lt;hr>
 &lt;ol>
 &lt;li id="fn:1" role="doc-endnote">
-&lt;p>엔지니어링 팀 내부에서는 플레이했던 기록이 꿈처럼 되어 버린다고 해서 &lt;dfn>신기루&lt;/dfn> 현상으로 부릅니다. &lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;p>엔지니어링 팀 내부에서는 플레이했던 기록이 꿈처럼 되어 버린다고 해서 &lt;dfn>신기루&lt;/dfn> 현상으로 부릅니다.&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;li id="fn:2" role="doc-endnote">
-&lt;p>블록체인 네트워크에 참여하는 컴퓨터를 의미합니다. &lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;p>블록체인 네트워크에 참여하는 컴퓨터를 의미합니다.&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;li id="fn:3" role="doc-endnote">
-&lt;p>블록체인 코리빙·코워킹 커뮤니티 논스(nonce) 공동 창립자 하시은 님이 쓴 &lt;a href="https://www.facebook.com/unseenone.flohsdpsyphle/posts/1027765500973348">게임 후기&lt;/a>에서 사용자 입장의 상황이 잘 설명되었습니다. &lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;p>블록체인 코리빙·코워킹 커뮤니티 논스(nonce) 공동 창립자 하시은 님이 쓴 &lt;a href="https://www.facebook.com/unseenone.flohsdpsyphle/posts/1027765500973348">게임 후기&lt;/a>에서 사용자 입장의 상황이 잘 설명되었습니다.&amp;#160;&lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;li id="fn:4" role="doc-endnote">
-&lt;p>블록체인은 그 이전 블록의 해시를 메타 정보 삼아 체인을 이읍니다. 연결 리스트를 떠오르면 이해하기 쉽습니다. &lt;a href="#fnref:4" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;p>블록체인은 그 이전 블록의 해시를 메타 정보 삼아 체인을 이읍니다. 연결 리스트를 떠오르면 이해하기 쉽습니다.&amp;#160;&lt;a href="#fnref:4" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;li id="fn:5" role="doc-endnote">
-&lt;p>확장한 명세가 들어간 게임 클라이언트가 이전 블록을 제대로 해석하지 못할 가능성이 있습니다. &lt;a href="#fnref:5" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;p>확장한 명세가 들어간 게임 클라이언트가 이전 블록을 제대로 해석하지 못할 가능성이 있습니다.&amp;#160;&lt;a href="#fnref:5" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;li id="fn:6" role="doc-endnote">
-&lt;p>P2P 온라인 게임을 위한 블록체인 코어 — &lt;a href="https://github.com/planetarium/libplanet">libplanet&lt;/a>, 나인 크로니클을 위한 Libplanet 기반의 SDK — &lt;a href="https://github.com/planetarium/lib9c">Lib9c&lt;/a>, 나인 크로니클 클라이언트 전용의 블록체인 노드 서비스 — &lt;a href="https://github.com/planetarium/ninechronicles.standalone">NineChronicles.Standalone&lt;/a>, 이 밖에도 나인 크로니클 론처와 게임 클라이언트의 저장소를 공개할 예정입니다. &lt;a href="#fnref:6" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;p>P2P 온라인 게임을 위한 블록체인 코어 — &lt;a href="https://github.com/planetarium/libplanet">libplanet&lt;/a>, 나인 크로니클을 위한 Libplanet 기반의 SDK — &lt;a href="https://github.com/planetarium/lib9c">Lib9c&lt;/a>, 나인 크로니클 클라이언트 전용의 블록체인 노드 서비스 — &lt;a href="https://github.com/planetarium/ninechronicles.standalone">NineChronicles.Standalone&lt;/a>, 이 밖에도 나인 크로니클 론처와 게임 클라이언트의 저장소를 공개할 예정입니다.&amp;#160;&lt;a href="#fnref:6" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;/section></content><author><name>김무훈</name><uri>https://github.com/x86chi</uri><email>iam@muhun.kim</email></author></entry><entry><title>플라네타리움에서 한 달동안 경험한 이야기</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/06/junior-experience/" title="플라네타리움에서 한 달동안 경험한 이야기"/><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/06/junior-experience/" hreflang="en" title="My First Month at Planetarium"/><id>https://snack.planetarium.dev/kor/2020/06/junior-experience/</id><published>2020-06-02T00:00:00+00:00</published><updated>2020-06-02T00:00:00+00:00</updated><content type="html">&lt;p>안녕하세요. 이번에 &lt;a href="https://planetariumhq.com/">플라네타리움&lt;/a>에 합류하게 된 이수호입니다. 합류한 지 한 달이 된 기념(?)으로 제가 이 회사에 어떤 기대를 하고 입사하였는지, 한 달 동안 무엇을 했고 플라네타리움은 어떻게 일하는지 간단하게 소개해 보는 시간을 가지고자 합니다.&lt;/p>
@@ -215,23 +211,20 @@ alt="어제 10,000 골드를 보유했던 사용자가 1,000 미만의 골드를
 &lt;p>작년 6월경, &lt;a href="https://www.sprintseoul.org/2019-06-29/">2019 스프린트 서울&lt;/a>이라는 행사에 참여하게 되었습니다. 무슨 오픈 소스에 기여할까 고민하던 저에게 당시 플라네타리움 팀원이셨던 홍민희 님이 &lt;a href="https://libplanet.io/">Libplanet&lt;/a>에 기여를 해 보면 어떻겠냐는 제안을 해 오셨습니다. 그렇게 즐겁게 기여를 마치고 나서 잊지 않고 있다가, 플라네타리움 구인 기간에 지원하여 입사하게 되었습니다. 이 곳이라면 내가 얻었던 즐거운 경험을 남들에게도 줄 수 있고, 나 자신도 그런 경험을 계속 쌓아나갈 수 있을 것이라고 판단하였기 때문입니다.&lt;/p>
 &lt;h2 id="한-달-동안-한-것">한 달 동안 한 것&lt;/h2>
 &lt;p>한 달 동안은 기본적으로 Libplanet의 구조와 C#에 대한 이해를 끌어올렸습니다. 개념 증명(&lt;abbr title="proof of concept">PoC&lt;/abbr>) 수준의 Libplanet을 새로 작성해 보고, 각 모듈별 설명을 들을 때마다 그 모듈에 대한 이슈를 하나씩 제거해 나갔습니다.&lt;/p>
-&lt;figure>
-&lt;img src="images/resolved-issue.png"
-alt="한 달 동안 제거해나간 이슈 목록"/> &lt;figcaption>
+&lt;figure>&lt;img src="images/resolved-issue.png"
+alt="한 달 동안 제거해나간 이슈 목록"/>&lt;figcaption>
 &lt;p>한 달 동안 제거해나간 이슈 목록&lt;/p>
 &lt;/figcaption>
 &lt;/figure>
 &lt;p>개인적으로 매우 효과를 본 방법이라고 생각합니다. 설명을 들을 때는 높은 문맥의 이야기만 대부분 듣기 때문에, 이 높은 문맥에서 일어나는 일들이 낮은 문맥에서 어떻게 일어나는지 직접 알아가며 체득하고, 실제로 문제를 해결하기 위해 분석하다 보니 이해도가 높았습니다.&lt;/p>
 &lt;p>또한 일일 업무일지를 저 개인적으로 적어나갔습니다.&lt;/p>
-&lt;figure>
-&lt;img src="images/daily-reports.png"
-alt="업무일지 목록"/> &lt;figcaption>
+&lt;figure>&lt;img src="images/daily-reports.png"
+alt="업무일지 목록"/>&lt;figcaption>
 &lt;p>업무일지 목록&lt;/p>
 &lt;/figcaption>
 &lt;/figure>
-&lt;figure>
-&lt;img src="images/daily-report.png"
-alt="업무일지"/> &lt;figcaption>
+&lt;figure>&lt;img src="images/daily-report.png"
+alt="업무일지"/>&lt;figcaption>
 &lt;p>업무일지&lt;/p>
 &lt;/figcaption>
 &lt;/figure>
@@ -243,7 +236,7 @@ alt="업무일지"/> &lt;figcaption>
 &lt;li>주간 미팅&lt;/li>
 &lt;li>분기별 회고&lt;/li>
 &lt;/ul>
-&lt;p>이 중 &lt;dfn>데일리 미팅&lt;/dfn>(줄여서 &lt;dfn>데일리&lt;/dfn>)은 간단하게 현재 하고 있는 일을 오후 2시에 공유하는 미팅입니다. 보통 자기가 &amp;lsquo;집중 모드'에 들어간 경우, 누군가 깨워 주거나 아이디어를 주기 전까지는 계속 오버엔지니어링 혹은 이른바 삽질을 계속 하게 됩니다. 하지만 데일리 미팅을 진행하므로써 그것을 미연에 방지하고 서로의 일을 조금씩 도와줄 수 있다는 점이 좋았습니다. 또한 저 개인적으로는 데일리용 업무일지를 적으면서 자기객관화가 쉽게 이루어져, 업무 자체에도 도움이 많이 되었습니다.&lt;/p>
+&lt;p>이 중 &lt;dfn>데일리 미팅&lt;/dfn>(줄여서 &lt;dfn>데일리&lt;/dfn>)은 간단하게 현재 하고 있는 일을 오후 2시에 공유하는 미팅입니다. 보통 자기가 &amp;lsquo;집중 모드&amp;rsquo;에 들어간 경우, 누군가 깨워 주거나 아이디어를 주기 전까지는 계속 오버엔지니어링 혹은 이른바 삽질을 계속 하게 됩니다. 하지만 데일리 미팅을 진행하므로써 그것을 미연에 방지하고 서로의 일을 조금씩 도와줄 수 있다는 점이 좋았습니다. 또한 저 개인적으로는 데일리용 업무일지를 적으면서 자기객관화가 쉽게 이루어져, 업무 자체에도 도움이 많이 되었습니다.&lt;/p>
 &lt;p>데일리는 많은 곳에서 진행하지만, 이걸 자신의 &lt;em>일 했다는 알리바이 증명 용도&lt;/em>로 사용하게 되는 경우가 많습니다 (예: 수직적 의사결정 구조에서 하급자가 상급자에게 보고하는 형태). 하지만 저희 팀은 데일리 미팅 때 내가 하는 일을 부풀리거나 보고하는 게 아닌 막히고 있는 부분을 솔직하게 밝히고, 모르는 부분이 있으면 물어보는 등 서로에게 정보를 공유하는 점이 매우 마음에 들었습니다.&lt;/p>
 &lt;h2 id="실천하는-팀원들">실천하는 팀원들&lt;/h2>
 &lt;p>의사 결정에 있어 실패에 대한 책임을 묻는 것은 아무 의미도 없다는 말은 진부할 정도로 누구나 잘 알고 있습니다. 실패하면 빠르게 공유·피드백하고, 이를 통해 대안책을 찾아 나가는 것이 좋다는 것도 누구나 알고 있습니다. 하지만 실천하는 것은 말처럼 쉽지가 않습니다.&lt;/p>
@@ -359,7 +352,7 @@ Rider 또는 Visual Studio Code를 쓴다는 가정 하에 Libplanet의 개발 �
 &lt;ul>
 &lt;li>
 &lt;p>&lt;code>IBufferElementData&lt;/code>를 구현하는 &lt;code>IntBufferElement&lt;/code> 구조체를 만들었어요. &lt;code>IComponentData&lt;/code>와 같은 흐름이죠?&lt;/p>
-&lt;div class="highlight">&lt;pre style="background-color:#fff">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#080;font-weight:bold">using&lt;/span> &lt;span style="color:#b06;font-weight:bold">Unity.Entities&lt;/span>;
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#080;font-weight:bold">using&lt;/span> &lt;span style="color:#b06;font-weight:bold">Unity.Entities&lt;/span>;
 &lt;span style="color:#080;font-weight:bold">namespace&lt;/span> &lt;span style="color:#b06;font-weight:bold">DOTS_DynamicBuffer&lt;/span>
 {
 &lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#080;font-weight:bold">struct&lt;/span> &lt;span style="color:#b06;font-weight:bold">IntBufferElement&lt;/span> : IBufferElementData
@@ -374,7 +367,7 @@ Rider 또는 Visual Studio Code를 쓴다는 가정 하에 Libplanet의 개발 �
 &lt;ul>
 &lt;li>
 &lt;p>엔티티에 &lt;code>IntBufferElement&lt;/code> 버퍼를 더하고, 그 버퍼에 값을 좀 넣어 볼게요.&lt;/p>
-&lt;div class="highlight">&lt;pre style="background-color:#fff">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#080;font-weight:bold">using&lt;/span> &lt;span style="color:#b06;font-weight:bold">UnityEngine&lt;/span>;
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#080;font-weight:bold">using&lt;/span> &lt;span style="color:#b06;font-weight:bold">UnityEngine&lt;/span>;
 &lt;span style="color:#080;font-weight:bold">using&lt;/span> &lt;span style="color:#b06;font-weight:bold">Unity.Entities&lt;/span>;
 &lt;span style="color:#080;font-weight:bold">namespace&lt;/span> &lt;span style="color:#b06;font-weight:bold">DOTS_DynamicBuffer&lt;/span>
 {
@@ -406,7 +399,7 @@ dynamicBuffer.Add(&lt;span style="color:#080;font-weight:bold">new&lt;/span> Int
 &lt;ul>
 &lt;li>
 &lt;p>&lt;code>PlayModeTest.Awake()&lt;/code> 메서드를 조금 수정해서 재해석이라는 의미의 &lt;a href="https://docs.unity3d.com/Packages/com.unity.entities@0.10/api/Unity.Entities.DynamicBuffer-1.html#Unity_Entities_DynamicBuffer_1_Reinterpret__1">&lt;code>DynamicBuffer&amp;lt;T&amp;gt;.Reinterpret&amp;lt;U&amp;gt;()&lt;/code> 메서드&lt;/a>를 사용해 봤어요. 12번 줄에서와 같이 인덱스로 접근한 구조체는 변수로 분류되지 않는 임시 값이기 때문에 변경할 수 없는데, 14&amp;ndash;15번 줄에서와 같은 방법을 사용하면 값을 수정할 수 있어요.&lt;/p>
-&lt;div class="highlight">&lt;pre style="background-color:#fff">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#080;font-weight:bold">private&lt;/span> &lt;span style="color:#080;font-weight:bold">void&lt;/span> Awake()
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#080;font-weight:bold">private&lt;/span> &lt;span style="color:#080;font-weight:bold">void&lt;/span> Awake()
 {
 &lt;span style="color:#888;font-weight:bold">var&lt;/span> entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
 &lt;span style="color:#888;font-weight:bold">var&lt;/span> entity = entityManager.CreateEntity();
@@ -432,14 +425,14 @@ intDynamicBuffer[&lt;span style="color:#00d;font-weight:bold">0&lt;/span>] *= &l
 &lt;ul>
 &lt;li>
 &lt;p>&lt;code>PlayModeTest&lt;/code> 클래스를 수정했어요. &lt;code>Awake()&lt;/code> 메서드에서 생성한 엔티티와 이것에 추가한 버퍼를 &lt;code>Start()&lt;/code> 메서드에서 불러와서 값을 수정했어요.&lt;/p>
-&lt;div class="highlight">&lt;pre style="background-color:#fff">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#080;font-weight:bold">class&lt;/span> &lt;span style="color:#b06;font-weight:bold">PlayModeTest&lt;/span> : MonoBehaviour
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#080;font-weight:bold">class&lt;/span> &lt;span style="color:#b06;font-weight:bold">PlayModeTest&lt;/span> : MonoBehaviour
 {
-&lt;span style="color:#080;font-weight:bold">private&lt;/span> Entity _entity;
+&lt;span style="color:#080;font-weight:bold">private&lt;/span> Entity &lt;span style="color:#00d;font-weight:bold">_&lt;/span>entity;
 &lt;span style="color:#080;font-weight:bold">private&lt;/span> &lt;span style="color:#080;font-weight:bold">void&lt;/span> Awake()
 {
 &lt;span style="color:#888;font-weight:bold">var&lt;/span> entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
-_entity = entityManager.CreateEntity();
-&lt;span style="color:#888;font-weight:bold">var&lt;/span> dynamicBuffer = entityManager.AddBuffer&amp;lt;IntBufferElement&amp;gt;(_entity);
+&lt;span style="color:#00d;font-weight:bold">_&lt;/span>entity = entityManager.CreateEntity();
+&lt;span style="color:#888;font-weight:bold">var&lt;/span> dynamicBuffer = entityManager.AddBuffer&amp;lt;IntBufferElement&amp;gt;(&lt;span style="color:#00d;font-weight:bold">_&lt;/span>entity);
 dynamicBuffer.Add(&lt;span style="color:#080;font-weight:bold">new&lt;/span> IntBufferElement { Value = &lt;span style="color:#00d;font-weight:bold">1&lt;/span> });
 dynamicBuffer.Add(&lt;span style="color:#080;font-weight:bold">new&lt;/span> IntBufferElement { Value = &lt;span style="color:#00d;font-weight:bold">2&lt;/span> });
 dynamicBuffer.Add(&lt;span style="color:#080;font-weight:bold">new&lt;/span> IntBufferElement { Value = &lt;span style="color:#00d;font-weight:bold">3&lt;/span> });
@@ -452,7 +445,7 @@ intDynamicBuffer[&lt;span style="color:#00d;font-weight:bold">0&lt;/span>] *= &l
 &lt;span style="color:#080;font-weight:bold">private&lt;/span> &lt;span style="color:#080;font-weight:bold">void&lt;/span> Start()
 {
 &lt;span style="color:#888;font-weight:bold">var&lt;/span> entityManger = World.DefaultGameObjectInjectionWorld.EntityManager;
-&lt;span style="color:#888;font-weight:bold">var&lt;/span> dynamicBuffer = entityManger.GetBuffer&amp;lt;IntBufferElement&amp;gt;(_entity);
+&lt;span style="color:#888;font-weight:bold">var&lt;/span> dynamicBuffer = entityManger.GetBuffer&amp;lt;IntBufferElement&amp;gt;(&lt;span style="color:#00d;font-weight:bold">_&lt;/span>entity);
 &lt;span style="color:#888;font-weight:bold">var&lt;/span> intDynamicBuffer = dynamicBuffer.Reinterpret&amp;lt;&lt;span style="color:#888;font-weight:bold">int&lt;/span>&amp;gt;();
 &lt;span style="color:#080;font-weight:bold">for&lt;/span> (&lt;span style="color:#888;font-weight:bold">var&lt;/span> i = &lt;span style="color:#00d;font-weight:bold">0&lt;/span>; i &amp;lt; intDynamicBuffer.Length; i++)
 {
@@ -471,7 +464,7 @@ intDynamicBuffer[i]++;
 &lt;ul>
 &lt;li>
 &lt;p>&lt;code>IntBufferElement&lt;/code>를 수정해서 &lt;code>GenerateAuthoringComponentAttribute&lt;/code>를 적용할게요.&lt;/p>
-&lt;div class="highlight">&lt;pre style="background-color:#fff">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#369">[GenerateAuthoringComponent]&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#369">[GenerateAuthoringComponent]&lt;/span>
 &lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#080;font-weight:bold">struct&lt;/span> &lt;span style="color:#b06;font-weight:bold">IntBufferElement&lt;/span> : IBufferElementData
 {
 &lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#888;font-weight:bold">int&lt;/span> Value;
@@ -487,7 +480,7 @@ intDynamicBuffer[i]++;
 &lt;/li>
 &lt;li>
 &lt;p>이후 과정을 위해 &lt;code>UnitTag&lt;/code>와 &lt;code>PlayerTag&lt;/code>, &lt;code>EnemyTag&lt;/code> 컴포넌트를 작성해서 각 컴포넌트를 포함하는 엔티티에 &lt;code>IntBufferElement&lt;/code> 버퍼를 더해 볼게요.&lt;/p>
-&lt;div class="highlight">&lt;pre style="background-color:#fff">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#080;font-weight:bold">using&lt;/span> &lt;span style="color:#b06;font-weight:bold">Unity.Entities&lt;/span>;
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#080;font-weight:bold">using&lt;/span> &lt;span style="color:#b06;font-weight:bold">Unity.Entities&lt;/span>;
 &lt;span style="color:#080;font-weight:bold">namespace&lt;/span> &lt;span style="color:#b06;font-weight:bold">DOTS_DynamicBuffer&lt;/span>
 {
 &lt;span style="color:#369"> [GenerateAuthoringComponent]&lt;/span>
@@ -508,7 +501,7 @@ intDynamicBuffer[i]++;
 &lt;ul>
 &lt;li>
 &lt;p>&lt;code>TestBufferFromEntitySystem&lt;/code>을 작성했어요. &lt;code>UnitTag&lt;/code>를 포함하는 엔티티들의 &lt;code>IntBufferElement&lt;/code>형 &lt;code>DynamicBuffer&lt;/code>에 접근해서 값을 변경하는 로직이에요. 20번 줄과 같이 사용하는 것은 안 되니 23&amp;ndash;28번 줄과 같이 사용해요. 물론 &lt;code>Reinterpret&amp;lt;T&amp;gt;()&lt;/code>도 사용할 수 있겠죠?&lt;/p>
-&lt;div class="highlight">&lt;pre style="background-color:#fff">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#080;font-weight:bold">using&lt;/span> &lt;span style="color:#b06;font-weight:bold">Unity.Entities&lt;/span>;
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#080;font-weight:bold">using&lt;/span> &lt;span style="color:#b06;font-weight:bold">Unity.Entities&lt;/span>;
 &lt;span style="color:#080;font-weight:bold">namespace&lt;/span> &lt;span style="color:#b06;font-weight:bold">DOTS_DynamicBuffer&lt;/span>
 {
 &lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#080;font-weight:bold">class&lt;/span> &lt;span style="color:#b06;font-weight:bold">TestBufferFromEntitySystem&lt;/span> : ComponentSystem
@@ -551,7 +544,7 @@ dynamicBufferFromUnitTag[i] = intBufferElement;
 &lt;ul>
 &lt;li>
 &lt;p>&lt;code>TestBufferFromEntityJobSystem&lt;/code>을 작성했어요. &lt;code>PlayerTag&lt;/code>를 포함하는 엔티티들의 &lt;code>IntBufferElement&lt;/code>형 &lt;code>DynamicBuffer&lt;/code>에 접근해서 값을 변경하는 로직이에요. 이번에는 &lt;code>Reinterpret&amp;lt;T&amp;gt;()&lt;/code>를 사용해 봤어요.&lt;/p>
-&lt;div class="highlight">&lt;pre style="background-color:#fff">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#080;font-weight:bold">using&lt;/span> &lt;span style="color:#b06;font-weight:bold">Unity.Entities&lt;/span>;
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#080;font-weight:bold">using&lt;/span> &lt;span style="color:#b06;font-weight:bold">Unity.Entities&lt;/span>;
 &lt;span style="color:#080;font-weight:bold">using&lt;/span> &lt;span style="color:#b06;font-weight:bold">Unity.Jobs&lt;/span>;
 &lt;span style="color:#080;font-weight:bold">namespace&lt;/span> &lt;span style="color:#b06;font-weight:bold">DOTS_DynamicBuffer&lt;/span>
 {
@@ -585,7 +578,7 @@ intDynamicBuffer[i]++;
 &lt;ul>
 &lt;li>
 &lt;p>요소 수를 2개로 설정해 봤어요.&lt;/p>
-&lt;div class="highlight">&lt;pre style="background-color:#fff">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#888">// InternalBufferCapacity specifies how many elements a buffer can have before
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#888">// InternalBufferCapacity specifies how many elements a buffer can have before
 &lt;/span>&lt;span style="color:#888">// the buffer storage is moved outside the chunk.
 &lt;/span>&lt;span style="color:#888">&lt;/span>&lt;span style="color:#369">[InternalBufferCapacity(2)]&lt;/span>
 &lt;span style="color:#369">[GenerateAuthoringComponent]&lt;/span>
@@ -605,7 +598,7 @@ intDynamicBuffer[i]++;
 &lt;/ul>
 &lt;h3 id="implicit-연산자">&lt;code>implicit&lt;/code> 연산자&lt;/h3>
 &lt;p>편의를 위해서 이렇게 작성해서 사용할 수도 있겠죠?&lt;/p>
-&lt;div class="highlight">&lt;pre style="background-color:#fff">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#080;font-weight:bold">using&lt;/span> &lt;span style="color:#b06;font-weight:bold">Unity.Entities&lt;/span>;
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#080;font-weight:bold">using&lt;/span> &lt;span style="color:#b06;font-weight:bold">Unity.Entities&lt;/span>;
 &lt;span style="color:#080;font-weight:bold">namespace&lt;/span> &lt;span style="color:#b06;font-weight:bold">DOTS_DynamicBuffer&lt;/span>
 {
 &lt;span style="color:#888">// InternalBufferCapacity specifies how many elements a buffer can have before
@@ -710,7 +703,7 @@ Libplanet 패키지에는 여전히 &lt;code>DefaultStore&lt;/code>가 제공됩
 기능도 추가될 예정입니다. 자세한 사용법은 &lt;code>planet --help&lt;/code> 명령을 확인해 주세요.&lt;/p>
 &lt;p>&lt;code>planet&lt;/code> 명령은 &lt;a href="https://www.nuget.org/packages/Libplanet.Tools/">Libplanet.Tools&lt;/a>라는 NuGet 패키지로 배포되며, .NET Core SDK가
 설치된 시스템에서 아래와 같이 설치할 수 있습니다:&lt;/p>
-&lt;div class="highlight">&lt;pre style="background-color:#fff">&lt;code class="language-bash" data-lang="bash">dotnet tool install -g Libplanet.Tools
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-bash" data-lang="bash">dotnet tool install -g Libplanet.Tools
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>.NET Core SDK가 설치되지 않은 환경이라면 &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.9.0">릴리스 페이지&lt;/a>에 첨부된
 공식 바이너리를 받아서 설치할 수도 있습니다. 공식 바이너리는 Linux (x64),
 macOS (x64), Windows (x64) 세 플랫폼의 버전이 제공되고 있습니다.&lt;/p>
@@ -725,7 +718,7 @@ macOS (x64), Windows (x64) 세 플랫폼의 버전이 제공되고 있습니다.
 &lt;p>일반적인 서버 앱에서는 시스템에 모든 의존 라이브러리들을 다 설치하는 것이 자연스러운 일입니다. 서버 앱을 구동하는 시스템은 보통 그 서버 앱만을 위해 운영되기 때문입니다. 하지만 저희는 블록체인 노드인 동시에 게이머의 시스템에서 돌아가는 앱을 만들고 있기 때문에 모든 게이머에게 이런 라이브러리들을 따로 설치하라고 요구하는 건 어려웠습니다.&lt;/p>
 &lt;p>그래서 생각한 것이 게임 클라이언트 내에 RocksDB가 의존하는 라이브러리들도 함께 넣어 배포하는 것이었습니다. 하지만 별도의 수정 없이 가이드대로 RocksDB를 동적 링크 라이브러리 형태로 빌드할 경우, 빌드된 RocksDB 라이브러리에서 게임 클라이언트에 함께 포함된 의존 라이브러리들을 찾지 못하는 문제가 있었습니다.&lt;/p>
 &lt;p>이 문제를 해결하기 위해 RocksDB 동적 링크 라이브러리 파일의 &lt;a href="https://en.wikipedia.org/wiki/Rpath">rpath&lt;/a>를 수정하는 방식을 사용했습니다. rpath란 &lt;q>run-time search path&lt;/q>를 가리키는 말로, 라이브러리 파일이나 실행 파일 내에 하드코딩 되어서 &lt;a href="https://en.wikipedia.org/wiki/Dynamic_linker">동적 링킹&lt;/a> &lt;a href="https://ko.wikipedia.org/wiki/%EB%A1%9C%EB%8D%94_(%EC%BB%B4%ED%93%A8%ED%8C%85)">로더&lt;/a>가 해당 파일에서 필요한 라이브러리를 찾기 위한 경로입니다. 처음에는 RocksDB 라이브러리를 빌드할때 rpath를 수정하는 방법을 고려했지만 RocksDB의 빌드 스크립트가 생각보다 복잡해 보였기 때문에 빌드가 완료된 라이브러리 파일의 rpath를 수정하기로 했습니다. 다행히 macOS에서는 &lt;a href="https://www.unix.com/man-page/osx/1/install_name_tool/">&lt;code>install_name_tool&lt;/code>&lt;/a>, Linux에서는 &lt;a href="https://github.com/NixOS/patchelf">&lt;code>patchelf&lt;/code>&lt;/a>라는 툴로 다음과 같이 간단하게 rpath를 현재 RocksDB 라이브러리가 존재하는 디렉터리로 수정할 수 있습니다.&lt;/p>
-&lt;div class="highlight">&lt;pre style="background-color:#fff">&lt;code class="language-bash" data-lang="bash">&lt;span style="color:#888"># macOS&lt;/span>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-bash" data-lang="bash">&lt;span style="color:#888"># macOS&lt;/span>
 $ install_name_tool -add_rpath &lt;span style="color:#d20;background-color:#fff0f0">&amp;#39;@loader_path&amp;#39;&lt;/span> librocksdb.dylib
 &lt;span style="color:#888"># linux&lt;/span>
 $ patchelf --set-rpath &lt;span style="color:#369">$ORIGIN&lt;/span> librocksdb.so
@@ -755,15 +748,14 @@ $ patchelf --set-rpath &lt;span style="color:#369">$ORIGIN&lt;/span> librocksdb.
 &lt;hr>
 &lt;ol>
 &lt;li id="fn:1" role="doc-endnote">
-&lt;p>이 작업을 진행할 당시, &lt;a href="https://nine-chronicles.com/">나인 크로니클&lt;/a>은 아직 소수의 테스트 플레이어를 대상으로 인스톨러 없이 간소하게 배포할 때였기 때문에, 이런 접근을 하게 되었습니다. 그러나 최근에는 인스톨러를 포함하여 배포하게 되면서 다른 접근도 가능하게 되었습니다. 기회가 된다면 이후 스낵에 다른 접근을 소개하도록 하겠습니다. &lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;p>이 작업을 진행할 당시, &lt;a href="https://nine-chronicles.com/">나인 크로니클&lt;/a>은 아직 소수의 테스트 플레이어를 대상으로 인스톨러 없이 간소하게 배포할 때였기 때문에, 이런 접근을 하게 되었습니다. 그러나 최근에는 인스톨러를 포함하여 배포하게 되면서 다른 접근도 가능하게 되었습니다. 기회가 된다면 이후 스낵에 다른 접근을 소개하도록 하겠습니다.&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
 &lt;/section></content><author><name>이승훈</name><uri>https://github.com/earlbread</uri><email>seunghun@planetariumhq.com</email></author></entry><entry><title>Libplanet 게임잼</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/03/libplanet-gamejam/" title="Libplanet 게임잼"/><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/03/libplanet-gamejam/" hreflang="en" title="Libplanet Game Jam"/><id>https://snack.planetarium.dev/kor/2020/03/libplanet-gamejam/</id><published>2020-03-19T00:00:00+00:00</published><updated>2020-03-19T00:00:00+00:00</updated><content type="html">&lt;p>안녕하세요, 플라네타리움의 게임 클라이언트 프로그래머인 송승걸입니다. 이번 시간에는 플라네타리움에서 열렸던 사내 &lt;a href="https://en.wikipedia.org/wiki/Game_jam">게임잼&lt;/a>에 대해 제가 느꼈던 점을 나눠보고자 합니다.&lt;/p>
 &lt;p>플라네타리움에선 저희가 자체 제작한 블록체인 게임 라이브러리인 &lt;a href="https://github.com/planetarium/libplanet">Libplanet&lt;/a>을 사용해 게임을 만들고 있습니다. Libplanet은 현재 주로 &lt;a href="https://unity.com/">Unity&lt;/a>에서 사용하는 것을 상정하고 개발 중이기 때문에, 엔진 내에서의 사용성을 위해 Unity용 &lt;a href="https://ko.wikipedia.org/wiki/%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4_%EA%B0%9C%EB%B0%9C_%ED%82%A4%ED%8A%B8">SDK&lt;/a>를 제작하기로 했습니다. 이를 위해 Unity에서 Libplanet을 사용하는 조그마한 예시 프로젝트를 만들어 작업에 도움을 받기 위해 플라네타리움 사내 게임잼을 개최했습니다.&lt;/p>
 &lt;p>2~3명이 한 조를 이뤄 게임 개발을 할 것을 상정하고 개최일까지 2일의 시간을 두고 게임 기획안을 생각해봤고, 그동안 블록체인 기술을 적용해볼 멋진 게임 기획안이 5개나 제시되었습니다. 저는 &lt;a href="https://github.com/limebell">고찬혁&lt;/a> 님과 한 조가 되어 오목 게임을 만들기로 했습니다. 2명의 플레이어가 대국하게 하려고 세션 개념, 즉 여러분들이 익히 알고 계신 게임의 &lt;strong>방&lt;/strong> 개념을 Libplanet의 액션(&lt;code>Action&lt;/code>)과 상태(state) 개념을 사용해 구현했습니다.&lt;/p>
-&lt;figure>
-&lt;img src="screenshot.png"
-alt="저희가 만든 오목 게임의 멋진 모습입니다!"/> &lt;figcaption>
+&lt;figure>&lt;img src="screenshot.png"
+alt="저희가 만든 오목 게임의 멋진 모습입니다!"/>&lt;figcaption>
 &lt;p>저희가 만든 오목 게임의 멋진 모습입니다!&lt;/p>
 &lt;/figcaption>
 &lt;/figure>
@@ -818,9 +810,8 @@ alt="저희가 만든 오목 게임의 멋진 모습입니다!"/> &lt;figcaption
 &lt;p>작년 12월에 저희는 마침내 첫 번째 알파테스트를 진행했고, 감사하게도 세계 각지에서 많은 분이 참여해 주셨습니다. 이는 팀에게 있어 굉장한 기회인 동시에 도전이기도 했습니다. 당연하게 크고 작은 문제가 있었는데요. 그중 저희를 난처하게 만들었던 문제 중 하나는 IBD였습니다.&lt;/p>
 &lt;p>&lt;abbr title="initial block download">IBD&lt;/abbr>란 게임을 켰을 때 네트워크의 다른 피어들로부터 그동안 쌓인 블록들을 내려받아 최신 상태로 동기화하는 단계인데요. 아무래도 세계 각지에서 참여하시다 보니 네트워크 지연 등의 문제로 인해 시간이 오래 걸리거나 이상 종료되는 경우가 종종 있었습니다.&lt;/p>
 &lt;p>그런데 그중에서도 특이한 증상을 보고한 사용자가 있었습니다. 당시 저희가 겪던 다른 문제들과 다르게 가장 첫 번째 블록을 내려받고 나서 이후 블록을 받을 수 없다는 것이었습니다.&lt;/p>
-&lt;figure>
-&lt;img src="1.png"
-alt="사용자로부터 받은 스크린숏"/> &lt;figcaption>
+&lt;figure>&lt;img src="1.png"
+alt="사용자로부터 받은 스크린숏"/>&lt;figcaption>
 &lt;p>사용자로부터 받은 스크린숏&lt;/p>
 &lt;/figcaption>
 &lt;/figure>
@@ -829,9 +820,8 @@ alt="사용자로부터 받은 스크린숏"/> &lt;figcaption>
 &lt;h2 id="날짜가-잘못되지-않았다">날짜가 잘못되지 않았다&lt;/h2>
 &lt;p>다행히 해당 문제를 겪고 있던 사용자는 접속을 흔쾌히 허락해주셨습니다. 스크린숏으로 확인한 것처럼 여전히 날짜는 2562년이었습니다. 일단 가장 먼저 시간을 맞추기 위해 제어판을 열었습니다. 대부분의 현대적인 운영체제가 그렇듯이 Windows도 네트워크를 통해 시간을 동기화하는 기능이 있습니다. 그러나 이렇게 시간을 다시 동기화해도 제어판과 시스템의 날짜는 2562년으로 변함없었고 마지막 동기화 시각도 연도만이 다를 뿐 날짜, 시간이 모두 제가 사용하고 있는 시스템과 다르지 않았습니다.&lt;/p>
 &lt;p>그런데 문제를 조금 살펴보기로 하고 제어판 이곳저곳을 확인 하던 중 제 눈길을 끄는 화면이 있었습니다.&lt;/p>
-&lt;figure>
-&lt;img src="2.png"
-alt="그레고리안력으로는 2019년이라고 표시되어 있다."/> &lt;figcaption>
+&lt;figure>&lt;img src="2.png"
+alt="그레고리안력으로는 2019년이라고 표시되어 있다."/>&lt;figcaption>
 &lt;p>그레고리안력으로는 2019년이라고 표시되어 있다.&lt;/p>
 &lt;/figcaption>
 &lt;/figure>
@@ -841,14 +831,14 @@ alt="그레고리안력으로는 2019년이라고 표시되어 있다."/> &lt;fi
 &lt;p>문제를 재현하기 위해 저희는 로컬 개발 환경에서 운영체제의 지역 설정을 태국으로 변경한 뒤 Libplanet의 단위 테스트를 돌려봤습니다. 아니나 다를까, 몇몇 테스트가 실패하는 것을 확인할 수 있었습니다. 그 가운데 가장 치명적인 문제는 내용상으로는 같은 블록의 해시가 달라지는 현상이었습니다. 살펴보니 해시의 입력을 만드는 과정에 &lt;a href="https://github.com/planetarium/libplanet/blob/82aaba0c37591ebf51207038e8c5c122272ce98b/Libplanet/Blocks/Block.cs#L488">&lt;code>Block&amp;lt;T&amp;gt;.Timestamp&lt;/code> 필드를 직렬화&lt;/a>한 결과가 기대와 달랐습니다. &lt;code>DateTimeOffset.ToString()&lt;/code> 메서드의 동작이 운영체제의 로캘에 영향을 받는 것입니다.&lt;/p>
 &lt;p>인도차이나반도에서 불교는 유럽의 기독교와 같은 위치입니다. 그래서 역법에서도 예수 그리스도의 탄신을 기원(epoch)으로 삼는 &lt;a href="https://ko.wikipedia.org/wiki/%EA%B7%B8%EB%A0%88%EA%B3%A0%EB%A6%AC%EB%A0%A5">그레고리력&lt;/a> 대신, 석가모니의 입멸을 기원으로 삼는 &lt;a href="https://en.wikipedia.org/wiki/Buddhist_calendar">불력&lt;/a>(佛曆)이 일반적으로 쓰였다고 합니다. 캄보디아나 라오스 같은 나라들은 이제 서기 연도를 쓰게 바뀌었지만, 태국은 여전히 불력을 양력으로 고친 &lt;a href="https://en.wikipedia.org/wiki/Thai_solar_calendar">타이 태양력&lt;/a>을 쓰고 있습니다. 석가모니 입멸은 기원전 543년으로, 서기 2019년은 타이 태양력으로 2562년이 됩니다.&lt;/p>
 &lt;p>이와 같이, 세계에는 문화권에 따라 다양한 역법을 쓰고 있으므로, 사용자 인터페이스를 표시할 때 각 문화권에 알맞는 날짜 형식으로 표시되어야 합니다. 사실 &lt;code>DateTimeOffset.ToString()&lt;/code> 메서드는 이를 위해 &lt;a href="https://docs.microsoft.com/en-us/dotnet/api/system.iformatprovider?view=netstandard-2.0">&lt;code>IFormatProvider&lt;/code>&lt;/a> 객체도 파라미터로 받는 오버로드를 갖고 있습니다. &lt;code>IFormatProvider&lt;/code> 인터페이스를 구현하는 클래스 중에서 가장 많이 쓰이는 것이 &lt;a href="https://docs.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo?view=netstandard-2.0">&lt;code>CultureInfo&lt;/code>&lt;/a>입니다. 이름에서 알 수 있듯, &lt;code>CultureInfo&lt;/code>는 유닉스 계열에서 로캘(locale)이라고 부르는 것과 같은 개념입니다. 아래와 같이, &lt;code>DateTimeOffset.ToString()&lt;/code> 메서드는 파라미터로 어떤 로캘을 설정하느냐에 따라 결과물이 달라집니다.&lt;/p>
-&lt;div class="highlight">&lt;pre style="background-color:#fff">&lt;code class="language-csharp" data-lang="csharp">&amp;gt; &lt;span style="color:#080;font-weight:bold">using&lt;/span> &lt;span style="color:#b06;font-weight:bold">System.Globalization&lt;/span>;
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-csharp" data-lang="csharp">&amp;gt; &lt;span style="color:#080;font-weight:bold">using&lt;/span> &lt;span style="color:#b06;font-weight:bold">System.Globalization&lt;/span>;
 &amp;gt; &lt;span style="color:#888;font-weight:bold">var&lt;/span> now = DateTimeOffset.Now;
 &amp;gt; now.ToString(&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;yyyy-MM-ddTHH:mm:ss.ffffffZ&amp;#34;&lt;/span>, &lt;span style="color:#080;font-weight:bold">new&lt;/span> CultureInfo(&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;ko-KR&amp;#34;&lt;/span>))
 &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;2020-02-13T17:37:16.436163Z&amp;#34;&lt;/span>
 &amp;gt; now.ToString(&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;yyyy-MM-ddTHH:mm:ss.ffffffZ&amp;#34;&lt;/span>, &lt;span style="color:#080;font-weight:bold">new&lt;/span> CultureInfo(&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;th-TH&amp;#34;&lt;/span>))
 &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;2563-02-13T17:37:16.436163Z&amp;#34;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>하지만 아무 로캘도 설정하지 않고 해당 파라미터를 생략하면 적당히 그 코드가 실행되는 환경의 로캘을 따라가게 됩니다. 아래 코드는 제가 운영체제의 지역 설정을 한국으로 해뒀을 때의 결과입니다.&lt;/p>
-&lt;div class="highlight">&lt;pre style="background-color:#fff">&lt;code class="language-csharp" data-lang="csharp">&amp;gt; now.ToString(&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;yyyy-MM-ddTHH:mm:ss.ffffffZ&amp;#34;&lt;/span>)
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-csharp" data-lang="csharp">&amp;gt; now.ToString(&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;yyyy-MM-ddTHH:mm:ss.ffffffZ&amp;#34;&lt;/span>)
 &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;2020-02-13T17:37:16.436163Z&amp;#34;&lt;/span>
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;a href="https://docs.microsoft.com/en-us/dotnet/api/system.datetimeoffset.tostring?view=netstandard-2.0#System_DateTimeOffset_ToString">문서에 따르면, 해당 파라미터가 생략된 오버로드&lt;/a>는 &lt;a href="https://docs.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo.currentculture?view=netstandard-2.0">&lt;code>CultureInfo.CurrentCulture&lt;/code>&lt;/a>를 따른다고 합니다. &lt;code>CultureInfo.CurrentCulture&lt;/code> 속성은 이름에서도 알 수 있듯 실행 환경의 로캘을 가르킵니다. 따라서, 실행 환경의 로캘과 무관하게 언제나 결정적인 동작을 원한다면 명시적으로 &lt;a href="https://docs.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo.invariantculture?view=netstandard-2.0">&lt;code>CultureInfo.InvariantCulture&lt;/code>&lt;/a>를 지정해야 합니다.&lt;/p>
 &lt;p>메서드가 비결정적으로 동작할 수 있음에도 불구하고 해당 파라미터를 생략하면 실행 환경의 로캘을 따르도록 API를 설계한 것은, 아마 저러한 서식(formatting) 연산이 대개 사용자 인터페이스를 그리는 데에 쓰이고, 그렇기 때문에 국제화에 큰 신경을 쓰지 않고 코딩을 해도 자연스럽게 문화권에 알맞은 서식으로 보이도록 하려는 의도일 것입니다. 하지만 저희가 해당 메서드를 쓴 것은 사용자 인터페이스가 아니라, 결정적이어야 하는 암호학적 해시의 입력인 것이 불찰이었습니다.&lt;/p>
@@ -871,9 +861,8 @@ alt="그레고리안력으로는 2019년이라고 표시되어 있다."/> &lt;fi
 &lt;h2 id="쿠버네티스kubernetes">쿠버네티스(Kubernetes)&lt;/h2>
 &lt;p>도커를 사용해서 게임 빌드를 어디서나 쉽게 돌릴 수 있게 컨테이너로 만들었지만 이걸로 끝은 아니었습니다. 저희의 목표는 어디까지나 많은 클라이언트를 손쉽게 실행/종료/업데이트하며 테스트 환경을 유지하는 것이니까요. 이를 위해서는 도커만으로는 부족했습니다.&lt;/p>
 &lt;p>가장 먼저 떠오른 방법은 &lt;abbr title="Elastic Container Service">&lt;a href="https://aws.amazon.com/ko/ecs/">ECS&lt;/a>&lt;/abbr>와 같이 클라우드 공급자가 제공하는 실행 환경이었습니다. 이런 실행 환경들은 복잡한 워크플로우를 효율적으로 설정할 수 있게 디자인되어있지만, 바꾸어보면 설정이 복잡하며 테스트 환경에서만 사용한다면 많은 기능을 사용하지 않을 것이라는 생각이 들었습니다. 또한 특정 클라우드 공급자에 종속되는 테스트 환경이 이후 이전 작업등에 부담이 될 것 같기도 했고요.&lt;/p>
-&lt;figure>
-&lt;img src="comparison.png"
-alt="AWS 컨테이너 오케스트레이션 비교"/> &lt;figcaption>
+&lt;figure>&lt;img src="comparison.png"
+alt="AWS 컨테이너 오케스트레이션 비교"/>&lt;figcaption>
 &lt;p>AWS 컨테이너 오케스트레이션 비교&lt;/p>
 &lt;/figcaption>
 &lt;/figure>
@@ -926,7 +915,7 @@ Libplanet이 일종의 메타프로토콜로 동작하기에 엉뚱한 네트워
 쓰게 하고 싶다면,
 아래와 같이 &lt;a href="https://docs.libplanet.io/0.8.0/api/Libplanet.Crypto.CryptoConfig.html#Libplanet_Crypto_CryptoConfig_CryptoBackend">&lt;code>CryptoConfig.CryptoBackend&lt;/code> 속성&lt;/a>를
 덮어씌우면 됩니다.&lt;/p>
-&lt;div class="highlight">&lt;pre style="background-color:#fff">&lt;code class="language-csharp" data-lang="csharp">CryptoConfig.CryptoBackend = &lt;span style="color:#080;font-weight:bold">new&lt;/span> MyCryptoBackend();
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-csharp" data-lang="csharp">CryptoConfig.CryptoBackend = &lt;span style="color:#080;font-weight:bold">new&lt;/span> MyCryptoBackend();
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>저희 팀에서 만드는 게임인 &lt;a href="https://nine-chronicles.com/">나인 크로니클&lt;/a>에서는 비트코인 프로젝트에서 공개한
 &lt;a href="https://github.com/bitcoin-core/secp256k1">secp256k1&lt;/a> C 라이브러리를 호출하는 &lt;code>ICryptoBackend&lt;/code> 인터페이스를 구현하여
 게임 성능을 개선하기도 했습니다.&lt;/p>
@@ -982,9 +971,8 @@ Libplanet이 일종의 메타프로토콜로 동작하기에 엉뚱한 네트워
 &lt;p>이번 변경 사항이나 Libplanet에 대해 궁금한 점이 있으시다면 언제든 저희 팀이 상주해 있는 &lt;a href="https://discord.gg/planetarium">디스코드 대화방&lt;/a>에 방문해 주세요!&lt;/p></content><author><name>이승훈</name><uri>https://github.com/earlbread</uri><email>seunghun@planetariumhq.com</email></author></entry><entry><title>Hacktoberfest를 돌아보며</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2019/11/looking-back-at-hacktoberfest/" title="Hacktoberfest를 돌아보며"/><link rel="alternate" href="https://snack.planetarium.dev/eng/2019/11/looking-back-at-hacktoberfest/" hreflang="en" title="Looking Back on Hacktoberfest"/><id>https://snack.planetarium.dev/kor/2019/11/looking-back-at-hacktoberfest/</id><published>2019-11-08T00:00:00+00:00</published><updated>2019-11-08T00:00:00+00:00</updated><content type="html">&lt;p>안녕하세요. 오늘은 저희 &lt;a href="https://planetariumhq.com">플라네타리움&lt;/a> 팀이 지난 10월 한 달간 &lt;a href="https://hacktoberfest.digitalocean.com/">Hacktoberfest&lt;/a>에 참가하여 받은 기여들을 소개해보려 합니다.&lt;/p>
 &lt;h1 id="둘러보기">둘러보기&lt;/h1>
 &lt;p>Hacktoberfest를 맞아 저희는 36개의 이슈를 준비했고, 그중 15개의 이슈가 기여를 통해 처리되었습니다.&lt;/p>
-&lt;figure>
-&lt;img src="1.png"
-alt="처리된 이슈들"/> &lt;figcaption>
+&lt;figure>&lt;img src="1.png"
+alt="처리된 이슈들"/>&lt;figcaption>
 &lt;p>처리된 이슈들&lt;/p>
 &lt;/figcaption>
 &lt;/figure>

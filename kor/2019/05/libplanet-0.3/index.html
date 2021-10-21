@@ -1,25 +1,111 @@
-<!doctype html><html lang=ko prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#"><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=description content><meta name=HandheldFriendly content="True"><meta name=MobileOptimized content="320"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=keywords content><meta property="og:type" content="article"><meta property="og:description" content><meta property="og:title" content="Libplanet 0.3 릴리스"><meta property="og:site_name" content="플라네타리움 엔지니어링 스낵"><meta property="og:image" content="https://snack.planetarium.dev/og/kor.png"><meta property="og:url" content="https://snack.planetarium.dev/kor/2019/05/libplanet-0.3/"><meta property="og:locale" content="ko"><meta property="article:published_time" content="2019-05-31"><meta property="article:modified_time" content="2019-05-31"><meta name=twitter:card content="summary"><meta name=twitter:site content="@"><meta name=twitter:creator content="@"><meta name=twitter:title content="Libplanet 0.3 릴리스 | 플라네타리움 엔지니어링 스낵"><meta name=twitter:description content="안녕하세요. 저희 팀은 Libplanet의 세번째 마이너 버전인 0.3 버전을 릴리스했습니다.
+<!doctype html><html lang=ko prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<meta name=description content>
+<meta name=HandheldFriendly content="True">
+<meta name=MobileOptimized content="320">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=keywords content>
+<meta property="og:type" content="article">
+<meta property="og:description" content>
+<meta property="og:title" content="Libplanet 0.3 릴리스">
+<meta property="og:site_name" content="플라네타리움 엔지니어링 스낵">
+<meta property="og:image" content="https://snack.planetarium.dev/og/kor.png">
+<meta property="og:url" content="https://snack.planetarium.dev/kor/2019/05/libplanet-0.3/">
+<meta property="og:locale" content="ko">
+<meta property="article:published_time" content="2019-05-31">
+<meta property="article:modified_time" content="2019-05-31">
+<meta name=twitter:card content="summary">
+<meta name=twitter:site content="@">
+<meta name=twitter:creator content="@">
+<meta name=twitter:title content="Libplanet 0.3 릴리스 | 플라네타리움 엔지니어링 스낵">
+<meta name=twitter:description content="안녕하세요. 저희 팀은 Libplanet의 세번째 마이너 버전인 0.3 버전을 릴리스했습니다.
 Libplanet은 분산 P2P로 돌아가는 온라인 멀티플레이 게임을 만들 때, 그러한 게임들이 매번 구현해야 하는 P2P 통신이나 데이터 동기화 등의 문제를 푸는 공용 라이브러리입니다.
 이 글에서는 0.3 버전의 주요 변경 사항에 대해 다루겠습니다.
-버전이 다른 노드를 만났을 때 반응하는 API 0.2 버전부터 Swarm 생성자에 appProtocolVersion이 추가되어 노드의 프로토콜 버전을 지정하도록 했습니다. 이번 0.3 버전에서는 Swarm.DifferentVersionPeerEncountered 이벤트 핸들러를 통해 버전이 다른 노드를 만났을 때의 행동을 지정해 줄 수 있습니다.|"><meta name=twitter:image:src content><meta name=twitter:domain content="https://snack.planetarium.dev/kor/2019/05/libplanet-0.3/"><title>Libplanet 0.3 릴리스</title><link rel=canonical href=https://snack.planetarium.dev/kor/2019/05/libplanet-0.3/><link rel=alternate href=https://snack.planetarium.dev/eng/2019/05/libplanet-0.3/ hreflang=en title="Libplanet 0.3 Released"><link href=https://snack.planetarium.dev/index.xml rel=alternate type=application/atom+xml title="Libplanet 0.3 릴리스"><link rel=stylesheet href=https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css><link rel=stylesheet href=https://snack.planetarium.dev/css/style.min.e1d6437358a5772f79ae0fd01e6ee2736e7fc6536065652581cf2a9c461d4bb0.css integrity="sha256-4dZDc1ildy95rg/QHm7ic25/xlNgZWUlgc8qnEYdS7A="><script async src="https://www.googletagmanager.com/gtag/js?id=UA-132504786-2"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
-gtag('js',new Date());gtag('config','UA-132504786-2');</script><link rel=icon href=/favicon-32x32.png type=image/png sizes=32x32><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><link rel=apple-touch-icon href=/apple-touch-icon.png></head><body class="sans-serif w-90 w-60-ns center center-ns mv2 mv5-ns" itemscope itemtype=http://schema.org/Article><a href=https://snack.planetarium.dev/kor/ id=site-title class="b bb bw1 pb1 no-underline dark-gray">플라네타리움 엔지니어링 스낵</a><section id=main class=mt5><h1 itemprop=name id=title class=mb1>Libplanet 0.3 릴리스</h1><div class="f6 gray dib-ns"><time itemprop=datePublished datetime=2019-05-31>2019년 5월 31일</time>
+버전이 다른 노드를 만났을 때 반응하는 API 0.2 버전부터 Swarm 생성자에 appProtocolVersion이 추가되어 노드의 프로토콜 버전을 지정하도록 했습니다. 이번 0.3 버전에서는 Swarm.DifferentVersionPeerEncountered 이벤트 핸들러를 통해 버전이 다른 노드를 만났을 때의 행동을 지정해 줄 수 있습니다.|">
+<meta name=twitter:image:src content>
+<meta name=twitter:domain content="https://snack.planetarium.dev/kor/2019/05/libplanet-0.3/">
+<title>Libplanet 0.3 릴리스</title>
+<link rel=canonical href=https://snack.planetarium.dev/kor/2019/05/libplanet-0.3/>
+<link rel=alternate href=https://snack.planetarium.dev/eng/2019/05/libplanet-0.3/ hreflang=en title="Libplanet 0.3 Released">
+<link href=https://snack.planetarium.dev/index.xml rel=alternate type=application/atom+xml title="Libplanet 0.3 릴리스">
+<link rel=stylesheet href=https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css>
+<link rel=stylesheet href=https://snack.planetarium.dev/css/style.min.e1d6437358a5772f79ae0fd01e6ee2736e7fc6536065652581cf2a9c461d4bb0.css integrity="sha256-4dZDc1ildy95rg/QHm7ic25/xlNgZWUlgc8qnEYdS7A=">
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-132504786-2"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-132504786-2')</script>
+<link rel=icon href=/favicon-32x32.png type=image/png sizes=32x32>
+<link rel="shortcut icon" href=/favicon.ico type=image/x-icon>
+<link rel=apple-touch-icon href=/apple-touch-icon.png>
+</head>
+<body class="sans-serif w-90 w-60-ns center center-ns mv2 mv5-ns" itemscope itemtype=http://schema.org/Article>
+<a href=https://snack.planetarium.dev/kor/ id=site-title class="b bb bw1 pb1 no-underline dark-gray">플라네타리움 엔지니어링 스낵</a>
+<section id=main class=mt5>
+<h1 itemprop=name id=title class=mb1>Libplanet 0.3 릴리스</h1>
+<div class="f6 gray dib-ns">
+<time itemprop=datePublished datetime=2019-05-31>
+2019년 5월 31일
+</time>
 (<strong>한국어</strong>
 &bull;
-<a href=https://snack.planetarium.dev/eng/2019/05/libplanet-0.3/ hreflang=en title="Libplanet 0.3 Released" class=gray>English</a>)</div><article itemprop=articleBody id=content class="w-100 lh-copy"><p>안녕하세요. 저희 팀은 <a href=https://libplanet.io/>Libplanet</a>의 세번째 마이너 버전인 <a href=https://github.com/planetarium/libplanet/releases/tag/0.3.0>0.3 버전</a>을 릴리스했습니다.</p><p>Libplanet은 분산 P2P로 돌아가는 온라인 멀티플레이 게임을 만들 때, 그러한 게임들이 매번 구현해야 하는 P2P 통신이나 데이터 동기화 등의 문제를 푸는 공용 라이브러리입니다.</p><p>이 글에서는 0.3 버전의 주요 변경 사항에 대해 다루겠습니다.</p><h2 id=버전이-다른-노드를-만났을-때-반응하는-api>버전이 다른 노드를 만났을 때 반응하는 API</h2><p>0.2 버전부터 <code>Swarm</code> 생성자에 <code>appProtocolVersion</code>이 추가되어 노드의 프로토콜 버전을 지정하도록 했습니다.
+<a href=https://snack.planetarium.dev/eng/2019/05/libplanet-0.3/ hreflang=en title="Libplanet 0.3 Released" class=gray>English</a>)
+</div>
+<article itemprop=articleBody id=content class="w-100 lh-copy">
+<p>안녕하세요. 저희 팀은 <a href=https://libplanet.io/>Libplanet</a>의 세번째 마이너 버전인 <a href=https://github.com/planetarium/libplanet/releases/tag/0.3.0>0.3 버전</a>을 릴리스했습니다.</p>
+<p>Libplanet은 분산 P2P로 돌아가는 온라인 멀티플레이 게임을 만들 때, 그러한 게임들이 매번 구현해야 하는 P2P 통신이나 데이터 동기화 등의 문제를 푸는 공용 라이브러리입니다.</p>
+<p>이 글에서는 0.3 버전의 주요 변경 사항에 대해 다루겠습니다.</p>
+<h2 id=버전이-다른-노드를-만났을-때-반응하는-api>버전이 다른 노드를 만났을 때 반응하는 API</h2>
+<p>0.2 버전부터 <code>Swarm</code> 생성자에 <code>appProtocolVersion</code>이 추가되어 노드의 프로토콜 버전을 지정하도록 했습니다.
 이번 0.3 버전에서는 <code>Swarm.DifferentVersionPeerEncountered</code> 이벤트 핸들러를 통해 버전이 다른
-노드를 만났을 때의 행동을 지정해 줄 수 있습니다.</p><p>예를 들어 자신보다 높은 프로토콜 버전의 메시지를 받을 경우 게임 앱을 업그레이드하도록 하는 핸들러 등을
-<code>Swarm.DifferentVersionPeerEncountered</code>로 넘겨줄 수 있습니다.</p><h2 id=액션-렌더링-api>액션 렌더링 API</h2><p>기존에는 게임에서 액션이 실제로 처리되었는지, 즉 액션의 실행 결과가 <code>GetStates()</code> 메소드의 결과에 언제 반영되는지 신호(이벤트)를 받을 수 없었습니다.
+노드를 만났을 때의 행동을 지정해 줄 수 있습니다.</p>
+<p>예를 들어 자신보다 높은 프로토콜 버전의 메시지를 받을 경우 게임 앱을 업그레이드하도록 하는 핸들러 등을
+<code>Swarm.DifferentVersionPeerEncountered</code>로 넘겨줄 수 있습니다.</p>
+<h2 id=액션-렌더링-api>액션 렌더링 API</h2>
+<p>기존에는 게임에서 액션이 실제로 처리되었는지, 즉 액션의 실행 결과가 <code>GetStates()</code> 메소드의 결과에 언제 반영되는지 신호(이벤트)를 받을 수 없었습니다.
 따라서 특정 주소의 액션이 처리되었다는 것을 확인하기 위해서는 <a href=https://ko.wikipedia.org/wiki/%ED%8F%B4%EB%A7%81_(%EC%BB%B4%ED%93%A8%ED%84%B0_%EA%B3%BC%ED%95%99)>폴링</a> 등의 방법을 이용해 해당 주소의 상태가 액션 이후의 상태로 변경되었는지 확인해야 했습니다.
-이런 방식은 구현이 복잡하고 번거로울 뿐 아니라 액션의 처리가 확인될 때까지 주소의 상태를 수차례 가져와야 하므로 성능적인 측면에서도 문제가 있습니다.</p><p>이런 문제를 해결하기 위해 이번 버전에서는 액션 렌더링 API가 추가되었습니다.
+이런 방식은 구현이 복잡하고 번거로울 뿐 아니라 액션의 처리가 확인될 때까지 주소의 상태를 수차례 가져와야 하므로 성능적인 측면에서도 문제가 있습니다.</p>
+<p>이런 문제를 해결하기 위해 이번 버전에서는 액션 렌더링 API가 추가되었습니다.
 <a href=https://docs.libplanet.io/0.3.0/api/Libplanet.Action.IAction.html#Libplanet_Action_IAction_Render_Libplanet_Action_IActionContext_Libplanet_Action_IAccountStateDelta_><code>IAction.Render()</code></a> 메서드 구현을 통해 게임에서는 액션의 결과가 로컬 상태에 반영되는 순간을 이벤트로 받을 수 있게 됩니다.
-또, 다수 체인(majority chain)이 변경되어 처리된 액션이 포함된 블록이 유효하지 않게 될 경우 <a href=https://docs.libplanet.io/0.3.0/api/Libplanet.Action.IAction.html#Libplanet_Action_IAction_Unrender_Libplanet_Action_IActionContext_Libplanet_Action_IAccountStateDelta_><code>IAction.Unrender()</code></a> 메서드를 통해 이미 렌더링 된 액션을 되돌릴 수 있도록 했습니다.</p><h2 id=계정-상태-접근-방법-개선>계정 상태 접근 방법 개선</h2><p>이전 버전에서는 계정의 상태를 가져오기 위해 해당 계정의 상태가 마지막으로 갱신된 블록을 찾을 때까지 이전 블록을 순회하는 방법을 사용했습니다.
+또, 다수 체인(majority chain)이 변경되어 처리된 액션이 포함된 블록이 유효하지 않게 될 경우 <a href=https://docs.libplanet.io/0.3.0/api/Libplanet.Action.IAction.html#Libplanet_Action_IAction_Unrender_Libplanet_Action_IActionContext_Libplanet_Action_IAccountStateDelta_><code>IAction.Unrender()</code></a> 메서드를 통해 이미 렌더링 된 액션을 되돌릴 수 있도록 했습니다.</p>
+<h2 id=계정-상태-접근-방법-개선>계정 상태 접근 방법 개선</h2>
+<p>이전 버전에서는 계정의 상태를 가져오기 위해 해당 계정의 상태가 마지막으로 갱신된 블록을 찾을 때까지 이전 블록을 순회하는 방법을 사용했습니다.
 이런 방식을 사용하면 해당 주소에 아직 아무런 상태가 기록된 적 없을 경우
 최신부터 제너시스까지 모든 블록을 순회해야 하는 문제점이 있습니다.
 상태가 마지막으로 업데이트된 지 오래되어 그사이 많은 블록이 추가된 주소의 상태를 구할 때도 마찬가지로 많은 블록을 순회해야 하고,
-체인의 길이가 길면 길수록 상태를 확인해야 하는 시간이 늘어나게 됩니다.</p><p>이번 버전에서는 각 계정의 상태를 저장할 때 해당 주소의 상태를 가지고 있는 블록을 인덱싱하고,
-상태를 조회할 때는 해당 블록을 바로 조회하는 방식으로 성능을 개선하였습니다.</p><h2 id=블록-추가-성능-개선>블록 추가 성능 개선</h2><p>블록체인에 블록을 추가할 때 수행되는 작업의 개선을 통해 블록 추가 성능을 개선했습니다.</p><ul><li>이미 체인에 추가된 블록에 접근할 때 수행하던 불필요한 블록 검증을 제거했습니다.</li><li>블록이 추가될 때 전체 체인을 검증하던 방식에서 추가되는 블록만 검증하는 방식으로 변경했습니다.</li><li>블록 해시가 필요할 때마다 계산하는 대신 블록 생성 때 한번 계산하도록 변경했습니다.</li><li>블록의 해시를 계산할 때 전체 트랜잭션을 사용하는 대신 트랜잭션 ID를 사용하여 해시 계산 시간을 감소시켰습니다.</li><li>블록을 추가할 때 여러 번 수행되던 액션 평가를 한 번만 수행되도록 하여 블록 추가 시간을 감소시켰습니다.</li></ul><h2 id=그-외>그 외</h2><p>그 외의 여러 가지 변경 사항은 <a href=https://github.com/planetarium/libplanet/releases/tag/0.3.0>전체 변경 내역</a>에서 확인하실 수 있습니다.</p><p>이번 변경 사항이나 Libplanet에 대해 궁금한 점이 있으시다면 언제든 저희 팀이 상주해 있는 <a href=https://discord.gg/planetarium>디스코드 대화방</a>에 놀러 오세요!</p></article><script>(function(){if(!location.hash.match(/^#/)){return;}
-var article=document.getElementById('content');var id=window.decodeURIComponent(location.hash.substring(1));var heading=document.getElementById(id);var match=heading.nodeName.match(/^H([123456])$/);if(!match||heading.parentNode!==article){return;}
-var headingLevel=window.parseInt(match[1]);var highlighted=false;for(var i=0;i<article.childNodes.length;i++){var child=article.childNodes[i];if(highlighted){match=child.nodeName.match(/^H([123456])$/);if(match&&window.parseInt(match[1])>=headingLevel){highlighted=false;}}
-else if(child===heading){highlighted=true;}
-if(!highlighted&&!child.nodeName.match(/^#/)){child.className+=' dim';}}})();</script><div class=recruit><a href=https://planetariumhq.com>플라네타리움</a>은 게임에 특화된 오픈 소스 P2P 라이브러리 <a href=https://libplanet.io/>Libplanet</a>과, 그 위에서 중앙 서버 없는 온라인 게임 <a href=https://nine-chronicles.com/>나인 크로니클</a>을 만들고 있습니다. 저희와 흥미로운 기술적 도전을 함께 하실 분들을 모시고 있습니다. 지금 <a href=https://recruit.planetariumhq.com/>채용 페이지</a>를 확인해주세요!</div><div itemprop=author class="fl tc mr3"><a href=https://github.com/earlbread rel=author itemprop=url class="no-underline mid-gray b f6"><img src="https://www.gravatar.com/avatar/b1267859758f31ce5f6db0af2042e846?d=https://avatars.githubusercontent.com/earlbread" itemprop=image class="w3 h3 br-100 mb1"><br>이승훈</a></div></section><footer><div><p class="f6 gray mt6 lh-copy">&copy; 2019&ndash;2021
-<a href=https://planetariumhq.com/ style=color:inherit;text-decoration:inherit>Planetarium</a>.</p></div></footer></body></html>
+체인의 길이가 길면 길수록 상태를 확인해야 하는 시간이 늘어나게 됩니다.</p>
+<p>이번 버전에서는 각 계정의 상태를 저장할 때 해당 주소의 상태를 가지고 있는 블록을 인덱싱하고,
+상태를 조회할 때는 해당 블록을 바로 조회하는 방식으로 성능을 개선하였습니다.</p>
+<h2 id=블록-추가-성능-개선>블록 추가 성능 개선</h2>
+<p>블록체인에 블록을 추가할 때 수행되는 작업의 개선을 통해 블록 추가 성능을 개선했습니다.</p>
+<ul>
+<li>이미 체인에 추가된 블록에 접근할 때 수행하던 불필요한 블록 검증을 제거했습니다.</li>
+<li>블록이 추가될 때 전체 체인을 검증하던 방식에서 추가되는 블록만 검증하는 방식으로 변경했습니다.</li>
+<li>블록 해시가 필요할 때마다 계산하는 대신 블록 생성 때 한번 계산하도록 변경했습니다.</li>
+<li>블록의 해시를 계산할 때 전체 트랜잭션을 사용하는 대신 트랜잭션 ID를 사용하여 해시 계산 시간을 감소시켰습니다.</li>
+<li>블록을 추가할 때 여러 번 수행되던 액션 평가를 한 번만 수행되도록 하여 블록 추가 시간을 감소시켰습니다.</li>
+</ul>
+<h2 id=그-외>그 외</h2>
+<p>그 외의 여러 가지 변경 사항은 <a href=https://github.com/planetarium/libplanet/releases/tag/0.3.0>전체 변경 내역</a>에서 확인하실 수 있습니다.</p>
+<p>이번 변경 사항이나 Libplanet에 대해 궁금한 점이 있으시다면 언제든 저희 팀이 상주해 있는 <a href=https://discord.gg/planetarium>디스코드 대화방</a>에 놀러 오세요!</p>
+</article>
+<script>(function(){var d,h,e,a,g,c,f,b;if(!location.hash.match(/^#/))return;if(d=document.getElementById('content'),h=window.decodeURIComponent(location.hash.substring(1)),e=document.getElementById(h),a=e.nodeName.match(/^H([123456])$/),!a||e.parentNode!==d)return;g=window.parseInt(a[1]),c=!1;for(f=0;f<d.childNodes.length;f++)b=d.childNodes[f],c?(a=b.nodeName.match(/^H([123456])$/),a&&window.parseInt(a[1])>=g&&(c=!1)):b===e&&(c=!0),!c&&!b.nodeName.match(/^#/)&&(b.className+=' dim')})()</script>
+<div class=recruit>
+<a href=https://planetariumhq.com>플라네타리움</a>은 게임에 특화된 오픈 소스 P2P 라이브러리 <a href=https://libplanet.io/>Libplanet</a>과, 그 위에서 중앙 서버 없는 온라인 게임 <a href=https://nine-chronicles.com/>나인 크로니클</a>을 만들고 있습니다. 저희와 흥미로운 기술적 도전을 함께 하실 분들을 모시고 있습니다. 지금 <a href=https://recruit.planetariumhq.com/>채용 페이지</a>를 확인해주세요!
+</div>
+<div itemprop=author class="fl tc mr3">
+<a href=https://github.com/earlbread rel=author itemprop=url class="no-underline mid-gray b f6">
+<img src="https://www.gravatar.com/avatar/b1267859758f31ce5f6db0af2042e846?d=https://avatars.githubusercontent.com/earlbread" itemprop=image class="w3 h3 br-100 mb1">
+<br>이승훈
+</a>
+</div>
+</section>
+<footer>
+<div>
+<p class="f6 gray mt6 lh-copy">
+&copy; 2019&ndash;2021
+<a href=https://planetariumhq.com/ style=color:inherit;text-decoration:inherit>Planetarium</a>.
+</p>
+</div>
+</footer>
+</body>
+</html>

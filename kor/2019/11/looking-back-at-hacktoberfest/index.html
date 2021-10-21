@@ -1,14 +1,105 @@
-<!doctype html><html lang=ko prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#"><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=description content><meta name=HandheldFriendly content="True"><meta name=MobileOptimized content="320"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=keywords content><meta property="og:type" content="article"><meta property="og:description" content><meta property="og:title" content="Hacktoberfest를 돌아보며"><meta property="og:site_name" content="플라네타리움 엔지니어링 스낵"><meta property="og:image" content="https://snack.planetarium.dev/kor/2019/11/looking-back-at-hacktoberfest/1.png"><meta property="og:image" content="https://snack.planetarium.dev/og/kor.png"><meta property="og:url" content="https://snack.planetarium.dev/kor/2019/11/looking-back-at-hacktoberfest/"><meta property="og:locale" content="ko"><meta property="article:published_time" content="2019-11-08"><meta property="article:modified_time" content="2019-11-08"><meta name=twitter:card content="summary"><meta name=twitter:site content="@"><meta name=twitter:creator content="@"><meta name=twitter:title content="Hacktoberfest를 돌아보며 | 플라네타리움 엔지니어링 스낵"><meta name=twitter:description content="안녕하세요. 오늘은 저희 플라네타리움 팀이 지난 10월 한 달간 Hacktoberfest에 참가하여 받은 기여들을 소개해보려 합니다.
+<!doctype html><html lang=ko prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<meta name=description content>
+<meta name=HandheldFriendly content="True">
+<meta name=MobileOptimized content="320">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=keywords content>
+<meta property="og:type" content="article">
+<meta property="og:description" content>
+<meta property="og:title" content="Hacktoberfest를 돌아보며">
+<meta property="og:site_name" content="플라네타리움 엔지니어링 스낵">
+<meta property="og:image" content="https://snack.planetarium.dev/kor/2019/11/looking-back-at-hacktoberfest/1.png">
+<meta property="og:image" content="https://snack.planetarium.dev/og/kor.png">
+<meta property="og:url" content="https://snack.planetarium.dev/kor/2019/11/looking-back-at-hacktoberfest/">
+<meta property="og:locale" content="ko">
+<meta property="article:published_time" content="2019-11-08">
+<meta property="article:modified_time" content="2019-11-08">
+<meta name=twitter:card content="summary">
+<meta name=twitter:site content="@">
+<meta name=twitter:creator content="@">
+<meta name=twitter:title content="Hacktoberfest를 돌아보며 | 플라네타리움 엔지니어링 스낵">
+<meta name=twitter:description content="안녕하세요. 오늘은 저희 플라네타리움 팀이 지난 10월 한 달간 Hacktoberfest에 참가하여 받은 기여들을 소개해보려 합니다.
 둘러보기 Hacktoberfest를 맞아 저희는 36개의 이슈를 준비했고, 그중 15개의 이슈가 기여를 통해 처리되었습니다.
-  처리된 이슈들
+ 처리된 이슈들
   한 달간 기여를 받아보니 다음과 같은 재밌는 사실도 알게 되었습니다.
- 절반 정도의 기여가 월초에 집중되었습니다. 초반 스퍼트가 중요해 보이네요. 🏃 대부분의 이슈가 초심자를 위한 이슈(label:&#34;good first issue&#34;)였습니다. Libplanet, Libplanet Explorer, Libplanet Explorer Frontend 3개 프로젝트가 고르게 기여를 받았습니다.|"><meta name=twitter:image:src content><meta name=twitter:domain content="https://snack.planetarium.dev/kor/2019/11/looking-back-at-hacktoberfest/"><title>Hacktoberfest를 돌아보며</title><link rel=canonical href=https://snack.planetarium.dev/kor/2019/11/looking-back-at-hacktoberfest/><link rel=alternate href=https://snack.planetarium.dev/eng/2019/11/looking-back-at-hacktoberfest/ hreflang=en title="Looking Back on Hacktoberfest"><link href=https://snack.planetarium.dev/index.xml rel=alternate type=application/atom+xml title="Hacktoberfest를 돌아보며"><link rel=stylesheet href=https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css><link rel=stylesheet href=https://snack.planetarium.dev/css/style.min.e1d6437358a5772f79ae0fd01e6ee2736e7fc6536065652581cf2a9c461d4bb0.css integrity="sha256-4dZDc1ildy95rg/QHm7ic25/xlNgZWUlgc8qnEYdS7A="><script async src="https://www.googletagmanager.com/gtag/js?id=UA-132504786-2"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
-gtag('js',new Date());gtag('config','UA-132504786-2');</script><link rel=icon href=/favicon-32x32.png type=image/png sizes=32x32><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><link rel=apple-touch-icon href=/apple-touch-icon.png></head><body class="sans-serif w-90 w-60-ns center center-ns mv2 mv5-ns" itemscope itemtype=http://schema.org/Article><a href=https://snack.planetarium.dev/kor/ id=site-title class="b bb bw1 pb1 no-underline dark-gray">플라네타리움 엔지니어링 스낵</a><section id=main class=mt5><h1 itemprop=name id=title class=mb1>Hacktoberfest를 돌아보며</h1><div class="f6 gray dib-ns"><time itemprop=datePublished datetime=2019-11-08>2019년 11월 8일</time>
+ 절반 정도의 기여가 월초에 집중되었습니다. 초반 스퍼트가 중요해 보이네요. 🏃 대부분의 이슈가 초심자를 위한 이슈(label:&#34;good first issue&#34;)였습니다. Libplanet, Libplanet Explorer, Libplanet Explorer Frontend 3개 프로젝트가 고르게 기여를 받았습니다.|">
+<meta name=twitter:image:src content>
+<meta name=twitter:domain content="https://snack.planetarium.dev/kor/2019/11/looking-back-at-hacktoberfest/">
+<title>Hacktoberfest를 돌아보며</title>
+<link rel=canonical href=https://snack.planetarium.dev/kor/2019/11/looking-back-at-hacktoberfest/>
+<link rel=alternate href=https://snack.planetarium.dev/eng/2019/11/looking-back-at-hacktoberfest/ hreflang=en title="Looking Back on Hacktoberfest">
+<link href=https://snack.planetarium.dev/index.xml rel=alternate type=application/atom+xml title="Hacktoberfest를 돌아보며">
+<link rel=stylesheet href=https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css>
+<link rel=stylesheet href=https://snack.planetarium.dev/css/style.min.e1d6437358a5772f79ae0fd01e6ee2736e7fc6536065652581cf2a9c461d4bb0.css integrity="sha256-4dZDc1ildy95rg/QHm7ic25/xlNgZWUlgc8qnEYdS7A=">
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-132504786-2"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-132504786-2')</script>
+<link rel=icon href=/favicon-32x32.png type=image/png sizes=32x32>
+<link rel="shortcut icon" href=/favicon.ico type=image/x-icon>
+<link rel=apple-touch-icon href=/apple-touch-icon.png>
+</head>
+<body class="sans-serif w-90 w-60-ns center center-ns mv2 mv5-ns" itemscope itemtype=http://schema.org/Article>
+<a href=https://snack.planetarium.dev/kor/ id=site-title class="b bb bw1 pb1 no-underline dark-gray">플라네타리움 엔지니어링 스낵</a>
+<section id=main class=mt5>
+<h1 itemprop=name id=title class=mb1>Hacktoberfest를 돌아보며</h1>
+<div class="f6 gray dib-ns">
+<time itemprop=datePublished datetime=2019-11-08>
+2019년 11월 8일
+</time>
 (<strong>한국어</strong>
 &bull;
-<a href=https://snack.planetarium.dev/eng/2019/11/looking-back-at-hacktoberfest/ hreflang=en title="Looking Back on Hacktoberfest" class=gray>English</a>)</div><article itemprop=articleBody id=content class="w-100 lh-copy"><p>안녕하세요. 오늘은 저희 <a href=https://planetariumhq.com>플라네타리움</a> 팀이 지난 10월 한 달간 <a href=https://hacktoberfest.digitalocean.com/>Hacktoberfest</a>에 참가하여 받은 기여들을 소개해보려 합니다.</p><h1 id=둘러보기>둘러보기</h1><p>Hacktoberfest를 맞아 저희는 36개의 이슈를 준비했고, 그중 15개의 이슈가 기여를 통해 처리되었습니다.</p><figure><img src=1.png alt="처리된 이슈들"><figcaption><p>처리된 이슈들</p></figcaption></figure><p>한 달간 기여를 받아보니 다음과 같은 재밌는 사실도 알게 되었습니다.</p><ul><li>절반 정도의 기여가 월초에 집중되었습니다. 초반 스퍼트가 중요해 보이네요. 🏃</li><li>대부분의 이슈가 초심자를 위한 이슈(<code>label:"good first issue"</code>)였습니다.</li><li><a href=https://github.com/planetarium/libplanet/>Libplanet</a>, <a href=https://github.com/planetarium/libplanet-explorer/>Libplanet Explorer</a>, <a href=https://github.com/planetarium/libplanet-explorer-frontend/>Libplanet Explorer Frontend</a> 3개 프로젝트가 고르게 기여를 받았습니다.</li></ul><h1 id=기억에-남는-기여들>기억에 남는 기여들</h1><ul><li><p><a href=https://github.com/MaxStalker>@MaxStalker</a> 님이 작업해 주신 <a href=https://github.com/planetarium/libplanet-explorer-frontend/issues/37>Auto refresh when block mined</a>는 코멘트 숫자에서도 알 수 있듯이, 꽤 난항을 겪은 이슈였습니다. Libplanet Explorer Frontend는 특성상 GraphQL 백엔드인 Libplanet Explorer가 있어야 하는데, 저희가 준비한 GraphQL 백엔드가 계속 내려가는 문제가 있어서 꽤 기다리셔야 했거든요. 😢 서비스가 정상화된 뒤에도 <a href=https://discord.gg/planetarium>저희 디스코드 서버</a>에서 이런저런 트러블슈팅을 함께 해가면서 기여를 마무리해 주신 @MaxStalker 님께 이 자리를 빌려 감사의 말씀을 전합니다. 🙇</p></li><li><p><a href=https://github.com/RozzaysRed>@RozzaysRed</a> 님은 Hackoberfest 기간 중, <em>hacktoberfest</em> 레이블이 붙어있는 이슈뿐만 아니라 그렇지 않은 이슈들에도 <a href="https://github.com/issues?q=assignee%3ARozzaysRed+is%3Aclosed">많은 기여</a>를 해주셨습니다. 이럴 줄 알았으면 저희가 <em>hacktoberfest</em> 레이블을 좀 더 빨리, 많이 붙여둘 걸 그랬네요. 😊</p></li><li><p><a href=https://github.com/planetarium/libplanet/issues/555>Rename “maxValue” parameters in IRandom.Next() methods</a> 이슈에서는 <a href=https://github.com/pBouillon>@pBouillon</a> 님께 기여뿐 아니라 적당한 파라미터 명(<code>lowerBound</code>, <code>upperBound</code>)을 제안받기도 했습니다. 💬</p></li></ul><h1 id=마치며>마치며</h1><p>그 밖에도 Hacktoberfest 기간 중 저희가 준비한 프로젝트에 관심과 기여를 보내 주신 모든 분들께 다시 한번 감사의 말씀 드립니다.</p><p>Hacktoberfest는 끝났지만, 저희는 언제나 여러분을 기다리고 있습니다. 혹시 저희가 풀고 있는 문제에 관심이 있거나 함께 하고 싶으신 분은 언제라도 <a href=https://discord.gg/planetarium>디스코드 대화방</a>에서 알려주세요!</p></article><script>(function(){if(!location.hash.match(/^#/)){return;}
-var article=document.getElementById('content');var id=window.decodeURIComponent(location.hash.substring(1));var heading=document.getElementById(id);var match=heading.nodeName.match(/^H([123456])$/);if(!match||heading.parentNode!==article){return;}
-var headingLevel=window.parseInt(match[1]);var highlighted=false;for(var i=0;i<article.childNodes.length;i++){var child=article.childNodes[i];if(highlighted){match=child.nodeName.match(/^H([123456])$/);if(match&&window.parseInt(match[1])>=headingLevel){highlighted=false;}}
-else if(child===heading){highlighted=true;}
-if(!highlighted&&!child.nodeName.match(/^#/)){child.className+=' dim';}}})();</script><div class=recruit><a href=https://planetariumhq.com>플라네타리움</a>은 게임에 특화된 오픈 소스 P2P 라이브러리 <a href=https://libplanet.io/>Libplanet</a>과, 그 위에서 중앙 서버 없는 온라인 게임 <a href=https://nine-chronicles.com/>나인 크로니클</a>을 만들고 있습니다. 저희와 흥미로운 기술적 도전을 함께 하실 분들을 모시고 있습니다. 지금 <a href=https://recruit.planetariumhq.com/>채용 페이지</a>를 확인해주세요!</div><div itemprop=author class="fl tc mr3"><a href=https://github.com/longfin rel=author itemprop=url class="no-underline mid-gray b f6"><img src="https://www.gravatar.com/avatar/0b12cfcb4b1a472207af0e51f7d13a71?d=https://avatars.githubusercontent.com/longfin" itemprop=image class="w3 h3 br-100 mb1"><br>문성원</a></div></section><footer><div><p class="f6 gray mt6 lh-copy">&copy; 2019&ndash;2021
-<a href=https://planetariumhq.com/ style=color:inherit;text-decoration:inherit>Planetarium</a>.</p></div></footer></body></html>
+<a href=https://snack.planetarium.dev/eng/2019/11/looking-back-at-hacktoberfest/ hreflang=en title="Looking Back on Hacktoberfest" class=gray>English</a>)
+</div>
+<article itemprop=articleBody id=content class="w-100 lh-copy">
+<p>안녕하세요. 오늘은 저희 <a href=https://planetariumhq.com>플라네타리움</a> 팀이 지난 10월 한 달간 <a href=https://hacktoberfest.digitalocean.com/>Hacktoberfest</a>에 참가하여 받은 기여들을 소개해보려 합니다.</p>
+<h1 id=둘러보기>둘러보기</h1>
+<p>Hacktoberfest를 맞아 저희는 36개의 이슈를 준비했고, 그중 15개의 이슈가 기여를 통해 처리되었습니다.</p>
+<figure><img src=1.png alt="처리된 이슈들"><figcaption>
+<p>처리된 이슈들</p>
+</figcaption>
+</figure>
+<p>한 달간 기여를 받아보니 다음과 같은 재밌는 사실도 알게 되었습니다.</p>
+<ul>
+<li>절반 정도의 기여가 월초에 집중되었습니다. 초반 스퍼트가 중요해 보이네요. 🏃</li>
+<li>대부분의 이슈가 초심자를 위한 이슈(<code>label:"good first issue"</code>)였습니다.</li>
+<li><a href=https://github.com/planetarium/libplanet/>Libplanet</a>, <a href=https://github.com/planetarium/libplanet-explorer/>Libplanet Explorer</a>, <a href=https://github.com/planetarium/libplanet-explorer-frontend/>Libplanet Explorer Frontend</a> 3개 프로젝트가 고르게 기여를 받았습니다.</li>
+</ul>
+<h1 id=기억에-남는-기여들>기억에 남는 기여들</h1>
+<ul>
+<li>
+<p><a href=https://github.com/MaxStalker>@MaxStalker</a> 님이 작업해 주신 <a href=https://github.com/planetarium/libplanet-explorer-frontend/issues/37>Auto refresh when block mined</a>는 코멘트 숫자에서도 알 수 있듯이, 꽤 난항을 겪은 이슈였습니다. Libplanet Explorer Frontend는 특성상 GraphQL 백엔드인 Libplanet Explorer가 있어야 하는데, 저희가 준비한 GraphQL 백엔드가 계속 내려가는 문제가 있어서 꽤 기다리셔야 했거든요. 😢 서비스가 정상화된 뒤에도 <a href=https://discord.gg/planetarium>저희 디스코드 서버</a>에서 이런저런 트러블슈팅을 함께 해가면서 기여를 마무리해 주신 @MaxStalker 님께 이 자리를 빌려 감사의 말씀을 전합니다. 🙇</p>
+</li>
+<li>
+<p><a href=https://github.com/RozzaysRed>@RozzaysRed</a> 님은 Hackoberfest 기간 중, <em>hacktoberfest</em> 레이블이 붙어있는 이슈뿐만 아니라 그렇지 않은 이슈들에도 <a href="https://github.com/issues?q=assignee%3ARozzaysRed+is%3Aclosed">많은 기여</a>를 해주셨습니다. 이럴 줄 알았으면 저희가 <em>hacktoberfest</em> 레이블을 좀 더 빨리, 많이 붙여둘 걸 그랬네요. 😊</p>
+</li>
+<li>
+<p><a href=https://github.com/planetarium/libplanet/issues/555>Rename “maxValue” parameters in IRandom.Next() methods</a> 이슈에서는 <a href=https://github.com/pBouillon>@pBouillon</a> 님께 기여뿐 아니라 적당한 파라미터 명(<code>lowerBound</code>, <code>upperBound</code>)을 제안받기도 했습니다. 💬</p>
+</li>
+</ul>
+<h1 id=마치며>마치며</h1>
+<p>그 밖에도 Hacktoberfest 기간 중 저희가 준비한 프로젝트에 관심과 기여를 보내 주신 모든 분들께 다시 한번 감사의 말씀 드립니다.</p>
+<p>Hacktoberfest는 끝났지만, 저희는 언제나 여러분을 기다리고 있습니다. 혹시 저희가 풀고 있는 문제에 관심이 있거나 함께 하고 싶으신 분은 언제라도 <a href=https://discord.gg/planetarium>디스코드 대화방</a>에서 알려주세요!</p>
+</article>
+<script>(function(){var d,h,e,a,g,c,f,b;if(!location.hash.match(/^#/))return;if(d=document.getElementById('content'),h=window.decodeURIComponent(location.hash.substring(1)),e=document.getElementById(h),a=e.nodeName.match(/^H([123456])$/),!a||e.parentNode!==d)return;g=window.parseInt(a[1]),c=!1;for(f=0;f<d.childNodes.length;f++)b=d.childNodes[f],c?(a=b.nodeName.match(/^H([123456])$/),a&&window.parseInt(a[1])>=g&&(c=!1)):b===e&&(c=!0),!c&&!b.nodeName.match(/^#/)&&(b.className+=' dim')})()</script>
+<div class=recruit>
+<a href=https://planetariumhq.com>플라네타리움</a>은 게임에 특화된 오픈 소스 P2P 라이브러리 <a href=https://libplanet.io/>Libplanet</a>과, 그 위에서 중앙 서버 없는 온라인 게임 <a href=https://nine-chronicles.com/>나인 크로니클</a>을 만들고 있습니다. 저희와 흥미로운 기술적 도전을 함께 하실 분들을 모시고 있습니다. 지금 <a href=https://recruit.planetariumhq.com/>채용 페이지</a>를 확인해주세요!
+</div>
+<div itemprop=author class="fl tc mr3">
+<a href=https://github.com/longfin rel=author itemprop=url class="no-underline mid-gray b f6">
+<img src="https://www.gravatar.com/avatar/0b12cfcb4b1a472207af0e51f7d13a71?d=https://avatars.githubusercontent.com/longfin" itemprop=image class="w3 h3 br-100 mb1">
+<br>문성원
+</a>
+</div>
+</section>
+<footer>
+<div>
+<p class="f6 gray mt6 lh-copy">
+&copy; 2019&ndash;2021
+<a href=https://planetariumhq.com/ style=color:inherit;text-decoration:inherit>Planetarium</a>.
+</p>
+</div>
+</footer>
+</body>
+</html>

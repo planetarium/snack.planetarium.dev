@@ -1,34 +1,131 @@
-<!doctype html><html lang=en prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#"><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=description content><meta name=HandheldFriendly content="True"><meta name=MobileOptimized content="320"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=keywords content><meta property="og:type" content="article"><meta property="og:description" content><meta property="og:title" content="Moving Beyond NAT"><meta property="og:site_name" content="Planetarium Engineering Snack"><meta property="og:image" content="https://snack.planetarium.dev/og/eng.png"><meta property="og:url" content="https://snack.planetarium.dev/eng/2019/04/nat_traversal_1/"><meta property="og:locale" content="en"><meta property="article:published_time" content="2019-04-04"><meta property="article:modified_time" content="2019-04-04"><meta name=twitter:card content="summary"><meta name=twitter:site content="@"><meta name=twitter:creator content="@"><meta name=twitter:title content="Moving Beyond NAT | Planetarium Engineering Snack"><meta name=twitter:description content="Hello, I&rsquo;m Swen Mun from the Planetarium Engineering Team. Today we&rsquo;re going to talk about what&rsquo;s known as NAT traversal techniques.
+<!doctype html><html lang=en prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<meta name=description content>
+<meta name=HandheldFriendly content="True">
+<meta name=MobileOptimized content="320">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=keywords content>
+<meta property="og:type" content="article">
+<meta property="og:description" content>
+<meta property="og:title" content="Moving Beyond NAT">
+<meta property="og:site_name" content="Planetarium Engineering Snack">
+<meta property="og:image" content="https://snack.planetarium.dev/og/eng.png">
+<meta property="og:url" content="https://snack.planetarium.dev/eng/2019/04/nat_traversal_1/">
+<meta property="og:locale" content="en">
+<meta property="article:published_time" content="2019-04-04">
+<meta property="article:modified_time" content="2019-04-04">
+<meta name=twitter:card content="summary">
+<meta name=twitter:site content="@">
+<meta name=twitter:creator content="@">
+<meta name=twitter:title content="Moving Beyond NAT | Planetarium Engineering Snack">
+<meta name=twitter:description content="Hello, I&rsquo;m Swen Mun from the Planetarium Engineering Team. Today we&rsquo;re going to talk about what&rsquo;s known as NAT traversal techniques.
 So what&rsquo;s the problem? From game servers to smartphones, every device connected to the Internet has an IP address. This enables devices to connect to one another and send/receive messages.
-The fundamental problem with IP address is that quantity is limited. In the case of IPv4 &mdash; the most widely used protocol, it uses 32-bit addresses which means address space is limited to 232 (more than 4 billion) addresses.|"><meta name=twitter:image:src content><meta name=twitter:domain content="https://snack.planetarium.dev/eng/2019/04/nat_traversal_1/"><title>Moving Beyond NAT</title><link rel=canonical href=https://snack.planetarium.dev/eng/2019/04/nat_traversal_1/><link rel=alternate href=https://snack.planetarium.dev/kor/2019/04/nat_traversal_1/ hreflang=ko title="NAT를 넘어서 가자"><link href=https://snack.planetarium.dev/index.xml rel=alternate type=application/atom+xml title="Moving Beyond NAT"><link rel=stylesheet href=https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css><link rel=stylesheet href=https://snack.planetarium.dev/css/style.min.e1d6437358a5772f79ae0fd01e6ee2736e7fc6536065652581cf2a9c461d4bb0.css integrity="sha256-4dZDc1ildy95rg/QHm7ic25/xlNgZWUlgc8qnEYdS7A="><script async src="https://www.googletagmanager.com/gtag/js?id=UA-132504786-2"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
-gtag('js',new Date());gtag('config','UA-132504786-2');</script><link rel=icon href=/favicon-32x32.png type=image/png sizes=32x32><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><link rel=apple-touch-icon href=/apple-touch-icon.png></head><body class="sans-serif w-90 w-60-ns center center-ns mv2 mv5-ns" itemscope itemtype=http://schema.org/Article><a href=https://snack.planetarium.dev/eng/ id=site-title class="b bb bw1 pb1 no-underline dark-gray">Planetarium Engineering Snack</a><section id=main class=mt5><h1 itemprop=name id=title class=mb1>Moving Beyond NAT</h1><div class="f6 gray dib-ns"><time itemprop=datePublished datetime=2019-04-04>April 4, 2019</time>
+The fundamental problem with IP address is that quantity is limited. In the case of IPv4 &mdash; the most widely used protocol, it uses 32-bit addresses which means address space is limited to 232 (more than 4 billion) addresses.|">
+<meta name=twitter:image:src content>
+<meta name=twitter:domain content="https://snack.planetarium.dev/eng/2019/04/nat_traversal_1/">
+<title>Moving Beyond NAT</title>
+<link rel=canonical href=https://snack.planetarium.dev/eng/2019/04/nat_traversal_1/>
+<link rel=alternate href=https://snack.planetarium.dev/kor/2019/04/nat_traversal_1/ hreflang=ko title="NAT를 넘어서 가자">
+<link href=https://snack.planetarium.dev/index.xml rel=alternate type=application/atom+xml title="Moving Beyond NAT">
+<link rel=stylesheet href=https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css>
+<link rel=stylesheet href=https://snack.planetarium.dev/css/style.min.e1d6437358a5772f79ae0fd01e6ee2736e7fc6536065652581cf2a9c461d4bb0.css integrity="sha256-4dZDc1ildy95rg/QHm7ic25/xlNgZWUlgc8qnEYdS7A=">
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-132504786-2"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-132504786-2')</script>
+<link rel=icon href=/favicon-32x32.png type=image/png sizes=32x32>
+<link rel="shortcut icon" href=/favicon.ico type=image/x-icon>
+<link rel=apple-touch-icon href=/apple-touch-icon.png>
+</head>
+<body class="sans-serif w-90 w-60-ns center center-ns mv2 mv5-ns" itemscope itemtype=http://schema.org/Article>
+<a href=https://snack.planetarium.dev/eng/ id=site-title class="b bb bw1 pb1 no-underline dark-gray">Planetarium Engineering Snack</a>
+<section id=main class=mt5>
+<h1 itemprop=name id=title class=mb1>Moving Beyond NAT</h1>
+<div class="f6 gray dib-ns">
+<time itemprop=datePublished datetime=2019-04-04>
+April 4, 2019
+</time>
 (<strong>English</strong>
 &bull;
-<a href=https://snack.planetarium.dev/kor/2019/04/nat_traversal_1/ hreflang=ko title="NAT를 넘어서 가자" class=gray>한국어</a>)</div><article itemprop=articleBody id=content class="w-100 lh-copy"><p>Hello, I&rsquo;m Swen Mun from the Planetarium Engineering Team.
-Today we&rsquo;re going to talk about what&rsquo;s known as <a href=https://en.wikipedia.org/wiki/NAT_traversal><abbr title="Network Address Translation">NAT</abbr> traversal techniques</a>.</p><h2 id=so-whats-the-problem>So what&rsquo;s the problem?</h2><p>From game servers to smartphones, every device connected to the Internet has an <a href=https://en.wikipedia.org/wiki/IP_address>IP address</a>.
-This enables devices to connect to one another and send/receive messages.</p><p>The fundamental problem with IP address is that quantity is limited.
+<a href=https://snack.planetarium.dev/kor/2019/04/nat_traversal_1/ hreflang=ko title="NAT를 넘어서 가자" class=gray>한국어</a>)
+</div>
+<article itemprop=articleBody id=content class="w-100 lh-copy">
+<p>Hello, I&rsquo;m Swen Mun from the Planetarium Engineering Team.
+Today we&rsquo;re going to talk about what&rsquo;s known as <a href=https://en.wikipedia.org/wiki/NAT_traversal><abbr title="Network Address Translation">NAT</abbr> traversal techniques</a>.</p>
+<h2 id=so-whats-the-problem>So what&rsquo;s the problem?</h2>
+<p>From game servers to smartphones, every device connected to the Internet has an <a href=https://en.wikipedia.org/wiki/IP_address>IP address</a>.
+This enables devices to connect to one another and send/receive messages.</p>
+<p>The fundamental problem with IP address is that quantity is limited.
 In the case of <a href=https://en.wikipedia.org/wiki/IPv4>IPv4</a> &mdash; the most widely used protocol, it uses 32-bit addresses which means address space is limited to 2<sup>32</sup> (more than 4 billion) addresses.
 (Of course we don&rsquo;t use all of these addresses.)
 This seems enough at first glance, but it&rsquo;s far short of operating more than one device per person on the planet.
-In fact, since 2011, <a href=https://en.wikipedia.org/wiki/IPv4_address_exhaustion>IPv4 addresses have all been exhausted</a> and no new addresses have been assigned.</p><p>To solve this problem, <a href=https://en.wikipedia.org/wiki/IPv6>IPv6</a> has been proposed to increase address space to 128-bits, but the supply hasn&rsquo;t been able to meet users&rsquo; demand.
+In fact, since 2011, <a href=https://en.wikipedia.org/wiki/IPv4_address_exhaustion>IPv4 addresses have all been exhausted</a> and no new addresses have been assigned.</p>
+<p>To solve this problem, <a href=https://en.wikipedia.org/wiki/IPv6>IPv6</a> has been proposed to increase address space to 128-bits, but the supply hasn&rsquo;t been able to meet users' demand.
 Thus, many network operators chose to separate the network and have multiple private IPs, and convert those addresses so that they could access the Internet through one authorized IP.
-This method is commonly referred to as <a href=https://en.wikipedia.org/wiki/Network_address_translation>NAT</a> (Network Address Translation) and sometimes refers to a device that handles such process (in general, a <a href=https://en.wikipedia.org/wiki/Router_(computing)>router</a>).</p><p>In the server-client model, accessing the Internet through NAT is not a problem.
+This method is commonly referred to as <a href=https://en.wikipedia.org/wiki/Network_address_translation>NAT</a> (Network Address Translation) and sometimes refers to a device that handles such process (in general, a <a href=https://en.wikipedia.org/wiki/Router_(computing)>router</a>).</p>
+<p>In the server-client model, accessing the Internet through NAT is not a problem.
 If the server has an authorized IP, the client can access it, whether through NAT or not.
 However, if you need to connect to a device inside the NAT/firewall, you&rsquo;ve got a problem.
 Because devices outside NAT cannot access the IP of a private network inside the NAT.
-Techniques to address these situations are called <a href=https://en.wikipedia.org/wiki/NAT_traversal>NAT traversal techniques</a>.</p><h2 id=so-which-technique-do-i-use>So which technique do I use?</h2><h3 id=abbr-titleuniversal_plug_and_playupnpabbr-abbr-titleinternet-gateway-device-protocoligdpabbr><abbr title=Universal_Plug_and_Play>UPnP</abbr> (<abbr title="Internet Gateway Device Protocol">IGDP</abbr>)</h3><p>Techniques to pass through NAT can largely be divided into two categories &mdash; whether they are supported by NAT or not.
+Techniques to address these situations are called <a href=https://en.wikipedia.org/wiki/NAT_traversal>NAT traversal techniques</a>.</p>
+<h2 id=so-which-technique-do-i-use>So which technique do I use?</h2>
+<h3 id=abbr-titleuniversal_plug_and_playupnpabbr-abbr-titleinternet-gateway-device-protocoligdpabbr><abbr title=Universal_Plug_and_Play>UPnP</abbr> (<abbr title="Internet Gateway Device Protocol">IGDP</abbr>)</h3>
+<p>Techniques to pass through NAT can largely be divided into two categories &mdash; whether they are supported by NAT or not.
 Protocols such as <a href=https://en.wikipedia.org/wiki/Universal_Plug_and_Play>UPnP</a> that are proposed to meet the requirements of the modern Internet in which equipment connectivity is valued also addresses NAT passing issues (e.g., <a href=https://en.wikipedia.org/wiki/Internet_Gateway_Device_Protocol>Internet Gateway Device Protocol</a>).
-However, this solution can only be applied to equipment that supports UPnP protocol.</p><h3 id=relay-abbr-titletraversal-using-relays-around-natturnabbr>Relay (<abbr title="Traversal Using Relays around NAT">TURN</abbr>)</h3><p>The other way around is not getting help from NAT. In other words, this way provides external access while maintaining the private-authorized IP system. How is this possible? At this point, let’s talk about what we can do and can&rsquo;t do.</p><ul><li><p>For device with an authorized IP,</p><ul><li>It can process connections from other devices.</li><li>It can connect to a device with a different authorized IP.</li></ul></li><li><p>A device with a private IP,</p><ul><li>It is unable to process connection from other devices. <ul><li><em>To be very precise, it&rsquo;s possible within the same network. But I&rsquo;ll exclude this case to simplify the story. :)</em></li></ul></li><li>It can connect to a device that has a different authorized IP.</li></ul></li></ul><p>Let&rsquo;s assume that a server (<em>S</em>) with a separate, authorized IP exists outside NAT.
+However, this solution can only be applied to equipment that supports UPnP protocol.</p>
+<h3 id=relay-abbr-titletraversal-using-relays-around-natturnabbr>Relay (<abbr title="Traversal Using Relays around NAT">TURN</abbr>)</h3>
+<p>The other way around is not getting help from NAT. In other words, this way provides external access while maintaining the private-authorized IP system. How is this possible? At this point, let’s talk about what we can do and can&rsquo;t do.</p>
+<ul>
+<li>
+<p>For device with an authorized IP,</p>
+<ul>
+<li>It can process connections from other devices.</li>
+<li>It can connect to a device with a different authorized IP.</li>
+</ul>
+</li>
+<li>
+<p>A device with a private IP,</p>
+<ul>
+<li>It is unable to process connection from other devices. 
+<ul>
+<li><em>To be very precise, it&rsquo;s possible within the same network. But I&rsquo;ll exclude this case to simplify the story. :)</em></li>
+</ul>
+</li>
+<li>It can connect to a device that has a different authorized IP.</li>
+</ul>
+</li>
+</ul>
+<p>Let&rsquo;s assume that a server (<em>S</em>) with a separate, authorized IP exists outside NAT.
 If this server processes the connection instead of the device (let’s call this <em>A</em>) behind NAT and forwards (relay) the content to <em>A</em>, then we can handle the connection with confidence without relying on NAT&rsquo;s behavior.
-This method is referred to as relay technique and is officially called, <a href=https://en.wikipedia.org/wiki/Traversal_Using_Relays_around_NAT><abbr title="Traversal Using Relays around NAT">TURN</abbr></a>.</p><h3 id=hole-punching>Hole Punching</h3><p>Another way to avoid direct help from NAT is by using a technique called <a href=https://en.wikipedia.org/wiki/TCP_hole_punching>hole punching</a> (commonly known as <a href=https://en.wikipedia.org/wiki/UDP_hole_punching>UDP hole punching</a> but it is also applicable to TCP).</p><p>Hole Punching also assumes a transit server (<em>S</em>) similar to <a href=https://en.wikipedia.org/wiki/Traversal_Using_Relays_around_NAT>TURN</a>.
+This method is referred to as relay technique and is officially called, <a href=https://en.wikipedia.org/wiki/Traversal_Using_Relays_around_NAT><abbr title="Traversal Using Relays around NAT">TURN</abbr></a>.</p>
+<h3 id=hole-punching>Hole Punching</h3>
+<p>Another way to avoid direct help from NAT is by using a technique called <a href=https://en.wikipedia.org/wiki/TCP_hole_punching>hole punching</a> (commonly known as <a href=https://en.wikipedia.org/wiki/UDP_hole_punching>UDP hole punching</a> but it is also applicable to TCP).</p>
+<p>Hole Punching also assumes a transit server (<em>S</em>) similar to <a href=https://en.wikipedia.org/wiki/Traversal_Using_Relays_around_NAT>TURN</a>.
 However, unlike <a href=https://en.wikipedia.org/wiki/Traversal_Using_Relays_around_NAT>TURN</a>, the transit server does not directly relay all communications.
-Instead, it only passes on NAT&rsquo;s authorized IP and device <em>A</em>&lsquo;s port information to to device <em>B</em>.
-In this way when attempting to access <em>A</em>, <em>B</em> attempts to access NAT&rsquo;s authorized IP and port, not <em>A</em>&lsquo;s private IP.</p><p>Although hole punching does not require NAT to implement a specific protocol like UPnP, it does require NAT’s port mapping method.
-Specifically, this technique is only applicable to NAT that follows endpoint independent mapping behavior.</p><h2 id=next-story>Next Story</h2><p>The NAT traversal techniques we have discussed today have different applicable situations and they all have different pros and cons.
+Instead, it only passes on NAT&rsquo;s authorized IP and device <em>A</em>&rsquo;s port information to to device <em>B</em>.
+In this way when attempting to access <em>A</em>, <em>B</em> attempts to access NAT&rsquo;s authorized IP and port, not <em>A</em>&rsquo;s private IP.</p>
+<p>Although hole punching does not require NAT to implement a specific protocol like UPnP, it does require NAT’s port mapping method.
+Specifically, this technique is only applicable to NAT that follows endpoint independent mapping behavior.</p>
+<h2 id=next-story>Next Story</h2>
+<p>The NAT traversal techniques we have discussed today have different applicable situations and they all have different pros and cons.
 Therefore, people in our field use these methods in combination.
-Next time we&rsquo;ll look have a closer look on <a href=https://en.wikipedia.org/wiki/Traversal_Using_Relays_around_NAT>TURN</a>, which is the most expensive but the most reliable communication method to move beyond NAT.</p></article><script>(function(){if(!location.hash.match(/^#/)){return;}
-var article=document.getElementById('content');var id=window.decodeURIComponent(location.hash.substring(1));var heading=document.getElementById(id);var match=heading.nodeName.match(/^H([123456])$/);if(!match||heading.parentNode!==article){return;}
-var headingLevel=window.parseInt(match[1]);var highlighted=false;for(var i=0;i<article.childNodes.length;i++){var child=article.childNodes[i];if(highlighted){match=child.nodeName.match(/^H([123456])$/);if(match&&window.parseInt(match[1])>=headingLevel){highlighted=false;}}
-else if(child===heading){highlighted=true;}
-if(!highlighted&&!child.nodeName.match(/^#/)){child.className+=' dim';}}})();</script><div itemprop=author class="fl tc mr3"><a href=https://github.com/longfin rel=author itemprop=url class="no-underline mid-gray b f6"><img src="https://www.gravatar.com/avatar/0b12cfcb4b1a472207af0e51f7d13a71?d=https://avatars.githubusercontent.com/longfin" itemprop=image class="w3 h3 br-100 mb1"><br>Swen Mun</a></div></section><footer><div><p class="f6 gray mt6 lh-copy">&copy; 2019&ndash;2021
-<a href=https://planetariumhq.com/ style=color:inherit;text-decoration:inherit>Planetarium</a>.</p></div></footer></body></html>
+Next time we&rsquo;ll look have a closer look on <a href=https://en.wikipedia.org/wiki/Traversal_Using_Relays_around_NAT>TURN</a>, which is the most expensive but the most reliable communication method to move beyond NAT.</p>
+</article>
+<script>(function(){var d,h,e,a,g,c,f,b;if(!location.hash.match(/^#/))return;if(d=document.getElementById('content'),h=window.decodeURIComponent(location.hash.substring(1)),e=document.getElementById(h),a=e.nodeName.match(/^H([123456])$/),!a||e.parentNode!==d)return;g=window.parseInt(a[1]),c=!1;for(f=0;f<d.childNodes.length;f++)b=d.childNodes[f],c?(a=b.nodeName.match(/^H([123456])$/),a&&window.parseInt(a[1])>=g&&(c=!1)):b===e&&(c=!0),!c&&!b.nodeName.match(/^#/)&&(b.className+=' dim')})()</script>
+<div itemprop=author class="fl tc mr3">
+<a href=https://github.com/longfin rel=author itemprop=url class="no-underline mid-gray b f6">
+<img src="https://www.gravatar.com/avatar/0b12cfcb4b1a472207af0e51f7d13a71?d=https://avatars.githubusercontent.com/longfin" itemprop=image class="w3 h3 br-100 mb1">
+<br>Swen Mun
+</a>
+</div>
+</section>
+<footer>
+<div>
+<p class="f6 gray mt6 lh-copy">
+&copy; 2019&ndash;2021
+<a href=https://planetariumhq.com/ style=color:inherit;text-decoration:inherit>Planetarium</a>.
+</p>
+</div>
+</footer>
+</body>
+</html>

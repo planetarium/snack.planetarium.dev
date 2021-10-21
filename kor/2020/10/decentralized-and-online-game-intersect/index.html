@@ -1,11 +1,101 @@
-<!doctype html><html lang=ko prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#"><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=description content><meta name=HandheldFriendly content="True"><meta name=MobileOptimized content="320"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=keywords content><meta property="og:type" content="article"><meta property="og:description" content><meta property="og:title" content="탈중앙과 온라인 게임이 교차하다"><meta property="og:site_name" content="플라네타리움 엔지니어링 스낵"><meta property="og:image" content="https://snack.planetarium.dev/kor/2020/10/decentralized-and-online-game-intersect/images/bug-report.png"><meta property="og:image" content="https://snack.planetarium.dev/kor/2020/10/decentralized-and-online-game-intersect/images/orphaned-block.png"><meta property="og:image" content="https://snack.planetarium.dev/kor/2020/10/decentralized-and-online-game-intersect/images/orphaned-blocks.png"><meta property="og:image" content="https://snack.planetarium.dev/kor/2020/10/decentralized-and-online-game-intersect/images/single-chain.png"><meta property="og:image" content="https://snack.planetarium.dev/og/kor.png"><meta property="og:url" content="https://snack.planetarium.dev/kor/2020/10/decentralized-and-online-game-intersect/"><meta property="og:locale" content="ko"><meta property="article:published_time" content="2020-10-08"><meta property="article:modified_time" content="2020-10-08"><meta name=twitter:card content="summary"><meta name=twitter:site content="@"><meta name=twitter:creator content="@"><meta name=twitter:title content="탈중앙과 온라인 게임이 교차하다 | 플라네타리움 엔지니어링 스낵"><meta name=twitter:description content="안녕하세요! 지난 2개월 간 플라네타리움의 엔지니어링 인턴으로 일한 김무훈입니다. 저는 나인 크로니클 출시 직전의 베타 과정을 함께했는데요.
+<!doctype html><html lang=ko prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<meta name=description content>
+<meta name=HandheldFriendly content="True">
+<meta name=MobileOptimized content="320">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=keywords content>
+<meta property="og:type" content="article">
+<meta property="og:description" content>
+<meta property="og:title" content="탈중앙과 온라인 게임이 교차하다">
+<meta property="og:site_name" content="플라네타리움 엔지니어링 스낵">
+<meta property="og:image" content="https://snack.planetarium.dev/kor/2020/10/decentralized-and-online-game-intersect/images/bug-report.png">
+<meta property="og:image" content="https://snack.planetarium.dev/kor/2020/10/decentralized-and-online-game-intersect/images/orphaned-block.png">
+<meta property="og:image" content="https://snack.planetarium.dev/kor/2020/10/decentralized-and-online-game-intersect/images/orphaned-blocks.png">
+<meta property="og:image" content="https://snack.planetarium.dev/kor/2020/10/decentralized-and-online-game-intersect/images/single-chain.png">
+<meta property="og:image" content="https://snack.planetarium.dev/og/kor.png">
+<meta property="og:url" content="https://snack.planetarium.dev/kor/2020/10/decentralized-and-online-game-intersect/">
+<meta property="og:locale" content="ko">
+<meta property="article:published_time" content="2020-10-08">
+<meta property="article:modified_time" content="2020-10-08">
+<meta name=twitter:card content="summary">
+<meta name=twitter:site content="@">
+<meta name=twitter:creator content="@">
+<meta name=twitter:title content="탈중앙과 온라인 게임이 교차하다 | 플라네타리움 엔지니어링 스낵">
+<meta name=twitter:description content="안녕하세요! 지난 2개월 간 플라네타리움의 엔지니어링 인턴으로 일한 김무훈입니다. 저는 나인 크로니클 출시 직전의 베타 과정을 함께했는데요.
 간단히 블록체인과 게임을 결합하며 특이하다고 생각한 기술적인 사례를 소개하겠습니다.
 탈중앙 온라인 게임은 멀티 플레이와 사용자의 데이터를 저장하는 등 서비스를 운영하기 위한 용도로 서버를 이용합니다. 그러나 운영사가 폐업하는 등 여러 이유로 서비스가 중단되면 더 이상 게임을 즐길 수 없게 됩니다.
-모두가 온라인 게임을 분업하여 유지할 수 있다면 사용자가 남아있는 한 서비스가 종료될 걱정은 없게 됩니다.|"><meta name=twitter:image:src content><meta name=twitter:domain content="https://snack.planetarium.dev/kor/2020/10/decentralized-and-online-game-intersect/"><title>탈중앙과 온라인 게임이 교차하다</title><link rel=canonical href=https://snack.planetarium.dev/kor/2020/10/decentralized-and-online-game-intersect/><link rel=alternate href=https://snack.planetarium.dev/eng/2020/10/decentralized-and-online-game-intersect/ hreflang=en title="Decentralization Intersects with Online Game"><link href=https://snack.planetarium.dev/index.xml rel=alternate type=application/atom+xml title="탈중앙과 온라인 게임이 교차하다"><link rel=stylesheet href=https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css><link rel=stylesheet href=https://snack.planetarium.dev/css/style.min.e1d6437358a5772f79ae0fd01e6ee2736e7fc6536065652581cf2a9c461d4bb0.css integrity="sha256-4dZDc1ildy95rg/QHm7ic25/xlNgZWUlgc8qnEYdS7A="><script async src="https://www.googletagmanager.com/gtag/js?id=UA-132504786-2"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
-gtag('js',new Date());gtag('config','UA-132504786-2');</script><link rel=icon href=/favicon-32x32.png type=image/png sizes=32x32><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><link rel=apple-touch-icon href=/apple-touch-icon.png></head><body class="sans-serif w-90 w-60-ns center center-ns mv2 mv5-ns" itemscope itemtype=http://schema.org/Article><a href=https://snack.planetarium.dev/kor/ id=site-title class="b bb bw1 pb1 no-underline dark-gray">플라네타리움 엔지니어링 스낵</a><section id=main class=mt5><h1 itemprop=name id=title class=mb1>탈중앙과 온라인 게임이 교차하다</h1><div class="f6 gray dib-ns"><time itemprop=datePublished datetime=2020-10-08>2020년 10월 8일</time>
+모두가 온라인 게임을 분업하여 유지할 수 있다면 사용자가 남아있는 한 서비스가 종료될 걱정은 없게 됩니다.|">
+<meta name=twitter:image:src content>
+<meta name=twitter:domain content="https://snack.planetarium.dev/kor/2020/10/decentralized-and-online-game-intersect/">
+<title>탈중앙과 온라인 게임이 교차하다</title>
+<link rel=canonical href=https://snack.planetarium.dev/kor/2020/10/decentralized-and-online-game-intersect/>
+<link rel=alternate href=https://snack.planetarium.dev/eng/2020/10/decentralized-and-online-game-intersect/ hreflang=en title="Decentralization Intersects with Online Game">
+<link href=https://snack.planetarium.dev/index.xml rel=alternate type=application/atom+xml title="탈중앙과 온라인 게임이 교차하다">
+<link rel=stylesheet href=https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css>
+<link rel=stylesheet href=https://snack.planetarium.dev/css/style.min.e1d6437358a5772f79ae0fd01e6ee2736e7fc6536065652581cf2a9c461d4bb0.css integrity="sha256-4dZDc1ildy95rg/QHm7ic25/xlNgZWUlgc8qnEYdS7A=">
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-132504786-2"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-132504786-2')</script>
+<link rel=icon href=/favicon-32x32.png type=image/png sizes=32x32>
+<link rel="shortcut icon" href=/favicon.ico type=image/x-icon>
+<link rel=apple-touch-icon href=/apple-touch-icon.png>
+</head>
+<body class="sans-serif w-90 w-60-ns center center-ns mv2 mv5-ns" itemscope itemtype=http://schema.org/Article>
+<a href=https://snack.planetarium.dev/kor/ id=site-title class="b bb bw1 pb1 no-underline dark-gray">플라네타리움 엔지니어링 스낵</a>
+<section id=main class=mt5>
+<h1 itemprop=name id=title class=mb1>탈중앙과 온라인 게임이 교차하다</h1>
+<div class="f6 gray dib-ns">
+<time itemprop=datePublished datetime=2020-10-08>
+2020년 10월 8일
+</time>
 (<strong>한국어</strong>
 &bull;
-<a href=https://snack.planetarium.dev/eng/2020/10/decentralized-and-online-game-intersect/ hreflang=en title="Decentralization Intersects with Online Game" class=gray>English</a>)</div><article itemprop=articleBody id=content class="w-100 lh-copy"><p>안녕하세요! 지난 2개월 간 플라네타리움의 엔지니어링 인턴으로 일한 김무훈입니다. 저는 <a href=https://nine-chronicles.com>나인 크로니클</a> 출시 직전의 베타 과정을 함께했는데요.</p><p>간단히 블록체인과 게임을 결합하며 특이하다고 생각한 기술적인 사례를 소개하겠습니다.</p><h2 id=탈중앙>탈중앙</h2><p>온라인 게임은 멀티 플레이와 사용자의 데이터를 저장하는 등 서비스를 운영하기 위한 용도로 서버를 이용합니다. 그러나 운영사가 폐업하는 등 여러 이유로 서비스가 중단되면 더 이상 게임을 즐길 수 없게 됩니다.</p><p>모두가 온라인 게임을 분업하여 유지할 수 있다면 사용자가 남아있는 한 서비스가 종료될 걱정은 없게 됩니다. 이 개념에 맞는 탈중앙은 전통적인 중앙 서버의 역할을 사용자에게 분담해두는 형태를 의미하는데요. 기술적으로는 <abbr title="Peer to peer">P2P</abbr>나, 분산화 기술이라고 아마 한 번쯤은 들어 보셨을 겁니다.</p><h2 id=재구성-현상>재구성 현상</h2><p>플라네타리움은 여러 분산화 기술 중에 블록체인을 활용해서 게임 내 재화, 보유한 아이템, 달성한 퀘스트 등의 데이터를 보존합니다.</p><p>블록체인에 게임 플레이 데이터를 보관하면 간혹 이 정보가 몇시간 전으로 되돌아가는 문제가 있습니다. 블록체인 네트워크에서 일어나는 <dfn>재구성 현상</dfn>이라는 결함인데요.<sup id=fnref:1><a href=#fn:1 class=footnote-ref role=doc-noteref>1</a></sup> 블록체인 커뮤니티에서는 이를 <dfn>리오그</dfn>(<abbr title=reorganization>reorg</abbr>)라 줄여서 부릅니다. 이 글에서도 편의상 리오그라 칭하겠습니다.</p><figure><img src=images/single-chain.png alt="블록이 순서대로 연결되어 있는 것을 체인이라 한다."><figcaption><p>블록이 순서대로 연결되어 있는 것을 체인이라 한다.</p></figcaption></figure><p>리오그 현상에 대해 설명하기 전에 블록체인 네트워크에는 언제나 하나의 체인을 정본으로 지목한다는 사실부터 짚고 넘어가야 합니다.</p><p>블록체인의 블록은 누구나 생성할 수 있습니다. 그러나 블록을 생성하는 여러 노드가<sup id=fnref:2><a href=#fn:2 class=footnote-ref role=doc-noteref>2</a></sup> 같은 시점에 블록을 동시에 만든다면 시작은 같은데 끝 부분이 서로 다른 여러 체인이 나타납니다. 어떻게 하면 하나의 체인을 정본으로 지목할 수 있는 것일까요? 중앙의 누군가가 정해주는 것도 아닌데도 말입니다.</p><figure><img src=images/orphaned-block.png alt="비슷한 시점에 더 많은 자원이 투입된 체인을 채택한다."><figcaption><p>비슷한 시점에 더 많은 자원이 투입된 체인을 채택한다.</p></figcaption></figure><p>각 노드가 제멋대로 체인을 고르지는 않고, 모든 노드가 공유한 규칙에 따라 가장 규칙에 적합한 체인을 고릅니다. 나인 크로니클 및 Libplanet이 따르고 있는 작업 증명(<abbr title=proof-of-work>PoW</abbr>) 방식에서는 비슷한 시점에 블록을 생성하는데 더 많은 자원이 투자된 체인을 채택합니다.</p><figure><img src=images/orphaned-blocks.png alt="5개의 길이를 가졌던 파란 블록의 체인이 빨간 블록으로 리오그된다. (깊은 리오그)"><figcaption><p>5개의 길이를 가졌던 파란 블록의 체인이 빨간 블록으로 리오그된다. (깊은 리오그)</p></figcaption></figure><p>그런데 기존의 주류 체인보다도 이 규칙에 더 부합하는 다른 체인이 네트워크에 나타날 경우, 이 순간 주류 블록체인이 뒤집히게 됩니다.</p><p>보통의 경우 블록 한두 개를 두고 <dfn>얕은 리오그</dfn>가 일어나지만 나누어진 블록의 깊이가 일정 개수보다 많다면 <dfn>깊은 리오그</dfn>가 일어납니다. 예를 들어,</p><ol><li>A, B 분기로 체인이 나뉘어져 다른 노드로 전파된다.</li><li>비슷한 비율로 점차 전파되는 노드가 늘어가며 체인의 길이도 늘어간다.</li><li>모든 노드가 A 분기와 B 분기 중 하나를 채택했고, A 분기의 체인이 더 길면서 채택된 비율이 높다.</li><li>B 분기의 체인을 채택한 모든 노드의 체인이 A로 리오그 됩니다.</li></ol><style>@media screen and (min-width:70em){img[src="images/bug-report.png"]{width:60%}}</style><figure><img src=images/bug-report.png alt="어제 10,000 골드를 보유했던 사용자가 1,000 미만의 골드를 보유하게 되었다고 제보를 했다."><figcaption><p>어제 10,000 골드를 보유했던 사용자가 1,000 미만의 골드를 보유하게 되었다고 제보를 했다.</p></figcaption></figure><p>그래서 앞서 이야기했듯이, 리오그 현상 때문에 레벨이나 가진 아이템이 몇 분에서 몇 시간 전의 상태로 되돌아갔다는 이야기가 나인 크로니클 커뮤니티에서 자주 언급되었습니다.<sup id=fnref:3><a href=#fn:3 class=footnote-ref role=doc-noteref>3</a></sup> 탈중앙 네트워크에서 발생한 일이기 때문에 운영진에게 되돌려달라고 할 수도 없는 노릇입니다.</p><h2 id=블록체인-네트워크-초기화>블록체인 네트워크 초기화</h2><p>나인 크로니클은 베타 기간 동안 체인 네트워크를 일곱 번 초기화했습니다. 체인 네트워크가 초기화되면 게임 플레이어가 일구었던 게임 데이터가 모두 사라지게 됩니다. 이런 위험을 감수하고도 초기화를 감행한 이유는 다음과 같습니다.</p><p>블록체인 네트워크 코어 <a href=https://libplanet.io/>Libplanet</a>에서는 게임의 상태를 블록에 저장합니다. 사용자의 행동은 경우 <a href=https://docs.libplanet.io/0.9.5/api/Libplanet.Action.IAction.html>액션</a>이라는 이름의 자료 구조에 맞추어 저장됩니다.</p><div class=highlight><pre style=background-color:#fff><code class=language-json data-lang=json>{
+<a href=https://snack.planetarium.dev/eng/2020/10/decentralized-and-online-game-intersect/ hreflang=en title="Decentralization Intersects with Online Game" class=gray>English</a>)
+</div>
+<article itemprop=articleBody id=content class="w-100 lh-copy">
+<p>안녕하세요! 지난 2개월 간 플라네타리움의 엔지니어링 인턴으로 일한 김무훈입니다. 저는 <a href=https://nine-chronicles.com>나인 크로니클</a> 출시 직전의 베타 과정을 함께했는데요.</p>
+<p>간단히 블록체인과 게임을 결합하며 특이하다고 생각한 기술적인 사례를 소개하겠습니다.</p>
+<h2 id=탈중앙>탈중앙</h2>
+<p>온라인 게임은 멀티 플레이와 사용자의 데이터를 저장하는 등 서비스를 운영하기 위한 용도로 서버를 이용합니다. 그러나 운영사가 폐업하는 등 여러 이유로 서비스가 중단되면 더 이상 게임을 즐길 수 없게 됩니다.</p>
+<p>모두가 온라인 게임을 분업하여 유지할 수 있다면 사용자가 남아있는 한 서비스가 종료될 걱정은 없게 됩니다. 이 개념에 맞는 탈중앙은 전통적인 중앙 서버의 역할을 사용자에게 분담해두는 형태를 의미하는데요. 기술적으로는 <abbr title="Peer to peer">P2P</abbr>나, 분산화 기술이라고 아마 한 번쯤은 들어 보셨을 겁니다.</p>
+<h2 id=재구성-현상>재구성 현상</h2>
+<p>플라네타리움은 여러 분산화 기술 중에 블록체인을 활용해서 게임 내 재화, 보유한 아이템, 달성한 퀘스트 등의 데이터를 보존합니다.</p>
+<p>블록체인에 게임 플레이 데이터를 보관하면 간혹 이 정보가 몇시간 전으로 되돌아가는 문제가 있습니다. 블록체인 네트워크에서 일어나는 <dfn>재구성 현상</dfn>이라는 결함인데요.<sup id=fnref:1><a href=#fn:1 class=footnote-ref role=doc-noteref>1</a></sup> 블록체인 커뮤니티에서는 이를 <dfn>리오그</dfn>(<abbr title=reorganization>reorg</abbr>)라 줄여서 부릅니다. 이 글에서도 편의상 리오그라 칭하겠습니다.</p>
+<figure><img src=images/single-chain.png alt="블록이 순서대로 연결되어 있는 것을 체인이라 한다."><figcaption>
+<p>블록이 순서대로 연결되어 있는 것을 체인이라 한다.</p>
+</figcaption>
+</figure>
+<p>리오그 현상에 대해 설명하기 전에 블록체인 네트워크에는 언제나 하나의 체인을 정본으로 지목한다는 사실부터 짚고 넘어가야 합니다.</p>
+<p>블록체인의 블록은 누구나 생성할 수 있습니다. 그러나 블록을 생성하는 여러 노드가<sup id=fnref:2><a href=#fn:2 class=footnote-ref role=doc-noteref>2</a></sup> 같은 시점에 블록을 동시에 만든다면 시작은 같은데 끝 부분이 서로 다른 여러 체인이 나타납니다. 어떻게 하면 하나의 체인을 정본으로 지목할 수 있는 것일까요? 중앙의 누군가가 정해주는 것도 아닌데도 말입니다.</p>
+<figure><img src=images/orphaned-block.png alt="비슷한 시점에 더 많은 자원이 투입된 체인을 채택한다."><figcaption>
+<p>비슷한 시점에 더 많은 자원이 투입된 체인을 채택한다.</p>
+</figcaption>
+</figure>
+<p>각 노드가 제멋대로 체인을 고르지는 않고, 모든 노드가 공유한 규칙에 따라 가장 규칙에 적합한 체인을 고릅니다. 나인 크로니클 및 Libplanet이 따르고 있는 작업 증명(<abbr title=proof-of-work>PoW</abbr>) 방식에서는 비슷한 시점에 블록을 생성하는데 더 많은 자원이 투자된 체인을 채택합니다.</p>
+<figure><img src=images/orphaned-blocks.png alt="5개의 길이를 가졌던 파란 블록의 체인이 빨간 블록으로 리오그된다. (깊은 리오그)"><figcaption>
+<p>5개의 길이를 가졌던 파란 블록의 체인이 빨간 블록으로 리오그된다. (깊은 리오그)</p>
+</figcaption>
+</figure>
+<p>그런데 기존의 주류 체인보다도 이 규칙에 더 부합하는 다른 체인이 네트워크에 나타날 경우, 이 순간 주류 블록체인이 뒤집히게 됩니다.</p>
+<p>보통의 경우 블록 한두 개를 두고 <dfn>얕은 리오그</dfn>가 일어나지만 나누어진 블록의 깊이가 일정 개수보다 많다면 <dfn>깊은 리오그</dfn>가 일어납니다. 예를 들어,</p>
+<ol>
+<li>A, B 분기로 체인이 나뉘어져 다른 노드로 전파된다.</li>
+<li>비슷한 비율로 점차 전파되는 노드가 늘어가며 체인의 길이도 늘어간다.</li>
+<li>모든 노드가 A 분기와 B 분기 중 하나를 채택했고, A 분기의 체인이 더 길면서 채택된 비율이 높다.</li>
+<li>B 분기의 체인을 채택한 모든 노드의 체인이 A로 리오그 됩니다.</li>
+</ol>
+<style>@media screen and (min-width:70em){img[src="images/bug-report.png"]{width:60%}}</style>
+<figure><img src=images/bug-report.png alt="어제 10,000 골드를 보유했던 사용자가 1,000 미만의 골드를 보유하게 되었다고 제보를 했다."><figcaption>
+<p>어제 10,000 골드를 보유했던 사용자가 1,000 미만의 골드를 보유하게 되었다고 제보를 했다.</p>
+</figcaption>
+</figure>
+<p>그래서 앞서 이야기했듯이, 리오그 현상 때문에 레벨이나 가진 아이템이 몇 분에서 몇 시간 전의 상태로 되돌아갔다는 이야기가 나인 크로니클 커뮤니티에서 자주 언급되었습니다.<sup id=fnref:3><a href=#fn:3 class=footnote-ref role=doc-noteref>3</a></sup> 탈중앙 네트워크에서 발생한 일이기 때문에 운영진에게 되돌려달라고 할 수도 없는 노릇입니다.</p>
+<h2 id=블록체인-네트워크-초기화>블록체인 네트워크 초기화</h2>
+<p>나인 크로니클은 베타 기간 동안 체인 네트워크를 일곱 번 초기화했습니다. 체인 네트워크가 초기화되면 게임 플레이어가 일구었던 게임 데이터가 모두 사라지게 됩니다. 이런 위험을 감수하고도 초기화를 감행한 이유는 다음과 같습니다.</p>
+<p>블록체인 네트워크 코어 <a href=https://libplanet.io/>Libplanet</a>에서는 게임의 상태를 블록에 저장합니다. 사용자의 행동은 경우 <a href=https://docs.libplanet.io/0.9.5/api/Libplanet.Action.IAction.html>액션</a>이라는 이름의 자료 구조에 맞추어 저장됩니다.</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff><code class=language-json data-lang=json>{
   <span style=color:#b06;font-weight:700>&#34;stageId&#34;</span>: <span style=color:#d20;background-color:#fff0f0>&#34;123&#34;</span>,
   <span style=color:#b06;font-weight:700>&#34;id&#34;</span>: <span style=color:#d20;background-color:#fff0f0>&#34;ntPSdIREOUOARaRYJHlGEg==&#34;</span>,
   <span style=color:#b06;font-weight:700>&#34;equipments&#34;</span>: [<span style=color:#d20;background-color:#fff0f0>&#34;KTm6cLkrtEWs6k4A821K3Q==&#34;</span>],
@@ -13,9 +103,55 @@ gtag('js',new Date());gtag('config','UA-132504786-2');</script><link rel=icon hr
   <span style=color:#b06;font-weight:700>&#34;foods&#34;</span>: [],
   <span style=color:#b06;font-weight:700>&#34;worldId&#34;</span>: <span style=color:#d20;background-color:#fff0f0>&#34;3&#34;</span>
 }
-</code></pre></div><p>만약 게임 내에서 의상 요소가 업데이트된다면 <code>costumes</code> 같이 새로운 속성이 추가되고, 이 정보가 담긴 블록의 해시가<sup id=fnref:4><a href=#fn:4 class=footnote-ref role=doc-noteref>4</a></sup> 이전 블록의 해시를 만드는 규약(protocol)과 맞지 않게 됩니다. 규약이 달라지면 이전의 블록 데이터를 이어서 사용할 수 없게 됩니다.<sup id=fnref:5><a href=#fn:5 class=footnote-ref role=doc-noteref>5</a></sup> 이 외에도 유니크한 값이 다르게 되거나, Libplanet이나 그 SDK의 코드 중에 해시에 영향이 가는 수정이 생긴다면 달라집니다.</p><p>이런 경우의 대개 다른 블록체인에서는 몇 번째 블록 이후부터 블록을 다르게 해석하도록 규약을 추가합니다. 나인 크로니클도 그럴 수 있지만, 크고 작은 변경이 잦은 베타 기간에 이런 방법을 취하는 것은 무리라고 판단했습니다. 그래서 체인을 매번 초기화하는 것을 감행한 것입니다.</p><p>정식 출시 이후에는 체인을 유지할 예정입니다. 그러기 위한 여러 제안이 검토된 상황으로, 기회가 된다면 이후에 스낵에서 이를 소개하겠습니다.</p><h2 id=마치며>마치며</h2><p>플라네타리움은 &ldquo;커뮤니티가 운영하는 온라인 게임"이라는 매력으로 새로운 형태의 게임 문화를 정착시키는 것에 큰 기대를 하고 있습니다. 간혹 온라인 게임의 운영사 직원이 게임의 자원을 횡령하여 게임의 생태계를 무너뜨리는 일이 언론에 보도되는데요. 나인 크로니클은 게임의 규칙이 프로토콜 수준으로 투명해져서 그런 일이 원칙적으로 일어날 수 없습니다.</p><p>이러한 장점에도 불구하고 Libplanet이 사용하는 블록체인 프로토콜이 진입 장벽으로 느껴질 수 있습니다. 작업 내역을 라인 단위로 분산하고 자동으로 병합이 되는 Git을 처음 보고 느낀 충격이랄까요. 그래서 여러분이 게임을 플레이하면 겪는 아쉬움, 개선점을 <a href=https://discord.gg/planetarium>디스코드 채널</a>과 GitHub<sup id=fnref:6><a href=#fn:6 class=footnote-ref role=doc-noteref>6</a></sup>에서 받고 있습니다.</p><p>이 글은 앞으로 시리즈로 연재되며, 다음 발행 때에는 나인 크로니클이 리오그 현상과 체인 리셋을 어떻게 대처하였는지 소개하는 시간을 가질 예정입니다. 읽어주셔서 감사합니다.</p><section class=footnotes role=doc-endnotes><hr><ol><li id=fn:1 role=doc-endnote><p>엔지니어링 팀 내부에서는 플레이했던 기록이 꿈처럼 되어 버린다고 해서 <dfn>신기루</dfn> 현상으로 부릅니다. <a href=#fnref:1 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:2 role=doc-endnote><p>블록체인 네트워크에 참여하는 컴퓨터를 의미합니다. <a href=#fnref:2 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:3 role=doc-endnote><p>블록체인 코리빙·코워킹 커뮤니티 논스(nonce) 공동 창립자 하시은 님이 쓴 <a href=https://www.facebook.com/unseenone.flohsdpsyphle/posts/1027765500973348>게임 후기</a>에서 사용자 입장의 상황이 잘 설명되었습니다. <a href=#fnref:3 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:4 role=doc-endnote><p>블록체인은 그 이전 블록의 해시를 메타 정보 삼아 체인을 이읍니다. 연결 리스트를 떠오르면 이해하기 쉽습니다. <a href=#fnref:4 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:5 role=doc-endnote><p>확장한 명세가 들어간 게임 클라이언트가 이전 블록을 제대로 해석하지 못할 가능성이 있습니다. <a href=#fnref:5 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:6 role=doc-endnote><p>P2P 온라인 게임을 위한 블록체인 코어 — <a href=https://github.com/planetarium/libplanet>libplanet</a>, 나인 크로니클을 위한 Libplanet 기반의 SDK — <a href=https://github.com/planetarium/lib9c>Lib9c</a>, 나인 크로니클 클라이언트 전용의 블록체인 노드 서비스 — <a href=https://github.com/planetarium/ninechronicles.standalone>NineChronicles.Standalone</a>, 이 밖에도 나인 크로니클 론처와 게임 클라이언트의 저장소를 공개할 예정입니다. <a href=#fnref:6 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li></ol></section></article><script>(function(){if(!location.hash.match(/^#/)){return;}
-var article=document.getElementById('content');var id=window.decodeURIComponent(location.hash.substring(1));var heading=document.getElementById(id);var match=heading.nodeName.match(/^H([123456])$/);if(!match||heading.parentNode!==article){return;}
-var headingLevel=window.parseInt(match[1]);var highlighted=false;for(var i=0;i<article.childNodes.length;i++){var child=article.childNodes[i];if(highlighted){match=child.nodeName.match(/^H([123456])$/);if(match&&window.parseInt(match[1])>=headingLevel){highlighted=false;}}
-else if(child===heading){highlighted=true;}
-if(!highlighted&&!child.nodeName.match(/^#/)){child.className+=' dim';}}})();</script><div class=recruit><a href=https://planetariumhq.com>플라네타리움</a>은 게임에 특화된 오픈 소스 P2P 라이브러리 <a href=https://libplanet.io/>Libplanet</a>과, 그 위에서 중앙 서버 없는 온라인 게임 <a href=https://nine-chronicles.com/>나인 크로니클</a>을 만들고 있습니다. 저희와 흥미로운 기술적 도전을 함께 하실 분들을 모시고 있습니다. 지금 <a href=https://recruit.planetariumhq.com/>채용 페이지</a>를 확인해주세요!</div><div itemprop=author class="fl tc mr3"><a href=https://github.com/x86chi rel=author itemprop=url class="no-underline mid-gray b f6"><img src="https://www.gravatar.com/avatar/c93656ae682a9721e1bdb3215c208309?d=https://avatars.githubusercontent.com/x86chi" itemprop=image class="w3 h3 br-100 mb1"><br>김무훈</a></div></section><footer><div><p class="f6 gray mt6 lh-copy">&copy; 2019&ndash;2021
-<a href=https://planetariumhq.com/ style=color:inherit;text-decoration:inherit>Planetarium</a>.</p></div></footer></body></html>
+</code></pre></div><p>만약 게임 내에서 의상 요소가 업데이트된다면 <code>costumes</code> 같이 새로운 속성이 추가되고, 이 정보가 담긴 블록의 해시가<sup id=fnref:4><a href=#fn:4 class=footnote-ref role=doc-noteref>4</a></sup> 이전 블록의 해시를 만드는 규약(protocol)과 맞지 않게 됩니다. 규약이 달라지면 이전의 블록 데이터를 이어서 사용할 수 없게 됩니다.<sup id=fnref:5><a href=#fn:5 class=footnote-ref role=doc-noteref>5</a></sup> 이 외에도 유니크한 값이 다르게 되거나, Libplanet이나 그 SDK의 코드 중에 해시에 영향이 가는 수정이 생긴다면 달라집니다.</p>
+<p>이런 경우의 대개 다른 블록체인에서는 몇 번째 블록 이후부터 블록을 다르게 해석하도록 규약을 추가합니다. 나인 크로니클도 그럴 수 있지만, 크고 작은 변경이 잦은 베타 기간에 이런 방법을 취하는 것은 무리라고 판단했습니다. 그래서 체인을 매번 초기화하는 것을 감행한 것입니다.</p>
+<p>정식 출시 이후에는 체인을 유지할 예정입니다. 그러기 위한 여러 제안이 검토된 상황으로, 기회가 된다면 이후에 스낵에서 이를 소개하겠습니다.</p>
+<h2 id=마치며>마치며</h2>
+<p>플라네타리움은 &ldquo;커뮤니티가 운영하는 온라인 게임"이라는 매력으로 새로운 형태의 게임 문화를 정착시키는 것에 큰 기대를 하고 있습니다. 간혹 온라인 게임의 운영사 직원이 게임의 자원을 횡령하여 게임의 생태계를 무너뜨리는 일이 언론에 보도되는데요. 나인 크로니클은 게임의 규칙이 프로토콜 수준으로 투명해져서 그런 일이 원칙적으로 일어날 수 없습니다.</p>
+<p>이러한 장점에도 불구하고 Libplanet이 사용하는 블록체인 프로토콜이 진입 장벽으로 느껴질 수 있습니다. 작업 내역을 라인 단위로 분산하고 자동으로 병합이 되는 Git을 처음 보고 느낀 충격이랄까요. 그래서 여러분이 게임을 플레이하면 겪는 아쉬움, 개선점을 <a href=https://discord.gg/planetarium>디스코드 채널</a>과 GitHub<sup id=fnref:6><a href=#fn:6 class=footnote-ref role=doc-noteref>6</a></sup>에서 받고 있습니다.</p>
+<p>이 글은 앞으로 시리즈로 연재되며, 다음 발행 때에는 나인 크로니클이 리오그 현상과 체인 리셋을 어떻게 대처하였는지 소개하는 시간을 가질 예정입니다. 읽어주셔서 감사합니다.</p>
+<section class=footnotes role=doc-endnotes>
+<hr>
+<ol>
+<li id=fn:1 role=doc-endnote>
+<p>엔지니어링 팀 내부에서는 플레이했던 기록이 꿈처럼 되어 버린다고 해서 <dfn>신기루</dfn> 현상으로 부릅니다.&#160;<a href=#fnref:1 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
+</li>
+<li id=fn:2 role=doc-endnote>
+<p>블록체인 네트워크에 참여하는 컴퓨터를 의미합니다.&#160;<a href=#fnref:2 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
+</li>
+<li id=fn:3 role=doc-endnote>
+<p>블록체인 코리빙·코워킹 커뮤니티 논스(nonce) 공동 창립자 하시은 님이 쓴 <a href=https://www.facebook.com/unseenone.flohsdpsyphle/posts/1027765500973348>게임 후기</a>에서 사용자 입장의 상황이 잘 설명되었습니다.&#160;<a href=#fnref:3 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
+</li>
+<li id=fn:4 role=doc-endnote>
+<p>블록체인은 그 이전 블록의 해시를 메타 정보 삼아 체인을 이읍니다. 연결 리스트를 떠오르면 이해하기 쉽습니다.&#160;<a href=#fnref:4 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
+</li>
+<li id=fn:5 role=doc-endnote>
+<p>확장한 명세가 들어간 게임 클라이언트가 이전 블록을 제대로 해석하지 못할 가능성이 있습니다.&#160;<a href=#fnref:5 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
+</li>
+<li id=fn:6 role=doc-endnote>
+<p>P2P 온라인 게임을 위한 블록체인 코어 — <a href=https://github.com/planetarium/libplanet>libplanet</a>, 나인 크로니클을 위한 Libplanet 기반의 SDK — <a href=https://github.com/planetarium/lib9c>Lib9c</a>, 나인 크로니클 클라이언트 전용의 블록체인 노드 서비스 — <a href=https://github.com/planetarium/ninechronicles.standalone>NineChronicles.Standalone</a>, 이 밖에도 나인 크로니클 론처와 게임 클라이언트의 저장소를 공개할 예정입니다.&#160;<a href=#fnref:6 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+</article>
+<script>(function(){var d,h,e,a,g,c,f,b;if(!location.hash.match(/^#/))return;if(d=document.getElementById('content'),h=window.decodeURIComponent(location.hash.substring(1)),e=document.getElementById(h),a=e.nodeName.match(/^H([123456])$/),!a||e.parentNode!==d)return;g=window.parseInt(a[1]),c=!1;for(f=0;f<d.childNodes.length;f++)b=d.childNodes[f],c?(a=b.nodeName.match(/^H([123456])$/),a&&window.parseInt(a[1])>=g&&(c=!1)):b===e&&(c=!0),!c&&!b.nodeName.match(/^#/)&&(b.className+=' dim')})()</script>
+<div class=recruit>
+<a href=https://planetariumhq.com>플라네타리움</a>은 게임에 특화된 오픈 소스 P2P 라이브러리 <a href=https://libplanet.io/>Libplanet</a>과, 그 위에서 중앙 서버 없는 온라인 게임 <a href=https://nine-chronicles.com/>나인 크로니클</a>을 만들고 있습니다. 저희와 흥미로운 기술적 도전을 함께 하실 분들을 모시고 있습니다. 지금 <a href=https://recruit.planetariumhq.com/>채용 페이지</a>를 확인해주세요!
+</div>
+<div itemprop=author class="fl tc mr3">
+<a href=https://github.com/x86chi rel=author itemprop=url class="no-underline mid-gray b f6">
+<img src="https://www.gravatar.com/avatar/c93656ae682a9721e1bdb3215c208309?d=https://avatars.githubusercontent.com/x86chi" itemprop=image class="w3 h3 br-100 mb1">
+<br>김무훈
+</a>
+</div>
+</section>
+<footer>
+<div>
+<p class="f6 gray mt6 lh-copy">
+&copy; 2019&ndash;2021
+<a href=https://planetariumhq.com/ style=color:inherit;text-decoration:inherit>Planetarium</a>.
+</p>
+</div>
+</footer>
+</body>
+</html>
