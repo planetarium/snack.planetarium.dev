@@ -98,14 +98,15 @@ API 측면에서는 [`ITransport` 인터페이스][ITransport]로 표현되며, 
 
 시범 단계이기에 인터페이스는 현재 여러 마이너 릴리스에 걸쳐 조정되고 있으며,
 아직 게임 개발자가 직접 정의한 트랜스포트 구현을 사용할 수는 없습니다.
-연내에는 `NetMQTransport`를 대체할 새로운 TCP 기반 트랜스포트 구현과 함께
-[`Swarm<T>`][Swarm<T>] 객체가 사용자 정의 트랜스포트를 쓰도록 설정 가능해질
-예정입니다.
+연내에는 `NetMQTransport`를 대체할 [새로운 TCP 기반 트랜스포트][TcpTransport]
+구현과 함께 [`Swarm<T>`][Swarm<T>] 객체가 사용자 정의 트랜스포트를 쓰도록 설정
+가능해질 예정입니다.
 
 [ZeroMQ]: https://zeromq.org/
 [NetMQ]: https://github.com/zeromq/netmq
 [ITransport]: https://docs.libplanet.io/0.19.0/api/Libplanet.Net.Transports.ITransport.html
 [NetMQTransport]: https://docs.libplanet.io/0.19.0/api/Libplanet.Net.Transports.NetMQTransport.html
+[TcpTransport]: https://github.com/planetarium/libplanet/pull/1523
 [Swarm<T>]: https://docs.libplanet.io/0.19.0/api/Libplanet.Net.Swarm-1.html
 
 
