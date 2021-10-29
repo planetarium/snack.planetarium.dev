@@ -211,7 +211,8 @@ HashAlgorithmType GetHashAlgorithm(long index) =>
 
 API 측면에서는, 블록의 서명은 [`Block<T>.Signature` 속성][Block<T>.Signature]에
 담기고 마이너의 공개 키는 [`Block<T>.PublicKey` 속성][Block<T>.PublicKey]에
-담기게 됩니다.  프로토콜 버전 1 및 0의 블록은 두 속성 모두 빕니다.
+담기게 됩니다.  프로토콜 버전 1 및 0의 블록에서는 두 속성이 모두 `null`로
+비어 있습니다.
 
 [Block<T>.Signature]: https://docs.libplanet.io/0.19.0/api/Libplanet.Blocks.Block-1.html#Libplanet_Blocks_Block_1_Signature
 [Block<T>.PublicKey]: https://docs.libplanet.io/0.19.0/api/Libplanet.Blocks.Block-1.html#Libplanet_Blocks_Block_1_PublicKey
