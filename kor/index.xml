@@ -1,4 +1,144 @@
-<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><title>플라네타리움 엔지니어링 스낵</title><link rel="self" href="https://snack.planetarium.dev/kor/index.xml"/><link rel="alternate" href="https://snack.planetarium.dev/kor/" title="플라네타리움 엔지니어링 스낵"/><link rel="alternate" href="https://snack.planetarium.dev/eng/" hreflang="en" title="Planetarium Engineering Snack"/><updated>2020-12-08T00:00:00+00:00</updated><id>https://snack.planetarium.dev/kor/</id><entry><title>Libplanet 0.10 릴리스</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/12/libplanet-0.10/" title="Libplanet 0.10 릴리스"/><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/12/libplanet-0.10/" hreflang="en" title="Libplanet 0.10 Released"/><id>https://snack.planetarium.dev/kor/2020/12/libplanet-0.10/</id><published>2020-12-08T00:00:00+00:00</published><updated>2020-12-08T00:00:00+00:00</updated><content type="html">&lt;p>안녕하세요. &lt;a href="https://libplanet.io/">Libplanet&lt;/a>의 열 번째 마이너 버전인 &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.10.0">0.10 버전&lt;/a>이
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><title>플라네타리움 엔지니어링 스낵</title><link rel="self" href="https://snack.planetarium.dev/kor/index.xml"/><link rel="alternate" href="https://snack.planetarium.dev/kor/" title="플라네타리움 엔지니어링 스낵"/><link rel="alternate" href="https://snack.planetarium.dev/eng/" hreflang="en" title="Planetarium Engineering Snack"/><updated>2021-10-29T00:00:00+00:00</updated><id>https://snack.planetarium.dev/kor/</id><entry><title>Libplanet 0.11–0.19 업데이트 요약</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2021/10/libplanet-0.11-0.19/" title="Libplanet 0.11–0.19 업데이트 요약"/><id>https://snack.planetarium.dev/kor/2021/10/libplanet-0.11-0.19/</id><published>2021-10-29T00:00:00+00:00</published><updated>2021-10-29T00:00:00+00:00</updated><content type="html">&lt;p>안녕하세요. 오랜만에 소식 전합니다. &lt;a href="https://libplanet.io/">Libplanet&lt;/a>&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>은 지난 몇 달 동안, 여러
+마이너 버전을 릴리스했습니다. 그렇지만 저희의 릴리스 정책과 주기가 바뀜에 따라,
+그리고 Libplanet으로 만들어진 첫 게임 〈&lt;a href="https://nine-chronicles.com/">나인 크로니클&lt;/a>〉 메인넷의 여러 문제들에
+대응하느라 차분히 그간의 업데이트를 정리된 글로 쓸 여유가 없었습니다.
+그래서 이번 글에서 그 사이의 변화 중 큰 것들을 중심으로 소개해 볼까 합니다.&lt;/p>
+&lt;h2 id="달라진-릴리스-주기">달라진 릴리스 주기&lt;/h2>
+&lt;p>이전까지 Libplanet은 릴리스 주기에 뚜렷한 규칙이 없었습니다. 주로 큰 API 변경이
+있거나 마지막 릴리스 이후로 시간이 많이 지났을 때 그 동안의 변경을 모아서 새
+버전 번호를 부여하는 것에 가까웠습니다.&lt;/p>
+&lt;p>그러나 지난해 〈&lt;a href="https://nine-chronicles.com/">나인 크로니클&lt;/a>〉 메인넷 (이하 &lt;q>메인넷&lt;/q>) 출범 이후,
+메인넷의 크고 작은 문제들을 해결해 나가기 위해 Libplanet도 그에 발맞춘 잦은
+릴리스가 이뤄져야 했습니다. 현재 플라네타리움의 Libplanet 팀과 〈나인 크로니클〉
+팀은 긴밀히 협력하며 릴리스 주기를 맞추고 있습니다. 이러한 기조는 한동안 바뀌지
+않을 것으로 보입니다.&lt;/p>
+&lt;p>그러한 방침 아래, 지난 몇 달 동안 릴리스된 Libplanet 버전으로는 올해 3월에 나온
+0.11.0부터 금주에 나온 0.19.0까지 총 9번의 마이너 업데이트가 있습니다.&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.11.0">0.11.0&lt;/a> (3월 30일)&lt;/li>
+&lt;li>&lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.12.0">0.12.0&lt;/a> (7월 23일)&lt;/li>
+&lt;li>&lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.13.0">0.13.0&lt;/a> (7월 28일)&lt;/li>
+&lt;li>&lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.14.0">0.14.0&lt;/a> (8월 5일)&lt;/li>
+&lt;li>&lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.15.0">0.15.0&lt;/a> (8월 18일)&lt;/li>
+&lt;li>&lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.16.0">0.16.0&lt;/a> (8월 25일)&lt;/li>
+&lt;li>&lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.17.0">0.17.0&lt;/a> (9월 28일)&lt;/li>
+&lt;li>&lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.18.0">0.18.0&lt;/a> (10월 13일)&lt;/li>
+&lt;li>&lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.19.0">0.19.0&lt;/a> (10월 27일)&lt;/li>
+&lt;/ul>
+&lt;h2 id="프로토콜-버전">프로토콜 버전&lt;/h2>
+&lt;p>&lt;em>&lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.11.0">0.11.0&lt;/a> 버전에서 추가됨.&lt;/em>&lt;/p>
+&lt;p>프로토콜 버전은 블록에 붙는 속성으로, 해당 블록이 어떤 Libplanet 버전을 써서
+마이닝됐는지 기록합니다. 프로토콜 버전은 Libplanet을 이용해 만들어진 게임이
+Libplanet 버전을 쉽게 업그레이드할 수 있도록 도우며, 한편으로는 Libplanet 쪽에서
+기존의 네트워크를 유지하면서도 기능을 추가할 수 있게 합니다.&lt;/p>
+&lt;p>API 측면에서는 &lt;a href="https://docs.libplanet.io/0.19.0/api/Libplanet.Blocks.Block-1.html#Libplanet_Blocks_Block_1_ProtocolVersion">&lt;code>Block&amp;lt;T&amp;gt;.ProtocolVersion&lt;/code> 속성&lt;/a>으로
+확인할 수 있으며, 32비트 정수형으로 표현됩니다. 표현되는 프로토콜 버전은
+Libplanet의 패키지 버전과는 별개의 네트워크 프로토콜의 버전인데, 패키지 버전의
+패치 릴리스는 프로토콜 버전이 올라갈 수 없고 반드시 마이너 및 메이저 릴리스할
+때만 프로토콜 버전도 함께 증가됩니다.&lt;sup id="fnref:2">&lt;a href="#fn:2" class="footnote-ref" role="doc-noteref">2&lt;/a>&lt;/sup>&lt;/p>
+&lt;p>&lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.19.0">0.19.0&lt;/a> 버전 현재 프로토콜 버전은 2이고, 프로토콜 버전이 도입된 &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.11.0">0.11.0&lt;/a> 버전
+미만에서 생성된 블록은 모두 프로토콜 버전 0으로 취급됩니다.&lt;/p>
+&lt;h2 id="네트워크-트랜스포트-레이어">네트워크 트랜스포트 레이어&lt;/h2>
+&lt;p>&lt;em>&lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.11.0">0.11.0&lt;/a> 버전에서 추가됨.&lt;/em>&lt;/p>
+&lt;p>오랫동안 Libplanet은 네트워크 통신에 있어 많은 저수준 처리를 &lt;a href="https://zeromq.org/">ZeroMQ&lt;/a>의
+.NET 구현인 &lt;a href="https://github.com/zeromq/netmq">NetMQ&lt;/a>에 맡겨 왔습니다. 하지만 모바일이나 웹 등 여러 플랫폼에서도
+Libplanet을 쓸 수 있도록, NetMQ에 의존하지 않고도 네트워크 통신이 가능하게
+바뀔 필요가 있었습니다.&lt;/p>
+&lt;p>네트워크 트랜스포트 레이어는 저수준 통신 방식을 다양화하고, 특수한 요구사항이
+있을 경우 게임 개발자도 직접 저수준 통신 방식을 정의하여 쓸 수 있도록 추가된
+실험적인 추상화 계층입니다.&lt;/p>
+&lt;p>API 측면에서는 &lt;a href="https://docs.libplanet.io/0.19.0/api/Libplanet.Net.Transports.ITransport.html">&lt;code>ITransport&lt;/code> 인터페이스&lt;/a>로 표현되며, 이를 구현한
+&lt;a href="https://docs.libplanet.io/0.19.0/api/Libplanet.Net.Transports.NetMQTransport.html">&lt;code>NetMQTransport&lt;/code> 클래스&lt;/a>가 기본 제공됩니다.&lt;/p>
+&lt;p>시범 단계이기에 인터페이스는 현재 여러 마이너 릴리스에 걸쳐 조정되고 있으며,
+아직 게임 개발자가 직접 정의한 트랜스포트 구현을 사용할 수는 없습니다.
+연내에는 &lt;code>NetMQTransport&lt;/code>를 대체할 &lt;a href="https://github.com/planetarium/libplanet/pull/1523">새로운 TCP 기반 트랜스포트&lt;/a>
+구현과 함께 &lt;a href="https://docs.libplanet.io/0.19.0/api/Libplanet.Net.Swarm-1.html">&lt;code>Swarm&amp;lt;T&amp;gt;&lt;/code>&lt;/a> 객체가 사용자 정의 트랜스포트를 쓰도록 설정
+가능해질 예정입니다.&lt;/p>
+&lt;h2 id="교체-가능한-작업-증명-해시-알고리즘">교체 가능한 작업 증명 해시 알고리즘&lt;/h2>
+&lt;p>&lt;em>&lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.12.0">0.12.0&lt;/a> 버전에서 추가됨.&lt;/em>&lt;/p>
+&lt;p>이전까지 Libplanet은 작업 증명에 &lt;a href="https://ko.wikipedia.org/wiki/SHA-2">SHA-256&lt;/a> 해시 알고리즘을 써 왔습니다.
+그러나 0.12.0 버전부터는 네트워크마다 &lt;a href="https://docs.libplanet.io/0.19.0/api/Libplanet.Blockchain.Policies.IBlockPolicy-1.html#Libplanet_Blockchain_Policies_IBlockPolicy_1_GetHashAlgorithm_System_Int64_">&lt;code>IBlockPolicy&amp;lt;T&amp;gt;.GetHashAlgorithm()&lt;/code>
+메서드&lt;/a>를 정의하여 해시 알고리즘을 선택할
+수 있게 됐습니다. 네트워크마다 다르게 할 수 있을 뿐만 아니라 블록 인덱스에
+따라 다른 해시 알고리즘을 쓸 수도 있기 때문에, 네트워크 출범 이후에도 다른 해시
+알고리즘으로 쉽게 이행할 수 있습니다.&lt;/p>
+&lt;p>.NET 런타임에 정의된 &lt;a href="https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.hashalgorithm">&lt;code>HashAlgorithm&lt;/code> 추상 클래스&lt;/a>의
+서브클래스라면 모두 해시 알고리즘으로 사용할 수 있습니다. 서브클래스는 꼭
+.NET 런타임에서 제공하는 것으로 국한되지 않으며, 사용자가 직접 상속 받아
+구현하거나 NuGet 등으로 제공되는 서드파티 라이브러리에서 정의한 것도
+쓸 수 있습니다. 이를테면 플라네타리움에서 직접 만든 RandomX의 .NET 바인딩
+라이브러리인 &lt;a href="https://github.com/planetarium/RandomXSharp">RandomXSharp&lt;/a> 역시 &lt;code>HashAlgorithm&lt;/code>의 서브클래스를 제공합니다.&lt;/p>
+&lt;p>다음 코드는 1만번째 블록까지는 SHA-256을 쓰고 그 뒤부터는 SHA-512를 쓰도록
+블록체인 정책을 설정하는 예입니다.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-csharp" data-lang="csharp">HashAlgorithmType GetHashAlgorithm(&lt;span style="color:#888;font-weight:bold">long&lt;/span> index) =&amp;gt;
+index &amp;lt;= &lt;span style="color:#00d;font-weight:bold">10_000&lt;/span>
+? HashAlgorithmType.Of&amp;lt;SHA256&amp;gt;()
+: HashAlgorithmType.Of&amp;lt;SHA512&amp;gt;();
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="논블로킹-렌더러">논블로킹 렌더러&lt;/h2>
+&lt;p>&lt;em>&lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.14.0">0.14.0&lt;/a> 버전에서 추가됨.&lt;/em>&lt;/p>
+&lt;p>노드의 로컬 블록체인의 상태가 변화를 이벤트로 수신할 수 있는
+&lt;a href="https://docs.libplanet.io/0.19.0/api/Libplanet.Blockchain.Renderers.IRenderer-1.html">&lt;code>IRenderer&amp;lt;T&amp;gt;&lt;/code>&lt;/a> 및 &lt;a href="https://docs.libplanet.io/0.19.0/api/Libplanet.Blockchain.Renderers.IActionRenderer-1.html">&lt;code>IActionRenderer&amp;lt;T&amp;gt;&lt;/code>&lt;/a>
+인터페이스는 별도의 스레드를 만들지 않는 대신 렌더링 로직이 블로킹으로
+동작합니다. 이를테면, 렌더링 로직이 &lt;code>Thread.Sleep(60_000)&lt;/code>을 호출한다면
+블록체인의 다음 상태 변화는 60초의 렌더링을 기다린 뒤에 이뤄진다는 것입니다.&lt;/p>
+&lt;p>0.14.0 버전부터는 시간이 소요되는 렌더링 로직을 별도 스레드에서 논블로킹
+방식으로 실행할 수 있게 해주는 &lt;a href="https://docs.libplanet.io/0.19.0/api/Libplanet.Blockchain.Renderers.NonblockRenderer-1.html">&lt;code>NonblockRenderer&amp;lt;T&amp;gt;&lt;/code>&lt;/a> 및
+&lt;a href="https://docs.libplanet.io/0.19.0/api/Libplanet.Blockchain.Renderers.NonblockActionRenderer-1.html">&lt;code>NonblockActionRenderer&amp;lt;T&amp;gt;&lt;/code>&lt;/a> 데코레이터 클래스가
+도입됐습니다. 두 클래스는 생성자에서 다른 렌더러를 인자로 받아, 해당 렌더러의
+이벤트 핸들러를 별도 스레드에서 호출합니다. 따라서 기존의 렌더러 구현을 한 번
+감싸는 것만으로 논블로킹 방식으로 전환할 수 있습니다.&lt;/p>
+&lt;p>논블로킹 방식이지만 내부적으로는 대기열이 존재하며, 따라서 이벤트의 순서는
+보장됩니다.&lt;/p>
+&lt;h2 id="마이너가-설정-가능한-트랜잭션-선호-함수">마이너가 설정 가능한 트랜잭션 선호 함수&lt;/h2>
+&lt;p>&lt;em>&lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.17.0">0.17.0&lt;/a> 버전에서 추가됨.&lt;/em>&lt;/p>
+&lt;p>마이닝할 블록에 포함할 트랜잭션들은 &lt;a href="https://docs.libplanet.io/0.19.0/api/Libplanet.Blockchain.Policies.IBlockPolicy-1.html#Libplanet_Blockchain_Policies_IBlockPolicy_1_ValidateNextBlockTx_Libplanet_Blockchain_BlockChain__0__Libplanet_Tx_Transaction__0__">&lt;code>IBlockPolicy&amp;lt;T&amp;gt;.ValidateNextBlockTx()&lt;/code>
+서술 메서드&lt;/a>를 만족하기만 한다면,
+프로토콜에서 정해진 우선순위는 없습니다.&lt;sup id="fnref:3">&lt;a href="#fn:3" class="footnote-ref" role="doc-noteref">3&lt;/a>&lt;/sup> 그렇지만 아직 블록에 포함되지 않는
+트랜잭션이 너무 많을 때는 한 블록에 너무 많은 트랜잭션을 다 넣을 수 없기 때문에,
+어떤 트랜잭션을 이번 블록에 포함시키고 어떤 트랜잭션을 나중 블록으로 미룰지 줄을
+세워야 합니다.&lt;/p>
+&lt;p>0.17.0 버전부터는 어떤 트랜잭션부터 블록에 넣을지 그 기준을 Libplanet이 임의로
+정하는 대신 마이너가 정할 수 있게 됐습니다. API 측면에서는
+&lt;a href="https://docs.libplanet.io/0.19.0/api/Libplanet.Blockchain.BlockChain-1.html#Libplanet_Blockchain_BlockChain_1_MineBlock_Libplanet_Crypto_PrivateKey_DateTimeOffset_System_Boolean_System_Int32_System_Int32_IComparer_Libplanet_Tx_Transaction__0___CancellationToken_">&lt;code>BlockChain&amp;lt;T&amp;gt;.MineBlock()&lt;/code> 메서드&lt;/a>에
+&lt;a href="https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.icomparer-1">&lt;code>IComparer&amp;lt;Transaction&amp;lt;T&amp;gt;&amp;gt;&lt;/code> 타입&lt;/a>의 옵션 &lt;code>txPriority&lt;/code>가
+생겼습니다.&lt;/p>
+&lt;h2 id="블록-서명">블록 서명&lt;/h2>
+&lt;p>&lt;em>&lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.18.0">0.18.0&lt;/a> 버전에서 추가됨.&lt;/em>&lt;/p>
+&lt;p>프로토콜 버전 2, Libplanet 버전 0.18.0부터 블록은 마이너의 비밀 키로 서명되며
+블록에는 마이너의 주소 뿐만 아니라 공개 키가 포함됩니다.&lt;/p>
+&lt;p>API 측면에서는, 블록의 서명은 &lt;a href="https://docs.libplanet.io/0.19.0/api/Libplanet.Blocks.Block-1.html#Libplanet_Blocks_Block_1_Signature">&lt;code>Block&amp;lt;T&amp;gt;.Signature&lt;/code> 속성&lt;/a>에
+담기고 마이너의 공개 키는 &lt;a href="https://docs.libplanet.io/0.19.0/api/Libplanet.Blocks.Block-1.html#Libplanet_Blocks_Block_1_PublicKey">&lt;code>Block&amp;lt;T&amp;gt;.PublicKey&lt;/code> 속성&lt;/a>에
+담기게 됩니다. 프로토콜 버전 1 및 0의 블록에서는 두 속성이 모두 &lt;code>null&lt;/code>로
+비어 있습니다.&lt;/p>
+&lt;h2 id="병렬-프로세스-마이닝">병렬 프로세스 마이닝&lt;/h2>
+&lt;p>&lt;em>&lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.19.0">0.19.0&lt;/a> 버전에서 추가됨.&lt;/em>&lt;/p>
+&lt;p>Libplanet 0.19.0 버전부터는 블록 마이닝이 자동으로 해당 기기의 프로세서 코어
+수에 따라 병렬로 수행됩니다. 마이너가 직접 활용할 프로세스 수를 조절하는
+옵션은 추후 버전에서 추가될 예정입니다.&lt;/p>
+&lt;h2 id="그-외">그 외&lt;/h2>
+&lt;p>그 외에도 수많은 기능이 더해졌을 뿐만 아니라, 몇 달 동안의 메인넷 운영에서
+발생한 문제를 해결하며 많은 영역에서 크게 안정화 됐습니다. 자세한 내용은
+각 버전의 &lt;a href="https://github.com/planetarium/libplanet/blob/0.19.0/CHANGES.md">전체 변경 내역&lt;/a>에서 확인해 주세요.&lt;/p>
+&lt;p>호기심이 생기신 분들은 설치해서 이용해 보시고, 궁금한 점이 있으시다면 저희 팀이
+상주해 있는 &lt;a href="https://discord.gg/planetarium">디스코드&lt;/a>에도 놀러오세요!&lt;/p>
+&lt;section class="footnotes" role="doc-endnotes">
+&lt;hr>
+&lt;ol>
+&lt;li id="fn:1" role="doc-endnote">
+&lt;p>Libplanet은 분산 P2P로 돌아가는 온라인 멀티플레이어 게임을 만들 때,
+매번 구현해야 하는 P2P 통신이나 데이터 동기화 등의 문제를 푸는
+공용 라이브러리입니다.&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li id="fn:2" role="doc-endnote">
+&lt;p>모든 메이저 및 마이너 릴리스가 프로토콜 버전을 증가시키는 것은 아닙니다.&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li id="fn:3" role="doc-endnote">
+&lt;p>물론 같은 서명자의 트랜잭션들 사이에는
+&lt;a href="https://docs.libplanet.io/0.19.0/api/Libplanet.Tx.Transaction-1.html#Libplanet_Tx_Transaction_1_Nonce">&lt;code>Transaction&amp;lt;T&amp;gt;.Nonce&lt;/code>&lt;/a>를 기준으로 정해지는 순서가
+있습니다.&amp;#160;&lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;/section></content><author><name>홍민희</name><uri>https://github.com/dahlia</uri><email>hong.minhee@planetariumhq.com</email></author></entry><entry><title>Libplanet 0.10 릴리스</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/12/libplanet-0.10/" title="Libplanet 0.10 릴리스"/><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/12/libplanet-0.10/" hreflang="en" title="Libplanet 0.10 Released"/><id>https://snack.planetarium.dev/kor/2020/12/libplanet-0.10/</id><published>2020-12-08T00:00:00+00:00</published><updated>2020-12-08T00:00:00+00:00</updated><content type="html">&lt;p>안녕하세요. &lt;a href="https://libplanet.io/">Libplanet&lt;/a>의 열 번째 마이너 버전인 &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.10.0">0.10 버전&lt;/a>이
 릴리스되었습니다.&lt;/p>
 &lt;p>Libplanet은 분산 P2P로 돌아가는 온라인 멀티플레이어 게임을 만들 때,
 매번 구현해야 하는 P2P 통신이나 데이터 동기화 등의 문제를 푸는
@@ -996,22 +1136,4 @@ alt="처리된 이슈들"/>&lt;figcaption>
 &lt;/ul>
 &lt;h1 id="마치며">마치며&lt;/h1>
 &lt;p>그 밖에도 Hacktoberfest 기간 중 저희가 준비한 프로젝트에 관심과 기여를 보내 주신 모든 분들께 다시 한번 감사의 말씀 드립니다.&lt;/p>
-&lt;p>Hacktoberfest는 끝났지만, 저희는 언제나 여러분을 기다리고 있습니다. 혹시 저희가 풀고 있는 문제에 관심이 있거나 함께 하고 싶으신 분은 언제라도 &lt;a href="https://discord.gg/planetarium">디스코드 대화방&lt;/a>에서 알려주세요!&lt;/p></content><author><name>문성원</name><uri>https://github.com/longfin</uri><email>swen@planetariumhq.com</email></author></entry><entry><title>Libplanet 0.6 릴리스</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2019/10/libplanet-0.6/" title="Libplanet 0.6 릴리스"/><link rel="alternate" href="https://snack.planetarium.dev/eng/2019/10/libplanet-0.6/" hreflang="en" title="Libplanet 0.6 Released"/><id>https://snack.planetarium.dev/kor/2019/10/libplanet-0.6/</id><published>2019-10-04T00:00:00+00:00</published><updated>2019-10-04T00:00:00+00:00</updated><content type="html">&lt;p>안녕하세요. 저희 팀은 &lt;a href="https://libplanet.io/">Libplanet&lt;/a>의 여섯 번째 마이너 버전인 &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.6.0">0.6 버전&lt;/a>을 릴리스했습니다.&lt;/p>
-&lt;p>Libplanet은 분산 P2P로 돌아가는 온라인 멀티플레이어 게임을 만들 때, 그러한 게임들이 매번 구현해야 하는 P2P 통신이나 데이터 동기화 등의 문제를 푸는 공용 라이브러리입니다.&lt;/p>
-&lt;p>0.6 버전에서는 Libplanet의 네트워크 구성과 관련한 큰 변화가 있었고, 잘 관측되지 않았던 버그들을 다수 수정했습니다. 이 글에서는 0.6 버전의 주요 변경 사항들에 대해 다루겠습니다.&lt;/p>
-&lt;h2 id="kademlia-분산-해시-테이블-적용">Kademlia 분산 해시 테이블 적용&lt;/h2>
-&lt;p>기존의 Libplanet에서는 각 피어가 네트워크상의 모든 피어들을 전부 관리했습니다. 생성한 데이터를 전파하는 블록체인의 특성상 이와 같은 방법은 네트워크에 적은 수의 피어들이 접속해 있다면 그럭저럭 작동하지만, 피어의 수가 많을 때는 네트워크 통신 문제가 생기게 됩니다.&lt;/p>
-&lt;p>위 문제를 해결하여 더욱 많은 피어들을 관리하기 위해 분산 해시 테이블 기법의 하나인 Kademlia 프로토콜이 적용되었습니다. Kademlia 분산 해시 테이블의 작동 원리가 궁금하시다면 &lt;cite>&lt;a href="https://snack.planetarium.dev/kor/2019/09/kademlia/">Kademlia 분산 해시 테이블 적용기&lt;/a>&lt;/cite>를 참고해 주세요.&lt;/p>
-&lt;h2 id="트랜잭션-전파-방식-변경">트랜잭션 전파 방식 변경&lt;/h2>
-&lt;p>어떤 클라이언트가 트랜잭션을 생성했을 때 해당 클라이언트는 자신의 라우팅 테이블이 가진 있는 피어들에 해당 데이터를 전파하고, 이를 통해 블록체인 네트워크상의 모든 피어가 동기화됩니다.&lt;/p>
-&lt;p>기존 Libplanet은 트랜잭션을 일정 주기마다 전파하는 방식으로 작동했었고, 각 피어가 네트워크 위에 존재하는 모든 피어들의 정보를 갖고 있었기 때문에 한 번의 전파로 모든 피어가 동기화되었습니다. 그러나 Kademlia 분산 해시 테이블이 적용되면서 한 번의 전파만으로는 모든 피어가 동기화되었음을 보장할 수 없게 되었습니다. 각 피어는 전파받은 데이터를 다시 전파하는 방식으로 네트워크에 퍼트리는데, 트랜잭션 전파가 일정 주기마다 실행되었기에 운이 나쁘다면 네트워크가 동기화되는 데 많은 시간이 소요되었습니다.&lt;/p>
-&lt;p>따라서 이 패치에서는 트랜잭션을 전파받았을 때 즉시 전파하게 로직을 수정하여 네트워크 동기화 과정이 오래 지연되는 것을 방지하였습니다.&lt;/p>
-&lt;h2 id="한-블록-내-트랜잭션들의-실행-순서-보장">한 블록 내 트랜잭션들의 실행 순서 보장&lt;/h2>
-&lt;p>한 블록 안에 여러 개의 트랜잭션이 포함될 때, 모든 클라이언트에서 같은 순서로 액션이 실행하는 것을 보장해 주어야 합니다. 그러면서도 블록을 마이닝 하기 전까지는 그 실행 순서를 예측할 수 없어야 합니다.&lt;/p>
-&lt;p>이번 업데이트에서는 위의 조건을 만족하기 위해 블록의 트랜잭션을 담을 때, 블록의 &lt;code>Hash&lt;/code> 값과 트랜잭션의 &lt;code>Id&lt;/code>를 이용해 순서를 정렬하여 모든 클라이언트에서 액션이 같은 순서로 실행되는 것이 보장될 수 있게 하였습니다.&lt;/p>
-&lt;h2 id="비동기-블록-마이닝">비동기 블록 마이닝&lt;/h2>
-&lt;p>Libplanet은 &lt;a href="https://ko.wikipedia.org/wiki/%EC%9E%91%EC%97%85_%EC%A6%9D%EB%AA%85_%EC%8B%9C%EC%8A%A4%ED%85%9C">작업 증명 시스템&lt;/a>을 기반으로 블록을 합의하기 때문에, 블록을 생성하는 마이닝 과정에서 다량의 CPU 자원을 소모합니다. 기존에는 블록의 &lt;code>Nonce&lt;/code>를 찾는 &lt;code>Hashcash.Answer()&lt;/code> 함수가 동기 함수였기 때문에 실행 중인 스레드가 차단되었고, 작업을 도중에 중단하는 것이 어려웠습니다.&lt;/p>
-&lt;p>이번 패치를 통해 &lt;code>BlockChain&amp;lt;T&amp;gt;.Mine()&lt;/code>이 비동기 함수가 되어 사용자가 &lt;code>CancellationToken&lt;/code>을 주어 원하는 시점에 중단시킬 수 있게 되었습니다. 또한 마이닝 도중 블록체인의 팁이 변경되었을 때 외부에서 구독 가능한 &lt;code>BlockChain&amp;lt;T&amp;gt;.TipChanged&lt;/code> 이벤트가 불리고, 해당 이벤트가 발생할 시 진행하던 마이닝이 중단되게 됩니다.&lt;/p>
-&lt;h2 id="그-외">그 외&lt;/h2>
-&lt;p>그 외의 여러 가지 변경 사항은 &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.6.0">전체 변경 내용&lt;/a>에서 확인하실 수 있습니다.&lt;/p>
-&lt;p>이번 변경 사항이나 Libplanet에 대해 궁금한 점이 있으시다면 언제든 저희 팀이 상주해 있는 &lt;a href="https://discord.gg/planetarium">디스코드 대화방&lt;/a>에 방문해 주세요!&lt;/p></content><author><name>고찬혁</name><uri>https://github.com/limebell</uri><email>lime@planetariumhq.com</email></author></entry></feed>
+&lt;p>Hacktoberfest는 끝났지만, 저희는 언제나 여러분을 기다리고 있습니다. 혹시 저희가 풀고 있는 문제에 관심이 있거나 함께 하고 싶으신 분은 언제라도 &lt;a href="https://discord.gg/planetarium">디스코드 대화방&lt;/a>에서 알려주세요!&lt;/p></content><author><name>문성원</name><uri>https://github.com/longfin</uri><email>swen@planetariumhq.com</email></author></entry></feed>
