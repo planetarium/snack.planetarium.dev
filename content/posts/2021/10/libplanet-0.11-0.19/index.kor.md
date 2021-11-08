@@ -75,6 +75,7 @@ Libplanet의 패키지 버전과는 별개의 네트워크 프로토콜의 버�
 미만에서 생성된 블록은 모두 프로토콜 버전 0으로 취급됩니다.
 
 [^2]: 모든 메이저 및 마이너 릴리스가 프로토콜 버전을 증가시키는 것은 아닙니다.
+      사실, 대부분의 릴리스는 프로토콜 버전을 증가시키지 않습니다.
 
 [Block<T>.ProtocolVersion]: https://docs.libplanet.io/0.19.0/api/Libplanet.Blocks.Block-1.html#Libplanet_Blocks_Block_1_ProtocolVersion
 
