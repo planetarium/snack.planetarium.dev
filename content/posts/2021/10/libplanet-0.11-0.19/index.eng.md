@@ -7,7 +7,7 @@ authors: [hong.minhee]
 Hello.  Long time no see.  [Libplanet][][^1] has released several minor
 versions over the past few months.  However, as our release policy and cycle
 changed, and as we had responded to deal with diverse problems on the mainnet
-of our first game <cite>[Nine Chronicles]</cite>, which is powered by Libplanet, we'd been
+of our first game <cite>[Nine Chronicles]</cite>, powered by Libplanet, we'd been
 unable to afford to keep up with the updates.  So let's focus on some of
 the key changes that have made in between the past releases.
 
