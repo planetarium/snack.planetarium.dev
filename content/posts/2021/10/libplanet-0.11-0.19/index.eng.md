@@ -9,7 +9,7 @@ versions over the past few months.  However, as our release policy and cycle
 changed, and as we had responded to deal with diverse problems on the mainnet
 of our first game <cite>[Nine Chronicles]</cite>, powered by Libplanet, we'd been
 unable to keep up with the updates.  So let's focus on some of
-the key changes that have made in between the past releases.
+the key changes that have been made in between the past releases.
 
 [^1]: Libplanet is a common library that abstracts out the implementation
       details of decentralized multiplayer gaming such as peer-to-peer
@@ -24,7 +24,7 @@ New Release Cycle
 
 Previously, Libplanet had no clear rules for its release cycle.  It was just
 simply giving a new version number to a collection of unreleased changes when
-there is a big API change or some time has passed since the last release.
+there is a big API change, or some time has passed since the last release.
 
 However, since the launch of the <cite>Nine Chronicles</cite>' mainnet last
 year, Libplanet has had to make frequent releases to fix various problems in
@@ -71,7 +71,7 @@ API-wise, it is exposed through
 the [`Block<T>.ProtocolVersion` property][Block<T>.ProtocolVersion], which is
 a 32-bit integer.  Those numbers solely represent a version of the network
 protocol, which is distinct from a version of the library package (on NuGet
-Gallery).  According to Semantic Versioning, patch releases never increase
+Gallery).  In compliance with Semantic Versioning, patch releases will never increase
 the protocol version, but only minor and major release can increase it.[^2]
 
 As of Libplanet [0.19.0], the current protocol version is 2, and any blocks
@@ -94,15 +94,15 @@ Since its inception, Libplanet has left much of the low-level networking to
 necessary to change its networking layer to not fully rely on NetMQ
 so that Libplanet can be used on various platforms such as mobile and Web.
 
-The network transport layer is Libplanet's response to that need.
-This abstraction layer was added experimentally to diversify low-level
+We created the network transport layer to meet those demands.
+We added this abstraction layer experimentally to diversify low-level
 network transports and to allow game developers to define and use them
-if there are special requirements.
+to meet their own requirements.
 
 API-wise, it is represented as the [`ITransport` interface][ITransport], and
 the [`NetMQTransport`][NetMQTransport] which implements it is built-in.
 
-As it is a pilot phase, the interface still has been adjusted through several
+As it's in a pilot phase, the interface still has been adjusted through several
 minor releases, and game programmers can't yet use their own transport
 implementation.  Later in the year, [`Swarm<T>`][Swarm<T>] instances will be
 configurable with custom transports besides
@@ -192,7 +192,7 @@ to include in a block, as long as the
 [`IBlockPolicy<T>.ValidateNextBlockTx()` predicate
 method][IBlockPolicy<T>.ValidateNextBlockTx] is satisfied.[^3]  However, if there
 are too many transactions to be included in a block, a miner may need to
-prioritize them so that they are chunked into multiple blocks.
+prioritize them so they are chunked into multiple blocks.
 
 Since version 0.17.0, instead of Libplanet arbitrarily prioritizing them,
 miners themselves can configure the priority for transactions to include in a block.
