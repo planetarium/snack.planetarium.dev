@@ -1,4 +1,154 @@
-<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><title>Planetarium Engineering Snack</title><link rel="self" href="https://snack.planetarium.dev/eng/index.xml"/><link rel="alternate" href="https://snack.planetarium.dev/eng/" title="Planetarium Engineering Snack"/><link rel="alternate" href="https://snack.planetarium.dev/kor/" hreflang="ko" title="플라네타리움 엔지니어링 스낵"/><updated>2020-12-08T00:00:00+00:00</updated><id>https://snack.planetarium.dev/eng/</id><entry><title>Libplanet 0.10 Released</title><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/12/libplanet-0.10/" title="Libplanet 0.10 Released"/><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/12/libplanet-0.10/" hreflang="ko" title="Libplanet 0.10 릴리스"/><id>https://snack.planetarium.dev/eng/2020/12/libplanet-0.10/</id><published>2020-12-08T00:00:00+00:00</published><updated>2020-12-08T00:00:00+00:00</updated><content type="html">&lt;p>Hello Everyone! We have released the tenth minor version of &lt;a href="https://libplanet.io/">Libplanet&lt;/a>, &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.10.0">Version 0.10&lt;/a>.&lt;/p>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><title>Planetarium Engineering Snack</title><link rel="self" href="https://snack.planetarium.dev/eng/index.xml"/><link rel="alternate" href="https://snack.planetarium.dev/eng/" title="Planetarium Engineering Snack"/><link rel="alternate" href="https://snack.planetarium.dev/kor/" hreflang="ko" title="플라네타리움 엔지니어링 스낵"/><updated>2021-10-29T00:00:00+00:00</updated><id>https://snack.planetarium.dev/eng/</id><entry><title>What's new in Libplanet 0.11–0.19</title><link rel="alternate" href="https://snack.planetarium.dev/eng/2021/10/libplanet-0.11-0.19/" title="What's new in Libplanet 0.11–0.19"/><link rel="alternate" href="https://snack.planetarium.dev/kor/2021/10/libplanet-0.11-0.19/" hreflang="ko" title="Libplanet 0.11–0.19 업데이트 요약"/><id>https://snack.planetarium.dev/eng/2021/10/libplanet-0.11-0.19/</id><published>2021-10-29T00:00:00+00:00</published><updated>2021-10-29T00:00:00+00:00</updated><content type="html">&lt;p>Hello. Long time no see. &lt;a href="https://libplanet.io/">Libplanet&lt;/a>&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup> has released several minor
+versions over the past few months. However, as our release policy and cycle
+changed, and as we had responded to deal with diverse problems on the mainnet
+of our first game &lt;cite>&lt;a href="https://nine-chronicles.com/">Nine Chronicles&lt;/a>&lt;/cite>, powered by Libplanet, we&amp;rsquo;d been
+unable to keep up with the updates. So let&amp;rsquo;s focus on some of
+the key changes that have been made in between the past releases.&lt;/p>
+&lt;h2 id="new-release-cycle">New Release Cycle&lt;/h2>
+&lt;p>Previously, Libplanet had no clear rules for its release cycle. It was just
+simply giving a new version number to a collection of unreleased changes when
+there is a big API change, or some time has passed since the last release.&lt;/p>
+&lt;p>However, since the launch of the &lt;cite>Nine Chronicles&lt;/cite>' mainnet last
+year, Libplanet has had to make frequent releases to fix various problems in
+the mainnet. Currently both teams of Libplanet and &lt;cite>Nine Chronicles&lt;/cite>
+in Planetarium work closely together to catch up each other&amp;rsquo;s updates. This
+release cycle of Libplanet is likely to continue for a while.&lt;/p>
+&lt;p>Under that policy, there have been 9 minor releases in the last few months,
+from 0.11.0 released in March 2021 to 0.19.0 released this week:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.11.0">0.11.0&lt;/a> (March 30)&lt;/li>
+&lt;li>&lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.12.0">0.12.0&lt;/a> (July 23)&lt;/li>
+&lt;li>&lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.13.0">0.13.0&lt;/a> (July 28)&lt;/li>
+&lt;li>&lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.14.0">0.14.0&lt;/a> (August 5)&lt;/li>
+&lt;li>&lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.15.0">0.15.0&lt;/a> (August 18)&lt;/li>
+&lt;li>&lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.16.0">0.16.0&lt;/a> (August 25)&lt;/li>
+&lt;li>&lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.17.0">0.17.0&lt;/a> (September 28)&lt;/li>
+&lt;li>&lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.18.0">0.18.0&lt;/a> (October 13)&lt;/li>
+&lt;li>&lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.19.0">0.19.0&lt;/a> (October 27)&lt;/li>
+&lt;/ul>
+&lt;h2 id="protocol-versions">Protocol Versions&lt;/h2>
+&lt;p>&lt;em>Added in version &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.11.0">0.11.0&lt;/a>.&lt;/em>&lt;/p>
+&lt;p>A protocol version is a property of a block that represents the version of
+Libplanet used for mining. It helps games powered by Libplanet to easily
+upgrade the Libplanet version, and on the Libplanet side, it allows us to
+add new functionalities without breaking backward compatibility with existing
+networks.&lt;/p>
+&lt;p>API-wise, it is exposed through
+the &lt;a href="https://docs.libplanet.io/0.19.0/api/Libplanet.Blocks.Block-1.html#Libplanet_Blocks_Block_1_ProtocolVersion">&lt;code>Block&amp;lt;T&amp;gt;.ProtocolVersion&lt;/code> property&lt;/a>, which is
+a 32-bit integer. Those numbers solely represent a version of the network
+protocol, which is distinct from a version of the library package (on NuGet
+Gallery). In compliance with Semantic Versioning, patch releases will never increase
+the protocol version, but only minor and major release can increase it.&lt;sup id="fnref:2">&lt;a href="#fn:2" class="footnote-ref" role="doc-noteref">2&lt;/a>&lt;/sup>&lt;/p>
+&lt;p>As of Libplanet &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.19.0">0.19.0&lt;/a>, the current protocol version is 2, and any blocks
+produced before Libplanet &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.11.0">0.11.0&lt;/a>, which did not have a protocol version,
+are treated as the protocol version 0.&lt;/p>
+&lt;h2 id="network-transport-layer">Network Transport Layer&lt;/h2>
+&lt;p>&lt;em>Added in version &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.11.0">0.11.0&lt;/a>.&lt;/em>&lt;/p>
+&lt;p>Since its inception, Libplanet has left much of the low-level networking to
+&lt;a href="https://github.com/zeromq/netmq">NetMQ&lt;/a>, which is a .NET implementation of &lt;a href="https://zeromq.org/">ZeroMQ&lt;/a>. However, we&amp;rsquo;ve now determined that it is
+necessary to change its networking layer to not fully rely on NetMQ
+so that Libplanet can be used on various platforms such as mobile and Web.&lt;/p>
+&lt;p>We created the network transport layer to meet those demands.
+We added this abstraction layer experimentally to diversify low-level
+network transports and to allow game developers to define and use them
+to meet their own requirements.&lt;/p>
+&lt;p>API-wise, it is represented as the &lt;a href="https://docs.libplanet.io/0.19.0/api/Libplanet.Net.Transports.ITransport.html">&lt;code>ITransport&lt;/code> interface&lt;/a>, and
+the &lt;a href="https://docs.libplanet.io/0.19.0/api/Libplanet.Net.Transports.NetMQTransport.html">&lt;code>NetMQTransport&lt;/code>&lt;/a> which implements it is built-in.&lt;/p>
+&lt;p>As it&amp;rsquo;s in a pilot phase, the interface still has been adjusted through several
+minor releases, and game programmers can&amp;rsquo;t yet use their own transport
+implementation. Later in the year, &lt;a href="https://docs.libplanet.io/0.19.0/api/Libplanet.Net.Swarm-1.html">&lt;code>Swarm&amp;lt;T&amp;gt;&lt;/code>&lt;/a> instances will be
+configurable with custom transports besides
+the &lt;a href="https://github.com/planetarium/libplanet/pull/1523">new TCP-based transport&lt;/a>, which aims to replace
+the &lt;code>NetMQTransport&lt;/code>.&lt;/p>
+&lt;h2 id="configurable-abbr-titleproof-of-workpowabbr-hash-algorithm">Configurable &lt;abbr title="Proof-Of-Work">PoW&lt;/abbr> Hash Algorithm&lt;/h2>
+&lt;p>&lt;em>Added in version &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.12.0">0.12.0&lt;/a>.&lt;/em>&lt;/p>
+&lt;p>Previously, Libplanet had used &lt;a href="https://ko.wikipedia.org/wiki/SHA-2">SHA-256&lt;/a> for proof-of-work. However, since
+version &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.12.0">0.12.0&lt;/a>, each network can configure its hash algorithm for
+&lt;abbr title="proof-of-work">PoW&lt;/abbr> by implementing its
+&lt;a href="https://docs.libplanet.io/0.19.0/api/Libplanet.Blockchain.Policies.IBlockPolicy-1.html#Libplanet_Blockchain_Policies_IBlockPolicy_1_GetHashAlgorithm_System_Int64_">&lt;code>IBlockPolicy&amp;lt;T&amp;gt;.GetHashAlgorithm()&lt;/code>
+method&lt;/a>. As it is not only configurable
+for each network, but also for block indices, it can be migrated within
+a network after its establishment.&lt;/p>
+&lt;p>You can use any hash algorithm for &lt;abbr title="proof-of-work">PoW&lt;/abbr>
+as long as it is a subclass of the &lt;a href="https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.hashalgorithm">&lt;code>HashAlgorithm&lt;/code>&lt;/a> abstract
+class, which is built in the .NET runtime. Since the hash algorithm is not necessarily required to be included
+in the .NET runtime, you can use your custom implementation as well.
+For instance, &lt;a href="https://github.com/planetarium/RandomXSharp">RandomXSharp&lt;/a>, a .NET binding library for RandomX we made,
+also provides a subclass of &lt;code>HashAlgorithm&lt;/code>.&lt;/p>
+&lt;p>The following code shows an example policy requiring blocks below 10,000th
+block to use SHA-256 and above blocks to use SHA-512 within a chain:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-csharp" data-lang="csharp">HashAlgorithmType GetHashAlgorithm(&lt;span style="color:#888;font-weight:bold">long&lt;/span> index) =&amp;gt;
+index &amp;lt;= &lt;span style="color:#00d;font-weight:bold">10_000&lt;/span>
+? HashAlgorithmType.Of&amp;lt;SHA256&amp;gt;()
+: HashAlgorithmType.Of&amp;lt;SHA512&amp;gt;();
+&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="non-blocking-renderers">Non-blocking Renderers&lt;/h2>
+&lt;p>&lt;em>Added in version &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.14.0">0.14.0&lt;/a>.&lt;/em>&lt;/p>
+&lt;p>&lt;a href="https://docs.libplanet.io/0.19.0/api/Libplanet.Blockchain.Renderers.IRenderer-1.html">&lt;code>IRenderer&amp;lt;T&amp;gt;&lt;/code>&lt;/a> and &lt;a href="https://docs.libplanet.io/0.19.0/api/Libplanet.Blockchain.Renderers.IActionRenderer-1.html">&lt;code>IActionRenderer&amp;lt;T&amp;gt;&lt;/code>&lt;/a>
+interfaces, event listeners that wait for state transitions of node&amp;rsquo;s local
+chain, do not spawn new threads but flow in a blocking manner. Suppose
+some rendering logic calls &lt;code>Thread.Sleep(60_000)&lt;/code>&amp;mdash;continued state transition
+from it on the chain will be made after waiting for 60 seconds of rendering.&lt;/p>
+&lt;p>Since version 0.14.0, we&amp;rsquo;ve introduced two decorators which execute time-consuming rendering
+logic in a separated thread without blocking&amp;ndash;
+&lt;a href="https://docs.libplanet.io/0.19.0/api/Libplanet.Blockchain.Renderers.NonblockRenderer-1.html">&lt;code>NonblockRenderer&amp;lt;T&amp;gt;&lt;/code>&lt;/a> and
+&lt;a href="https://docs.libplanet.io/0.19.0/api/Libplanet.Blockchain.Renderers.NonblockActionRenderer-1.html">&lt;code>NonblockActionRenderer&amp;lt;T&amp;gt;&lt;/code>&lt;/a> classes.
+Both classes take another render through their constructors,
+and call its event handlers in a separated thread. As they are decorators,
+the existing renderers can be transformed into a non-blocking style,
+by wrapping existing ones with the decorators.&lt;/p>
+&lt;p>Although they are non-blocking, they have their own internal queue to guarantee
+the order of events.&lt;/p>
+&lt;h2 id="configurable-transaction-preference-by-miners">Configurable Transaction Preference By Miners&lt;/h2>
+&lt;p>&lt;em>Added in version &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.17.0">0.17.0&lt;/a>.&lt;/em>&lt;/p>
+&lt;p>The Libplanet protocol does not require miners to have any priority for transactions
+to include in a block, as long as the
+&lt;a href="https://docs.libplanet.io/0.19.0/api/Libplanet.Blockchain.Policies.IBlockPolicy-1.html#Libplanet_Blockchain_Policies_IBlockPolicy_1_ValidateNextBlockTx_Libplanet_Blockchain_BlockChain__0__Libplanet_Tx_Transaction__0__">&lt;code>IBlockPolicy&amp;lt;T&amp;gt;.ValidateNextBlockTx()&lt;/code> predicate
+method&lt;/a> is satisfied.&lt;sup id="fnref:3">&lt;a href="#fn:3" class="footnote-ref" role="doc-noteref">3&lt;/a>&lt;/sup> However, if there
+are too many transactions to be included in a block, a miner may need to
+prioritize them so they are chunked into multiple blocks.&lt;/p>
+&lt;p>Since version 0.17.0, instead of Libplanet arbitrarily prioritizing them,
+miners themselves can configure the priority for transactions to include in a block.
+API-wise, &lt;a href="https://docs.libplanet.io/0.19.0/api/Libplanet.Blockchain.BlockChain-1.html#Libplanet_Blockchain_BlockChain_1_MineBlock_Libplanet_Crypto_PrivateKey_DateTimeOffset_System_Boolean_System_Int32_System_Int32_IComparer_Libplanet_Tx_Transaction__0___CancellationToken_">&lt;code>BlockChain&amp;lt;T&amp;gt;.MineBlock()&lt;/code> method&lt;/a> has the
+&lt;code>txPriority&lt;/code> option which takes an &lt;a href="https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.icomparer-1">&lt;code>IComparer&amp;lt;Transaction&amp;lt;T&amp;gt;&amp;gt;&lt;/code>&lt;/a>.&lt;/p>
+&lt;h2 id="blocks-signed-by-miners">Blocks Signed By Miners&lt;/h2>
+&lt;p>&lt;em>Added in version &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.18.0">0.18.0&lt;/a>.&lt;/em>&lt;/p>
+&lt;p>Since protocol version 2, i.e., Libplanet 0.18.0, every block is signed with
+the private key of its miner, and it includes the public key as well as the address
+of its miner.&lt;/p>
+&lt;p>API-wise, block signatures are represented as
+&lt;a href="https://docs.libplanet.io/0.19.0/api/Libplanet.Blocks.Block-1.html#Libplanet_Blocks_Block_1_Signature">&lt;code>Block&amp;lt;T&amp;gt;.Signature&lt;/code> property&lt;/a>, and miners' public keys
+are represented as &lt;a href="https://docs.libplanet.io/0.19.0/api/Libplanet.Blocks.Block-1.html#Libplanet_Blocks_Block_1_PublicKey">&lt;code>Block&amp;lt;T&amp;gt;.PublicKey&lt;/code> property&lt;/a>.
+Blocks with protocol versions 1 and 0 fill both properties with &lt;code>null&lt;/code>.&lt;/p>
+&lt;h2 id="multi-threaded-mining">Multi-Threaded Mining&lt;/h2>
+&lt;p>&lt;em>Added in version &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.19.0">0.19.0&lt;/a>.&lt;/em>&lt;/p>
+&lt;p>Since Libplanet 0.19.0, each block is mined in parallel, depending on
+the number of CPU cores. The option to configure the number of processes
+(workers) will be added in the future.&lt;/p>
+&lt;h2 id="many-others">Many Others&lt;/h2>
+&lt;p>In addition, lots of new features have been added, and it has significantly
+stabilized the network in many areas, solving problems that have arisen during the past few months of
+the mainnet ops. Please check the &lt;a href="https://github.com/planetarium/libplanet/blob/0.19.0/CHANGES.md">entire changelog&lt;/a> of each release
+for details.&lt;/p>
+&lt;p>If you are interested in Libplanet, please give it a try. As we are always
+in &lt;a href="https://discord.gg/planetarium">our Discord server&lt;/a>, feel free to ask any questions if you have one!&lt;/p>
+&lt;section class="footnotes" role="doc-endnotes">
+&lt;hr>
+&lt;ol>
+&lt;li id="fn:1" role="doc-endnote">
+&lt;p>Libplanet is a common library that abstracts out the implementation
+details of decentralized multiplayer gaming such as peer-to-peer
+networking and data synchronization.&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li id="fn:2" role="doc-endnote">
+&lt;p>This does not mean that all major and minor releases increase the protocol
+version. In fact, most releases do not increment the protocol version.&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li id="fn:3" role="doc-endnote">
+&lt;p>Of course, there is an order between transactions signed by a signer.
+These are ordered by &lt;a href="https://docs.libplanet.io/0.19.0/api/Libplanet.Tx.Transaction-1.html#Libplanet_Tx_Transaction_1_Nonce">&lt;code>Transaction&amp;lt;T&amp;gt;.Nonce&lt;/code>&lt;/a>.&amp;#160;&lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;/section></content><author><name>Hong Minhee</name><uri>https://github.com/dahlia</uri><email>hong.minhee@planetariumhq.com</email></author></entry><entry><title>Libplanet 0.10 Released</title><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/12/libplanet-0.10/" title="Libplanet 0.10 Released"/><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/12/libplanet-0.10/" hreflang="ko" title="Libplanet 0.10 릴리스"/><id>https://snack.planetarium.dev/eng/2020/12/libplanet-0.10/</id><published>2020-12-08T00:00:00+00:00</published><updated>2020-12-08T00:00:00+00:00</updated><content type="html">&lt;p>Hello Everyone! We have released the tenth minor version of &lt;a href="https://libplanet.io/">Libplanet&lt;/a>, &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.10.0">Version 0.10&lt;/a>.&lt;/p>
 &lt;p>Libplanet is a common library that solves game implementation problems such as P2P communication and data synchronization when creating online multiplayer games that run on distributed P2P.&lt;/p>
 &lt;p>In this version, Libplanet has made many changes both inside and outside the interface, including the use of &lt;a href="https://eth.wiki/en/fundamentals/patricia-tree">&lt;abbr title="Merkle–Patricia Trie">MPT&lt;/abbr>&lt;/a> to manage Libplanet&amp;rsquo;s state and additional APIs for asset management.&lt;/p>
 &lt;p>This piece addresses key major changes in Version 0.10.&lt;/p>
@@ -782,22 +932,4 @@ alt="Contributed Issues"/>&lt;figcaption>
 &lt;/ul>
 &lt;h1 id="closing">Closing&lt;/h1>
 &lt;p>Furthermore, we would like to thank every single one of you for your interest and contribution to our project during Hacktoberfest.&lt;/p>
-&lt;p>Hacktoberfest is over, but fortunately, we&amp;rsquo;re always open and waiting for you. If you&amp;rsquo;re interested in a problem we&amp;rsquo;re working on or would like to join us, please let us know at our [Discord Chatroom] &lt;a href="https://discord.gg/planetarium">2&lt;/a>!&lt;/p></content><author><name>Swen Mun</name><uri>https://github.com/longfin</uri><email>swen@planetariumhq.com</email></author></entry><entry><title>Libplanet 0.6 Released</title><link rel="alternate" href="https://snack.planetarium.dev/eng/2019/10/libplanet-0.6/" title="Libplanet 0.6 Released"/><link rel="alternate" href="https://snack.planetarium.dev/kor/2019/10/libplanet-0.6/" hreflang="ko" title="Libplanet 0.6 릴리스"/><id>https://snack.planetarium.dev/eng/2019/10/libplanet-0.6/</id><published>2019-10-04T00:00:00+00:00</published><updated>2019-10-04T00:00:00+00:00</updated><content type="html">&lt;p>Hello everyone, our team has released the 6th minor version of &lt;a href="https://libplanet.io/">Libplanet&lt;/a>, &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.6.0">Version 0.6&lt;/a>.&lt;/p>
-&lt;p>Libplanet is a common library that solves game implementation problems such as P2P communication and data synchronization when creating online multiplayer games that run on distributed P2P.&lt;/p>
-&lt;p>In version 0.6 there are significant changes to Libplanet&amp;rsquo;s network configuration, and many bugs are fixed that had not been found before. In this article we will cover those key changes of Version 0.6.&lt;/p>
-&lt;h2 id="kademlia-distributed-hash-table-applied">Kademlia Distributed Hash Table Applied&lt;/h2>
-&lt;p>In the traditional Libplanet, each peer managed all other peers on the network. Due to the nature of blockchain that transmits every data created, this method manages to work when only a handful of peers are connected to the network, but when the number of peers increase, network communication problem occurs.&lt;/p>
-&lt;p>To address this issue, Kademlia protocol, one of the distributed hash table techniques, has been applied to manage more peers in a network. If you are curious about the operation of Kademlia distributed hash table, please refer to &lt;cite>&lt;a href="https://snack.planetarium.dev/eng/2019/09/kademlia/">Applying Kademlia Distributed Hash Table to Libplanet&lt;/a>&lt;/cite>.&lt;/p>
-&lt;h2 id="transaction-transmission-method-changed">Transaction Transmission Method Changed&lt;/h2>
-&lt;p>When a client creates a transaction, it transmits that data to peers on its routing table, which then synchronizes all peers on the blockchain network.&lt;/p>
-&lt;p>The traditional Libplanet worked by transmitting transaction data at regular intervals, and since each peer had a list of all other peers on a network, the entire network was synchronized with one wave. However, with Kademlia distributed hash table applied, a single wave alone could not guarantee synchronization of the entire network. Because each peer re-transmits data it receives from another peer at an interval until the whole network is synchronized, there’s certainly a possibility that the process will take much longer time than we’d like.&lt;/p>
-&lt;p>Therefore, from this version, we’ve modified the logic to transmit transaction immediately when transmission begins, preventing long delays in the network synchronization process.&lt;/p>
-&lt;h2 id="ensuring-transaction-order-within-a-block">Ensuring Transaction Order within a Block&lt;/h2>
-&lt;p>When multiple transactions are included within a block, we must ensure that all clients run the actions in the same order. At the same time, the order of execution must not be predictable until the blocks are mined.&lt;/p>
-&lt;p>In order to meet the above conditions, this update allows all clients to run actions in the same order by utilizing the block&amp;rsquo;s &lt;code>Hash&lt;/code> value and the transaction&amp;rsquo;s &lt;code>Id&lt;/code>.&lt;/p>
-&lt;h2 id="asynchronous-block-mining">Asynchronous Block Mining&lt;/h2>
-&lt;p>Since Libplanet works based on a &lt;a href="https://en.wikipedia.org/wiki/Proof_of_work">Proof of Work&lt;/a> system, it uses a lot of CPU resources during block mining process. In the previous version, because &lt;code>Hashcash.Answer()&lt;/code> which looks for &lt;code>Nonce&lt;/code> in a block was a synchronous function, the running thread was blocked and it was difficult to abort operation.&lt;/p>
-&lt;p>From this version, &lt;code>BlockChain&amp;lt;T&amp;gt;.Mine()&lt;/code> is an asynchronous function, meaning users can abort operation at a desired time by using &lt;code>CancellationToken&lt;/code>. Also, when blockchain tip changes during mining, &lt;code>Blockchain &amp;lt;T&amp;gt;.TipChanged&lt;/code> event, which can be subscribed externally, will be called and the mining process will halt when that event occurs.&lt;/p>
-&lt;h2 id="furthermore">Furthermore&lt;/h2>
-&lt;p>You can learn more about additional changes in our &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.6.0">release notes&lt;/a>.&lt;/p>
-&lt;p>And as always, if you have any questions about the new release or Libplanet in general, please visit our &lt;a href="https://discord.gg/planetarium">Discord chatroom&lt;/a> and let’s chat!&lt;/p></content><author><name>Chanhyuck Ko</name><uri>https://github.com/limebell</uri><email>lime@planetariumhq.com</email></author></entry></feed>
+&lt;p>Hacktoberfest is over, but fortunately, we&amp;rsquo;re always open and waiting for you. If you&amp;rsquo;re interested in a problem we&amp;rsquo;re working on or would like to join us, please let us know at our [Discord Chatroom] &lt;a href="https://discord.gg/planetarium">2&lt;/a>!&lt;/p></content><author><name>Swen Mun</name><uri>https://github.com/longfin</uri><email>swen@planetariumhq.com</email></author></entry></feed>

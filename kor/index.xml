@@ -1,4 +1,4 @@
-<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><title>플라네타리움 엔지니어링 스낵</title><link rel="self" href="https://snack.planetarium.dev/kor/index.xml"/><link rel="alternate" href="https://snack.planetarium.dev/kor/" title="플라네타리움 엔지니어링 스낵"/><link rel="alternate" href="https://snack.planetarium.dev/eng/" hreflang="en" title="Planetarium Engineering Snack"/><updated>2021-10-29T00:00:00+00:00</updated><id>https://snack.planetarium.dev/kor/</id><entry><title>Libplanet 0.11–0.19 업데이트 요약</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2021/10/libplanet-0.11-0.19/" title="Libplanet 0.11–0.19 업데이트 요약"/><id>https://snack.planetarium.dev/kor/2021/10/libplanet-0.11-0.19/</id><published>2021-10-29T00:00:00+00:00</published><updated>2021-10-29T00:00:00+00:00</updated><content type="html">&lt;p>안녕하세요. 오랜만에 소식 전합니다. &lt;a href="https://libplanet.io/">Libplanet&lt;/a>&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>은 지난 몇 달 동안, 여러
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><title>플라네타리움 엔지니어링 스낵</title><link rel="self" href="https://snack.planetarium.dev/kor/index.xml"/><link rel="alternate" href="https://snack.planetarium.dev/kor/" title="플라네타리움 엔지니어링 스낵"/><link rel="alternate" href="https://snack.planetarium.dev/eng/" hreflang="en" title="Planetarium Engineering Snack"/><updated>2021-10-29T00:00:00+00:00</updated><id>https://snack.planetarium.dev/kor/</id><entry><title>Libplanet 0.11–0.19 업데이트 요약</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2021/10/libplanet-0.11-0.19/" title="Libplanet 0.11–0.19 업데이트 요약"/><link rel="alternate" href="https://snack.planetarium.dev/eng/2021/10/libplanet-0.11-0.19/" hreflang="en" title="What's new in Libplanet 0.11–0.19"/><id>https://snack.planetarium.dev/kor/2021/10/libplanet-0.11-0.19/</id><published>2021-10-29T00:00:00+00:00</published><updated>2021-10-29T00:00:00+00:00</updated><content type="html">&lt;p>안녕하세요. 오랜만에 소식 전합니다. &lt;a href="https://libplanet.io/">Libplanet&lt;/a>&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>은 지난 몇 달 동안, 여러
 마이너 버전을 릴리스했습니다. 그렇지만 저희의 릴리스 정책과 주기가 바뀜에 따라,
 그리고 Libplanet으로 만들어진 첫 게임 〈&lt;a href="https://nine-chronicles.com/">나인 크로니클&lt;/a>〉 메인넷의 여러 문제들에
 대응하느라 차분히 그간의 업데이트를 정리된 글로 쓸 여유가 없었습니다.
@@ -130,7 +130,8 @@ index &amp;lt;= &lt;span style="color:#00d;font-weight:bold">10_000&lt;/span>
 공용 라이브러리입니다.&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;li id="fn:2" role="doc-endnote">
-&lt;p>모든 메이저 및 마이너 릴리스가 프로토콜 버전을 증가시키는 것은 아닙니다.&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;p>모든 메이저 및 마이너 릴리스가 프로토콜 버전을 증가시키는 것은 아닙니다.
+사실, 대부분의 릴리스는 프로토콜 버전을 증가시키지 않습니다.&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;li id="fn:3" role="doc-endnote">
 &lt;p>물론 같은 서명자의 트랜잭션들 사이에는
