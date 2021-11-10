@@ -8,7 +8,7 @@ Hello.  Long time no see.  [Libplanet][][^1] has released several minor
 versions over the past few months.  However, as our release policy and cycle
 changed, and as we had responded to deal with diverse problems on the mainnet
 of our first game <cite>[Nine Chronicles]</cite>, powered by Libplanet, we'd been
-unable to afford to keep up with the updates.  So let's focus on some of
+unable to keep up with the updates.  So let's focus on some of
 the key changes that have made in between the past releases.
 
 [^1]: Libplanet is a common library that abstracts out the implementation
@@ -27,7 +27,7 @@ simply giving a new version number to a collection of unreleased changes when
 there is a big API change or some time has passed since the last release.
 
 However, since the launch of the <cite>Nine Chronicles</cite>' mainnet last
-year, Libplanet has had to make frequent releases to fix various problems of
+year, Libplanet has had to make frequent releases to fix various problems in
 the mainnet.  Currently both teams of Libplanet and <cite>Nine Chronicles</cite>
 in Planetarium work closely together to catch up each other's updates.  This
 release cycle of Libplanet is likely to continue for a while.
@@ -61,7 +61,7 @@ Protocol Versions
 
 *Added in version [0.11.0].*
 
-A protocol version is a property of a block that represents in which version of
+A protocol version is a property of a block that represents the version of
 Libplanet used for mining.  It helps games powered by Libplanet to easily
 upgrade the Libplanet version, and on the Libplanet side, it allows us to
 add new functionalities without breaking backward compatibility with existing
@@ -75,7 +75,7 @@ Gallery).  According to Semantic Versioning, patch releases never increase
 the protocol version, but only minor and major release can increase it.[^2]
 
 As of Libplanet [0.19.0], the current protocol version is 2, and any blocks
-produced before Libplanet [0.11.0], which introduced protocol versions,
+produced before Libplanet [0.11.0], which did not have a protocol version,
 are treated as the protocol version 0.
 
 [^2]: This does not mean that all major and minor releases increase the protocol
@@ -90,8 +90,8 @@ Network Transport Layer
 *Added in version [0.11.0].*
 
 Since its inception, Libplanet has left much of the low-level networking to
-[NetMQ], which is a .NET implementation of [ZeroMQ].  However, now it is
-necessary to change its networking layer to be possible without relying on NetMQ
+[NetMQ], which is a .NET implementation of [ZeroMQ].  However, we've now determined that it is
+necessary to change its networking layer to not fully rely on NetMQ
 so that Libplanet can be used on various platforms such as mobile and Web.
 
 The network transport layer is Libplanet's response to that need.
@@ -122,7 +122,7 @@ Configurable <abbr title="Proof-Of-Work">PoW</abbr> Hash Algorithm
 
 *Added in version [0.12.0].*
 
-Previously, Libplanet has used [SHA-256] for proof-of-work.  However, since
+Previously, Libplanet had used [SHA-256] for proof-of-work.  However, since
 version [0.12.0], each network can configure its hash algorithm for
 <abbr title="proof-of-work">PoW</abbr> by implementing its
 [`IBlockPolicy<T>.GetHashAlgorithm()`
@@ -132,8 +132,8 @@ a network after its establishment.
 
 You can use any hash algorithm for <abbr title="proof-of-work">PoW</abbr>
 as long as it is a subclass of the [`HashAlgorithm`][HashAlgorithm] abstract
-class, which is built in the .NET runtime.  It is not necessary to be included
-in the .NET runtime, but you can use your custom implementation as well.
+class, which is built in the .NET runtime.  Since the hash algorithm is not necessarily required to be included
+in the .NET runtime, you can use your custom implementation as well.
 For instance, [RandomXSharp], a .NET binding library for RandomX we made,
 also provides a subclass of `HashAlgorithm`.
 
@@ -159,21 +159,21 @@ Non-blocking Renderers
 *Added in version [0.14.0].*
 
 [`IRenderer<T>`][IRenderer<T>] and [`IActionRenderer<T>`][IActionRenderer<T>]
-interfaces, event listners that wait for state transitions of node's local
-chain, flow in a blocking manner as they do not spawn new threads.  Suppose
+interfaces, event listeners that wait for state transitions of node's local
+chain, do not spawn new threads but flow in a blocking manner.  Suppose
 some rendering logic calls `Thread.Sleep(60_000)`---continued state transition
-from it on the chain will be made after waiting for 60 seconds of rending.
+from it on the chain will be made after waiting for 60 seconds of rendering.
 
-Since version 0.14.0, two decorators which execute time-consuming rendering
-logic in a separated thread without blocking,
+Since version 0.14.0, we've introduced two decorators which execute time-consuming rendering
+logic in a separated thread without blocking-- 
 [`NonblockRenderer<T>`][NonblockRenderer<T>] and
-[`NonblockActionRenderer<T>`][NonblockActionRenderer<T>] classes,
-are introduced.  Both classes take another render through their constructors,
+[`NonblockActionRenderer<T>`][NonblockActionRenderer<T>] classes. 
+Both classes take another render through their constructors,
 and call its event handlers in a separated thread.  As they are decorators,
 the existing renderers can be transformed into a non-blocking style,
 by wrapping existing ones with the decorators.
 
-Despite they are non-blocking, they have their own internal queue to guarantee
+Although they are non-blocking, they have their own internal queue to guarantee
 the order of events.
 
 [IRenderer<T>]: https://docs.libplanet.io/0.19.0/api/Libplanet.Blockchain.Renderers.IRenderer-1.html
@@ -187,15 +187,15 @@ Configurable Transaction Preference By Miners
 
 *Added in version [0.17.0].*
 
-The protocol does not require miners to have any priority for transactions
-to include in a block, if these staisfy
+The Libplanet protocol does not require miners to have any priority for transactions
+to include in a block, as long as the
 [`IBlockPolicy<T>.ValidateNextBlockTx()` predicate
-method][IBlockPolicy<T>.ValidateNextBlockTx] at least.[^3]  However, if there
+method][IBlockPolicy<T>.ValidateNextBlockTx] is satisfied.[^3]  However, if there
 are too many transactions to be included in a block, a miner may need to
 prioritize them so that they are chunked into multiple blocks.
 
 Since version 0.17.0, instead of Libplanet arbitrarily prioritizing them,
-miners can configure the priority for transactions to include in a block.
+miners themselves can configure the priority for transactions to include in a block.
 API-wise, [`BlockChain<T>.MineBlock()` method][BlockChain<T>.MineBlock] has the
 `txPriority` option which takes an [`IComparer<Transaction<T>>`][IComparer<T>].
 
@@ -213,14 +213,14 @@ Blocks Signed By Miners
 
 *Added in version [0.18.0].*
 
-Since the protocol version 2, i.e., Libplanet 0.18.0, every block is signed with
-the private key of its miner, and it includes the public key besides the addres
+Since protocol version 2, i.e., Libplanet 0.18.0, every block is signed with
+the private key of its miner, and it includes the public key as well as the address
 of its miner.
 
 API-wise, block signatures are represented as
 [`Block<T>.Signature` property][Block<T>.Signature], and miners' public keys
 are represented as [`Block<T>.PublicKey` property][Block<T>.PublicKey].
-Blocks with the protocol versions 1 and 0 fill both properties with `null`.
+Blocks with protocol versions 1 and 0 fill both properties with `null`.
 
 [Block<T>.Signature]: https://docs.libplanet.io/0.19.0/api/Libplanet.Blocks.Block-1.html#Libplanet_Blocks_Block_1_Signature
 [Block<T>.PublicKey]: https://docs.libplanet.io/0.19.0/api/Libplanet.Blocks.Block-1.html#Libplanet_Blocks_Block_1_PublicKey
@@ -239,13 +239,13 @@ the number of CPU cores.  The option to configure the number of processes
 Many Others
 -----------
 
-Besides that, a lot of new features has been added, and it has significantly
-stabilized in many areas, solving problems that have arisen during months of
+In addition, lots of new features have been added, and it has significantly
+stabilized the network in many areas, solving problems that have arisen during the past few months of
 the mainnet ops.  Please check the [entire changelog] of each release
 for details.
 
-If you became interested in Libplanet, please give it a try.  As we are always
-in [our Discord server], feel free to ask any questions if you have!
+If you are interested in Libplanet, please give it a try.  As we are always
+in [our Discord server], feel free to ask any questions if you have one!
 
 [entire changelog]: https://github.com/planetarium/libplanet/blob/0.19.0/CHANGES.md
 [our Discord server]: https://discord.gg/planetarium
