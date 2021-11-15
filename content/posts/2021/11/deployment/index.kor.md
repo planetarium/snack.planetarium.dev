@@ -20,7 +20,7 @@ authors: [youngki]
 - QA Report
 - ...
 
-이 내용을은 배포 시작 전까지 모두 채워져 있어야 합니다.
+이 내용들은 배포 시작 전까지 모두 채워져 있어야 합니다.
 
 ## GitHub Repository
 
