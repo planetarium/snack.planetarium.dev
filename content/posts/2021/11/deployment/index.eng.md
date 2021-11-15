@@ -1,5 +1,5 @@
 ---
-title: Deployment of a new version in the Planetarium
+title: New version deployment of Nine Chronicles
 date: 2021-11-15
 authors: [youngki]
 ---
