@@ -1,7 +1,7 @@
 ---
 title: Planetarium의 새로운 버젼 배포
 date: 2021-11-15
-authors: [youngkiu]
+authors: [youngki]
 ---
 
 ## Notion Release Page

@@ -1,7 +1,7 @@
 ---
 title: Deployment of a new version in the Planetarium
 date: 2021-11-15
-authors: [youngkiu]
+authors: [youngki]
 ---
 
 ## Notion Release Page
