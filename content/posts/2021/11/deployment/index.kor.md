@@ -45,7 +45,7 @@ authors: [youngki]
 
 <img src="./images/git_flow.png" width="400">
 
-릴리즈 시작시 각 플라네타리움 저장소의 development branch에서 rc-\<version\> branch를 생성합니다. <br>
+릴리즈 시작 시 각 플라네타리움 저장소의 development branch에서 rc-\<version\> branch를 생성합니다. <br>
 rc-branch에서 배포를 완료하고, tag 이후, 백머지 PR을 main과 development branch로 날리고 배포과정은 종료 됩니다.
 
 핫픽스시에는 이를 처리하는 저장소에서만 main branch에서 수정후 백머지 합니다.
