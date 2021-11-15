@@ -24,7 +24,7 @@ authors: [youngki]
 
 ## GitHub Repository
 
-플라네타리움은 여러개의 깃헙 저장소를 가지고 있습니다.
+플라네타리움은 여러 개의 깃헙 저장소를 가지고 있습니다.
 
 - [9c-launcher](https://github.com/planetarium/9c-launcher)
 - [NineChronicles](https://github.com/planetarium/NineChronicles)
