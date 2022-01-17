@@ -1,4 +1,60 @@
-<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><title>플라네타리움 엔지니어링 스낵</title><link rel="self" href="https://snack.planetarium.dev/kor/index.xml"/><link rel="alternate" href="https://snack.planetarium.dev/kor/" title="플라네타리움 엔지니어링 스낵"/><link rel="alternate" href="https://snack.planetarium.dev/eng/" hreflang="en" title="Planetarium Engineering Snack"/><updated>2021-10-29T00:00:00+00:00</updated><id>https://snack.planetarium.dev/kor/</id><entry><title>Libplanet 0.11–0.19 업데이트 요약</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2021/10/libplanet-0.11-0.19/" title="Libplanet 0.11–0.19 업데이트 요약"/><link rel="alternate" href="https://snack.planetarium.dev/eng/2021/10/libplanet-0.11-0.19/" hreflang="en" title="What's new in Libplanet 0.11–0.19"/><id>https://snack.planetarium.dev/kor/2021/10/libplanet-0.11-0.19/</id><published>2021-10-29T00:00:00+00:00</published><updated>2021-10-29T00:00:00+00:00</updated><content type="html">&lt;p>안녕하세요. 오랜만에 소식 전합니다. &lt;a href="https://libplanet.io/">Libplanet&lt;/a>&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>은 지난 몇 달 동안, 여러
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><title>플라네타리움 엔지니어링 스낵</title><link rel="self" href="https://snack.planetarium.dev/kor/index.xml"/><link rel="alternate" href="https://snack.planetarium.dev/kor/" title="플라네타리움 엔지니어링 스낵"/><link rel="alternate" href="https://snack.planetarium.dev/eng/" hreflang="en" title="Planetarium Engineering Snack"/><updated>2022-01-17T00:00:00+00:00</updated><id>https://snack.planetarium.dev/kor/</id><entry><title>Libplanet 팀이 2022년 1월 스프린트서울에도 참여합니다!</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2022/01/sprintseoul/" title="Libplanet 팀이 2022년 1월 스프린트서울에도 참여합니다!"/><id>https://snack.planetarium.dev/kor/2022/01/sprintseoul/</id><published>2022-01-17T00:00:00+00:00</published><updated>2022-01-17T00:00:00+00:00</updated><content type="html">&lt;p>정말로 오랜만입니다! &lt;a href="https://sprintseoul.org/">스프린트서울&lt;/a>에 프로젝트 리더로 참가하는 &lt;a href="https://libplanet.io/">Libplanet&lt;/a>
+팀입니다.&lt;/p>
+&lt;p>장기화 된 코로나로 많은 행사들이 연기되거나 축소되어 많은 분들이 아쉬워하고 계실 것
+같습니다. 그런데 다행히도 올해 1월부터 스프린트서울이 재개된다는 기쁜 소식을
+접했고, 감사하게도 이번에도 프로젝트 리더로 선정되어 여러분을 만나려 합니다.
+지난 번 참여했을 때에는 라이브러리인 Libplanet으로 참가했었는데, 이번에는 함께
+개발한 오픈소스 탈중앙 게임인 &lt;a href="https://nine-chronicles.com/">나인 크로니클&lt;/a>쪽도 함께 참가합니다.&lt;/p>
+&lt;h2 id="프로젝트-소개">프로젝트 소개&lt;/h2>
+&lt;p>&lt;a href="https://libplanet.io/">Libplanet&lt;/a>은 BitTorrent처럼 서버 없이 돌아가는 P2P 멀티플레이 게임을 만들기
+위한 네트워킹・스토리지 라이브러리로, 이를 달성하기 위해 블록체인 기술을
+구현합니다. 이용자 각각이 실행하는 게임 앱들이 네트워크에서 서로 연결되며,
+게임의 공정한 판정과 기록을 위해 운영되는 서버가 없는 대신,
+공정한 판정은 합의 알고리즘을 통해, 기록은 리플리케이션을 통해 이뤄집니다.&lt;/p>
+&lt;p>&lt;a href="https://nine-chronicles.com/">나인 크로니클&lt;/a>은 위에서 소개한 Libplanet을 사용한 최초의 P2P MMO 게임으로,
+2020년 10월 메인넷을 출범한 이후 현재까지 약 1년 3개월간 운영하고 있는 커뮤니티
+주도형 탈중앙 게임입니다. 게임 진행에 필요한 모든 게임 로직이 블록체인 위에서
+동작하는 것이 가장 큰 특징으로, 현재 일 평균 3,000명 정도가 플레이하고 있습니다.&lt;/p>
+&lt;p>이번 스프린트에서 다룰 저장소로는 아래 두 곳으로, 각자 익숙하거나 선호하시는 환경에
+따라 다른 저장소에 기여해 주시면 됩니다. 또한 모든 저장소의 프로젝트는
+Linux, macOS, Windows 세 플랫폼에서 개발 가능합니다.&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;a href="https://github.com/planetarium/libplanet">Libplanet&lt;/a>: 네트워킹 및 스토리지, 블록체인 등을 구현하는
+프로젝트의 핵심으로, Unity 등의 게임 엔진과 함께 쓰일 수 있도록 C#으로
+작성되어 있으며 멀티플랫폼입니다.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;a href="https://github.com/planetarium/9c-launcher">나인 크로니클 게임 론처&lt;/a>: 나인 크로니클의 개인 키와 계정 관리,
+그리고 가장 중요한 게임 클라이언트의 실행을 담당하는 GUI 애플리케이션입니다.
+Electron으로 개발되어 있으며 TypeScript와 React, 그리고 GraphQL을 적극적으로 사용하고 있습니다.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="c-개발-환경">C# 개발 환경&lt;/h2>
+&lt;p>먼저, C# 프로젝트에 참여하기 위해서는 개발 환경을 설치해야 합니다.
+C#은 Python이나 JavaScript 등과 달리 IDE가 없으면 코딩하기 힘든 언어입니다.
+Windows라면 최신 버전의 Visual Studio를 설치하면 되겠지만, 여러 플랫폼에서
+두루 쓸 수 있는 IDE로 Rider나 VS Code를 추천합니다. 아래 문서들은
+Rider 또는 Visual Studio Code를 쓴다는 가정 하에 Libplanet의 개발 환경을
+설치하는 방법을 한국어로 안내하고 있습니다.&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://gist.github.com/dahlia/5333634f62509293cd46c0e4ba65b2f5">Libplanet 개발 환경 설정 (VS Code)&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://gist.github.com/dahlia/08f6e659e2266e941ad026f591c30c9a">Libplanet 개발 환경 설정 (Rider)&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>그 외에, Libplanet 저장소의 &lt;em>&lt;a href="https://github.com/planetarium/libplanet/blob/main/CONTRIBUTING.md">CONTRIBUTING.md&lt;/a>&lt;/em> 문서는 CLI 도구만을 이용해서
+개발하는 아주 기본적인 개발 환경 설정을 안내합니다. 꼭 자신이 이용하는 에디터를
+쓰고 싶은 분들은 이쪽을 읽어주시면 되겠습니다.&lt;/p>
+&lt;h2 id="고민되거나-망설여진다면">고민되거나 망설여진다면&lt;/h2>
+&lt;p>어떤 기여를 어떻게 해야 할지 고민이 되는 분들은, 저희 프로젝트에 기여하신 분들의
+경험담을 읽어보시고 결정하셔도 좋을 것 같습니다.&lt;/p>
+&lt;ul>
+&lt;li>이승훈 님께서 쓰신 &lt;cite>&lt;a href="https://snack.planetarium.dev/kor/2019/05/first-contribution/">Libplanet 처음 기여하기&lt;/a>&lt;/cite>&lt;/li>
+&lt;li>이수호 님께서 쓰신 &lt;cite>&lt;a href="https://web.archive.org/web/20201028104023/https://blog.hanaoto.me/sprint_seoul_2019_june/">2019 스프린트 서울 6월 행사를 참여하고 나서&amp;hellip;&lt;/a>&lt;/cite>&lt;/li>
+&lt;/ul>
+&lt;h2 id="질문-및-대화방">질문 및 대화방&lt;/h2>
+&lt;p>궁금한 게 있으시면 &lt;a href="https://discord.gg/YaHPjcrdrw">저희 Discord 서버&lt;/a>에 오셔서 물어보셔도 됩니다. 행사 전에
+미리 들어오셔서 물어보셔도 좋고, 행사 끝난 뒤라도 좋습니다. 물론 가볍게 놀러 오시는
+것도 환영입니다!&lt;/p></content><author><name>문성원</name><uri>https://github.com/longfin</uri><email>swen@planetariumhq.com</email></author></entry><entry><title>Libplanet 0.11–0.19 업데이트 요약</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2021/10/libplanet-0.11-0.19/" title="Libplanet 0.11–0.19 업데이트 요약"/><link rel="alternate" href="https://snack.planetarium.dev/eng/2021/10/libplanet-0.11-0.19/" hreflang="en" title="What's new in Libplanet 0.11–0.19"/><id>https://snack.planetarium.dev/kor/2021/10/libplanet-0.11-0.19/</id><published>2021-10-29T00:00:00+00:00</published><updated>2021-10-29T00:00:00+00:00</updated><content type="html">&lt;p>안녕하세요. 오랜만에 소식 전합니다. &lt;a href="https://libplanet.io/">Libplanet&lt;/a>&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>은 지난 몇 달 동안, 여러
 마이너 버전을 릴리스했습니다. 그렇지만 저희의 릴리스 정책과 주기가 바뀜에 따라,
 그리고 Libplanet으로 만들어진 첫 게임 〈&lt;a href="https://nine-chronicles.com/">나인 크로니클&lt;/a>〉 메인넷의 여러 문제들에
 대응하느라 차분히 그간의 업데이트를 정리된 글로 쓸 여유가 없었습니다.
@@ -1109,32 +1165,4 @@ Libplanet이 일종의 메타프로토콜로 동작하기에 엉뚱한 네트워
 &lt;p>현재 &lt;a href="https://en.wikipedia.org/wiki/Key_derivation_function">키 유도함수&lt;/a>는 &lt;a href="https://en.wikipedia.org/wiki/PBKDF2">PBKDF2&lt;/a>와 &lt;a href="https://en.wikipedia.org/wiki/Scrypt">Scrypt&lt;/a>가 구현되어있고, &lt;a href="https://ko.wikipedia.org/wiki/%EA%B3%A0%EA%B8%89_%EC%95%94%ED%98%B8%ED%99%94_%ED%91%9C%EC%A4%80">AES&lt;/a>-128-&lt;a href="https://ko.wikipedia.org/wiki/%EB%B8%94%EB%A1%9D_%EC%95%94%ED%98%B8_%EC%9A%B4%EC%9A%A9_%EB%B0%A9%EC%8B%9D#%EC%B9%B4%EC%9A%B4%ED%84%B0_(CTR)">CTR&lt;/a> 암호화 알고리즘을 지원하고 있습니다. 이 중 Scrypt 구현은 &lt;a href="https://github.com/minhoryang">minhoryang&lt;/a> 님의 &lt;a href="https://github.com/planetarium/libplanet/pull/654">기여&lt;/a>로 추가되었습니다. 🎉&lt;/p>
 &lt;h2 id="그-외">그 외&lt;/h2>
 &lt;p>이번 버전에는 &lt;a href="https://hacktoberfest.digitalocean.com/">Hacktoberfest&lt;/a> 행사로 많은 분의 기여가 있었습니다. 해당 행사에 관한 내용은 문성원 님이 작성하신 &lt;a href="/kor/2019/11/looking-back-at-hacktoberfest/">Hacktoberfest를 돌아보며&lt;/a>에서 자세히 보실 수 있고, 그 외 이번 버전의 모든 변경 사항은 &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.7.0">전체 변경 내용&lt;/a>에서 확인하실 수 있습니다.&lt;/p>
-&lt;p>이번 변경 사항이나 Libplanet에 대해 궁금한 점이 있으시다면 언제든 저희 팀이 상주해 있는 &lt;a href="https://discord.gg/planetarium">디스코드 대화방&lt;/a>에 방문해 주세요!&lt;/p></content><author><name>이승훈</name><uri>https://github.com/earlbread</uri><email>seunghun@planetariumhq.com</email></author></entry><entry><title>Hacktoberfest를 돌아보며</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2019/11/looking-back-at-hacktoberfest/" title="Hacktoberfest를 돌아보며"/><link rel="alternate" href="https://snack.planetarium.dev/eng/2019/11/looking-back-at-hacktoberfest/" hreflang="en" title="Looking Back on Hacktoberfest"/><id>https://snack.planetarium.dev/kor/2019/11/looking-back-at-hacktoberfest/</id><published>2019-11-08T00:00:00+00:00</published><updated>2019-11-08T00:00:00+00:00</updated><content type="html">&lt;p>안녕하세요. 오늘은 저희 &lt;a href="https://planetariumhq.com">플라네타리움&lt;/a> 팀이 지난 10월 한 달간 &lt;a href="https://hacktoberfest.digitalocean.com/">Hacktoberfest&lt;/a>에 참가하여 받은 기여들을 소개해보려 합니다.&lt;/p>
-&lt;h1 id="둘러보기">둘러보기&lt;/h1>
-&lt;p>Hacktoberfest를 맞아 저희는 36개의 이슈를 준비했고, 그중 15개의 이슈가 기여를 통해 처리되었습니다.&lt;/p>
-&lt;figure>&lt;img src="1.png"
-alt="처리된 이슈들"/>&lt;figcaption>
-&lt;p>처리된 이슈들&lt;/p>
-&lt;/figcaption>
-&lt;/figure>
-&lt;p>한 달간 기여를 받아보니 다음과 같은 재밌는 사실도 알게 되었습니다.&lt;/p>
-&lt;ul>
-&lt;li>절반 정도의 기여가 월초에 집중되었습니다. 초반 스퍼트가 중요해 보이네요. 🏃&lt;/li>
-&lt;li>대부분의 이슈가 초심자를 위한 이슈(&lt;code>label:&amp;quot;good first issue&amp;quot;&lt;/code>)였습니다.&lt;/li>
-&lt;li>&lt;a href="https://github.com/planetarium/libplanet/">Libplanet&lt;/a>, &lt;a href="https://github.com/planetarium/libplanet-explorer/">Libplanet Explorer&lt;/a>, &lt;a href="https://github.com/planetarium/libplanet-explorer-frontend/">Libplanet Explorer Frontend&lt;/a> 3개 프로젝트가 고르게 기여를 받았습니다.&lt;/li>
-&lt;/ul>
-&lt;h1 id="기억에-남는-기여들">기억에 남는 기여들&lt;/h1>
-&lt;ul>
-&lt;li>
-&lt;p>&lt;a href="https://github.com/MaxStalker">@MaxStalker&lt;/a> 님이 작업해 주신 &lt;a href="https://github.com/planetarium/libplanet-explorer-frontend/issues/37">Auto refresh when block mined&lt;/a>는 코멘트 숫자에서도 알 수 있듯이, 꽤 난항을 겪은 이슈였습니다. Libplanet Explorer Frontend는 특성상 GraphQL 백엔드인 Libplanet Explorer가 있어야 하는데, 저희가 준비한 GraphQL 백엔드가 계속 내려가는 문제가 있어서 꽤 기다리셔야 했거든요. 😢 서비스가 정상화된 뒤에도 &lt;a href="https://discord.gg/planetarium">저희 디스코드 서버&lt;/a>에서 이런저런 트러블슈팅을 함께 해가면서 기여를 마무리해 주신 @MaxStalker 님께 이 자리를 빌려 감사의 말씀을 전합니다. 🙇&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;a href="https://github.com/RozzaysRed">@RozzaysRed&lt;/a> 님은 Hackoberfest 기간 중, &lt;em>hacktoberfest&lt;/em> 레이블이 붙어있는 이슈뿐만 아니라 그렇지 않은 이슈들에도 &lt;a href="https://github.com/issues?q=assignee%3ARozzaysRed+is%3Aclosed">많은 기여&lt;/a>를 해주셨습니다. 이럴 줄 알았으면 저희가 &lt;em>hacktoberfest&lt;/em> 레이블을 좀 더 빨리, 많이 붙여둘 걸 그랬네요. 😊&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;a href="https://github.com/planetarium/libplanet/issues/555">Rename “maxValue” parameters in IRandom.Next() methods&lt;/a> 이슈에서는 &lt;a href="https://github.com/pBouillon">@pBouillon&lt;/a> 님께 기여뿐 아니라 적당한 파라미터 명(&lt;code>lowerBound&lt;/code>, &lt;code>upperBound&lt;/code>)을 제안받기도 했습니다. 💬&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;h1 id="마치며">마치며&lt;/h1>
-&lt;p>그 밖에도 Hacktoberfest 기간 중 저희가 준비한 프로젝트에 관심과 기여를 보내 주신 모든 분들께 다시 한번 감사의 말씀 드립니다.&lt;/p>
-&lt;p>Hacktoberfest는 끝났지만, 저희는 언제나 여러분을 기다리고 있습니다. 혹시 저희가 풀고 있는 문제에 관심이 있거나 함께 하고 싶으신 분은 언제라도 &lt;a href="https://discord.gg/planetarium">디스코드 대화방&lt;/a>에서 알려주세요!&lt;/p></content><author><name>문성원</name><uri>https://github.com/longfin</uri><email>swen@planetariumhq.com</email></author></entry></feed>
+&lt;p>이번 변경 사항이나 Libplanet에 대해 궁금한 점이 있으시다면 언제든 저희 팀이 상주해 있는 &lt;a href="https://discord.gg/planetarium">디스코드 대화방&lt;/a>에 방문해 주세요!&lt;/p></content><author><name>이승훈</name><uri>https://github.com/earlbread</uri><email>seunghun@planetariumhq.com</email></author></entry></feed>
