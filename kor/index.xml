@@ -1,8 +1,9 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><title>플라네타리움 엔지니어링 스낵</title><link rel="self" href="https://snack.planetarium.dev/kor/index.xml"/><link rel="alternate" href="https://snack.planetarium.dev/kor/" title="플라네타리움 엔지니어링 스낵"/><link rel="alternate" href="https://snack.planetarium.dev/eng/" hreflang="en" title="Planetarium Engineering Snack"/><updated>2022-01-17T00:00:00+00:00</updated><id>https://snack.planetarium.dev/kor/</id><entry><title>Libplanet 팀이 2022년 1월 스프린트서울에도 참여합니다!</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2022/01/sprintseoul/" title="Libplanet 팀이 2022년 1월 스프린트서울에도 참여합니다!"/><id>https://snack.planetarium.dev/kor/2022/01/sprintseoul/</id><published>2022-01-17T00:00:00+00:00</published><updated>2022-01-17T00:00:00+00:00</updated><content type="html">&lt;p>정말로 오랜만입니다! &lt;a href="https://sprintseoul.org/">스프린트서울&lt;/a>에 프로젝트 리더로 참가하는 &lt;a href="https://libplanet.io/">Libplanet&lt;/a>
 팀입니다.&lt;/p>
 &lt;p>장기화 된 코로나로 많은 행사들이 연기되거나 축소되어 많은 분들이 아쉬워하고 계실 것
-같습니다. 그런데 다행히도 올해 1월부터 스프린트서울이 재개된다는 기쁜 소식을
-접했고, 감사하게도 이번에도 프로젝트 리더로 선정되어 여러분을 만나려 합니다.
+같습니다. 그런데 다행히도 &lt;a href="https://sprintseoul.org/2022-01-22/">올해 1월 22일 토요일에 스프린트서울이 비대면으로
+재개된다는 기쁜 소식&lt;/a>을 접했고,
+감사하게도 이번에도 프로젝트 리더로 선정되어 여러분을 만나려 합니다.
 지난 번 참여했을 때에는 라이브러리인 Libplanet으로 참가했었는데, 이번에는 함께
 개발한 오픈소스 탈중앙 게임인 &lt;a href="https://nine-chronicles.com/">나인 크로니클&lt;/a>쪽도 함께 참가합니다.&lt;/p>
 &lt;h2 id="프로젝트-소개">프로젝트 소개&lt;/h2>
@@ -38,7 +39,7 @@ Windows라면 최신 버전의 Visual Studio를 설치하면 되겠지만, 여�
 Rider 또는 Visual Studio Code를 쓴다는 가정 하에 Libplanet의 개발 환경을
 설치하는 방법을 한국어로 안내하고 있습니다.&lt;/p>
 &lt;ul>
-&lt;li>&lt;a href="https://gist.github.com/dahlia/5333634f62509293cd46c0e4ba65b2f5">Libplanet 개발 환경 설정 (VS Code)&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://sprintseoul.org/2022-01-22/">Libplanet 개발 환경 설정 (VS Code)&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://gist.github.com/dahlia/08f6e659e2266e941ad026f591c30c9a">Libplanet 개발 환경 설정 (Rider)&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>그 외에, Libplanet 저장소의 &lt;em>&lt;a href="https://github.com/planetarium/libplanet/blob/main/CONTRIBUTING.md">CONTRIBUTING.md&lt;/a>&lt;/em> 문서는 CLI 도구만을 이용해서
