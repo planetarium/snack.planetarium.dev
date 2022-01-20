@@ -1,6 +1,6 @@
 ---
 title: 탈중앙 게임과 AWS re:Invent
-date: 2022-01-20
+date: 2022-01-25
 authors: [swen.mun]
 ---
 
@@ -58,11 +58,11 @@ IaaS들이 가져온 변화는 상상 이상의 것입니다. 많은 개발자�
 노드들을 여러 주체가 운영하는 것을 목표로 합니다. 하지만 과연 노드를 어디서 어떻게 
 실행해야 할까요?
 
-종래의 중앙화 된 게임 서버들은 [온 프레미스(On-premise)][On-premise]라고 불리는 
+종래의 중앙화 된 게임 서버들은 [온 프레미스][on-premises](on-premises)라고 불리는 
 호스팅 환경에서 실행되어왔습니다. 최근에 와서는 운영 효율 등을 고려하여 클라우드 
 IaaS로의 이전을 검토하고, [성공 사례들][1]이 나오고 있지만, 크게 대중화된 방식은 
 아닙니다. 주요한 이유 중 하나는, 개인이나 작은 규모의 팀들이 고민하는 
-"작은 규모로 먼저 시작할 수 있다."라는 강점이 그리 크게 받아들여지기 어렵기 때문일 
+"작은 규모로 먼저 시작할 수 있다"라는 강점이 그리 크게 받아들여지기 어렵기 때문일 
 것입니다.
 
 ![](images/9c-structure.png)
@@ -74,8 +74,8 @@ IaaS로의 이전을 검토하고, [성공 사례들][1]이 나오고 있지만,
 
 [나인 크로니클]: https://nine-chronicles.com
 [IaaS]: https://en.wikipedia.org/wiki/Infrastructure_as_a_service
-[On-premise]: https://en.wikipedia.org/wiki/On-premises_software
-[Scale-out]: https://en.wikipedia.org/wiki/Scalability#Horizontal_(scale_out)_and_vertical_scaling_(scale_up)
+[on-premises]: https://en.wikipedia.org/wiki/On-premises_software
+[scale-out]: https://en.wikipedia.org/wiki/Scalability#Horizontal_(scale_out)_and_vertical_scaling_(scale_up)
 [1]: https://aws.amazon.com/ko/gaming/gaming-customer-references/
 
 
@@ -90,4 +90,4 @@ IaaS로의 이전을 검토하고, [성공 사례들][1]이 나오고 있지만,
 없더라도, AWS와 같은 IaaS를 사용해보신 경험이 있으신 분들이라면 가벼운 마음으로 
 많은 지원 부탁드립니다.
 
-[2]: TBD
+[2]: https://recruit.planetariumhq.com/e2ba3fcc-ce76-456a-bea9-0be97622cb48
