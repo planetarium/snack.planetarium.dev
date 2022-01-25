@@ -2,6 +2,7 @@
 title: 탈중앙 게임과 AWS re:Invent
 date: 2022-01-25
 authors: [swen.mun]
+ogimage: images/reinvent2021.png
 ---
 
 안녕하세요. [Libplanet]을 만들고 있는 [플라네타리움]의 문성원입니다.
