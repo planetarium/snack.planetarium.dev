@@ -1,0 +1,133 @@
+<!doctype html><html lang=ko prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<meta name=description content>
+<meta name=HandheldFriendly content="True">
+<meta name=MobileOptimized content="320">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=keywords content>
+<meta property="og:type" content="article">
+<meta property="og:description" content>
+<meta property="og:title" content="탈중앙 게임과 AWS re:Invent">
+<meta property="og:site_name" content="플라네타리움 엔지니어링 스낵">
+<meta property="og:image" content="https://snack.planetarium.dev/kor/2022/01/2021-aws-reinvent/images/9c-structure.png">
+<meta property="og:image" content="https://snack.planetarium.dev/kor/2022/01/2021-aws-reinvent/images/aws-blockchain-template.png">
+<meta property="og:image" content="https://snack.planetarium.dev/kor/2022/01/2021-aws-reinvent/images/reinvent2021.png">
+<meta property="og:image" content="https://snack.planetarium.dev/og/kor.png">
+<meta property="og:url" content="https://snack.planetarium.dev/kor/2022/01/2021-aws-reinvent/">
+<meta property="og:locale" content="ko">
+<meta property="article:published_time" content="2022-01-25">
+<meta property="article:modified_time" content="2022-01-25">
+<meta name=twitter:card content="summary">
+<meta name=twitter:site content="@">
+<meta name=twitter:creator content="@">
+<meta name=twitter:title content="탈중앙 게임과 AWS re:Invent | 플라네타리움 엔지니어링 스낵">
+<meta name=twitter:description content="안녕하세요. Libplanet을 만들고 있는 플라네타리움의 문성원입니다. 오늘은 작년 11월 29일부터 12월 3일까지 열린, AWS re:Invent에 참석하게 된 계기에 대해서 짤막하게나마 공유토록 하겠습니다.
+AWS re:Invent AWS re:Invent는 2012년부터 (코로나 19로 연기된 2019년을 제외하고) 매해 열린 개발자 행사입니다. 클라우드가 단순히 서비스 운영을 넘어, 소프트웨어 개발에 걸쳐서 막대한 영향력을 끼치는 현대에 들어서는 가장 큰 개발자 행사라고 해도 과언이 아니죠.
+AWS는 re:Invent를 통해서 자사의 비전이나 새로운 제품/기능을 소개하는 것을 넘어서 자사 제품을 사용하여 구축한 모범 사례나 개발 방법론을 공유하기도 합니다.|">
+<meta name=twitter:image:src content>
+<meta name=twitter:domain content="https://snack.planetarium.dev/kor/2022/01/2021-aws-reinvent/">
+<title>탈중앙 게임과 AWS re:Invent</title>
+<link rel=canonical href=https://snack.planetarium.dev/kor/2022/01/2021-aws-reinvent/>
+<link href=https://snack.planetarium.dev/index.xml rel=alternate type=application/atom+xml title="탈중앙 게임과 AWS re:Invent">
+<link rel=stylesheet href=https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css>
+<link rel=stylesheet href=https://snack.planetarium.dev/css/style.min.e1d6437358a5772f79ae0fd01e6ee2736e7fc6536065652581cf2a9c461d4bb0.css integrity="sha256-4dZDc1ildy95rg/QHm7ic25/xlNgZWUlgc8qnEYdS7A=">
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-132504786-2"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-132504786-2')</script>
+<link rel=icon href=/favicon-32x32.png type=image/png sizes=32x32>
+<link rel="shortcut icon" href=/favicon.ico type=image/x-icon>
+<link rel=apple-touch-icon href=/apple-touch-icon.png>
+</head>
+<body class="sans-serif w-90 w-60-ns center center-ns mv2 mv5-ns" itemscope itemtype=http://schema.org/Article>
+<a href=https://snack.planetarium.dev/kor/ id=site-title class="b bb bw1 pb1 no-underline dark-gray">플라네타리움 엔지니어링 스낵</a>
+<section id=main class=mt5>
+<h1 itemprop=name id=title class=mb1>탈중앙 게임과 AWS re:Invent</h1>
+<div class="f6 gray dib-ns">
+<time itemprop=datePublished datetime=2022-01-25>
+2022년 1월 25일
+</time>
+</div>
+<article itemprop=articleBody id=content class="w-100 lh-copy">
+<p>안녕하세요. <a href=https://libplanet.io/>Libplanet</a>을 만들고 있는 <a href=https://planetariumhq.com/>플라네타리움</a>의 문성원입니다.
+오늘은 작년 11월 29일부터 12월 3일까지 열린, <a href=https://reinvent.awsevents.com/>AWS re:Invent</a>에 참석하게 된 계기에 대해서 짤막하게나마 공유토록 하겠습니다.</p>
+<h1 id=aws-reinvent>AWS re:Invent</h1>
+<p><img src=images/reinvent2021.png alt></p>
+<p>AWS re:Invent는 2012년부터 (코로나 19로 연기된 2019년을 제외하고) 매해 열린 개발자
+행사입니다. 클라우드가 단순히 서비스 운영을 넘어, 소프트웨어 개발에 걸쳐서 막대한
+영향력을 끼치는 현대에 들어서는 가장 큰 개발자 행사라고 해도 과언이 아니죠.</p>
+<p>AWS는 re:Invent를 통해서 자사의 비전이나 새로운 제품/기능을 소개하는 것을 넘어서
+자사 제품을 사용하여 구축한 모범 사례나 개발 방법론을 공유하기도 합니다.</p>
+<h1 id=탈중앙-애플리케이션을-만드는-사람들이-왜>탈중앙 애플리케이션을 만드는 사람들이 왜?</h1>
+<p>저희가 만드는 Libplanet은 탈중앙 게임을 만들기 위한 블록체인 라이브러리입니다.
+저희는 이 Libplanet을 통해서 별도의 중앙 서버 없이도 영원히 플레이 가능한
+멀티플레이어 게임이 만들어지는 것을 기대하며, 목표로 하고 있습니다. 실제로 이
+Libplanet을 사용해서 만들어진 최초의 MMO 게임인 <a href=https://nine-chronicles.com>나인 크로니클</a> 역시, 현재는 비록
+불완전하지만 이런 탈중앙화 된 게임을 목표로 하여 개발/운영되고 있습니다.</p>
+<p>여기까지만 보면 Libplanet과 나인 크로니클을 만드는 저희가 AWS 같은 중앙화 된
+<abbr title="Infrastructure as a Service"><a href=https://en.wikipedia.org/wiki/Infrastructure_as_a_service>IaaS</a></abbr>를 쓰는 것, 그리고 그런
+서비스의 제품군을 소개하는 행사에 참석하는 것이 아이러니하게 보일 수 있습니다.</p>
+<p>여기에는 크게 2가지 이야기할 거리가 있을 것 같습니다.</p>
+<h2 id=aws는-단순한-운영-도구-이상입니다>AWS는 단순한 운영 도구 이상입니다.</h2>
+<p>서두에 말씀드린 것처럼, 현대 소프트웨어 개발에 있어서 AWS와 같은 클라우드 기반
+IaaS들이 가져온 변화는 상상 이상의 것입니다. 많은 개발자가 물리 서버 기반의
+초기 투자 없이도 자신의 서비스를 가볍게 시험해보고, 또 릴리스해 볼 수 있게
+되었습니다. 블록체인 역시 소프트웨어이기 때문에 예외가 아닙니다.
+실제로, AWS나 Azure, GCP 모두 블록체인(주로 이더리움) 노드에 대한 템플릿, 혹은
+관리형 서비스를 제공합니다.</p>
+<p><img src=images/aws-blockchain-template.png alt></p>
+<p>이런 템플릿으로 노드를 쉽게 띄워서 돌려볼 수 있게 하므로, 엔지니어가 서비스나
+애플리케이션(저희의 경우 게임)의 공개까지 개발 기간을 단축 시키는 효과를 가져올 뿐
+아니라, 운영 환경에서 얻을 수 있는 정보들을 빠르게 개발팀으로 피드백 시키는 수단으로
+활용 할 수 있습니다.</p>
+<h2 id=결국-운영-그리고-운영>결국 운영, 그리고 운영</h2>
+<p>저희가 만들고 있는 나인 크로니클은 특정 중앙 주체가 도맡아서 운영하는 대신, 분산된
+노드들을 여러 주체가 운영하는 것을 목표로 합니다. 하지만 과연 노드를 어디서 어떻게
+실행해야 할까요?</p>
+<p>종래의 중앙화 된 게임 서버들은 <a href=https://en.wikipedia.org/wiki/On-premises_software>온 프레미스</a>(on-premises)라고 불리는
+호스팅 환경에서 실행되어왔습니다. 최근에 와서는 운영 효율 등을 고려하여 클라우드
+IaaS로의 이전을 검토하고, <a href=https://aws.amazon.com/ko/gaming/gaming-customer-references/>성공 사례들</a>이 나오고 있지만, 크게 대중화된 방식은
+아닙니다. 주요한 이유 중 하나는, 개인이나 작은 규모의 팀들이 고민하는
+&ldquo;작은 규모로 먼저 시작할 수 있다"라는 강점이 그리 크게 받아들여지기 어렵기 때문일
+것입니다.</p>
+<p><img src=images/9c-structure.png alt></p>
+<p>하지만 탈중앙 게임을 지향하는 나인 크로니클과 같은 게임에서, 저희는 노드를 운영하는
+사람들이 초기 투자를 많이 하지 않고도 본인들이 원하는 규모에서
+<a href=https://en.wikipedia.org/wiki/Scalability#Horizontal_(scale_out)_and_vertical_scaling_(scale_up)>스케일 아웃</a> 할 수 있는 환경을 제공하는 것은 대단히 중요하다고
+생각합니다. 이는 AWS와 같은 클라우드 IaaS가 제공하는 강점과 정확히 부합하죠.</p>
+<h1 id=남은-이야기들>남은 이야기들</h1>
+<p>거창하게 여러 가지 이유를 이야기했지만, 아쉽게도 저는 re:Invent 행사장에서 많은
+세션을 듣지는 못했습니다. 하지만 걱정 마세요. 곧 이어서 다른 분들의 re:Invent
+후기를 이곳에 공유토록 하겠습니다.</p>
+<p>또한, 저희와 함께 AWS와 같은 클라우드에 탈중앙 게임 노드를 배포 / 운영하는
+도구를 함께 만들 인프라 엔지니어를 <a href=https://recruit.planetariumhq.com/e2ba3fcc-ce76-456a-bea9-0be97622cb48>모시고 있습니다.</a> 블록체인이나 C# 경험이
+없더라도, AWS와 같은 IaaS를 사용해보신 경험이 있으신 분들이라면 가벼운 마음으로
+많은 지원 부탁드립니다.</p>
+</article>
+<script>(function(){var d,h,e,a,g,c,f,b;if(!location.hash.match(/^#/))return;if(d=document.getElementById('content'),h=window.decodeURIComponent(location.hash.substring(1)),e=document.getElementById(h),a=e.nodeName.match(/^H([123456])$/),!a||e.parentNode!==d)return;g=window.parseInt(a[1]),c=!1;for(f=0;f<d.childNodes.length;f++)b=d.childNodes[f],c?(a=b.nodeName.match(/^H([123456])$/),a&&window.parseInt(a[1])>=g&&(c=!1)):b===e&&(c=!0),!c&&!b.nodeName.match(/^#/)&&(b.className+=' dim')})()</script>
+<div class=recruit>
+<a href=https://planetariumhq.com>플라네타리움</a>은 게임에 특화된
+오픈 소스 P2P 라이브러리 <a href=https://libplanet.io/>Libplanet</a>과,
+그 위에서 중앙 서버 없는 온라인 게임
+〈<a href=https://nine-chronicles.com/>나인 크로니클</a>〉을 만들고
+있습니다. 저희와 흥미로운 기술적 도전을 함께 하실 분들을 모시고 있습니다.
+지금 <a href=https://recruit.planetariumhq.com/>인재 영입 페이지</a>를
+확인해주세요!
+</div>
+<div itemprop=author class="fl tc mr3">
+<a href=https://github.com/longfin rel=author itemprop=url class="no-underline mid-gray b f6">
+<img src="https://www.gravatar.com/avatar/0b12cfcb4b1a472207af0e51f7d13a71?d=https://avatars.githubusercontent.com/longfin" itemprop=image class="w3 h3 br-100 mb1">
+<br>문성원
+</a>
+</div>
+</section>
+<footer>
+<div>
+<p class="f6 gray mt6 lh-copy">
+&copy; 2019&ndash;2021
+<a href=https://planetariumhq.com/ style=color:inherit;text-decoration:inherit>Planetarium</a>.
+</p>
+</div>
+</footer>
+</body>
+</html>
