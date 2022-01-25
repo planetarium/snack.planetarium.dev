@@ -2,6 +2,7 @@
 title: 탈중앙 게임과 AWS re:Invent
 date: 2022-01-25
 authors: [swen.mun]
+ogimage: images/reinvent2021.png
 ---
 
 안녕하세요. [Libplanet]을 만들고 있는 [플라네타리움]의 문성원입니다.
@@ -65,7 +66,7 @@ IaaS로의 이전을 검토하고, [성공 사례들][1]이 나오고 있지만,
 "작은 규모로 먼저 시작할 수 있다"라는 강점이 그리 크게 받아들여지기 어렵기 때문일 
 것입니다.
 
-![](images/9c-structure.png)
+![](images/9c-structure.jpg)
 
 하지만 탈중앙 게임을 지향하는 나인 크로니클과 같은 게임에서, 저희는 노드를 운영하는
 사람들이 초기 투자를 많이 하지 않고도 본인들이 원하는 규모에서 
