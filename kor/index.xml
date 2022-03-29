@@ -1,4 +1,49 @@
-<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><title>플라네타리움 엔지니어링 스낵</title><link rel="self" href="https://snack.planetarium.dev/kor/index.xml"/><link rel="alternate" href="https://snack.planetarium.dev/kor/" title="플라네타리움 엔지니어링 스낵"/><link rel="alternate" href="https://snack.planetarium.dev/eng/" hreflang="en" title="Planetarium Engineering Snack"/><updated>2022-01-25T00:00:00+00:00</updated><id>https://snack.planetarium.dev/kor/</id><entry><title>탈중앙 게임과 AWS re:Invent</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2022/01/2021-aws-reinvent/" title="탈중앙 게임과 AWS re:Invent"/><id>https://snack.planetarium.dev/kor/2022/01/2021-aws-reinvent/</id><published>2022-01-25T00:00:00+00:00</published><updated>2022-01-25T00:00:00+00:00</updated><content type="html">&lt;p>안녕하세요. &lt;a href="https://libplanet.io/">Libplanet&lt;/a>을 만들고 있는 &lt;a href="https://planetariumhq.com/">플라네타리움&lt;/a>의 문성원입니다.
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><title>플라네타리움 엔지니어링 스낵</title><link rel="self" href="https://snack.planetarium.dev/kor/index.xml"/><link rel="alternate" href="https://snack.planetarium.dev/kor/" title="플라네타리움 엔지니어링 스낵"/><link rel="alternate" href="https://snack.planetarium.dev/eng/" hreflang="en" title="Planetarium Engineering Snack"/><updated>2022-03-29T00:00:00+00:00</updated><id>https://snack.planetarium.dev/kor/</id><entry><title>세상을 늦게 보기 위해 잃었던 것들</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2022/03/things-i-lost-to-see-the-world-late/" title="세상을 늦게 보기 위해 잃었던 것들"/><id>https://snack.planetarium.dev/kor/2022/03/things-i-lost-to-see-the-world-late/</id><published>2022-03-29T00:00:00+00:00</published><updated>2022-03-29T00:00:00+00:00</updated><content type="html">&lt;p>안녕하세요. 플라네타리움 엔진팀에서 &lt;a href="https://libplanet.io/">Libplanet&lt;/a>을 개발하고 있는 이수호입니다.
+오늘은 &lt;a href="https://libplanet.io/">Libplanet&lt;/a>을 개발하면서 생겼던 문제 중 블록체인에서 흔히 말하는 확정(&lt;code>Confirmation&lt;/code>)으로 인해 생긴 문제와
+그 문제를 발견하고 해결하는 과정을 이야기하고자 합니다.&lt;/p>
+&lt;h2 id="확정confirmation">확정(&lt;code>Confirmation&lt;/code>)&lt;/h2>
+&lt;p>블록체인에서의 블록은, 어떠한 사건이라고 볼 수 있고 체인은 사건으로 이루어진 일련의 시간 흐름이라고 볼 수 있습니다.
+이전의 시간 흐름과는 맞지 않는 사건이 발생했을 때, 관측자는 이 사건을 올바르지 않은 사건으로 분류하고 거절합니다.
+이 &amp;lsquo;올바른 사건&amp;rsquo;이라는 규칙을 대다수가 공유하고 있다면, 사건들만 순서대로 공유했을 때에 모두가 같은 현상을 관측하고 있다고 할 수 있습니다.&lt;/p>
+&lt;p>하지만, 이 서로 다른 &amp;lsquo;올바른 사건&amp;rsquo;이 동시다발적으로 제출된다면 어떻게 될까요?
+일시적으로 관측자들 사이에 혼란이 생길 것이지만 결과적으로는 올바른 시간대를 바라보게 됩니다.
+하지만 이 혼란으로 인해 관측하고 있는 정보를 기반으로 하고 있는 다른 사용자들은 혼란을 겪게 됩니다.&lt;/p>
+&lt;p>예를 들면. 방금 전 사건까지만 해도 분명히 100원이 있었는데, 이 사건이 없던 걸로 되어서 0원이 되어 버린다던가 하는 일들이 생길 수 있습니다.&lt;/p>
+&lt;p>이를 막기 위해 사용자는 확정(&lt;code>Confirmation&lt;/code>) 이라는 &amp;lsquo;여기서부터는 뒤집히지 않는다&amp;rsquo; 라는 수치를 두고,
+이 수치 이전까지는 블록이 들어와도 체인에 받지 않습니다.
+세상을 늦게 보고 확실해질 때 까지 기다리는 것이죠.&lt;/p>
+&lt;h2 id="libplanet-에서의-확정confirmation과-렌더러renderer">Libplanet 에서의 확정(&lt;code>Confirmation&lt;/code>)과 렌더러(&lt;code>Renderer&lt;/code>)&lt;/h2>
+&lt;p>Libplanet 은 이 확정(&lt;code>Confirmation&lt;/code>)을 지원하고 있습니다. 정확히는 렌더링 과정에서 확정(&lt;code>Confirmation&lt;/code>)을 거칩니다.
+이 렌더링 역할을 해 주는 렌더러(&lt;a href="https://docs.libplanet.io/0.30.0/api/Libplanet.Blockchain.Renderers.IRenderer-1.html">Renderer&lt;/a>)는 블록체인의 상태를 수신해서 변경이 일어났을 경우
+해당 렌더러의 콜백을 블록체인의 이전 상태,현재 상태와 함께 호출해 주는 역할을 가지고 있습니다.&lt;/p>
+&lt;p>이 중에서도 지연 렌더러(&lt;a href="https://docs.libplanet.io/0.30.0/api/Libplanet.Blockchain.Renderers.DelayedRenderer-1.html">DelayedRenderer&lt;/a>)는 블록 자체를 늦게 인지하는 것이 아닌 블록을 전부 인지 및 연산한 후에
+렌더링 하는 부분만 가지고 있다가 수치가 넘어가면 감싸고 있는 렌더러(&lt;a href="https://docs.libplanet.io/0.30.0/api/Libplanet.Blockchain.Renderers.IRenderer-1.html">Renderer&lt;/a>)에 보내줍니다.&lt;/p>
+&lt;p>더 자세한 정보는 &lt;a href="https://docs.libplanet.io/0.30.0/api/Libplanet.Blockchain.Renderers.DelayedRenderer-1.html">DelayedRenderer&lt;/a>에서 확인할 수 있습니다.&lt;/p>
+&lt;h2 id="문제-발생">문제 발생&lt;/h2>
+&lt;p>어느 순간, 사용자들에게서 메모리 사용량이 급증한다는 제보를 받았습니다. 켜놓은 지 약 1시간이 지나면 메모리 누수가 심각하게 일어나는 것을 확인할 수 있었습니다.
+특정하는 것은 어렵지 않았습니다. &lt;a href="https://www.jetbrains.com/ko-kr/dotmemory/">dotMemory&lt;/a>를 사용하니 어떤 클래스에서 메모리를 가장 많이 사용하는지 특정할 수 있었습니다.&lt;/p>
+&lt;figure>&lt;img src="images/dot-memory.png"
+alt="DelayedActionRenderer 가 가장 많은 메모리 사용량을 차지하고 있는 dotMemory 분석 결과"/>&lt;figcaption>
+&lt;p>DelayedActionRenderer 가 가장 많은 메모리 사용량을 차지하고 있는 dotMemory 분석 결과&lt;/p>
+&lt;/figcaption>
+&lt;/figure>
+&lt;p>문제는 다음입니다. 왜 메모리 누수가 일어났을까? 눈치가 빠르거나 경험이 많으신 분들은 이미 눈치채셨을지도 모르겠습니다.&lt;/p>
+&lt;h2 id="원인-및-해결">원인 및 해결&lt;/h2>
+&lt;p>앞에서 언급했던 문구를 다시 가져와 보겠습니다&lt;/p>
+&lt;blockquote>
+&lt;p>이를 막기 위해 사용자는 확정(&lt;code>Confirmation&lt;/code>) 이라는 &amp;lsquo;여기서부터는 뒤집히지 않는다&amp;rsquo; 라는 수치를 두고,
+이 수치 이전까지는 블록이 들어와도 체인에 받지 않습니다.
+세상을 늦게 보고 확실해질 때 까지 기다리는 것이죠.&lt;/p>
+&lt;/blockquote>
+&lt;p>힌트는 &lt;em>여기서부터는 뒤집히지 않는다&lt;/em> 입니다.
+작업 기반 증명(Proof-Of-Work, PoW)에서는 합의 무결성(Safety)를 보장할 수 없기 때문에, 이것은 그 누구도 보장할 수 없습니다.&lt;/p>
+&lt;p>따라서 사용자가 지정한 이 확정(&lt;code>Confirmation&lt;/code>) 을 체인 안쪽까지 끌어와서
+블록체인 네트워크 엔지니어가 경계 값(Threshold)을 지정할 수 있게 하는 작업이 필요했습니다.
+해당 작업의 결과는 &lt;a href="https://github.com/planetarium/libplanet/pull/1163">#1163&lt;/a> PR에서 보실 수 있습니다.&lt;/p>
+&lt;h2 id="마치며">마치며&lt;/h2>
+&lt;p>일련의 모든 블록체인 합의 과정에서의 설명은 모두 작업 기반 증명(Proof-Of-Work, PoW)을 기반으로 설명되었습니다.
+지분 기반 증명(Proof-Of-Stake, PoS)나 다른 합의 알고리즘에서는 필요 없는 이야기일 수도 있습니다.&lt;/p>
+&lt;p>설명이 조금 모자라거나 틀린 부분이 있으면 의견 남겨주시면 감사하겠습니다.&lt;/p></content><author><name>이수호</name><uri>https://github.com/riemannulus</uri><email>suho@planetariumhq.com</email></author></entry><entry><title>탈중앙 게임과 AWS re:Invent</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2022/01/2021-aws-reinvent/" title="탈중앙 게임과 AWS re:Invent"/><id>https://snack.planetarium.dev/kor/2022/01/2021-aws-reinvent/</id><published>2022-01-25T00:00:00+00:00</published><updated>2022-01-25T00:00:00+00:00</updated><content type="html">&lt;p>안녕하세요. &lt;a href="https://libplanet.io/">Libplanet&lt;/a>을 만들고 있는 &lt;a href="https://planetariumhq.com/">플라네타리움&lt;/a>의 문성원입니다.
 오늘은 작년 11월 29일부터 12월 3일까지 열린, &lt;a href="https://reinvent.awsevents.com/">AWS re:Invent&lt;/a>에 참석하게 된 계기에 대해서 짤막하게나마 공유토록 하겠습니다.&lt;/p>
 &lt;h1 id="aws-reinvent">AWS re:Invent&lt;/h1>
 &lt;p>&lt;img src="images/reinvent2021.png" alt="">&lt;/p>
@@ -1119,84 +1164,4 @@ alt="AWS 컨테이너 오케스트레이션 비교"/>&lt;figcaption>
 &lt;/figure>
 &lt;p>그래서 떠올린 대안이 쿠버네티스였습니다. 쿠버네티스는 저희가 ECS 같은 서비스를 통해서 하고 싶은 일을 공급자 중립적(Provider Agonistic)으로 할 수 있는 오픈소스 프로젝트입니다. 여러 종류의 복잡한 컨테이너를 손쉽게 띄우고 내리는 기능을 컨테이너 오케스트레이션이라고 하는데, 저희는 거의 같은 종류의 컨테이너(게임)를 여러 개 띄우고 싶은 것뿐이니 설정은 그리 복잡하지 않았습니다.&lt;/p>
 &lt;h2 id="다음-이야기">다음 이야기&lt;/h2>
-&lt;p>적다 보니 이야기가 많이 길어졌네요. 다음 시간에는 테스트를 위해 쿠버네티스를 어떻게 설정하고 클라우드 상에 배치하고 있는지 구체적인 절차에 대해 살펴보도록 하겠습니다.&lt;/p></content><author><name>문성원</name><uri>https://github.com/longfin</uri><email>swen@planetariumhq.com</email></author></entry><entry><title>Libplanet 0.8 릴리스</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/02/libplanet-0.8/" title="Libplanet 0.8 릴리스"/><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/02/libplanet-0.8/" hreflang="en" title="Libplanet 0.8 Released"/><id>https://snack.planetarium.dev/kor/2020/02/libplanet-0.8/</id><published>2020-02-05T00:00:00+00:00</published><updated>2020-02-05T00:00:00+00:00</updated><content type="html">&lt;p>안녕하세요.
-저희 팀은 &lt;a href="https://libplanet.io/">Libplanet&lt;/a>의 여덟 번째 마이너 버전인 &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.8.0">0.8 버전&lt;/a>을
-릴리스했습니다.&lt;/p>
-&lt;p>Libplanet은 분산 P2P로 돌아가는 온라인 멀티플레이어 게임을 만들 때,
-그러한 게임들이 매번 구현해야 하는 P2P 통신이나 데이터 동기화 등의 문제를 푸는
-공용 라이브러리입니다.&lt;/p>
-&lt;p>거의 세 달 만의 새 버전인 만큼, 0.8 버전에서는 저장소 최적화를 비롯한 많은
-개선이 있었습니다.
-이 글에서는 0.8 버전의 주요 변경 사항들에 대해 다루겠습니다.&lt;/p>
-&lt;h2 id="제너시스-블록-상정">제너시스 블록 상정&lt;/h2>
-&lt;p>&lt;code>BlockChain&amp;lt;T&amp;gt;&lt;/code>는 이제 특정한 제너시스 블록을 상정하게 되었습니다.
-이는 Libplanet으로 만든 여러 게임들이 서로 별개의 네트워크를 구성함에도,
-Libplanet이 일종의 메타프로토콜로 동작하기에 엉뚱한 네트워크에 접속 시도를
-하는 등의 실수를 방지하기 위해서 입니다.&lt;/p>
-&lt;p>&lt;a href="https://docs.libplanet.io/0.8.0/api/Libplanet.Blockchain.BlockChain-1.html#Libplanet_Blockchain_BlockChain_1__ctor_Libplanet_Blockchain_Policies_IBlockPolicy__0__Libplanet_Store_IStore_Libplanet_Blocks_Block__0__">&lt;code>BlockChain&amp;lt;T&amp;gt;()&lt;/code> 생성자&lt;/a>는 &lt;code>Block&amp;lt;T&amp;gt;&lt;/code> 객체를 인자로 받으며,
-해당 블록이 가장 첫 블록이 됩니다. 만약 &lt;code>IStore&lt;/code>에 들어있는 제너시스 블록과
-&lt;code>BlockChain&amp;lt;T&amp;gt;()&lt;/code> 생성자가 기대하는 제너시스 블록이 일치하지 않을 경우
-&lt;a href="https://docs.libplanet.io/0.8.0/api/Libplanet.Blocks.InvalidGenesisBlockException.html">&lt;code>InvalidGenesisBlockException&lt;/code>&lt;/a>이 일어나게
-됩니다.&lt;/p>
-&lt;p>현재는 생성자가 제너시스 &lt;code>Block&amp;lt;T&amp;gt;&lt;/code> 객체를 통째로 받지만,
-&lt;a href="https://github.com/planetarium/libplanet/pull/769">다음 버전에는 제너시스 블록 해시만 받고 실제 블록 내용은 네트워크의 다른
-노드한테 받을 수도 있게 개선될 예정입니다.&lt;/a>&lt;/p>
-&lt;h2 id="defaultstoredefaultstore--litedbstore">&lt;a href="https://docs.libplanet.io/master/api/Libplanet.Store.DefaultStore.html">&lt;code>DefaultStore&lt;/code>&lt;/a> ← &lt;code>LiteDBStore&lt;/code>&lt;/h2>
-&lt;p>내장 &lt;code>IStore&lt;/code> 구현이었던 &lt;code>LiteDBStore&lt;/code>가 사라지고 그 자리를
-&lt;a href="https://docs.libplanet.io/master/api/Libplanet.Store.DefaultStore.html">&lt;code>DefaultStore&lt;/code>&lt;/a>가 대체했습니다.&lt;/p>
-&lt;p>이름이 바뀐 까닭은 더이상 LiteDB 파일 하나가 아닌,
-여러 포맷이 섞인 파일들을 담는 디렉터리에 저장되게 바뀌었기 때문입니다.&lt;/p>
-&lt;p>또한, 1.0.0 릴리스 전까지 실험을 거듭하여 저장소 최적화를 할 예정으로,
-이름에서 구현 세부 사항을 제거하는 의도도 있었습니다.&lt;/p>
-&lt;p>그 외에도 저장 공간을 줄이기 위한 &lt;a href="https://docs.libplanet.io/master/api/Libplanet.Store.DefaultStore.html#Libplanet_Store_DefaultStore__ctor_System_String_System_Boolean_System_Boolean_System_Int32_System_Int32_System_Int32_System_Int32_System_Boolean_System_Boolean_">&lt;code>DefaultStore()&lt;/code> 생성자&lt;/a>에는
-&lt;code>compress&lt;/code> 옵션이 생겼습니다. 이번 버전에서는 아직 기본적으로 꺼져 있지만,
-다음 버전에서는 기본값이 &lt;code>true&lt;/code>로 바뀔 예정입니다.&lt;/p>
-&lt;h2 id="icryptobackendicryptobackend">&lt;a href="https://docs.libplanet.io/0.8.0/api/Libplanet.Crypto.ICryptoBackend.html">&lt;code>ICryptoBackend&lt;/code>&lt;/a>&lt;/h2>
-&lt;p>Libplanet은 다양한 플랫폼에서도 쓸 수 있도록,
-순수 C#으로 작성된 암호학 라이브러리인 &lt;a href="http://www.bouncycastle.org/csharp/">Bouncy Castle&lt;/a>을 써왔습니다.
-그러나 순수 C# 구현은 이식성에서는 큰 장점이 되지만,
-성능에서는 오히려 페널티로 작용합니다.&lt;/p>
-&lt;p>새 버전에서는 이식성과 성능 중 어느 쪽을 취할지 게임 제작자가 고를 수 있도록,
-&lt;a href="https://docs.libplanet.io/0.8.0/api/Libplanet.Crypto.ICryptoBackend.html">&lt;code>ICryptoBackend&lt;/code>&lt;/a>라는 추상화 계층이 추가됐습니다.
-기본 구현인 &lt;a href="https://docs.libplanet.io/0.8.0/api/Libplanet.Crypto.DefaultCryptoBackend.html">&lt;code>DefaultCryptoBackend&lt;/code>&lt;/a>는 여전히
-내부적으로 Bouncy Castle에 의존하지만,
-게임 제작자는 게임의 타깃 플랫폼에 따라 적절히 &lt;code>ICryptoBackend&lt;/code> 인터페이스를
-구현하여 성능 이점을 누릴 수 있습니다.&lt;/p>
-&lt;p>예를 들어, Libplanet이 &lt;code>ICryptoBackend&lt;/code>를 구현한 &lt;code>MyCryptoBackend&lt;/code> 클래스를
-쓰게 하고 싶다면,
-아래와 같이 &lt;a href="https://docs.libplanet.io/0.8.0/api/Libplanet.Crypto.CryptoConfig.html#Libplanet_Crypto_CryptoConfig_CryptoBackend">&lt;code>CryptoConfig.CryptoBackend&lt;/code> 속성&lt;/a>를
-덮어씌우면 됩니다.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-csharp" data-lang="csharp">CryptoConfig.CryptoBackend = &lt;span style="color:#080;font-weight:bold">new&lt;/span> MyCryptoBackend();
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>저희 팀에서 만드는 게임인 &lt;a href="https://nine-chronicles.com/">나인 크로니클&lt;/a>에서는 비트코인 프로젝트에서 공개한
-&lt;a href="https://github.com/bitcoin-core/secp256k1">secp256k1&lt;/a> C 라이브러리를 호출하는 &lt;code>ICryptoBackend&lt;/code> 인터페이스를 구현하여
-게임 성능을 개선하기도 했습니다.&lt;/p>
-&lt;h2 id="라우팅-테이블-개선">라우팅 테이블 개선&lt;/h2>
-&lt;p>Libplanet은 &lt;a href="https://snack.planetarium.dev/kor/2019/09/kademlia/">분산 해시 테이블 방식&lt;/a>을 적용하여 다른 피어와 통신하기 때문에
-라우팅 테이블의 자신과 연결된 피어들의 정보를 저장합니다.&lt;/p>
-&lt;p>기존에는 이 라우팅 테이블에 해당 피어와 가장 최근에 통신한 시점만을
-저장하고 있었는데,
-추가로 해당 피어와의 통신 딜레이를 추가하여 사용자가 네트워크 환경에 대한
-자세한 정보를 알 수 있도록 하였습니다.&lt;/p>
-&lt;p>개발자들은 새로 추가된
-&lt;a href="https://docs.libplanet.io/0.8.0/api/Libplanet.Net.Swarm-1.html#Libplanet_Net_Swarm_1_CheckAllPeersAsync_System_Nullable_TimeSpan__CancellationToken_">&lt;code>Swarm&amp;lt;T&amp;gt;.CheckAllPeersAsync()&lt;/code> 메서드&lt;/a>를
-이용하여 라우팅 테이블에 저장된 피어들을 갱신할 수 있고,
-&lt;a href="https://docs.libplanet.io/0.8.0/api/Libplanet.Net.Swarm-1.html#Libplanet_Net_Swarm_1_Peers">&lt;code>Swarm&amp;lt;T&amp;gt;.Peers&lt;/code> 속성&lt;/a>에 접근해 Libplanet의 외부에서도 현재
-자신의 라우팅 테이블에 들어있는 피어들을 확인할 수 있게 되었습니다.&lt;/p>
-&lt;h2 id="블록-구조-및-직렬화-방식의-변경">블록 구조 및 직렬화 방식의 변경&lt;/h2>
-&lt;p>블록체인을 구성하는 요소인 블록은 크게 트랜잭션을 제외한 메타데이터 부분과
-트랜잭션, 이렇게 두 부분로 나눌 수 있습니다.&lt;/p>
-&lt;p>많은 블록체인 프로젝트들이 그렇듯 저희 역시 여기서 트랜잭션을 뺀
-부분을 블록 헤더로 정의하였고,
-기존에 블록 해시로만 수행하던 연산들을 좀더 풍부한 정보를 담은 블록 헤더를
-이용해 수행하게 바꾸어 기존보다 효율적인 연산을 할 수 있게 되었습니다.&lt;/p>
-&lt;p>더불어, 블록과 트랜잭션을 직렬화할 때 필드 키를 짧게 줄이고,
-비어있는 필드는 아예 배제함으로써 직렬화된 표현을 경량화했습니다.&lt;/p>
-&lt;h2 id="문서-개선">문서 개선&lt;/h2>
-&lt;p>라이브러리 자체의 변경은 아니지만, &lt;a href="https://docs.libplanet.io/0.8.0/">문서 웹사이트&lt;/a>의 디자인에 개선이
-있었고, 문성원 님이 작성하신 새로운 &lt;a href="https://docs.libplanet.io/0.8.0/articles/overview.html">개요&lt;/a> 문서도 추가됐습니다.&lt;/p>
-&lt;h2 id="그-외">그 외&lt;/h2>
-&lt;p>그 밖에도, 세 달 남짓 Libplanet으로 만들고 있는 게임 &lt;a href="https://nine-chronicles.com/">나인 크로니클&lt;/a>의
-퍼블릭 테스트를 몇 차례 진행하며 발견한 많은 문제들을 바로잡느라 매우 다양한
-변화가 있었습니다. 자세한 것은 &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.8.0">전체 변경 내역&lt;/a>에서 확인할 수 있습니다.&lt;/p>
-&lt;p>호기심이 생기신 분들은 설치해서 이용해 보시고, 궁금한 점이 있으시다면 저희 팀이
-상주해 있는 &lt;a href="https://discord.gg/planetarium">디스코드&lt;/a>에 놀러오세요!&lt;/p></content><author><name>고찬혁</name><uri>https://github.com/limebell</uri><email>lime@planetariumhq.com</email></author><author><name>홍민희</name><uri>https://github.com/dahlia</uri><email>hong.minhee@planetariumhq.com</email></author></entry></feed>
+&lt;p>적다 보니 이야기가 많이 길어졌네요. 다음 시간에는 테스트를 위해 쿠버네티스를 어떻게 설정하고 클라우드 상에 배치하고 있는지 구체적인 절차에 대해 살펴보도록 하겠습니다.&lt;/p></content><author><name>문성원</name><uri>https://github.com/longfin</uri><email>swen@planetariumhq.com</email></author></entry></feed>
