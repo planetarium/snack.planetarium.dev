@@ -1,7 +1,7 @@
 ---
 title: "세상을 늦게 보기 위해 잃었던 것들"
 date: 2022-03-29
-authors: [lee.suho]
+authors: [suho.lee]
 ---
 
 안녕하세요. 플라네타리움 엔진팀에서 [Libplanet]을 개발하고 있는 이수호입니다.
@@ -49,7 +49,7 @@ Libplanet 은 이 확정(`Confirmation`)을 지원하고 있습니다. 정확히
 
 {{<
 figure
-  src="images/dotMemory.png"
+  src="images/dot-memory.png"
   caption="DelayedActionRenderer 가 가장 많은 메모리 사용량을 차지하고 있는 dotMemory 분석 결과"
 >}}
 
