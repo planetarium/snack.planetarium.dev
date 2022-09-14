@@ -56,7 +56,7 @@ Libplanet에 대해 논의할 [Discord 서버](https://planetarium.dev/discord)�
 
 ### 전제 조건
 
-최신 C# 컴파일러 및 .NET VM을 제공하는 .NET Core SDK 6.0 이상이 필요합니다. .NET Core 다운로드 페이지에서 .NET Core SDK 설치 지침을 읽고 따릅니다. 
+최신 C# 컴파일러 및 .NET 런타임을 제공하는 .NET SDK 6.0 이상이 필요합니다. .NET 다운로드 페이지에서 .NET SDK 설치 지침을 읽고 따릅니다. 
 
 선호하는 설정이 없는 경우 Visual Studio Code를 사용하는 것을 추천합니다. .NET을 만든 Microsoft에서 만든 무료 오픈 소스입니다. 
 
