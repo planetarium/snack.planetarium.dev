@@ -43,6 +43,25 @@ blockquote p {
   display: inline;
 }
 
+blockquote > p:last-child {
+  cite:only-child { display: block; margin-top: 1em; }
+  cite:before { content: '\2014'; } // em dash
+  cite:lang(ko):before { content: '\2014\3008'; } // em dash and opening bracket
+}
+
+table {
+  border-collapse: collapse;
+
+  th, td {
+    border: 1px solid #ccc;
+    padding: 0.5em;
+
+    &:has(> strong:only-child) {
+      background-color: #eee;
+    }
+  }
+}
+
 code {
   font-size: 90%;
 }
