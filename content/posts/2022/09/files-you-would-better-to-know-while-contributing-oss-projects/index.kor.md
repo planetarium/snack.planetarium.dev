@@ -76,7 +76,7 @@ dotnet build -p:SkipSonar=true
 
 ### 프로젝트
 
-GitHub의 Planetarium/libplanet 저장소는 여러 프로젝트로 구성됩니다. 
+GitHub의 [planetarium/libplanet](https://github.com/planetarium/libplanet) 저장소는 여러 프로젝트로 구성됩니다. 
 
 - Libplanet: 대부분의 구현 코드를 포함하는 메인 프로젝트. Libplanet이라는 이름의 NuGet 패키지로 배포됩니다.
 - [Libplanet.Net](http://libplanet.net/): Libplanet 위에 구축된 P2P 네트워킹 계층. 이것은 별개의 NuGet 패키지인 Libplanet.Net으로 배포됩니다.
