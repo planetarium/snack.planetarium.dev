@@ -31,7 +31,7 @@ Libplanet은 .NET 라이브러리이므로 모든 게임 로직을 동일한 언
 
 </aside>
 
-### 누겟(NuGET)
+### 누겟(NuGet)
 
 모든 안정적인 릴리스에 대해 Libplanet을 .nupkg로 압축하고 NuGet 및 GitHub 릴리스 페이지에 업로드합니다.
 
