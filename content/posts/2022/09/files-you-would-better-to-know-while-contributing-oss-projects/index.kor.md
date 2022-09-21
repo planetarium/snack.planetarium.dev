@@ -130,7 +130,7 @@ Planetarium/libplanet은 **GNU Lesser General Public License v2.1**에 따라 �
 
 ### 마무리
 
-위의 3가지 파일 외에도 릴리즈 가이드가 있는 ****[RELEASE.md](https://github.com/planetarium/libplanet/blob/main/RELEASE.md), [CHANGES.md](https://github.com/planetarium/libplanet/blob/main/CHANGES.md)**들이 있습니다. INSTALL
+위의 3가지 파일 외에도 릴리즈 가이드가 있는 ****[RELEASE.md](https://github.com/planetarium/libplanet/blob/main/RELEASE.md), [CHANGES.md](https://github.com/planetarium/libplanet/blob/main/CHANGES.md)**들이 있습니다.
 
 README 파일, CONTRIBUTING 파일, LICENSE 파일을 통해서 오픈 소스 프로젝트인 립플래닛을 소개했습니다. 꼭 립플래닛이 아니어도 좋습니다. 여러분들의 미래를 위해 오픈 소스 프로젝트에 기여하는 것을 추천드립니다. 물론 립플래닛 저장소와 디스코드 서버에서 만나면 더욱 좋고요.  
 
