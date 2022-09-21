@@ -100,7 +100,7 @@ Libplanet 솔루션은 여러 프로젝트로 구성됩니다. .Tests 접미사�
 
 성능 향상 또는 회귀를 추적하기 위해 일련의 벤치마크를 유지 관리하고 CI에서 지속적으로 측정합니다. 로컬 환경에서도 벤치마크를 실행할 수 있습니다.
 
-모든 벤치마크 코드는 Libplanet.Benchmarks 프로젝트에 있습니다. 벤치마크는 [BenchmarkDotNet](https://benchmarkdotnet.org/)을 기반으로 하므로 자세한 내용은 공식 문서를 참조하세요.
+모든 벤치마크 코드는 [Libplanet.Benchmarks](https://github.com/planetarium/libplanet/tree/main/Libplanet.Benchmarks) 프로젝트에 있습니다. 벤치마크는 [BenchmarkDotNet](https://benchmarkdotnet.org/)을 기반으로 하므로 자세한 내용은 공식 문서를 참조하세요.
 
 ### 새 버전 출시
 
