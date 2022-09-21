@@ -86,7 +86,7 @@ GitHub의 [planetarium/libplanet](https://github.com/planetarium/libplanet) 저�
 
 해당 구현 코드에 가능한 한 완전한 테스트를 작성합니다. 코드 커버리지 100%에 가까워지는 것이 우리의 목표 중 하나입니다.
 
-Libplanet 솔루션은 여러 프로젝트로 구성됩니다. .Tests 접미사가 없는 모든 프로젝트는 실제 구현입니다. 이들은 Libplanet*.dll 어셈블리에 빌드되고 하나의 NuGet 패키지에 포장됩니다.
+*Libplanet* 솔루션은 여러 프로젝트로 구성됩니다. *.Tests* 접미사가 없는 모든 프로젝트는 실제 구현입니다. 이들은 *Libplanet\*.dll* 어셈블리에 빌드되고 하나의 NuGet 패키지에 포장됩니다.
 
 ### 스타일 규칙
 
