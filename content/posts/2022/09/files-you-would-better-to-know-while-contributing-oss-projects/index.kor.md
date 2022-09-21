@@ -108,7 +108,7 @@ Libplanet 솔루션은 여러 프로젝트로 구성됩니다. .Tests 접미사�
 
 ## 3. LICENSE 파일
 
-Planetarium/libplanet은 **GNU Lesser General Public License v2.1**에 따라 사용이 허가되었습니다.
+[planetarium/libplanet](https://github.com/planetarium/libplanet)은 **GNU Lesser General Public License v2.1**에 따라 사용이 허가되었습니다.
 
 ![](images/2.png)
 
