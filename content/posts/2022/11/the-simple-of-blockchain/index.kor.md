@@ -2,6 +2,7 @@
 title: 블록체인? 채굴해서 코인 나오는 건 알겠는데...
 date: 2022-11-15
 authors: [suho.lee]
+ogimage: images/OpenGraph_Image_Blockchain_I_understand.jpg
 ---
 
 ## 알림
