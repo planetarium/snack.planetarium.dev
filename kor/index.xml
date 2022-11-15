@@ -1,4 +1,54 @@
-<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><title>플라네타리움 엔지니어링 스낵</title><link rel="self" href="https://snack.planetarium.dev/kor/index.xml"/><link rel="alternate" href="https://snack.planetarium.dev/kor/" title="플라네타리움 엔지니어링 스낵"/><link rel="alternate" href="https://snack.planetarium.dev/eng/" hreflang="en" title="Planetarium Engineering Snack"/><updated>2022-09-14T00:00:00+00:00</updated><id>https://snack.planetarium.dev/kor/</id><entry><title>오픈 소스인 립플래닛 프로젝트에 기여 하기 전에 알아야 할 파일들</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2022/09/files-you-would-better-to-know-while-contributing-oss-projects/" title="오픈 소스인 립플래닛 프로젝트에 기여 하기 전에 알아야 할 파일들"/><id>https://snack.planetarium.dev/kor/2022/09/files-you-would-better-to-know-while-contributing-oss-projects/</id><published>2022-09-14T00:00:00+00:00</published><updated>2022-09-14T00:00:00+00:00</updated><content type="html">&lt;p>개발자 커리어와 오픈 소스는 떼려야 뗄 수 없는 관계입니다. 오픈소스를 통해 얻을 수 있는 것은 경력상의 혜택 뿐 아니라, 안전한 환경에서 새로운 기술을 배우며 효율적이고 효과적으로 의사소통하는 방법과 같은 소프트 스킬을 배울 수 있는 기술적 혜택, 그리고 이와 더불어 인맥적 혜택도 있습니다.&lt;/p>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><title>플라네타리움 엔지니어링 스낵</title><link rel="self" href="https://snack.planetarium.dev/kor/index.xml"/><link rel="alternate" href="https://snack.planetarium.dev/kor/" title="플라네타리움 엔지니어링 스낵"/><link rel="alternate" href="https://snack.planetarium.dev/eng/" hreflang="en" title="Planetarium Engineering Snack"/><updated>2022-11-15T00:00:00+00:00</updated><id>https://snack.planetarium.dev/kor/</id><entry><title>블록체인? 채굴해서 코인 나오는 건 알겠는데...</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2022/11/the-simple-of-blockchain/" title="블록체인? 채굴해서 코인 나오는 건 알겠는데..."/><id>https://snack.planetarium.dev/kor/2022/11/the-simple-of-blockchain/</id><published>2022-11-15T00:00:00+00:00</published><updated>2022-11-15T00:00:00+00:00</updated><content type="html">&lt;h2 id="알림">알림&lt;/h2>
+&lt;p>이번 스낵 글은 이전에 개인 &lt;a href="https://www.getrevue.co/profile/bin_bash_shell/issues/issue-1-838950">뉴스레터&lt;/a>에서 발행했던 내용을
+필사하여 스낵에 올리는 포스트입니다.&lt;/p>
+&lt;h2 id="들어가며">들어가며&lt;/h2>
+&lt;p>이번 뉴스레터는 “채굴해서 코인 나오는 건 이제 알겠고, 이게 변조 불가능하다고 하는데 이런 특성이랑 코인이 가치를 가지는 거랑 무슨 상관이야?” 정도로 블록체인을 아시는 분들에 대해 설명하는 내용을 담고 있습니다. 기술적 이해도가 필요한 이야기가 약간은 섞여 있고, 설명의 단순화를 위해 생략하거나 감추는 내용들이 있습니다.&lt;/p>
+&lt;h2 id="tldr">TL;DR&lt;/h2>
+&lt;p>블록체인은 “공개 탈 중앙 분산 데이터베이스” 입니다. 채굴같은 일반적인 분산 데이터베이스에는 없는 특성 같은 경우 공개 탈 중앙형 분산 데이터베이스를 만들기 위한 장치입니다.&lt;/p>
+&lt;h2 id="데이터베이스">데이터베이스&lt;/h2>
+&lt;p>블록체인을 이야기하려면 데이터베이스라는 것을 이야기하지 않을 수가 없습니다. 데이터베이스라는 것은 무엇일까요? 본인이 RDB 등에 익숙하다면 이 단락을 넘기셔도 좋습니다. 이 밑으로는 고전적인 RDB 이야기를 조금 하려고 합니다.&lt;/p>
+&lt;figure>
+&lt;a href="https://ko.wikipedia.org/wiki/%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4">
+&lt;img src="images/database.jpg" alt="하드디스크의 내부, 헤드와 디스크가 보인다."/>
+&lt;figcaption>Reference from https://unsplash.com/photos/GNyjCePVRs8&lt;/figcaption>
+&lt;/a>
+&lt;/figure>
+&lt;p>데이터베이스는 쉽게 말해서 일종의 엑셀입니다. 표가 있고. 표에 값을 저장합니다. 이를 쉽고 빠르게 저장하고 가져다 쓰기 위한 여러 장치, 그리고 그 장치를 동작시키기 위한 약간의 규칙 같은 것들이 존재하는 엑셀이죠.
+하지만 엑셀과는 다른 특이한 점이 있는데, 바로 값의 변경 (추가, 수정, 삭제)이 트랜잭션(Transaction) 이라는 연산을 통해 이루어진다는 것입니다.
+엑셀에 있는 파일을 여러 사람이 동시에 수정한다고 생각해 보겠습니다. 동시에 한 셀을 수정하려고 하면 어떻게 될까요? ‘나중에 엔터를 친 사람 걸 적용한다’ 라는 규칙같은 것들이 떠오른다면 똑똑하신 분일 거고, “나중” 이라는 걸 어떻게 처리할 거냐 같은 것들이 떠오른다면 개발 경력이 좀 되는 분일 것 같습니다.
+이걸 트랜잭션 동시성 제어(Concurrency control)라고 합니다. 데이터베이스에 있어서 매우 중요한 부분이자 골치가 아픈 부분이라고 할 수 있습니다. 이 트랜잭션 단위의 변경이라는 특성을 통해 DB는 트랜잭션 순서와 트래픽을 잘 관리하는 것으로 동시성 제어를 할 수 있습니다.&lt;/p>
+&lt;h3 id="데이터베이스와-블록체인">데이터베이스와 블록체인&lt;/h3>
+&lt;p>앞에서 데이터베이스의 데이터를 변화시키는 방법으로써 트랜잭션을 소개한 이유는 블록체인도 트랜잭션을 통해 모든 분산 노드의 데이터를 변화시키기 때문입니다.
+하지만 다른 점이 있다면 보통 일반적인 데이터베이스는 권한을 가진 초월적인 존재인 오라클이 있다면 이 데이터를 마음대로 수정할 수 있고, 블록체인은 민주적인 방법으로 데이터의 수정 시도를 검증합니다.
+그럴 일은 0에 수렴하겠지만 -그리고 이렇게 단순하게 진행되진 않겠지만-, 은행 전산망 담당자가 자신의 잔고 뒷자리에 0을 하나 붙여서 데이터베이스에 쓰기만 하면 손쉽게 변조가 가능합니다.
+블록체인은 합의에 참여하는 사람들이 모두 자신의 컴퓨터에 데이터베이스를 만들고, 공개 네트워크에 전파 된 트랜잭션을 이용하여 이 데이터베이스에 데이터를 추가하거나 삭제하는 방법을 택함으로써, 앞에서 소개한 내용의 위/변조를 미연에 막을 수 있습니다.&lt;/p>
+&lt;h2 id="블록체인">블록체인&lt;/h2>
+&lt;h3 id="변조-불가능">변조 불가능&lt;/h3>
+&lt;blockquote>
+&lt;p>공개 네트워크에 전파 된 트랜잭션을 이용하여 내 로컬 데이터베이스를 수정하는 것과 위/변조를 미연에 막을 수 있는 건 무슨 상관이죠?&lt;/p>
+&lt;/blockquote>
+&lt;p>은행 전산망 담당자의 이야기로 돌아갑시다. 전산망 담당자 A씨가 이 데이터를 수정할 수 있었던 것은 권한만 존재한다면 쓰는 건 어떤 식으로 수정하더라도 상관이 없기 때문입니다. 잔고 저장 테이블을 수정할 수 있는 코드를 A씨가 몰래 삽입하여 배포한 뒤 이 코드를 실행시키는 방법도 있을 수 있고, 직접 DB에 접근할 수 있었다면 이야기는 더욱 쉬워질 것입니다.
+하지만 이 데이터를 수정할 수 있는 방법은 코드를 수정하여 해당 코드를 실행시키는 트랜잭션을 발생시키는 법 단 하나고, 이 코드를 여러 검증인이 검증하여 위/변조하려는 시도를 했을 때 해당 시도를 무시할 수 있다면 어떨까요?
+블록체인의 특성이 그렇습니다. 검증에 참여하는 사용자들은 여러 트랜잭션이 위/변조되었는지 검증하고, 검증이 끝난 트랜잭션들을 잘 모아서 다른 검증인들에게 전파합니다. 다른 검증인들은 해당 트랜잭션들이 올바른지 검증한 후 실행시켜 자신의 로컬 데이터베이스를 변화시킵니다.&lt;/p>
+&lt;h3 id="블록과-블록체인">블록과 블록체인&lt;/h3>
+&lt;p>이 과정에서 코드를 수정하여 트랜잭션을 변조한 뒤 발생시킨다 하더라도, 이런 검증인들에 의하여 받아들여지지 않고 사라집니다. 이 트랜잭션의 묶음을 우리는 “블록” 이라고 부릅니다.
+이렇게 트랜잭션이 계속 발생한다면 블록도 계속 만들어 질 것이고, 해당 블록들이 이전 블록의 정보를 담은 상태로 계속 이어진다면 마치 체인과 같은 형태가 될 것입니다. 이걸 우리는 “블록체인” 이라고 부릅니다.&lt;/p>
+&lt;figure>
+&lt;img src="images/Linkedlist.png" alt="링크드리스트 그림."/>
+&lt;figcaption>LinkedList (https://www.geeksforgeeks.org/data-structures/linked-list/)&lt;/figcaption>
+&lt;/figure>
+&lt;h3 id="검증인">검증인&lt;/h3>
+&lt;p>똑똑하신 여러분들은 위화감을 느낄 겁니다&lt;/p>
+&lt;blockquote>
+&lt;p>“그럼 누가 검증하고 검증인은 어떻게 믿어?”&lt;/p>
+&lt;/blockquote>
+&lt;p>검증인을 믿기도 어려울 뿐더러, 검증인이 왜 그걸 해야하는지도 의문이 들 겁니다. 누구도 자신의 검증하기 위한 자원을(시간, 전기, 실리콘 성능) 마구 제공하고 싶어하지 않을 거기 때문이죠. 네트워크를 유지하는 데 필요한 검증을 제공해 준 사람들에게 보상을 어떤 방법으로도 해 주어야 합니다. 이 때 등장하는 개념이 “코인” 입니다.&lt;/p>
+&lt;h2 id="코인">코인&lt;/h2>
+&lt;p>검증에 올바르게 참여 해 준 보상으로, 네트워크는 이 검증인에게 “코인” 을 줍니다. 이 코인에 가치를 만들어서 네트워크에 참여하게 만드는 것은 역설적이게도 이 네트워크에 참여한 사람들입니다.
+이런 블록체인의 특성을 이용하여 게임을 만든다던가, 송금 애플리케이션을 만든다던가, 부동산 증서 거래 애플리케이션을 만드는 방식으로 네트워크에 참여하는 사람들이 있고, 이 사람들의 애플리케이션을 이용하기 위해 코인은 가치를 가지며, 이 코인이 가치를 가지기에 검증인은 검증을 하는 동인이 생기게 됩니다.
+즉, 진정한 블록체인의 가치와 그에 따라오는 코인의 가치는 커뮤니티가 만들어 나가는 네트워크에 있다고 저는 생각합니다.&lt;/p>
+&lt;h2 id="마치며">마치며&lt;/h2>
+&lt;p>최대한 풀어 쓰기 위해 복잡한 내용은 많이 덜어내고 최대한 간결하게 설명하려고 노력해 봤는 데 어떨지 모르겠군요. 잘 읽혔으면 좋겠습니다. 다음 호가 나올 진 모르겠지만 나온다면 조금 더 재미있는 내용으로 찾아뵈려 합니다. 감사합니다.&lt;/p></content><author><name>이수호</name><uri>https://github.com/riemannulus</uri><email>suho@planetariumhq.com</email></author></entry><entry><title>오픈 소스인 립플래닛 프로젝트에 기여 하기 전에 알아야 할 파일들</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2022/09/files-you-would-better-to-know-while-contributing-oss-projects/" title="오픈 소스인 립플래닛 프로젝트에 기여 하기 전에 알아야 할 파일들"/><id>https://snack.planetarium.dev/kor/2022/09/files-you-would-better-to-know-while-contributing-oss-projects/</id><published>2022-09-14T00:00:00+00:00</published><updated>2022-09-14T00:00:00+00:00</updated><content type="html">&lt;p>개발자 커리어와 오픈 소스는 떼려야 뗄 수 없는 관계입니다. 오픈소스를 통해 얻을 수 있는 것은 경력상의 혜택 뿐 아니라, 안전한 환경에서 새로운 기술을 배우며 효율적이고 효과적으로 의사소통하는 방법과 같은 소프트 스킬을 배울 수 있는 기술적 혜택, 그리고 이와 더불어 인맥적 혜택도 있습니다.&lt;/p>
 &lt;p>플라네타리움의 핵심 기술인 립플래닛은 오픈 소스 입니다. 회사 업무를 병행하며 오픈 소스 기여를 하기란 쉽지 않은데, 립플래닛 개발 자체가 오픈 소스 기여가 되는 것이죠.&lt;/p>
 &lt;p>그래서 플라네타리움 구성원들 중에서는 오픈 소스 커뮤니티와 개발에 관심이 많았던 분들이 많습니다.&lt;/p>
 &lt;p>그럼 립플래닛을 통해 오픈 소스 프로젝트에 기여를 해볼까요? 물론 말처럼 쉽게 시작되진 않습니다. 그리고 시작 전에 알아야 할 몇가지 파일(README, CONTRIBUTING, LICENSE)들이 있습니다. 이 파일들을 통해서 립플래닛에 대해 소개하고 어떤게 립플래닛에 기여할 수 있는지 말씀드리고자 합니다.&lt;/p>
@@ -1262,45 +1312,4 @@ alt="저희가 만든 오목 게임의 멋진 모습입니다!"/>&lt;figcaption>
 &lt;p>상태 값의 변경은 액션을 통해서만 이루어지는 특성상, 더 이상 필요가 없는 변경점을 제거하기 위해서는 별도의 액션으로 처리해야 했어요. A액션의 변경점을 쌓아두기 위해 대상 상태 값을 변경했는데, 이미 사용해서 쌓아둘 필요가 없는 변경점을 대상 상태 값에서 제거하기 위해 B액션을 사용할 때, 그 변경점은 다시 대상 상태 값에 담겨야 하는가? 네, 로직에 예외가 생기더라고요. 이 안은 보류했어요.&lt;/p>
 &lt;hr>
 &lt;p>이 글을 작성하는 동안에도 Libplanet은 꾸준히 강력해졌어요. 액션의 실행 단계에서 확보되는 &lt;code>IActionContext&lt;/code>형 인자는 액션의 상태값과 무관하게 모든 노드에서 같은 결과를 결정적으로 확보할 수 있도록 &lt;code>IRandom&lt;/code> 인터페이스를 제공하고 있어요. 유니티에서 제공하는 랜덤 객체는 모든 노드에서 같은 결과를 얻을 수 없지만, &lt;code>IRandom&lt;/code> 인터페이스는 이를 보장해주고 있어요. 다시 2번의 접근이 가능하겠다는 각이 보이죠?&lt;/p>
-&lt;p>다음 글에서는 &lt;code>IRandom&lt;/code> 인터페이스를 파해치고, 아름다운 클라이언트 환경을 어떻게 만들어 내는지 이야기해 볼게요.&lt;/p></content><author><name>현승민</name><uri>https://github.com/boscohyun</uri><email>seungmin@planetariumhq.com</email></author></entry><entry><title>태국에서만 2562년으로 가는 소프트웨어?</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/02/thai-in-2562/" title="태국에서만 2562년으로 가는 소프트웨어?"/><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/02/thai-in-2562/" hreflang="en" title="Software from Year 2562 Emerges in Thailand?"/><id>https://snack.planetarium.dev/kor/2020/02/thai-in-2562/</id><published>2020-02-25T00:00:00+00:00</published><updated>2020-02-25T00:00:00+00:00</updated><content type="html">&lt;h2 id="미래에서-온-손님">미래에서 온 손님&lt;/h2>
-&lt;p>작년 12월에 저희는 마침내 첫 번째 알파테스트를 진행했고, 감사하게도 세계 각지에서 많은 분이 참여해 주셨습니다. 이는 팀에게 있어 굉장한 기회인 동시에 도전이기도 했습니다. 당연하게 크고 작은 문제가 있었는데요. 그중 저희를 난처하게 만들었던 문제 중 하나는 IBD였습니다.&lt;/p>
-&lt;p>&lt;abbr title="initial block download">IBD&lt;/abbr>란 게임을 켰을 때 네트워크의 다른 피어들로부터 그동안 쌓인 블록들을 내려받아 최신 상태로 동기화하는 단계인데요. 아무래도 세계 각지에서 참여하시다 보니 네트워크 지연 등의 문제로 인해 시간이 오래 걸리거나 이상 종료되는 경우가 종종 있었습니다.&lt;/p>
-&lt;p>그런데 그중에서도 특이한 증상을 보고한 사용자가 있었습니다. 당시 저희가 겪던 다른 문제들과 다르게 가장 첫 번째 블록을 내려받고 나서 이후 블록을 받을 수 없다는 것이었습니다.&lt;/p>
-&lt;figure>&lt;img src="1.png"
-alt="사용자로부터 받은 스크린숏"/>&lt;figcaption>
-&lt;p>사용자로부터 받은 스크린숏&lt;/p>
-&lt;/figcaption>
-&lt;/figure>
-&lt;p>저희는 이 사용자가 보내 준 스크린숏을 확인하고 한 가지 이상한 점을 깨달았습니다. 날짜가 2019년이 아닌 2562년으로 적혀있던 것이었는데요. 그래서 저희는 한가지 가설을 세웠습니다. 모종의 이유로 파일 시스템이 고장이 나 있어서 블록 헤더의 해시가 잘못 계산되고 있다는 것이죠.&lt;/p>
-&lt;p>이를 검증하기 위해 저희는 양해를 구하고 원격 데스크톱을 통해 문제가 발생한 시스템을 직접 조사하기로 했습니다.&lt;/p>
-&lt;h2 id="날짜가-잘못되지-않았다">날짜가 잘못되지 않았다&lt;/h2>
-&lt;p>다행히 해당 문제를 겪고 있던 사용자는 접속을 흔쾌히 허락해주셨습니다. 스크린숏으로 확인한 것처럼 여전히 날짜는 2562년이었습니다. 일단 가장 먼저 시간을 맞추기 위해 제어판을 열었습니다. 대부분의 현대적인 운영체제가 그렇듯이 Windows도 네트워크를 통해 시간을 동기화하는 기능이 있습니다. 그러나 이렇게 시간을 다시 동기화해도 제어판과 시스템의 날짜는 2562년으로 변함없었고 마지막 동기화 시각도 연도만이 다를 뿐 날짜, 시간이 모두 제가 사용하고 있는 시스템과 다르지 않았습니다.&lt;/p>
-&lt;p>그런데 문제를 조금 살펴보기로 하고 제어판 이곳저곳을 확인 하던 중 제 눈길을 끄는 화면이 있었습니다.&lt;/p>
-&lt;figure>&lt;img src="2.png"
-alt="그레고리안력으로는 2019년이라고 표시되어 있다."/>&lt;figcaption>
-&lt;p>그레고리안력으로는 2019년이라고 표시되어 있다.&lt;/p>
-&lt;/figcaption>
-&lt;/figure>
-&lt;p>저희 개발팀에서 태국어를 읽을 수 있는 사람은 없었지만, &amp;ldquo;Date in Gregorian&amp;quot;을 보니 &amp;ldquo;2562년&amp;quot;은 &amp;ldquo;2019년&amp;quot;의 다른 표현이라는 것을 알아차렸습니다. 그래서 시험 삼아 포맷을 바꾸니 예상대로 2019년 12월 16일이 표시되었고, 혹시나 하는 마음에 게임을 실행해보니 IBD 단계에서 문제없이 잘 실행이 되었습니다.&lt;/p>
-&lt;h2 id="불력-佛曆">불력 (佛曆)&lt;/h2>
-&lt;p>재현 방법과 실마리를 찾았으니 사용자께는 일단 잠시 지역 설정을 미국으로 해주실 것을 제안드렸고, 감사하게도 그 사용자분은 그 제안을 승낙하셨습니다.&lt;/p>
-&lt;p>문제를 재현하기 위해 저희는 로컬 개발 환경에서 운영체제의 지역 설정을 태국으로 변경한 뒤 Libplanet의 단위 테스트를 돌려봤습니다. 아니나 다를까, 몇몇 테스트가 실패하는 것을 확인할 수 있었습니다. 그 가운데 가장 치명적인 문제는 내용상으로는 같은 블록의 해시가 달라지는 현상이었습니다. 살펴보니 해시의 입력을 만드는 과정에 &lt;a href="https://github.com/planetarium/libplanet/blob/82aaba0c37591ebf51207038e8c5c122272ce98b/Libplanet/Blocks/Block.cs#L488">&lt;code>Block&amp;lt;T&amp;gt;.Timestamp&lt;/code> 필드를 직렬화&lt;/a>한 결과가 기대와 달랐습니다. &lt;code>DateTimeOffset.ToString()&lt;/code> 메서드의 동작이 운영체제의 로캘에 영향을 받는 것입니다.&lt;/p>
-&lt;p>인도차이나반도에서 불교는 유럽의 기독교와 같은 위치입니다. 그래서 역법에서도 예수 그리스도의 탄신을 기원(epoch)으로 삼는 &lt;a href="https://ko.wikipedia.org/wiki/%EA%B7%B8%EB%A0%88%EA%B3%A0%EB%A6%AC%EB%A0%A5">그레고리력&lt;/a> 대신, 석가모니의 입멸을 기원으로 삼는 &lt;a href="https://en.wikipedia.org/wiki/Buddhist_calendar">불력&lt;/a>(佛曆)이 일반적으로 쓰였다고 합니다. 캄보디아나 라오스 같은 나라들은 이제 서기 연도를 쓰게 바뀌었지만, 태국은 여전히 불력을 양력으로 고친 &lt;a href="https://en.wikipedia.org/wiki/Thai_solar_calendar">타이 태양력&lt;/a>을 쓰고 있습니다. 석가모니 입멸은 기원전 543년으로, 서기 2019년은 타이 태양력으로 2562년이 됩니다.&lt;/p>
-&lt;p>이와 같이, 세계에는 문화권에 따라 다양한 역법을 쓰고 있으므로, 사용자 인터페이스를 표시할 때 각 문화권에 알맞는 날짜 형식으로 표시되어야 합니다. 사실 &lt;code>DateTimeOffset.ToString()&lt;/code> 메서드는 이를 위해 &lt;a href="https://docs.microsoft.com/en-us/dotnet/api/system.iformatprovider?view=netstandard-2.0">&lt;code>IFormatProvider&lt;/code>&lt;/a> 객체도 파라미터로 받는 오버로드를 갖고 있습니다. &lt;code>IFormatProvider&lt;/code> 인터페이스를 구현하는 클래스 중에서 가장 많이 쓰이는 것이 &lt;a href="https://docs.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo?view=netstandard-2.0">&lt;code>CultureInfo&lt;/code>&lt;/a>입니다. 이름에서 알 수 있듯, &lt;code>CultureInfo&lt;/code>는 유닉스 계열에서 로캘(locale)이라고 부르는 것과 같은 개념입니다. 아래와 같이, &lt;code>DateTimeOffset.ToString()&lt;/code> 메서드는 파라미터로 어떤 로캘을 설정하느냐에 따라 결과물이 달라집니다.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-csharp" data-lang="csharp">&amp;gt; &lt;span style="color:#080;font-weight:bold">using&lt;/span> &lt;span style="color:#b06;font-weight:bold">System.Globalization&lt;/span>;
-&amp;gt; &lt;span style="color:#888;font-weight:bold">var&lt;/span> now = DateTimeOffset.Now;
-&amp;gt; now.ToString(&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;yyyy-MM-ddTHH:mm:ss.ffffffZ&amp;#34;&lt;/span>, &lt;span style="color:#080;font-weight:bold">new&lt;/span> CultureInfo(&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;ko-KR&amp;#34;&lt;/span>))
-&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;2020-02-13T17:37:16.436163Z&amp;#34;&lt;/span>
-&amp;gt; now.ToString(&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;yyyy-MM-ddTHH:mm:ss.ffffffZ&amp;#34;&lt;/span>, &lt;span style="color:#080;font-weight:bold">new&lt;/span> CultureInfo(&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;th-TH&amp;#34;&lt;/span>))
-&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;2563-02-13T17:37:16.436163Z&amp;#34;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>하지만 아무 로캘도 설정하지 않고 해당 파라미터를 생략하면 적당히 그 코드가 실행되는 환경의 로캘을 따라가게 됩니다. 아래 코드는 제가 운영체제의 지역 설정을 한국으로 해뒀을 때의 결과입니다.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-csharp" data-lang="csharp">&amp;gt; now.ToString(&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;yyyy-MM-ddTHH:mm:ss.ffffffZ&amp;#34;&lt;/span>)
-&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;2020-02-13T17:37:16.436163Z&amp;#34;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;a href="https://docs.microsoft.com/en-us/dotnet/api/system.datetimeoffset.tostring?view=netstandard-2.0#System_DateTimeOffset_ToString">문서에 따르면, 해당 파라미터가 생략된 오버로드&lt;/a>는 &lt;a href="https://docs.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo.currentculture?view=netstandard-2.0">&lt;code>CultureInfo.CurrentCulture&lt;/code>&lt;/a>를 따른다고 합니다. &lt;code>CultureInfo.CurrentCulture&lt;/code> 속성은 이름에서도 알 수 있듯 실행 환경의 로캘을 가르킵니다. 따라서, 실행 환경의 로캘과 무관하게 언제나 결정적인 동작을 원한다면 명시적으로 &lt;a href="https://docs.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo.invariantculture?view=netstandard-2.0">&lt;code>CultureInfo.InvariantCulture&lt;/code>&lt;/a>를 지정해야 합니다.&lt;/p>
-&lt;p>메서드가 비결정적으로 동작할 수 있음에도 불구하고 해당 파라미터를 생략하면 실행 환경의 로캘을 따르도록 API를 설계한 것은, 아마 저러한 서식(formatting) 연산이 대개 사용자 인터페이스를 그리는 데에 쓰이고, 그렇기 때문에 국제화에 큰 신경을 쓰지 않고 코딩을 해도 자연스럽게 문화권에 알맞은 서식으로 보이도록 하려는 의도일 것입니다. 하지만 저희가 해당 메서드를 쓴 것은 사용자 인터페이스가 아니라, 결정적이어야 하는 암호학적 해시의 입력인 것이 불찰이었습니다.&lt;/p>
-&lt;p>원인을 알았으니 &lt;a href="https://github.com/planetarium/libplanet/pull/734">&lt;code>DateTimeOffset.ToString()&lt;/code> 메서드와 마찬가지로 &lt;code>CultureInfo&lt;/code>나 &lt;code>IFormatProvider&lt;/code> 파라미터가 생략된 메서드를 찾아서, 명시적으로 &lt;code>CultureInfo.InvariantCulture&lt;/code>를 지정하도록 패치&lt;/a>하는 것으로 급한 문제는 일단락됐습니다.&lt;/p>
-&lt;p>CI에서도 아랍어나 프랑스어, 히브리어 로캘 등에서도 단위 테스트를 실행하도록 보강하기도 했습니다. 유럽에는 소수점 표시를 점(&lt;code>.&lt;/code>)이 아니라 쉼표(&lt;code>,&lt;/code>)로 하는 나라도 많고, 중동에는 오른쪽에서 왼쪽으로 글을 쓰기도 하므로, 저희에게 다소 생소하게 느껴지는 언어권을 일부러 고른 것입니다.&lt;/p>
-&lt;p>또, 앞으로 비슷한 실수는 얼마든지 일어날 수 있기 때문에, 실행 환경의 로캘에 따라 동작이 달라지는 코드를 찾아주는 &lt;a href="https://github.com/planetarium/libplanet/pull/737">정적 분석도 도입&lt;/a>하였습니다.&lt;/p>
-&lt;h2 id="마치며">마치며&lt;/h2>
-&lt;p>앞서 언급한 것처럼 암호학적 해시를 계산하는 함수에 서식 같은 비결정적인 동작이 예상되는 API를 사용하는 것은 장기적으로 좋은 결정은 아닙니다. 일반적으로 문자열은 이러한 서식이 많이 적용되기 때문에 자료형 차원에서 피하는 것이 안전합니다.&lt;/p>
-&lt;p>하지만 아쉽게도 저희는 이 문제를 테스트 중간에 발견하였고, 해시 방식을 바꾸는 것은 이전 데이터의 호환성을 깨는 결정이었기 때문에 아직 대대적인 수정은 하지 못했습니다. 하지만 Libplanet 릴리스 1.0 전에는 이러한 부분을 수정할 예정입니다.&lt;/p></content><author><name>홍민희</name><uri>https://github.com/dahlia</uri><email>hong.minhee@planetariumhq.com</email></author><author><name>문성원</name><uri>https://github.com/longfin</uri><email>swen@planetariumhq.com</email></author></entry></feed>
+&lt;p>다음 글에서는 &lt;code>IRandom&lt;/code> 인터페이스를 파해치고, 아름다운 클라이언트 환경을 어떻게 만들어 내는지 이야기해 볼게요.&lt;/p></content><author><name>현승민</name><uri>https://github.com/boscohyun</uri><email>seungmin@planetariumhq.com</email></author></entry></feed>
