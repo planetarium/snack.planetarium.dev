@@ -1,0 +1,155 @@
+<!doctype html><html lang=ko prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<meta name=description content>
+<meta name=HandheldFriendly content="True">
+<meta name=MobileOptimized content="320">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=keywords content>
+<meta property="og:type" content="article">
+<meta property="og:description" content>
+<meta property="og:title" content="오픈 소스, 블록체인 그리고 탈중앙 애플리케이션">
+<meta property="og:site_name" content="플라네타리움 엔지니어링 스낵">
+<meta property="og:image" content="https://snack.planetarium.dev/kor/2022/12/oss-blockchain-and-decentralized/images/og.jpg">
+<meta property="og:url" content="https://snack.planetarium.dev/kor/2022/12/oss-blockchain-and-decentralized/">
+<meta property="og:locale" content="ko">
+<meta property="article:published_time" content="2022-12-07">
+<meta property="article:modified_time" content="2022-12-07">
+<meta name=twitter:card content="summary">
+<meta name=twitter:site content="@">
+<meta name=twitter:creator content="@">
+<meta name=twitter:title content="오픈 소스, 블록체인 그리고 탈중앙 애플리케이션 | 플라네타리움 엔지니어링 스낵">
+<meta name=twitter:description content="이 글에선 오픈 소스 운동과 블록체인 기술이 어떤 특성들을 담보하며, 탈중앙 애플리케이션을 만드는데 어떤 역할을 하는지에 대해 저의 이해를 바탕으로 설명합니다. 이 글의 목적은 &ldquo;진정한 탈중앙 애플리케이션을 만들려면 반드시 오픈 소스를 해야 한다.&ldquo;라기보다는1, 오픈 소스나 블록체인 기술이 차지하고 있는 역할을 공유함으로써, 추후 이러한 이해 상충이 벌어지는 부분들을 보다 명확히 하기 위함입니다.
+오픈 소스 오픈 소스, 혹은 오픈 소스 운동은 다양한 정의를 가지고 있습니다. 자유 소프트웨어 운동을 지지하는 쪽에서는 오픈 소스가 자유 소프트웨어의 부분 집합이라고 주장하지만, 오픈 소스를 지지하는 사람들은 오픈 소스가 자유 소프트웨어를 포함하는 더 넓은 개념이라고 이야기하기도 합니다.|">
+<meta name=twitter:image:src content>
+<meta name=twitter:domain content="https://snack.planetarium.dev/kor/2022/12/oss-blockchain-and-decentralized/">
+<title>오픈 소스, 블록체인 그리고 탈중앙 애플리케이션</title>
+<link rel=canonical href=https://snack.planetarium.dev/kor/2022/12/oss-blockchain-and-decentralized/>
+<link href=https://snack.planetarium.dev/index.xml rel=alternate type=application/atom+xml title="오픈 소스, 블록체인 그리고 탈중앙 애플리케이션">
+<link rel=stylesheet href=https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css>
+<link rel=stylesheet href=https://snack.planetarium.dev/css/style.min.1a35efb5c5da4fd20bd2ec86458da5ee7cc1cfc81c4f107944b5e0fc59a3d809.css integrity="sha256-GjXvtcXaT9IL0uyGRY2l7nzBz8gcTxB5RLXg/Fmj2Ak=">
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-132504786-2"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-132504786-2')</script>
+<link rel=icon href=/favicon-32x32.png type=image/png sizes=32x32>
+<link rel="shortcut icon" href=/favicon.ico type=image/x-icon>
+<link rel=apple-touch-icon href=/apple-touch-icon.png>
+</head>
+<body class="sans-serif w-90 w-60-ns center center-ns mv2 mv5-ns" itemscope itemtype=http://schema.org/Article>
+<a href=https://snack.planetarium.dev/kor/ id=site-title class="b bb bw1 pb1 no-underline dark-gray">플라네타리움 엔지니어링 스낵</a>
+<section id=main class=mt5>
+<h1 itemprop=name id=title class=mb1>오픈 소스, 블록체인 그리고 탈중앙 애플리케이션</h1>
+<div class="f6 gray dib-ns">
+<time itemprop=datePublished datetime=2022-12-07>
+2022년 12월 7일
+</time>
+</div>
+<article itemprop=articleBody id=content class="w-100 lh-copy">
+<p>이 글에선 <a href=https://ko.wikipedia.org/wiki/%EC%98%A4%ED%94%88_%EC%86%8C%EC%8A%A4>오픈 소스</a> 운동과 <a href=https://ko.wikipedia.org/wiki/%EB%B8%94%EB%A1%9D%EC%B2%B4%EC%9D%B8>블록체인</a> 기술이 어떤 특성들을 담보하며, 탈중앙 애플리케이션을 만드는데 어떤 역할을 하는지에 대해 저의 이해를 바탕으로 설명합니다. 이 글의 목적은 &ldquo;진정한 탈중앙 애플리케이션을 만들려면 반드시 오픈 소스를 해야 한다.&ldquo;라기보다는<sup id=fnref:1><a href=#fn:1 class=footnote-ref role=doc-noteref>1</a></sup>, 오픈 소스나 블록체인 기술이 차지하고 있는 역할을 공유함으로써, 추후 이러한 이해 상충이 벌어지는 부분들을 보다 명확히 하기 위함입니다.</p>
+<h1 id=오픈-소스>오픈 소스</h1>
+<p>오픈 소스, 혹은 오픈 소스 운동은 다양한 정의를 가지고 있습니다. <a href=https://ko.wikipedia.org/wiki/%EC%9E%90%EC%9C%A0_%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4>자유 소프트웨어</a> 운동을 지지하는 쪽에서는 오픈 소스가 자유 소프트웨어의 부분 집합이라고 주장하지만, 오픈 소스를 지지하는 사람들은 오픈 소스가 자유 소프트웨어를 포함하는 더 넓은 개념이라고 이야기하기도 합니다. 이 둘의 차이나 주장도 흥미로운 부분이 많지만, 이 글에서 제가 밝히고 싶은 제 이해의 관점에선 크게 차이가 나진 않으므로 생략하도록 하겠습니다.</p>
+<p><a href=https://opensource.org/osd>오픈 소스 이니셔티브의 정의</a>에 따르면, 오픈 소스는 단순히 코드를 공개하는 것 이상의 기준을 갖추고 있습니다. 가령 파생 제작물(Derived Works)에 대해서도 원본 소프트웨어와 같은 라이선스를 유지해야 한다든지, 개인이나 집단을 차별해서는 안 된다는, 일종의 사회 운동과 같은 성격을 지니고 있기도 합니다.</p>
+<p>그런데 이런 기준들을 만족하는 것보다 더 중요한 것은, 이런 기준들을 요구하게 된 배경과 철학입니다. 왜냐면 구체적인 기준은 시대와 기술이 변화함에 따라 바뀌기도 하기 때문이죠. <sup id=fnref:2><a href=#fn:2 class=footnote-ref role=doc-noteref>2</a></sup> 그리고 저는 오픈 소스(그리고 자유 소프트웨어)의 기저에 깔린 배경과 철학이 다음과 같다고 생각합니다.</p>
+<blockquote>
+<p>소프트웨어 저작물을 사용하는 모든 사용자에게, 소프트웨어의 구성(i.e., 소스 코드)을 자유롭게 확인하고 수정본과 파생 저작물을 만들어서 배포할 권리를 보장해야 한다. <sup id=fnref:3><a href=#fn:3 class=footnote-ref role=doc-noteref>3</a></sup></p>
+</blockquote>
+<p>또한 오픈 소스 운동을 지지하는 많은 사람은, 이런 권리가 보장될 때, 해당 소프트웨어의 생태계가 더욱 풍성해지며 공공의 이익이 촉진된다고 믿습니다. 그렇기 때문에 많은 오픈 소스 프로젝트들이 공개 개발과 협업에 관심을 가지는 것이라 할 수 있죠. <sup id=fnref:4><a href=#fn:4 class=footnote-ref role=doc-noteref>4</a></sup></p>
+<h1 id=블록체인과-포크>블록체인과 포크</h1>
+<p><a href=https://bitcoin.org/>비트코인</a>의 세계적인 대히트 이후 블록체인이 (정도나 분야, 전망에 대한 이해는 다를지언정) 우리 사회를 강타했다는 것은 부정하기 어려운 사실입니다. 비트코인을 이야기할 때 빠지지 않는 것이 분산 원장이나 불변성 같은 개념이죠. 이를테면 모든 거래는 하나의 체인에 기록되어 모두의 노드에 저장되므로 누군가가 이를 절대로 위/변조할 수 없다는 그런 구체적인 장점을 들어 이야기하는 경우가 많습니다. 저는 이런 설명이 완전히 틀린 것은 아니지만, 블록체인이 어떤 애플리케이션이나 서비스의 탈중앙화를 하는데 차지하는 역할을 설명하기에는 다소 오해가 생길 수 있는 설명이라는 생각도 합니다. 왜냐면 &ldquo;절대 불변의 분산 장부"라는 매력적인 속성은 블록체인의 기술적인 속성에만 기댄 것이 아니라, 허가형 네트워크에서 오픈 소스 프로젝트로서 취할 수 있는 여러 기법들을 섞어서 만든 비트코인이나 이더리움의 복합적인 성취이기 때문입니다.</p>
+<h2 id=허가비허가형-네트워크>허가/비허가형 네트워크</h2>
+<p>순수하게 기술적인 관점<sup id=fnref:5><a href=#fn:5 class=footnote-ref role=doc-noteref>5</a></sup>에서 블록체인은 모두가 같은 상태에 대해 합의해야 하는 분산 환경에서, 다른 상태를 계산한 노드를 빠르게 찾기 위한 목적으로 사용됩니다. 그리고 그게 다입니다. 보통 이쯤에서 많은 분들은 이를 배제하는 수단으로써 작업 증명이나 지분 증명 등을 떠올리실 것이고, 또 어떤 분들은 &ldquo;그 또한 블록체인의 일부로 봐야지, 블록체인을 너무 협의로 본 것이 아닌가?&rdquo; 라는 생각이 드실 것입니다. 동의합니다. 하지만 제가 이 글에서 말씀드리고 싶은 것은 이런 구체적인 합의 방법 이전에, 우리가 중요한 결정을 해야 한다는 점입니다. 그것은 바로 네트워크를 허가형으로 운영할 것인지, 아니면 비허가형으로 운영할 것인지입니다.</p>
+<p>우리는 소프트웨어(노드)가 어떠한 주체로부터 허가를 얻어야만 네트워크에 접근할 수 있는지, 아니면 이러한 허가가 없이도 접근할 수 있는지에 따라 이를 허가형(Permissioned), 혹은 비허가형(Permissionless)이라고 지칭합니다. SNS나 멀티플레이어 게임 등이 실행되는 현대의 많은 상업적 네트워크는, 그 서비스/게임의 이용료가 얼마냐와는 무관하게 허가형인 경우가 많은데, 이는 꼭 비용을 요구하지 않더라도 그 네트워크를 이용하기 원하는 소프트웨어의 접근을 특정 주체가 통제할 수 있기 때문입니다. 반대로 이더리움 네트워크는, 트랜잭션을 처리하기 위해 수수료가 발생하는 구조지만, 이러한 수수료만 감당한다면 어떤 주체도 접근을 제한하거나 제어할 수 없기에 비허가형 네트워크로 분류됩니다. <sup id=fnref:6><a href=#fn:6 class=footnote-ref role=doc-noteref>6</a></sup> 대부분의 탈중앙 네트워크를 지향하는 애플리케이션과 네트워크는 통상적으로 허가형보다는 비허가형으로 설계하여 자유로운 접근을 허용하는 접근을 취합니다.</p>
+<h2 id=프로토콜과-구현>프로토콜과 구현</h2>
+<p>우리가 탈중앙성과 블록체인을 다룰 때 자주 언급하는 것이 프로토콜(Protocol)입니다. 이름에서 알 수 있듯, 탈중앙/비허가 네트워크를 이야기할 때 이 프로토콜은 규칙/규약을 지칭하며, 특정 주체의 판단 대신에 노드가 네트워크를 사용하는 방식을 통제하는 수단입니다.<sup id=fnref:7><a href=#fn:7 class=footnote-ref role=doc-noteref>7</a></sup> 그렇기에 어떤 네트워크가 비허가성, 그리고 그로 인한 탈중앙성을 갖는지 이야기할 때에는 이러한 프로토콜이 얼마나 자세하게 노드의 동작을 규정하는지, 그리고 얼마나 이러한 프로노콜을 잘 유지하는지를 함께 고려하는 경우가 많습니다. 그런데 이런 프로토콜에 대한 고려가 비허가형 네트워크를 만드는데 충분한 조건일까요?</p>
+<p>극단적인 사고 실험을 해보죠. 어떤 노드의 구현이 완벽하게 어떤 네트워크의 프로토콜을 준수하고 호환되며, 심지어 그 네트워크에선 P2P로 모든 노드가 특권 없이 투표를 통해 민주적<sup id=fnref:8><a href=#fn:8 class=footnote-ref role=doc-noteref>8</a></sup>으로 정해진다고 가정해봅시다. 이 구현을 가지고만 있다면, 누구든지 네트워크에 참여할 수 있다면 이 네트워크는 비허가형일까요? 저는 여기에 대해서 &ldquo;아니오"라고 생각합니다. 왜냐하면, 프로토콜은 규칙을 정해둔 것일뿐, 실제 네트워크에서 동작하는 노드는 소프트웨어이기에 반드시 구현을 필요로 합니다. 즉 사용자들은 어떤 네트워크를 이용할 때에 이러한 구현을 사용합니다. 그런데 이런 구현을 얻는 방법이 제한되어 있다면, 프로토콜의 고려와는 무관하게 탈중앙성도 함께 제한됩니다. 누군가 사용하는 노드의 구현을 바꿔치기하거나, 혹은 구현을 공급하는 주체가 더 이상 공급을 하지 않게 되는 경우 등을 상상해보시면 제 관점의 이해가 수월하시리라 생각됩니다.</p>
+<p>즉 네트워크가 온전히 비허가형이기 위해선 한 가지 속성을 더 만족해야 합니다. 바로 그 노드 구현에 대해서 누구든지 확인할 수 있어야 하며 배포가 독점적인 주체로부터 이뤄지면 안 된다는 것이죠. 이는 오픈 소스가 소프트웨어 저작물에 대해 사용자의 권리로서 보장하는 것과 일치합니다.</p>
+<h2 id=포크>포크</h2>
+<p><a href=https://en.wikipedia.org/wiki/Fork_(blockchain)>포크(Fork)</a>는 전통적인 자유 소프트웨어/오픈 소스 개발에서, <a href=https://en.wikipedia.org/wiki/Fork_(software_development)>어떠한 프로젝트를 자신의 입맛에 맞게 개작하여 분화하는 활동을 일컫는 동명의 단어</a>에서 유래했습니다. 대표적인 리눅스 배포판 중 하나인 우분투는 데비안 리눅스의 포크이며, MySQL을 포크한 MariaDB와 같이 많은 프로젝트가 이러한 포크를 통해 탄생했습니다. 그런데 예전엔 이런 포크에 대해서 부정적인 인식이 있습니다. 주로 프로젝트를 유지 보수하는 메인테이너들 간의 갈등이나 반목으로 인해 싸우고 나간 결과가 포크이기도 했고, 실질적으로 변경 내역을 패치로, 때로는 조정을 통해서 가져와야 하기 때문에 품이 더 드는 비효율적인 일이기 때문이었죠. 더군다나 사람들은 같은 일을 하는 소프트웨어를 2개 이상 쓸 일도 없으니, 사람들의 한정된 관심사란 자원을 나눠먹는 이적 행위이기도 합니다.</p>
+<p>그럼 이렇게 안 좋기만 한 포크를 막으려면 어떻게 해야 할까요? 코드를 숨기고 재배포를 금지하는 거겠지만 이래서야 기껏 오픈 소스로 프로젝트를 하는 의미가 없습니다. 다른 좋은 방법은&mldr; 적어도 저는 아직 발견하지 못했는데, 이는 포크라는 행위가 오픈 소스를 통해 얻고 싶은 가치인 코드의 열람과 개작, 배포의 자유와 깊게 연관되어 있기 때문이라고 생각합니다.</p>
+<p>그렇기에 사람들은 조금 우직하지만 어떻게 보면 정공법을 택했습니다. 보다 좋은 제품을 만들어서 기여자와 사용자들에게 호소하는 것이죠. 캐노니컬이라는 기업을 등에 입은 우분투라는 포크가 있음에도 사람들이 데비안을 사용하는 것은, 우분투에는 없고 데비안에는 있는 데비안 만의 장점이 있기 때문입니다.<sup id=fnref:9><a href=#fn:9 class=footnote-ref role=doc-noteref>9</a></sup> 그래서 어쩌면 이는 포크를 막고 독점 소프트웨어로 돌아가느냐 아니면 기여자들과 사용자들이 자신의 프로젝트를 지지할 수 있게끔 개선을 통해 우위를 유지하느냐의 선택이며, 제 이해로는 오픈 소스 신에 남은 많은 사람은 후자를 택했다고 봅니다.</p>
+<p>이는 비허가형 네트워크에도 비슷하게 적용된다고 생각합니다.<sup id=fnref:10><a href=#fn:10 class=footnote-ref role=doc-noteref>10</a></sup> 오픈 소스 모델의 선례를 따르는 많은 공개 네트워크들은 포크가 생길 수 있는 위험에도 불구하고 네트워크의 구성을 공개하고 자유로이 포크 된 네트워크를 띄울 수 있도록 합니다. 이는 포크 된 네트워크에 이점이 있다기보다는, 단순히 포크를 제한하면서 동시에 독점성을 없앨 수 있는 방법이 논리적으로 없기 때문이라고 생각합니다.</p>
+<h1 id=탈중앙-애플리케이션>탈중앙 애플리케이션</h1>
+<p>포크에 대한 위의 전망은 전적으로 오픈 소스 모델에서 빌려 온 논리이므로, 현실의 고도화된 의사 결정 체계를 모사하여 해결할 수 있다는 의견이 있을 수 있습니다. 하지만 저는 거기에 대해서는 회의적인데, 왜냐하면 그런 현실의 세련된 의사 결정 체계의 끝에 있는 것이 현존하는 중앙화 된 의사 결정 체제라고 생각하며, 이미 그들은 그들대로 일을 잘하고 있다고 생각하기 때문입니다. <sup id=fnref:11><a href=#fn:11 class=footnote-ref role=doc-noteref>11</a></sup></p>
+<p>저는 탈중앙 애플리케이션의 강점은 단지 조금 다르게 일을 하는 <a href=https://en.wikipedia.org/wiki/Big_Tech#FAANG>FAANG</a>가 아니라, 그런 주체 없이도 자율적으로 돌아갈 수 있는, 아주 많이 다르게 일을 하는 점에 있다고 생각합니다. 그리고 이런 목표를 달성하기 위해서 현대의 탈중앙 애플리케이션들은 굳이 포크의 위험을 감수하면서도 오픈 소스로 개발되고 있는 것이라고 생각하고요.</p>
+<h2 id=포크를-허용하지-않는-탈중앙-애플리케이션>포크를 허용하지 않는 탈중앙 애플리케이션</h2>
+<p>글을 적다 보니 위의 탈중앙 애플리케이션이 너무 제 시각의, 좁은 버전일 수 있겠다는 생각도 듭니다. 어느 정도 탈중앙화 된, 그렇지만 모두가 내키지 않는 포크는 허용하지 않는 그런 네트워크가 독점성을 띄고 중앙화 되었다고 하는 것이 예단일 수도 있습니다.</p>
+<p>하지만 적어도 현재로서 저는</p>
+<ul>
+<li>비허가형 네트워크를 포크를 허용하지 않으면서 구성할 방법에 대한 아이디어가 없으며</li>
+<li>오픈 소스 개발 모델을 벗어난 개발 모델에서 비허가형 네트워크를 구성할 방법에 대한 아이디어도 없으며</li>
+<li>허가형 네트워크에 의존하는 애플리케이션이 탈중앙화 되어 있다고 보기엔 어렵다고 생각합니다.</li>
+</ul>
+<h1 id=요약>요약</h1>
+<ul>
+<li>오픈 소스는 소프트웨어 저작물에 대한 사용자의 사용 이상의 권리를 보장하기 위해 창안되었으며, 이는 소프트웨어 개발에 긍정적인 영향을 주고 있다고 평가됩니다.</li>
+<li>현대의 비허가형 네트워크들은, 오픈 소스 운동의 권리 보장을 차용하여 비허가성을 달성하는데, 이와 동시에 포크에 대한 위협에도 같이 노출됩니다.</li>
+<li>오픈 소스와 비허가형 네트워크들은 포크가 유익해서 이를 감내하는 것이 아니라, 비허가성과 이를 통해 담보되는 탈중앙성을 유지하기 위해서 이를 감내합니다.</li>
+</ul>
+<hr>
+<p>(이 글은 제 <a href=https://gist.github.com/longfin>개인 Gist</a>에 올해 10월 <a href=https://gist.github.com/longfin/0951c39b566e58e4e0a80faf513bb4b1>게시한 글</a>을 옮긴 것입니다.)</p>
+<section class=footnotes role=doc-endnotes>
+<hr>
+<ol>
+<li id=fn:1 role=doc-endnote>
+<p>물론 저는 이 주장을 지지합니다. 하지만 이 주장을 지지하기에 앞서, 그 까닭을 말씀드리는 것이 먼저라고 생각합니다.&#160;<a href=#fnref:1 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
+</li>
+<li id=fn:2 role=doc-endnote>
+<p>실제로 나인 크로니클이 채택하고 있는 라이선스인 <a href=https://www.gnu.org/licenses/agpl-3.0.en.html>AGPL</a>은 <a href=https://www.gnu.org/licenses/gpl-3.0.html>GPL</a>의 변형으로, GPL이 가정하던 배포가 바이너리를 직접 제공하는 것 외에도 서버를 통해 서비스를 제공하거나 하는 식으로 바뀐 시대상을 따라가기 위해 제안되었습니다.&#160;<a href=#fnref:2 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
+</li>
+<li id=fn:3 role=doc-endnote>
+<p>&ldquo;이를 촉진하기 위해서 얼마만큼의 제약을 가해야 하는가"가 오픈 소스와 자유 소프트웨어 진영의 가장 큰 논쟁 거리입니다만, 글의 주요한 주제가 아니므로 생략합니다.&#160;<a href=#fnref:3 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
+</li>
+<li id=fn:4 role=doc-endnote>
+<p>근래의 많은 오픈 소스 커뮤니티에서 (설사 당장의 기술적인 이득이 생기지 않거나, 혹은 오히려 손해가 발생하더라도) 정치적 올바름과 같은 주제에 대해서 신중하고 포용력 있는 결정을 내리기 위해 고민하는 것은, 이러한 철학이 깔려 있기 때문이라고 생각합니다. 다만 이 또한 글의 주요한 주제가 아니므로 생략합니다.&#160;<a href=#fnref:4 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
+</li>
+<li id=fn:5 role=doc-endnote>
+<p>보다 구체적으로는, 이더리움 등에서 제안하는 분산 상태 기계로서의 블록체인을 이야기합니다.&#160;<a href=#fnref:5 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
+</li>
+<li id=fn:6 role=doc-endnote>
+<p>물론 지미 송 같은 비트코인 지지자들은 <a href="https://www.coindeskkorea.com/news/articleView.html?idxno=41885">이더리움이 허가형 네트워크라고 비판하기도 합니다.</a> 하지만 이는 이더리움이 취하고 있는 접근 방향 자체가 잘못되었다기 보단, 비탈릭을 위시한 이더리움 재단이 <a href=https://www.gemini.com/cryptopedia/the-dao-hack-makerdao>&ldquo;The DAO&rdquo; 사태</a> 등에서 통제권을 발휘하고 있다는 점의 비판이므로 여기서는 길게 다루지 않겠습니다.&#160;<a href=#fnref:6 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
+</li>
+<li id=fn:7 role=doc-endnote>
+<p>어떤 네트워크가 비허가형이라고 할 때에는 반드시 어떠한 통제도 없어야 한다는 것을 의미하진 않습니다.&#160;<a href=#fnref:7 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
+</li>
+<li id=fn:8 role=doc-endnote>
+<p>구성원의 선호를 완벽하게 반영하는 투표가 가능한가에 대한 논의(e.g., <a href=https://ko.wikipedia.org/wiki/%ED%88%AC%ED%91%9C%EC%9D%98_%EC%97%AD%EC%84%A4>콩도르세의 역설</a>)도 흥미로운 주제이지만, 이 사고 실험의 주된 주제는 아니기에 생략하고, 가능하다고 가정합니다.&#160;<a href=#fnref:8 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
+</li>
+<li id=fn:9 role=doc-endnote>
+<p>이 역시도 오픈 소스가 효율성에 대해 많이 비판 받는 지점입니다. 왜냐하면 이러한 장점은 꼭 객관적인 기능의 우열뿐 아니라 개인이 지지하는 가치 등도 포함되기 때문입니다.&#160;<a href=#fnref:9 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
+</li>
+<li id=fn:10 role=doc-endnote>
+<p>블록체인 포크를 기술적으로 보면 <a href=https://ethereum.org/ko/upgrades/merge/>더 머지(The Merge)</a>와 같은 체인 호환성이 없는 소프트웨어 업데이트를 일컫는 용어이지만 기술적 논의를 다루는 것이 목표는 아니기에, 여기서는 적대적인 포크로 한정해서 다룹니다.&#160;<a href=#fnref:10 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
+</li>
+<li id=fn:11 role=doc-endnote>
+<p>어쩌면 이 시각은 독점 소프트웨어를 바라보는 오픈 소스 진영의 논리와 비슷하다는 느낌도 받습니다. 저는 제가 생각하는 탈중앙 애플리케이션이 세상의 모든 애플리케이션을 대체하는 것은 아마도 불가능할 것이라고 생각합니다.&#160;<a href=#fnref:11 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+</article>
+<script>(function(){var d,h,e,a,g,c,f,b;if(!location.hash.match(/^#/))return;if(d=document.getElementById('content'),h=window.decodeURIComponent(location.hash.substring(1)),e=document.getElementById(h),a=e.nodeName.match(/^H([123456])$/),!a||e.parentNode!==d)return;g=window.parseInt(a[1]),c=!1;for(f=0;f<d.childNodes.length;f++)b=d.childNodes[f],c?(a=b.nodeName.match(/^H([123456])$/),a&&window.parseInt(a[1])>=g&&(c=!1)):b===e&&(c=!0),!c&&!b.nodeName.match(/^#/)&&(b.className+=' dim')})()</script>
+<div class=recruit>
+<a href=https://planetariumhq.com>플라네타리움</a>은 게임에 특화된
+오픈 소스 P2P 라이브러리 <a href=https://libplanet.io/>Libplanet</a>과,
+그 위에서 중앙 서버 없는 온라인 게임
+〈<a href=https://nine-chronicles.com/>나인 크로니클</a>〉을 만들고
+있습니다. 저희와 흥미로운 기술적 도전을 함께 하실 분들을 모시고 있습니다.
+지금 <a href=https://recruit.planetariumhq.com/>인재 영입 페이지</a>를
+확인해주세요!
+</div>
+<div itemprop=author class="fl tc mr3">
+<a href=https://github.com/longfin rel=author itemprop=url class="no-underline mid-gray b f6">
+<img src="https://www.gravatar.com/avatar/0b12cfcb4b1a472207af0e51f7d13a71?d=https://avatars.githubusercontent.com/longfin" itemprop=image class="w3 h3 br-100 mb1">
+<br>문성원
+</a>
+</div>
+</section>
+<footer>
+<div>
+<p class="f6 gray mt6 lh-copy">
+&copy; 2019&ndash;2021
+<a href=https://planetariumhq.com/ style=color:inherit;text-decoration:inherit>Planetarium</a>.
+</p>
+</div>
+</footer>
+</body>
+</html>
