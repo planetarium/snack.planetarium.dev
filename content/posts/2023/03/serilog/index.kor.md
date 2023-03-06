@@ -2,6 +2,7 @@
 title: "Serilog를 통해 애플리케이션 데이터를 수집하고 분석하자"
 date: 2023-03-03
 authors: [suho.lee]
+ogimage: images/og.png
 ---
 
 # 들어가며
