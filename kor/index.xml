@@ -1,4 +1,54 @@
-<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><title>플라네타리움 엔지니어링 스낵</title><link rel="self" href="https://snack.planetarium.dev/kor/index.xml"/><link rel="alternate" href="https://snack.planetarium.dev/kor/" title="플라네타리움 엔지니어링 스낵"/><link rel="alternate" href="https://snack.planetarium.dev/eng/" hreflang="en" title="Planetarium Engineering Snack"/><updated>2023-03-03T00:00:00+00:00</updated><id>https://snack.planetarium.dev/kor/</id><entry><title>Serilog를 통해 애플리케이션 데이터를 수집하고 분석하자</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2023/03/serilog/" title="Serilog를 통해 애플리케이션 데이터를 수집하고 분석하자"/><id>https://snack.planetarium.dev/kor/2023/03/serilog/</id><published>2023-03-03T00:00:00+00:00</published><updated>2023-03-03T00:00:00+00:00</updated><content type="html">&lt;h1 id="들어가며">들어가며&lt;/h1>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><title>플라네타리움 엔지니어링 스낵</title><link rel="self" href="https://snack.planetarium.dev/kor/index.xml"/><link rel="alternate" href="https://snack.planetarium.dev/kor/" title="플라네타리움 엔지니어링 스낵"/><link rel="alternate" href="https://snack.planetarium.dev/eng/" hreflang="en" title="Planetarium Engineering Snack"/><updated>2023-03-15T00:00:00+00:00</updated><id>https://snack.planetarium.dev/kor/</id><entry><title>페타바이트 트래픽 원인 분석기</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2023/03/cloudwatch/" title="페타바이트 트래픽 원인 분석기"/><id>https://snack.planetarium.dev/kor/2023/03/cloudwatch/</id><published>2023-03-15T00:00:00+00:00</published><updated>2023-03-15T00:00:00+00:00</updated><content type="html">&lt;p>안녕하세요, Nine Corparation, 게임 디비전에서 DX Engineer로 근무하고 있는 moreal입니다. 이 글에서는 작년 이맘때 회사에서 발견한 문제를 디버깅한 경험을 공유하려고 합니다.&lt;/p>
+&lt;h2 id="대시보드에-보이는-이상한-단위">대시보드에 보이는 이상한 단위&lt;/h2>
+&lt;p>회사에서는 운영하는 서비스의 상태를 확인하고 주의 사항을 공유하기 위한 주간 미팅을 진행합니다. 서비스는 EKS를 사용하고 있으며, 상태 확인을 위해 AWS CloudWatch Container Insights를 활용하고 있습니다. 그런데 어느 날 대시보드를 확인하다 이상한 수치들을 발견했습니다.&lt;/p>
+&lt;p>&lt;img src="https://velog.velcdn.com/images/moreal/post/3165dcad-605a-4e2d-8ad0-fd083993608d/image.png" alt="">&lt;/p>
+&lt;p>Y축의 단위를 보니 1.67 페타바이트가 표시되어 있었습니다.&lt;/p>
+&lt;p>&lt;img src="https://velog.velcdn.com/images/moreal/post/47432dd2-f78e-4724-8608-7721c09ad165/image.png" alt="">&lt;/p>
+&lt;p>최대 값은 400 페타바이트에 이르렀습니다. 🙀&lt;/p>
+&lt;p>여러 가지 추측을 해봤지만, 원인을 찾기 위해 CloudWatch가 어떻게 메트릭을 수집하는지 알아보기로 했습니다.&lt;/p>
+&lt;h2 id="cloudwatch가-메트릭을-수집하는-방법">CloudWatch가 메트릭을 수집하는 방법&lt;/h2>
+&lt;p>CloudWatch 메트릭 수집 방법을 알아보기 위해, 오픈소스로 공개된 &lt;a href="https://github.com/aws/amazon-cloudwatch-agent">aws/amazon-cloudwatch-agent&lt;/a> 저장소를 참조했습니다.&lt;/p>
+&lt;p>&lt;code>amazon-cloudwatch-agent&lt;/code>는 Kubernetes에서 사용하는 cAdvisor를 활용합니다. cAdvisor는 컨테이너에서 사용하는 리소스와 퍼포먼스 메트릭을 제공합니다. 이 값들을 활용하여 메트릭 값을 계산합니다.&lt;/p>
+&lt;p>계산 로직은 아래와 같습니다.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-go" data-lang="go">netIfceMetric[NetRxBytes] = &lt;span style="color:#038">float64&lt;/span>(cur.RxBytes-pre.RxBytes) / &lt;span style="color:#038">float64&lt;/span>(deltaCTimeInNano) * &lt;span style="color:#038">float64&lt;/span>(time.Second)
+netIfceMetric[NetTxBytes] = &lt;span style="color:#038">float64&lt;/span>(cur.TxBytes-pre.TxBytes) / &lt;span style="color:#038">float64&lt;/span>(deltaCTimeInNano) * &lt;span style="color:#038">float64&lt;/span>(time.Second)
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;a href="https://github.com/google/cadvisor/blob/648b12f8db47171ebd0fc45c67d53574ddb017fe/info/v1/container.go#L418-L437">&lt;code>cur.RxBytes&lt;/code>&lt;/a>의 데이터 타입이 &lt;code>uint64&lt;/code>여서 언더플로우가 발생할 가능성이 있었습니다. 과도한 트래픽이 발생하는 경우를 확인하기 위해 로그를 출력하는 부분이 있었고, 실제 값도 확인할 수 있었습니다.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-go" data-lang="go">&lt;span style="color:#080;font-weight:bold">if&lt;/span> netIfceMetric[NetRxBytes] &amp;gt; oneTerabytes || netIfceMetric[NetTxBytes] &amp;gt; oneTerabytes {
+log.&lt;span style="color:#06b;font-weight:bold">Printf&lt;/span>(&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;I! Too Big value for network RX/TX bytes, final Rx:%v, final Tx:%v, curRx:%v, preRx:%v, curTx:%v, preTx:%v, deltaCTimeInNano:%v&amp;#34;&lt;/span>,
+netIfceMetric[NetRxBytes], netIfceMetric[NetTxBytes],
+cur.RxBytes, pre.RxBytes,
+cur.TxBytes, pre.TxBytes,
+deltaCTimeInNano)
+}
+&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>2022-04-08T08:18:17Z I! Too Big value for network RX/TX bytes, final Rx:3.1837731352719405e+17, final Tx:3.183773135286772e+17, curRx:692608, preRx:317669466, curTx:11946450, preTx:242992298, deltaCTimeInNano:57939882302
+&lt;/code>&lt;/pre>&lt;p>Go Playground에서 코드를 실행하면 아래와 같은 결과가 나옵니다.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-go" data-lang="go">&lt;span style="color:#888">// https://play.golang.com/p/KppWhxtTtad
+&lt;/span>&lt;span style="color:#888">&lt;/span>&lt;span style="color:#080;font-weight:bold">package&lt;/span> main
+&lt;span style="color:#080;font-weight:bold">import&lt;/span> (
+&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;time&amp;#34;&lt;/span>
+)
+&lt;span style="color:#080;font-weight:bold">func&lt;/span> &lt;span style="color:#06b;font-weight:bold">main&lt;/span>() {
+&lt;span style="color:#080;font-weight:bold">var&lt;/span> curRxBytes &lt;span style="color:#888;font-weight:bold">uint64&lt;/span> = &lt;span style="color:#00d;font-weight:bold">692608&lt;/span>
+&lt;span style="color:#080;font-weight:bold">var&lt;/span> preRxBytes &lt;span style="color:#888;font-weight:bold">uint64&lt;/span> = &lt;span style="color:#00d;font-weight:bold">317669466&lt;/span>
+&lt;span style="color:#080;font-weight:bold">var&lt;/span> deltaCTimeInNano &lt;span style="color:#888;font-weight:bold">int64&lt;/span> = &lt;span style="color:#00d;font-weight:bold">57939882302&lt;/span>
+&lt;span style="color:#080;font-weight:bold">var&lt;/span> rxBytes = &lt;span style="color:#038">float64&lt;/span>(curRxBytes-preRxBytes) / &lt;span style="color:#038">float64&lt;/span>(deltaCTimeInNano) * &lt;span style="color:#038">float64&lt;/span>(time.Second)
+fmt.&lt;span style="color:#06b;font-weight:bold">Printf&lt;/span>(&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;%v&amp;#34;&lt;/span>, rxBytes)
+&lt;span style="color:#888">// output = 3.1837731352719405e+17
+&lt;/span>&lt;span style="color:#888">&lt;/span>}
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>3.1837731352719405e+17&lt;/code> 와 같은 값을 얻을 수 있고, 이 값을 Python에서 확인하면 원래 CloudWatch Container Insight에서 본 페타바이트 값이 나옵니다.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-python" data-lang="python">&amp;gt;&amp;gt;&amp;gt; &lt;span style="color:#038">int&lt;/span>(&lt;span style="color:#00d;font-weight:bold">3.1837731352719405e+17&lt;/span>)
+&lt;span style="color:#00d;font-weight:bold">318377313527194048&lt;/span>
+&amp;gt;&amp;gt;&amp;gt; &lt;span style="color:#038">int&lt;/span>(&lt;span style="color:#00d;font-weight:bold">3.1837731352719405e+17&lt;/span>) // (&lt;span style="color:#00d;font-weight:bold">1024&lt;/span> ** &lt;span style="color:#00d;font-weight:bold">5&lt;/span>) &lt;span style="color:#888"># KB MB GB TB PB&lt;/span>
+&lt;span style="color:#00d;font-weight:bold">282&lt;/span>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>cAdvisor는 &lt;code>/proc/&amp;lt;pid&amp;gt;/net/dev&lt;/code>에서 프로세스의 네트워크 관련 메트릭들을 가져오는데, 프로세스가 실행되면서 값이 누적되고, 재시작하면 다시 0부터 시작합니다. 그래서 Pod를 내리고 다시 올릴 때, 같은 컨테이너 이름의 경우 이전 값보다 현재 값이 더 작아지면서 언더플로우 버그가 발생한 것으로 이해할 수 있었습니다.&lt;/p>
+&lt;p>이 문제와 관련하여 Helm이나 다른 예제에서 Pod 이름이 항상 다른 것과 관련이 있는지는 아직 확실하지 않습니다. 🤔&lt;/p>
+&lt;h4 id="여담">여담&lt;/h4>
+&lt;ul>
+&lt;li>다행히 요금에 큰 문제가 발생하는 문제는 아니었습니다 💭&lt;/li>
+&lt;li>아직도 발생하는 문제입니다. 🙀&lt;/li>
+&lt;li>ChatGPT에게 한 번 정리해달라고 해봤는데 괜찮은 것 같습니다. 👀&lt;/li>
+&lt;/ul></content><author><name>이도건</name><uri>https://github.com/moreal</uri><email>dogeon@planetariumhq.com</email></author></entry><entry><title>Serilog를 통해 애플리케이션 데이터를 수집하고 분석하자</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2023/03/serilog/" title="Serilog를 통해 애플리케이션 데이터를 수집하고 분석하자"/><id>https://snack.planetarium.dev/kor/2023/03/serilog/</id><published>2023-03-03T00:00:00+00:00</published><updated>2023-03-03T00:00:00+00:00</updated><content type="html">&lt;h1 id="들어가며">들어가며&lt;/h1>
 &lt;p>분산 네트워크나 마이크로서비스 아키텍처 상에서는 각 어플리케이션 간의 로그를 수집하고, 어플리케이션 간의 로그를 짝 맞춰야 할 일이 종종 있습니다.
 이 글에서는 Serilog 와 S3를 이용하여 로그를 수집하고, 이를 Athena나 다른 로그 서치 엔진에 응용할 수 있는 방법을 안내하고자 합니다.&lt;/p>
 &lt;h1 id="구조화-된-로그structured-log">구조화 된 로그(Structured Log)&lt;/h1>
@@ -1523,92 +1573,4 @@ intDynamicBuffer[i]++;
 &lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="마치며">마치며&lt;/h2>
 &lt;p>&lt;code>IBufferElementData&lt;/code>와 &lt;code>DynamicBuffer&amp;lt;T&amp;gt;&lt;/code>를 가볍게 알아 봤어요.&lt;/p>
 &lt;p>게임을 만들 때 오브젝트 풀링에 대해서 수도 없이 많이 들어 보셨을 거예요. 1회용 객체를 생성하는 것은 쓰레기를 만드는 것이기에 풀링해서 재사용하면 잦은 &lt;a href="https://ko.wikipedia.org/wiki/%EC%93%B0%EB%A0%88%EA%B8%B0_%EC%88%98%EC%A7%91_(%EC%BB%B4%ED%93%A8%ED%84%B0_%EA%B3%BC%ED%95%99)">쓰레기 수집&lt;/a>을 줄이고 인스턴스 생성 타이밍을 관리할 수 있어서 더욱 부드러운 게임을 만들 수 있죠.&lt;/p>
-&lt;p>다음에는 이 기능을 게임에 어떻게 적용하는지 알아보고, 적용하기 전과 후를 비교하면서 어느정도 효과를 얻을 수 있는지 확인해 볼게요.&lt;/p></content><author><name>현승민</name><uri>https://github.com/boscohyun</uri><email>seungmin@planetariumhq.com</email></author></entry><entry><title>Libplanet 0.9 릴리스</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/04/libplanet-0.9/" title="Libplanet 0.9 릴리스"/><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/04/libplanet-0.9/" hreflang="en" title="Libplanet 0.9 Released"/><id>https://snack.planetarium.dev/kor/2020/04/libplanet-0.9/</id><published>2020-04-28T00:00:00+00:00</published><updated>2020-04-28T00:00:00+00:00</updated><content type="html">&lt;p>안녕하세요. &lt;a href="https://libplanet.io/">Libplanet&lt;/a>의 아홉 번째 마이너 버전인 &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.9.0">0.9 버전&lt;/a>이
-릴리스되었습니다.&lt;/p>
-&lt;p>Libplanet은 분산 P2P로 돌아가는 온라인 멀티플레이어 게임을 만들 때,
-그러한 게임들이 매번 구현해야 하는 P2P 통신이나 데이터 동기화 등의 문제를 푸는
-공용 라이브러리입니다.&lt;/p>
-&lt;p>이번 버전부터 Libplanet은 여러 NuGet 패키지로 배포되는데요.
-Libplanet의 외연이 확장되어 일부 의존 라이브러리를 모든 애플리케이션에서
-포함하기에는 무거워졌기 때문입니다.&lt;/p>
-&lt;p>이 글에서는 0.9 버전의 새로운 NuGet 패키지들을 소개하며 주요 변경 사항들에
-대해서도 다루겠습니다.&lt;/p>
-&lt;h2 id="libplanetrocksdbstore">&lt;a href="https://www.nuget.org/packages/Libplanet.RocksDBStore/">Libplanet.RocksDBStore&lt;/a>&lt;/h2>
-&lt;p>Libplanet.RocksDBStore는 새로 추가된 NuGet 패키지로,
-Lipblanet의 &lt;a href="https://docs.libplanet.io/0.9.0/api/Libplanet.Store.IStore.html">&lt;code>IStore&lt;/code> 인터페이스&lt;/a>를 &lt;a href="https://rocksdb.org/">RocksDB&lt;/a> 백엔드로 구현한
-&lt;code>RocksDBStore&lt;/code> 클래스를 포함합니다. &lt;code>RocksDBStore&lt;/code>는 내부 테스트 결과 기존의
-&lt;a href="https://docs.libplanet.io/0.9.0/api/Libplanet.Store.DefaultStore.html">&lt;code>DefaultStore&lt;/code>&lt;/a>에 비해 쓰기는 약 10배 읽기는 약 2배 이상
-빨라졌으며, 압축 등의 효과 덕에 기존에 비해 15% 이하의 저장 공간만을 차지하게
-됐습니다.&lt;/p>
-&lt;p>위와 같은 장점에도, C++로 작성된 RocksDB 네이티브 바이너리를 애플리케이션과
-함께 배포해야 하기 때문에 일부 플랫폼에서는 이용이 곤란할 수 있습니다.
-따라서 &lt;code>RocksDBStore&lt;/code> 클래스는 Libplanet 패키지가 아닌
-Libplanet.RocksDBStore라는 별도 NuGet 패키지로 배포하게 되었으며,
-Libplanet 패키지에는 여전히 &lt;code>DefaultStore&lt;/code>가 제공됩니다. 따라서 개발할 때는
-설치가 간편한 &lt;code>DefaultStore&lt;/code>를 쓰고 테스트 및 실제 배포시에만 &lt;code>RocksDBStore&lt;/code>를
-쓰거나, RocksDB 바이너리를 제공하기 어려운 플랫폼에 한해 &lt;code>DefaultStore&lt;/code>를 쓰는
-식의 활용이 가능합니다.&lt;/p>
-&lt;p>자세한 내용은 이승훈 님이 쓰신 &lt;a href="https://snack.planetarium.dev/kor/2020/04/rocksdb/">Libplanet RocksDB 적용기&lt;/a>에서 볼 수 있습니다.&lt;/p>
-&lt;h2 id="여러-피어로부터-블록-받기">여러 피어로부터 블록 받기&lt;/h2>
-&lt;p>이제까지 &lt;a href="https://docs.libplanet.io/0.9.0/api/Libplanet.Net.Swarm-1.html">&lt;code>Swarm&amp;lt;T&amp;gt;&lt;/code> 클래스&lt;/a>의 &lt;a href="https://docs.libplanet.io/0.9.0/api/Libplanet.Net.Swarm-1.html#Libplanet_Net_Swarm_1_PreloadAsync_System_Nullable_TimeSpan__IProgress_Libplanet_Net_PreloadState__IImmutableSet_Libplanet_Address__EventHandler_Libplanet_Net_PreloadBlockDownloadFailEventArgs__CancellationToken_">&lt;code>PreloadAsync()&lt;/code>&lt;/a> 및
-&lt;a href="https://docs.libplanet.io/0.9.0/api/Libplanet.Net.Swarm-1.html#Libplanet_Net_Swarm_1_StartAsync_TimeSpan_TimeSpan_CancellationToken_">&lt;code>StartAsync()&lt;/code> 메서드&lt;/a>는 네트워크에 쌓인 블록을 따라잡기
-위해 하나의 피어에게 그간의 모든 블록을 요청하여 받게 되어 있었습니다.
-쌓인 블록이 많을 경우 하나의 피어에게만 받다 보니 오래 걸리기 일쑤였고,
-운이 안 좋으면 서로 통신이 아주 느린 피어에게 블록을 요청해 받기까지 아주 오래
-걸리는 경우도 있었습니다. 블록을 보내주는 쪽에서도 홀로 큰 부담을 져야 하는데,
-배포되는 애플리케이션에 기본값으로 설정된 시드 노드의 경우 그 부담이 무시하기
-힘들 정도였습니다.&lt;/p>
-&lt;p>이번 버전부터는 블록을 여러 피어에게 고루 받도록 개선되었으며, 그 가운데
-특별히 느린 피어가 끼더라도 전체 블록을 받는 시간이 크게 늦어지는 일도
-크게 줄었습니다.&lt;/p>
-&lt;h2 id="서명된-앱-프로토콜-버전">서명된 앱 프로토콜 버전&lt;/h2>
-&lt;p>지난해, &lt;a href="https://snack.planetarium.dev/kor/2019/05/libplanet-0.3/#%EB%B2%84%EC%A0%84%EC%9D%B4-%EB%8B%A4%EB%A5%B8-%EB%85%B8%EB%93%9C%EB%A5%BC-%EB%A7%8C%EB%82%AC%EC%9D%84-%EB%95%8C-%EB%B0%98%EC%9D%91%ED%95%98%EB%8A%94-api">Libplanet 0.3에는 &lt;code>Swarm&amp;lt;T&amp;gt;()&lt;/code> 생성자에 &lt;code>appProtocolVersion&lt;/code> 매개변수가
-추가됐습니다.&lt;/a> 서로 프로토콜이 호환되는 노드끼리만 통신하고, 호환되지
-않는 경우의 처리를 앱에 따라 적절히 처리할 수 있도록 한 것입니다.&lt;/p>
-&lt;p>저희 팀 역시 이 기능을 활용했고, 더 높은 버전의 노드와 조우할 경우 소프트웨어
-업데이트를 유도하는 용도로 썼습니다. 그러나 이렇게 활용하니, 변조된
-소프트웨어가 악의적으로 (실제로는 발표된 적 없는) 높은 버전 숫자를 내보이게
-하여 다른 노드들이 거짓 소프트웨어 업데이트를 시도하도록 공격하는 데에 쓰일
-수 있다는 것을 알게 됐습니다.&lt;/p>
-&lt;p>이러한 일을 피할 수 있도록, &lt;a href="https://docs.microsoft.com/en-us/dotnet/api/system.int32">&lt;code>System.Int32&lt;/code>&lt;/a>로 표현되던
-앱 프로토콜 버전은 이제 서명과 서명자 등 여러 메타데이터를 포함하는
-&lt;a href="https://docs.libplanet.io/0.9.0/api/Libplanet.Net.AppProtocolVersion.html">&lt;code>AppProtocolVersion&lt;/code> 자료형&lt;/a>으로
-바뀌었습니다. 앱 프로토콜 버전은 서명되어야 하며, 각 노드는 &lt;code>Swarm&amp;lt;T&amp;gt;()&lt;/code>
-생성자의 &lt;code>trustedAppProtocolVersionSigners&lt;/code> 매개변수로 어떤 서명자의
-앱 프로로콜 버전을 신뢰할지 &lt;em>각자&lt;/em> 정하게 됩니다.&lt;/p>
-&lt;p>이러한 방식은 각 노드들을 의도하지 않은 (변조된) 소프트웨어 업데이트로부터
-보호하는 동시에, 각 노드들이 원한다면 자유롭게 포크된 다른 애플리케이션 로드맵을
-선택할 자유도 제공합니다.&lt;/p>
-&lt;h2 id="키-저장소">키 저장소&lt;/h2>
-&lt;p>지난해, &lt;a href="https://snack.planetarium.dev/kor/2019/11/libplanet-0.7/#%EA%B0%9C%EC%9D%B8%ED%82%A4%EB%A5%BC-%EC%95%88%EC%A0%84%ED%95%98%EA%B2%8C-%EC%A0%80%EC%9E%A5%ED%95%A0-%EC%88%98-%EC%9E%88%EB%8A%94-%ED%82%A4-%EC%A0%80%EC%9E%A5%EC%86%8C-%EA%B5%AC%ED%98%84">Libplanet은 0.7 버전에서 &lt;code>PrivateKey&lt;/code>를 안전하게 저장할 수 있는
-&lt;code>ProtectedPrivateKey&lt;/code> 클래스가 추가됐습니다.&lt;/a> 그렇지만
-&lt;a href="https://docs.libplanet.io/0.9.0/api/Libplanet.KeyStore.ProtectedPrivateKey.html">&lt;code>ProtectedPrivateKey&lt;/code>&lt;/a>는 하나의 키만 다룰 뿐으로,
-여러 키를 다루려면 애플리케이션 측에서 디렉터리를 만들고 파일명을 결정하고
-파일에 쓰는 등의 처리를 알아서 구현해야 했습니다.&lt;/p>
-&lt;p>이번 버전에부터는 키를 물리적으로 보존하고 관리하는 기능인
-&lt;a href="https://docs.libplanet.io/0.9.0/api/Libplanet.KeyStore.Web3KeyStore.html">&lt;code>Web3KeyStore&lt;/code>&lt;/a> 클래스가 제공되기 때문에, 더이상 그런 처리를
-직접 구현할 필요가 없어졌습니다. 파일 시스템에 &lt;a href="https://github.com/ethereum/wiki/wiki/Web3-Secret-Storage-Definition">Web3 Secret Storage Definition&lt;/a>
-형식으로 키를 보존하는 &lt;code>Web3KeyStore&lt;/code>와 더불어, 그러한 구체적인 보존 방식(구현
-세부사항)을 추상화하는 &lt;a href="https://docs.libplanet.io/0.9.0/api/Libplanet.KeyStore.IKeyStore.html">&lt;code>IKeyStore&lt;/code> 인터페이스&lt;/a> 역시 도입됐습니다.&lt;/p>
-&lt;h2 id="planet-명령행-도구">&lt;code>planet&lt;/code>: 명령행 도구&lt;/h2>
-&lt;p>&lt;a href="https://docs.libplanet.io/0.9.0/api/Libplanet.Net.Swarm-1.html#Libplanet_Net_Swarm_1__ctor_Libplanet_Blockchain_BlockChain__0__Libplanet_Crypto_PrivateKey_Libplanet_Net_AppProtocolVersion_System_Int32_System_String_System_Nullable_System_Int32__IEnumerable_Libplanet_Net_IceServer__Libplanet_Net_DifferentAppProtocolVersionEncountered_IEnumerable_Libplanet_Crypto_PublicKey__">&lt;code>Swarm&amp;lt;T&amp;gt;()&lt;/code> 생성자&lt;/a>는 &lt;a href="https://snack.planetarium.dev/kor/2020/02/libplanet-0.8/#%EC%A0%9C%EB%84%88%EC%8B%9C%EC%8A%A4-%EB%B8%94%EB%A1%9D-%EC%83%81%EC%A0%95">지난 버전부터 특정 제너시스 블록을 상정하게
-됐고&lt;/a>, &lt;a href="#%EC%84%9C%EB%AA%85%EB%90%9C-%EC%95%B1-%ED%94%84%EB%A1%9C%ED%86%A0%EC%BD%9C-%EB%B2%84%EC%A0%84">이번 버전부터는 앱 프로토콜 버전을 서명하게 됐습니다.&lt;/a> 이와 같은
-값들은 암호학 알고리즘의 결과를 포함하기 때문에, 사람이 임의로 아무 값이나
-넣을 수 없습니다. 그렇지만 개발 과정에서는 임의의 값들을 채워봐야 할 일이 많기
-때문에, 이 때마다 Libplanet API를 C# 대화형 셸이나 PowerShell 등에서 호출하여
-원하는 값을 계산하는 것은 그것대로 여간 번거로운 일이 아니었습니다.&lt;/p>
-&lt;p>이러한 작업을 좀더 쉽게 할 수 있도록, 이번 버전부터는 &lt;code>planet&lt;/code>이라는
-명령행(&lt;abbr title="command-line interface">CLI&lt;/abbr>) 도구를 함께 배포합니다.
-&lt;code>planet&lt;/code> 명령은 여러 서브커맨드를 포함하며, 현재로서는 키 저장소 관리와
-앱 프로토콜 버전의 서명 기능을 제공합니다. 이후 임의의 제너시스 블록 생성 등의
-기능도 추가될 예정입니다. 자세한 사용법은 &lt;code>planet --help&lt;/code> 명령을 확인해 주세요.&lt;/p>
-&lt;p>&lt;code>planet&lt;/code> 명령은 &lt;a href="https://www.nuget.org/packages/Libplanet.Tools/">Libplanet.Tools&lt;/a>라는 NuGet 패키지로 배포되며, .NET Core SDK가
-설치된 시스템에서 아래와 같이 설치할 수 있습니다:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-bash" data-lang="bash">dotnet tool install -g Libplanet.Tools
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>.NET Core SDK가 설치되지 않은 환경이라면 &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.9.0">릴리스 페이지&lt;/a>에 첨부된
-공식 바이너리를 받아서 설치할 수도 있습니다. 공식 바이너리는 Linux (x64),
-macOS (x64), Windows (x64) 세 플랫폼의 버전이 제공되고 있습니다.&lt;/p>
-&lt;h2 id="그-외">그 외&lt;/h2>
-&lt;p>그 밖의 여러 변경 사항은 &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.9.0">전체 변경 내용&lt;/a>에서 확인하실 수 있습니다.&lt;/p>
-&lt;p>호기심이 생기신 분들은 설치해서 이용해 보시고, 궁금한 점이 있으시다면 저희 팀이
-상주해 있는 &lt;a href="https://discord.gg/planetarium">디스코드&lt;/a>에도 놀러오세요!&lt;/p></content><author><name>홍민희</name><uri>https://github.com/dahlia</uri><email>hong.minhee@planetariumhq.com</email></author></entry></feed>
+&lt;p>다음에는 이 기능을 게임에 어떻게 적용하는지 알아보고, 적용하기 전과 후를 비교하면서 어느정도 효과를 얻을 수 있는지 확인해 볼게요.&lt;/p></content><author><name>현승민</name><uri>https://github.com/boscohyun</uri><email>seungmin@planetariumhq.com</email></author></entry></feed>
