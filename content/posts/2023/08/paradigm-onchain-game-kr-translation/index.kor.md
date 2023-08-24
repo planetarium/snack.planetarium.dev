@@ -3,7 +3,6 @@ title: "온체인 게임의 미해결 과제 (번역)"
 date: 2023-08-24
 authors: [loun.lee]
 ogimage: images/og.kor.png
-draft: true
 ---
 
 크립토 업계의 대표 벤처캐피탈 [패러다임(Paradigm)](https://paradigm.xyz)이 지난 8월 14일에 공유한, 온체인 게임이 나아갈 방향과 그 과정에서 고민할만한 점을 다룬 글이 공감되어 한국어로 번역해보았습니다.
