@@ -54,7 +54,7 @@ _도대체 왜 게임을 블록체인에 올리나요?_
 
 게임 세계가 파편화되면, 확장을 점진적으로 할 수 있는 능력을 잃어버립니다.
  
-# 개방된 경제 구조
+## 개방된 경제 구조
 
 게임 내 경제는 플레이어의 창의력 측면에서 거의 무한한 잠재력을 가진 또다른 차원입니다. 여기선 최초로 전업 경제학자를 직원으로 채용했던 최초의 게임인 이브 온라인을 가지고 설명해보겠습니다.
 
@@ -162,7 +162,7 @@ _도대체 왜 게임을 블록체인에 올리나요?_
 
 저희는 다른 빌더들과 크립토 네이티브 게임의 모든 최전선을 함께 탐색하기를 기대합니다. 또한 인프라보다는 게임 자체를 만드는 것에 관심이 더 많습니다. 우리가 직접 즐길 수 있는 게임을요.
 
-이런 이야기에 흥미가 있으시다면, 여기로 연락주세요: {charlie,doug}@paradigm.xyz
+이런 이야기에 흥미가 있으시다면, 여기로 연락주시기 바랍니다: {charlie,doug}@paradigm.xyz
 
 # 감사의 말
 이 글을 작성하기 위해 여러 시간을 기여해 준 동료 [t11s](https://twitter.com/transmissions11)에 감사 드리며, 함께 논의하고 리뷰 해 준 [Matt Huang](https://twitter.com/matthuang), [Dan Robinson](https://twitter.com/danrobinson), [Dave White](https://twitter.com/_Dave__White_), [Frankie](https://twitter.com/FrankieIsLost)에게도 감사 드립니다.
