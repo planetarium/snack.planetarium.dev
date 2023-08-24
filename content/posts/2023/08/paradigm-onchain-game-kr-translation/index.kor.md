@@ -7,7 +7,7 @@ ogimage: images/og.kor.png
 
 크립토 업계의 대표 벤처캐피탈 [패러다임(Paradigm)](https://paradigm.xyz)이 지난 8월 14일에 공유한, 온체인 게임이 나아갈 방향과 그 과정에서 고민할만한 점을 다룬 글이 공감되어 한국어로 번역해보았습니다.
 
-원문: https://www.paradigm.xyz/2023/08/onchain-games
+원문: [The Open Problems of Onchain Games](https://www.paradigm.xyz/2023/08/onchain-games)
 
 저자: [Charlie Noyes (General Partner)](https://www.paradigm.xyz/team/charlienoyes), [Doug Feagin (Investment Partner)](https://www.paradigm.xyz/team/dougfeagin)
 
