@@ -1,221 +1,90 @@
-<!doctype html><html lang=ko prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
-<head>
-<meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
-<meta name=description content>
-<meta name=HandheldFriendly content="True">
-<meta name=MobileOptimized content="320">
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=keywords content>
-<meta property="og:type" content="article">
-<meta property="og:description" content>
-<meta property="og:title" content="Libplanet 0.11–0.19 업데이트 요약">
-<meta property="og:site_name" content="플라네타리움 엔지니어링 스낵">
-<meta property="og:image" content="https://snack.planetarium.dev/og/kor.png">
-<meta property="og:url" content="https://snack.planetarium.dev/kor/2021/10/libplanet-0.11-0.19/">
-<meta property="og:locale" content="ko">
-<meta property="article:published_time" content="2021-10-29">
-<meta property="article:modified_time" content="2021-10-29">
-<meta name=twitter:card content="summary">
-<meta name=twitter:site content="@">
-<meta name=twitter:creator content="@">
-<meta name=twitter:title content="Libplanet 0.11–0.19 업데이트 요약 | 플라네타리움 엔지니어링 스낵">
-<meta name=twitter:description content="안녕하세요. 오랜만에 소식 전합니다. Libplanet1은 지난 몇 달 동안, 여러 마이너 버전을 릴리스했습니다. 그렇지만 저희의 릴리스 정책과 주기가 바뀜에 따라, 그리고 Libplanet으로 만들어진 첫 게임 〈나인 크로니클〉 메인넷의 여러 문제들에 대응하느라 차분히 그간의 업데이트를 정리된 글로 쓸 여유가 없었습니다. 그래서 이번 글에서 그 사이의 변화 중 큰 것들을 중심으로 소개해 볼까 합니다.
-달라진 릴리스 주기 이전까지 Libplanet은 릴리스 주기에 뚜렷한 규칙이 없었습니다. 주로 큰 API 변경이 있거나 마지막 릴리스 이후로 시간이 많이 지났을 때 그 동안의 변경을 모아서 새 버전 번호를 부여하는 것에 가까웠습니다.|">
-<meta name=twitter:image:src content>
-<meta name=twitter:domain content="https://snack.planetarium.dev/kor/2021/10/libplanet-0.11-0.19/">
-<title>Libplanet 0.11–0.19 업데이트 요약</title>
-<link rel=canonical href=https://snack.planetarium.dev/kor/2021/10/libplanet-0.11-0.19/>
-<link rel=alternate href=https://snack.planetarium.dev/eng/2021/10/libplanet-0.11-0.19/ hreflang=en title="What's new in Libplanet 0.11–0.19">
-<link href=https://snack.planetarium.dev/index.xml rel=alternate type=application/atom+xml title="Libplanet 0.11–0.19 업데이트 요약">
-<link rel=stylesheet href=https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css>
-<link rel=stylesheet href=https://snack.planetarium.dev/css/style.min.1a35efb5c5da4fd20bd2ec86458da5ee7cc1cfc81c4f107944b5e0fc59a3d809.css integrity="sha256-GjXvtcXaT9IL0uyGRY2l7nzBz8gcTxB5RLXg/Fmj2Ak=">
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-132504786-2"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-132504786-2')</script>
-<link rel=icon href=/favicon-32x32.png type=image/png sizes=32x32>
-<link rel="shortcut icon" href=/favicon.ico type=image/x-icon>
-<link rel=apple-touch-icon href=/apple-touch-icon.png>
-</head>
-<body class="sans-serif w-90 w-60-ns center center-ns mv2 mv5-ns" itemscope itemtype=http://schema.org/Article>
-<a href=https://snack.planetarium.dev/kor/ id=site-title class="b bb bw1 pb1 no-underline dark-gray">플라네타리움 엔지니어링 스낵</a>
-<section id=main class=mt5>
-<h1 itemprop=name id=title class=mb1>Libplanet 0.11–0.19 업데이트 요약</h1>
-<div class="f6 gray dib-ns">
-<time itemprop=datePublished datetime=2021-10-29>
-2021년 10월 29일
-</time>
-(<strong>한국어</strong>
+<!doctype html><html lang=ko prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#"><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><meta name=description content><meta name=HandheldFriendly content="True"><meta name=MobileOptimized content="320"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=keywords content><meta property="og:type" content="article"><meta property="og:description" content><meta property="og:title" content="Libplanet 0.11–0.19 업데이트 요약"><meta property="og:site_name" content="플라네타리움 엔지니어링 스낵"><meta property="og:image" content="https://snack.planetarium.dev/og/kor.png"><meta property="og:url" content="https://snack.planetarium.dev/kor/2021/10/libplanet-0.11-0.19/"><meta property="og:locale" content="ko"><meta property="article:published_time" content="2021-10-29"><meta property="article:modified_time" content="2021-10-29"><meta name=twitter:card content="summary"><meta name=twitter:site content="@"><meta name=twitter:creator content="@"><meta name=twitter:title content="Libplanet 0.11–0.19 업데이트 요약 | 플라네타리움 엔지니어링 스낵"><meta name=twitter:description content="안녕하세요. 오랜만에 소식 전합니다. Libplanet1은 지난 몇 달 동안, 여러 마이너 버전을 릴리스했습니다. 그렇지만 저희의 릴리스 정책과 주기가 바뀜에 따라, 그리고 Libplanet으로 만들어진 첫 게임 〈나인 크로니클〉 메인넷의 여러 문제들에 대응하느라 차분히 그간의 업데이트를 정리된 글로 쓸 여유가 없었습니다. 그래서 이번 글에서 그 사이의 변화 중 큰 것들을 중심으로 소개해 볼까 합니다.
+달라진 릴리스 주기 이전까지 Libplanet은 릴리스 주기에 뚜렷한 규칙이 없었습니다. 주로 큰 API 변경이 있거나 마지막 릴리스 이후로 시간이 많이 지났을 때 그 동안의 변경을 모아서 새 버전 번호를 부여하는 것에 가까웠습니다.|"><meta name=twitter:image:src content><meta name=twitter:domain content="https://snack.planetarium.dev/kor/2021/10/libplanet-0.11-0.19/"><title>Libplanet 0.11–0.19 업데이트 요약</title>
+<link rel=canonical href=https://snack.planetarium.dev/kor/2021/10/libplanet-0.11-0.19/><link rel=alternate href=https://snack.planetarium.dev/eng/2021/10/libplanet-0.11-0.19/ hreflang title="What's new in Libplanet 0.11–0.19"><link href=https://snack.planetarium.dev/index.xml rel=alternate type=application/atom+xml title="Libplanet 0.11–0.19 업데이트 요약"><link rel=stylesheet href=https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css><link rel=stylesheet href=https://snack.planetarium.dev/css/style.min.1a35efb5c5da4fd20bd2ec86458da5ee7cc1cfc81c4f107944b5e0fc59a3d809.css integrity="sha256-GjXvtcXaT9IL0uyGRY2l7nzBz8gcTxB5RLXg/Fmj2Ak="><script async src="https://www.googletagmanager.com/gtag/js?id=UA-132504786-2"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","UA-132504786-2")</script><link rel=icon href=/favicon-32x32.png type=image/png sizes=32x32><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><link rel=apple-touch-icon href=/apple-touch-icon.png></head><body class="sans-serif w-90 w-60-ns center center-ns mv2 mv5-ns" itemscope itemtype=http://schema.org/Article><a href=https://snack.planetarium.dev/kor/ id=site-title class="b bb bw1 pb1 no-underline dark-gray">플라네타리움 엔지니어링 스낵</a><section id=main class=mt5><h1 itemprop=name id=title class=mb1>Libplanet 0.11–0.19 업데이트 요약</h1><div class="f6 gray dib-ns"><time itemprop=datePublished datetime=2021-10-29>2021년 10월 29일
+</time>(<strong>한국어</strong>
 &bull;
-<a href=https://snack.planetarium.dev/eng/2021/10/libplanet-0.11-0.19/ hreflang=en title="What's new in Libplanet 0.11–0.19" class=gray>English</a>)
-</div>
-<article itemprop=articleBody id=content class="w-100 lh-copy">
-<p>안녕하세요. 오랜만에 소식 전합니다. <a href=https://libplanet.io/>Libplanet</a><sup id=fnref:1><a href=#fn:1 class=footnote-ref role=doc-noteref>1</a></sup>은 지난 몇 달 동안, 여러
+<a href=https://snack.planetarium.dev/eng/2021/10/libplanet-0.11-0.19/ hreflang title="What's new in Libplanet 0.11–0.19" class=gray>English</a>)</div><article itemprop=articleBody id=content class="w-100 lh-copy"><p>안녕하세요. 오랜만에 소식 전합니다. <a href=https://libplanet.io/>Libplanet</a><sup id=fnref:1><a href=#fn:1 class=footnote-ref role=doc-noteref>1</a></sup>은 지난 몇 달 동안, 여러
 마이너 버전을 릴리스했습니다. 그렇지만 저희의 릴리스 정책과 주기가 바뀜에 따라,
 그리고 Libplanet으로 만들어진 첫 게임 〈<a href=https://nine-chronicles.com/>나인 크로니클</a>〉 메인넷의 여러 문제들에
 대응하느라 차분히 그간의 업데이트를 정리된 글로 쓸 여유가 없었습니다.
-그래서 이번 글에서 그 사이의 변화 중 큰 것들을 중심으로 소개해 볼까 합니다.</p>
-<h2 id=달라진-릴리스-주기>달라진 릴리스 주기</h2>
-<p>이전까지 Libplanet은 릴리스 주기에 뚜렷한 규칙이 없었습니다. 주로 큰 API 변경이
+그래서 이번 글에서 그 사이의 변화 중 큰 것들을 중심으로 소개해 볼까 합니다.</p><h2 id=달라진-릴리스-주기>달라진 릴리스 주기</h2><p>이전까지 Libplanet은 릴리스 주기에 뚜렷한 규칙이 없었습니다. 주로 큰 API 변경이
 있거나 마지막 릴리스 이후로 시간이 많이 지났을 때 그 동안의 변경을 모아서 새
-버전 번호를 부여하는 것에 가까웠습니다.</p>
-<p>그러나 지난해 〈<a href=https://nine-chronicles.com/>나인 크로니클</a>〉 메인넷 (이하 <q>메인넷</q>) 출범 이후,
+버전 번호를 부여하는 것에 가까웠습니다.</p><p>그러나 지난해 〈<a href=https://nine-chronicles.com/>나인 크로니클</a>〉 메인넷 (이하 <q>메인넷</q>) 출범 이후,
 메인넷의 크고 작은 문제들을 해결해 나가기 위해 Libplanet도 그에 발맞춘 잦은
 릴리스가 이뤄져야 했습니다. 현재 플라네타리움의 Libplanet 팀과 〈나인 크로니클〉
 팀은 긴밀히 협력하며 릴리스 주기를 맞추고 있습니다. 이러한 기조는 한동안 바뀌지
-않을 것으로 보입니다.</p>
-<p>그러한 방침 아래, 지난 몇 달 동안 릴리스된 Libplanet 버전으로는 올해 3월에 나온
-0.11.0부터 금주에 나온 0.19.0까지 총 9번의 마이너 업데이트가 있습니다.</p>
-<ul>
-<li><a href=https://github.com/planetarium/libplanet/releases/tag/0.11.0>0.11.0</a> (3월 30일)</li>
-<li><a href=https://github.com/planetarium/libplanet/releases/tag/0.12.0>0.12.0</a> (7월 23일)</li>
-<li><a href=https://github.com/planetarium/libplanet/releases/tag/0.13.0>0.13.0</a> (7월 28일)</li>
-<li><a href=https://github.com/planetarium/libplanet/releases/tag/0.14.0>0.14.0</a> (8월 5일)</li>
-<li><a href=https://github.com/planetarium/libplanet/releases/tag/0.15.0>0.15.0</a> (8월 18일)</li>
-<li><a href=https://github.com/planetarium/libplanet/releases/tag/0.16.0>0.16.0</a> (8월 25일)</li>
-<li><a href=https://github.com/planetarium/libplanet/releases/tag/0.17.0>0.17.0</a> (9월 28일)</li>
-<li><a href=https://github.com/planetarium/libplanet/releases/tag/0.18.0>0.18.0</a> (10월 13일)</li>
-<li><a href=https://github.com/planetarium/libplanet/releases/tag/0.19.0>0.19.0</a> (10월 27일)</li>
-</ul>
-<h2 id=프로토콜-버전>프로토콜 버전</h2>
-<p><em><a href=https://github.com/planetarium/libplanet/releases/tag/0.11.0>0.11.0</a> 버전에서 추가됨.</em></p>
-<p>프로토콜 버전은 블록에 붙는 속성으로, 해당 블록이 어떤 Libplanet 버전을 써서
+않을 것으로 보입니다.</p><p>그러한 방침 아래, 지난 몇 달 동안 릴리스된 Libplanet 버전으로는 올해 3월에 나온
+0.11.0부터 금주에 나온 0.19.0까지 총 9번의 마이너 업데이트가 있습니다.</p><ul><li><a href=https://github.com/planetarium/libplanet/releases/tag/0.11.0>0.11.0</a> (3월 30일)</li><li><a href=https://github.com/planetarium/libplanet/releases/tag/0.12.0>0.12.0</a> (7월 23일)</li><li><a href=https://github.com/planetarium/libplanet/releases/tag/0.13.0>0.13.0</a> (7월 28일)</li><li><a href=https://github.com/planetarium/libplanet/releases/tag/0.14.0>0.14.0</a> (8월 5일)</li><li><a href=https://github.com/planetarium/libplanet/releases/tag/0.15.0>0.15.0</a> (8월 18일)</li><li><a href=https://github.com/planetarium/libplanet/releases/tag/0.16.0>0.16.0</a> (8월 25일)</li><li><a href=https://github.com/planetarium/libplanet/releases/tag/0.17.0>0.17.0</a> (9월 28일)</li><li><a href=https://github.com/planetarium/libplanet/releases/tag/0.18.0>0.18.0</a> (10월 13일)</li><li><a href=https://github.com/planetarium/libplanet/releases/tag/0.19.0>0.19.0</a> (10월 27일)</li></ul><h2 id=프로토콜-버전>프로토콜 버전</h2><p><em><a href=https://github.com/planetarium/libplanet/releases/tag/0.11.0>0.11.0</a> 버전에서 추가됨.</em></p><p>프로토콜 버전은 블록에 붙는 속성으로, 해당 블록이 어떤 Libplanet 버전을 써서
 마이닝됐는지 기록합니다. 프로토콜 버전은 Libplanet을 이용해 만들어진 게임이
 Libplanet 버전을 쉽게 업그레이드할 수 있도록 도우며, 한편으로는 Libplanet 쪽에서
-기존의 네트워크를 유지하면서도 기능을 추가할 수 있게 합니다.</p>
-<p>API 측면에서는 <a href=https://docs.libplanet.io/0.19.0/api/Libplanet.Blocks.Block-1.html#Libplanet_Blocks_Block_1_ProtocolVersion><code>Block&lt;T>.ProtocolVersion</code> 속성</a>으로
+기존의 네트워크를 유지하면서도 기능을 추가할 수 있게 합니다.</p><p>API 측면에서는 <a href=https://docs.libplanet.io/0.19.0/api/Libplanet.Blocks.Block-1.html#Libplanet_Blocks_Block_1_ProtocolVersion><code>Block&lt;T>.ProtocolVersion</code> 속성</a>으로
 확인할 수 있으며, 32비트 정수형으로 표현됩니다. 표현되는 프로토콜 버전은
 Libplanet의 패키지 버전과는 별개의 네트워크 프로토콜의 버전인데, 패키지 버전의
 패치 릴리스는 프로토콜 버전이 올라갈 수 없고 반드시 마이너 및 메이저 릴리스할
-때만 프로토콜 버전도 함께 증가됩니다.<sup id=fnref:2><a href=#fn:2 class=footnote-ref role=doc-noteref>2</a></sup></p>
-<p><a href=https://github.com/planetarium/libplanet/releases/tag/0.19.0>0.19.0</a> 버전 현재 프로토콜 버전은 2이고, 프로토콜 버전이 도입된 <a href=https://github.com/planetarium/libplanet/releases/tag/0.11.0>0.11.0</a> 버전
-미만에서 생성된 블록은 모두 프로토콜 버전 0으로 취급됩니다.</p>
-<h2 id=네트워크-트랜스포트-레이어>네트워크 트랜스포트 레이어</h2>
-<p><em><a href=https://github.com/planetarium/libplanet/releases/tag/0.11.0>0.11.0</a> 버전에서 추가됨.</em></p>
-<p>오랫동안 Libplanet은 네트워크 통신에 있어 많은 저수준 처리를 <a href=https://zeromq.org/>ZeroMQ</a>의
+때만 프로토콜 버전도 함께 증가됩니다.<sup id=fnref:2><a href=#fn:2 class=footnote-ref role=doc-noteref>2</a></sup></p><p><a href=https://github.com/planetarium/libplanet/releases/tag/0.19.0>0.19.0</a> 버전 현재 프로토콜 버전은 2이고, 프로토콜 버전이 도입된 <a href=https://github.com/planetarium/libplanet/releases/tag/0.11.0>0.11.0</a> 버전
+미만에서 생성된 블록은 모두 프로토콜 버전 0으로 취급됩니다.</p><h2 id=네트워크-트랜스포트-레이어>네트워크 트랜스포트 레이어</h2><p><em><a href=https://github.com/planetarium/libplanet/releases/tag/0.11.0>0.11.0</a> 버전에서 추가됨.</em></p><p>오랫동안 Libplanet은 네트워크 통신에 있어 많은 저수준 처리를 <a href=https://zeromq.org/>ZeroMQ</a>의
 .NET 구현인 <a href=https://github.com/zeromq/netmq>NetMQ</a>에 맡겨 왔습니다. 하지만 모바일이나 웹 등 여러 플랫폼에서도
 Libplanet을 쓸 수 있도록, NetMQ에 의존하지 않고도 네트워크 통신이 가능하게
-바뀔 필요가 있었습니다.</p>
-<p>네트워크 트랜스포트 레이어는 저수준 통신 방식을 다양화하고, 특수한 요구사항이
+바뀔 필요가 있었습니다.</p><p>네트워크 트랜스포트 레이어는 저수준 통신 방식을 다양화하고, 특수한 요구사항이
 있을 경우 게임 개발자도 직접 저수준 통신 방식을 정의하여 쓸 수 있도록 추가된
-실험적인 추상화 계층입니다.</p>
-<p>API 측면에서는 <a href=https://docs.libplanet.io/0.19.0/api/Libplanet.Net.Transports.ITransport.html><code>ITransport</code> 인터페이스</a>로 표현되며, 이를 구현한
-<a href=https://docs.libplanet.io/0.19.0/api/Libplanet.Net.Transports.NetMQTransport.html><code>NetMQTransport</code> 클래스</a>가 기본 제공됩니다.</p>
-<p>시범 단계이기에 인터페이스는 현재 여러 마이너 릴리스에 걸쳐 조정되고 있으며,
+실험적인 추상화 계층입니다.</p><p>API 측면에서는 <a href=https://docs.libplanet.io/0.19.0/api/Libplanet.Net.Transports.ITransport.html><code>ITransport</code> 인터페이스</a>로 표현되며, 이를 구현한
+<a href=https://docs.libplanet.io/0.19.0/api/Libplanet.Net.Transports.NetMQTransport.html><code>NetMQTransport</code> 클래스</a>가 기본 제공됩니다.</p><p>시범 단계이기에 인터페이스는 현재 여러 마이너 릴리스에 걸쳐 조정되고 있으며,
 아직 게임 개발자가 직접 정의한 트랜스포트 구현을 사용할 수는 없습니다.
 연내에는 <code>NetMQTransport</code>를 대체할 <a href=https://github.com/planetarium/libplanet/pull/1523>새로운 TCP 기반 트랜스포트</a>
 구현과 함께 <a href=https://docs.libplanet.io/0.19.0/api/Libplanet.Net.Swarm-1.html><code>Swarm&lt;T></code></a> 객체가 사용자 정의 트랜스포트를 쓰도록 설정
-가능해질 예정입니다.</p>
-<h2 id=교체-가능한-작업-증명-해시-알고리즘>교체 가능한 작업 증명 해시 알고리즘</h2>
-<p><em><a href=https://github.com/planetarium/libplanet/releases/tag/0.12.0>0.12.0</a> 버전에서 추가됨.</em></p>
-<p>이전까지 Libplanet은 작업 증명에 <a href=https://ko.wikipedia.org/wiki/SHA-2>SHA-256</a> 해시 알고리즘을 써 왔습니다.
+가능해질 예정입니다.</p><h2 id=교체-가능한-작업-증명-해시-알고리즘>교체 가능한 작업 증명 해시 알고리즘</h2><p><em><a href=https://github.com/planetarium/libplanet/releases/tag/0.12.0>0.12.0</a> 버전에서 추가됨.</em></p><p>이전까지 Libplanet은 작업 증명에 <a href=https://ko.wikipedia.org/wiki/SHA-2>SHA-256</a> 해시 알고리즘을 써 왔습니다.
 그러나 0.12.0 버전부터는 네트워크마다 <a href=https://docs.libplanet.io/0.19.0/api/Libplanet.Blockchain.Policies.IBlockPolicy-1.html#Libplanet_Blockchain_Policies_IBlockPolicy_1_GetHashAlgorithm_System_Int64_><code>IBlockPolicy&lt;T>.GetHashAlgorithm()</code>
 메서드</a>를 정의하여 해시 알고리즘을 선택할
 수 있게 됐습니다. 네트워크마다 다르게 할 수 있을 뿐만 아니라 블록 인덱스에
 따라 다른 해시 알고리즘을 쓸 수도 있기 때문에, 네트워크 출범 이후에도 다른 해시
-알고리즘으로 쉽게 이행할 수 있습니다.</p>
-<p>.NET 런타임에 정의된 <a href=https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.hashalgorithm><code>HashAlgorithm</code> 추상 클래스</a>의
+알고리즘으로 쉽게 이행할 수 있습니다.</p><p>.NET 런타임에 정의된 <a href=https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.hashalgorithm><code>HashAlgorithm</code> 추상 클래스</a>의
 서브클래스라면 모두 해시 알고리즘으로 사용할 수 있습니다. 서브클래스는 꼭
 .NET 런타임에서 제공하는 것으로 국한되지 않으며, 사용자가 직접 상속 받아
 구현하거나 NuGet 등으로 제공되는 서드파티 라이브러리에서 정의한 것도
 쓸 수 있습니다. 이를테면 플라네타리움에서 직접 만든 RandomX의 .NET 바인딩
-라이브러리인 <a href=https://github.com/planetarium/RandomXSharp>RandomXSharp</a> 역시 <code>HashAlgorithm</code>의 서브클래스를 제공합니다.</p>
-<p>다음 코드는 1만번째 블록까지는 SHA-256을 쓰고 그 뒤부터는 SHA-512를 쓰도록
-블록체인 정책을 설정하는 예입니다.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#fff><code class=language-csharp data-lang=csharp>HashAlgorithmType GetHashAlgorithm(<span style=color:#888;font-weight:700>long</span> index) =&gt;
-    index &lt;= <span style=color:#00d;font-weight:700>10_000</span>
-        ? HashAlgorithmType.Of&lt;SHA256&gt;()
-        : HashAlgorithmType.Of&lt;SHA512&gt;();
-</code></pre></div><h2 id=논블로킹-렌더러>논블로킹 렌더러</h2>
-<p><em><a href=https://github.com/planetarium/libplanet/releases/tag/0.14.0>0.14.0</a> 버전에서 추가됨.</em></p>
-<p>노드의 로컬 블록체인의 상태가 변화를 이벤트로 수신할 수 있는
+라이브러리인 <a href=https://github.com/planetarium/RandomXSharp>RandomXSharp</a> 역시 <code>HashAlgorithm</code>의 서브클래스를 제공합니다.</p><p>다음 코드는 1만번째 블록까지는 SHA-256을 쓰고 그 뒤부터는 SHA-512를 쓰도록
+블록체인 정책을 설정하는 예입니다.</p><div class=highlight><pre tabindex=0 style=background-color:#fff><code class=language-csharp data-lang=csharp><span style=display:flex><span>HashAlgorithmType GetHashAlgorithm(<span style=color:#888;font-weight:700>long</span> index) =&gt;
+</span></span><span style=display:flex><span>    index &lt;= <span style=color:#00d;font-weight:700>10_000</span>
+</span></span><span style=display:flex><span>        ? HashAlgorithmType.Of&lt;SHA256&gt;()
+</span></span><span style=display:flex><span>        : HashAlgorithmType.Of&lt;SHA512&gt;();
+</span></span></code></pre></div><h2 id=논블로킹-렌더러>논블로킹 렌더러</h2><p><em><a href=https://github.com/planetarium/libplanet/releases/tag/0.14.0>0.14.0</a> 버전에서 추가됨.</em></p><p>노드의 로컬 블록체인의 상태가 변화를 이벤트로 수신할 수 있는
 <a href=https://docs.libplanet.io/0.19.0/api/Libplanet.Blockchain.Renderers.IRenderer-1.html><code>IRenderer&lt;T></code></a> 및 <a href=https://docs.libplanet.io/0.19.0/api/Libplanet.Blockchain.Renderers.IActionRenderer-1.html><code>IActionRenderer&lt;T></code></a>
 인터페이스는 별도의 스레드를 만들지 않는 대신 렌더링 로직이 블로킹으로
 동작합니다. 이를테면, 렌더링 로직이 <code>Thread.Sleep(60_000)</code>을 호출한다면
-블록체인의 다음 상태 변화는 60초의 렌더링을 기다린 뒤에 이뤄진다는 것입니다.</p>
-<p>0.14.0 버전부터는 시간이 소요되는 렌더링 로직을 별도 스레드에서 논블로킹
+블록체인의 다음 상태 변화는 60초의 렌더링을 기다린 뒤에 이뤄진다는 것입니다.</p><p>0.14.0 버전부터는 시간이 소요되는 렌더링 로직을 별도 스레드에서 논블로킹
 방식으로 실행할 수 있게 해주는 <a href=https://docs.libplanet.io/0.19.0/api/Libplanet.Blockchain.Renderers.NonblockRenderer-1.html><code>NonblockRenderer&lt;T></code></a> 및
 <a href=https://docs.libplanet.io/0.19.0/api/Libplanet.Blockchain.Renderers.NonblockActionRenderer-1.html><code>NonblockActionRenderer&lt;T></code></a> 데코레이터 클래스가
 도입됐습니다. 두 클래스는 생성자에서 다른 렌더러를 인자로 받아, 해당 렌더러의
 이벤트 핸들러를 별도 스레드에서 호출합니다. 따라서 기존의 렌더러 구현을 한 번
-감싸는 것만으로 논블로킹 방식으로 전환할 수 있습니다.</p>
-<p>논블로킹 방식이지만 내부적으로는 대기열이 존재하며, 따라서 이벤트의 순서는
-보장됩니다.</p>
-<h2 id=마이너가-설정-가능한-트랜잭션-선호-함수>마이너가 설정 가능한 트랜잭션 선호 함수</h2>
-<p><em><a href=https://github.com/planetarium/libplanet/releases/tag/0.17.0>0.17.0</a> 버전에서 추가됨.</em></p>
-<p>마이닝할 블록에 포함할 트랜잭션들은 <a href=https://docs.libplanet.io/0.19.0/api/Libplanet.Blockchain.Policies.IBlockPolicy-1.html#Libplanet_Blockchain_Policies_IBlockPolicy_1_ValidateNextBlockTx_Libplanet_Blockchain_BlockChain__0__Libplanet_Tx_Transaction__0__><code>IBlockPolicy&lt;T>.ValidateNextBlockTx()</code>
+감싸는 것만으로 논블로킹 방식으로 전환할 수 있습니다.</p><p>논블로킹 방식이지만 내부적으로는 대기열이 존재하며, 따라서 이벤트의 순서는
+보장됩니다.</p><h2 id=마이너가-설정-가능한-트랜잭션-선호-함수>마이너가 설정 가능한 트랜잭션 선호 함수</h2><p><em><a href=https://github.com/planetarium/libplanet/releases/tag/0.17.0>0.17.0</a> 버전에서 추가됨.</em></p><p>마이닝할 블록에 포함할 트랜잭션들은 <a href=https://docs.libplanet.io/0.19.0/api/Libplanet.Blockchain.Policies.IBlockPolicy-1.html#Libplanet_Blockchain_Policies_IBlockPolicy_1_ValidateNextBlockTx_Libplanet_Blockchain_BlockChain__0__Libplanet_Tx_Transaction__0__><code>IBlockPolicy&lt;T>.ValidateNextBlockTx()</code>
 서술 메서드</a>를 만족하기만 한다면,
 프로토콜에서 정해진 우선순위는 없습니다.<sup id=fnref:3><a href=#fn:3 class=footnote-ref role=doc-noteref>3</a></sup> 그렇지만 아직 블록에 포함되지 않는
 트랜잭션이 너무 많을 때는 한 블록에 너무 많은 트랜잭션을 다 넣을 수 없기 때문에,
 어떤 트랜잭션을 이번 블록에 포함시키고 어떤 트랜잭션을 나중 블록으로 미룰지 줄을
-세워야 합니다.</p>
-<p>0.17.0 버전부터는 어떤 트랜잭션부터 블록에 넣을지 그 기준을 Libplanet이 임의로
+세워야 합니다.</p><p>0.17.0 버전부터는 어떤 트랜잭션부터 블록에 넣을지 그 기준을 Libplanet이 임의로
 정하는 대신 마이너가 정할 수 있게 됐습니다. API 측면에서는
 <a href=https://docs.libplanet.io/0.19.0/api/Libplanet.Blockchain.BlockChain-1.html#Libplanet_Blockchain_BlockChain_1_MineBlock_Libplanet_Crypto_PrivateKey_DateTimeOffset_System_Boolean_System_Int32_System_Int32_IComparer_Libplanet_Tx_Transaction__0___CancellationToken_><code>BlockChain&lt;T>.MineBlock()</code> 메서드</a>에
 <a href=https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.icomparer-1><code>IComparer&lt;Transaction&lt;T>></code> 타입</a>의 옵션 <code>txPriority</code>가
-생겼습니다.</p>
-<h2 id=블록-서명>블록 서명</h2>
-<p><em><a href=https://github.com/planetarium/libplanet/releases/tag/0.18.0>0.18.0</a> 버전에서 추가됨.</em></p>
-<p>프로토콜 버전 2, Libplanet 버전 0.18.0부터 블록은 마이너의 비밀 키로 서명되며
-블록에는 마이너의 주소 뿐만 아니라 공개 키가 포함됩니다.</p>
-<p>API 측면에서는, 블록의 서명은 <a href=https://docs.libplanet.io/0.19.0/api/Libplanet.Blocks.Block-1.html#Libplanet_Blocks_Block_1_Signature><code>Block&lt;T>.Signature</code> 속성</a>에
+생겼습니다.</p><h2 id=블록-서명>블록 서명</h2><p><em><a href=https://github.com/planetarium/libplanet/releases/tag/0.18.0>0.18.0</a> 버전에서 추가됨.</em></p><p>프로토콜 버전 2, Libplanet 버전 0.18.0부터 블록은 마이너의 비밀 키로 서명되며
+블록에는 마이너의 주소 뿐만 아니라 공개 키가 포함됩니다.</p><p>API 측면에서는, 블록의 서명은 <a href=https://docs.libplanet.io/0.19.0/api/Libplanet.Blocks.Block-1.html#Libplanet_Blocks_Block_1_Signature><code>Block&lt;T>.Signature</code> 속성</a>에
 담기고 마이너의 공개 키는 <a href=https://docs.libplanet.io/0.19.0/api/Libplanet.Blocks.Block-1.html#Libplanet_Blocks_Block_1_PublicKey><code>Block&lt;T>.PublicKey</code> 속성</a>에
 담기게 됩니다. 프로토콜 버전 1 및 0의 블록에서는 두 속성이 모두 <code>null</code>로
-비어 있습니다.</p>
-<h2 id=병렬-프로세스-마이닝>병렬 프로세스 마이닝</h2>
-<p><em><a href=https://github.com/planetarium/libplanet/releases/tag/0.19.0>0.19.0</a> 버전에서 추가됨.</em></p>
-<p>Libplanet 0.19.0 버전부터는 블록 마이닝이 자동으로 해당 기기의 프로세서 코어
+비어 있습니다.</p><h2 id=병렬-프로세스-마이닝>병렬 프로세스 마이닝</h2><p><em><a href=https://github.com/planetarium/libplanet/releases/tag/0.19.0>0.19.0</a> 버전에서 추가됨.</em></p><p>Libplanet 0.19.0 버전부터는 블록 마이닝이 자동으로 해당 기기의 프로세서 코어
 수에 따라 병렬로 수행됩니다. 마이너가 직접 활용할 프로세스 수를 조절하는
-옵션은 추후 버전에서 추가될 예정입니다.</p>
-<h2 id=그-외>그 외</h2>
-<p>그 외에도 수많은 기능이 더해졌을 뿐만 아니라, 몇 달 동안의 메인넷 운영에서
+옵션은 추후 버전에서 추가될 예정입니다.</p><h2 id=그-외>그 외</h2><p>그 외에도 수많은 기능이 더해졌을 뿐만 아니라, 몇 달 동안의 메인넷 운영에서
 발생한 문제를 해결하며 많은 영역에서 크게 안정화 됐습니다. 자세한 내용은
-각 버전의 <a href=https://github.com/planetarium/libplanet/blob/0.19.0/CHANGES.md>전체 변경 내역</a>에서 확인해 주세요.</p>
-<p>호기심이 생기신 분들은 설치해서 이용해 보시고, 궁금한 점이 있으시다면 저희 팀이
-상주해 있는 <a href=https://discord.gg/planetarium>디스코드</a>에도 놀러오세요!</p>
-<section class=footnotes role=doc-endnotes>
-<hr>
-<ol>
-<li id=fn:1 role=doc-endnote>
-<p>Libplanet은 분산 P2P로 돌아가는 온라인 멀티플레이어 게임을 만들 때,
+각 버전의 <a href=https://github.com/planetarium/libplanet/blob/0.19.0/CHANGES.md>전체 변경 내역</a>에서 확인해 주세요.</p><p>호기심이 생기신 분들은 설치해서 이용해 보시고, 궁금한 점이 있으시다면 저희 팀이
+상주해 있는 <a href=https://discord.gg/planetarium>디스코드</a>에도 놀러오세요!</p><div class=footnotes role=doc-endnotes><hr><ol><li id=fn:1><p>Libplanet은 분산 P2P로 돌아가는 온라인 멀티플레이어 게임을 만들 때,
 매번 구현해야 하는 P2P 통신이나 데이터 동기화 등의 문제를 푸는
-공용 라이브러리입니다.&#160;<a href=#fnref:1 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
-</li>
-<li id=fn:2 role=doc-endnote>
-<p>모든 메이저 및 마이너 릴리스가 프로토콜 버전을 증가시키는 것은 아닙니다.
-사실, 대부분의 릴리스는 프로토콜 버전을 증가시키지 않습니다.&#160;<a href=#fnref:2 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
-</li>
-<li id=fn:3 role=doc-endnote>
-<p>물론 같은 서명자의 트랜잭션들 사이에는
+공용 라이브러리입니다.&#160;<a href=#fnref:1 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:2><p>모든 메이저 및 마이너 릴리스가 프로토콜 버전을 증가시키는 것은 아닙니다.
+사실, 대부분의 릴리스는 프로토콜 버전을 증가시키지 않습니다.&#160;<a href=#fnref:2 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:3><p>물론 같은 서명자의 트랜잭션들 사이에는
 <a href=https://docs.libplanet.io/0.19.0/api/Libplanet.Tx.Transaction-1.html#Libplanet_Tx_Transaction_1_Nonce><code>Transaction&lt;T>.Nonce</code></a>를 기준으로 정해지는 순서가
-있습니다.&#160;<a href=#fnref:3 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
-</li>
-</ol>
-</section>
-</article>
-<script>(function(){var d,h,e,a,g,c,f,b;if(!location.hash.match(/^#/))return;if(d=document.getElementById('content'),h=window.decodeURIComponent(location.hash.substring(1)),e=document.getElementById(h),a=e.nodeName.match(/^H([123456])$/),!a||e.parentNode!==d)return;g=window.parseInt(a[1]),c=!1;for(f=0;f<d.childNodes.length;f++)b=d.childNodes[f],c?(a=b.nodeName.match(/^H([123456])$/),a&&window.parseInt(a[1])>=g&&(c=!1)):b===e&&(c=!0),!c&&!b.nodeName.match(/^#/)&&(b.className+=' dim')})()</script>
-<div class=recruit>
-<a href=https://planetariumhq.com>플라네타리움</a>은 게임에 특화된
+있습니다.&#160;<a href=#fnref:3 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li></ol></div></article><script>(function(){if(!location.hash.match(/^#/))return;var t,n,s,a,o=document.getElementById("content"),r=window.decodeURIComponent(location.hash.substring(1)),i=document.getElementById(r),e=i.nodeName.match(/^H([123456])$/);if(!e||i.parentNode!==o)return;for(a=window.parseInt(e[1]),t=!1,s=0;s<o.childNodes.length;s++)n=o.childNodes[s],t?(e=n.nodeName.match(/^H([123456])$/),e&&window.parseInt(e[1])>=a&&(t=!1)):n===i&&(t=!0),!t&&!n.nodeName.match(/^#/)&&(n.className+=" dim")})()</script><div class=recruit><a href=https://planetariumhq.com>플라네타리움</a>은 게임에 특화된
 오픈 소스 P2P 라이브러리 <a href=https://libplanet.io/>Libplanet</a>과,
 그 위에서 중앙 서버 없는 온라인 게임
 〈<a href=https://nine-chronicles.com/>나인 크로니클</a>〉을 만들고
 있습니다. 저희와 흥미로운 기술적 도전을 함께 하실 분들을 모시고 있습니다.
 지금 <a href=https://recruit.planetariumhq.com/>인재 영입 페이지</a>를
-확인해주세요!
-</div>
-<div itemprop=author class="fl tc mr3">
-<a href=https://github.com/dahlia rel=author itemprop=url class="no-underline mid-gray b f6">
-<img src="https://www.gravatar.com/avatar/03acbf60571d4ef2bf3741aecfa1b8cb?d=https://avatars.githubusercontent.com/dahlia" itemprop=image class="w3 h3 br-100 mb1">
-<br>홍민희
-</a>
-</div>
-</section>
-<footer>
-<div>
-<p class="f6 gray mt6 lh-copy">
-&copy; 2019&ndash;2023
-<a href=https://planetariumlabs.com/ style=color:inherit;text-decoration:inherit>Planetarium</a>.
-</p>
-</div>
-</footer>
-</body>
-</html>
+확인해주세요!</div><div itemprop=author class="fl tc mr3"><a href=https://github.com/dahlia rel=author itemprop=url class="no-underline mid-gray b f6"><img src="https://www.gravatar.com/avatar/03acbf60571d4ef2bf3741aecfa1b8cb?d=https://avatars.githubusercontent.com/dahlia" itemprop=image class="w3 h3 br-100 mb1"><br>홍민희</a></div></section><footer><div><p class="f6 gray mt6 lh-copy">&copy; 2019&ndash;2023
+<a href=https://planetariumlabs.com/ style=color:inherit;text-decoration:inherit>Planetarium</a>.</p></div></footer></body></html>

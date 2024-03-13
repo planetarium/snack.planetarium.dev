@@ -1,93 +1,9 @@
-<!doctype html><html lang=en prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
-<head>
-<meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
-<meta name=description content>
-<meta name=HandheldFriendly content="True">
-<meta name=MobileOptimized content="320">
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=keywords content>
-<meta property="og:type" content="article">
-<meta property="og:description" content>
-<meta property="og:title" content="Libplanet 0.4 Released">
-<meta property="og:site_name" content="Planetarium Engineering Snack">
-<meta property="og:image" content="https://snack.planetarium.dev/og/eng.png">
-<meta property="og:url" content="https://snack.planetarium.dev/eng/2019/07/libplanet-0.4/">
-<meta property="og:locale" content="en">
-<meta property="article:published_time" content="2019-07-10">
-<meta property="article:modified_time" content="2019-07-10">
-<meta name=twitter:card content="summary">
-<meta name=twitter:site content="@">
-<meta name=twitter:creator content="@">
-<meta name=twitter:title content="Libplanet 0.4 Released | Planetarium Engineering Snack">
-<meta name=twitter:description content="Hello everyone, we are happy to announce that the fourth minor version of Libplanet—Version 0.4, has been released.
+<!doctype html><html lang prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#"><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><meta name=description content><meta name=HandheldFriendly content="True"><meta name=MobileOptimized content="320"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=keywords content><meta property="og:type" content="article"><meta property="og:description" content><meta property="og:title" content="Libplanet 0.4 Released"><meta property="og:site_name" content="Planetarium Engineering Snack"><meta property="og:image" content="https://snack.planetarium.dev/og/eng.png"><meta property="og:url" content="https://snack.planetarium.dev/eng/2019/07/libplanet-0.4/"><meta property="og:locale" content><meta property="article:published_time" content="2019-07-10"><meta property="article:modified_time" content="2019-07-10"><meta name=twitter:card content="summary"><meta name=twitter:site content="@"><meta name=twitter:creator content="@"><meta name=twitter:title content="Libplanet 0.4 Released | Planetarium Engineering Snack"><meta name=twitter:description content="Hello everyone, we are happy to announce that the fourth minor version of Libplanet—Version 0.4, has been released.
 Libplanet is a common library that solves game implementation problems such as P2P communication and data synchronization when creating online multiplayer games that run on distributed P2P.
 This post will cover key changes in Version 0.4.
-LiteDBStore Added To simplify the storage layer, Libplanet provides a built-in interface called IStore and a file-based class called FileStore.|">
-<meta name=twitter:image:src content>
-<meta name=twitter:domain content="https://snack.planetarium.dev/eng/2019/07/libplanet-0.4/">
-<title>Libplanet 0.4 Released</title>
-<link rel=canonical href=https://snack.planetarium.dev/eng/2019/07/libplanet-0.4/>
-<link rel=alternate href=https://snack.planetarium.dev/kor/2019/07/libplanet-0.4/ hreflang=ko title="Libplanet 0.4 릴리스">
-<link href=https://snack.planetarium.dev/index.xml rel=alternate type=application/atom+xml title="Libplanet 0.4 Released">
-<link rel=stylesheet href=https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css>
-<link rel=stylesheet href=https://snack.planetarium.dev/css/style.min.1a35efb5c5da4fd20bd2ec86458da5ee7cc1cfc81c4f107944b5e0fc59a3d809.css integrity="sha256-GjXvtcXaT9IL0uyGRY2l7nzBz8gcTxB5RLXg/Fmj2Ak=">
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-132504786-2"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-132504786-2')</script>
-<link rel=icon href=/favicon-32x32.png type=image/png sizes=32x32>
-<link rel="shortcut icon" href=/favicon.ico type=image/x-icon>
-<link rel=apple-touch-icon href=/apple-touch-icon.png>
-</head>
-<body class="sans-serif w-90 w-60-ns center center-ns mv2 mv5-ns" itemscope itemtype=http://schema.org/Article>
-<a href=https://snack.planetarium.dev/eng/ id=site-title class="b bb bw1 pb1 no-underline dark-gray">Planetarium Engineering Snack</a>
-<section id=main class=mt5>
-<h1 itemprop=name id=title class=mb1>Libplanet 0.4 Released</h1>
-<div class="f6 gray dib-ns">
-<time itemprop=datePublished datetime=2019-07-10>
-July 10, 2019
-</time>
-(<strong>English</strong>
+LiteDBStore Added To simplify the storage layer, Libplanet provides a built-in interface called IStore and a file-based class called FileStore.|"><meta name=twitter:image:src content><meta name=twitter:domain content="https://snack.planetarium.dev/eng/2019/07/libplanet-0.4/"><title>Libplanet 0.4 Released</title>
+<link rel=canonical href=https://snack.planetarium.dev/eng/2019/07/libplanet-0.4/><link rel=alternate href=https://snack.planetarium.dev/kor/2019/07/libplanet-0.4/ hreflang=ko title="Libplanet 0.4 릴리스"><link href=https://snack.planetarium.dev/index.xml rel=alternate type=application/atom+xml title="Libplanet 0.4 Released"><link rel=stylesheet href=https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css><link rel=stylesheet href=https://snack.planetarium.dev/css/style.min.1a35efb5c5da4fd20bd2ec86458da5ee7cc1cfc81c4f107944b5e0fc59a3d809.css integrity="sha256-GjXvtcXaT9IL0uyGRY2l7nzBz8gcTxB5RLXg/Fmj2Ak="><script async src="https://www.googletagmanager.com/gtag/js?id=UA-132504786-2"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","UA-132504786-2")</script><link rel=icon href=/favicon-32x32.png type=image/png sizes=32x32><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><link rel=apple-touch-icon href=/apple-touch-icon.png></head><body class="sans-serif w-90 w-60-ns center center-ns mv2 mv5-ns" itemscope itemtype=http://schema.org/Article><a href=https://snack.planetarium.dev/eng/ id=site-title class="b bb bw1 pb1 no-underline dark-gray">Planetarium Engineering Snack</a><section id=main class=mt5><h1 itemprop=name id=title class=mb1>Libplanet 0.4 Released</h1><div class="f6 gray dib-ns"><time itemprop=datePublished datetime=2019-07-10>July 10, 2019
+</time>(<strong>English</strong>
 &bull;
-<a href=https://snack.planetarium.dev/kor/2019/07/libplanet-0.4/ hreflang=ko title="Libplanet 0.4 릴리스" class=gray>한국어</a>)
-</div>
-<article itemprop=articleBody id=content class="w-100 lh-copy">
-<p>Hello everyone, we are happy to announce that the fourth minor version of <a href=https://libplanet.io/>Libplanet</a>—<a href=https://github.com/planetarium/libplanet/releases/tag/0.4.0>Version 0.4</a>, has been released.</p>
-<p>Libplanet is a common library that solves game implementation problems such as P2P communication and data synchronization when creating online multiplayer games that run on distributed P2P.</p>
-<p>This post will cover key changes in Version 0.4.</p>
-<h2 id=litedbstore-added><code>LiteDBStore</code> Added</h2>
-<p>To simplify the storage layer, Libplanet provides a built-in interface called <a href=https://docs.libplanet.io/0.4.0/api/Libplanet.Store.IStore.html><code>IStore</code></a> and a file-based class called <a href=https://docs.libplanet.io/0.4.0/api/Libplanet.Store.FileStore.html><code>FileStore</code></a>. The <code>FileStore</code> was enough for a small game, but when we applied it to a larger one, we found the following problems:</p>
-<ul>
-<li>Because all the blocks, their status, transactions, and account addresses, were stored as separate files, there were just too many of them.</li>
-<li>I/O performance was reduced because there were no separate cache or buffers.</li>
-</ul>
-<p>To address these issues, we reviewed the need for an <code>IStore</code> implementation using a separate storage engine, and in this process we chose <a href=https://www.litedb.org/>LiteDB</a>. Written purely in C#, LiteDB is easy to manage because it&rsquo;s highly portable in a .NET environment and it allows you to manage your entire data in a single file.</p>
-<p>Since the newly added <a href=https://docs.libplanet.io/0.4.0/api/Libplanet.Store.LiteDBStore.html><code>LiteDBStore</code></a> implements <code>IStore</code>, besides the object initialization method in the previous <code>FileStore</code>, it can be used in exactly the same way.</p>
-<h2 id=easy-transaction-creation>Easy Transaction Creation</h2>
-<p><a href=https://docs.libplanet.io/0.3.0/api/Libplanet.Tx.Transaction-1.html#Libplanet_Tx_Transaction_1_Nonce><code>Transaction&lt;T>.Nonce</code></a> added on Version 0.3 was an important device for creating secure transactions, but at the same time it was a headache for developers who used Libplanet. This was because in order to make a <code>Transaction&lt;T></code>, one had to use <a href=https://docs.libplanet.io/0.3.0/api/Libplanet.Blockchain.BlockChain-1.html#Libplanet_Blockchain_BlockChain_1_GetNonce_Libplanet_Address_><code>BlockChain&lt;T>.GetNonce()</code></a> to get the exact <a href=https://en.wikipedia.org/wiki/Cryptographic_nonce>nonce</a> of the account that’s currently signing and use it. Not only was this process cumbersome, but it also created concurrency problems depending on when transactions were created.</p>
-<p>But starting from Version 0.4, <a href=https://docs.libplanet.io/0.4.0/api/Libplanet.Blockchain.BlockChain-1.html#Libplanet_Blockchain_BlockChain_1_MakeTransaction_Libplanet_Crypto_PrivateKey_System_Collections_Generic_IEnumerable__0__System_Collections_Immutable_IImmutableSet_Libplanet_Address__System_Nullable_System_DateTimeOffset__System_Boolean_><code>BlockChain&lt;T>.MakeTransaction()</code></a> makes it simple and easy to create transactions without worrying about concurrency.</p>
-<h2 id=transaction-broadcast-automated>Transaction Broadcast Automated</h2>
-<p>In order for games using previous versions of Libplanet to broadcast transactions, <a href=https://docs.libplanet.io/0.3.0/api/Libplanet.Net.Swarm.html#Libplanet_Net_Swarm_BroadcastTxs__1_System_Collections_Generic_IEnumerable_Libplanet_Tx_Transaction___0___><code>Swarm.BroadcastTxs()</code></a> had to be called directly. And because transaction broadcast could fail due to network failure, the retry logic had to be implemented directly from the game side.</p>
-<p>(Although <code>.BroadcastTxs()</code> is still usable) Now, direct implementation isn’t necessary from games. Instead, they can put their own chains when making <code>Swarm&lt;T></code> and create a transaction (using <code>BlockChain&lt;T>.MakeTransaction()</code> as introduced above). The rest will be carried out by <code>Swarm&lt;T></code>.</p>
-<p>In this process, since <code>Swarm</code> now directly manages the chain, it has been modified to <code>Swarm&lt;T></code>, indicating that it contains a type parameter(<code>T</code>), just like<code> BlockChain&lt;T></code>.</p>
-<h2 id=furthermore>Furthermore,</h2>
-<p>You can learn more about additional changes in <a href=https://github.com/planetarium/libplanet/releases/tag/0.4.0>our release notes</a>.</p>
-<p>And as always, if you have any questions about the new release or Libplanet in general, please visit <a href=https://discord.gg/planetarium>our Discord chatroom</a> and let’s chat!</p>
-</article>
-<script>(function(){var d,h,e,a,g,c,f,b;if(!location.hash.match(/^#/))return;if(d=document.getElementById('content'),h=window.decodeURIComponent(location.hash.substring(1)),e=document.getElementById(h),a=e.nodeName.match(/^H([123456])$/),!a||e.parentNode!==d)return;g=window.parseInt(a[1]),c=!1;for(f=0;f<d.childNodes.length;f++)b=d.childNodes[f],c?(a=b.nodeName.match(/^H([123456])$/),a&&window.parseInt(a[1])>=g&&(c=!1)):b===e&&(c=!0),!c&&!b.nodeName.match(/^#/)&&(b.className+=' dim')})()</script>
-<div itemprop=author class="fl tc mr3">
-<a href=https://github.com/longfin rel=author itemprop=url class="no-underline mid-gray b f6">
-<img src="https://www.gravatar.com/avatar/0b12cfcb4b1a472207af0e51f7d13a71?d=https://avatars.githubusercontent.com/longfin" itemprop=image class="w3 h3 br-100 mb1">
-<br>Swen Mun
-</a>
-</div>
-</section>
-<footer>
-<div>
-<p class="f6 gray mt6 lh-copy">
-&copy; 2019&ndash;2023
-<a href=https://planetariumlabs.com/ style=color:inherit;text-decoration:inherit>Planetarium</a>.
-</p>
-</div>
-</footer>
-</body>
-</html>
+<a href=https://snack.planetarium.dev/kor/2019/07/libplanet-0.4/ hreflang=ko title="Libplanet 0.4 릴리스" class=gray>한국어</a>)</div><article itemprop=articleBody id=content class="w-100 lh-copy"><p>Hello everyone, we are happy to announce that the fourth minor version of <a href=https://libplanet.io/>Libplanet</a>—<a href=https://github.com/planetarium/libplanet/releases/tag/0.4.0>Version 0.4</a>, has been released.</p><p>Libplanet is a common library that solves game implementation problems such as P2P communication and data synchronization when creating online multiplayer games that run on distributed P2P.</p><p>This post will cover key changes in Version 0.4.</p><h2 id=litedbstore-added><code>LiteDBStore</code> Added</h2><p>To simplify the storage layer, Libplanet provides a built-in interface called <a href=https://docs.libplanet.io/0.4.0/api/Libplanet.Store.IStore.html><code>IStore</code></a> and a file-based class called <a href=https://docs.libplanet.io/0.4.0/api/Libplanet.Store.FileStore.html><code>FileStore</code></a>. The <code>FileStore</code> was enough for a small game, but when we applied it to a larger one, we found the following problems:</p><ul><li>Because all the blocks, their status, transactions, and account addresses, were stored as separate files, there were just too many of them.</li><li>I/O performance was reduced because there were no separate cache or buffers.</li></ul><p>To address these issues, we reviewed the need for an <code>IStore</code> implementation using a separate storage engine, and in this process we chose <a href=https://www.litedb.org/>LiteDB</a>. Written purely in C#, LiteDB is easy to manage because it&rsquo;s highly portable in a .NET environment and it allows you to manage your entire data in a single file.</p><p>Since the newly added <a href=https://docs.libplanet.io/0.4.0/api/Libplanet.Store.LiteDBStore.html><code>LiteDBStore</code></a> implements <code>IStore</code>, besides the object initialization method in the previous <code>FileStore</code>, it can be used in exactly the same way.</p><h2 id=easy-transaction-creation>Easy Transaction Creation</h2><p><a href=https://docs.libplanet.io/0.3.0/api/Libplanet.Tx.Transaction-1.html#Libplanet_Tx_Transaction_1_Nonce><code>Transaction&lt;T>.Nonce</code></a> added on Version 0.3 was an important device for creating secure transactions, but at the same time it was a headache for developers who used Libplanet. This was because in order to make a <code>Transaction&lt;T></code>, one had to use <a href=https://docs.libplanet.io/0.3.0/api/Libplanet.Blockchain.BlockChain-1.html#Libplanet_Blockchain_BlockChain_1_GetNonce_Libplanet_Address_><code>BlockChain&lt;T>.GetNonce()</code></a> to get the exact <a href=https://en.wikipedia.org/wiki/Cryptographic_nonce>nonce</a> of the account that’s currently signing and use it. Not only was this process cumbersome, but it also created concurrency problems depending on when transactions were created.</p><p>But starting from Version 0.4, <a href=https://docs.libplanet.io/0.4.0/api/Libplanet.Blockchain.BlockChain-1.html#Libplanet_Blockchain_BlockChain_1_MakeTransaction_Libplanet_Crypto_PrivateKey_System_Collections_Generic_IEnumerable__0__System_Collections_Immutable_IImmutableSet_Libplanet_Address__System_Nullable_System_DateTimeOffset__System_Boolean_><code>BlockChain&lt;T>.MakeTransaction()</code></a> makes it simple and easy to create transactions without worrying about concurrency.</p><h2 id=transaction-broadcast-automated>Transaction Broadcast Automated</h2><p>In order for games using previous versions of Libplanet to broadcast transactions, <a href=https://docs.libplanet.io/0.3.0/api/Libplanet.Net.Swarm.html#Libplanet_Net_Swarm_BroadcastTxs__1_System_Collections_Generic_IEnumerable_Libplanet_Tx_Transaction___0___><code>Swarm.BroadcastTxs()</code></a> had to be called directly. And because transaction broadcast could fail due to network failure, the retry logic had to be implemented directly from the game side.</p><p>(Although <code>.BroadcastTxs()</code> is still usable) Now, direct implementation isn’t necessary from games. Instead, they can put their own chains when making <code>Swarm&lt;T></code> and create a transaction (using <code>BlockChain&lt;T>.MakeTransaction()</code> as introduced above). The rest will be carried out by <code>Swarm&lt;T></code>.</p><p>In this process, since <code>Swarm</code> now directly manages the chain, it has been modified to <code>Swarm&lt;T></code>, indicating that it contains a type parameter(<code>T</code>), just like<code> BlockChain&lt;T></code>.</p><h2 id=furthermore>Furthermore,</h2><p>You can learn more about additional changes in <a href=https://github.com/planetarium/libplanet/releases/tag/0.4.0>our release notes</a>.</p><p>And as always, if you have any questions about the new release or Libplanet in general, please visit <a href=https://discord.gg/planetarium>our Discord chatroom</a> and let’s chat!</p></article><script>(function(){if(!location.hash.match(/^#/))return;var t,n,s,a,o=document.getElementById("content"),r=window.decodeURIComponent(location.hash.substring(1)),i=document.getElementById(r),e=i.nodeName.match(/^H([123456])$/);if(!e||i.parentNode!==o)return;for(a=window.parseInt(e[1]),t=!1,s=0;s<o.childNodes.length;s++)n=o.childNodes[s],t?(e=n.nodeName.match(/^H([123456])$/),e&&window.parseInt(e[1])>=a&&(t=!1)):n===i&&(t=!0),!t&&!n.nodeName.match(/^#/)&&(n.className+=" dim")})()</script><div itemprop=author class="fl tc mr3"><a href=https://github.com/longfin rel=author itemprop=url class="no-underline mid-gray b f6"><img src="https://www.gravatar.com/avatar/0b12cfcb4b1a472207af0e51f7d13a71?d=https://avatars.githubusercontent.com/longfin" itemprop=image class="w3 h3 br-100 mb1"><br>Swen Mun</a></div></section><footer><div><p class="f6 gray mt6 lh-copy">&copy; 2019&ndash;2023
+<a href=https://planetariumlabs.com/ style=color:inherit;text-decoration:inherit>Planetarium</a>.</p></div></footer></body></html>

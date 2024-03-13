@@ -1,4 +1,4 @@
-<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><title>Planetarium Engineering Snack</title><link rel="self" href="https://snack.planetarium.dev/eng/index.xml"/><link rel="alternate" href="https://snack.planetarium.dev/eng/" title="Planetarium Engineering Snack"/><link rel="alternate" href="https://snack.planetarium.dev/kor/" hreflang="ko" title="플라네타리움 엔지니어링 스낵"/><updated>2023-04-24T00:00:00+00:00</updated><id>https://snack.planetarium.dev/eng/</id><entry><title>Libplanet PBFT Transitioner Episode 0 - Why did you switch to PBFT?</title><link rel="alternate" href="https://snack.planetarium.dev/eng/2023/04/pbft-0/" title="Libplanet PBFT Transitioner Episode 0 - Why did you switch to PBFT?"/><link rel="alternate" href="https://snack.planetarium.dev/kor/2023/04/pbft-0/" hreflang="ko" title="Libplanet PBFT 전환 제 0화 - 왜 PBFT로 전환을 시작했나요?"/><id>https://snack.planetarium.dev/eng/2023/04/pbft-0/</id><published>2023-04-24T00:00:00+00:00</published><updated>2023-04-24T00:00:00+00:00</updated><content type="html">&lt;p>Hello. My name is Suho Lee, and I am working as a Libplanet team in the blockchain division at Planetarium. Today, I would like to share the first episode of an article that explains the reasons and process for Libplanet to switch to PBFT. In this blog post, we will discuss the Libplanet blockchain consensus change process, including the reasons for the change, the specific changes made, and the advantages of the new consensus algorithm.&lt;/p>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang=""><title>Planetarium Engineering Snack</title><link rel="self" href="https://snack.planetarium.dev/eng/index.xml"/><link rel="alternate" href="https://snack.planetarium.dev/eng/" title="Planetarium Engineering Snack"/><link rel="alternate" href="https://snack.planetarium.dev/kor/" hreflang="ko" title="플라네타리움 엔지니어링 스낵"/><updated>2023-04-24T00:00:00+00:00</updated><id>https://snack.planetarium.dev/eng/</id><entry><title>Libplanet PBFT Transitioner Episode 0 - Why did you switch to PBFT?</title><link rel="alternate" href="https://snack.planetarium.dev/eng/2023/04/pbft-0/" title="Libplanet PBFT Transitioner Episode 0 - Why did you switch to PBFT?"/><link rel="alternate" href="https://snack.planetarium.dev/kor/2023/04/pbft-0/" hreflang="ko" title="Libplanet PBFT 전환 제 0화 - 왜 PBFT로 전환을 시작했나요?"/><id>https://snack.planetarium.dev/eng/2023/04/pbft-0/</id><published>2023-04-24T00:00:00+00:00</published><updated>2023-04-24T00:00:00+00:00</updated><content type="html">&lt;p>Hello. My name is Suho Lee, and I am working as a Libplanet team in the blockchain division at Planetarium. Today, I would like to share the first episode of an article that explains the reasons and process for Libplanet to switch to PBFT. In this blog post, we will discuss the Libplanet blockchain consensus change process, including the reasons for the change, the specific changes made, and the advantages of the new consensus algorithm.&lt;/p>
 &lt;h2 id="introduction">Introduction&lt;/h2>
 &lt;p>Blockchain technology is revolutionizing the world, and Libplanet is one of the leading blockchains. &lt;code>Libplanet&lt;/code> is highly scalable and decentralized, built on the .NET platform, and is open-source. The platform is highly efficient and secure, using a unique consensus algorithm that ensures network integrity.&lt;/p>
 &lt;h2 id="lets-talk-about-nine-chronicles">Let’s talk about Nine Chronicles&lt;/h2>
@@ -41,7 +41,7 @@ the key changes that have been made in between the past releases.&lt;/p>
 &lt;p>Previously, Libplanet had no clear rules for its release cycle. It was just
 simply giving a new version number to a collection of unreleased changes when
 there is a big API change, or some time has passed since the last release.&lt;/p>
-&lt;p>However, since the launch of the &lt;cite>Nine Chronicles&lt;/cite>' mainnet last
+&lt;p>However, since the launch of the &lt;cite>Nine Chronicles&lt;/cite>&amp;rsquo; mainnet last
 year, Libplanet has had to make frequent releases to fix various problems in
 the mainnet. Currently both teams of Libplanet and &lt;cite>Nine Chronicles&lt;/cite>
 in Planetarium work closely together to catch up each other&amp;rsquo;s updates. This
@@ -110,11 +110,11 @@ For instance, &lt;a href="https://github.com/planetarium/RandomXSharp">RandomXSh
 also provides a subclass of &lt;code>HashAlgorithm&lt;/code>.&lt;/p>
 &lt;p>The following code shows an example policy requiring blocks below 10,000th
 block to use SHA-256 and above blocks to use SHA-512 within a chain:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-csharp" data-lang="csharp">HashAlgorithmType GetHashAlgorithm(&lt;span style="color:#888;font-weight:bold">long&lt;/span> index) =&amp;gt;
-index &amp;lt;= &lt;span style="color:#00d;font-weight:bold">10_000&lt;/span>
-? HashAlgorithmType.Of&amp;lt;SHA256&amp;gt;()
-: HashAlgorithmType.Of&amp;lt;SHA512&amp;gt;();
-&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="non-blocking-renderers">Non-blocking Renderers&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>HashAlgorithmType GetHashAlgorithm(&lt;span style="color:#888;font-weight:bold">long&lt;/span> index) =&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> index &amp;lt;= &lt;span style="color:#00d;font-weight:bold">10_000&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ? HashAlgorithmType.Of&amp;lt;SHA256&amp;gt;()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> : HashAlgorithmType.Of&amp;lt;SHA512&amp;gt;();
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="non-blocking-renderers">Non-blocking Renderers&lt;/h2>
 &lt;p>&lt;em>Added in version &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.14.0">0.14.0&lt;/a>.&lt;/em>&lt;/p>
 &lt;p>&lt;a href="https://docs.libplanet.io/0.19.0/api/Libplanet.Blockchain.Renderers.IRenderer-1.html">&lt;code>IRenderer&amp;lt;T&amp;gt;&lt;/code>&lt;/a> and &lt;a href="https://docs.libplanet.io/0.19.0/api/Libplanet.Blockchain.Renderers.IActionRenderer-1.html">&lt;code>IActionRenderer&amp;lt;T&amp;gt;&lt;/code>&lt;/a>
 interfaces, event listeners that wait for state transitions of node&amp;rsquo;s local
@@ -149,7 +149,7 @@ API-wise, &lt;a href="https://docs.libplanet.io/0.19.0/api/Libplanet.Blockchain.
 the private key of its miner, and it includes the public key as well as the address
 of its miner.&lt;/p>
 &lt;p>API-wise, block signatures are represented as
-&lt;a href="https://docs.libplanet.io/0.19.0/api/Libplanet.Blocks.Block-1.html#Libplanet_Blocks_Block_1_Signature">&lt;code>Block&amp;lt;T&amp;gt;.Signature&lt;/code> property&lt;/a>, and miners' public keys
+&lt;a href="https://docs.libplanet.io/0.19.0/api/Libplanet.Blocks.Block-1.html#Libplanet_Blocks_Block_1_Signature">&lt;code>Block&amp;lt;T&amp;gt;.Signature&lt;/code> property&lt;/a>, and miners&amp;rsquo; public keys
 are represented as &lt;a href="https://docs.libplanet.io/0.19.0/api/Libplanet.Blocks.Block-1.html#Libplanet_Blocks_Block_1_PublicKey">&lt;code>Block&amp;lt;T&amp;gt;.PublicKey&lt;/code> property&lt;/a>.
 Blocks with protocol versions 1 and 0 fill both properties with &lt;code>null&lt;/code>.&lt;/p>
 &lt;h2 id="multi-threaded-mining">Multi-Threaded Mining&lt;/h2>
@@ -164,24 +164,24 @@ the mainnet ops. Please check the &lt;a href="https://github.com/planetarium/lib
 for details.&lt;/p>
 &lt;p>If you are interested in Libplanet, please give it a try. As we are always
 in &lt;a href="https://discord.gg/planetarium">our Discord server&lt;/a>, feel free to ask any questions if you have one!&lt;/p>
-&lt;section class="footnotes" role="doc-endnotes">
+&lt;div class="footnotes" role="doc-endnotes">
 &lt;hr>
 &lt;ol>
-&lt;li id="fn:1" role="doc-endnote">
+&lt;li id="fn:1">
 &lt;p>Libplanet is a common library that abstracts out the implementation
 details of decentralized multiplayer gaming such as peer-to-peer
 networking and data synchronization.&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:2" role="doc-endnote">
+&lt;li id="fn:2">
 &lt;p>This does not mean that all major and minor releases increase the protocol
 version. In fact, most releases do not increment the protocol version.&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:3" role="doc-endnote">
+&lt;li id="fn:3">
 &lt;p>Of course, there is an order between transactions signed by a signer.
 These are ordered by &lt;a href="https://docs.libplanet.io/0.19.0/api/Libplanet.Tx.Transaction-1.html#Libplanet_Tx_Transaction_1_Nonce">&lt;code>Transaction&amp;lt;T&amp;gt;.Nonce&lt;/code>&lt;/a>.&amp;#160;&lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></content><author><name>Hong Minhee</name><uri>https://github.com/dahlia</uri><email>hong.minhee@planetariumhq.com</email></author></entry><entry><title>Libplanet 0.10 Released</title><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/12/libplanet-0.10/" title="Libplanet 0.10 Released"/><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/12/libplanet-0.10/" hreflang="ko" title="Libplanet 0.10 릴리스"/><id>https://snack.planetarium.dev/eng/2020/12/libplanet-0.10/</id><published>2020-12-08T00:00:00+00:00</published><updated>2020-12-08T00:00:00+00:00</updated><content type="html">&lt;p>Hello Everyone! We have released the tenth minor version of &lt;a href="https://libplanet.io/">Libplanet&lt;/a>, &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.10.0">Version 0.10&lt;/a>.&lt;/p>
+&lt;/div></content><author><name>Hong Minhee</name><uri>https://github.com/dahlia</uri><email>hong.minhee@planetariumhq.com</email></author></entry><entry><title>Libplanet 0.10 Released</title><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/12/libplanet-0.10/" title="Libplanet 0.10 Released"/><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/12/libplanet-0.10/" hreflang="ko" title="Libplanet 0.10 릴리스"/><id>https://snack.planetarium.dev/eng/2020/12/libplanet-0.10/</id><published>2020-12-08T00:00:00+00:00</published><updated>2020-12-08T00:00:00+00:00</updated><content type="html">&lt;p>Hello Everyone! We have released the tenth minor version of &lt;a href="https://libplanet.io/">Libplanet&lt;/a>, &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.10.0">Version 0.10&lt;/a>.&lt;/p>
 &lt;p>Libplanet is a common library that solves game implementation problems such as P2P communication and data synchronization when creating online multiplayer games that run on distributed P2P.&lt;/p>
 &lt;p>In this version, Libplanet has made many changes both inside and outside the interface, including the use of &lt;a href="https://eth.wiki/en/fundamentals/patricia-tree">&lt;abbr title="Merkle–Patricia Trie">MPT&lt;/abbr>&lt;/a> to manage Libplanet&amp;rsquo;s state and additional APIs for asset management.&lt;/p>
 &lt;p>This piece addresses key major changes in Version 0.10.&lt;/p>
@@ -195,7 +195,7 @@ These are ordered by &lt;a href="https://docs.libplanet.io/0.19.0/api/Libplanet.
 &lt;h2 id="separate-state-api-for-assets">Separate State API for Assets&lt;/h2>
 &lt;p>So far, in-game goods have been treated the same way as in-game states when creating games with Libplanet. For example, &lt;abbr title="Nine Chronicles Gold">NCG&lt;/abbr> is implemented as an arbitrarily large integer. Although such goods should never be replicated or destroyed carelessly, implementing them in a data type that is free of proprietary computation and doesn&amp;rsquo;t necessarily hold the characteristics of the goods is prone to bugs.&lt;/p>
 &lt;p>For instance, when money is transferred, the sender&amp;rsquo;s balance should be reduced and the recipient&amp;rsquo;s balance should be increased. However, bugs that skip updating either the sender&amp;rsquo;s or the recipient&amp;rsquo;s balance could take place. Also, bugs that distribute the money to multiple people and bugs that unintentionally delete remaining amounts after division are possible.&lt;/p>
-&lt;p>And even more critically, when a programmer carelessly writes a code that just adds money to players' balance as a game reward, this could affect the game economy as a whole and is practically like casting money privately.&lt;/p>
+&lt;p>And even more critically, when a programmer carelessly writes a code that just adds money to players&amp;rsquo; balance as a game reward, this could affect the game economy as a whole and is practically like casting money privately.&lt;/p>
 &lt;p>To prevent these issues early on, this version has a separate state API for primarily dealing with assets. The &lt;a href="https://docs.libplanet.io/0.10.2/api/Libplanet.Blockchain.BlockChain-1.html#Libplanet_Blockchain_BlockChain_1_GetBalance_Libplanet_Address_Libplanet_Assets_Currency_System_Nullable_Libplanet_HashDigest_SHA256___Libplanet_Blockchain_FungibleAssetStateCompleter__0__">&lt;code>BlockChain&amp;lt;T&amp;gt;.GetBalance()&lt;/code>&lt;/a> and &lt;a href="https://docs.libplanet.io/0.10.2/api/Libplanet.Action.IAccountStateDelta.html#Libplanet_Action_IAccountStateDelta_GetBalance_Libplanet_Address_Libplanet_Assets_Currency_">&lt;code>IAccountStateDelta.GetBalance()&lt;/code>&lt;/a> methods are created alongside the existing &lt;a href="https://docs.libplanet.io/0.10.2/api/Libplanet.Blockchain.BlockChain-1.html#Libplanet_Blockchain_BlockChain_1_GetState_Libplanet_Address_System_Nullable_Libplanet_HashDigest_SHA256___Libplanet_Blockchain_StateCompleter__0__">&lt;code>BlockChain&amp;lt;T&amp;gt;.GetState()&lt;/code>&lt;/a> and &lt;a href="https://docs.libplanet.io/0.10.2/api/Libplanet.Action.IAccountStateDelta.html#Libplanet_Action_IAccountStateDelta_GetState_Libplanet_Address_">&lt;code>IAccountStateDelta.GetState()&lt;/code>&lt;/a> methods. And in addition to the &lt;a href="https://docs.libplanet.io/0.10.2/api/Libplanet.Action.IAccountStateDelta.html#Libplanet_Action_IAccountStateDelta_SetState_Libplanet_Address_IValue_">&lt;code>IAccountStateDelta.SetState()&lt;/code>&lt;/a> method which can freely update states, &lt;a href="https://docs.libplanet.io/0.10.2/api/Libplanet.Action.IAccountStateDelta.html#Libplanet_Action_IAccountStateDelta_SetState_Libplanet_Address_IValue_">&lt;code>IAccountStateDelta.TransferAsset()&lt;/code>&lt;/a> method for transferring assets and &lt;a href="https://docs.libplanet.io/0.10.2/api/Libplanet.Action.IAccountStateDelta.html#Libplanet_Action_IAccountStateDelta_MintAsset_Libplanet_Address_Libplanet_Assets_FungibleAssetValue_">&lt;code>IAccountStateDelta.MintAsset()&lt;/code>&lt;/a> method for minting assets have been created.&lt;/p>
 &lt;p>Also, instead of using .NET&amp;rsquo;s built-in &lt;a href="https://docs.microsoft.com/en-us/dotnet/api/system.numerics.biginteger?view=net-5.0">&lt;code>BigInteger&lt;/code>&lt;/a> type, you need to use the new &lt;a href="https://docs.libplanet.io/0.10.2/api/Libplanet.Assets.FungibleAssetValue.html">&lt;code>FungibleAssetValue&lt;/code>&lt;/a> type added to Libplanet. &lt;code>FungibleAssetValue&lt;/code> basically looks like a &lt;a href="https://docs.microsoft.com/en-us/dotnet/api/system.numerics.biginteger?view=net-5.0">&lt;code>BigInteger&lt;/code>&lt;/a>, but there are some differences.&lt;/p>
 &lt;ol>
@@ -213,7 +213,7 @@ To implement No.3 above, the data type &lt;a href="https://docs.libplanet.io/0.1
 &lt;p>When you only need a simple rendering, we recommend that you use the &lt;a href="https://docs.libplanet.io/0.10.2/api/Libplanet.Blockchain.Renderers.AnonymousRenderer-1.html">&lt;code>AnonymousRenderer&amp;lt;T&amp;gt;&lt;/code>&lt;/a> class instead of creating your own class that implements the interface.&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>
 Also, in the new rendering API, the &lt;a href="https://docs.libplanet.io/0.10.2/api/Libplanet.Blockchain.Renderers.IActionRenderer-1.html#Libplanet_Blockchain_Renderers_IActionRenderer_1_RenderActionError_Libplanet_Action_IAction_Libplanet_Action_IActionContext_Exception_">&lt;code>IActionRenderer&amp;lt;T&amp;gt;.RenderActionError()&lt;/code>&lt;/a> method addresses exceptions from actions, the &lt;a href="https://docs.libplanet.io/0.10.2/api/Libplanet.Blockchain.Renderers.IRenderer-1.html#Libplanet_Blockchain_Renderers_IRenderer_1_RenderBlock_Libplanet_Blocks_Block__0__Libplanet_Blocks_Block__0__">&lt;code>IRenderer&amp;lt;T&amp;gt;.RenderBlock()&lt;/code>&lt;/a> method detects the height change in the blockchain, and the &lt;a href="https://docs.libplanet.io/0.10.2/api/Libplanet.Blockchain.Renderers.IRenderer-1.html#Libplanet_Blockchain_Renderers_IRenderer_1_RenderReorg_Libplanet_Blocks_Block__0__Libplanet_Blocks_Block__0__Libplanet_Blocks_Block__0__">&lt;code>IRenderer&amp;lt;T&amp;gt;.RenderReorg()&lt;/code>&lt;/a> method detects the occurrence of a reorg&lt;sup id="fnref:2">&lt;a href="#fn:2" class="footnote-ref" role="doc-noteref">2&lt;/a>&lt;/sup>. The separation of the rendering code from the action into an independent unit called renderer allows middleware structure through decorator pattern. For example, the new version&amp;rsquo;s &lt;a href="https://docs.libplanet.io/0.10.2/api/Libplanet.Blockchain.Renderers.LoggedRenderer-1.html">&lt;code>LoggedRenderer&amp;lt;T&amp;gt;&lt;/code>&lt;/a> class wraps other &lt;code>IRenderer&amp;lt;T&amp;gt;&lt;/code> implementations and logs which rendering events occurred at what point. When debugging, you can wrap the game renderer with &lt;code>LoggedRenderer&amp;lt;T&amp;gt;&lt;/code> and take it out in the actual production.&lt;/p>
 &lt;h2 id="delayed-renderer">Delayed Renderer&lt;/h2>
-&lt;p>Since Libplanet currently uses a &lt;abbr title="proof-of-work">PoW&lt;/abbr> mechanism which has only &lt;em>probabilistic&lt;/em> finality, recent blocks are prone to reorg. For this reason, many cryptocurrency wallets and exchanges often show transactions' number of confirmations because the higher the number of confirmations, the less likely a reorg occurs. In order to prevent confusion in the game due to frequent reorg in the blockchain, a delayed renderer has been added. &lt;a href="https://docs.libplanet.io/0.10.2/api/Libplanet.Blockchain.Renderers.DelayedRenderer-1.html">&lt;code>DelayedRenderer&amp;lt;T&amp;gt;&lt;/code>&lt;/a> is a decorator that receives &lt;code>IRenderer&amp;lt;T&amp;gt;&lt;/code> as an input and implements &lt;code>IRenderer&amp;lt;T&amp;gt;&lt;/code> on its own, virtually acting as a middleware that delays rendering events. So instead of immediately generating related events when new blocks are stacked in the blockchain, the delayed renderer waits until it meets the number of confirmations you have set. &lt;a href="https://nine-chronicles.com/">Nine Chronicles&lt;/a> also uses a delayed renderer, and the number of confirmations is available as an option for the player to set.&lt;sup id="fnref:3">&lt;a href="#fn:3" class="footnote-ref" role="doc-noteref">3&lt;/a>&lt;/sup>&lt;/p>
+&lt;p>Since Libplanet currently uses a &lt;abbr title="proof-of-work">PoW&lt;/abbr> mechanism which has only &lt;em>probabilistic&lt;/em> finality, recent blocks are prone to reorg. For this reason, many cryptocurrency wallets and exchanges often show transactions&amp;rsquo; number of confirmations because the higher the number of confirmations, the less likely a reorg occurs. In order to prevent confusion in the game due to frequent reorg in the blockchain, a delayed renderer has been added. &lt;a href="https://docs.libplanet.io/0.10.2/api/Libplanet.Blockchain.Renderers.DelayedRenderer-1.html">&lt;code>DelayedRenderer&amp;lt;T&amp;gt;&lt;/code>&lt;/a> is a decorator that receives &lt;code>IRenderer&amp;lt;T&amp;gt;&lt;/code> as an input and implements &lt;code>IRenderer&amp;lt;T&amp;gt;&lt;/code> on its own, virtually acting as a middleware that delays rendering events. So instead of immediately generating related events when new blocks are stacked in the blockchain, the delayed renderer waits until it meets the number of confirmations you have set. &lt;a href="https://nine-chronicles.com/">Nine Chronicles&lt;/a> also uses a delayed renderer, and the number of confirmations is available as an option for the player to set.&lt;sup id="fnref:3">&lt;a href="#fn:3" class="footnote-ref" role="doc-noteref">3&lt;/a>&lt;/sup>&lt;/p>
 &lt;h2 id="static-analyzer">&lt;a href="https://github.com/planetarium/libplanet/tree/main/Libplanet.Analyzers">Static Analyzer&lt;/a>&lt;/h2>
 &lt;p>In Libplanet, the state within all blockchain can only be changed through an action. Because actions are executed separately on each node to derive a new state from the previous state and all nodes need to agree on a consistent state, an action must be deterministic. However, despite knowing what makes the code non-deterministic, it&amp;rsquo;s not that simple to make a complex logic deterministic. You can make mistakes knowingly, and especially when multiple people work on the code, each deterministic portion implemented by different people can easily be combined to derive a non-deterministic result.&lt;/p>
 &lt;p>To address this issue, the new version introduces &lt;a href="https://www.nuget.org/packages/Libplanet.Analyzers">Libplanet.Analyzers Package&lt;/a>, which checks for errors in the Libplanet action code through static analysis. This static analyzer alerts you in advance to potential bugs that are common, based on repeated mistakes we&amp;rsquo;ve made in developing Nine Chronicles. It&amp;rsquo;s very easy to use, just add it as a NuGet package dependency and it will output as a warning along with a C# compiler error when built.&lt;/p>
@@ -225,20 +225,20 @@ Also, in the new rendering API, the &lt;a href="https://docs.libplanet.io/0.10.2
 &lt;h2 id="furthermore">Furthermore&lt;/h2>
 &lt;p>You can learn more about additional changes in our &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.10.0">release notes&lt;/a>.&lt;/p>
 &lt;p>And as always, if you have any questions about the new release or Libplanet in general, please visit our &lt;a href="https://discord.gg/planetarium">Discord chatroom&lt;/a> and let’s chat!&lt;/p>
-&lt;section class="footnotes" role="doc-endnotes">
+&lt;div class="footnotes" role="doc-endnotes">
 &lt;hr>
 &lt;ol>
-&lt;li id="fn:1" role="doc-endnote">
+&lt;li id="fn:1">
 &lt;p>Unlike Java, C# doesn&amp;rsquo;t have an anonymous class.&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:2" role="doc-endnote">
+&lt;li id="fn:2">
 &lt;p>For more information on reorg, refer to Muhun Kim&amp;rsquo;s &lt;a href="https://snack.planetarium.dev/eng/2020/10/decentralized-and-online-game-intersect/">Decentralization Intersects with Online Game&lt;/a>.&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:3" role="doc-endnote">
+&lt;li id="fn:3">
 &lt;p>The number of confirmations currently can&amp;rsquo;t be adjusted on the UI, but it can be changed directly in the configuration file.&amp;#160;&lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></content><author><name>Suho Lee</name><uri>https://github.com/riemannulus</uri><email>suho@planetariumhq.com</email></author></entry><entry><title>Decentralization Intersects with Online Game</title><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/10/decentralized-and-online-game-intersect/" title="Decentralization Intersects with Online Game"/><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/10/decentralized-and-online-game-intersect/" hreflang="ko" title="탈중앙과 온라인 게임이 교차하다"/><id>https://snack.planetarium.dev/eng/2020/10/decentralized-and-online-game-intersect/</id><published>2020-10-08T00:00:00+00:00</published><updated>2020-10-08T00:00:00+00:00</updated><content type="html">&lt;p>Hello all! I&amp;rsquo;m Muhun Kim, an engineering intern at Planetarium for the past two months. I was involved in the beta process prior to the launch of &lt;a href="https://nine-chronicles.com">Nine Chronicles&lt;/a>.&lt;/p>
+&lt;/div></content><author><name>Suho Lee</name><uri>https://github.com/riemannulus</uri><email>suho@planetariumhq.com</email></author></entry><entry><title>Decentralization Intersects with Online Game</title><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/10/decentralized-and-online-game-intersect/" title="Decentralization Intersects with Online Game"/><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/10/decentralized-and-online-game-intersect/" hreflang="ko" title="탈중앙과 온라인 게임이 교차하다"/><id>https://snack.planetarium.dev/eng/2020/10/decentralized-and-online-game-intersect/</id><published>2020-10-08T00:00:00+00:00</published><updated>2020-10-08T00:00:00+00:00</updated><content type="html">&lt;p>Hello all! I&amp;rsquo;m Muhun Kim, an engineering intern at Planetarium for the past two months. I was involved in the beta process prior to the launch of &lt;a href="https://nine-chronicles.com">Nine Chronicles&lt;/a>.&lt;/p>
 &lt;p>In this post, I’d like to introduce a technical example that I thought was unique when combining blockchain and games.&lt;/p>
 &lt;h2 id="decentralization">Decentralization&lt;/h2>
 &lt;p>Online games use servers to operate services, such as multi-play and user data. However, if services go down for a number of reasons, such as when game companies shut down, you will no longer be able to play the games.&lt;/p>
@@ -288,45 +288,45 @@ alt="A user who owned 10,000 gold yesterday reported having less than 1,000 gold
 &lt;h2 id="blockchain-network-reset">Blockchain Network Reset&lt;/h2>
 &lt;p>Nine Chronicles has reset its blockchain network seven times during the beta period. When the network is reset, all players’ game data becomes reset as well. Here’s the reason why the reset was carried out despite certain risks:&lt;/p>
 &lt;p>The blockchain network core &lt;a href="https://libplanet.io/">Libplanet&lt;/a> stores the state of the game in blocks. Player’s behavior is stored with a data structure called &lt;a href="https://docs.libplanet.io/0.9.5/api/Libplanet.Action.IAction.html">Action&lt;/a>.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-json" data-lang="json">{
-&lt;span style="color:#b06;font-weight:bold">&amp;#34;stageId&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;123&amp;#34;&lt;/span>,
-&lt;span style="color:#b06;font-weight:bold">&amp;#34;id&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;ntPSdIREOUOARaRYJHlGEg==&amp;#34;&lt;/span>,
-&lt;span style="color:#b06;font-weight:bold">&amp;#34;equipments&amp;#34;&lt;/span>: [&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;KTm6cLkrtEWs6k4A821K3Q==&amp;#34;&lt;/span>],
-&lt;span style="color:#b06;font-weight:bold">&amp;#34;avatarAddress&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;sGo0bo0VwrYA7ubq6yV8ctiU2vc=&amp;#34;&lt;/span>,
-&lt;span style="color:#b06;font-weight:bold">&amp;#34;foods&amp;#34;&lt;/span>: [],
-&lt;span style="color:#b06;font-weight:bold">&amp;#34;worldId&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;3&amp;#34;&lt;/span>
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>If a costume element is updated within the game, a new property is added, such as &lt;code>costumes&lt;/code>, and the hash&lt;sup id="fnref:4">&lt;a href="#fn:4" class="footnote-ref" role="doc-noteref">4&lt;/a>&lt;/sup> of the block containing this information does not match the protocol that creates the hash of the previous block. And if the protocol changes, previous block data will not be able to be used consecutively.&lt;sup id="fnref:5">&lt;a href="#fn:5" class="footnote-ref" role="doc-noteref">5&lt;/a>&lt;/sup> In addition, the protocol changes if the unique values are different, or if the code in &lt;a href="https://libplanet.io/">Libplanet&lt;/a> or its SDK is modified that affects the hash.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b06;font-weight:bold">&amp;#34;stageId&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;123&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b06;font-weight:bold">&amp;#34;id&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;ntPSdIREOUOARaRYJHlGEg==&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b06;font-weight:bold">&amp;#34;equipments&amp;#34;&lt;/span>: [&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;KTm6cLkrtEWs6k4A821K3Q==&amp;#34;&lt;/span>],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b06;font-weight:bold">&amp;#34;avatarAddress&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;sGo0bo0VwrYA7ubq6yV8ctiU2vc=&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b06;font-weight:bold">&amp;#34;foods&amp;#34;&lt;/span>: [],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b06;font-weight:bold">&amp;#34;worldId&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;3&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>If a costume element is updated within the game, a new property is added, such as &lt;code>costumes&lt;/code>, and the hash&lt;sup id="fnref:4">&lt;a href="#fn:4" class="footnote-ref" role="doc-noteref">4&lt;/a>&lt;/sup> of the block containing this information does not match the protocol that creates the hash of the previous block. And if the protocol changes, previous block data will not be able to be used consecutively.&lt;sup id="fnref:5">&lt;a href="#fn:5" class="footnote-ref" role="doc-noteref">5&lt;/a>&lt;/sup> In addition, the protocol changes if the unique values are different, or if the code in &lt;a href="https://libplanet.io/">Libplanet&lt;/a> or its SDK is modified that affects the hash.&lt;/p>
 &lt;p>In these cases, other blockchains usually add protocols to interpret blocks differently after a certain number of blocks. Nine Chronicles may do the same, but we found this method to be unnecessary during the beta period, when changes are frequent, large and small. That&amp;rsquo;s why we decided to reset the chain every time.&lt;/p>
 &lt;p>Of course, we will be maintaining the chain after the official launch. A number of suggestions have been reviewed, and if there is a chance, we will introduce them on this blog.&lt;/p>
 &lt;h2 id="closing">Closing&lt;/h2>
 &lt;p>Planetarium is looking forward to establishing a new type of game culture with &amp;ldquo;community-run online games.&amp;rdquo; Sometimes we see on the media that an employee of an online game company embezzled game resources, destroying the game&amp;rsquo;s ecosystem. Nine Chronicles can&amp;rsquo;t do that in principle because the rules of the game are transparent to the protocol level.&lt;/p>
 &lt;p>Despite these advantages, the blockchain protocol used by Libplanet can be felt as an entry barrier. It&amp;rsquo;s similar to the shock I felt when I first saw Git, which distributes the work by line and merges automatically. So we’d love to hear about your experience, thoughts, and concerns playing Nine Chronicles on our &lt;a href="https://discord.gg/planetarium">discord channel&lt;/a> and on GitHub&lt;sup id="fnref:6">&lt;a href="#fn:6" class="footnote-ref" role="doc-noteref">6&lt;/a>&lt;/sup>.&lt;/p>
-&lt;p>This post will be published as a series, and the next issue will introduce Nine Chronicles' handling of reorg and chain resets. Thanks!&lt;/p>
-&lt;section class="footnotes" role="doc-endnotes">
+&lt;p>This post will be published as a series, and the next issue will introduce Nine Chronicles&amp;rsquo; handling of reorg and chain resets. Thanks!&lt;/p>
+&lt;div class="footnotes" role="doc-endnotes">
 &lt;hr>
 &lt;ol>
-&lt;li id="fn:1" role="doc-endnote">
+&lt;li id="fn:1">
 &lt;p>Our engineering team calls this a mirage phenomenon because the game data disappears like a dream.&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:2" role="doc-endnote">
+&lt;li id="fn:2">
 &lt;p>Computer that participates in the blockchain network.&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:3" role="doc-endnote">
+&lt;li id="fn:3">
 &lt;p>The player&amp;rsquo;s perspective was well explained in the &lt;a href="https://dpsyphle.ninja/2020/08/16/rollbacks-in-decentralized-games.html">game review&lt;/a> written by See-eun Ha, Co-founder of Blockchain Co-living and Co-working Community, Nonce.&amp;#160;&lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:4" role="doc-endnote">
+&lt;li id="fn:4">
 &lt;p>A blockchain connects the chain using the hash of the previous block as a meta information, similar to a linked list.&amp;#160;&lt;a href="#fnref:4" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:5" role="doc-endnote">
+&lt;li id="fn:5">
 &lt;p>It is possible that game clients with expanded specifications may not be able to interpret the previous block correctly.&amp;#160;&lt;a href="#fnref:5" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:6" role="doc-endnote">
+&lt;li id="fn:6">
 &lt;p>In addition to the Blockchain Core for P2P online games — &lt;a href="https://github.com/planetarium/libplanet">Libplanet&lt;/a>,
 Libplanet-based SDK for Nine Chronicles — &lt;a href="https://github.com/planetarium/lib9c">Lib9c&lt;/a>, Blockchain Node Service dedicated to Nine Chronicle Clients — &lt;a href="https://github.com/planetarium/ninechronicles.standalone">NineChronicles.Standalone&lt;/a>, we will also be releasing the repositories of the launcher and game client for Nine Chronicles.&amp;#160;&lt;a href="#fnref:6" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></content><author><name>Muhun Kim</name><uri>https://github.com/x86chi</uri><email>iam@muhun.kim</email></author></entry><entry><title>My First Month at Planetarium</title><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/06/junior-experience/" title="My First Month at Planetarium"/><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/06/junior-experience/" hreflang="ko" title="플라네타리움에서 한 달동안 경험한 이야기"/><id>https://snack.planetarium.dev/eng/2020/06/junior-experience/</id><published>2020-06-02T00:00:00+00:00</published><updated>2020-06-02T00:00:00+00:00</updated><content type="html">&lt;p>Hello, I’m Suho Lee, the newest member of Team Libplanet at &lt;a href="https://planetariumhq.com/">Planetarium&lt;/a>. To celebrate my first month of working in the company, I would like to take this opportunity to talk about my expectations joining the team, what I did for a month, and how we work at Planetarium.&lt;/p>
+&lt;/div></content><author><name>Muhun Kim</name><uri>https://github.com/x86chi</uri><email>iam@muhun.kim</email></author></entry><entry><title>My First Month at Planetarium</title><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/06/junior-experience/" title="My First Month at Planetarium"/><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/06/junior-experience/" hreflang="ko" title="플라네타리움에서 한 달동안 경험한 이야기"/><id>https://snack.planetarium.dev/eng/2020/06/junior-experience/</id><published>2020-06-02T00:00:00+00:00</published><updated>2020-06-02T00:00:00+00:00</updated><content type="html">&lt;p>Hello, I’m Suho Lee, the newest member of Team Libplanet at &lt;a href="https://planetariumhq.com/">Planetarium&lt;/a>. To celebrate my first month of working in the company, I would like to take this opportunity to talk about my expectations joining the team, what I did for a month, and how we work at Planetarium.&lt;/p>
 &lt;h2 id="how-i-applied-to-planetarium">How I Applied to Planetarium&lt;/h2>
 &lt;p>In June 2019, I participated in an event called &lt;a href="https://www.sprintseoul.org/2019-06-29/">2019 Sprint Seoul&lt;/a>. While deciding which open-source project to contribute to, Hong Minhee, a member of Planetarium reached out to me and suggested me to take a look at &lt;a href="https://libplanet.io/">Libplanet&lt;/a>. My experience contributing to Libplanet turned out to be extremely memorable and I decided to apply for a job at Planetarium as soon as open positions were posted. My main motivation for applying was that I wanted to continue this positive experience working with the members at Planetarium and I also wanted to make an impact in the company by sharing my positivity.&lt;/p>
 &lt;h2 id="what-i-did-in-the-first-month">What I Did in the First Month&lt;/h2>
@@ -441,46 +441,48 @@ alt="Daily Report"/>&lt;figcaption>
 &lt;ul>
 &lt;li>
 &lt;p>I’ve created an &lt;code>IntBufferElement&lt;/code> structure that implements &lt;code>IBufferElementData&lt;/code>. It’s format is similar to &lt;code>IComponentData&lt;/code>, right?&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#080;font-weight:bold">using&lt;/span> &lt;span style="color:#b06;font-weight:bold">Unity.Entities&lt;/span>;
-&lt;span style="color:#080;font-weight:bold">namespace&lt;/span> &lt;span style="color:#b06;font-weight:bold">DOTS_DynamicBuffer&lt;/span>
-{
-&lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#080;font-weight:bold">struct&lt;/span> &lt;span style="color:#b06;font-weight:bold">IntBufferElement&lt;/span> : IBufferElementData
-{
-&lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#888;font-weight:bold">int&lt;/span> Value;
-}
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#080;font-weight:bold">using&lt;/span> &lt;span style="color:#b06;font-weight:bold">Unity.Entities&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#080;font-weight:bold">namespace&lt;/span> &lt;span style="color:#b06;font-weight:bold">DOTS_DynamicBuffer&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#080;font-weight:bold">struct&lt;/span> &lt;span style="color:#b06;font-weight:bold">IntBufferElement&lt;/span> : IBufferElementData
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#888;font-weight:bold">int&lt;/span> Value;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;/ul>
 &lt;h2 id="using-entitymanageraddbuffertentitymanageraddbuffert">Using &lt;a href="https://docs.unity3d.com/Packages/com.unity.entities@0.10/api/Unity.Entities.EntityManager.html#Unity_Entities_EntityManager_AddBuffer__1_Unity_Entities_Entity_">&lt;code>EntityManager.AddBuffer&amp;lt;T&amp;gt;()&lt;/code>&lt;/a>&lt;/h2>
 &lt;p>Just like adding a component to an entity, we need to use &lt;a href="https://docs.unity3d.com/Packages/com.unity.entities@0.10/api/Unity.Entities.EntityManager.html">&lt;code>EntityManager&lt;/code>&lt;/a> when adding buffers. Below, I’ve written a component called &lt;code>PlayModeTest&lt;/code> that will be added to game objects and with that, let’s check the &lt;em>Entity Debugger&lt;/em> in play mode.&lt;/p>
 &lt;ul>
 &lt;li>
 &lt;p>Let’s add an &lt;code>IntBufferElement&lt;/code> buffer to the entity and put some values in it.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#080;font-weight:bold">using&lt;/span> &lt;span style="color:#b06;font-weight:bold">UnityEngine&lt;/span>;
-&lt;span style="color:#080;font-weight:bold">using&lt;/span> &lt;span style="color:#b06;font-weight:bold">Unity.Entities&lt;/span>;
-&lt;span style="color:#080;font-weight:bold">namespace&lt;/span> &lt;span style="color:#b06;font-weight:bold">DOTS_DynamicBuffer&lt;/span>
-{
-&lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#080;font-weight:bold">class&lt;/span> &lt;span style="color:#b06;font-weight:bold">PlayModeTest&lt;/span> : MonoBehaviour
-{
-&lt;span style="color:#080;font-weight:bold">private&lt;/span> &lt;span style="color:#080;font-weight:bold">void&lt;/span> Awake()
-{
-&lt;span style="color:#888;font-weight:bold">var&lt;/span> entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
-&lt;span style="color:#888;font-weight:bold">var&lt;/span> entity = entityManager.CreateEntity();
-&lt;span style="color:#888;font-weight:bold">var&lt;/span> dynamicBuffer = entityManager.AddBuffer&amp;lt;IntBufferElement&amp;gt;(entity);
-dynamicBuffer.Add(&lt;span style="color:#080;font-weight:bold">new&lt;/span> IntBufferElement { Value = &lt;span style="color:#00d;font-weight:bold">1&lt;/span> });
-dynamicBuffer.Add(&lt;span style="color:#080;font-weight:bold">new&lt;/span> IntBufferElement { Value = &lt;span style="color:#00d;font-weight:bold">2&lt;/span> });
-dynamicBuffer.Add(&lt;span style="color:#080;font-weight:bold">new&lt;/span> IntBufferElement { Value = &lt;span style="color:#00d;font-weight:bold">3&lt;/span> });
-}
-}
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#080;font-weight:bold">using&lt;/span> &lt;span style="color:#b06;font-weight:bold">UnityEngine&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#080;font-weight:bold">using&lt;/span> &lt;span style="color:#b06;font-weight:bold">Unity.Entities&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#080;font-weight:bold">namespace&lt;/span> &lt;span style="color:#b06;font-weight:bold">DOTS_DynamicBuffer&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#080;font-weight:bold">class&lt;/span> &lt;span style="color:#b06;font-weight:bold">PlayModeTest&lt;/span> : MonoBehaviour
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#080;font-weight:bold">private&lt;/span> &lt;span style="color:#080;font-weight:bold">void&lt;/span> Awake()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#888;font-weight:bold">var&lt;/span> entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#888;font-weight:bold">var&lt;/span> entity = entityManager.CreateEntity();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#888;font-weight:bold">var&lt;/span> dynamicBuffer = entityManager.AddBuffer&amp;lt;IntBufferElement&amp;gt;(entity);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dynamicBuffer.Add(&lt;span style="color:#080;font-weight:bold">new&lt;/span> IntBufferElement { Value = &lt;span style="color:#00d;font-weight:bold">1&lt;/span> });
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dynamicBuffer.Add(&lt;span style="color:#080;font-weight:bold">new&lt;/span> IntBufferElement { Value = &lt;span style="color:#00d;font-weight:bold">2&lt;/span> });
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dynamicBuffer.Add(&lt;span style="color:#080;font-weight:bold">new&lt;/span> IntBufferElement { Value = &lt;span style="color:#00d;font-weight:bold">3&lt;/span> });
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>
 &lt;p>I’ve created &lt;em>DOTS_DynamicBufferScene&lt;/em> and added the &lt;code>PlayModeTest&lt;/code> script to a game object with the same name.&lt;/p>
-&lt;p>&lt;img src="images/01.png" alt="">&lt;/p>
+&lt;p>&lt;img src="images/01.png">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>In play mode, you can check the entity created by the &lt;code>PlayModeTest.Awake()&lt;/code> method through &lt;em>Entity Debugger&lt;/em>. Can you see that the &lt;code>IntBufferElement&lt;/code> buffer has three values?&lt;/p>
-&lt;p>&lt;img src="images/02.png" alt="">&lt;/p>
+&lt;p>&lt;img src="images/02.png">&lt;/p>
 &lt;/li>
 &lt;/ul>
 &lt;h2 id="using-dynamicbuffertreinterpretudynamicbuffertreinterpretu">Using &lt;a href="https://docs.unity3d.com/Packages/com.unity.entities@0.10/api/Unity.Entities.DynamicBuffer-1.html#Unity_Entities_DynamicBuffer_1_Reinterpret__1">&lt;code>DynamicBuffer&amp;lt;T&amp;gt;.Reinterpret&amp;lt;U&amp;gt;()&lt;/code>&lt;/a>&lt;/h2>
@@ -488,25 +490,26 @@ dynamicBuffer.Add(&lt;span style="color:#080;font-weight:bold">new&lt;/span> Int
 &lt;ul>
 &lt;li>
 &lt;p>I’ve used &lt;a href="https://docs.unity3d.com/Packages/com.unity.entities@0.10/api/Unity.Entities.DynamicBuffer-1.html#Unity_Entities_DynamicBuffer_1_Reinterpret__1">&lt;code>DynamicBuffer&amp;lt;T&amp;gt;.Reinterpret&amp;lt;U&amp;gt;()&lt;/code> Method&lt;/a>, which is a minor modification of &lt;code>PlayModeTest.Awake()&lt;/code>. And as shown on line 12, structure that’s accessed with index values cannot be changed because it is a temporary value that is not classified as a variable. However, the values can be modified using the reinterpret method as you can see on line 14&amp;ndash;15.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#080;font-weight:bold">private&lt;/span> &lt;span style="color:#080;font-weight:bold">void&lt;/span> Awake()
-{
-&lt;span style="color:#888;font-weight:bold">var&lt;/span> entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
-&lt;span style="color:#888;font-weight:bold">var&lt;/span> entity = entityManager.CreateEntity();
-&lt;span style="color:#888;font-weight:bold">var&lt;/span> dynamicBuffer = entityManager.AddBuffer&amp;lt;IntBufferElement&amp;gt;(entity);
-dynamicBuffer.Add(&lt;span style="color:#080;font-weight:bold">new&lt;/span> IntBufferElement {Value = &lt;span style="color:#00d;font-weight:bold">1&lt;/span>});
-dynamicBuffer.Add(&lt;span style="color:#080;font-weight:bold">new&lt;/span> IntBufferElement {Value = &lt;span style="color:#00d;font-weight:bold">2&lt;/span>});
-dynamicBuffer.Add(&lt;span style="color:#080;font-weight:bold">new&lt;/span> IntBufferElement {Value = &lt;span style="color:#00d;font-weight:bold">3&lt;/span>});
-&lt;span style="color:#888">// ERROR: Indexer access returns temporary value.
-&lt;/span>&lt;span style="color:#888">&lt;/span> &lt;span style="color:#888">// Cannot modify struct member when accessed struct is not classified as a variable
-&lt;/span>&lt;span style="color:#888">&lt;/span> &lt;span style="color:#888">// dynamicBuffer[0].Value *= 10;
-&lt;/span>&lt;span style="color:#888">&lt;/span>
-&lt;span style="color:#888;font-weight:bold">var&lt;/span> intDynamicBuffer = dynamicBuffer.Reinterpret&amp;lt;&lt;span style="color:#888;font-weight:bold">int&lt;/span>&amp;gt;();
-intDynamicBuffer[&lt;span style="color:#00d;font-weight:bold">0&lt;/span>] *= &lt;span style="color:#00d;font-weight:bold">10&lt;/span>;
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#080;font-weight:bold">private&lt;/span> &lt;span style="color:#080;font-weight:bold">void&lt;/span> Awake()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#888;font-weight:bold">var&lt;/span> entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#888;font-weight:bold">var&lt;/span> entity = entityManager.CreateEntity();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#888;font-weight:bold">var&lt;/span> dynamicBuffer = entityManager.AddBuffer&amp;lt;IntBufferElement&amp;gt;(entity);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dynamicBuffer.Add(&lt;span style="color:#080;font-weight:bold">new&lt;/span> IntBufferElement {Value = &lt;span style="color:#00d;font-weight:bold">1&lt;/span>});
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dynamicBuffer.Add(&lt;span style="color:#080;font-weight:bold">new&lt;/span> IntBufferElement {Value = &lt;span style="color:#00d;font-weight:bold">2&lt;/span>});
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dynamicBuffer.Add(&lt;span style="color:#080;font-weight:bold">new&lt;/span> IntBufferElement {Value = &lt;span style="color:#00d;font-weight:bold">3&lt;/span>});
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#888">// ERROR: Indexer access returns temporary value.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#888">// Cannot modify struct member when accessed struct is not classified as a variable&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#888">// dynamicBuffer[0].Value *= 10;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#888;font-weight:bold">var&lt;/span> intDynamicBuffer = dynamicBuffer.Reinterpret&amp;lt;&lt;span style="color:#888;font-weight:bold">int&lt;/span>&amp;gt;();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> intDynamicBuffer[&lt;span style="color:#00d;font-weight:bold">0&lt;/span>] *= &lt;span style="color:#00d;font-weight:bold">10&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>
 &lt;p>Let’s check the play mode to see if the value has changed. Great! So our takeaway is that the buffer’s value changed despite not putting in the value of &lt;code>intDynamicBuffer[0]&lt;/code>back into &lt;code>dynamicBuffer[0]&lt;/code>.&lt;/p>
-&lt;p>&lt;img src="images/03.png" alt="">&lt;/p>
+&lt;p>&lt;img src="images/03.png">&lt;/p>
 &lt;/li>
 &lt;/ul>
 &lt;h2 id="using-entitymanagergetbuffertentitymanagergetbuffert">Using &lt;a href="https://docs.unity3d.com/Packages/com.unity.entities@0.10/api/Unity.Entities.EntityManager.html#Unity_Entities_EntityManager_GetBuffer__1_Unity_Entities_Entity_">&lt;code>EntityManager.GetBuffer&amp;lt;T&amp;gt;()&lt;/code>&lt;/a>&lt;/h2>
@@ -514,38 +517,42 @@ intDynamicBuffer[&lt;span style="color:#00d;font-weight:bold">0&lt;/span>] *= &l
 &lt;ul>
 &lt;li>
 &lt;p>I’ve modified the &lt;code>PlayModeTest&lt;/code> class. And I’ve changed the value by importing the entity generated by the &lt;code>Awake()&lt;/code> method and the buffer added to it using the &lt;code>Start()&lt;/code> method.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#080;font-weight:bold">class&lt;/span> &lt;span style="color:#b06;font-weight:bold">PlayModeTest&lt;/span> : MonoBehaviour
-{
-&lt;span style="color:#080;font-weight:bold">private&lt;/span> Entity &lt;span style="color:#00d;font-weight:bold">_&lt;/span>entity;
-&lt;span style="color:#080;font-weight:bold">private&lt;/span> &lt;span style="color:#080;font-weight:bold">void&lt;/span> Awake()
-{
-&lt;span style="color:#888;font-weight:bold">var&lt;/span> entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
-&lt;span style="color:#00d;font-weight:bold">_&lt;/span>entity = entityManager.CreateEntity();
-&lt;span style="color:#888;font-weight:bold">var&lt;/span> dynamicBuffer = entityManager.AddBuffer&amp;lt;IntBufferElement&amp;gt;(&lt;span style="color:#00d;font-weight:bold">_&lt;/span>entity);
-dynamicBuffer.Add(&lt;span style="color:#080;font-weight:bold">new&lt;/span> IntBufferElement { Value = &lt;span style="color:#00d;font-weight:bold">1&lt;/span> });
-dynamicBuffer.Add(&lt;span style="color:#080;font-weight:bold">new&lt;/span> IntBufferElement { Value = &lt;span style="color:#00d;font-weight:bold">2&lt;/span> });
-dynamicBuffer.Add(&lt;span style="color:#080;font-weight:bold">new&lt;/span> IntBufferElement { Value = &lt;span style="color:#00d;font-weight:bold">3&lt;/span> });
-&lt;span style="color:#888">// ERROR: Indexer access returns temporary value.
-&lt;/span>&lt;span style="color:#888">&lt;/span> &lt;span style="color:#888">// Cannot modify struct member when accessed struct is not classified as a variable
-&lt;/span>&lt;span style="color:#888">&lt;/span> &lt;span style="color:#888">// dynamicBuffer[0].Value *= 10;
-&lt;/span>&lt;span style="color:#888">&lt;/span> &lt;span style="color:#888;font-weight:bold">var&lt;/span> intDynamicBuffer = dynamicBuffer.Reinterpret&amp;lt;&lt;span style="color:#888;font-weight:bold">int&lt;/span>&amp;gt;();
-intDynamicBuffer[&lt;span style="color:#00d;font-weight:bold">0&lt;/span>] *= &lt;span style="color:#00d;font-weight:bold">10&lt;/span>;
-}
-&lt;span style="color:#080;font-weight:bold">private&lt;/span> &lt;span style="color:#080;font-weight:bold">void&lt;/span> Start()
-{
-&lt;span style="color:#888;font-weight:bold">var&lt;/span> entityManger = World.DefaultGameObjectInjectionWorld.EntityManager;
-&lt;span style="color:#888;font-weight:bold">var&lt;/span> dynamicBuffer = entityManger.GetBuffer&amp;lt;IntBufferElement&amp;gt;(&lt;span style="color:#00d;font-weight:bold">_&lt;/span>entity);
-&lt;span style="color:#888;font-weight:bold">var&lt;/span> intDynamicBuffer = dynamicBuffer.Reinterpret&amp;lt;&lt;span style="color:#888;font-weight:bold">int&lt;/span>&amp;gt;();
-&lt;span style="color:#080;font-weight:bold">for&lt;/span> (&lt;span style="color:#888;font-weight:bold">var&lt;/span> i = &lt;span style="color:#00d;font-weight:bold">0&lt;/span>; i &amp;lt; intDynamicBuffer.Length; i++)
-{
-intDynamicBuffer[i]++;
-}
-}
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#080;font-weight:bold">class&lt;/span> &lt;span style="color:#b06;font-weight:bold">PlayModeTest&lt;/span> : MonoBehaviour
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#080;font-weight:bold">private&lt;/span> Entity _entity;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#080;font-weight:bold">private&lt;/span> &lt;span style="color:#080;font-weight:bold">void&lt;/span> Awake()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#888;font-weight:bold">var&lt;/span> entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> _entity = entityManager.CreateEntity();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#888;font-weight:bold">var&lt;/span> dynamicBuffer = entityManager.AddBuffer&amp;lt;IntBufferElement&amp;gt;(_entity);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dynamicBuffer.Add(&lt;span style="color:#080;font-weight:bold">new&lt;/span> IntBufferElement { Value = &lt;span style="color:#00d;font-weight:bold">1&lt;/span> });
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dynamicBuffer.Add(&lt;span style="color:#080;font-weight:bold">new&lt;/span> IntBufferElement { Value = &lt;span style="color:#00d;font-weight:bold">2&lt;/span> });
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dynamicBuffer.Add(&lt;span style="color:#080;font-weight:bold">new&lt;/span> IntBufferElement { Value = &lt;span style="color:#00d;font-weight:bold">3&lt;/span> });
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#888">// ERROR: Indexer access returns temporary value.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#888">// Cannot modify struct member when accessed struct is not classified as a variable&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#888">// dynamicBuffer[0].Value *= 10;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#888;font-weight:bold">var&lt;/span> intDynamicBuffer = dynamicBuffer.Reinterpret&amp;lt;&lt;span style="color:#888;font-weight:bold">int&lt;/span>&amp;gt;();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> intDynamicBuffer[&lt;span style="color:#00d;font-weight:bold">0&lt;/span>] *= &lt;span style="color:#00d;font-weight:bold">10&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#080;font-weight:bold">private&lt;/span> &lt;span style="color:#080;font-weight:bold">void&lt;/span> Start()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#888;font-weight:bold">var&lt;/span> entityManger = World.DefaultGameObjectInjectionWorld.EntityManager;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#888;font-weight:bold">var&lt;/span> dynamicBuffer = entityManger.GetBuffer&amp;lt;IntBufferElement&amp;gt;(_entity);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#888;font-weight:bold">var&lt;/span> intDynamicBuffer = dynamicBuffer.Reinterpret&amp;lt;&lt;span style="color:#888;font-weight:bold">int&lt;/span>&amp;gt;();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#080;font-weight:bold">for&lt;/span> (&lt;span style="color:#888;font-weight:bold">var&lt;/span> i = &lt;span style="color:#00d;font-weight:bold">0&lt;/span>; i &amp;lt; intDynamicBuffer.Length; i++)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> intDynamicBuffer[i]++;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>
 &lt;p>Let’s check if it works well. All values in the buffer have increased by one! &lt;code>Reinterpret&amp;lt;T&amp;gt;()&lt;/code> is fascinating.&lt;/p>
-&lt;p>&lt;img src="images/04.png" alt="">&lt;/p>
+&lt;p>&lt;img src="images/04.png">&lt;/p>
 &lt;/li>
 &lt;/ul>
 &lt;h2 id="authoring">Authoring&lt;/h2>
@@ -553,36 +560,37 @@ intDynamicBuffer[i]++;
 &lt;ul>
 &lt;li>
 &lt;p>Let’s modify &lt;code>IntBufferElement&lt;/code> and apply &lt;code>GenerateAuthoringComponentAttribute&lt;/code>.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#369">[GenerateAuthoringComponent]&lt;/span>
-&lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#080;font-weight:bold">struct&lt;/span> &lt;span style="color:#b06;font-weight:bold">IntBufferElement&lt;/span> : IBufferElementData
-{
-&lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#888;font-weight:bold">int&lt;/span> Value;
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#369">[GenerateAuthoringComponent]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#080;font-weight:bold">struct&lt;/span> &lt;span style="color:#b06;font-weight:bold">IntBufferElement&lt;/span> : IBufferElementData
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#888;font-weight:bold">int&lt;/span> Value;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>
 &lt;p>And I’ve added &lt;code>IntBufferElementAuthoring&lt;/code> component that was automatically generated by modifying Scene and added value to the game object. I’ve also added &lt;code>ConvertToEntity&lt;/code> component to make the game object into an entity.&lt;/p>
-&lt;p>&lt;img src="images/05.png" alt="">&lt;/p>
+&lt;p>&lt;img src="images/05.png">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>The &lt;em>Entity Debugger&lt;/em> shows that an entity with the same name is created as a game object with &lt;strong>Authoring&lt;/strong> components.&lt;/p>
-&lt;p>&lt;img src="images/06.png" alt="">&lt;/p>
+&lt;p>&lt;img src="images/06.png">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>For our next step, let’s write &lt;code>UnitTag&lt;/code>, &lt;code>PlayerTag&lt;/code> and &lt;code>EnemyTag&lt;/code> components and add an &lt;code>IntBufferElement&lt;/code> buffer to the entity that includes each component.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#080;font-weight:bold">using&lt;/span> &lt;span style="color:#b06;font-weight:bold">Unity.Entities&lt;/span>;
-&lt;span style="color:#080;font-weight:bold">namespace&lt;/span> &lt;span style="color:#b06;font-weight:bold">DOTS_DynamicBuffer&lt;/span>
-{
-&lt;span style="color:#369"> [GenerateAuthoringComponent]&lt;/span>
-&lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#080;font-weight:bold">struct&lt;/span> &lt;span style="color:#b06;font-weight:bold">UnitTag&lt;/span> : IComponentData { }
-&lt;span style="color:#369">
-&lt;/span>&lt;span style="color:#369"> [GenerateAuthoringComponent]&lt;/span>
-&lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#080;font-weight:bold">struct&lt;/span> &lt;span style="color:#b06;font-weight:bold">PlayerTag&lt;/span> : IComponentData { }
-&lt;span style="color:#369">
-&lt;/span>&lt;span style="color:#369"> [GenerateAuthoringComponent]&lt;/span>
-&lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#080;font-weight:bold">struct&lt;/span> &lt;span style="color:#b06;font-weight:bold">EnemyTag&lt;/span> : IComponentData { }
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="images/07.png" alt="">&lt;/p>
-&lt;p>&lt;img src="images/08.png" alt="">&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#080;font-weight:bold">using&lt;/span> &lt;span style="color:#b06;font-weight:bold">Unity.Entities&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#080;font-weight:bold">namespace&lt;/span> &lt;span style="color:#b06;font-weight:bold">DOTS_DynamicBuffer&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#369"> [GenerateAuthoringComponent]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#080;font-weight:bold">struct&lt;/span> &lt;span style="color:#b06;font-weight:bold">UnitTag&lt;/span> : IComponentData { }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#369">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#369"> [GenerateAuthoringComponent]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#080;font-weight:bold">struct&lt;/span> &lt;span style="color:#b06;font-weight:bold">PlayerTag&lt;/span> : IComponentData { }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#369">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#369"> [GenerateAuthoringComponent]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#080;font-weight:bold">struct&lt;/span> &lt;span style="color:#b06;font-weight:bold">EnemyTag&lt;/span> : IComponentData { }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="images/07.png">&lt;/p>
+&lt;p>&lt;img src="images/08.png">&lt;/p>
 &lt;/li>
 &lt;/ul>
 &lt;h2 id="using-the-dynamicbuffer-in-componentsystem">Using the &lt;code>DynamicBuffer&lt;/code> in &lt;code>ComponentSystem&lt;/code>&lt;/h2>
@@ -590,42 +598,44 @@ intDynamicBuffer[i]++;
 &lt;ul>
 &lt;li>
 &lt;p>I’ve written a &lt;code>TestBufferFromEntitySystem&lt;/code>. This logic changes the value by accessing an entity’s &lt;code>IntBufferElement&lt;/code>type &lt;code>DynamicBuffer&lt;/code> that includes &lt;code>UnitTag&lt;/code>. Implementing this like on line 20 doesn’t work, so refer to line 23&amp;ndash;28. And of course, we can also use &lt;code>Reinterpret&amp;lt;T&amp;gt;()&lt;/code>.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#080;font-weight:bold">using&lt;/span> &lt;span style="color:#b06;font-weight:bold">Unity.Entities&lt;/span>;
-&lt;span style="color:#080;font-weight:bold">namespace&lt;/span> &lt;span style="color:#b06;font-weight:bold">DOTS_DynamicBuffer&lt;/span>
-{
-&lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#080;font-weight:bold">class&lt;/span> &lt;span style="color:#b06;font-weight:bold">TestBufferFromEntitySystem&lt;/span> : ComponentSystem
-{
-&lt;span style="color:#080;font-weight:bold">protected&lt;/span> &lt;span style="color:#080;font-weight:bold">override&lt;/span> &lt;span style="color:#080;font-weight:bold">void&lt;/span> OnUpdate()
-{
-&lt;span style="color:#888;font-weight:bold">var&lt;/span> bufferFromEntity = GetBufferFromEntity&amp;lt;IntBufferElement&amp;gt;();
-Entities
-.WithAll&amp;lt;UnitTag&amp;gt;()
-.ForEach(entity =&amp;gt;
-{
-&lt;span style="color:#080;font-weight:bold">if&lt;/span> (bufferFromEntity.Exists(entity))
-{
-&lt;span style="color:#888;font-weight:bold">var&lt;/span> dynamicBufferFromUnitTag = bufferFromEntity[entity];
-&lt;span style="color:#080;font-weight:bold">foreach&lt;/span> (&lt;span style="color:#888;font-weight:bold">var&lt;/span> intBufferElement &lt;span style="color:#080;font-weight:bold">in&lt;/span> dynamicBufferFromUnitTag)
-{
-&lt;span style="color:#888">// Foreach iteration variable &amp;#39;intBufferElement&amp;#39; is immutable.
-&lt;/span>&lt;span style="color:#888">&lt;/span> &lt;span style="color:#888">// Cannot modify struct member when accessed struct is not classified as a variable
-&lt;/span>&lt;span style="color:#888">&lt;/span> &lt;span style="color:#888">// intBufferElement.Value++;
-&lt;/span>&lt;span style="color:#888">&lt;/span> }
-&lt;span style="color:#080;font-weight:bold">for&lt;/span> (&lt;span style="color:#888;font-weight:bold">var&lt;/span> i = &lt;span style="color:#00d;font-weight:bold">0&lt;/span>; i &amp;lt; dynamicBufferFromUnitTag.Length; i++)
-{
-&lt;span style="color:#888;font-weight:bold">var&lt;/span> intBufferElement = dynamicBufferFromUnitTag[i];
-intBufferElement.Value++;
-dynamicBufferFromUnitTag[i] = intBufferElement;
-}
-}
-});
-}
-}
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#080;font-weight:bold">using&lt;/span> &lt;span style="color:#b06;font-weight:bold">Unity.Entities&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#080;font-weight:bold">namespace&lt;/span> &lt;span style="color:#b06;font-weight:bold">DOTS_DynamicBuffer&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#080;font-weight:bold">class&lt;/span> &lt;span style="color:#b06;font-weight:bold">TestBufferFromEntitySystem&lt;/span> : ComponentSystem
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#080;font-weight:bold">protected&lt;/span> &lt;span style="color:#080;font-weight:bold">override&lt;/span> &lt;span style="color:#080;font-weight:bold">void&lt;/span> OnUpdate()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#888;font-weight:bold">var&lt;/span> bufferFromEntity = GetBufferFromEntity&amp;lt;IntBufferElement&amp;gt;();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Entities
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .WithAll&amp;lt;UnitTag&amp;gt;()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .ForEach(entity =&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#080;font-weight:bold">if&lt;/span> (bufferFromEntity.Exists(entity))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#888;font-weight:bold">var&lt;/span> dynamicBufferFromUnitTag = bufferFromEntity[entity];
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#080;font-weight:bold">foreach&lt;/span> (&lt;span style="color:#888;font-weight:bold">var&lt;/span> intBufferElement &lt;span style="color:#080;font-weight:bold">in&lt;/span> dynamicBufferFromUnitTag)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#888">// Foreach iteration variable &amp;#39;intBufferElement&amp;#39; is immutable.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#888">// Cannot modify struct member when accessed struct is not classified as a variable&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#888">// intBufferElement.Value++;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#080;font-weight:bold">for&lt;/span> (&lt;span style="color:#888;font-weight:bold">var&lt;/span> i = &lt;span style="color:#00d;font-weight:bold">0&lt;/span>; i &amp;lt; dynamicBufferFromUnitTag.Length; i++)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#888;font-weight:bold">var&lt;/span> intBufferElement = dynamicBufferFromUnitTag[i];
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> intBufferElement.Value++;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> dynamicBufferFromUnitTag[i] = intBufferElement;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> });
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>
 &lt;p>If you look at &lt;em>Entity Debugger&lt;/em> in play mode, you can see that the value of &lt;code>UnitTag&lt;/code> component including entity&amp;rsquo;s &lt;code>IntBufferElement&lt;/code> &lt;code>DynamicBuffer&lt;/code> changes.&lt;/p>
-&lt;p>&lt;img src="images/09.png" alt="">&lt;/p>
+&lt;p>&lt;img src="images/09.png">&lt;/p>
 &lt;/li>
 &lt;/ul>
 &lt;h2 id="using-the-dynamicbuffer-in-jobcomponentsystem">Using the &lt;code>DynamicBuffer&lt;/code> in &lt;code>JobComponentSystem&lt;/code>&lt;/h2>
@@ -633,32 +643,33 @@ dynamicBufferFromUnitTag[i] = intBufferElement;
 &lt;ul>
 &lt;li>
 &lt;p>I’ve written a &lt;code>TestBufferFromEntityJobSystem&lt;/code>. This logic changes the value by accessing &lt;code>IntBufferElement&lt;/code> type &lt;code>DynamicBuffer&lt;/code> of entities that include &lt;code>PlayerTag&lt;/code>. This time I tried &lt;code>Reinterpret&amp;lt;T&amp;gt;()&lt;/code>.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#080;font-weight:bold">using&lt;/span> &lt;span style="color:#b06;font-weight:bold">Unity.Entities&lt;/span>;
-&lt;span style="color:#080;font-weight:bold">using&lt;/span> &lt;span style="color:#b06;font-weight:bold">Unity.Jobs&lt;/span>;
-&lt;span style="color:#080;font-weight:bold">namespace&lt;/span> &lt;span style="color:#b06;font-weight:bold">DOTS_DynamicBuffer&lt;/span>
-{
-&lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#080;font-weight:bold">class&lt;/span> &lt;span style="color:#b06;font-weight:bold">TestBufferFromEntityJobSystem&lt;/span> : JobComponentSystem
-{
-&lt;span style="color:#080;font-weight:bold">protected&lt;/span> &lt;span style="color:#080;font-weight:bold">override&lt;/span> JobHandle OnUpdate(JobHandle inputDeps)
-{
-&lt;span style="color:#080;font-weight:bold">return&lt;/span> Entities
-.WithAll&amp;lt;PlayerTag&amp;gt;()
-.ForEach((&lt;span style="color:#080;font-weight:bold">ref&lt;/span> DynamicBuffer&amp;lt;IntBufferElement&amp;gt; dynamicBuffer) =&amp;gt;
-{
-&lt;span style="color:#888;font-weight:bold">var&lt;/span> intDynamicBuffer = dynamicBuffer.Reinterpret&amp;lt;&lt;span style="color:#888;font-weight:bold">int&lt;/span>&amp;gt;();
-&lt;span style="color:#080;font-weight:bold">for&lt;/span> (&lt;span style="color:#888;font-weight:bold">var&lt;/span> i = &lt;span style="color:#00d;font-weight:bold">0&lt;/span>; i &amp;lt; intDynamicBuffer.Length; i++)
-{
-intDynamicBuffer[i]++;
-}
-})
-.Schedule(inputDeps);
-}
-}
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#080;font-weight:bold">using&lt;/span> &lt;span style="color:#b06;font-weight:bold">Unity.Entities&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#080;font-weight:bold">using&lt;/span> &lt;span style="color:#b06;font-weight:bold">Unity.Jobs&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#080;font-weight:bold">namespace&lt;/span> &lt;span style="color:#b06;font-weight:bold">DOTS_DynamicBuffer&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#080;font-weight:bold">class&lt;/span> &lt;span style="color:#b06;font-weight:bold">TestBufferFromEntityJobSystem&lt;/span> : JobComponentSystem
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#080;font-weight:bold">protected&lt;/span> &lt;span style="color:#080;font-weight:bold">override&lt;/span> JobHandle OnUpdate(JobHandle inputDeps)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#080;font-weight:bold">return&lt;/span> Entities
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .WithAll&amp;lt;PlayerTag&amp;gt;()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .ForEach((&lt;span style="color:#080;font-weight:bold">ref&lt;/span> DynamicBuffer&amp;lt;IntBufferElement&amp;gt; dynamicBuffer) =&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#888;font-weight:bold">var&lt;/span> intDynamicBuffer = dynamicBuffer.Reinterpret&amp;lt;&lt;span style="color:#888;font-weight:bold">int&lt;/span>&amp;gt;();
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#080;font-weight:bold">for&lt;/span> (&lt;span style="color:#888;font-weight:bold">var&lt;/span> i = &lt;span style="color:#00d;font-weight:bold">0&lt;/span>; i &amp;lt; intDynamicBuffer.Length; i++)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> intDynamicBuffer[i]++;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> })
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .Schedule(inputDeps);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>
 &lt;p>It&amp;rsquo;s working! The value is increasing just like we wanted.&lt;/p>
-&lt;p>&lt;img src="images/10.png" alt="">&lt;/p>
+&lt;p>&lt;img src="images/10.png">&lt;/p>
 &lt;/li>
 &lt;/ul>
 &lt;h2 id="additional-tips">Additional Tips&lt;/h2>
@@ -667,48 +678,53 @@ intDynamicBuffer[i]++;
 &lt;ul>
 &lt;li>
 &lt;p>Here, I&amp;rsquo;ve set the number of elements to two.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#888">// InternalBufferCapacity specifies how many elements a buffer can have before
-&lt;/span>&lt;span style="color:#888">// the buffer storage is moved outside the chunk.
-&lt;/span>&lt;span style="color:#888">&lt;/span>&lt;span style="color:#369">[InternalBufferCapacity(2)]&lt;/span>
-&lt;span style="color:#369">[GenerateAuthoringComponent]&lt;/span>
-&lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#080;font-weight:bold">struct&lt;/span> &lt;span style="color:#b06;font-weight:bold">IntBufferElement&lt;/span> : IBufferElementData
-{
-&lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#888;font-weight:bold">int&lt;/span> Value;
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#888">// InternalBufferCapacity specifies how many elements a buffer can have before&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#888">// the buffer storage is moved outside the chunk.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#369">[InternalBufferCapacity(2)]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#369">[GenerateAuthoringComponent]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#080;font-weight:bold">struct&lt;/span> &lt;span style="color:#b06;font-weight:bold">IntBufferElement&lt;/span> : IBufferElementData
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#888;font-weight:bold">int&lt;/span> Value;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>
 &lt;p>And to hold tests in the same chunk, I’ve copied two more &lt;code>Enemy&lt;/code> game objects that includes &lt;code>EnemyTag&lt;/code>.&lt;/p>
-&lt;p>&lt;img src="images/11.png" alt="">&lt;/p>
+&lt;p>&lt;img src="images/11.png">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Let’s check the &lt;em>Entity Debugger&lt;/em>. But it looks like &lt;code>IntBufferElement&lt;/code> is still in the chunk. This may be for convenience even though the buffer has been moved to the heap memory.&lt;/p>
-&lt;p>&lt;img src="images/12.png" alt="">&lt;/p>
+&lt;p>&lt;img src="images/12.png">&lt;/p>
 &lt;/li>
 &lt;/ul>
 &lt;h3 id="implicit-operator">&lt;code>implicit&lt;/code> Operator&lt;/h3>
 &lt;p>We can also write our code this way for convenience.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-cs" data-lang="cs">&lt;span style="color:#080;font-weight:bold">using&lt;/span> &lt;span style="color:#b06;font-weight:bold">Unity.Entities&lt;/span>;
-&lt;span style="color:#080;font-weight:bold">namespace&lt;/span> &lt;span style="color:#b06;font-weight:bold">DOTS_DynamicBuffer&lt;/span>
-{
-&lt;span style="color:#888">// InternalBufferCapacity specifies how many elements a buffer can have before
-&lt;/span>&lt;span style="color:#888">&lt;/span> &lt;span style="color:#888">// the buffer storage is moved outside the chunk.
-&lt;/span>&lt;span style="color:#888">&lt;/span>&lt;span style="color:#369"> [InternalBufferCapacity(2)]&lt;/span>
-&lt;span style="color:#369"> [GenerateAuthoringComponent]&lt;/span>
-&lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#080;font-weight:bold">struct&lt;/span> &lt;span style="color:#b06;font-weight:bold">IntBufferElement&lt;/span> : IBufferElementData
-{
-&lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#888;font-weight:bold">int&lt;/span> Value;
-&lt;span style="color:#888">// The following implicit conversions are optional, but can be convenient.
-&lt;/span>&lt;span style="color:#888">&lt;/span> &lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#080;font-weight:bold">static&lt;/span> &lt;span style="color:#080;font-weight:bold">implicit&lt;/span> &lt;span style="color:#080;font-weight:bold">operator&lt;/span> &lt;span style="color:#888;font-weight:bold">int&lt;/span>(IntBufferElement e)
-{
-&lt;span style="color:#080;font-weight:bold">return&lt;/span> e.Value;
-}
-&lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#080;font-weight:bold">static&lt;/span> &lt;span style="color:#080;font-weight:bold">implicit&lt;/span> &lt;span style="color:#080;font-weight:bold">operator&lt;/span> IntBufferElement(&lt;span style="color:#888;font-weight:bold">int&lt;/span> e)
-{
-&lt;span style="color:#080;font-weight:bold">return&lt;/span> &lt;span style="color:#080;font-weight:bold">new&lt;/span> IntBufferElement { Value = e };
-}
-}
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="closing">Closing&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;">&lt;code class="language-cs" data-lang="cs">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#080;font-weight:bold">using&lt;/span> &lt;span style="color:#b06;font-weight:bold">Unity.Entities&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#080;font-weight:bold">namespace&lt;/span> &lt;span style="color:#b06;font-weight:bold">DOTS_DynamicBuffer&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#888">// InternalBufferCapacity specifies how many elements a buffer can have before&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#888">// the buffer storage is moved outside the chunk.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#369"> [InternalBufferCapacity(2)]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#369"> [GenerateAuthoringComponent]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#080;font-weight:bold">struct&lt;/span> &lt;span style="color:#b06;font-weight:bold">IntBufferElement&lt;/span> : IBufferElementData
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#888;font-weight:bold">int&lt;/span> Value;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#888">// The following implicit conversions are optional, but can be convenient.&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#080;font-weight:bold">static&lt;/span> &lt;span style="color:#080;font-weight:bold">implicit&lt;/span> &lt;span style="color:#080;font-weight:bold">operator&lt;/span> &lt;span style="color:#888;font-weight:bold">int&lt;/span>(IntBufferElement e)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#080;font-weight:bold">return&lt;/span> e.Value;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#080;font-weight:bold">static&lt;/span> &lt;span style="color:#080;font-weight:bold">implicit&lt;/span> &lt;span style="color:#080;font-weight:bold">operator&lt;/span> IntBufferElement(&lt;span style="color:#888;font-weight:bold">int&lt;/span> e)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#080;font-weight:bold">return&lt;/span> &lt;span style="color:#080;font-weight:bold">new&lt;/span> IntBufferElement { Value = e };
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="closing">Closing&lt;/h2>
 &lt;p>Today, we took a quick look at &lt;code>IBufferElementData&lt;/code> and &lt;code>DynamicBuffer&amp;lt;T&amp;gt;&lt;/code>.&lt;/p>
 &lt;p>You&amp;rsquo;ve probably heard a lot about object pooling when you’re making games. Since creating single-use objects is basically the same as creating garbage, pooling and reusing them can reduce frequent &lt;a href="https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)">garbage collection&lt;/a> and manage instance creation timing, which ultimately creates a smoother game.&lt;/p>
 &lt;p>Next time, let&amp;rsquo;s find out how to apply this feature and compare the before and after to see how much improvement you can get.&lt;/p></content><author><name>Hyun Seungmin</name><uri>https://github.com/boscohyun</uri><email>seungmin@planetariumhq.com</email></author></entry><entry><title>Libplanet 0.9 Released</title><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/04/libplanet-0.9/" title="Libplanet 0.9 Released"/><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/04/libplanet-0.9/" hreflang="ko" title="Libplanet 0.9 릴리스"/><id>https://snack.planetarium.dev/eng/2020/04/libplanet-0.9/</id><published>2020-04-28T00:00:00+00:00</published><updated>2020-04-28T00:00:00+00:00</updated><content type="html">&lt;p>Hello Everyone! We have released the ninth minor version of &lt;a href="https://libplanet.io/">Libplanet&lt;/a>, &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.9.0">Version 0.9&lt;/a>.&lt;/p>
@@ -733,11 +749,11 @@ And if you were unlucky, you might request blocks from a peer with a very slow c
 &lt;p>Last year, &lt;a href="https://snack.planetarium.dev/eng/2019/11/libplanet-0.7/#key-store-implementation-to-safely-store-personal-keys">Libplanet added a &lt;code>ProtectedPrivateKey&lt;/code> class to safely store &lt;code>PrivateKey&lt;/code> in Version 0.7.&lt;/a> However, because &lt;a href="https://docs.libplanet.io/0.9.0/api/Libplanet.KeyStore.ProtectedPrivateKey.html">&lt;code>ProtectedPrivateKey&lt;/code>&lt;/a> deals with only one key, handling multiple keys required a separate implementation for the application to create a directory, set a file name, and write the file.&lt;/p>
 &lt;p>So from this version, &lt;a href="https://docs.libplanet.io/0.9.0/api/Libplanet.KeyStore.Web3KeyStore.html">&lt;code>Web3KeyStore&lt;/code>&lt;/a> class, which physically preserves and manages keys, are now available, eliminating the need to implement these features separately. In addition to the &lt;code>Web3KeyStore&lt;/code> that preserves keys in &lt;a href="https://github.com/ethereum/wiki/wiki/Web3-Secret-Storage-Definition">Web3 Secret Storage Definition&lt;/a> format, we have also introduced &lt;a href="https://docs.libplanet.io/0.9.0/api/Libplanet.KeyStore.IKeyStore.html">&lt;code>IKeyStore&lt;/code> Interface&lt;/a>, which abstracts specific preservation methods (implementation details).&lt;/p>
 &lt;h2 id="planet-cli-utility">&lt;code>planet&lt;/code>: CLI Utility&lt;/h2>
-&lt;p>&lt;a href="https://docs.libplanet.io/0.9.0/api/Libplanet.Net.Swarm-1.html#Libplanet_Net_Swarm_1__ctor_Libplanet_Blockchain_BlockChain__0__Libplanet_Crypto_PrivateKey_Libplanet_Net_AppProtocolVersion_System_Int32_System_String_System_Nullable_System_Int32__IEnumerable_Libplanet_Net_IceServer__Libplanet_Net_DifferentAppProtocolVersionEncountered_IEnumerable_Libplanet_Crypto_PublicKey__">&lt;code>Swarm&amp;lt;T&amp;gt;()&lt;/code> constructor&lt;/a> has &lt;a href="https://snack.planetarium.dev/eng/2020/02/libplanet-0.8/#genesis-block-anticipation">assumed a specific genesis block since last version&lt;/a> and &lt;a href="#signed-app-protocol-version">from this version, it signs the app protocol version.&lt;/a> Because these values include the results of cryptographic algorithm, it is impossible for a human to randomly generate the value. However, since the development process does require a lot of filling up random values, it was definitely a hassle to call up Libplanet APIs from C# interactive shells or PowerShell to calculate the desired values.&lt;/p>
+&lt;p>&lt;a href="https://docs.libplanet.io/0.9.0/api/Libplanet.Net.Swarm-1.html#Libplanet_Net_Swarm_1__ctor_Libplanet_Blockchain_BlockChain__0__Libplanet_Crypto_PrivateKey_Libplanet_Net_AppProtocolVersion_System_Int32_System_String_System_Nullable_System_Int32__IEnumerable_Libplanet_Net_IceServer__Libplanet_Net_DifferentAppProtocolVersionEncountered_IEnumerable_Libplanet_Crypto_PublicKey__">&lt;code>Swarm&amp;lt;T&amp;gt;()&lt;/code> constructor&lt;/a> has &lt;a href="https://snack.planetarium.dev/eng/2020/02/libplanet-0.8/#genesis-block-anticipation">assumed a specific genesis block since last version&lt;/a> and &lt;a href="/eng/2020/04/libplanet-0.9/#signed-app-protocol-version">from this version, it signs the app protocol version.&lt;/a> Because these values include the results of cryptographic algorithm, it is impossible for a human to randomly generate the value. However, since the development process does require a lot of filling up random values, it was definitely a hassle to call up Libplanet APIs from C# interactive shells or PowerShell to calculate the desired values.&lt;/p>
 &lt;p>To make this easier, we are deploying a &lt;abbr title="command-line interface">CLI&lt;/abbr> utility called &lt;code>planet&lt;/code> from this version. The &lt;code>planet&lt;/code> command contains multiple subcommands, and currently provides key storage management and app protocol version signing feature. In the future, features such as creating a random genesis block will be added. Please check the &lt;code>planet --help&lt;/code> command for detailed instructions.&lt;/p>
 &lt;p>The &lt;code>planet&lt;/code> command is distributed in a NuGet package called &lt;a href="https://www.nuget.org/packages/Libplanet.Tools/">Libplanet.Tools&lt;/a>, which can be installed on systems with .NET Core SDK using the following command:&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-bash" data-lang="bash">dotnet tool install -g Libplanet.Tools
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>If the .NET Core SDK is not installed, you can also download and install the official binary uploaded on the &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.9.0">Release Page&lt;/a>. The official binary is available in three versions: Linux (x64), macOS (x64), and Windows (x64).&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>dotnet tool install -g Libplanet.Tools
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>If the .NET Core SDK is not installed, you can also download and install the official binary uploaded on the &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.9.0">Release Page&lt;/a>. The official binary is available in three versions: Linux (x64), macOS (x64), and Windows (x64).&lt;/p>
 &lt;h2 id="furthermore">Furthermore&lt;/h2>
 &lt;p>You can learn more about additional changes in our &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.9.0">release notes&lt;/a>.&lt;/p>
 &lt;p>If you’re interested, install and try it out! And as always, if you have any questions about the new release or Libplanet in general, please visit our &lt;a href="https://discord.gg/planetarium">Discord chatroom&lt;/a> and let’s chat!&lt;/p></content><author><name>Hong Minhee</name><uri>https://github.com/dahlia</uri><email>hong.minhee@planetariumhq.com</email></author></entry><entry><title>Applying RocksDB to Libplanet</title><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/04/rocksdb/" title="Applying RocksDB to Libplanet"/><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/04/rocksdb/" hreflang="ko" title="Libplanet RocksDB 적용기"/><id>https://snack.planetarium.dev/eng/2020/04/rocksdb/</id><published>2020-04-17T00:00:00+00:00</published><updated>2020-04-17T00:00:00+00:00</updated><content type="html">&lt;p>Hello, I&amp;rsquo;m Seunghun Lee, &lt;a href="https://libplanet.io/">Libplanet&lt;/a> developer at Planetarium.&lt;/p>
@@ -745,14 +761,15 @@ And if you were unlucky, you might request blocks from a peer with a very slow c
 &lt;p>After reviewing various alternative storage methods, we decided that &lt;a href="https://rocksdb.org/">RocksDB&lt;/a>, a &lt;a href="https://en.wikipedia.org/wiki/Key-value_database">Key-Value Database&lt;/a> library developed by Facebook, was our best option. We decided to create an &lt;code>IStore&lt;/code> implementation called &lt;a href="https://github.com/planetarium/libplanet/blob/master/Libplanet.RocksDBStore/RocksDBStore.cs">&lt;code>RocksDBStore&lt;/code>&lt;/a> to use as a backend. In this article, I would like to share our experiences in developing &lt;code>RocksDBStore&lt;/code>.&lt;/p>
 &lt;h2 id="including-dependent-libraries1">Including Dependent Libraries&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>&lt;/h2>
 &lt;p>RocksDB relies on other libraries for compression or memory allocation purposes. Unlike &lt;a href="https://github.com/facebook/rocksdb/wiki/Building-on-Windows">Windows build&lt;/a>, for macOS and Linux, the dependent libraries must also be installed in the system to use the RocksDB native library in the form of dynamic link libraries (&lt;em>.so&lt;/em> and .&lt;em>dylib&lt;/em>).&lt;/p>
-&lt;p>In a typical server app, it is natural to install all dependent libraries in your system. This is because the system that runs the server app is usually operated only for that server app. But because we&amp;rsquo;re building an app that serves as blockchain nodes and runs on gamers' systems, it&amp;rsquo;s hard to ask all gamers to install these libraries separately.&lt;/p>
+&lt;p>In a typical server app, it is natural to install all dependent libraries in your system. This is because the system that runs the server app is usually operated only for that server app. But because we&amp;rsquo;re building an app that serves as blockchain nodes and runs on gamers&amp;rsquo; systems, it&amp;rsquo;s hard to ask all gamers to install these libraries separately.&lt;/p>
 &lt;p>So what we came up with was to put the libraries that RocksDB relies on in the game client and distribute them. However, building RocksDB in the form of a dynamic link library without any modifications caused the built RocksDB library to not be able to find the dependent libraries that were included in the game clients.&lt;/p>
 &lt;p>To resolve this issue, we used a method of modifying &lt;a href="https://en.wikipedia.org/wiki/Rpath">rpath&lt;/a> in the RocksDB dynamic link library file. rpath refers to &lt;q>run-time search path&lt;/q>, which is hard-coded within a library file or executable file so the &lt;a href="https://en.wikipedia.org/wiki/Dynamic_linker">dynamic linking&lt;/a> &lt;a href="https://en.wikipedia.org/wiki/Loader_(computing)">loader&lt;/a> can find the required library in that file. Initially, we considered modifying the rpath when building the RocksDB library, but we eventually decided to modify the rpath in the completed library file because the build script in RocksDB turned out to be more complicated than we thought. Fortunately, with tools called &lt;a href="https://www.unix.com/man-page/osx/1/install_name_tool/">&lt;code>install_name_tool&lt;/code>&lt;/a> on macOS and &lt;a href="https://github.com/NixOS/patchelf">&lt;code>patchelf&lt;/code>&lt;/a> on Linux, you can simply modify the rpath to the directory where the current RocksDB library exists.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-bash" data-lang="bash">&lt;span style="color:#888"># macOS&lt;/span>
-$ install_name_tool -add_rpath &lt;span style="color:#d20;background-color:#fff0f0">&amp;#39;@loader_path&amp;#39;&lt;/span> librocksdb.dylib
-&lt;span style="color:#888"># linux&lt;/span>
-$ patchelf --set-rpath &lt;span style="color:#369">$ORIGIN&lt;/span> librocksdb.so
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>For more information on rpath modification, please refer to the pages below:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#888"># macOS&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ install_name_tool -add_rpath &lt;span style="color:#d20;background-color:#fff0f0">&amp;#39;@loader_path&amp;#39;&lt;/span> librocksdb.dylib
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#888"># linux&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ patchelf --set-rpath &lt;span style="color:#369">$ORIGIN&lt;/span> librocksdb.so
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>For more information on rpath modification, please refer to the pages below:&lt;/p>
 &lt;ul>
 &lt;li>&lt;a href="https://medium.com/@donblas/fun-with-rpath-otool-and-install-name-tool-e3e41ae86172">Fun with rpath, otool, and install_name_tool&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://mindonmind.github.io/notes/linux/change_rpath.html">Change Library Search Path For Binary Files in Linux&lt;/a>&lt;/li>
@@ -774,14 +791,14 @@ $ patchelf --set-rpath &lt;span style="color:#369">$ORIGIN&lt;/span> librocksdb.
 &lt;h2 id="closing">Closing&lt;/h2>
 &lt;p>Through many different processes, we have applied RocksDB and experienced improvements in storage space and speed. Please refer to our &lt;a href="https://github.com/planetarium/libplanet/blob/master/Libplanet.RocksDBStore/RocksDBStore.cs">code&lt;/a> for detailed implementation.&lt;/p>
 &lt;p>And as always, if you have any questions about RocksDBStore or Libplanet in general, please visit our &lt;a href="https://discord.gg/planetarium">Discord&lt;/a> and let’s chat!&lt;/p>
-&lt;section class="footnotes" role="doc-endnotes">
+&lt;div class="footnotes" role="doc-endnotes">
 &lt;hr>
 &lt;ol>
-&lt;li id="fn:1" role="doc-endnote">
+&lt;li id="fn:1">
 &lt;p>We took this approach during this phase because Nine Chronicles was being tested to only a small number of players, enabling us to distribute files without an installer. However, now that we’re deploying Nine Chronicles with an installer, other approaches have been developed. We will introduce some of them on Snack in the near future.&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></content><author><name>Seunghun Lee</name><uri>https://github.com/earlbread</uri><email>seunghun@planetariumhq.com</email></author></entry><entry><title>Libplanet Game Jam</title><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/03/libplanet-gamejam/" title="Libplanet Game Jam"/><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/03/libplanet-gamejam/" hreflang="ko" title="Libplanet 게임잼"/><id>https://snack.planetarium.dev/eng/2020/03/libplanet-gamejam/</id><published>2020-03-19T00:00:00+00:00</published><updated>2020-03-19T00:00:00+00:00</updated><content type="html">&lt;p>Hello, I&amp;rsquo;m Seunggeol Song, a game client programmer at Planetarium. This time, I&amp;rsquo;d like to share with you my experience in the in-house &lt;a href="https://en.wikipedia.org/wiki/Game_jam">game jam&lt;/a>
+&lt;/div></content><author><name>Seunghun Lee</name><uri>https://github.com/earlbread</uri><email>seunghun@planetariumhq.com</email></author></entry><entry><title>Libplanet Game Jam</title><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/03/libplanet-gamejam/" title="Libplanet Game Jam"/><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/03/libplanet-gamejam/" hreflang="ko" title="Libplanet 게임잼"/><id>https://snack.planetarium.dev/eng/2020/03/libplanet-gamejam/</id><published>2020-03-19T00:00:00+00:00</published><updated>2020-03-19T00:00:00+00:00</updated><content type="html">&lt;p>Hello, I&amp;rsquo;m Seunggeol Song, a game client programmer at Planetarium. This time, I&amp;rsquo;d like to share with you my experience in the in-house &lt;a href="https://en.wikipedia.org/wiki/Game_jam">game jam&lt;/a>
 held at Planetarium.&lt;/p>
 &lt;p>Here at Planetarium, we use our own blockchain game library, &lt;a href="https://github.com/planetarium/libplanet">Libplanet&lt;/a>, to create games. Because Libplanet is currently being developed with the assumption that it will be primarily used in &lt;a href="https://unity.com/">Unity&lt;/a>, we have decided to build an &lt;a href="https://en.wikipedia.org/wiki/Software_development_kit">SDK&lt;/a> for Unity to enhance usability within the engine. To aid our development process, we held an in-house game Jam of creating small example Unity projects using Libplanet.&lt;/p>
 &lt;p>Groups of 2 or 3 people were formed and for 2 days before the opening day, we got together to brainstorm potential game projects and eventually came up with 5 dazzling game proposals to apply blockchain technology. I teamed up with &lt;a href="https://github.com/limebell">Chanhyuck Ko&lt;/a> to make a game of &lt;a href="https://en.wikipedia.org/wiki/Gomoku">Omok (Five in a Row)&lt;/a>. To make two players battle, we implemented the concept of a session (i.e. the &lt;strong>room&lt;/strong> of the game), using the concept of &lt;code>Action&lt;/code> and &lt;code>State&lt;/code> in Libplanet.&lt;/p>
@@ -796,7 +813,7 @@ alt="The Great Looking Omok Game We Created!"/>&lt;figcaption>
 &lt;p>&lt;code>PlayerState&lt;/code>: This state saves information about the Go stones used by a player in the game. The coordinates of the stones in the Omok table are stored.&lt;/p>
 &lt;p>&lt;code>JoinSession&lt;/code>: This action joins a session with the key a player enters. If there’s no session with the entered key, this action creates a new session with that key. This will change &lt;code>SessionState&lt;/code>.&lt;/p>
 &lt;p>&lt;code>PlaceAction&lt;/code>: This action places a Go stone on the Omok table. This changes the stone information of &lt;code>PlayerState&lt;/code>.&lt;/p>
-&lt;p>&lt;code>ResignAction&lt;/code>: This action surrenders the game. It changes both players' &lt;code>AgentState&lt;/code>, recording a loss to the loser and a win to the winner.&lt;/p>
+&lt;p>&lt;code>ResignAction&lt;/code>: This action surrenders the game. It changes both players&amp;rsquo; &lt;code>AgentState&lt;/code>, recording a loss to the loser and a win to the winner.&lt;/p>
 &lt;p>For more specific internal implementation or code, visit the &lt;a href="https://github.com/planetarium/planet-omok">GitHub repository&lt;/a>!&lt;/p>
 &lt;p>From the overall experience, I felt that the key to developing blockchain games using Libplanet is ultimately knowing how to deal with these states and actions. Action changes states and we take those states in-game logic to play the game. Before game jam, I didn&amp;rsquo;t have the chance to develop an action myself because I had only recently joined Planetarium. But after implementing the general concept of the session with Chanhyuck Ko, I was able to understand the meaning of action and state and their general usage. It was a great learning experience in many ways.&lt;/p>
 &lt;h2 id="closing">Closing&lt;/h2>
@@ -848,16 +865,16 @@ alt="Year Displayed as 2019 in Gregorian calendar"/>&lt;figcaption>
 &lt;p>To reproduce this problem on our side, we changed the regional setting of our OS to Thailand in the local development environment and then ran the unit test of Libplanet. Sure enough, we were able to see some of them fail. The most crucial problem was that the hash of the same block was changing. As we looked closer, the result of &lt;a href="https://github.com/planetarium/libplanet/blob/82aaba0c37591ebf51207038e8c5c122272ce98b/Libplanet/Blocks/Block.cs#L488">serializing &lt;code>Block&amp;lt;T&amp;gt;.Timestamp&lt;/code> field&lt;/a> in the process of creating a hash input was different than expected. The behavior of the &lt;code>DateTimeOffset.ToString()&lt;/code> method was affected by the locale of the operating system.&lt;/p>
 &lt;p>In Indochina Peninsula, Buddhism takes the same place as Christianity in Europe. So, instead of the &lt;a href="https://en.wikipedia.org/wiki/Gregorian_calendar">Gregorian calendar&lt;/a>, which uses the birth of Jesus Christ as an epoch, countries in Indochina Peninsula had used the &lt;a href="https://en.wikipedia.org/wiki/Buddhist_calendar">Buddhist calendar&lt;/a> which takes Buddha’s attainment of parinirvana (nirvana after death) as an epoch. Although countries like Cambodia and Laos eventually took on the Gregorian calendar, Thailand still uses the &lt;a href="https://en.wikipedia.org/wiki/Thai_solar_calendar">Thai solar calendar&lt;/a>, which is a solar modification of the traditional Buddhist lunar calendar. Buddha’s parinirvana was in 543 BC, and so the year 2019 A.D. becomes 2562 under the Thai solar calendar.&lt;/p>
 &lt;p>As such, the world uses various calendars depending on the cultural region. So when displaying a user interface, time should be displayed in the appropriate date format for each region. In fact, &lt;code>DateTimeOffset.ToString()&lt;/code> method has an overload that also receives &lt;a href="https://docs.microsoft.com/en-us/dotnet/api/system.iformatprovider?view=netstandard-2.0">&lt;code>IFormatProvider&lt;/code>&lt;/a> objects as parameters for this purpose. &lt;a href="https://docs.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo?view=netstandard-2.0">&lt;code>CultureInfo&lt;/code>&lt;/a> is the most common class to implement the &lt;code>IFormatProvider&lt;/code> interface. As the name suggests, &lt;code>CultureInfo&lt;/code> is the same concept that the Unix family calls locale. As shown below, the result of &lt;code>DateTimeOffset.ToString()&lt;/code> method depends on which locale you set up as the parameter.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-csharp" data-lang="csharp">&amp;gt; &lt;span style="color:#080;font-weight:bold">using&lt;/span> &lt;span style="color:#b06;font-weight:bold">System.Globalization&lt;/span>;
-&amp;gt; &lt;span style="color:#888;font-weight:bold">var&lt;/span> now = DateTimeOffset.Now;
-&amp;gt; now.ToString(&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;yyyy-MM-ddTHH:mm:ss.ffffffZ&amp;#34;&lt;/span>, &lt;span style="color:#080;font-weight:bold">new&lt;/span> CultureInfo(&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;ko-KR&amp;#34;&lt;/span>))
-&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;2020-02-13T17:37:16.436163Z&amp;#34;&lt;/span>
-&amp;gt; now.ToString(&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;yyyy-MM-ddTHH:mm:ss.ffffffZ&amp;#34;&lt;/span>, &lt;span style="color:#080;font-weight:bold">new&lt;/span> CultureInfo(&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;th-TH&amp;#34;&lt;/span>))
-&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;2563-02-13T17:37:16.436163Z&amp;#34;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>However, if you omit the parameter without setting any locale, the method will follow the locale of the environment in which the code is executed. The code below is the result of setting up the operating system region in Korea.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-csharp" data-lang="csharp">&amp;gt; now.ToString(&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;yyyy-MM-ddTHH:mm:ss.ffffffZ&amp;#34;&lt;/span>)
-&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;2020-02-13T17:37:16.436163Z&amp;#34;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;a href="https://docs.microsoft.com/en-us/dotnet/api/system.datetimeoffset.tostring?view=netstandard-2.0#System_DateTimeOffset_ToString">According to the docs, the overload with the omitted parameter&lt;/a> follows &lt;a href="https://docs.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo.currentculture?view=netstandard-2.0">&lt;code>CultureInfo.CurrentCulture&lt;/code>&lt;/a>. As you can infer from its name, the &lt;code>CultureInfo.CurrentCulture&lt;/code> property points to the locale of the execution environment. Therefore, you must explicitly specify &lt;a href="https://docs.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo.invariantculture?view=netstandard-2.0">&lt;code>CultureInfo.InvariantCulture&lt;/code>&lt;/a> if you want a deterministic action at all times regardless of the locale of your execution environment.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>&amp;gt; &lt;span style="color:#080;font-weight:bold">using&lt;/span> &lt;span style="color:#b06;font-weight:bold">System.Globalization&lt;/span>;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;gt; &lt;span style="color:#888;font-weight:bold">var&lt;/span> now = DateTimeOffset.Now;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;gt; now.ToString(&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;yyyy-MM-ddTHH:mm:ss.ffffffZ&amp;#34;&lt;/span>, &lt;span style="color:#080;font-weight:bold">new&lt;/span> CultureInfo(&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;ko-KR&amp;#34;&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;2020-02-13T17:37:16.436163Z&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;gt; now.ToString(&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;yyyy-MM-ddTHH:mm:ss.ffffffZ&amp;#34;&lt;/span>, &lt;span style="color:#080;font-weight:bold">new&lt;/span> CultureInfo(&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;th-TH&amp;#34;&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;2563-02-13T17:37:16.436163Z&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>However, if you omit the parameter without setting any locale, the method will follow the locale of the environment in which the code is executed. The code below is the result of setting up the operating system region in Korea.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>&amp;gt; now.ToString(&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;yyyy-MM-ddTHH:mm:ss.ffffffZ&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;2020-02-13T17:37:16.436163Z&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;a href="https://docs.microsoft.com/en-us/dotnet/api/system.datetimeoffset.tostring?view=netstandard-2.0#System_DateTimeOffset_ToString">According to the docs, the overload with the omitted parameter&lt;/a> follows &lt;a href="https://docs.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo.currentculture?view=netstandard-2.0">&lt;code>CultureInfo.CurrentCulture&lt;/code>&lt;/a>. As you can infer from its name, the &lt;code>CultureInfo.CurrentCulture&lt;/code> property points to the locale of the execution environment. Therefore, you must explicitly specify &lt;a href="https://docs.microsoft.com/en-us/dotnet/api/system.globalization.cultureinfo.invariantculture?view=netstandard-2.0">&lt;code>CultureInfo.InvariantCulture&lt;/code>&lt;/a> if you want a deterministic action at all times regardless of the locale of your execution environment.&lt;/p>
 &lt;p>Even though the method may be non-deterministic, the API designed to follow the locale of the execution environment is probably intended because such formatting operations are usually used for a user interface, and coding can naturally look appropriate to the cultural community without much concern about internationalization. But the reason why we used this method was not for a user interface, but for the cryptographic hash input that had to be deterministic— this turned out to be a mistake.&lt;/p>
 &lt;p>Now that we know the cause, we have solved the urgent problem by &lt;a href="https://github.com/planetarium/libplanet/pull/734">finding a method that has the &lt;code>CultureInfo&lt;/code> or &lt;code>IFormatProvider&lt;/code> parameters omitted, and patching it to explicitly designate &lt;code>CultureInfo.InvariantCulture&lt;/code>, just like the method &lt;code>DateTimeOffset.ToString()&lt;/code>&lt;/a>.&lt;/p>
 &lt;p>CI has also been reinforced with unit testing in Arabic, French, Hebrew locale and so on. Since there are a lot of countries in Europe that use comma (&lt;code>,&lt;/code>) instead of a period (&lt;code>.&lt;/code>) in decimal places, and countries in the Middle East that writes from right to left, we deliberately chose language regions that were somewhat unfamiliar to us.&lt;/p>
@@ -903,8 +920,8 @@ alt="AWS Container Orchestration Comparison"/>&lt;figcaption>
 &lt;p>To be used on a variety of platforms, Libplanet has been using a cryptographic library written in pure C#, &lt;a href="http://www.bouncycastle.org/csharp/">Bouncy Castle&lt;/a>. Although pure C# implementations are a great advantage in portability, they serve as a penalty in performance.&lt;/p>
 &lt;p>In the new version, an abstraction layer called &lt;a href="https://docs.libplanet.io/0.8.0/api/Libplanet.Crypto.ICryptoBackend.html">&lt;code>ICryptoBackend&lt;/code>&lt;/a> has been added to allow game developers to choose between portability and performance. While the default implementation, &lt;a href="https://docs.libplanet.io/0.8.0/api/Libplanet.Crypto.DefaultCryptoBackend.html">&lt;code>DefaultCryptoBackend&lt;/code>&lt;/a>, is still internally dependent on Bouncy Castle, game developers can achieve performance benefits by implementing the &lt;code>ICryptoBackend&lt;/code> interface appropriately, depending on the game’s target platform.&lt;/p>
 &lt;p>For example, if you want Libplanet to use &lt;code>MyCryptoBackend&lt;/code> class that implements &lt;code>ICryptoBackend&lt;/code>, you can overwrite &lt;a href="https://docs.libplanet.io/0.8.0/api/Libplanet.Crypto.CryptoConfig.html#Libplanet_Crypto_CryptoConfig_CryptoBackend">&lt;code>CryptoConfig.CryptoBackend&lt;/code> property&lt;/a> as shown below.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-csharp" data-lang="csharp">CryptoConfig.CryptoBackend = &lt;span style="color:#080;font-weight:bold">new&lt;/span> MyCryptoBackend();
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>In the case of &lt;a href="https://nine-chronicles.com/">Nine Chronicles&lt;/a>, a game currently being developed by our team, we have also improved game performance by implementing &lt;code>ICryptoBackend&lt;/code> interface that calls &lt;a href="https://github.com/bitcoin-core/secp256k1">secp256k1&lt;/a> C library unveiled in the Bitcoin project.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>CryptoConfig.CryptoBackend = &lt;span style="color:#080;font-weight:bold">new&lt;/span> MyCryptoBackend();
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>In the case of &lt;a href="https://nine-chronicles.com/">Nine Chronicles&lt;/a>, a game currently being developed by our team, we have also improved game performance by implementing &lt;code>ICryptoBackend&lt;/code> interface that calls &lt;a href="https://github.com/bitcoin-core/secp256k1">secp256k1&lt;/a> C library unveiled in the Bitcoin project.&lt;/p>
 &lt;h2 id="routing-table-improvement">Routing Table Improvement&lt;/h2>
 &lt;p>Because Libplanet uses &lt;a href="https://snack.planetarium.dev/eng/2019/09/kademlia/">&lt;abbr title="distributed hash table">DHT&lt;/abbr>&lt;/a> to communicate with other peers, it stores information about the peers associated with itself on the routing table.&lt;/p>
 &lt;p>Traditionally, this routing table only stored the most recent communication points with that peer. But now, we&amp;rsquo;ve also added a communication delay info to give you more information about the network environment.&lt;/p>

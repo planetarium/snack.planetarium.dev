@@ -1,130 +1,42 @@
-<!doctype html><html lang=ko prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
-<head>
-<meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
-<meta name=description content>
-<meta name=HandheldFriendly content="True">
-<meta name=MobileOptimized content="320">
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=keywords content>
-<meta property="og:type" content="article">
-<meta property="og:description" content>
-<meta property="og:title" content="페타바이트 트래픽 원인 분석기">
-<meta property="og:site_name" content="플라네타리움 엔지니어링 스낵">
-<meta property="og:image" content="https://snack.planetarium.dev/kor/2023/03/cloudwatch/images/og.jpg">
-<meta property="og:url" content="https://snack.planetarium.dev/kor/2023/03/cloudwatch/">
-<meta property="og:locale" content="ko">
-<meta property="article:published_time" content="2023-03-15">
-<meta property="article:modified_time" content="2023-03-15">
-<meta name=twitter:card content="summary">
-<meta name=twitter:site content="@">
-<meta name=twitter:creator content="@">
-<meta name=twitter:title content="페타바이트 트래픽 원인 분석기 | 플라네타리움 엔지니어링 스낵">
-<meta name=twitter:description content="안녕하세요, Nine Corparation, 게임 디비전에서 DX Engineer로 근무하고 있는 moreal입니다. 이 글에서는 작년 이맘때 회사에서 발견한 문제를 디버깅한 경험을 공유하려고 합니다.
+<!doctype html><html lang=ko prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#"><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><meta name=description content><meta name=HandheldFriendly content="True"><meta name=MobileOptimized content="320"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=keywords content><meta property="og:type" content="article"><meta property="og:description" content><meta property="og:title" content="페타바이트 트래픽 원인 분석기"><meta property="og:site_name" content="플라네타리움 엔지니어링 스낵"><meta property="og:image" content="https://snack.planetarium.dev/og/kor.png"><meta property="og:url" content="https://snack.planetarium.dev/kor/2023/03/cloudwatch/"><meta property="og:locale" content="ko"><meta property="article:published_time" content="2023-03-15"><meta property="article:modified_time" content="2023-03-15"><meta name=twitter:card content="summary"><meta name=twitter:site content="@"><meta name=twitter:creator content="@"><meta name=twitter:title content="페타바이트 트래픽 원인 분석기 | 플라네타리움 엔지니어링 스낵"><meta name=twitter:description content="안녕하세요, Nine Corparation, 게임 디비전에서 DX Engineer로 근무하고 있는 moreal입니다. 이 글에서는 작년 이맘때 회사에서 발견한 문제를 디버깅한 경험을 공유하려고 합니다.
 대시보드에 보이는 이상한 단위 회사에서는 운영하는 서비스의 상태를 확인하고 주의 사항을 공유하기 위한 주간 미팅을 진행합니다. 서비스는 EKS를 사용하고 있으며, 상태 확인을 위해 AWS CloudWatch Container Insights를 활용하고 있습니다. 그런데 어느 날 대시보드를 확인하다 이상한 수치들을 발견했습니다.
 Y축의 단위를 보니 1.67 페타바이트가 표시되어 있었습니다.
-최대 값은 400 페타바이트에 이르렀습니다. 🙀|">
-<meta name=twitter:image:src content>
-<meta name=twitter:domain content="https://snack.planetarium.dev/kor/2023/03/cloudwatch/">
-<title>페타바이트 트래픽 원인 분석기</title>
-<link rel=canonical href=https://snack.planetarium.dev/kor/2023/03/cloudwatch/>
-<link href=https://snack.planetarium.dev/index.xml rel=alternate type=application/atom+xml title="페타바이트 트래픽 원인 분석기">
-<link rel=stylesheet href=https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css>
-<link rel=stylesheet href=https://snack.planetarium.dev/css/style.min.1a35efb5c5da4fd20bd2ec86458da5ee7cc1cfc81c4f107944b5e0fc59a3d809.css integrity="sha256-GjXvtcXaT9IL0uyGRY2l7nzBz8gcTxB5RLXg/Fmj2Ak=">
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-132504786-2"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-132504786-2')</script>
-<link rel=icon href=/favicon-32x32.png type=image/png sizes=32x32>
-<link rel="shortcut icon" href=/favicon.ico type=image/x-icon>
-<link rel=apple-touch-icon href=/apple-touch-icon.png>
-</head>
-<body class="sans-serif w-90 w-60-ns center center-ns mv2 mv5-ns" itemscope itemtype=http://schema.org/Article>
-<a href=https://snack.planetarium.dev/kor/ id=site-title class="b bb bw1 pb1 no-underline dark-gray">플라네타리움 엔지니어링 스낵</a>
-<section id=main class=mt5>
-<h1 itemprop=name id=title class=mb1>페타바이트 트래픽 원인 분석기</h1>
-<div class="f6 gray dib-ns">
-<time itemprop=datePublished datetime=2023-03-15>
-2023년 3월 15일
-</time>
-</div>
-<article itemprop=articleBody id=content class="w-100 lh-copy">
-<p>안녕하세요, Nine Corparation, 게임 디비전에서 DX Engineer로 근무하고 있는 moreal입니다. 이 글에서는 작년 이맘때 회사에서 발견한 문제를 디버깅한 경험을 공유하려고 합니다.</p>
-<h2 id=대시보드에-보이는-이상한-단위>대시보드에 보이는 이상한 단위</h2>
-<p>회사에서는 운영하는 서비스의 상태를 확인하고 주의 사항을 공유하기 위한 주간 미팅을 진행합니다. 서비스는 EKS를 사용하고 있으며, 상태 확인을 위해 AWS CloudWatch Container Insights를 활용하고 있습니다. 그런데 어느 날 대시보드를 확인하다 이상한 수치들을 발견했습니다.</p>
-<p><img src=https://velog.velcdn.com/images/moreal/post/3165dcad-605a-4e2d-8ad0-fd083993608d/image.png alt></p>
-<p>Y축의 단위를 보니 1.67 페타바이트가 표시되어 있었습니다.</p>
-<p><img src=https://velog.velcdn.com/images/moreal/post/47432dd2-f78e-4724-8608-7721c09ad165/image.png alt></p>
-<p>최대 값은 400 페타바이트에 이르렀습니다. 🙀</p>
-<p>여러 가지 추측을 해봤지만, 원인을 찾기 위해 CloudWatch가 어떻게 메트릭을 수집하는지 알아보기로 했습니다.</p>
-<h2 id=cloudwatch가-메트릭을-수집하는-방법>CloudWatch가 메트릭을 수집하는 방법</h2>
-<p>CloudWatch 메트릭 수집 방법을 알아보기 위해, 오픈소스로 공개된 <a href=https://github.com/aws/amazon-cloudwatch-agent>aws/amazon-cloudwatch-agent</a> 저장소를 참조했습니다.</p>
-<p><code>amazon-cloudwatch-agent</code>는 Kubernetes에서 사용하는 cAdvisor를 활용합니다. cAdvisor는 컨테이너에서 사용하는 리소스와 퍼포먼스 메트릭을 제공합니다. 이 값들을 활용하여 메트릭 값을 계산합니다.</p>
-<p>계산 로직은 아래와 같습니다.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#fff><code class=language-go data-lang=go>netIfceMetric[NetRxBytes] = <span style=color:#038>float64</span>(cur.RxBytes-pre.RxBytes) / <span style=color:#038>float64</span>(deltaCTimeInNano) * <span style=color:#038>float64</span>(time.Second)
-netIfceMetric[NetTxBytes] = <span style=color:#038>float64</span>(cur.TxBytes-pre.TxBytes) / <span style=color:#038>float64</span>(deltaCTimeInNano) * <span style=color:#038>float64</span>(time.Second)
-</code></pre></div><p><a href=https://github.com/google/cadvisor/blob/648b12f8db47171ebd0fc45c67d53574ddb017fe/info/v1/container.go#L418-L437><code>cur.RxBytes</code></a>의 데이터 타입이 <code>uint64</code>여서 언더플로우가 발생할 가능성이 있었습니다. 과도한 트래픽이 발생하는 경우를 확인하기 위해 로그를 출력하는 부분이 있었고, 실제 값도 확인할 수 있었습니다.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#fff><code class=language-go data-lang=go><span style=color:#080;font-weight:700>if</span> netIfceMetric[NetRxBytes] &gt; oneTerabytes || netIfceMetric[NetTxBytes] &gt; oneTerabytes {
-	log.<span style=color:#06b;font-weight:700>Printf</span>(<span style=color:#d20;background-color:#fff0f0>&#34;I! Too Big value for network RX/TX bytes, final Rx:%v, final Tx:%v, curRx:%v, preRx:%v, curTx:%v, preTx:%v, deltaCTimeInNano:%v&#34;</span>,
-		netIfceMetric[NetRxBytes], netIfceMetric[NetTxBytes],
-		cur.RxBytes, pre.RxBytes,
-		cur.TxBytes, pre.TxBytes,
-		deltaCTimeInNano)
-}
-</code></pre></div><pre tabindex=0><code>2022-04-08T08:18:17Z I! Too Big value for network RX/TX bytes, final Rx:3.1837731352719405e+17, final Tx:3.183773135286772e+17, curRx:692608, preRx:317669466, curTx:11946450, preTx:242992298, deltaCTimeInNano:57939882302
-</code></pre><p>Go Playground에서 코드를 실행하면 아래와 같은 결과가 나옵니다.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#fff><code class=language-go data-lang=go><span style=color:#888>// https://play.golang.com/p/KppWhxtTtad
-</span><span style=color:#888></span><span style=color:#080;font-weight:700>package</span> main
-
-<span style=color:#080;font-weight:700>import</span> (
-	<span style=color:#d20;background-color:#fff0f0>&#34;fmt&#34;</span>
-	<span style=color:#d20;background-color:#fff0f0>&#34;time&#34;</span>
-)
-
-<span style=color:#080;font-weight:700>func</span> <span style=color:#06b;font-weight:700>main</span>() {
-	<span style=color:#080;font-weight:700>var</span> curRxBytes <span style=color:#888;font-weight:700>uint64</span> = <span style=color:#00d;font-weight:700>692608</span> 	
-	<span style=color:#080;font-weight:700>var</span> preRxBytes <span style=color:#888;font-weight:700>uint64</span> = <span style=color:#00d;font-weight:700>317669466</span>
-	<span style=color:#080;font-weight:700>var</span> deltaCTimeInNano <span style=color:#888;font-weight:700>int64</span> = <span style=color:#00d;font-weight:700>57939882302</span>
-	<span style=color:#080;font-weight:700>var</span> rxBytes = <span style=color:#038>float64</span>(curRxBytes-preRxBytes) / <span style=color:#038>float64</span>(deltaCTimeInNano) * <span style=color:#038>float64</span>(time.Second)
-	fmt.<span style=color:#06b;font-weight:700>Printf</span>(<span style=color:#d20;background-color:#fff0f0>&#34;%v&#34;</span>, rxBytes)
-    <span style=color:#888>// output = 3.1837731352719405e+17
-</span><span style=color:#888></span>}
-</code></pre></div><p><code>3.1837731352719405e+17</code> 와 같은 값을 얻을 수 있고, 이 값을 Python에서 확인하면 원래 CloudWatch Container Insight에서 본 페타바이트 값이 나옵니다.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#fff><code class=language-python data-lang=python>&gt;&gt;&gt; <span style=color:#038>int</span>(<span style=color:#00d;font-weight:700>3.1837731352719405e+17</span>)
-<span style=color:#00d;font-weight:700>318377313527194048</span>
-&gt;&gt;&gt; <span style=color:#038>int</span>(<span style=color:#00d;font-weight:700>3.1837731352719405e+17</span>) // (<span style=color:#00d;font-weight:700>1024</span> ** <span style=color:#00d;font-weight:700>5</span>) <span style=color:#888># KB MB GB TB PB</span>
-<span style=color:#00d;font-weight:700>282</span>
-</code></pre></div><p>cAdvisor는 <code>/proc/&lt;pid>/net/dev</code>에서 프로세스의 네트워크 관련 메트릭들을 가져오는데, 프로세스가 실행되면서 값이 누적되고, 재시작하면 다시 0부터 시작합니다. 그래서 Pod를 내리고 다시 올릴 때, 같은 컨테이너 이름의 경우 이전 값보다 현재 값이 더 작아지면서 언더플로우 버그가 발생한 것으로 이해할 수 있었습니다.</p>
-<p>이 문제와 관련하여 Helm이나 다른 예제에서 Pod 이름이 항상 다른 것과 관련이 있는지는 아직 확실하지 않습니다. 🤔</p>
-<h4 id=여담>여담</h4>
-<ul>
-<li>다행히 요금에 큰 문제가 발생하는 문제는 아니었습니다 💭</li>
-<li>아직도 발생하는 문제입니다. 🙀</li>
-<li>ChatGPT에게 한 번 정리해달라고 해봤는데 괜찮은 것 같습니다. 👀</li>
-</ul>
-</article>
-<script>(function(){var d,h,e,a,g,c,f,b;if(!location.hash.match(/^#/))return;if(d=document.getElementById('content'),h=window.decodeURIComponent(location.hash.substring(1)),e=document.getElementById(h),a=e.nodeName.match(/^H([123456])$/),!a||e.parentNode!==d)return;g=window.parseInt(a[1]),c=!1;for(f=0;f<d.childNodes.length;f++)b=d.childNodes[f],c?(a=b.nodeName.match(/^H([123456])$/),a&&window.parseInt(a[1])>=g&&(c=!1)):b===e&&(c=!0),!c&&!b.nodeName.match(/^#/)&&(b.className+=' dim')})()</script>
-<div class=recruit>
-<a href=https://planetariumhq.com>플라네타리움</a>은 게임에 특화된
+최대 값은 400 페타바이트에 이르렀습니다. 🙀|"><meta name=twitter:image:src content><meta name=twitter:domain content="https://snack.planetarium.dev/kor/2023/03/cloudwatch/"><title>페타바이트 트래픽 원인 분석기</title>
+<link rel=canonical href=https://snack.planetarium.dev/kor/2023/03/cloudwatch/><link href=https://snack.planetarium.dev/index.xml rel=alternate type=application/atom+xml title="페타바이트 트래픽 원인 분석기"><link rel=stylesheet href=https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css><link rel=stylesheet href=https://snack.planetarium.dev/css/style.min.1a35efb5c5da4fd20bd2ec86458da5ee7cc1cfc81c4f107944b5e0fc59a3d809.css integrity="sha256-GjXvtcXaT9IL0uyGRY2l7nzBz8gcTxB5RLXg/Fmj2Ak="><script async src="https://www.googletagmanager.com/gtag/js?id=UA-132504786-2"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","UA-132504786-2")</script><link rel=icon href=/favicon-32x32.png type=image/png sizes=32x32><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><link rel=apple-touch-icon href=/apple-touch-icon.png></head><body class="sans-serif w-90 w-60-ns center center-ns mv2 mv5-ns" itemscope itemtype=http://schema.org/Article><a href=https://snack.planetarium.dev/kor/ id=site-title class="b bb bw1 pb1 no-underline dark-gray">플라네타리움 엔지니어링 스낵</a><section id=main class=mt5><h1 itemprop=name id=title class=mb1>페타바이트 트래픽 원인 분석기</h1><div class="f6 gray dib-ns"><time itemprop=datePublished datetime=2023-03-15>2023년 3월 15일</time></div><article itemprop=articleBody id=content class="w-100 lh-copy"><p>안녕하세요, Nine Corparation, 게임 디비전에서 DX Engineer로 근무하고 있는 moreal입니다. 이 글에서는 작년 이맘때 회사에서 발견한 문제를 디버깅한 경험을 공유하려고 합니다.</p><h2 id=대시보드에-보이는-이상한-단위>대시보드에 보이는 이상한 단위</h2><p>회사에서는 운영하는 서비스의 상태를 확인하고 주의 사항을 공유하기 위한 주간 미팅을 진행합니다. 서비스는 EKS를 사용하고 있으며, 상태 확인을 위해 AWS CloudWatch Container Insights를 활용하고 있습니다. 그런데 어느 날 대시보드를 확인하다 이상한 수치들을 발견했습니다.</p><p><img src=https://velog.velcdn.com/images/moreal/post/3165dcad-605a-4e2d-8ad0-fd083993608d/image.png></p><p>Y축의 단위를 보니 1.67 페타바이트가 표시되어 있었습니다.</p><p><img src=https://velog.velcdn.com/images/moreal/post/47432dd2-f78e-4724-8608-7721c09ad165/image.png></p><p>최대 값은 400 페타바이트에 이르렀습니다. 🙀</p><p>여러 가지 추측을 해봤지만, 원인을 찾기 위해 CloudWatch가 어떻게 메트릭을 수집하는지 알아보기로 했습니다.</p><h2 id=cloudwatch가-메트릭을-수집하는-방법>CloudWatch가 메트릭을 수집하는 방법</h2><p>CloudWatch 메트릭 수집 방법을 알아보기 위해, 오픈소스로 공개된 <a href=https://github.com/aws/amazon-cloudwatch-agent>aws/amazon-cloudwatch-agent</a> 저장소를 참조했습니다.</p><p><code>amazon-cloudwatch-agent</code>는 Kubernetes에서 사용하는 cAdvisor를 활용합니다. cAdvisor는 컨테이너에서 사용하는 리소스와 퍼포먼스 메트릭을 제공합니다. 이 값들을 활용하여 메트릭 값을 계산합니다.</p><p>계산 로직은 아래와 같습니다.</p><div class=highlight><pre tabindex=0 style=background-color:#fff><code class=language-go data-lang=go><span style=display:flex><span>netIfceMetric[NetRxBytes] = <span style=color:#038>float64</span>(cur.RxBytes-pre.RxBytes) / <span style=color:#038>float64</span>(deltaCTimeInNano) * <span style=color:#038>float64</span>(time.Second)
+</span></span><span style=display:flex><span>netIfceMetric[NetTxBytes] = <span style=color:#038>float64</span>(cur.TxBytes-pre.TxBytes) / <span style=color:#038>float64</span>(deltaCTimeInNano) * <span style=color:#038>float64</span>(time.Second)
+</span></span></code></pre></div><p><a href=https://github.com/google/cadvisor/blob/648b12f8db47171ebd0fc45c67d53574ddb017fe/info/v1/container.go#L418-L437><code>cur.RxBytes</code></a>의 데이터 타입이 <code>uint64</code>여서 언더플로우가 발생할 가능성이 있었습니다. 과도한 트래픽이 발생하는 경우를 확인하기 위해 로그를 출력하는 부분이 있었고, 실제 값도 확인할 수 있었습니다.</p><div class=highlight><pre tabindex=0 style=background-color:#fff><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#080;font-weight:700>if</span> netIfceMetric[NetRxBytes] &gt; oneTerabytes || netIfceMetric[NetTxBytes] &gt; oneTerabytes {
+</span></span><span style=display:flex><span>	log.<span style=color:#06b;font-weight:700>Printf</span>(<span style=color:#d20;background-color:#fff0f0>&#34;I! Too Big value for network RX/TX bytes, final Rx:%v, final Tx:%v, curRx:%v, preRx:%v, curTx:%v, preTx:%v, deltaCTimeInNano:%v&#34;</span>,
+</span></span><span style=display:flex><span>		netIfceMetric[NetRxBytes], netIfceMetric[NetTxBytes],
+</span></span><span style=display:flex><span>		cur.RxBytes, pre.RxBytes,
+</span></span><span style=display:flex><span>		cur.TxBytes, pre.TxBytes,
+</span></span><span style=display:flex><span>		deltaCTimeInNano)
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><pre tabindex=0><code>2022-04-08T08:18:17Z I! Too Big value for network RX/TX bytes, final Rx:3.1837731352719405e+17, final Tx:3.183773135286772e+17, curRx:692608, preRx:317669466, curTx:11946450, preTx:242992298, deltaCTimeInNano:57939882302
+</code></pre><p>Go Playground에서 코드를 실행하면 아래와 같은 결과가 나옵니다.</p><div class=highlight><pre tabindex=0 style=background-color:#fff><code class=language-go data-lang=go><span style=display:flex><span><span style=color:#888>// https://play.golang.com/p/KppWhxtTtad
+</span></span></span><span style=display:flex><span><span style=color:#888></span><span style=color:#080;font-weight:700>package</span> main
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#080;font-weight:700>import</span> (
+</span></span><span style=display:flex><span>	<span style=color:#d20;background-color:#fff0f0>&#34;fmt&#34;</span>
+</span></span><span style=display:flex><span>	<span style=color:#d20;background-color:#fff0f0>&#34;time&#34;</span>
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#080;font-weight:700>func</span> <span style=color:#06b;font-weight:700>main</span>() {
+</span></span><span style=display:flex><span>	<span style=color:#080;font-weight:700>var</span> curRxBytes <span style=color:#888;font-weight:700>uint64</span> = <span style=color:#00d;font-weight:700>692608</span> 	
+</span></span><span style=display:flex><span>	<span style=color:#080;font-weight:700>var</span> preRxBytes <span style=color:#888;font-weight:700>uint64</span> = <span style=color:#00d;font-weight:700>317669466</span>
+</span></span><span style=display:flex><span>	<span style=color:#080;font-weight:700>var</span> deltaCTimeInNano <span style=color:#888;font-weight:700>int64</span> = <span style=color:#00d;font-weight:700>57939882302</span>
+</span></span><span style=display:flex><span>	<span style=color:#080;font-weight:700>var</span> rxBytes = <span style=color:#038>float64</span>(curRxBytes-preRxBytes) / <span style=color:#038>float64</span>(deltaCTimeInNano) * <span style=color:#038>float64</span>(time.Second)
+</span></span><span style=display:flex><span>	fmt.<span style=color:#06b;font-weight:700>Printf</span>(<span style=color:#d20;background-color:#fff0f0>&#34;%v&#34;</span>, rxBytes)
+</span></span><span style=display:flex><span>    <span style=color:#888>// output = 3.1837731352719405e+17
+</span></span></span><span style=display:flex><span><span style=color:#888></span>}
+</span></span></code></pre></div><p><code>3.1837731352719405e+17</code> 와 같은 값을 얻을 수 있고, 이 값을 Python에서 확인하면 원래 CloudWatch Container Insight에서 본 페타바이트 값이 나옵니다.</p><div class=highlight><pre tabindex=0 style=background-color:#fff><code class=language-python data-lang=python><span style=display:flex><span>&gt;&gt;&gt; <span style=color:#038>int</span>(<span style=color:#00d;font-weight:700>3.1837731352719405e+17</span>)
+</span></span><span style=display:flex><span><span style=color:#00d;font-weight:700>318377313527194048</span>
+</span></span><span style=display:flex><span>&gt;&gt;&gt; <span style=color:#038>int</span>(<span style=color:#00d;font-weight:700>3.1837731352719405e+17</span>) // (<span style=color:#00d;font-weight:700>1024</span> ** <span style=color:#00d;font-weight:700>5</span>) <span style=color:#888># KB MB GB TB PB</span>
+</span></span><span style=display:flex><span><span style=color:#00d;font-weight:700>282</span>
+</span></span></code></pre></div><p>cAdvisor는 <code>/proc/&lt;pid>/net/dev</code>에서 프로세스의 네트워크 관련 메트릭들을 가져오는데, 프로세스가 실행되면서 값이 누적되고, 재시작하면 다시 0부터 시작합니다. 그래서 Pod를 내리고 다시 올릴 때, 같은 컨테이너 이름의 경우 이전 값보다 현재 값이 더 작아지면서 언더플로우 버그가 발생한 것으로 이해할 수 있었습니다.</p><p>이 문제와 관련하여 Helm이나 다른 예제에서 Pod 이름이 항상 다른 것과 관련이 있는지는 아직 확실하지 않습니다. 🤔</p><h4 id=여담>여담</h4><ul><li>다행히 요금에 큰 문제가 발생하는 문제는 아니었습니다 💭</li><li>아직도 발생하는 문제입니다. 🙀</li><li>ChatGPT에게 한 번 정리해달라고 해봤는데 괜찮은 것 같습니다. 👀</li></ul></article><script>(function(){if(!location.hash.match(/^#/))return;var t,n,s,a,o=document.getElementById("content"),r=window.decodeURIComponent(location.hash.substring(1)),i=document.getElementById(r),e=i.nodeName.match(/^H([123456])$/);if(!e||i.parentNode!==o)return;for(a=window.parseInt(e[1]),t=!1,s=0;s<o.childNodes.length;s++)n=o.childNodes[s],t?(e=n.nodeName.match(/^H([123456])$/),e&&window.parseInt(e[1])>=a&&(t=!1)):n===i&&(t=!0),!t&&!n.nodeName.match(/^#/)&&(n.className+=" dim")})()</script><div class=recruit><a href=https://planetariumhq.com>플라네타리움</a>은 게임에 특화된
 오픈 소스 P2P 라이브러리 <a href=https://libplanet.io/>Libplanet</a>과,
 그 위에서 중앙 서버 없는 온라인 게임
 〈<a href=https://nine-chronicles.com/>나인 크로니클</a>〉을 만들고
 있습니다. 저희와 흥미로운 기술적 도전을 함께 하실 분들을 모시고 있습니다.
 지금 <a href=https://recruit.planetariumhq.com/>인재 영입 페이지</a>를
-확인해주세요!
-</div>
-<div itemprop=author class="fl tc mr3">
-<a href=https://github.com/moreal rel=author itemprop=url class="no-underline mid-gray b f6">
-<img src="https://www.gravatar.com/avatar/0be9fcfeb2a4517ecf4d37054377c001?d=https://avatars.githubusercontent.com/moreal" itemprop=image class="w3 h3 br-100 mb1">
-<br>이도건
-</a>
-</div>
-</section>
-<footer>
-<div>
-<p class="f6 gray mt6 lh-copy">
-&copy; 2019&ndash;2023
-<a href=https://planetariumlabs.com/ style=color:inherit;text-decoration:inherit>Planetarium</a>.
-</p>
-</div>
-</footer>
-</body>
-</html>
+확인해주세요!</div><div itemprop=author class="fl tc mr3"><a href=https://github.com/moreal rel=author itemprop=url class="no-underline mid-gray b f6"><img src="https://www.gravatar.com/avatar/0be9fcfeb2a4517ecf4d37054377c001?d=https://avatars.githubusercontent.com/moreal" itemprop=image class="w3 h3 br-100 mb1"><br>이도건</a></div></section><footer><div><p class="f6 gray mt6 lh-copy">&copy; 2019&ndash;2023
+<a href=https://planetariumlabs.com/ style=color:inherit;text-decoration:inherit>Planetarium</a>.</p></div></footer></body></html>

@@ -1,384 +1,191 @@
-<!doctype html><html lang=en prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
-<head>
-<meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
-<meta name=description content>
-<meta name=HandheldFriendly content="True">
-<meta name=MobileOptimized content="320">
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=keywords content>
-<meta property="og:type" content="article">
-<meta property="og:description" content>
-<meta property="og:title" content="How to Use Unity DOTS DynamicBuffer">
-<meta property="og:site_name" content="Planetarium Engineering Snack">
-<meta property="og:image" content="https://snack.planetarium.dev/eng/2020/05/unity-dots-start-to-use-dynamic-buffer/images/01.png">
-<meta property="og:image" content="https://snack.planetarium.dev/eng/2020/05/unity-dots-start-to-use-dynamic-buffer/images/02.png">
-<meta property="og:image" content="https://snack.planetarium.dev/eng/2020/05/unity-dots-start-to-use-dynamic-buffer/images/03.png">
-<meta property="og:image" content="https://snack.planetarium.dev/eng/2020/05/unity-dots-start-to-use-dynamic-buffer/images/04.png">
-<meta property="og:image" content="https://snack.planetarium.dev/eng/2020/05/unity-dots-start-to-use-dynamic-buffer/images/05.png">
-<meta property="og:image" content="https://snack.planetarium.dev/eng/2020/05/unity-dots-start-to-use-dynamic-buffer/images/06.png">
-<meta property="og:image" content="https://snack.planetarium.dev/eng/2020/05/unity-dots-start-to-use-dynamic-buffer/images/07.png">
-<meta property="og:image" content="https://snack.planetarium.dev/eng/2020/05/unity-dots-start-to-use-dynamic-buffer/images/08.png">
-<meta property="og:image" content="https://snack.planetarium.dev/eng/2020/05/unity-dots-start-to-use-dynamic-buffer/images/09.png">
-<meta property="og:image" content="https://snack.planetarium.dev/eng/2020/05/unity-dots-start-to-use-dynamic-buffer/images/10.png">
-<meta property="og:image" content="https://snack.planetarium.dev/eng/2020/05/unity-dots-start-to-use-dynamic-buffer/images/11.png">
-<meta property="og:image" content="https://snack.planetarium.dev/eng/2020/05/unity-dots-start-to-use-dynamic-buffer/images/12.png">
-<meta property="og:image" content="https://snack.planetarium.dev/og/eng.png">
-<meta property="og:url" content="https://snack.planetarium.dev/eng/2020/05/unity-dots-start-to-use-dynamic-buffer/">
-<meta property="og:locale" content="en">
-<meta property="article:published_time" content="2020-05-18">
-<meta property="article:modified_time" content="2020-05-18">
-<meta name=twitter:card content="summary">
-<meta name=twitter:site content="@">
-<meta name=twitter:creator content="@">
-<meta name=twitter:title content="How to Use Unity DOTS DynamicBuffer | Planetarium Engineering Snack">
-<meta name=twitter:description content="Hello, I&rsquo;m Hyun Seungmin, Nine Chronicles developer at Planetarium. Our project is not yet using Unity DOTS but we are working hard to apply it to our next project. So from now on, I will be sharing what I&rsquo;ve learned in my studies.
-This time, let&rsquo;s have a look at DynamicBuffer<T>. We’re going to talk about setting up a dynamic buffer on an entity and using it. Although we’re starting a few steps ahead for our very first DOTS article, I think you can catch on right away by following this piece because the skipped portion isn’t that substantial.|">
-<meta name=twitter:image:src content>
-<meta name=twitter:domain content="https://snack.planetarium.dev/eng/2020/05/unity-dots-start-to-use-dynamic-buffer/">
-<title>How to Use Unity DOTS DynamicBuffer</title>
-<link rel=canonical href=https://snack.planetarium.dev/eng/2020/05/unity-dots-start-to-use-dynamic-buffer/>
-<link rel=alternate href=https://snack.planetarium.dev/kor/2020/05/unity-dots-start-to-use-dynamic-buffer/ hreflang=ko title="Unity DOTS DynamicBuffer 사용하기">
-<link href=https://snack.planetarium.dev/index.xml rel=alternate type=application/atom+xml title="How to Use Unity DOTS DynamicBuffer">
-<link rel=stylesheet href=https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css>
-<link rel=stylesheet href=https://snack.planetarium.dev/css/style.min.1a35efb5c5da4fd20bd2ec86458da5ee7cc1cfc81c4f107944b5e0fc59a3d809.css integrity="sha256-GjXvtcXaT9IL0uyGRY2l7nzBz8gcTxB5RLXg/Fmj2Ak=">
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-132504786-2"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-132504786-2')</script>
-<link rel=icon href=/favicon-32x32.png type=image/png sizes=32x32>
-<link rel="shortcut icon" href=/favicon.ico type=image/x-icon>
-<link rel=apple-touch-icon href=/apple-touch-icon.png>
-</head>
-<body class="sans-serif w-90 w-60-ns center center-ns mv2 mv5-ns" itemscope itemtype=http://schema.org/Article>
-<a href=https://snack.planetarium.dev/eng/ id=site-title class="b bb bw1 pb1 no-underline dark-gray">Planetarium Engineering Snack</a>
-<section id=main class=mt5>
-<h1 itemprop=name id=title class=mb1>How to Use Unity DOTS DynamicBuffer</h1>
-<div class="f6 gray dib-ns">
-<time itemprop=datePublished datetime=2020-05-18>
-May 18, 2020
-</time>
-(<strong>English</strong>
+<!doctype html><html lang prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#"><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><meta name=description content><meta name=HandheldFriendly content="True"><meta name=MobileOptimized content="320"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=keywords content><meta property="og:type" content="article"><meta property="og:description" content><meta property="og:title" content="How to Use Unity DOTS DynamicBuffer"><meta property="og:site_name" content="Planetarium Engineering Snack"><meta property="og:image" content="https://snack.planetarium.dev/og/eng.png"><meta property="og:url" content="https://snack.planetarium.dev/eng/2020/05/unity-dots-start-to-use-dynamic-buffer/"><meta property="og:locale" content><meta property="article:published_time" content="2020-05-18"><meta property="article:modified_time" content="2020-05-18"><meta name=twitter:card content="summary"><meta name=twitter:site content="@"><meta name=twitter:creator content="@"><meta name=twitter:title content="How to Use Unity DOTS DynamicBuffer | Planetarium Engineering Snack"><meta name=twitter:description content="Hello, I&rsquo;m Hyun Seungmin, Nine Chronicles developer at Planetarium. Our project is not yet using Unity DOTS but we are working hard to apply it to our next project. So from now on, I will be sharing what I&rsquo;ve learned in my studies.
+This time, let&rsquo;s have a look at DynamicBuffer<T>. We’re going to talk about setting up a dynamic buffer on an entity and using it. Although we’re starting a few steps ahead for our very first DOTS article, I think you can catch on right away by following this piece because the skipped portion isn’t that substantial.|"><meta name=twitter:image:src content><meta name=twitter:domain content="https://snack.planetarium.dev/eng/2020/05/unity-dots-start-to-use-dynamic-buffer/"><title>How to Use Unity DOTS DynamicBuffer</title>
+<link rel=canonical href=https://snack.planetarium.dev/eng/2020/05/unity-dots-start-to-use-dynamic-buffer/><link rel=alternate href=https://snack.planetarium.dev/kor/2020/05/unity-dots-start-to-use-dynamic-buffer/ hreflang=ko title="Unity DOTS DynamicBuffer 사용하기"><link href=https://snack.planetarium.dev/index.xml rel=alternate type=application/atom+xml title="How to Use Unity DOTS DynamicBuffer"><link rel=stylesheet href=https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css><link rel=stylesheet href=https://snack.planetarium.dev/css/style.min.1a35efb5c5da4fd20bd2ec86458da5ee7cc1cfc81c4f107944b5e0fc59a3d809.css integrity="sha256-GjXvtcXaT9IL0uyGRY2l7nzBz8gcTxB5RLXg/Fmj2Ak="><script async src="https://www.googletagmanager.com/gtag/js?id=UA-132504786-2"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","UA-132504786-2")</script><link rel=icon href=/favicon-32x32.png type=image/png sizes=32x32><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><link rel=apple-touch-icon href=/apple-touch-icon.png></head><body class="sans-serif w-90 w-60-ns center center-ns mv2 mv5-ns" itemscope itemtype=http://schema.org/Article><a href=https://snack.planetarium.dev/eng/ id=site-title class="b bb bw1 pb1 no-underline dark-gray">Planetarium Engineering Snack</a><section id=main class=mt5><h1 itemprop=name id=title class=mb1>How to Use Unity DOTS DynamicBuffer</h1><div class="f6 gray dib-ns"><time itemprop=datePublished datetime=2020-05-18>May 18, 2020
+</time>(<strong>English</strong>
 &bull;
-<a href=https://snack.planetarium.dev/kor/2020/05/unity-dots-start-to-use-dynamic-buffer/ hreflang=ko title="Unity DOTS DynamicBuffer 사용하기" class=gray>한국어</a>)
-</div>
-<article itemprop=articleBody id=content class="w-100 lh-copy">
-<p>Hello, I&rsquo;m Hyun Seungmin, <a href=https://nine-chronicles.com/>Nine Chronicles</a> developer at <a href=https://planetariumhq.com/>Planetarium</a>. Our project is not yet using Unity <a href=https://unity.com/dots><abbr title="Data-Oriented Technology Stack">DOTS</abbr></a> but we are working hard to apply it to our next project. So from now on, I will be sharing what I&rsquo;ve learned in my studies.</p>
-<p>This time, let&rsquo;s have a look at <a href=https://docs.unity3d.com/Packages/com.unity.entities@0.10/api/Unity.Entities.DynamicBuffer-1.html><code>DynamicBuffer&lt;T></code></a>. We’re going to talk about setting up a dynamic buffer on an entity and using it. Although we’re starting a few steps ahead for our very first DOTS article, I think you can catch on right away by following this piece because the skipped portion isn’t that substantial.</p>
-<p>This article refers to the <a href=https://docs.unity3d.com/Packages/com.unity.entities@0.10/manual/dynamic_buffers.html>Unity Official Docs</a> and the <a href="https://www.youtube.com/watch?v=XC84bc95heI">tutorial video</a>.</p>
-<h2 id=dev-environment>Dev Environment</h2>
-<dl>
-<dt>Unity</dt>
-<dd>2019.3.12f1</dd>
-<dt><code>com.unity.entities</code></dt>
-<dd>0.10.0-preview.6</dd>
-</dl>
-<h2 id=ibufferelementdataibufferelementdata-implementation><a href=https://docs.unity3d.com/Packages/com.unity.entities@0.10/api/Unity.Entities.IBufferElementData.html><code>IBufferElementData</code></a> Implementation</h2>
-<p>Just as components that are added to an entity must implement the <a href=https://docs.unity3d.com/Packages/com.unity.entities@0.10/api/Unity.Entities.IComponentData.html><code>IComponentData</code> Interface</a>, <code>DynamicBuffer&lt;T></code> must also implement the <a href=https://docs.unity3d.com/Packages/com.unity.entities@0.10/api/Unity.Entities.IBufferElementData.html><code>IBufferElementData</code> Interface</a>.</p>
-<ul>
-<li>
-<p>I’ve created an <code>IntBufferElement</code> structure that implements <code>IBufferElementData</code>. It’s format is similar to <code>IComponentData</code>, right?</p>
-<div class=highlight><pre tabindex=0 style=background-color:#fff><code class=language-cs data-lang=cs><span style=color:#080;font-weight:700>using</span> <span style=color:#b06;font-weight:700>Unity.Entities</span>;
-
-<span style=color:#080;font-weight:700>namespace</span> <span style=color:#b06;font-weight:700>DOTS_DynamicBuffer</span>
-{
-  <span style=color:#080;font-weight:700>public</span> <span style=color:#080;font-weight:700>struct</span> <span style=color:#b06;font-weight:700>IntBufferElement</span> : IBufferElementData
-  {
-    <span style=color:#080;font-weight:700>public</span> <span style=color:#888;font-weight:700>int</span> Value;
-  }
-}
-</code></pre></div></li>
-</ul>
-<h2 id=using-entitymanageraddbuffertentitymanageraddbuffert>Using <a href=https://docs.unity3d.com/Packages/com.unity.entities@0.10/api/Unity.Entities.EntityManager.html#Unity_Entities_EntityManager_AddBuffer__1_Unity_Entities_Entity_><code>EntityManager.AddBuffer&lt;T>()</code></a></h2>
-<p>Just like adding a component to an entity, we need to use <a href=https://docs.unity3d.com/Packages/com.unity.entities@0.10/api/Unity.Entities.EntityManager.html><code>EntityManager</code></a> when adding buffers. Below, I’ve written a component called <code>PlayModeTest</code> that will be added to game objects and with that, let’s check the <em>Entity Debugger</em> in play mode.</p>
-<ul>
-<li>
-<p>Let’s add an <code>IntBufferElement</code> buffer to the entity and put some values in it.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#fff><code class=language-cs data-lang=cs><span style=color:#080;font-weight:700>using</span> <span style=color:#b06;font-weight:700>UnityEngine</span>;
-<span style=color:#080;font-weight:700>using</span> <span style=color:#b06;font-weight:700>Unity.Entities</span>;
-
-<span style=color:#080;font-weight:700>namespace</span> <span style=color:#b06;font-weight:700>DOTS_DynamicBuffer</span>
-{
-  <span style=color:#080;font-weight:700>public</span> <span style=color:#080;font-weight:700>class</span> <span style=color:#b06;font-weight:700>PlayModeTest</span> : MonoBehaviour
-  {
-    <span style=color:#080;font-weight:700>private</span> <span style=color:#080;font-weight:700>void</span> Awake()
-    {
-      <span style=color:#888;font-weight:700>var</span> entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
-      <span style=color:#888;font-weight:700>var</span> entity = entityManager.CreateEntity();
-      <span style=color:#888;font-weight:700>var</span> dynamicBuffer = entityManager.AddBuffer&lt;IntBufferElement&gt;(entity);
-      dynamicBuffer.Add(<span style=color:#080;font-weight:700>new</span> IntBufferElement { Value = <span style=color:#00d;font-weight:700>1</span> });
-      dynamicBuffer.Add(<span style=color:#080;font-weight:700>new</span> IntBufferElement { Value = <span style=color:#00d;font-weight:700>2</span> });
-      dynamicBuffer.Add(<span style=color:#080;font-weight:700>new</span> IntBufferElement { Value = <span style=color:#00d;font-weight:700>3</span> });
-    }
-  }
-}
-</code></pre></div></li>
-<li>
-<p>I’ve created <em>DOTS_DynamicBufferScene</em> and added the <code>PlayModeTest</code> script to a game object with the same name.</p>
-<p><img src=images/01.png alt></p>
-</li>
-<li>
-<p>In play mode, you can check the entity created by the <code>PlayModeTest.Awake()</code> method through <em>Entity Debugger</em>. Can you see that the <code>IntBufferElement</code> buffer has three values?</p>
-<p><img src=images/02.png alt></p>
-</li>
-</ul>
-<h2 id=using-dynamicbuffertreinterpretudynamicbuffertreinterpretu>Using <a href=https://docs.unity3d.com/Packages/com.unity.entities@0.10/api/Unity.Entities.DynamicBuffer-1.html#Unity_Entities_DynamicBuffer_1_Reinterpret__1><code>DynamicBuffer&lt;T>.Reinterpret&lt;U>()</code></a></h2>
-<p>Now let&rsquo;s find out how to modify the values contained in the structure of the buffer.</p>
-<ul>
-<li>
-<p>I’ve used <a href=https://docs.unity3d.com/Packages/com.unity.entities@0.10/api/Unity.Entities.DynamicBuffer-1.html#Unity_Entities_DynamicBuffer_1_Reinterpret__1><code>DynamicBuffer&lt;T>.Reinterpret&lt;U>()</code> Method</a>, which is a minor modification of <code>PlayModeTest.Awake()</code>. And as shown on line 12, structure that’s accessed with index values cannot be changed because it is a temporary value that is not classified as a variable. However, the values can be modified using the reinterpret method as you can see on line 14&ndash;15.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#fff><code class=language-cs data-lang=cs><span style=color:#080;font-weight:700>private</span> <span style=color:#080;font-weight:700>void</span> Awake()
-{
-    <span style=color:#888;font-weight:700>var</span> entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
-    <span style=color:#888;font-weight:700>var</span> entity = entityManager.CreateEntity();
-    <span style=color:#888;font-weight:700>var</span> dynamicBuffer = entityManager.AddBuffer&lt;IntBufferElement&gt;(entity);
-    dynamicBuffer.Add(<span style=color:#080;font-weight:700>new</span> IntBufferElement {Value = <span style=color:#00d;font-weight:700>1</span>});
-    dynamicBuffer.Add(<span style=color:#080;font-weight:700>new</span> IntBufferElement {Value = <span style=color:#00d;font-weight:700>2</span>});
-    dynamicBuffer.Add(<span style=color:#080;font-weight:700>new</span> IntBufferElement {Value = <span style=color:#00d;font-weight:700>3</span>});
-
-    <span style=color:#888>// ERROR: Indexer access returns temporary value.
-</span><span style=color:#888></span>    <span style=color:#888>// Cannot modify struct member when accessed struct is not classified as a variable
-</span><span style=color:#888></span>    <span style=color:#888>// dynamicBuffer[0].Value *= 10;
-</span><span style=color:#888></span>
-    <span style=color:#888;font-weight:700>var</span> intDynamicBuffer = dynamicBuffer.Reinterpret&lt;<span style=color:#888;font-weight:700>int</span>&gt;();
-    intDynamicBuffer[<span style=color:#00d;font-weight:700>0</span>] *= <span style=color:#00d;font-weight:700>10</span>;
-}
-</code></pre></div></li>
-<li>
-<p>Let’s check the play mode to see if the value has changed. Great! So our takeaway is that the buffer’s value changed despite not putting in the value of <code>intDynamicBuffer[0]</code>back into <code>dynamicBuffer[0]</code>.</p>
-<p><img src=images/03.png alt></p>
-</li>
-</ul>
-<h2 id=using-entitymanagergetbuffertentitymanagergetbuffert>Using <a href=https://docs.unity3d.com/Packages/com.unity.entities@0.10/api/Unity.Entities.EntityManager.html#Unity_Entities_EntityManager_GetBuffer__1_Unity_Entities_Entity_><code>EntityManager.GetBuffer&lt;T>()</code></a></h2>
-<p>We also need a way to access the buffer on the entity.</p>
-<ul>
-<li>
-<p>I’ve modified the <code>PlayModeTest</code> class. And I’ve changed the value by importing the entity generated by the <code>Awake()</code> method and the buffer added to it using the <code>Start()</code> method.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#fff><code class=language-cs data-lang=cs><span style=color:#080;font-weight:700>public</span> <span style=color:#080;font-weight:700>class</span> <span style=color:#b06;font-weight:700>PlayModeTest</span> : MonoBehaviour
-{
-  <span style=color:#080;font-weight:700>private</span> Entity <span style=color:#00d;font-weight:700>_</span>entity;
-
-  <span style=color:#080;font-weight:700>private</span> <span style=color:#080;font-weight:700>void</span> Awake()
-  {
-    <span style=color:#888;font-weight:700>var</span> entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
-    <span style=color:#00d;font-weight:700>_</span>entity = entityManager.CreateEntity();
-
-    <span style=color:#888;font-weight:700>var</span> dynamicBuffer = entityManager.AddBuffer&lt;IntBufferElement&gt;(<span style=color:#00d;font-weight:700>_</span>entity);
-    dynamicBuffer.Add(<span style=color:#080;font-weight:700>new</span> IntBufferElement { Value = <span style=color:#00d;font-weight:700>1</span> });
-    dynamicBuffer.Add(<span style=color:#080;font-weight:700>new</span> IntBufferElement { Value = <span style=color:#00d;font-weight:700>2</span> });
-    dynamicBuffer.Add(<span style=color:#080;font-weight:700>new</span> IntBufferElement { Value = <span style=color:#00d;font-weight:700>3</span> });
-
-    <span style=color:#888>// ERROR: Indexer access returns temporary value.
-</span><span style=color:#888></span>    <span style=color:#888>// Cannot modify struct member when accessed struct is not classified as a variable
-</span><span style=color:#888></span>    <span style=color:#888>// dynamicBuffer[0].Value *= 10;
-</span><span style=color:#888></span>    <span style=color:#888;font-weight:700>var</span> intDynamicBuffer = dynamicBuffer.Reinterpret&lt;<span style=color:#888;font-weight:700>int</span>&gt;();
-    intDynamicBuffer[<span style=color:#00d;font-weight:700>0</span>] *= <span style=color:#00d;font-weight:700>10</span>;
-  }
-
-  <span style=color:#080;font-weight:700>private</span> <span style=color:#080;font-weight:700>void</span> Start()
-  {
-    <span style=color:#888;font-weight:700>var</span> entityManger = World.DefaultGameObjectInjectionWorld.EntityManager;
-    <span style=color:#888;font-weight:700>var</span> dynamicBuffer = entityManger.GetBuffer&lt;IntBufferElement&gt;(<span style=color:#00d;font-weight:700>_</span>entity);
-    <span style=color:#888;font-weight:700>var</span> intDynamicBuffer = dynamicBuffer.Reinterpret&lt;<span style=color:#888;font-weight:700>int</span>&gt;();
-    <span style=color:#080;font-weight:700>for</span> (<span style=color:#888;font-weight:700>var</span> i = <span style=color:#00d;font-weight:700>0</span>; i &lt; intDynamicBuffer.Length; i++)
-    {
-      intDynamicBuffer[i]++;
-    }
-  }
-}
-</code></pre></div></li>
-<li>
-<p>Let’s check if it works well. All values in the buffer have increased by one! <code>Reinterpret&lt;T>()</code> is fascinating.</p>
-<p><img src=images/04.png alt></p>
-</li>
-</ul>
-<h2 id=authoring>Authoring</h2>
-<p><a href=https://docs.unity3d.com/Packages/com.unity.entities@0.10/api/Unity.Entities.GenerateAuthoringComponentAttribute.html><code>GenerateAuthoringComponentAttribute</code></a> allows you to add Authoring Component to a game object to make an entity. <code>IBufferElementData</code> can use the same method.</p>
-<ul>
-<li>
-<p>Let’s modify <code>IntBufferElement</code> and apply <code>GenerateAuthoringComponentAttribute</code>.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#fff><code class=language-cs data-lang=cs><span style=color:#369>[GenerateAuthoringComponent]</span>
-<span style=color:#080;font-weight:700>public</span> <span style=color:#080;font-weight:700>struct</span> <span style=color:#b06;font-weight:700>IntBufferElement</span> : IBufferElementData
-{
-  <span style=color:#080;font-weight:700>public</span> <span style=color:#888;font-weight:700>int</span> Value;
-}
-</code></pre></div></li>
-<li>
-<p>And I’ve added <code>IntBufferElementAuthoring</code> component that was automatically generated by modifying Scene and added value to the game object. I’ve also added <code>ConvertToEntity</code> component to make the game object into an entity.</p>
-<p><img src=images/05.png alt></p>
-</li>
-<li>
-<p>The <em>Entity Debugger</em> shows that an entity with the same name is created as a game object with <strong>Authoring</strong> components.</p>
-<p><img src=images/06.png alt></p>
-</li>
-<li>
-<p>For our next step, let’s write <code>UnitTag</code>, <code>PlayerTag</code> and <code>EnemyTag</code> components and add an <code>IntBufferElement</code> buffer to the entity that includes each component.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#fff><code class=language-cs data-lang=cs><span style=color:#080;font-weight:700>using</span> <span style=color:#b06;font-weight:700>Unity.Entities</span>;
-
-<span style=color:#080;font-weight:700>namespace</span> <span style=color:#b06;font-weight:700>DOTS_DynamicBuffer</span>
-{
-<span style=color:#369>  [GenerateAuthoringComponent]</span>
-  <span style=color:#080;font-weight:700>public</span> <span style=color:#080;font-weight:700>struct</span> <span style=color:#b06;font-weight:700>UnitTag</span> : IComponentData { }
-<span style=color:#369>
-</span><span style=color:#369>  [GenerateAuthoringComponent]</span>
-  <span style=color:#080;font-weight:700>public</span> <span style=color:#080;font-weight:700>struct</span> <span style=color:#b06;font-weight:700>PlayerTag</span> : IComponentData { }
-<span style=color:#369>
-</span><span style=color:#369>  [GenerateAuthoringComponent]</span>
-  <span style=color:#080;font-weight:700>public</span> <span style=color:#080;font-weight:700>struct</span> <span style=color:#b06;font-weight:700>EnemyTag</span> : IComponentData { }
-}
-</code></pre></div><p><img src=images/07.png alt></p>
-<p><img src=images/08.png alt></p>
-</li>
-</ul>
-<h2 id=using-the-dynamicbuffer-in-componentsystem>Using the <code>DynamicBuffer</code> in <code>ComponentSystem</code></h2>
-<p>Now, let’s access the entity’s <code>IntBufferElement</code> <code>DynamicBuffer</code> that includes the <code>UnitTag</code> component by creating a system that inherits <code>ComponentSystem</code>.</p>
-<ul>
-<li>
-<p>I’ve written a <code>TestBufferFromEntitySystem</code>. This logic changes the value by accessing an entity’s <code>IntBufferElement</code>type <code>DynamicBuffer</code> that includes <code>UnitTag</code>. Implementing this like on line 20 doesn’t work, so refer to line 23&ndash;28. And of course, we can also use <code>Reinterpret&lt;T>()</code>.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#fff><code class=language-cs data-lang=cs><span style=color:#080;font-weight:700>using</span> <span style=color:#b06;font-weight:700>Unity.Entities</span>;
-
-<span style=color:#080;font-weight:700>namespace</span> <span style=color:#b06;font-weight:700>DOTS_DynamicBuffer</span>
-{
-  <span style=color:#080;font-weight:700>public</span> <span style=color:#080;font-weight:700>class</span> <span style=color:#b06;font-weight:700>TestBufferFromEntitySystem</span> : ComponentSystem
-  {
-    <span style=color:#080;font-weight:700>protected</span> <span style=color:#080;font-weight:700>override</span> <span style=color:#080;font-weight:700>void</span> OnUpdate()
-    {
-      <span style=color:#888;font-weight:700>var</span> bufferFromEntity = GetBufferFromEntity&lt;IntBufferElement&gt;();
-      Entities
-        .WithAll&lt;UnitTag&gt;()
-        .ForEach(entity =&gt;
-        {
-          <span style=color:#080;font-weight:700>if</span> (bufferFromEntity.Exists(entity))
-          {
-            <span style=color:#888;font-weight:700>var</span> dynamicBufferFromUnitTag = bufferFromEntity[entity];
-            <span style=color:#080;font-weight:700>foreach</span> (<span style=color:#888;font-weight:700>var</span> intBufferElement <span style=color:#080;font-weight:700>in</span> dynamicBufferFromUnitTag)
-            {
-              <span style=color:#888>// Foreach iteration variable &#39;intBufferElement&#39; is immutable.
-</span><span style=color:#888></span>              <span style=color:#888>// Cannot modify struct member when accessed struct is not classified as a variable
-</span><span style=color:#888></span>              <span style=color:#888>// intBufferElement.Value++;
-</span><span style=color:#888></span>            }
-
-            <span style=color:#080;font-weight:700>for</span> (<span style=color:#888;font-weight:700>var</span> i = <span style=color:#00d;font-weight:700>0</span>; i &lt; dynamicBufferFromUnitTag.Length; i++)
-            {
-              <span style=color:#888;font-weight:700>var</span> intBufferElement = dynamicBufferFromUnitTag[i];
-              intBufferElement.Value++;
-              dynamicBufferFromUnitTag[i] = intBufferElement;
-            }
-          }
-        });
-    }
-  }
-}
-</code></pre></div></li>
-<li>
-<p>If you look at <em>Entity Debugger</em> in play mode, you can see that the value of <code>UnitTag</code> component including entity&rsquo;s <code>IntBufferElement</code> <code>DynamicBuffer</code> changes.</p>
-<p><img src=images/09.png alt></p>
-</li>
-</ul>
-<h2 id=using-the-dynamicbuffer-in-jobcomponentsystem>Using the <code>DynamicBuffer</code> in <code>JobComponentSystem</code></h2>
-<p>Let’s create a system that inherits <code>JobComponentSystem</code> and try to access <code>IntBufferElement</code> <code>DynamicBuffer</code> of an entity that includes the <code>PlayerTag</code> component.</p>
-<ul>
-<li>
-<p>I’ve written a <code>TestBufferFromEntityJobSystem</code>. This logic changes the value by accessing <code>IntBufferElement</code> type <code>DynamicBuffer</code> of entities that include <code>PlayerTag</code>. This time I tried <code>Reinterpret&lt;T>()</code>.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#fff><code class=language-cs data-lang=cs><span style=color:#080;font-weight:700>using</span> <span style=color:#b06;font-weight:700>Unity.Entities</span>;
-<span style=color:#080;font-weight:700>using</span> <span style=color:#b06;font-weight:700>Unity.Jobs</span>;
-
-<span style=color:#080;font-weight:700>namespace</span> <span style=color:#b06;font-weight:700>DOTS_DynamicBuffer</span>
-{
-  <span style=color:#080;font-weight:700>public</span> <span style=color:#080;font-weight:700>class</span> <span style=color:#b06;font-weight:700>TestBufferFromEntityJobSystem</span> : JobComponentSystem
-  {
-    <span style=color:#080;font-weight:700>protected</span> <span style=color:#080;font-weight:700>override</span> JobHandle OnUpdate(JobHandle inputDeps)
-    {
-      <span style=color:#080;font-weight:700>return</span> Entities
-        .WithAll&lt;PlayerTag&gt;()
-        .ForEach((<span style=color:#080;font-weight:700>ref</span> DynamicBuffer&lt;IntBufferElement&gt; dynamicBuffer) =&gt;
-        {
-          <span style=color:#888;font-weight:700>var</span> intDynamicBuffer = dynamicBuffer.Reinterpret&lt;<span style=color:#888;font-weight:700>int</span>&gt;();
-          <span style=color:#080;font-weight:700>for</span> (<span style=color:#888;font-weight:700>var</span> i = <span style=color:#00d;font-weight:700>0</span>; i &lt; intDynamicBuffer.Length; i++)
-          {
-            intDynamicBuffer[i]++;
-          }
-        })
-        .Schedule(inputDeps);
-    }
-  }
-}
-</code></pre></div></li>
-<li>
-<p>It&rsquo;s working! The value is increasing just like we wanted.</p>
-<p><img src=images/10.png alt></p>
-</li>
-</ul>
-<h2 id=additional-tips>Additional Tips</h2>
-<h3 id=internalbuffercapacityattributeinternalbuffercapacityattribute><a href=https://docs.unity3d.com/Packages/com.unity.entities@0.10/api/Unity.Entities.InternalBufferCapacityAttribute.html><code>InternalBufferCapacityAttribute</code></a></h3>
-<p>Since entities are generally included in chunks, applying <code>InternalBufferCapacityAttribute</code> to a structure that implements <code>IBufferElementData</code> can specify the maximum number of elements that can exist in chunks. When the elements go over the specified limit, the buffer movers over to the heap memory. Of course, you can access the buffer through <code>DynamicBuffer</code> API as well.</p>
-<ul>
-<li>
-<p>Here, I&rsquo;ve set the number of elements to two.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#fff><code class=language-cs data-lang=cs><span style=color:#888>// InternalBufferCapacity specifies how many elements a buffer can have before
-</span><span style=color:#888>// the buffer storage is moved outside the chunk.
-</span><span style=color:#888></span><span style=color:#369>[InternalBufferCapacity(2)]</span>
-<span style=color:#369>[GenerateAuthoringComponent]</span>
-<span style=color:#080;font-weight:700>public</span> <span style=color:#080;font-weight:700>struct</span> <span style=color:#b06;font-weight:700>IntBufferElement</span> : IBufferElementData
-{
-  <span style=color:#080;font-weight:700>public</span> <span style=color:#888;font-weight:700>int</span> Value;
-}
-</code></pre></div></li>
-<li>
-<p>And to hold tests in the same chunk, I’ve copied two more <code>Enemy</code> game objects that includes <code>EnemyTag</code>.</p>
-<p><img src=images/11.png alt></p>
-</li>
-<li>
-<p>Let’s check the <em>Entity Debugger</em>. But it looks like <code>IntBufferElement</code> is still in the chunk. This may be for convenience even though the buffer has been moved to the heap memory.</p>
-<p><img src=images/12.png alt></p>
-</li>
-</ul>
-<h3 id=implicit-operator><code>implicit</code> Operator</h3>
-<p>We can also write our code this way for convenience.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#fff><code class=language-cs data-lang=cs><span style=color:#080;font-weight:700>using</span> <span style=color:#b06;font-weight:700>Unity.Entities</span>;
-
-<span style=color:#080;font-weight:700>namespace</span> <span style=color:#b06;font-weight:700>DOTS_DynamicBuffer</span>
-{
-  <span style=color:#888>// InternalBufferCapacity specifies how many elements a buffer can have before
-</span><span style=color:#888></span>  <span style=color:#888>// the buffer storage is moved outside the chunk.
-</span><span style=color:#888></span><span style=color:#369>  [InternalBufferCapacity(2)]</span>
-<span style=color:#369>  [GenerateAuthoringComponent]</span>
-  <span style=color:#080;font-weight:700>public</span> <span style=color:#080;font-weight:700>struct</span> <span style=color:#b06;font-weight:700>IntBufferElement</span> : IBufferElementData
-  {
-    <span style=color:#080;font-weight:700>public</span> <span style=color:#888;font-weight:700>int</span> Value;
-
-    <span style=color:#888>// The following implicit conversions are optional, but can be convenient.
-</span><span style=color:#888></span>    <span style=color:#080;font-weight:700>public</span> <span style=color:#080;font-weight:700>static</span> <span style=color:#080;font-weight:700>implicit</span> <span style=color:#080;font-weight:700>operator</span> <span style=color:#888;font-weight:700>int</span>(IntBufferElement e)
-
-    {
-      <span style=color:#080;font-weight:700>return</span> e.Value;
-    }
-
-    <span style=color:#080;font-weight:700>public</span> <span style=color:#080;font-weight:700>static</span> <span style=color:#080;font-weight:700>implicit</span> <span style=color:#080;font-weight:700>operator</span> IntBufferElement(<span style=color:#888;font-weight:700>int</span> e)
-
-    {
-      <span style=color:#080;font-weight:700>return</span> <span style=color:#080;font-weight:700>new</span> IntBufferElement { Value = e };
-    }
-  }
-}
-</code></pre></div><h2 id=closing>Closing</h2>
-<p>Today, we took a quick look at <code>IBufferElementData</code> and <code>DynamicBuffer&lt;T></code>.</p>
-<p>You&rsquo;ve probably heard a lot about object pooling when you’re making games. Since creating single-use objects is basically the same as creating garbage, pooling and reusing them can reduce frequent <a href=https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)>garbage collection</a> and manage instance creation timing, which ultimately creates a smoother game.</p>
-<p>Next time, let&rsquo;s find out how to apply this feature and compare the before and after to see how much improvement you can get.</p>
-</article>
-<script>(function(){var d,h,e,a,g,c,f,b;if(!location.hash.match(/^#/))return;if(d=document.getElementById('content'),h=window.decodeURIComponent(location.hash.substring(1)),e=document.getElementById(h),a=e.nodeName.match(/^H([123456])$/),!a||e.parentNode!==d)return;g=window.parseInt(a[1]),c=!1;for(f=0;f<d.childNodes.length;f++)b=d.childNodes[f],c?(a=b.nodeName.match(/^H([123456])$/),a&&window.parseInt(a[1])>=g&&(c=!1)):b===e&&(c=!0),!c&&!b.nodeName.match(/^#/)&&(b.className+=' dim')})()</script>
-<div itemprop=author class="fl tc mr3">
-<a href=https://github.com/boscohyun rel=author itemprop=url class="no-underline mid-gray b f6">
-<img src="https://www.gravatar.com/avatar/c34d881a6bfa3ddba681523b2b732607?d=https://avatars.githubusercontent.com/boscohyun" itemprop=image class="w3 h3 br-100 mb1">
-<br>Hyun Seungmin
-</a>
-</div>
-</section>
-<footer>
-<div>
-<p class="f6 gray mt6 lh-copy">
-&copy; 2019&ndash;2023
-<a href=https://planetariumlabs.com/ style=color:inherit;text-decoration:inherit>Planetarium</a>.
-</p>
-</div>
-</footer>
-</body>
-</html>
+<a href=https://snack.planetarium.dev/kor/2020/05/unity-dots-start-to-use-dynamic-buffer/ hreflang=ko title="Unity DOTS DynamicBuffer 사용하기" class=gray>한국어</a>)</div><article itemprop=articleBody id=content class="w-100 lh-copy"><p>Hello, I&rsquo;m Hyun Seungmin, <a href=https://nine-chronicles.com/>Nine Chronicles</a> developer at <a href=https://planetariumhq.com/>Planetarium</a>. Our project is not yet using Unity <a href=https://unity.com/dots><abbr title="Data-Oriented Technology Stack">DOTS</abbr></a> but we are working hard to apply it to our next project. So from now on, I will be sharing what I&rsquo;ve learned in my studies.</p><p>This time, let&rsquo;s have a look at <a href=https://docs.unity3d.com/Packages/com.unity.entities@0.10/api/Unity.Entities.DynamicBuffer-1.html><code>DynamicBuffer&lt;T></code></a>. We’re going to talk about setting up a dynamic buffer on an entity and using it. Although we’re starting a few steps ahead for our very first DOTS article, I think you can catch on right away by following this piece because the skipped portion isn’t that substantial.</p><p>This article refers to the <a href=https://docs.unity3d.com/Packages/com.unity.entities@0.10/manual/dynamic_buffers.html>Unity Official Docs</a> and the <a href="https://www.youtube.com/watch?v=XC84bc95heI">tutorial video</a>.</p><h2 id=dev-environment>Dev Environment</h2><dl><dt>Unity</dt><dd>2019.3.12f1</dd><dt><code>com.unity.entities</code></dt><dd>0.10.0-preview.6</dd></dl><h2 id=ibufferelementdataibufferelementdata-implementation><a href=https://docs.unity3d.com/Packages/com.unity.entities@0.10/api/Unity.Entities.IBufferElementData.html><code>IBufferElementData</code></a> Implementation</h2><p>Just as components that are added to an entity must implement the <a href=https://docs.unity3d.com/Packages/com.unity.entities@0.10/api/Unity.Entities.IComponentData.html><code>IComponentData</code> Interface</a>, <code>DynamicBuffer&lt;T></code> must also implement the <a href=https://docs.unity3d.com/Packages/com.unity.entities@0.10/api/Unity.Entities.IBufferElementData.html><code>IBufferElementData</code> Interface</a>.</p><ul><li><p>I’ve created an <code>IntBufferElement</code> structure that implements <code>IBufferElementData</code>. It’s format is similar to <code>IComponentData</code>, right?</p><div class=highlight><pre tabindex=0 style=background-color:#fff><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#080;font-weight:700>using</span> <span style=color:#b06;font-weight:700>Unity.Entities</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#080;font-weight:700>namespace</span> <span style=color:#b06;font-weight:700>DOTS_DynamicBuffer</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  <span style=color:#080;font-weight:700>public</span> <span style=color:#080;font-weight:700>struct</span> <span style=color:#b06;font-weight:700>IntBufferElement</span> : IBufferElementData
+</span></span><span style=display:flex><span>  {
+</span></span><span style=display:flex><span>    <span style=color:#080;font-weight:700>public</span> <span style=color:#888;font-weight:700>int</span> Value;
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div></li></ul><h2 id=using-entitymanageraddbuffertentitymanageraddbuffert>Using <a href=https://docs.unity3d.com/Packages/com.unity.entities@0.10/api/Unity.Entities.EntityManager.html#Unity_Entities_EntityManager_AddBuffer__1_Unity_Entities_Entity_><code>EntityManager.AddBuffer&lt;T>()</code></a></h2><p>Just like adding a component to an entity, we need to use <a href=https://docs.unity3d.com/Packages/com.unity.entities@0.10/api/Unity.Entities.EntityManager.html><code>EntityManager</code></a> when adding buffers. Below, I’ve written a component called <code>PlayModeTest</code> that will be added to game objects and with that, let’s check the <em>Entity Debugger</em> in play mode.</p><ul><li><p>Let’s add an <code>IntBufferElement</code> buffer to the entity and put some values in it.</p><div class=highlight><pre tabindex=0 style=background-color:#fff><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#080;font-weight:700>using</span> <span style=color:#b06;font-weight:700>UnityEngine</span>;
+</span></span><span style=display:flex><span><span style=color:#080;font-weight:700>using</span> <span style=color:#b06;font-weight:700>Unity.Entities</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#080;font-weight:700>namespace</span> <span style=color:#b06;font-weight:700>DOTS_DynamicBuffer</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  <span style=color:#080;font-weight:700>public</span> <span style=color:#080;font-weight:700>class</span> <span style=color:#b06;font-weight:700>PlayModeTest</span> : MonoBehaviour
+</span></span><span style=display:flex><span>  {
+</span></span><span style=display:flex><span>    <span style=color:#080;font-weight:700>private</span> <span style=color:#080;font-weight:700>void</span> Awake()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>      <span style=color:#888;font-weight:700>var</span> entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
+</span></span><span style=display:flex><span>      <span style=color:#888;font-weight:700>var</span> entity = entityManager.CreateEntity();
+</span></span><span style=display:flex><span>      <span style=color:#888;font-weight:700>var</span> dynamicBuffer = entityManager.AddBuffer&lt;IntBufferElement&gt;(entity);
+</span></span><span style=display:flex><span>      dynamicBuffer.Add(<span style=color:#080;font-weight:700>new</span> IntBufferElement { Value = <span style=color:#00d;font-weight:700>1</span> });
+</span></span><span style=display:flex><span>      dynamicBuffer.Add(<span style=color:#080;font-weight:700>new</span> IntBufferElement { Value = <span style=color:#00d;font-weight:700>2</span> });
+</span></span><span style=display:flex><span>      dynamicBuffer.Add(<span style=color:#080;font-weight:700>new</span> IntBufferElement { Value = <span style=color:#00d;font-weight:700>3</span> });
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div></li><li><p>I’ve created <em>DOTS_DynamicBufferScene</em> and added the <code>PlayModeTest</code> script to a game object with the same name.</p><p><img src=images/01.png></p></li><li><p>In play mode, you can check the entity created by the <code>PlayModeTest.Awake()</code> method through <em>Entity Debugger</em>. Can you see that the <code>IntBufferElement</code> buffer has three values?</p><p><img src=images/02.png></p></li></ul><h2 id=using-dynamicbuffertreinterpretudynamicbuffertreinterpretu>Using <a href=https://docs.unity3d.com/Packages/com.unity.entities@0.10/api/Unity.Entities.DynamicBuffer-1.html#Unity_Entities_DynamicBuffer_1_Reinterpret__1><code>DynamicBuffer&lt;T>.Reinterpret&lt;U>()</code></a></h2><p>Now let&rsquo;s find out how to modify the values contained in the structure of the buffer.</p><ul><li><p>I’ve used <a href=https://docs.unity3d.com/Packages/com.unity.entities@0.10/api/Unity.Entities.DynamicBuffer-1.html#Unity_Entities_DynamicBuffer_1_Reinterpret__1><code>DynamicBuffer&lt;T>.Reinterpret&lt;U>()</code> Method</a>, which is a minor modification of <code>PlayModeTest.Awake()</code>. And as shown on line 12, structure that’s accessed with index values cannot be changed because it is a temporary value that is not classified as a variable. However, the values can be modified using the reinterpret method as you can see on line 14&ndash;15.</p><div class=highlight><pre tabindex=0 style=background-color:#fff><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#080;font-weight:700>private</span> <span style=color:#080;font-weight:700>void</span> Awake()
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>    <span style=color:#888;font-weight:700>var</span> entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
+</span></span><span style=display:flex><span>    <span style=color:#888;font-weight:700>var</span> entity = entityManager.CreateEntity();
+</span></span><span style=display:flex><span>    <span style=color:#888;font-weight:700>var</span> dynamicBuffer = entityManager.AddBuffer&lt;IntBufferElement&gt;(entity);
+</span></span><span style=display:flex><span>    dynamicBuffer.Add(<span style=color:#080;font-weight:700>new</span> IntBufferElement {Value = <span style=color:#00d;font-weight:700>1</span>});
+</span></span><span style=display:flex><span>    dynamicBuffer.Add(<span style=color:#080;font-weight:700>new</span> IntBufferElement {Value = <span style=color:#00d;font-weight:700>2</span>});
+</span></span><span style=display:flex><span>    dynamicBuffer.Add(<span style=color:#080;font-weight:700>new</span> IntBufferElement {Value = <span style=color:#00d;font-weight:700>3</span>});
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#888>// ERROR: Indexer access returns temporary value.</span>
+</span></span><span style=display:flex><span>    <span style=color:#888>// Cannot modify struct member when accessed struct is not classified as a variable</span>
+</span></span><span style=display:flex><span>    <span style=color:#888>// dynamicBuffer[0].Value *= 10;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#888;font-weight:700>var</span> intDynamicBuffer = dynamicBuffer.Reinterpret&lt;<span style=color:#888;font-weight:700>int</span>&gt;();
+</span></span><span style=display:flex><span>    intDynamicBuffer[<span style=color:#00d;font-weight:700>0</span>] *= <span style=color:#00d;font-weight:700>10</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div></li><li><p>Let’s check the play mode to see if the value has changed. Great! So our takeaway is that the buffer’s value changed despite not putting in the value of <code>intDynamicBuffer[0]</code>back into <code>dynamicBuffer[0]</code>.</p><p><img src=images/03.png></p></li></ul><h2 id=using-entitymanagergetbuffertentitymanagergetbuffert>Using <a href=https://docs.unity3d.com/Packages/com.unity.entities@0.10/api/Unity.Entities.EntityManager.html#Unity_Entities_EntityManager_GetBuffer__1_Unity_Entities_Entity_><code>EntityManager.GetBuffer&lt;T>()</code></a></h2><p>We also need a way to access the buffer on the entity.</p><ul><li><p>I’ve modified the <code>PlayModeTest</code> class. And I’ve changed the value by importing the entity generated by the <code>Awake()</code> method and the buffer added to it using the <code>Start()</code> method.</p><div class=highlight><pre tabindex=0 style=background-color:#fff><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#080;font-weight:700>public</span> <span style=color:#080;font-weight:700>class</span> <span style=color:#b06;font-weight:700>PlayModeTest</span> : MonoBehaviour
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  <span style=color:#080;font-weight:700>private</span> Entity _entity;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#080;font-weight:700>private</span> <span style=color:#080;font-weight:700>void</span> Awake()
+</span></span><span style=display:flex><span>  {
+</span></span><span style=display:flex><span>    <span style=color:#888;font-weight:700>var</span> entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
+</span></span><span style=display:flex><span>    _entity = entityManager.CreateEntity();
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#888;font-weight:700>var</span> dynamicBuffer = entityManager.AddBuffer&lt;IntBufferElement&gt;(_entity);
+</span></span><span style=display:flex><span>    dynamicBuffer.Add(<span style=color:#080;font-weight:700>new</span> IntBufferElement { Value = <span style=color:#00d;font-weight:700>1</span> });
+</span></span><span style=display:flex><span>    dynamicBuffer.Add(<span style=color:#080;font-weight:700>new</span> IntBufferElement { Value = <span style=color:#00d;font-weight:700>2</span> });
+</span></span><span style=display:flex><span>    dynamicBuffer.Add(<span style=color:#080;font-weight:700>new</span> IntBufferElement { Value = <span style=color:#00d;font-weight:700>3</span> });
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#888>// ERROR: Indexer access returns temporary value.</span>
+</span></span><span style=display:flex><span>    <span style=color:#888>// Cannot modify struct member when accessed struct is not classified as a variable</span>
+</span></span><span style=display:flex><span>    <span style=color:#888>// dynamicBuffer[0].Value *= 10;</span>
+</span></span><span style=display:flex><span>    <span style=color:#888;font-weight:700>var</span> intDynamicBuffer = dynamicBuffer.Reinterpret&lt;<span style=color:#888;font-weight:700>int</span>&gt;();
+</span></span><span style=display:flex><span>    intDynamicBuffer[<span style=color:#00d;font-weight:700>0</span>] *= <span style=color:#00d;font-weight:700>10</span>;
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#080;font-weight:700>private</span> <span style=color:#080;font-weight:700>void</span> Start()
+</span></span><span style=display:flex><span>  {
+</span></span><span style=display:flex><span>    <span style=color:#888;font-weight:700>var</span> entityManger = World.DefaultGameObjectInjectionWorld.EntityManager;
+</span></span><span style=display:flex><span>    <span style=color:#888;font-weight:700>var</span> dynamicBuffer = entityManger.GetBuffer&lt;IntBufferElement&gt;(_entity);
+</span></span><span style=display:flex><span>    <span style=color:#888;font-weight:700>var</span> intDynamicBuffer = dynamicBuffer.Reinterpret&lt;<span style=color:#888;font-weight:700>int</span>&gt;();
+</span></span><span style=display:flex><span>    <span style=color:#080;font-weight:700>for</span> (<span style=color:#888;font-weight:700>var</span> i = <span style=color:#00d;font-weight:700>0</span>; i &lt; intDynamicBuffer.Length; i++)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>      intDynamicBuffer[i]++;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div></li><li><p>Let’s check if it works well. All values in the buffer have increased by one! <code>Reinterpret&lt;T>()</code> is fascinating.</p><p><img src=images/04.png></p></li></ul><h2 id=authoring>Authoring</h2><p><a href=https://docs.unity3d.com/Packages/com.unity.entities@0.10/api/Unity.Entities.GenerateAuthoringComponentAttribute.html><code>GenerateAuthoringComponentAttribute</code></a> allows you to add Authoring Component to a game object to make an entity. <code>IBufferElementData</code> can use the same method.</p><ul><li><p>Let’s modify <code>IntBufferElement</code> and apply <code>GenerateAuthoringComponentAttribute</code>.</p><div class=highlight><pre tabindex=0 style=background-color:#fff><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#369>[GenerateAuthoringComponent]</span>
+</span></span><span style=display:flex><span><span style=color:#080;font-weight:700>public</span> <span style=color:#080;font-weight:700>struct</span> <span style=color:#b06;font-weight:700>IntBufferElement</span> : IBufferElementData
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  <span style=color:#080;font-weight:700>public</span> <span style=color:#888;font-weight:700>int</span> Value;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div></li><li><p>And I’ve added <code>IntBufferElementAuthoring</code> component that was automatically generated by modifying Scene and added value to the game object. I’ve also added <code>ConvertToEntity</code> component to make the game object into an entity.</p><p><img src=images/05.png></p></li><li><p>The <em>Entity Debugger</em> shows that an entity with the same name is created as a game object with <strong>Authoring</strong> components.</p><p><img src=images/06.png></p></li><li><p>For our next step, let’s write <code>UnitTag</code>, <code>PlayerTag</code> and <code>EnemyTag</code> components and add an <code>IntBufferElement</code> buffer to the entity that includes each component.</p><div class=highlight><pre tabindex=0 style=background-color:#fff><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#080;font-weight:700>using</span> <span style=color:#b06;font-weight:700>Unity.Entities</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#080;font-weight:700>namespace</span> <span style=color:#b06;font-weight:700>DOTS_DynamicBuffer</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span><span style=color:#369>  [GenerateAuthoringComponent]</span>
+</span></span><span style=display:flex><span>  <span style=color:#080;font-weight:700>public</span> <span style=color:#080;font-weight:700>struct</span> <span style=color:#b06;font-weight:700>UnitTag</span> : IComponentData { }
+</span></span><span style=display:flex><span><span style=color:#369>
+</span></span></span><span style=display:flex><span><span style=color:#369>  [GenerateAuthoringComponent]</span>
+</span></span><span style=display:flex><span>  <span style=color:#080;font-weight:700>public</span> <span style=color:#080;font-weight:700>struct</span> <span style=color:#b06;font-weight:700>PlayerTag</span> : IComponentData { }
+</span></span><span style=display:flex><span><span style=color:#369>
+</span></span></span><span style=display:flex><span><span style=color:#369>  [GenerateAuthoringComponent]</span>
+</span></span><span style=display:flex><span>  <span style=color:#080;font-weight:700>public</span> <span style=color:#080;font-weight:700>struct</span> <span style=color:#b06;font-weight:700>EnemyTag</span> : IComponentData { }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p><img src=images/07.png></p><p><img src=images/08.png></p></li></ul><h2 id=using-the-dynamicbuffer-in-componentsystem>Using the <code>DynamicBuffer</code> in <code>ComponentSystem</code></h2><p>Now, let’s access the entity’s <code>IntBufferElement</code> <code>DynamicBuffer</code> that includes the <code>UnitTag</code> component by creating a system that inherits <code>ComponentSystem</code>.</p><ul><li><p>I’ve written a <code>TestBufferFromEntitySystem</code>. This logic changes the value by accessing an entity’s <code>IntBufferElement</code>type <code>DynamicBuffer</code> that includes <code>UnitTag</code>. Implementing this like on line 20 doesn’t work, so refer to line 23&ndash;28. And of course, we can also use <code>Reinterpret&lt;T>()</code>.</p><div class=highlight><pre tabindex=0 style=background-color:#fff><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#080;font-weight:700>using</span> <span style=color:#b06;font-weight:700>Unity.Entities</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#080;font-weight:700>namespace</span> <span style=color:#b06;font-weight:700>DOTS_DynamicBuffer</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  <span style=color:#080;font-weight:700>public</span> <span style=color:#080;font-weight:700>class</span> <span style=color:#b06;font-weight:700>TestBufferFromEntitySystem</span> : ComponentSystem
+</span></span><span style=display:flex><span>  {
+</span></span><span style=display:flex><span>    <span style=color:#080;font-weight:700>protected</span> <span style=color:#080;font-weight:700>override</span> <span style=color:#080;font-weight:700>void</span> OnUpdate()
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>      <span style=color:#888;font-weight:700>var</span> bufferFromEntity = GetBufferFromEntity&lt;IntBufferElement&gt;();
+</span></span><span style=display:flex><span>      Entities
+</span></span><span style=display:flex><span>        .WithAll&lt;UnitTag&gt;()
+</span></span><span style=display:flex><span>        .ForEach(entity =&gt;
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>          <span style=color:#080;font-weight:700>if</span> (bufferFromEntity.Exists(entity))
+</span></span><span style=display:flex><span>          {
+</span></span><span style=display:flex><span>            <span style=color:#888;font-weight:700>var</span> dynamicBufferFromUnitTag = bufferFromEntity[entity];
+</span></span><span style=display:flex><span>            <span style=color:#080;font-weight:700>foreach</span> (<span style=color:#888;font-weight:700>var</span> intBufferElement <span style=color:#080;font-weight:700>in</span> dynamicBufferFromUnitTag)
+</span></span><span style=display:flex><span>            {
+</span></span><span style=display:flex><span>              <span style=color:#888>// Foreach iteration variable &#39;intBufferElement&#39; is immutable.</span>
+</span></span><span style=display:flex><span>              <span style=color:#888>// Cannot modify struct member when accessed struct is not classified as a variable</span>
+</span></span><span style=display:flex><span>              <span style=color:#888>// intBufferElement.Value++;</span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#080;font-weight:700>for</span> (<span style=color:#888;font-weight:700>var</span> i = <span style=color:#00d;font-weight:700>0</span>; i &lt; dynamicBufferFromUnitTag.Length; i++)
+</span></span><span style=display:flex><span>            {
+</span></span><span style=display:flex><span>              <span style=color:#888;font-weight:700>var</span> intBufferElement = dynamicBufferFromUnitTag[i];
+</span></span><span style=display:flex><span>              intBufferElement.Value++;
+</span></span><span style=display:flex><span>              dynamicBufferFromUnitTag[i] = intBufferElement;
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>          }
+</span></span><span style=display:flex><span>        });
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div></li><li><p>If you look at <em>Entity Debugger</em> in play mode, you can see that the value of <code>UnitTag</code> component including entity&rsquo;s <code>IntBufferElement</code> <code>DynamicBuffer</code> changes.</p><p><img src=images/09.png></p></li></ul><h2 id=using-the-dynamicbuffer-in-jobcomponentsystem>Using the <code>DynamicBuffer</code> in <code>JobComponentSystem</code></h2><p>Let’s create a system that inherits <code>JobComponentSystem</code> and try to access <code>IntBufferElement</code> <code>DynamicBuffer</code> of an entity that includes the <code>PlayerTag</code> component.</p><ul><li><p>I’ve written a <code>TestBufferFromEntityJobSystem</code>. This logic changes the value by accessing <code>IntBufferElement</code> type <code>DynamicBuffer</code> of entities that include <code>PlayerTag</code>. This time I tried <code>Reinterpret&lt;T>()</code>.</p><div class=highlight><pre tabindex=0 style=background-color:#fff><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#080;font-weight:700>using</span> <span style=color:#b06;font-weight:700>Unity.Entities</span>;
+</span></span><span style=display:flex><span><span style=color:#080;font-weight:700>using</span> <span style=color:#b06;font-weight:700>Unity.Jobs</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#080;font-weight:700>namespace</span> <span style=color:#b06;font-weight:700>DOTS_DynamicBuffer</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  <span style=color:#080;font-weight:700>public</span> <span style=color:#080;font-weight:700>class</span> <span style=color:#b06;font-weight:700>TestBufferFromEntityJobSystem</span> : JobComponentSystem
+</span></span><span style=display:flex><span>  {
+</span></span><span style=display:flex><span>    <span style=color:#080;font-weight:700>protected</span> <span style=color:#080;font-weight:700>override</span> JobHandle OnUpdate(JobHandle inputDeps)
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>      <span style=color:#080;font-weight:700>return</span> Entities
+</span></span><span style=display:flex><span>        .WithAll&lt;PlayerTag&gt;()
+</span></span><span style=display:flex><span>        .ForEach((<span style=color:#080;font-weight:700>ref</span> DynamicBuffer&lt;IntBufferElement&gt; dynamicBuffer) =&gt;
+</span></span><span style=display:flex><span>        {
+</span></span><span style=display:flex><span>          <span style=color:#888;font-weight:700>var</span> intDynamicBuffer = dynamicBuffer.Reinterpret&lt;<span style=color:#888;font-weight:700>int</span>&gt;();
+</span></span><span style=display:flex><span>          <span style=color:#080;font-weight:700>for</span> (<span style=color:#888;font-weight:700>var</span> i = <span style=color:#00d;font-weight:700>0</span>; i &lt; intDynamicBuffer.Length; i++)
+</span></span><span style=display:flex><span>          {
+</span></span><span style=display:flex><span>            intDynamicBuffer[i]++;
+</span></span><span style=display:flex><span>          }
+</span></span><span style=display:flex><span>        })
+</span></span><span style=display:flex><span>        .Schedule(inputDeps);
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div></li><li><p>It&rsquo;s working! The value is increasing just like we wanted.</p><p><img src=images/10.png></p></li></ul><h2 id=additional-tips>Additional Tips</h2><h3 id=internalbuffercapacityattributeinternalbuffercapacityattribute><a href=https://docs.unity3d.com/Packages/com.unity.entities@0.10/api/Unity.Entities.InternalBufferCapacityAttribute.html><code>InternalBufferCapacityAttribute</code></a></h3><p>Since entities are generally included in chunks, applying <code>InternalBufferCapacityAttribute</code> to a structure that implements <code>IBufferElementData</code> can specify the maximum number of elements that can exist in chunks. When the elements go over the specified limit, the buffer movers over to the heap memory. Of course, you can access the buffer through <code>DynamicBuffer</code> API as well.</p><ul><li><p>Here, I&rsquo;ve set the number of elements to two.</p><div class=highlight><pre tabindex=0 style=background-color:#fff><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#888>// InternalBufferCapacity specifies how many elements a buffer can have before</span>
+</span></span><span style=display:flex><span><span style=color:#888>// the buffer storage is moved outside the chunk.</span>
+</span></span><span style=display:flex><span><span style=color:#369>[InternalBufferCapacity(2)]</span>
+</span></span><span style=display:flex><span><span style=color:#369>[GenerateAuthoringComponent]</span>
+</span></span><span style=display:flex><span><span style=color:#080;font-weight:700>public</span> <span style=color:#080;font-weight:700>struct</span> <span style=color:#b06;font-weight:700>IntBufferElement</span> : IBufferElementData
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  <span style=color:#080;font-weight:700>public</span> <span style=color:#888;font-weight:700>int</span> Value;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div></li><li><p>And to hold tests in the same chunk, I’ve copied two more <code>Enemy</code> game objects that includes <code>EnemyTag</code>.</p><p><img src=images/11.png></p></li><li><p>Let’s check the <em>Entity Debugger</em>. But it looks like <code>IntBufferElement</code> is still in the chunk. This may be for convenience even though the buffer has been moved to the heap memory.</p><p><img src=images/12.png></p></li></ul><h3 id=implicit-operator><code>implicit</code> Operator</h3><p>We can also write our code this way for convenience.</p><div class=highlight><pre tabindex=0 style=background-color:#fff><code class=language-cs data-lang=cs><span style=display:flex><span><span style=color:#080;font-weight:700>using</span> <span style=color:#b06;font-weight:700>Unity.Entities</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#080;font-weight:700>namespace</span> <span style=color:#b06;font-weight:700>DOTS_DynamicBuffer</span>
+</span></span><span style=display:flex><span>{
+</span></span><span style=display:flex><span>  <span style=color:#888>// InternalBufferCapacity specifies how many elements a buffer can have before</span>
+</span></span><span style=display:flex><span>  <span style=color:#888>// the buffer storage is moved outside the chunk.</span>
+</span></span><span style=display:flex><span><span style=color:#369>  [InternalBufferCapacity(2)]</span>
+</span></span><span style=display:flex><span><span style=color:#369>  [GenerateAuthoringComponent]</span>
+</span></span><span style=display:flex><span>  <span style=color:#080;font-weight:700>public</span> <span style=color:#080;font-weight:700>struct</span> <span style=color:#b06;font-weight:700>IntBufferElement</span> : IBufferElementData
+</span></span><span style=display:flex><span>  {
+</span></span><span style=display:flex><span>    <span style=color:#080;font-weight:700>public</span> <span style=color:#888;font-weight:700>int</span> Value;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#888>// The following implicit conversions are optional, but can be convenient.</span>
+</span></span><span style=display:flex><span>    <span style=color:#080;font-weight:700>public</span> <span style=color:#080;font-weight:700>static</span> <span style=color:#080;font-weight:700>implicit</span> <span style=color:#080;font-weight:700>operator</span> <span style=color:#888;font-weight:700>int</span>(IntBufferElement e)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>      <span style=color:#080;font-weight:700>return</span> e.Value;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#080;font-weight:700>public</span> <span style=color:#080;font-weight:700>static</span> <span style=color:#080;font-weight:700>implicit</span> <span style=color:#080;font-weight:700>operator</span> IntBufferElement(<span style=color:#888;font-weight:700>int</span> e)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    {
+</span></span><span style=display:flex><span>      <span style=color:#080;font-weight:700>return</span> <span style=color:#080;font-weight:700>new</span> IntBufferElement { Value = e };
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><h2 id=closing>Closing</h2><p>Today, we took a quick look at <code>IBufferElementData</code> and <code>DynamicBuffer&lt;T></code>.</p><p>You&rsquo;ve probably heard a lot about object pooling when you’re making games. Since creating single-use objects is basically the same as creating garbage, pooling and reusing them can reduce frequent <a href=https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)>garbage collection</a> and manage instance creation timing, which ultimately creates a smoother game.</p><p>Next time, let&rsquo;s find out how to apply this feature and compare the before and after to see how much improvement you can get.</p></article><script>(function(){if(!location.hash.match(/^#/))return;var t,n,s,a,o=document.getElementById("content"),r=window.decodeURIComponent(location.hash.substring(1)),i=document.getElementById(r),e=i.nodeName.match(/^H([123456])$/);if(!e||i.parentNode!==o)return;for(a=window.parseInt(e[1]),t=!1,s=0;s<o.childNodes.length;s++)n=o.childNodes[s],t?(e=n.nodeName.match(/^H([123456])$/),e&&window.parseInt(e[1])>=a&&(t=!1)):n===i&&(t=!0),!t&&!n.nodeName.match(/^#/)&&(n.className+=" dim")})()</script><div itemprop=author class="fl tc mr3"><a href=https://github.com/boscohyun rel=author itemprop=url class="no-underline mid-gray b f6"><img src="https://www.gravatar.com/avatar/c34d881a6bfa3ddba681523b2b732607?d=https://avatars.githubusercontent.com/boscohyun" itemprop=image class="w3 h3 br-100 mb1"><br>Hyun Seungmin</a></div></section><footer><div><p class="f6 gray mt6 lh-copy">&copy; 2019&ndash;2023
+<a href=https://planetariumlabs.com/ style=color:inherit;text-decoration:inherit>Planetarium</a>.</p></div></footer></body></html>

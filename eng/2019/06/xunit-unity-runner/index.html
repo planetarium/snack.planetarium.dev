@@ -1,191 +1,56 @@
-<!doctype html><html lang=en prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
-<head>
-<meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
-<meta name=description content>
-<meta name=HandheldFriendly content="True">
-<meta name=MobileOptimized content="320">
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=keywords content>
-<meta property="og:type" content="article">
-<meta property="og:description" content>
-<meta property="og:title" content="Unit Testing in Unity Player">
-<meta property="og:site_name" content="Planetarium Engineering Snack">
-<meta property="og:image" content="https://snack.planetarium.dev/eng/2019/06/xunit-unity-runner/after.png">
-<meta property="og:image" content="https://snack.planetarium.dev/eng/2019/06/xunit-unity-runner/before.png">
-<meta property="og:image" content="https://snack.planetarium.dev/eng/2019/06/xunit-unity-runner/github-actions.png">
-<meta property="og:image" content="https://snack.planetarium.dev/eng/2019/06/xunit-unity-runner/noisy-output.png">
-<meta property="og:image" content="https://snack.planetarium.dev/eng/2019/06/xunit-unity-runner/unity-build-settings.png">
-<meta property="og:image" content="https://snack.planetarium.dev/og/eng.png">
-<meta property="og:url" content="https://snack.planetarium.dev/eng/2019/06/xunit-unity-runner/">
-<meta property="og:locale" content="en">
-<meta property="article:published_time" content="2019-06-28">
-<meta property="article:modified_time" content="2019-06-28">
-<meta name=twitter:card content="summary">
-<meta name=twitter:site content="@">
-<meta name=twitter:creator content="@">
-<meta name=twitter:title content="Unit Testing in Unity Player | Planetarium Engineering Snack">
-<meta name=twitter:description content="Hello, I&rsquo;m Hong Minhee, Libplanet committer at Planetarium. In this post, I want to talk about why we came to a conclusion to run unit tests on Unity too, the most widely used game engine, and how we actually approached it.
-Supporting Different Environments on Libplanet Libplanet is a common library that solves game implementation problems such as P2P communication and data synchronization when creating online multiplayer games that run on distributed P2P.|">
-<meta name=twitter:image:src content>
-<meta name=twitter:domain content="https://snack.planetarium.dev/eng/2019/06/xunit-unity-runner/">
-<title>Unit Testing in Unity Player</title>
-<link rel=canonical href=https://snack.planetarium.dev/eng/2019/06/xunit-unity-runner/>
-<link rel=alternate href=https://snack.planetarium.dev/kor/2019/06/xunit-unity-runner/ hreflang=ko title="Unity 환경에서 단위 테스트 돌리기">
-<link href=https://snack.planetarium.dev/index.xml rel=alternate type=application/atom+xml title="Unit Testing in Unity Player">
-<link rel=stylesheet href=https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css>
-<link rel=stylesheet href=https://snack.planetarium.dev/css/style.min.1a35efb5c5da4fd20bd2ec86458da5ee7cc1cfc81c4f107944b5e0fc59a3d809.css integrity="sha256-GjXvtcXaT9IL0uyGRY2l7nzBz8gcTxB5RLXg/Fmj2Ak=">
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-132504786-2"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-132504786-2')</script>
-<link rel=icon href=/favicon-32x32.png type=image/png sizes=32x32>
-<link rel="shortcut icon" href=/favicon.ico type=image/x-icon>
-<link rel=apple-touch-icon href=/apple-touch-icon.png>
-</head>
-<body class="sans-serif w-90 w-60-ns center center-ns mv2 mv5-ns" itemscope itemtype=http://schema.org/Article>
-<a href=https://snack.planetarium.dev/eng/ id=site-title class="b bb bw1 pb1 no-underline dark-gray">Planetarium Engineering Snack</a>
-<section id=main class=mt5>
-<h1 itemprop=name id=title class=mb1>Unit Testing in Unity Player</h1>
-<div class="f6 gray dib-ns">
-<time itemprop=datePublished datetime=2019-06-28>
-June 28, 2019
-</time>
-(<strong>English</strong>
+<!doctype html><html lang prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#"><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><meta name=description content><meta name=HandheldFriendly content="True"><meta name=MobileOptimized content="320"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=keywords content><meta property="og:type" content="article"><meta property="og:description" content><meta property="og:title" content="Unit Testing in Unity Player"><meta property="og:site_name" content="Planetarium Engineering Snack"><meta property="og:image" content="https://snack.planetarium.dev/og/eng.png"><meta property="og:url" content="https://snack.planetarium.dev/eng/2019/06/xunit-unity-runner/"><meta property="og:locale" content><meta property="article:published_time" content="2019-06-28"><meta property="article:modified_time" content="2019-06-28"><meta name=twitter:card content="summary"><meta name=twitter:site content="@"><meta name=twitter:creator content="@"><meta name=twitter:title content="Unit Testing in Unity Player | Planetarium Engineering Snack"><meta name=twitter:description content="Hello, I&rsquo;m Hong Minhee, Libplanet committer at Planetarium. In this post, I want to talk about why we came to a conclusion to run unit tests on Unity too, the most widely used game engine, and how we actually approached it.
+Supporting Different Environments on Libplanet Libplanet is a common library that solves game implementation problems such as P2P communication and data synchronization when creating online multiplayer games that run on distributed P2P.|"><meta name=twitter:image:src content><meta name=twitter:domain content="https://snack.planetarium.dev/eng/2019/06/xunit-unity-runner/"><title>Unit Testing in Unity Player</title>
+<link rel=canonical href=https://snack.planetarium.dev/eng/2019/06/xunit-unity-runner/><link rel=alternate href=https://snack.planetarium.dev/kor/2019/06/xunit-unity-runner/ hreflang=ko title="Unity 환경에서 단위 테스트 돌리기"><link href=https://snack.planetarium.dev/index.xml rel=alternate type=application/atom+xml title="Unit Testing in Unity Player"><link rel=stylesheet href=https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css><link rel=stylesheet href=https://snack.planetarium.dev/css/style.min.1a35efb5c5da4fd20bd2ec86458da5ee7cc1cfc81c4f107944b5e0fc59a3d809.css integrity="sha256-GjXvtcXaT9IL0uyGRY2l7nzBz8gcTxB5RLXg/Fmj2Ak="><script async src="https://www.googletagmanager.com/gtag/js?id=UA-132504786-2"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","UA-132504786-2")</script><link rel=icon href=/favicon-32x32.png type=image/png sizes=32x32><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><link rel=apple-touch-icon href=/apple-touch-icon.png></head><body class="sans-serif w-90 w-60-ns center center-ns mv2 mv5-ns" itemscope itemtype=http://schema.org/Article><a href=https://snack.planetarium.dev/eng/ id=site-title class="b bb bw1 pb1 no-underline dark-gray">Planetarium Engineering Snack</a><section id=main class=mt5><h1 itemprop=name id=title class=mb1>Unit Testing in Unity Player</h1><div class="f6 gray dib-ns"><time itemprop=datePublished datetime=2019-06-28>June 28, 2019
+</time>(<strong>English</strong>
 &bull;
-<a href=https://snack.planetarium.dev/kor/2019/06/xunit-unity-runner/ hreflang=ko title="Unity 환경에서 단위 테스트 돌리기" class=gray>한국어</a>)
-</div>
-<article itemprop=articleBody id=content class="w-100 lh-copy">
-<p>Hello, I&rsquo;m Hong Minhee, <a href=https://libplanet.io/>Libplanet</a> committer at Planetarium.
+<a href=https://snack.planetarium.dev/kor/2019/06/xunit-unity-runner/ hreflang=ko title="Unity 환경에서 단위 테스트 돌리기" class=gray>한국어</a>)</div><article itemprop=articleBody id=content class="w-100 lh-copy"><p>Hello, I&rsquo;m Hong Minhee, <a href=https://libplanet.io/>Libplanet</a> committer at Planetarium.
 In this post, I want to talk about why we came to a conclusion to run unit tests on Unity too,
-the most widely used game engine, and how we actually approached it.</p>
-<h2 id=supporting-different-environments-on-libplanet>Supporting Different Environments on Libplanet</h2>
-<p>Libplanet is a common library that solves game implementation problems such as P2P communication and
-data synchronization when creating online multiplayer games that run on distributed P2P.</p>
-<p>Automated tests, especially unit tests, are needed to achieve rapid improvement while minimizing malfunctions
+the most widely used game engine, and how we actually approached it.</p><h2 id=supporting-different-environments-on-libplanet>Supporting Different Environments on Libplanet</h2><p>Libplanet is a common library that solves game implementation problems such as P2P communication and
+data synchronization when creating online multiplayer games that run on distributed P2P.</p><p>Automated tests, especially unit tests, are needed to achieve rapid improvement while minimizing malfunctions
 that are prone to <a href=https://en.wikipedia.org/wiki/Software_regression>regressions</a> or corner cases. Furthermore, Libplanet is a library and because it is
 difficult to determine which operating system and .NET runtime each game or app will use, we need to run all
-tests in as many different environments as possible.</p>
-<p>So our team had run tests on [Azure Pipelines]<sup id=fnref:1><a href=#fn:1 class=footnote-ref role=doc-noteref>1</a></sup> with (Linux, macOS, Windows) × (.NET Framework, Mono, .NET Core)
-combination<sup id=fnref:2><a href=#fn:2 class=footnote-ref role=doc-noteref>2</a></sup> whenever a push or a pull request was made in the Libplanet repository.</p>
-<figure><img src=before.png alt="The combination of environments tested on each build" width=298><figcaption>
-<p>The combination of environments tested on each build</p>
-</figcaption>
-</figure>
-<h2 id=unity--mono>Unity ≠ Mono</h2>
-<p>At first, we thought this was enough because Unity uses Mono Runtime. But as we used Libplanet to develop
+tests in as many different environments as possible.</p><p>So our team had run tests on [Azure Pipelines]<sup id=fnref:1><a href=#fn:1 class=footnote-ref role=doc-noteref>1</a></sup> with (Linux, macOS, Windows) × (.NET Framework, Mono, .NET Core)
+combination<sup id=fnref:2><a href=#fn:2 class=footnote-ref role=doc-noteref>2</a></sup> whenever a push or a pull request was made in the Libplanet repository.</p><figure><img src=before.png alt="The combination of environments tested on each build" width=298><figcaption><p>The combination of environments tested on each build</p></figcaption></figure><h2 id=unity--mono>Unity ≠ Mono</h2><p>At first, we thought this was enough because Unity uses Mono Runtime. But as we used Libplanet to develop
 our game on Unity, we had to encounter unexpected behaviors in the game several times, and it became increasingly
-evident that just passing the test on Mono was not enough.</p>
-<p><a href=https://github.com/Unity-Technologies/mono>In fact, the Mono used in Unity seems to be a fairly long-standing downstream, with a lot of patches added
+evident that just passing the test on Mono was not enough.</p><p><a href=https://github.com/Unity-Technologies/mono>In fact, the Mono used in Unity seems to be a fairly long-standing downstream, with a lot of patches added
 to the upstream.</a> And even if they were tested at the exact same Mono runtime, there were a lot
 of special conditions created by Unity Player. For instance, <a href=https://github.com/zeromq/netmq>NetMQ</a>, <a href=http://zeromq.org/>ZeroMQ</a>&rsquo;s C# implementation, had
 numerous library malfunctions due to many complicated things happening inside compared to the simplicity of
-the APIs revealed on the outer layer.</p>
-<p>All of these considerations led to an agreement that a testing environment for Unity needed to be added to CI
-to ensure reliable functionality.</p>
-<h2 id=testing-xunitnet-on-unity>Testing xUnit.net on Unity</h2>
-<p>Because there is a unit testing feature available in Unity, we tried to use it at first. Unfortunately, Unity&rsquo;s
+the APIs revealed on the outer layer.</p><p>All of these considerations led to an agreement that a testing environment for Unity needed to be added to CI
+to ensure reliable functionality.</p><h2 id=testing-xunitnet-on-unity>Testing xUnit.net on Unity</h2><p>Because there is a unit testing feature available in Unity, we tried to use it at first. Unfortunately, Unity&rsquo;s
 unit testing was done in an Editor environment used by game developers, not in a Player environment, and the
 testing framework supported only <a href=https://nunit.org/>NUnit</a>. We thought about changing all of Libplanet&rsquo;s <a href=https://xunit.net/>xUnit.net</a>-based test
 codes, to NUnit, but with such a high volume of codes to change at once, we didn&rsquo;t want to risk making mistakes
-that are hard to notice.</p>
-<p>So we decided to create a test runner app instead of a game app with Unity. Fortunately, xUnit.net was well divided
+that are hard to notice.</p><p>So we decided to create a test runner app instead of a game app with Unity. Fortunately, xUnit.net was well divided
 between APIs for writing tests and APIs for running tests. This is probably due to the diverse frontend plug-ins to
 various IDE, GUI and CLI. In fact, if you search &ldquo;xunit runner&rdquo; on NuGet, you&rsquo;ll get a xUnit.net test runner for a
-variety of environments.</p>
-<p>A downside is that because there are no API documents, we had to search the source code of xUnit.net and the source
-code of other test runners.<sup id=fnref:3><a href=#fn:3 class=footnote-ref role=doc-noteref>3</a></sup></p>
-<p>The test runner API on xUnit.net is roughly as follows: First, the client code looks for test classes and the tests
+variety of environments.</p><p>A downside is that because there are no API documents, we had to search the source code of xUnit.net and the source
+code of other test runners.<sup id=fnref:3><a href=#fn:3 class=footnote-ref role=doc-noteref>3</a></sup></p><p>The test runner API on xUnit.net is roughly as follows: First, the client code looks for test classes and the tests
 methods within those classes from the assembly files (<em>.dll</em>) passed through the input. After, the client code can
 decide which test to run. Then, the test cases are run by the test runner. Because the test discovery and execution
 can be done in parallel for performance, the API follows a typical <a href=https://en.wikipedia.org/wiki/Inversion_of_control><abbr title="inversion of control">IoC</abbr></a>
 pattern. An interface called <a href=https://github.com/xunit/xunit/blob/2.4.1/src/xunit.runner.utility/Messages/IMessageSinkWithTypes.cs><code>IMessageSinkWithTypes</code></a>, which receives events such as test
 discovery, start running, failure, success, skip, and so on in the form of a message, must be implemented in the client
 code to show the log on screen when such events occur. Because our team didn&rsquo;t run the tests in parallel, it was quite
-frustrating to have a less liberal API with a lengthy client code. 🙄</p>
-<h2 id=building-a-abbr-titlecommand-line-interfacecliabbr-with-unity>Building a <abbr title="command-line interface">CLI</abbr> with Unity</h2>
-<p>Our greatest concern when creating a Unity test runner was that since this was to be done on
+frustrating to have a less liberal API with a lengthy client code. 🙄</p><h2 id=building-a-abbr-titlecommand-line-interfacecliabbr-with-unity>Building a <abbr title="command-line interface">CLI</abbr> with Unity</h2><p>Our greatest concern when creating a Unity test runner was that since this was to be done on
 <abbr title="continuous integration">CI</abbr> in the first place, we believed that the test runner had to be manipulated
 by the <abbr title="command-line interface">CLI</abbr> rather than by the graphics screen, and the results should be
 visible. So with Unity being a platform for making graphic games, we were worried whether it&rsquo;d be a good idea or not to
-actually create a CLI app.</p>
-<p>Fortunately, we found out that Unity has a <dfn>headless mode</dfn>, which means that all logs taken in
-<a href=https://docs.unity3d.com/ScriptReference/Debug.Log.html><code>Debug.Log()</code></a> method are output as <a href=https://en.wikipedia.org/wiki/Standard_streams#Standard_output_(stdout)>standard output</a>, without graphical display.</p>
-<figure><img src=unity-build-settings.png alt="Server Build option in Unity build settings that turn on headless mode" width=356><figcaption>
-<p><q>Server Build</q> option in Unity build settings that turn on headless mode</p>
-</figcaption>
-</figure>
-<p>Even if you don&rsquo;t use the <code>Debug.Log()</code> method provided by Unity, we&rsquo;ve also figured out that just like creating a
-typical application the <a href=https://docs.microsoft.com/dotnet/api/system.console><code>Console</code></a> class provided by the .NET standard works as well.</p>
-<p>However, since the <code>Main()</code> method cannot be defined, the command line factor was not accepted as the <code>string[] args</code>
+actually create a CLI app.</p><p>Fortunately, we found out that Unity has a <dfn>headless mode</dfn>, which means that all logs taken in
+<a href=https://docs.unity3d.com/ScriptReference/Debug.Log.html><code>Debug.Log()</code></a> method are output as <a href=https://en.wikipedia.org/wiki/Standard_streams#Standard_output_(stdout)>standard output</a>, without graphical display.</p><figure><img src=unity-build-settings.png alt="Server Build option in Unity build settings that turn on headless mode" width=356><figcaption><p><q>Server Build</q> option in Unity build settings that turn on headless mode</p></figcaption></figure><p>Even if you don&rsquo;t use the <code>Debug.Log()</code> method provided by Unity, we&rsquo;ve also figured out that just like creating a
+typical application the <a href=https://docs.microsoft.com/dotnet/api/system.console><code>Console</code></a> class provided by the .NET standard works as well.</p><p>However, since the <code>Main()</code> method cannot be defined, the command line factor was not accepted as the <code>string[] args</code>
 parameter of the <code>Main()</code> method, but instead had to be obtained as the <a href=https://docs.microsoft.com/dotnet/api/system.environment.getcommandlineargs><code>Environment.GetCommandLineArgs()</code></a>
 method. Similarly, the program&rsquo;s termination required an explicit call to the <a href=https://docs.unity3d.com/ScriptReference/Application.Quit.html><code>Application.Quit()</code></a> method to
-terminate the process directly.</p>
-<p>Lastly, there were messages being output from Unity player itself, but we couldn&rsquo;t find a way to block it, so we had
-to wrap it up.<sup id=fnref:4><a href=#fn:4 class=footnote-ref role=doc-noteref>4</a></sup></p>
-<figure><img src=noisy-output.png alt="Unity player&amp;rsquo;s own message, printed on the first and last line, was never removed." width=739><figcaption>
-<p>Unity player&rsquo;s own message, printed on the first and last line, was never removed.</p>
-</figcaption>
-</figure>
-<h2 id=build-automation>Build Automation</h2>
-<p>Building a CLI app with Unity and writing a document on how to build one on Windows as well as Linux or macOS makes
+terminate the process directly.</p><p>Lastly, there were messages being output from Unity player itself, but we couldn&rsquo;t find a way to block it, so we had
+to wrap it up.<sup id=fnref:4><a href=#fn:4 class=footnote-ref role=doc-noteref>4</a></sup></p><figure><img src=noisy-output.png alt="Unity player&amp;rsquo;s own message, printed on the first and last line, was never removed." width=739><figcaption><p>Unity player&rsquo;s own message, printed on the first and last line, was never removed.</p></figcaption></figure><h2 id=build-automation>Build Automation</h2><p>Building a CLI app with Unity and writing a document on how to build one on Windows as well as Linux or macOS makes
 the process tricky and easier for people to get inconsistent results. So we decided to make a tag in the repository
-and when pushed, and it&rsquo;ll automatically build for Linux, macOS, and Windows.</p>
-<p>Although we thought about putting CI on the board, we decided that it was unnecessary and used <a href=https://github.com/features/actions>GitHub Actions</a> to build it.</p>
-<p><a href=https://medium.com/@neuecc/using-circle-ci-to-build-test-make-unitypackage-on-unity-9f9fa2b3adfd>Referring to Kawai Yoshifumi&rsquo;s post</a>, we were able to carry out the entire build process inside the Docker.
-In the process, we experienced things that we hadn&rsquo;t experienced in other environments:</p>
-<p>Because Unity was a commercial product, we needed to activate the license.</p>
-<p>Unity has somewhat an ambiguous boundary between an editor and a player. The code that will run in the editor environment
+and when pushed, and it&rsquo;ll automatically build for Linux, macOS, and Windows.</p><p>Although we thought about putting CI on the board, we decided that it was unnecessary and used <a href=https://github.com/features/actions>GitHub Actions</a> to build it.</p><p><a href=https://medium.com/@neuecc/using-circle-ci-to-build-test-make-unitypackage-on-unity-9f9fa2b3adfd>Referring to Kawai Yoshifumi&rsquo;s post</a>, we were able to carry out the entire build process inside the Docker.
+In the process, we experienced things that we hadn&rsquo;t experienced in other environments:</p><p>Because Unity was a commercial product, we needed to activate the license.</p><p>Unity has somewhat an ambiguous boundary between an editor and a player. The code that will run in the editor environment
 can also be scripted, and this enables the app to be built by itself because Unity includes the app-building script as
-part of the app and then runs it.</p>
-<p>At first, we thought we needed to build on all three operating systems, but fortunately, Unity supported <a href=https://en.wikipedia.org/wiki/Cross_compiler>cross-compiling</a>
-and we were able to build the app for macOS and Windows on Linux.</p>
-<figure><img src=github-actions.png alt="Being Built on GitHub Actions" width=823><figcaption>
-<p>Being Built on GitHub Actions</p>
-</figcaption>
-</figure>
-<h2 id=conclusion>Conclusion</h2>
-<figure><img src=after.png alt="Current Build with Unit Test Added in Unity Environment" width=298><figcaption>
-<p>Current Build with Unit Test Added in Unity Environment</p>
-</figcaption>
-</figure>
-<p>The newly built xUnit.net test runner for Unity has been applied on Libplanet project and is currently working well.
+part of the app and then runs it.</p><p>At first, we thought we needed to build on all three operating systems, but fortunately, Unity supported <a href=https://en.wikipedia.org/wiki/Cross_compiler>cross-compiling</a>
+and we were able to build the app for macOS and Windows on Linux.</p><figure><img src=github-actions.png alt="Being Built on GitHub Actions" width=823><figcaption><p>Being Built on GitHub Actions</p></figcaption></figure><h2 id=conclusion>Conclusion</h2><figure><img src=after.png alt="Current Build with Unit Test Added in Unity Environment" width=298><figcaption><p>Current Build with Unit Test Added in Unity Environment</p></figcaption></figure><p>The newly built xUnit.net test runner for Unity has been applied on Libplanet project and is currently working well.
 By working well, we mean that the tests are often breaking due to
 different actions that are only seen in Unity environments. 😇 Of course, we&rsquo;re glad to accept it because that&rsquo;s the
-point of building a unit test &mdash; to find bugs as early as possible.</p>
-<p>The runner is not yet neatly organized, but we have still <a href=https://github.com/planetarium/xunit-unity-runner>put it up as an open source on GitHub</a>. The executable
-file is available on the <a href=https://github.com/planetarium/xunit-unity-runner/releases>releases page</a>, so if you want to try it out, it&rsquo;s all yours!</p>
-<section class=footnotes role=doc-endnotes>
-<hr>
-<ol>
-<li id=fn:1 role=doc-endnote>
-<p>As of June 2019, <abbr title="continuous integration">CI</abbr> services that support all Linux, macOS, and Windows include <a href=https://travis-ci.com/>Travis CI</a> and Azure Pipelines. Our team used Travis CI at first, but it didn&rsquo;t perform well, so we&rsquo;re now using Azure Pipelines.&#160;<a href=#fnref:1 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
-</li>
-<li id=fn:2 role=doc-endnote>
-<p>Because the .NET Framework supports only Windows, it will be tested in 7 environments instead of 9.&#160;<a href=#fnref:2 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
-</li>
-<li id=fn:3 role=doc-endnote>
-<p>Because the .NET <abbr title="integrated development environment">IDE</abbr> has become very common for quite some time, there are many projects that don&rsquo;t post API documents on the Web and simply leave <a href=https://docs.microsoft.com/dotnet/csharp/programming-guide/xmldoc/>XML document annotations</a> in the source code. Those annotations will appear small as a tooltip when the class or method is automatically completed in IDE.&#160;<a href=#fnref:3 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
-</li>
-<li id=fn:4 role=doc-endnote>
-<p>If anyone knows how, please let us know. Or better, send us a pull request!&#160;<a href=#fnref:4 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p>
-</li>
-</ol>
-</section>
-</article>
-<script>(function(){var d,h,e,a,g,c,f,b;if(!location.hash.match(/^#/))return;if(d=document.getElementById('content'),h=window.decodeURIComponent(location.hash.substring(1)),e=document.getElementById(h),a=e.nodeName.match(/^H([123456])$/),!a||e.parentNode!==d)return;g=window.parseInt(a[1]),c=!1;for(f=0;f<d.childNodes.length;f++)b=d.childNodes[f],c?(a=b.nodeName.match(/^H([123456])$/),a&&window.parseInt(a[1])>=g&&(c=!1)):b===e&&(c=!0),!c&&!b.nodeName.match(/^#/)&&(b.className+=' dim')})()</script>
-<div itemprop=author class="fl tc mr3">
-<a href=https://github.com/dahlia rel=author itemprop=url class="no-underline mid-gray b f6">
-<img src="https://www.gravatar.com/avatar/03acbf60571d4ef2bf3741aecfa1b8cb?d=https://avatars.githubusercontent.com/dahlia" itemprop=image class="w3 h3 br-100 mb1">
-<br>Hong Minhee
-</a>
-</div>
-</section>
-<footer>
-<div>
-<p class="f6 gray mt6 lh-copy">
-&copy; 2019&ndash;2023
-<a href=https://planetariumlabs.com/ style=color:inherit;text-decoration:inherit>Planetarium</a>.
-</p>
-</div>
-</footer>
-</body>
-</html>
+point of building a unit test &mdash; to find bugs as early as possible.</p><p>The runner is not yet neatly organized, but we have still <a href=https://github.com/planetarium/xunit-unity-runner>put it up as an open source on GitHub</a>. The executable
+file is available on the <a href=https://github.com/planetarium/xunit-unity-runner/releases>releases page</a>, so if you want to try it out, it&rsquo;s all yours!</p><div class=footnotes role=doc-endnotes><hr><ol><li id=fn:1><p>As of June 2019, <abbr title="continuous integration">CI</abbr> services that support all Linux, macOS, and Windows include <a href=https://travis-ci.com/>Travis CI</a> and Azure Pipelines. Our team used Travis CI at first, but it didn&rsquo;t perform well, so we&rsquo;re now using Azure Pipelines.&#160;<a href=#fnref:1 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:2><p>Because the .NET Framework supports only Windows, it will be tested in 7 environments instead of 9.&#160;<a href=#fnref:2 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:3><p>Because the .NET <abbr title="integrated development environment">IDE</abbr> has become very common for quite some time, there are many projects that don&rsquo;t post API documents on the Web and simply leave <a href=https://docs.microsoft.com/dotnet/csharp/programming-guide/xmldoc/>XML document annotations</a> in the source code. Those annotations will appear small as a tooltip when the class or method is automatically completed in IDE.&#160;<a href=#fnref:3 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li><li id=fn:4><p>If anyone knows how, please let us know. Or better, send us a pull request!&#160;<a href=#fnref:4 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li></ol></div></article><script>(function(){if(!location.hash.match(/^#/))return;var t,n,s,a,o=document.getElementById("content"),r=window.decodeURIComponent(location.hash.substring(1)),i=document.getElementById(r),e=i.nodeName.match(/^H([123456])$/);if(!e||i.parentNode!==o)return;for(a=window.parseInt(e[1]),t=!1,s=0;s<o.childNodes.length;s++)n=o.childNodes[s],t?(e=n.nodeName.match(/^H([123456])$/),e&&window.parseInt(e[1])>=a&&(t=!1)):n===i&&(t=!0),!t&&!n.nodeName.match(/^#/)&&(n.className+=" dim")})()</script><div itemprop=author class="fl tc mr3"><a href=https://github.com/dahlia rel=author itemprop=url class="no-underline mid-gray b f6"><img src="https://www.gravatar.com/avatar/03acbf60571d4ef2bf3741aecfa1b8cb?d=https://avatars.githubusercontent.com/dahlia" itemprop=image class="w3 h3 br-100 mb1"><br>Hong Minhee</a></div></section><footer><div><p class="f6 gray mt6 lh-copy">&copy; 2019&ndash;2023
+<a href=https://planetariumlabs.com/ style=color:inherit;text-decoration:inherit>Planetarium</a>.</p></div></footer></body></html>

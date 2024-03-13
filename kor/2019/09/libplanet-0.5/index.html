@@ -1,115 +1,17 @@
-<!doctype html><html lang=ko prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
-<head>
-<meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
-<meta name=description content>
-<meta name=HandheldFriendly content="True">
-<meta name=MobileOptimized content="320">
-<meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=keywords content>
-<meta property="og:type" content="article">
-<meta property="og:description" content>
-<meta property="og:title" content="Libplanet 0.5 릴리스">
-<meta property="og:site_name" content="플라네타리움 엔지니어링 스낵">
-<meta property="og:image" content="https://snack.planetarium.dev/og/kor.png">
-<meta property="og:url" content="https://snack.planetarium.dev/kor/2019/09/libplanet-0.5/">
-<meta property="og:locale" content="ko">
-<meta property="article:published_time" content="2019-09-06">
-<meta property="article:modified_time" content="2019-09-06">
-<meta name=twitter:card content="summary">
-<meta name=twitter:site content="@">
-<meta name=twitter:creator content="@">
-<meta name=twitter:title content="Libplanet 0.5 릴리스 | 플라네타리움 엔지니어링 스낵">
-<meta name=twitter:description content="안녕하세요. 저희 팀은 Libplanet의 다섯 번째 마이너 버전인 0.5 버전, 그리고 그 패치 버전인 0.5.1 및 0.5.2 버전을 릴리스했습니다.
+<!doctype html><html lang=ko prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#"><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1"><meta name=description content><meta name=HandheldFriendly content="True"><meta name=MobileOptimized content="320"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=keywords content><meta property="og:type" content="article"><meta property="og:description" content><meta property="og:title" content="Libplanet 0.5 릴리스"><meta property="og:site_name" content="플라네타리움 엔지니어링 스낵"><meta property="og:image" content="https://snack.planetarium.dev/og/kor.png"><meta property="og:url" content="https://snack.planetarium.dev/kor/2019/09/libplanet-0.5/"><meta property="og:locale" content="ko"><meta property="article:published_time" content="2019-09-06"><meta property="article:modified_time" content="2019-09-06"><meta name=twitter:card content="summary"><meta name=twitter:site content="@"><meta name=twitter:creator content="@"><meta name=twitter:title content="Libplanet 0.5 릴리스 | 플라네타리움 엔지니어링 스낵"><meta name=twitter:description content="안녕하세요. 저희 팀은 Libplanet의 다섯 번째 마이너 버전인 0.5 버전, 그리고 그 패치 버전인 0.5.1 및 0.5.2 버전을 릴리스했습니다.
 Libplanet은 분산 P2P로 돌아가는 온라인 멀티플레이어 게임을 만들 때, 그러한 게임들이 매번 구현해야 하는 P2P 통신이나 데이터 동기화 등의 문제를 푸는 공용 라이브러리입니다.
 0.5 버전에서는 Libplanet과 함께 만들고 있는 게임의 테스트 과정에서 광범위한 성능 및 안정성 개선이 있었습니다. 이 글에서는 그러한 0.5 버전의 주요 변경 사항들에 대해 다루겠습니다.
-IBD 속도 개선 이전까지의 IBD(밀린 블록 다운로드)는 블록이 조금만 많이 쌓여도 굉장히 오래 걸리는 작업이었습니다.|">
-<meta name=twitter:image:src content>
-<meta name=twitter:domain content="https://snack.planetarium.dev/kor/2019/09/libplanet-0.5/">
-<title>Libplanet 0.5 릴리스</title>
-<link rel=canonical href=https://snack.planetarium.dev/kor/2019/09/libplanet-0.5/>
-<link rel=alternate href=https://snack.planetarium.dev/eng/2019/09/libplanet-0.5/ hreflang=en title="Libplanet 0.5 Released">
-<link href=https://snack.planetarium.dev/index.xml rel=alternate type=application/atom+xml title="Libplanet 0.5 릴리스">
-<link rel=stylesheet href=https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css>
-<link rel=stylesheet href=https://snack.planetarium.dev/css/style.min.1a35efb5c5da4fd20bd2ec86458da5ee7cc1cfc81c4f107944b5e0fc59a3d809.css integrity="sha256-GjXvtcXaT9IL0uyGRY2l7nzBz8gcTxB5RLXg/Fmj2Ak=">
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-132504786-2"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','UA-132504786-2')</script>
-<link rel=icon href=/favicon-32x32.png type=image/png sizes=32x32>
-<link rel="shortcut icon" href=/favicon.ico type=image/x-icon>
-<link rel=apple-touch-icon href=/apple-touch-icon.png>
-</head>
-<body class="sans-serif w-90 w-60-ns center center-ns mv2 mv5-ns" itemscope itemtype=http://schema.org/Article>
-<a href=https://snack.planetarium.dev/kor/ id=site-title class="b bb bw1 pb1 no-underline dark-gray">플라네타리움 엔지니어링 스낵</a>
-<section id=main class=mt5>
-<h1 itemprop=name id=title class=mb1>Libplanet 0.5 릴리스</h1>
-<div class="f6 gray dib-ns">
-<time itemprop=datePublished datetime=2019-09-06>
-2019년 9월 6일
-</time>
-(<strong>한국어</strong>
+IBD 속도 개선 이전까지의 IBD(밀린 블록 다운로드)는 블록이 조금만 많이 쌓여도 굉장히 오래 걸리는 작업이었습니다.|"><meta name=twitter:image:src content><meta name=twitter:domain content="https://snack.planetarium.dev/kor/2019/09/libplanet-0.5/"><title>Libplanet 0.5 릴리스</title>
+<link rel=canonical href=https://snack.planetarium.dev/kor/2019/09/libplanet-0.5/><link rel=alternate href=https://snack.planetarium.dev/eng/2019/09/libplanet-0.5/ hreflang title="Libplanet 0.5 Released"><link href=https://snack.planetarium.dev/index.xml rel=alternate type=application/atom+xml title="Libplanet 0.5 릴리스"><link rel=stylesheet href=https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css><link rel=stylesheet href=https://snack.planetarium.dev/css/style.min.1a35efb5c5da4fd20bd2ec86458da5ee7cc1cfc81c4f107944b5e0fc59a3d809.css integrity="sha256-GjXvtcXaT9IL0uyGRY2l7nzBz8gcTxB5RLXg/Fmj2Ak="><script async src="https://www.googletagmanager.com/gtag/js?id=UA-132504786-2"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","UA-132504786-2")</script><link rel=icon href=/favicon-32x32.png type=image/png sizes=32x32><link rel="shortcut icon" href=/favicon.ico type=image/x-icon><link rel=apple-touch-icon href=/apple-touch-icon.png></head><body class="sans-serif w-90 w-60-ns center center-ns mv2 mv5-ns" itemscope itemtype=http://schema.org/Article><a href=https://snack.planetarium.dev/kor/ id=site-title class="b bb bw1 pb1 no-underline dark-gray">플라네타리움 엔지니어링 스낵</a><section id=main class=mt5><h1 itemprop=name id=title class=mb1>Libplanet 0.5 릴리스</h1><div class="f6 gray dib-ns"><time itemprop=datePublished datetime=2019-09-06>2019년 9월 6일
+</time>(<strong>한국어</strong>
 &bull;
-<a href=https://snack.planetarium.dev/eng/2019/09/libplanet-0.5/ hreflang=en title="Libplanet 0.5 Released" class=gray>English</a>)
-</div>
-<article itemprop=articleBody id=content class="w-100 lh-copy">
-<p>안녕하세요. 저희 팀은 <a href=https://libplanet.io/>Libplanet</a>의 다섯 번째 마이너 버전인 <a href=https://github.com/planetarium/libplanet/releases/tag/0.5.0>0.5 버전</a>, 그리고 그 패치 버전인 <a href=https://github.com/planetarium/libplanet/releases/tag/0.5.1>0.5.1</a> 및 <a href=https://github.com/planetarium/libplanet/releases/tag/0.5.2>0.5.2</a> 버전을 릴리스했습니다.</p>
-<p>Libplanet은 분산 P2P로 돌아가는 온라인 멀티플레이어 게임을 만들 때, 그러한 게임들이 매번 구현해야 하는 P2P 통신이나 데이터 동기화 등의 문제를 푸는 공용 라이브러리입니다.</p>
-<p>0.5 버전에서는 Libplanet과 함께 만들고 있는 게임의 테스트 과정에서 광범위한 성능 및 안정성 개선이 있었습니다. 이 글에서는 그러한 0.5 버전의 주요 변경 사항들에 대해 다루겠습니다.</p>
-<h2 id=abbr-titleinitial-block-downloadibdabbr-속도-개선><abbr title="Initial Block Download">IBD</abbr> 속도 개선</h2>
-<p>이전까지의 <a href=https://bitcoin.org/en/glossary/initial-block-download>IBD</a>(밀린 블록 다운로드)는 블록이 조금만 많이 쌓여도 굉장히 오래 걸리는 작업이었습니다. 블록들을 다운받은 후 최종 상태를 첫 블록에서부터 스스로 연산하여 얻었어야 했었기 때문이죠.</p>
-<p>하지만 신뢰할 수 있는 노드가 있다면 그 노드로부터 미리 연산돼 있는 결과를 받아와 연산에 드는 시간 효과적으로 줄일 수도 있을 것입니다.</p>
-<p>그래서 0.5 버전 부터는 <a href=https://docs.libplanet.io/0.5.0/api/Libplanet.Net.Swarm-1.html#Libplanet_Net_Swarm_1_PreloadAsync_System_IProgress_Libplanet_Net_PreloadState__System_Collections_Immutable_IImmutableSet_Libplanet_Address__System_Threading_CancellationToken_><code>Swarm&lt;T>.PreloadAsync()</code></a>에 신뢰할 수 있는 노드들을 인자로 넘겨주어 신뢰할 수 있는 노드들로 부터 이미 연산되어 있는 최근 상태 값들을 받아와 저장, 사용할 수도 있게 되었습니다.</p>
-<p>만약 신뢰할 수 있는 노드들이 없거나 다른 이유로 그 과정에 실패했을 때에는 기존과 같이 직접 연산해서 사용합니다.</p>
-<h2 id=irandomnextdouble-제거><code>IRandom.NextDouble()</code> 제거</h2>
-<p><a href="https://docs.microsoft.com/en-us/dotnet/api/system.double?view=netstandard-2.0#remarks"><code>System.Double</code>의 .NET Standard 공식 문서</a>의 일부를 인용하면 다음과 같은 내용을 볼 수 있습니다.</p>
-<blockquote>
-<p>또한, <code>Double</code> 값의 산술 연산 및 대입 결과는 <code>Double</code> 타입의 정밀도 유실 때문에 플랫폼에 따라 다소 달라질 수 있습니다. 예를 들어, <code>Double</code> 값 리터럴을 대입한 결과는 32 비트와 64 비트 버전의 .NET 프레임워크에서 서로 다를 수 있습니다.</p>
-</blockquote>
-<p>위와 같이 Double의 산술 연산 및 대입은 결정적이지 않은 결과를 유발할 수 있습니다. 이 때문에 0.5 버전 부터는 <a href=https://github.com/planetarium/libplanet/pull/419><code>IRandom.NextDouble()</code></a>을 제공하지 않기로 결정하였습니다.</p>
-<p>이에 관한 자세한 내용은 <a href=https://randomascii.wordpress.com/2013/07/16/floating-point-determinism/>이 글</a>을 참고하시기 바랍니다.</p>
-<h2 id=블록-액션>블록 액션</h2>
-<p>체인을 안전하게 유지하기 위해서는 블록들을 채굴할 마이너들이 필요하고, 그러한 마이너들을 모으고 유지하기 위해 보상을 주어야 할 것입니다.</p>
-<p>기존에는 마이너들에게 보상을 주기 위해선 직접 마이너가 블록에 리워드 액션을 가진 트랜잭션을 스스로 추가해야 했었지만, 이번 버전부터는 매 블록마다 실행되는 <a href=https://docs.libplanet.io/0.5.0/api/Libplanet.Blockchain.Policies.IBlockPolicy-1.html#Libplanet_Blockchain_Policies_IBlockPolicy_1_BlockAction><code>IBlockPolicy&lt;T>.BlockAction</code></a> 속성이 생겨 이 블록 액션을 통해 마이너에게 보상금을 주는 코드를 구현할 수 있습니다.</p>
-<h2 id=filestore-제거><code>FileStore</code> 제거</h2>
-<p>Libplanet은 저장 계층을 간추리기 위해 <a href=https://docs.libplanet.io/0.5.0/api/Libplanet.Store.IStore.html><code>IStore</code></a>라는 인터페이스와 이를 파일 기반으로 구현한 <a href=https://docs.libplanet.io/0.4.0/api/Libplanet.Store.FileStore.html><code>FileStore</code></a>를 비롯하여 <a href=https://www.litedb.org/>LiteDB</a>를 기반으로 구현한 <a href=https://docs.libplanet.io/0.5.0/api/Libplanet.Store.LiteDBStore.html><code>LiteDBStore</code></a>를 추가적으로 <a href=/kor/2019/07/libplanet-0.4/>0.4</a> 버전 부터 제공하고 있었습니다. 그러나 <code>FileStore</code>는 구현이 내부 구현이 간소하다는 장점에도 불구하고 다음과 같은 한계점도 있었습니다.</p>
-<ul>
-<li>모든 블록과 트랜잭션 그리고 계정의 매 블록마다의 상태 등이 각기 별도의 파일로 저장되는 방식이었기 때문에, 파일이 너무 많이 생겼습니다.</li>
-<li>별도의 캐시나 버퍼가 없어서 어떤 물리 저장 장치를 쓰느냐에 따라 입출력 성능이 크게 영향을 받았습니다.</li>
-</ul>
-<p>LiteDB를 사용하기 시작하면서 <code>FileStore</code>의 사용 빈도는 줄어들었고, 그에 비해 <code>FileStore</code>를 지속적으로 관리하기는 어렵다고 판단, 이번 0.5 버전부터는 <code>FileStore</code> 구현체를 제공하지 않기로 결정하였습니다.</p>
-<h2 id=좀-더-상세한-프리로드-진행-상황-전달>좀 더 상세한 프리로드 진행 상황 전달</h2>
-<p>위에서 언급했던 IBD 과정을 수행하기 위해서는 <a href=https://docs.libplanet.io/0.5.0/api/Libplanet.Net.Swarm-1.html#Libplanet_Net_Swarm_1_PreloadAsync_System_IProgress_Libplanet_Net_PreloadState__System_Collections_Immutable_IImmutableSet_Libplanet_Address__System_Threading_CancellationToken_><code>Swarm&lt;T>.PreloadAsync()</code></a> 메서드를 호출 할 수 있습니다. 이 메서드의 인자로 <code>IProgress&lt;BlockDownloadState></code>를 전달하면 이를 통해 블록 다운로드 진행 상황을 알 수 있었지만, 블록 다운로드 이후 액션들을 실행하여 (또는 신뢰할 수 있는 노드로부터) 최종 상태를 구하는 작업의 진척 상황은 알려주지 않았습니다.
-이로 인해 블록을 모두 다운로드 받은 이후 로딩 메시지에는 <q>100%</q>라고 보여줌에도 불구하고 여전히 아무런 변화 없이 <q>로딩 중</q>과 같은 고정된 메시지를 얼마간 동안 보게 된다면, 게임을 플레이하는 유저 입장에서는 기다리는 시간이 매우 지루하게 느껴질 것입니다.</p>
-<p>하지만 0.5 버전부터는 <code>IProgress&lt;BlockDownloadState></code> 대신 <code>IProgress&lt;PreloadState></code> 타입의 인자를 받음으로써 프리로드 전반의 진행 상황을 세부적으로 전달받을 수 있도록 되었습니다.</p>
-<p><a href=https://docs.libplanet.io/0.5.0/api/Libplanet.Net.PreloadState.html><code>PreloadState</code></a>를 상속 받은 <a href=https://docs.libplanet.io/0.5.0/api/Libplanet.Net.BlockDownloadState.html><code>BlockDownloadState</code></a>, <a href=https://docs.libplanet.io/0.5.0/api/Libplanet.Net.BlockStateDownloadState.html><code>BlockStateDownloadState</code></a>,
-<a href=https://docs.libplanet.io/0.5.0/api/Libplanet.Net.StateReferenceDownloadState.html><code>StateReferenceDownloadState</code></a>, <a href=https://docs.libplanet.io/0.5.0/api/Libplanet.Net.ActionExecutionState.html><code>ActionExecutionState</code></a>를 인자로 받은 <code>IProgress&lt;PreloadState></code> 객체를 통해 알림으로써 이용자에게 더 자세한 정보를 제공할 수 있습니다.</p>
-<h2 id=그-외>그 외</h2>
-<p>그 외의 여러 가지 변경 사항은 <a href=https://github.com/planetarium/libplanet/releases/tag/0.5.0>0.5.0</a> 및 <a href=https://github.com/planetarium/libplanet/releases/tag/0.5.1>0.5.1</a>, <a href=https://github.com/planetarium/libplanet/releases/tag/0.5.2>0.5.2</a> 전체 변경 내역에서 확인하실 수 있습니다.</p>
-<p>이번 변경 사항이나 Libplanet에 대해 궁금한 점이 있으시다면 언제든 저희 팀이 상주해 있는 <a href=https://discord.gg/planetarium>디스코드 대화방</a>에 놀러 오세요!</p>
-</article>
-<script>(function(){var d,h,e,a,g,c,f,b;if(!location.hash.match(/^#/))return;if(d=document.getElementById('content'),h=window.decodeURIComponent(location.hash.substring(1)),e=document.getElementById(h),a=e.nodeName.match(/^H([123456])$/),!a||e.parentNode!==d)return;g=window.parseInt(a[1]),c=!1;for(f=0;f<d.childNodes.length;f++)b=d.childNodes[f],c?(a=b.nodeName.match(/^H([123456])$/),a&&window.parseInt(a[1])>=g&&(c=!1)):b===e&&(c=!0),!c&&!b.nodeName.match(/^#/)&&(b.className+=' dim')})()</script>
-<div class=recruit>
-<a href=https://planetariumhq.com>플라네타리움</a>은 게임에 특화된
+<a href=https://snack.planetarium.dev/eng/2019/09/libplanet-0.5/ hreflang title="Libplanet 0.5 Released" class=gray>English</a>)</div><article itemprop=articleBody id=content class="w-100 lh-copy"><p>안녕하세요. 저희 팀은 <a href=https://libplanet.io/>Libplanet</a>의 다섯 번째 마이너 버전인 <a href=https://github.com/planetarium/libplanet/releases/tag/0.5.0>0.5 버전</a>, 그리고 그 패치 버전인 <a href=https://github.com/planetarium/libplanet/releases/tag/0.5.1>0.5.1</a> 및 <a href=https://github.com/planetarium/libplanet/releases/tag/0.5.2>0.5.2</a> 버전을 릴리스했습니다.</p><p>Libplanet은 분산 P2P로 돌아가는 온라인 멀티플레이어 게임을 만들 때, 그러한 게임들이 매번 구현해야 하는 P2P 통신이나 데이터 동기화 등의 문제를 푸는 공용 라이브러리입니다.</p><p>0.5 버전에서는 Libplanet과 함께 만들고 있는 게임의 테스트 과정에서 광범위한 성능 및 안정성 개선이 있었습니다. 이 글에서는 그러한 0.5 버전의 주요 변경 사항들에 대해 다루겠습니다.</p><h2 id=abbr-titleinitial-block-downloadibdabbr-속도-개선><abbr title="Initial Block Download">IBD</abbr> 속도 개선</h2><p>이전까지의 <a href=https://bitcoin.org/en/glossary/initial-block-download>IBD</a>(밀린 블록 다운로드)는 블록이 조금만 많이 쌓여도 굉장히 오래 걸리는 작업이었습니다. 블록들을 다운받은 후 최종 상태를 첫 블록에서부터 스스로 연산하여 얻었어야 했었기 때문이죠.</p><p>하지만 신뢰할 수 있는 노드가 있다면 그 노드로부터 미리 연산돼 있는 결과를 받아와 연산에 드는 시간 효과적으로 줄일 수도 있을 것입니다.</p><p>그래서 0.5 버전 부터는 <a href=https://docs.libplanet.io/0.5.0/api/Libplanet.Net.Swarm-1.html#Libplanet_Net_Swarm_1_PreloadAsync_System_IProgress_Libplanet_Net_PreloadState__System_Collections_Immutable_IImmutableSet_Libplanet_Address__System_Threading_CancellationToken_><code>Swarm&lt;T>.PreloadAsync()</code></a>에 신뢰할 수 있는 노드들을 인자로 넘겨주어 신뢰할 수 있는 노드들로 부터 이미 연산되어 있는 최근 상태 값들을 받아와 저장, 사용할 수도 있게 되었습니다.</p><p>만약 신뢰할 수 있는 노드들이 없거나 다른 이유로 그 과정에 실패했을 때에는 기존과 같이 직접 연산해서 사용합니다.</p><h2 id=irandomnextdouble-제거><code>IRandom.NextDouble()</code> 제거</h2><p><a href="https://docs.microsoft.com/en-us/dotnet/api/system.double?view=netstandard-2.0#remarks"><code>System.Double</code>의 .NET Standard 공식 문서</a>의 일부를 인용하면 다음과 같은 내용을 볼 수 있습니다.</p><blockquote><p>또한, <code>Double</code> 값의 산술 연산 및 대입 결과는 <code>Double</code> 타입의 정밀도 유실 때문에 플랫폼에 따라 다소 달라질 수 있습니다. 예를 들어, <code>Double</code> 값 리터럴을 대입한 결과는 32 비트와 64 비트 버전의 .NET 프레임워크에서 서로 다를 수 있습니다.</p></blockquote><p>위와 같이 Double의 산술 연산 및 대입은 결정적이지 않은 결과를 유발할 수 있습니다. 이 때문에 0.5 버전 부터는 <a href=https://github.com/planetarium/libplanet/pull/419><code>IRandom.NextDouble()</code></a>을 제공하지 않기로 결정하였습니다.</p><p>이에 관한 자세한 내용은 <a href=https://randomascii.wordpress.com/2013/07/16/floating-point-determinism/>이 글</a>을 참고하시기 바랍니다.</p><h2 id=블록-액션>블록 액션</h2><p>체인을 안전하게 유지하기 위해서는 블록들을 채굴할 마이너들이 필요하고, 그러한 마이너들을 모으고 유지하기 위해 보상을 주어야 할 것입니다.</p><p>기존에는 마이너들에게 보상을 주기 위해선 직접 마이너가 블록에 리워드 액션을 가진 트랜잭션을 스스로 추가해야 했었지만, 이번 버전부터는 매 블록마다 실행되는 <a href=https://docs.libplanet.io/0.5.0/api/Libplanet.Blockchain.Policies.IBlockPolicy-1.html#Libplanet_Blockchain_Policies_IBlockPolicy_1_BlockAction><code>IBlockPolicy&lt;T>.BlockAction</code></a> 속성이 생겨 이 블록 액션을 통해 마이너에게 보상금을 주는 코드를 구현할 수 있습니다.</p><h2 id=filestore-제거><code>FileStore</code> 제거</h2><p>Libplanet은 저장 계층을 간추리기 위해 <a href=https://docs.libplanet.io/0.5.0/api/Libplanet.Store.IStore.html><code>IStore</code></a>라는 인터페이스와 이를 파일 기반으로 구현한 <a href=https://docs.libplanet.io/0.4.0/api/Libplanet.Store.FileStore.html><code>FileStore</code></a>를 비롯하여 <a href=https://www.litedb.org/>LiteDB</a>를 기반으로 구현한 <a href=https://docs.libplanet.io/0.5.0/api/Libplanet.Store.LiteDBStore.html><code>LiteDBStore</code></a>를 추가적으로 <a href=/kor/2019/07/libplanet-0.4/>0.4</a> 버전 부터 제공하고 있었습니다. 그러나 <code>FileStore</code>는 구현이 내부 구현이 간소하다는 장점에도 불구하고 다음과 같은 한계점도 있었습니다.</p><ul><li>모든 블록과 트랜잭션 그리고 계정의 매 블록마다의 상태 등이 각기 별도의 파일로 저장되는 방식이었기 때문에, 파일이 너무 많이 생겼습니다.</li><li>별도의 캐시나 버퍼가 없어서 어떤 물리 저장 장치를 쓰느냐에 따라 입출력 성능이 크게 영향을 받았습니다.</li></ul><p>LiteDB를 사용하기 시작하면서 <code>FileStore</code>의 사용 빈도는 줄어들었고, 그에 비해 <code>FileStore</code>를 지속적으로 관리하기는 어렵다고 판단, 이번 0.5 버전부터는 <code>FileStore</code> 구현체를 제공하지 않기로 결정하였습니다.</p><h2 id=좀-더-상세한-프리로드-진행-상황-전달>좀 더 상세한 프리로드 진행 상황 전달</h2><p>위에서 언급했던 IBD 과정을 수행하기 위해서는 <a href=https://docs.libplanet.io/0.5.0/api/Libplanet.Net.Swarm-1.html#Libplanet_Net_Swarm_1_PreloadAsync_System_IProgress_Libplanet_Net_PreloadState__System_Collections_Immutable_IImmutableSet_Libplanet_Address__System_Threading_CancellationToken_><code>Swarm&lt;T>.PreloadAsync()</code></a> 메서드를 호출 할 수 있습니다. 이 메서드의 인자로 <code>IProgress&lt;BlockDownloadState></code>를 전달하면 이를 통해 블록 다운로드 진행 상황을 알 수 있었지만, 블록 다운로드 이후 액션들을 실행하여 (또는 신뢰할 수 있는 노드로부터) 최종 상태를 구하는 작업의 진척 상황은 알려주지 않았습니다.
+이로 인해 블록을 모두 다운로드 받은 이후 로딩 메시지에는 <q>100%</q>라고 보여줌에도 불구하고 여전히 아무런 변화 없이 <q>로딩 중</q>과 같은 고정된 메시지를 얼마간 동안 보게 된다면, 게임을 플레이하는 유저 입장에서는 기다리는 시간이 매우 지루하게 느껴질 것입니다.</p><p>하지만 0.5 버전부터는 <code>IProgress&lt;BlockDownloadState></code> 대신 <code>IProgress&lt;PreloadState></code> 타입의 인자를 받음으로써 프리로드 전반의 진행 상황을 세부적으로 전달받을 수 있도록 되었습니다.</p><p><a href=https://docs.libplanet.io/0.5.0/api/Libplanet.Net.PreloadState.html><code>PreloadState</code></a>를 상속 받은 <a href=https://docs.libplanet.io/0.5.0/api/Libplanet.Net.BlockDownloadState.html><code>BlockDownloadState</code></a>, <a href=https://docs.libplanet.io/0.5.0/api/Libplanet.Net.BlockStateDownloadState.html><code>BlockStateDownloadState</code></a>,
+<a href=https://docs.libplanet.io/0.5.0/api/Libplanet.Net.StateReferenceDownloadState.html><code>StateReferenceDownloadState</code></a>, <a href=https://docs.libplanet.io/0.5.0/api/Libplanet.Net.ActionExecutionState.html><code>ActionExecutionState</code></a>를 인자로 받은 <code>IProgress&lt;PreloadState></code> 객체를 통해 알림으로써 이용자에게 더 자세한 정보를 제공할 수 있습니다.</p><h2 id=그-외>그 외</h2><p>그 외의 여러 가지 변경 사항은 <a href=https://github.com/planetarium/libplanet/releases/tag/0.5.0>0.5.0</a> 및 <a href=https://github.com/planetarium/libplanet/releases/tag/0.5.1>0.5.1</a>, <a href=https://github.com/planetarium/libplanet/releases/tag/0.5.2>0.5.2</a> 전체 변경 내역에서 확인하실 수 있습니다.</p><p>이번 변경 사항이나 Libplanet에 대해 궁금한 점이 있으시다면 언제든 저희 팀이 상주해 있는 <a href=https://discord.gg/planetarium>디스코드 대화방</a>에 놀러 오세요!</p></article><script>(function(){if(!location.hash.match(/^#/))return;var t,n,s,a,o=document.getElementById("content"),r=window.decodeURIComponent(location.hash.substring(1)),i=document.getElementById(r),e=i.nodeName.match(/^H([123456])$/);if(!e||i.parentNode!==o)return;for(a=window.parseInt(e[1]),t=!1,s=0;s<o.childNodes.length;s++)n=o.childNodes[s],t?(e=n.nodeName.match(/^H([123456])$/),e&&window.parseInt(e[1])>=a&&(t=!1)):n===i&&(t=!0),!t&&!n.nodeName.match(/^#/)&&(n.className+=" dim")})()</script><div class=recruit><a href=https://planetariumhq.com>플라네타리움</a>은 게임에 특화된
 오픈 소스 P2P 라이브러리 <a href=https://libplanet.io/>Libplanet</a>과,
 그 위에서 중앙 서버 없는 온라인 게임
 〈<a href=https://nine-chronicles.com/>나인 크로니클</a>〉을 만들고
 있습니다. 저희와 흥미로운 기술적 도전을 함께 하실 분들을 모시고 있습니다.
 지금 <a href=https://recruit.planetariumhq.com/>인재 영입 페이지</a>를
-확인해주세요!
-</div>
-<div itemprop=author class="fl tc mr3">
-<a href=https://github.com/moreal rel=author itemprop=url class="no-underline mid-gray b f6">
-<img src="https://www.gravatar.com/avatar/0be9fcfeb2a4517ecf4d37054377c001?d=https://avatars.githubusercontent.com/moreal" itemprop=image class="w3 h3 br-100 mb1">
-<br>이도건
-</a>
-</div>
-</section>
-<footer>
-<div>
-<p class="f6 gray mt6 lh-copy">
-&copy; 2019&ndash;2023
-<a href=https://planetariumlabs.com/ style=color:inherit;text-decoration:inherit>Planetarium</a>.
-</p>
-</div>
-</footer>
-</body>
-</html>
+확인해주세요!</div><div itemprop=author class="fl tc mr3"><a href=https://github.com/moreal rel=author itemprop=url class="no-underline mid-gray b f6"><img src="https://www.gravatar.com/avatar/0be9fcfeb2a4517ecf4d37054377c001?d=https://avatars.githubusercontent.com/moreal" itemprop=image class="w3 h3 br-100 mb1"><br>이도건</a></div></section><footer><div><p class="f6 gray mt6 lh-copy">&copy; 2019&ndash;2023
+<a href=https://planetariumlabs.com/ style=color:inherit;text-decoration:inherit>Planetarium</a>.</p></div></footer></body></html>

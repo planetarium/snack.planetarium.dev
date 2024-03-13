@@ -1,25 +1,66 @@
-<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><title>플라네타리움 엔지니어링 스낵</title><link rel="self" href="https://snack.planetarium.dev/kor/index.xml"/><link rel="alternate" href="https://snack.planetarium.dev/kor/" title="플라네타리움 엔지니어링 스낵"/><link rel="alternate" href="https://snack.planetarium.dev/eng/" hreflang="en" title="Planetarium Engineering Snack"/><updated>2023-08-24T00:00:00+00:00</updated><id>https://snack.planetarium.dev/kor/</id><entry><title>온체인 게임의 미해결 과제 (번역)</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2023/08/paradigm-onchain-game-kr-translation/" title="온체인 게임의 미해결 과제 (번역)"/><id>https://snack.planetarium.dev/kor/2023/08/paradigm-onchain-game-kr-translation/</id><published>2023-08-24T00:00:00+00:00</published><updated>2023-08-24T00:00:00+00:00</updated><content type="html">&lt;p>크립토 업계의 대표 벤처캐피탈 &lt;a href="https://paradigm.xyz">패러다임(Paradigm)&lt;/a>이 지난 8월 14일에 공유한, 온체인 게임이 나아갈 방향과 그 과정에서 고민할만한 점을 다룬 글이 공감되어 한국어로 번역해보았습니다.&lt;/p>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><title>플라네타리움 엔지니어링 스낵</title><link rel="self" href="https://snack.planetarium.dev/kor/index.xml"/><link rel="alternate" href="https://snack.planetarium.dev/kor/" title="플라네타리움 엔지니어링 스낵"/><link rel="alternate" href="https://snack.planetarium.dev/eng/" hreflang="" title="Planetarium Engineering Snack"/><updated>2024-03-12T00:00:00+00:00</updated><id>https://snack.planetarium.dev/kor/</id><entry><title>Libplanet 4.0 릴리스</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2024/03/libplanet-4.1.0/" title="Libplanet 4.0 릴리스"/><id>https://snack.planetarium.dev/kor/2024/03/libplanet-4.1.0/</id><published>2024-03-12T00:00:00+00:00</published><updated>2024-03-12T00:00:00+00:00</updated><content type="html">&lt;p>안녕하세요. &lt;a href="https://libplanet.io/">Libplanet&lt;/a>의 네 번째 메이저 버전인 &lt;a href="https://github.com/planetarium/libplanet/releases/tag/4.0.0">4.0 버전&lt;/a>이
+릴리스되었습니다.&lt;/p>
+&lt;p>Libplanet은 분산 P2P로 돌아가는 온라인 멀티플레이어 게임을 만들 때,
+매번 구현해야 하는 P2P 통신이나 데이터 동기화 등의 문제를 푸는
+공용 라이브러리입니다.&lt;/p>
+&lt;p>이번 버전부터 Libplanet은 상태를 조금 더 효율적으로 다루기 위해, 여러 &lt;a href="https://docs.libplanet.io/4.1.0/api/Libplanet.Action.State.Account.html">Account&lt;/a>
+를 다룰 수 있는 &lt;a href="https://docs.libplanet.io/4.1.0/api/Libplanet.Action.State.World.html">World&lt;/a> 를 도입하였고, 버전 마이그레이션을 큰 문제 없이 할 수 있도록
+여러 API를 제공하고 있습니다.&lt;/p>
+&lt;p>이 글에서는 4.0 버전의 주요 변경 사항들에 대해서 다루겠습니다.&lt;/p>
+&lt;h2 id="여러-sub-state-를-들-수-있게-된-libplanet">여러 Sub-state 를 들 수 있게 된 Libplanet&lt;/h2>
+&lt;p>그동안 Libplanet 은 단 하나의 상태 저장소 만을 가질 수 있었습니다. 이는 초기 개발에는 복잡한
+&lt;code>Sub-state&lt;/code> 유도 과정 등을 생략하고, 하나의 공유 데이터를 사용함으로써 많은 이점을 가질 수 있었습니다.&lt;/p>
+&lt;p>하지만 게임의 규모가 커짐에 따라, 한 Address 가 여러 상태 모델을 가지고 싶어하는 상황이 생겼습니다.
+Libplanet 은 그동안 해당 Address 로부터 유도 된 새로운 Address 에 모델을 저장하는 방식을 채택하였습니다.
+그래프로 그리면 다음과 같습니다.&lt;/p>
+&lt;pre class="mermaid">flowchart LR
+A[User Address] -->|"Derive(User, 'Avatar')"| B[Avatar Address]
+A --> |"Get(User Address)"| S[Storage]
+B --> |"Get(Avatar Address)"| S
+&lt;/pre>
+&lt;p>이는 한 스토리지에 여러 데이터를 저장하게 되어 성능이나 권한 문제에서 자유로울 수 없었습니다.&lt;/p>
+&lt;p>이런 문제를 해결하기 위해, Libplanet 은 기존의 하나 밖에 없던 &lt;a href="https://docs.libplanet.io/3.6.0/api/Libplanet.Action.State.Account.html">&lt;code>Account&lt;/code>&lt;/a>를
+&lt;a href="https://docs.libplanet.io/4.1.0/api/Libplanet.Action.State.IWorldState.html#Libplanet_Action_State_IWorldState_Legacy">&lt;code>World.Legacy&lt;/code>&lt;/a> 로 만들고, &lt;a href="https://docs.libplanet.io/4.1.0/api/Libplanet.Action.State.IWorld.html">&lt;code>World&lt;/code>&lt;/a> 밑에 여러 &lt;a href="https://docs.libplanet.io/3.6.0/api/Libplanet.Action.State.Account.html">&lt;code>Account&lt;/code>&lt;/a> 를 가질 수 있게 하였습니다.&lt;/p>
+&lt;pre class="mermaid">flowchart LR
+A[User Address] --> |"Get(User)"| S1["Avatar Storage"]
+A[User Address] --> |"Get(User)"| S2["Agent Storage"]
+S1 --> Avatar
+S2 --> Agent
+&lt;/pre>
+&lt;p>이런 문제로, 이전과 같이 직접적으로 &lt;a href="https://docs.libplanet.io/4.1.0/api/Libplanet.Action.IActionContext.html#Libplanet_Action_IActionContext_PreviousState">&lt;code>IActionContext.PreviousState&lt;/code>&lt;/a> 혹은
+&lt;a href="https://docs.libplanet.io/4.1.0/api/Libplanet.Action.IActionEvaluation.html#Libplanet_Action_IActionEvaluation_OutputState">&lt;code>IActionEvaluation.OutputState&lt;/code>&lt;/a>로부터 데이터를 읽어 올 수는 없습니다. 따라서
+&lt;a href="https://docs.libplanet.io/4.1.0/api/Libplanet.Action.IAction.html#Libplanet_Action_IAction_Execute_Libplanet_Action_IActionContext_">&lt;code>IAction.Execute()&lt;/code>&lt;/a>안에서의 API 는 다음과 같이 변경됩니다.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>IWorld world = context.PreviousState
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>IAccount avatarAccount = world.GetAccount(&lt;span style="color:#080;font-weight:bold">new&lt;/span> Address(&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;0x0000000000000000&amp;#34;&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>IValue avatarList = avatarAccount.GetState(context.Signer)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>IAccount agentAccount = world.GetAccount(&lt;span style="color:#080;font-weight:bold">new&lt;/span> Address(&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;0x0000000000000001&amp;#34;&lt;/span>))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>IValue agent = agentAccount.GetState(context.Signer)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>각 도메인에 맞는 &lt;code>Account&lt;/code> 를 가져오는 점에 주의하십시오.&lt;/p>
+&lt;h2 id="그-외">그 외&lt;/h2>
+&lt;p>그 외에도 여러 성능 개선이나 자잘한 마이너 패치가 있었습니다. 자세한 내용은 &lt;a href="https://github.com/planetarium/libplanet/releases/tag/4.0.0">전체 변경 내용&lt;/a> 에서 확인해 주세요.&lt;/p>
+&lt;p>질문이나 관심이 있으신 분들은 또한 저희 &lt;a href="https://discord.gg/YaHPjcrdrw">Discord&lt;/a> 채널에 놀러와 주세요!&lt;/p></content><author><name>이수호</name><uri>https://github.com/riemannulus</uri><email>suho@planetariumhq.com</email></author></entry><entry><title>온체인 게임의 미해결 과제 (번역)</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2023/08/paradigm-onchain-game-kr-translation/" title="온체인 게임의 미해결 과제 (번역)"/><id>https://snack.planetarium.dev/kor/2023/08/paradigm-onchain-game-kr-translation/</id><published>2023-08-24T00:00:00+00:00</published><updated>2023-08-24T00:00:00+00:00</updated><content type="html">&lt;p>크립토 업계의 대표 벤처캐피탈 &lt;a href="https://paradigm.xyz">패러다임(Paradigm)&lt;/a>이 지난 8월 14일에 공유한, 온체인 게임이 나아갈 방향과 그 과정에서 고민할만한 점을 다룬 글이 공감되어 한국어로 번역해보았습니다.&lt;/p>
 &lt;p>원문: &lt;a href="https://www.paradigm.xyz/2023/08/onchain-games">The Open Problems of Onchain Games&lt;/a>&lt;/p>
 &lt;p>저자: &lt;a href="https://www.paradigm.xyz/team/charlienoyes">Charlie Noyes (General Partner)&lt;/a>, &lt;a href="https://www.paradigm.xyz/team/dougfeagin">Doug Feagin (Investment Partner)&lt;/a>&lt;/p>
 &lt;h1 id="목차">목차&lt;/h1>
 &lt;ul>
-&lt;li>&lt;a href="#%EC%B0%BD%EB%B0%9Cemergence%EC%9D%84-%EC%9D%B4%EB%81%8C%EC%96%B4%EB%82%B4%EA%B8%B0-%EC%9C%84%ED%95%9C-%EC%84%A4%EA%B3%84">창발을 이끌어내기 위한 설계&lt;/a>
+&lt;li>&lt;a href="/kor/2023/08/paradigm-onchain-game-kr-translation/#창발emergence을-이끌어내기-위한-설계">창발을 이끌어내기 위한 설계&lt;/a>
 &lt;ul>
-&lt;li>&lt;a href="#%EB%AA%A8%EB%93%9Cmods">모드&lt;/a>&lt;/li>
-&lt;li>&lt;a href="#%EA%B0%9C%EB%B0%A9%EB%90%9C-%EA%B2%BD%EC%A0%9C-%EA%B5%AC%EC%A1%B0">개방된 경제 구조&lt;/a>&lt;/li>
+&lt;li>&lt;a href="/kor/2023/08/paradigm-onchain-game-kr-translation/#모드mods">모드&lt;/a>&lt;/li>
+&lt;li>&lt;a href="/kor/2023/08/paradigm-onchain-game-kr-translation/#개방된-경제-구조">개방된 경제 구조&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;/li>
-&lt;li>&lt;a href="#%EC%98%A8%EC%B2%B4%EC%9D%B8-%EA%B2%8C%EC%9E%84">온체인 게임&lt;/a>&lt;/li>
-&lt;li>&lt;a href="#%EB%AF%B8%ED%95%B4%EA%B2%B0-%EA%B3%BC%EC%A0%9C">미해결 과제&lt;/a>
+&lt;li>&lt;a href="/kor/2023/08/paradigm-onchain-game-kr-translation/#온체인-게임">온체인 게임&lt;/a>&lt;/li>
+&lt;li>&lt;a href="/kor/2023/08/paradigm-onchain-game-kr-translation/#미해결-과제">미해결 과제&lt;/a>
 &lt;ul>
-&lt;li>&lt;a href="#%EA%B8%B0%EC%88%A0%EC%A0%81-%EC%A0%9C%EC%95%BD%EB%93%A4%EC%9D%B4-%EA%B2%8C%EC%9E%84-%EB%94%94%EC%9E%90%EC%9D%B8%EC%9D%84-%EC%A0%9C%ED%95%9C%ED%95%9C%EB%8B%A4">기술적 제약들이 게임 디자인을 제한한다.&lt;/a>&lt;/li>
-&lt;li>&lt;a href="#%EC%A1%B0%ED%95%A9-%EA%B0%80%EB%8A%A5%EC%84%B1%EC%9D%80-%ED%83%9C%EC%83%9D%EC%A0%81%EC%9C%BC%EB%A1%9C-%EA%B8%88%EC%9C%B5%ED%99%94%EB%A1%9C-%EC%9D%B4%EC%96%B4%EC%A7%84%EB%8B%A4">조합 가능성은 태생적으로 금융화로 이어진다.&lt;/a>&lt;/li>
-&lt;li>&lt;a href="#%EB%A9%94%ED%83%80%EA%B2%8C%EC%9E%84%EC%9D%80-%EC%B9%A8%EC%B2%B4-%EB%90%98%EA%B8%B0-%EB%A7%88%EB%A0%A8%EC%9D%B4%EB%8B%A4">메타게임은 침체 되기 마련이다.&lt;/a>&lt;/li>
+&lt;li>&lt;a href="/kor/2023/08/paradigm-onchain-game-kr-translation/#기술적-제약들이-게임-디자인을-제한한다">기술적 제약들이 게임 디자인을 제한한다.&lt;/a>&lt;/li>
+&lt;li>&lt;a href="/kor/2023/08/paradigm-onchain-game-kr-translation/#조합-가능성은-태생적으로-금융화로-이어진다">조합 가능성은 태생적으로 금융화로 이어진다.&lt;/a>&lt;/li>
+&lt;li>&lt;a href="/kor/2023/08/paradigm-onchain-game-kr-translation/#메타게임은-침체-되기-마련이다">메타게임은 침체 되기 마련이다.&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;/li>
-&lt;li>&lt;a href="#%EA%B2%8C%EC%9E%84%EC%9D%80-%EC%99%84%EC%A0%84%ED%9E%88-%EC%98%A8%EC%B2%B4%EC%9D%B8%EC%9D%B4%EC%96%B4%EC%95%BC-%ED%95%98%EB%8A%94%EA%B0%80">게임은 완전히 온체인이어야 하는가&lt;/a>&lt;/li>
-&lt;li>&lt;a href="#%EA%B2%B0%EB%A1%A0">결론&lt;/a>&lt;/li>
-&lt;li>&lt;a href="#%EA%B0%90%EC%82%AC%EC%9D%98-%EB%A7%90">감사의 말&lt;/a>&lt;/li>
+&lt;li>&lt;a href="/kor/2023/08/paradigm-onchain-game-kr-translation/#게임은-완전히-온체인이어야-하는가">게임은 완전히 온체인이어야 하는가&lt;/a>&lt;/li>
+&lt;li>&lt;a href="/kor/2023/08/paradigm-onchain-game-kr-translation/#결론">결론&lt;/a>&lt;/li>
+&lt;li>&lt;a href="/kor/2023/08/paradigm-onchain-game-kr-translation/#감사의-말">감사의 말&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;hr>
 &lt;p>게임과 크립토가 교차하는 지점엔 가능성이 많아 보입니다. 비탈릭이 월드 오브 워크래프트에서 흑마법사를 플레이 하던 중 &lt;a href="https://about.me/vitalikbuterin">너프를 먹고 이더리움을 만들기로 마음 먹었다&lt;/a>는 건 유명한 일화이죠. 와우는 핵심 인프라는 아니었지만, 가상 세계가 앞으로 대규모의 자산을 저장하고 일자리를 제공하는 핵심 인프라가 될 것이라는 예상은 많은 사람들이 하고 있습니다. 그런 세계가 몇몇 중앙화된 플랫폼에 의해 지배될 것이라는 건 상상하기 어렵습니다.&lt;/p>
@@ -114,7 +155,7 @@
 &lt;p>이런 이야기에 흥미가 있으시다면, 여기로 연락주시기 바랍니다: {charlie,doug}@paradigm.xyz&lt;/p>
 &lt;h1 id="감사의-말">감사의 말&lt;/h1>
 &lt;p>이 글을 작성하기 위해 여러 시간을 기여해 준 동료 &lt;a href="https://twitter.com/transmissions11">t11s&lt;/a>에 감사 드리며, 함께 논의하고 리뷰 해 준 &lt;a href="https://twitter.com/matthuang">Matt Huang&lt;/a>, &lt;a href="https://twitter.com/danrobinson">Dan Robinson&lt;/a>, &lt;a href="https://twitter.com/_Dave__White_">Dave White&lt;/a>, &lt;a href="https://twitter.com/FrankieIsLost">Frankie&lt;/a>에게도 감사 드립니다.&lt;/p>
-&lt;p>피드백을 준 &lt;a href="https://twitter.com/DangerWillRobin">Will Robinson&lt;/a>, &lt;a href="https://twitter.com/guiltygyoza">GuiltyGyzoa&lt;/a>, &lt;a href="https://twitter.com/nagual_ape">Rafael Morado&lt;/a>, &lt;a href="https://twitter.com/smsunarto">Scott Sunarto&lt;/a>, &lt;a href="https://twitter.com/bertcmiller">Robert Miller&lt;/a>, &lt;a href="https://twitter.com/0xhank">0xhank&lt;/a> 에게 감사드리며, 함께 논의 한 &lt;a href="https://twitter.com/l_udens">Ludens&lt;/a>, &lt;a href="https://twitter.com/phildaian">Phil Daian&lt;/a>, &lt;a href="https://twitter.com/jtguibas">John Guibas&lt;/a>, &lt;a href="https://twitter.com/ArthurRoingBaer">Arthur Roeing Bear&lt;/a>, &lt;a href="https://twitter.com/hilmarveigar">Hilmar Veigar Pétursson&lt;/a> 에게도 감사의 말을 전합니다.&lt;/p></content><author><name>이로운</name><uri>https://github.com/lounlee</uri><email>loun@planetariumhq.com</email></author></entry><entry><title>Libplanet PBFT 전환 제 0화 - 왜 PBFT로 전환을 시작했나요?</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2023/04/pbft-0/" title="Libplanet PBFT 전환 제 0화 - 왜 PBFT로 전환을 시작했나요?"/><link rel="alternate" href="https://snack.planetarium.dev/eng/2023/04/pbft-0/" hreflang="en" title="Libplanet PBFT Transitioner Episode 0 - Why did you switch to PBFT?"/><id>https://snack.planetarium.dev/kor/2023/04/pbft-0/</id><published>2023-04-24T00:00:00+00:00</published><updated>2023-04-24T00:00:00+00:00</updated><content type="html">&lt;p>안녕하세요. Planetarium 에서 블록체인 디비전의 Libplanet 팀으로 근무하고 있는 이수호라고 합니다. 오늘은 Libplanet이 PBFT로 전환하게 된 계기와 그 과정에 대해 설명하는 글의 첫 번째 에피소드를 이야기하고자 합니다. 이 블로그 글에서는 Libplanet 블록체인의 합의 변경 과정, 변경 이유, 구체적인 변경 내용 및 새로운 합의 알고리즘의 이점에 대해 논의하겠습니다.&lt;/p>
+&lt;p>피드백을 준 &lt;a href="https://twitter.com/DangerWillRobin">Will Robinson&lt;/a>, &lt;a href="https://twitter.com/guiltygyoza">GuiltyGyzoa&lt;/a>, &lt;a href="https://twitter.com/nagual_ape">Rafael Morado&lt;/a>, &lt;a href="https://twitter.com/smsunarto">Scott Sunarto&lt;/a>, &lt;a href="https://twitter.com/bertcmiller">Robert Miller&lt;/a>, &lt;a href="https://twitter.com/0xhank">0xhank&lt;/a> 에게 감사드리며, 함께 논의 한 &lt;a href="https://twitter.com/l_udens">Ludens&lt;/a>, &lt;a href="https://twitter.com/phildaian">Phil Daian&lt;/a>, &lt;a href="https://twitter.com/jtguibas">John Guibas&lt;/a>, &lt;a href="https://twitter.com/ArthurRoingBaer">Arthur Roeing Bear&lt;/a>, &lt;a href="https://twitter.com/hilmarveigar">Hilmar Veigar Pétursson&lt;/a> 에게도 감사의 말을 전합니다.&lt;/p></content><author><name>이로운</name><uri>https://github.com/lounlee</uri><email>loun@planetariumhq.com</email></author></entry><entry><title>Libplanet PBFT 전환 제 0화 - 왜 PBFT로 전환을 시작했나요?</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2023/04/pbft-0/" title="Libplanet PBFT 전환 제 0화 - 왜 PBFT로 전환을 시작했나요?"/><link rel="alternate" href="https://snack.planetarium.dev/eng/2023/04/pbft-0/" hreflang="" title="Libplanet PBFT Transitioner Episode 0 - Why did you switch to PBFT?"/><id>https://snack.planetarium.dev/kor/2023/04/pbft-0/</id><published>2023-04-24T00:00:00+00:00</published><updated>2023-04-24T00:00:00+00:00</updated><content type="html">&lt;p>안녕하세요. Planetarium 에서 블록체인 디비전의 Libplanet 팀으로 근무하고 있는 이수호라고 합니다. 오늘은 Libplanet이 PBFT로 전환하게 된 계기와 그 과정에 대해 설명하는 글의 첫 번째 에피소드를 이야기하고자 합니다. 이 블로그 글에서는 Libplanet 블록체인의 합의 변경 과정, 변경 이유, 구체적인 변경 내용 및 새로운 합의 알고리즘의 이점에 대해 논의하겠습니다.&lt;/p>
 &lt;h2 id="소개">소개&lt;/h2>
 &lt;p>블록체인 기술은 혁신을 이루고 있으며, Libplanet은 주요 블록체인 엔진 중 하나입니다. &lt;code>Libplanet&lt;/code>은 .NET 플랫폼으로 구축된 고도로 확장 가능하고 탈중앙화된 오픈소스 플랫폼입니다. 이 플랫폼은 독특한 합의 알고리즘을 사용하여 네트워크 무결성을 보장하며, 높은 효율성과 안정성을 갖추고 있습니다.&lt;/p>
 &lt;h2 id="nine-chronicles에-대해-이야기해-보겠습니다">Nine Chronicles에 대해 이야기해 보겠습니다.&lt;/h2>
@@ -151,47 +192,49 @@
 &lt;p>PoW -&amp;gt; PBFT를 전환하면서 고려해야 했던 것들에 대해 이야기하도록 하겠습니다.&lt;/p></content><author><name>이수호</name><uri>https://github.com/riemannulus</uri><email>suho@planetariumhq.com</email></author></entry><entry><title>페타바이트 트래픽 원인 분석기</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2023/03/cloudwatch/" title="페타바이트 트래픽 원인 분석기"/><id>https://snack.planetarium.dev/kor/2023/03/cloudwatch/</id><published>2023-03-15T00:00:00+00:00</published><updated>2023-03-15T00:00:00+00:00</updated><content type="html">&lt;p>안녕하세요, Nine Corparation, 게임 디비전에서 DX Engineer로 근무하고 있는 moreal입니다. 이 글에서는 작년 이맘때 회사에서 발견한 문제를 디버깅한 경험을 공유하려고 합니다.&lt;/p>
 &lt;h2 id="대시보드에-보이는-이상한-단위">대시보드에 보이는 이상한 단위&lt;/h2>
 &lt;p>회사에서는 운영하는 서비스의 상태를 확인하고 주의 사항을 공유하기 위한 주간 미팅을 진행합니다. 서비스는 EKS를 사용하고 있으며, 상태 확인을 위해 AWS CloudWatch Container Insights를 활용하고 있습니다. 그런데 어느 날 대시보드를 확인하다 이상한 수치들을 발견했습니다.&lt;/p>
-&lt;p>&lt;img src="https://velog.velcdn.com/images/moreal/post/3165dcad-605a-4e2d-8ad0-fd083993608d/image.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://velog.velcdn.com/images/moreal/post/3165dcad-605a-4e2d-8ad0-fd083993608d/image.png">&lt;/p>
 &lt;p>Y축의 단위를 보니 1.67 페타바이트가 표시되어 있었습니다.&lt;/p>
-&lt;p>&lt;img src="https://velog.velcdn.com/images/moreal/post/47432dd2-f78e-4724-8608-7721c09ad165/image.png" alt="">&lt;/p>
+&lt;p>&lt;img src="https://velog.velcdn.com/images/moreal/post/47432dd2-f78e-4724-8608-7721c09ad165/image.png">&lt;/p>
 &lt;p>최대 값은 400 페타바이트에 이르렀습니다. 🙀&lt;/p>
 &lt;p>여러 가지 추측을 해봤지만, 원인을 찾기 위해 CloudWatch가 어떻게 메트릭을 수집하는지 알아보기로 했습니다.&lt;/p>
 &lt;h2 id="cloudwatch가-메트릭을-수집하는-방법">CloudWatch가 메트릭을 수집하는 방법&lt;/h2>
 &lt;p>CloudWatch 메트릭 수집 방법을 알아보기 위해, 오픈소스로 공개된 &lt;a href="https://github.com/aws/amazon-cloudwatch-agent">aws/amazon-cloudwatch-agent&lt;/a> 저장소를 참조했습니다.&lt;/p>
 &lt;p>&lt;code>amazon-cloudwatch-agent&lt;/code>는 Kubernetes에서 사용하는 cAdvisor를 활용합니다. cAdvisor는 컨테이너에서 사용하는 리소스와 퍼포먼스 메트릭을 제공합니다. 이 값들을 활용하여 메트릭 값을 계산합니다.&lt;/p>
 &lt;p>계산 로직은 아래와 같습니다.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-go" data-lang="go">netIfceMetric[NetRxBytes] = &lt;span style="color:#038">float64&lt;/span>(cur.RxBytes-pre.RxBytes) / &lt;span style="color:#038">float64&lt;/span>(deltaCTimeInNano) * &lt;span style="color:#038">float64&lt;/span>(time.Second)
-netIfceMetric[NetTxBytes] = &lt;span style="color:#038">float64&lt;/span>(cur.TxBytes-pre.TxBytes) / &lt;span style="color:#038">float64&lt;/span>(deltaCTimeInNano) * &lt;span style="color:#038">float64&lt;/span>(time.Second)
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;a href="https://github.com/google/cadvisor/blob/648b12f8db47171ebd0fc45c67d53574ddb017fe/info/v1/container.go#L418-L437">&lt;code>cur.RxBytes&lt;/code>&lt;/a>의 데이터 타입이 &lt;code>uint64&lt;/code>여서 언더플로우가 발생할 가능성이 있었습니다. 과도한 트래픽이 발생하는 경우를 확인하기 위해 로그를 출력하는 부분이 있었고, 실제 값도 확인할 수 있었습니다.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-go" data-lang="go">&lt;span style="color:#080;font-weight:bold">if&lt;/span> netIfceMetric[NetRxBytes] &amp;gt; oneTerabytes || netIfceMetric[NetTxBytes] &amp;gt; oneTerabytes {
-log.&lt;span style="color:#06b;font-weight:bold">Printf&lt;/span>(&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;I! Too Big value for network RX/TX bytes, final Rx:%v, final Tx:%v, curRx:%v, preRx:%v, curTx:%v, preTx:%v, deltaCTimeInNano:%v&amp;#34;&lt;/span>,
-netIfceMetric[NetRxBytes], netIfceMetric[NetTxBytes],
-cur.RxBytes, pre.RxBytes,
-cur.TxBytes, pre.TxBytes,
-deltaCTimeInNano)
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>2022-04-08T08:18:17Z I! Too Big value for network RX/TX bytes, final Rx:3.1837731352719405e+17, final Tx:3.183773135286772e+17, curRx:692608, preRx:317669466, curTx:11946450, preTx:242992298, deltaCTimeInNano:57939882302
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>netIfceMetric[NetRxBytes] = &lt;span style="color:#038">float64&lt;/span>(cur.RxBytes-pre.RxBytes) / &lt;span style="color:#038">float64&lt;/span>(deltaCTimeInNano) * &lt;span style="color:#038">float64&lt;/span>(time.Second)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>netIfceMetric[NetTxBytes] = &lt;span style="color:#038">float64&lt;/span>(cur.TxBytes-pre.TxBytes) / &lt;span style="color:#038">float64&lt;/span>(deltaCTimeInNano) * &lt;span style="color:#038">float64&lt;/span>(time.Second)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;a href="https://github.com/google/cadvisor/blob/648b12f8db47171ebd0fc45c67d53574ddb017fe/info/v1/container.go#L418-L437">&lt;code>cur.RxBytes&lt;/code>&lt;/a>의 데이터 타입이 &lt;code>uint64&lt;/code>여서 언더플로우가 발생할 가능성이 있었습니다. 과도한 트래픽이 발생하는 경우를 확인하기 위해 로그를 출력하는 부분이 있었고, 실제 값도 확인할 수 있었습니다.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#080;font-weight:bold">if&lt;/span> netIfceMetric[NetRxBytes] &amp;gt; oneTerabytes || netIfceMetric[NetTxBytes] &amp;gt; oneTerabytes {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> log.&lt;span style="color:#06b;font-weight:bold">Printf&lt;/span>(&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;I! Too Big value for network RX/TX bytes, final Rx:%v, final Tx:%v, curRx:%v, preRx:%v, curTx:%v, preTx:%v, deltaCTimeInNano:%v&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> netIfceMetric[NetRxBytes], netIfceMetric[NetTxBytes],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cur.RxBytes, pre.RxBytes,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> cur.TxBytes, pre.TxBytes,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> deltaCTimeInNano)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>2022-04-08T08:18:17Z I! Too Big value for network RX/TX bytes, final Rx:3.1837731352719405e+17, final Tx:3.183773135286772e+17, curRx:692608, preRx:317669466, curTx:11946450, preTx:242992298, deltaCTimeInNano:57939882302
 &lt;/code>&lt;/pre>&lt;p>Go Playground에서 코드를 실행하면 아래와 같은 결과가 나옵니다.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-go" data-lang="go">&lt;span style="color:#888">// https://play.golang.com/p/KppWhxtTtad
-&lt;/span>&lt;span style="color:#888">&lt;/span>&lt;span style="color:#080;font-weight:bold">package&lt;/span> main
-&lt;span style="color:#080;font-weight:bold">import&lt;/span> (
-&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;fmt&amp;#34;&lt;/span>
-&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;time&amp;#34;&lt;/span>
-)
-&lt;span style="color:#080;font-weight:bold">func&lt;/span> &lt;span style="color:#06b;font-weight:bold">main&lt;/span>() {
-&lt;span style="color:#080;font-weight:bold">var&lt;/span> curRxBytes &lt;span style="color:#888;font-weight:bold">uint64&lt;/span> = &lt;span style="color:#00d;font-weight:bold">692608&lt;/span>
-&lt;span style="color:#080;font-weight:bold">var&lt;/span> preRxBytes &lt;span style="color:#888;font-weight:bold">uint64&lt;/span> = &lt;span style="color:#00d;font-weight:bold">317669466&lt;/span>
-&lt;span style="color:#080;font-weight:bold">var&lt;/span> deltaCTimeInNano &lt;span style="color:#888;font-weight:bold">int64&lt;/span> = &lt;span style="color:#00d;font-weight:bold">57939882302&lt;/span>
-&lt;span style="color:#080;font-weight:bold">var&lt;/span> rxBytes = &lt;span style="color:#038">float64&lt;/span>(curRxBytes-preRxBytes) / &lt;span style="color:#038">float64&lt;/span>(deltaCTimeInNano) * &lt;span style="color:#038">float64&lt;/span>(time.Second)
-fmt.&lt;span style="color:#06b;font-weight:bold">Printf&lt;/span>(&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;%v&amp;#34;&lt;/span>, rxBytes)
-&lt;span style="color:#888">// output = 3.1837731352719405e+17
-&lt;/span>&lt;span style="color:#888">&lt;/span>}
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>3.1837731352719405e+17&lt;/code> 와 같은 값을 얻을 수 있고, 이 값을 Python에서 확인하면 원래 CloudWatch Container Insight에서 본 페타바이트 값이 나옵니다.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-python" data-lang="python">&amp;gt;&amp;gt;&amp;gt; &lt;span style="color:#038">int&lt;/span>(&lt;span style="color:#00d;font-weight:bold">3.1837731352719405e+17&lt;/span>)
-&lt;span style="color:#00d;font-weight:bold">318377313527194048&lt;/span>
-&amp;gt;&amp;gt;&amp;gt; &lt;span style="color:#038">int&lt;/span>(&lt;span style="color:#00d;font-weight:bold">3.1837731352719405e+17&lt;/span>) // (&lt;span style="color:#00d;font-weight:bold">1024&lt;/span> ** &lt;span style="color:#00d;font-weight:bold">5&lt;/span>) &lt;span style="color:#888"># KB MB GB TB PB&lt;/span>
-&lt;span style="color:#00d;font-weight:bold">282&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>cAdvisor는 &lt;code>/proc/&amp;lt;pid&amp;gt;/net/dev&lt;/code>에서 프로세스의 네트워크 관련 메트릭들을 가져오는데, 프로세스가 실행되면서 값이 누적되고, 재시작하면 다시 0부터 시작합니다. 그래서 Pod를 내리고 다시 올릴 때, 같은 컨테이너 이름의 경우 이전 값보다 현재 값이 더 작아지면서 언더플로우 버그가 발생한 것으로 이해할 수 있었습니다.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#888">// https://play.golang.com/p/KppWhxtTtad
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#888">&lt;/span>&lt;span style="color:#080;font-weight:bold">package&lt;/span> main
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#080;font-weight:bold">import&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;time&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#080;font-weight:bold">func&lt;/span> &lt;span style="color:#06b;font-weight:bold">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#080;font-weight:bold">var&lt;/span> curRxBytes &lt;span style="color:#888;font-weight:bold">uint64&lt;/span> = &lt;span style="color:#00d;font-weight:bold">692608&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#080;font-weight:bold">var&lt;/span> preRxBytes &lt;span style="color:#888;font-weight:bold">uint64&lt;/span> = &lt;span style="color:#00d;font-weight:bold">317669466&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#080;font-weight:bold">var&lt;/span> deltaCTimeInNano &lt;span style="color:#888;font-weight:bold">int64&lt;/span> = &lt;span style="color:#00d;font-weight:bold">57939882302&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#080;font-weight:bold">var&lt;/span> rxBytes = &lt;span style="color:#038">float64&lt;/span>(curRxBytes-preRxBytes) / &lt;span style="color:#038">float64&lt;/span>(deltaCTimeInNano) * &lt;span style="color:#038">float64&lt;/span>(time.Second)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> fmt.&lt;span style="color:#06b;font-weight:bold">Printf&lt;/span>(&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;%v&amp;#34;&lt;/span>, rxBytes)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#888">// output = 3.1837731352719405e+17
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#888">&lt;/span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>3.1837731352719405e+17&lt;/code> 와 같은 값을 얻을 수 있고, 이 값을 Python에서 확인하면 원래 CloudWatch Container Insight에서 본 페타바이트 값이 나옵니다.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;">&lt;code class="language-python" data-lang="python">&lt;span style="display:flex;">&lt;span>&amp;gt;&amp;gt;&amp;gt; &lt;span style="color:#038">int&lt;/span>(&lt;span style="color:#00d;font-weight:bold">3.1837731352719405e+17&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00d;font-weight:bold">318377313527194048&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;gt;&amp;gt;&amp;gt; &lt;span style="color:#038">int&lt;/span>(&lt;span style="color:#00d;font-weight:bold">3.1837731352719405e+17&lt;/span>) // (&lt;span style="color:#00d;font-weight:bold">1024&lt;/span> ** &lt;span style="color:#00d;font-weight:bold">5&lt;/span>) &lt;span style="color:#888"># KB MB GB TB PB&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#00d;font-weight:bold">282&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>cAdvisor는 &lt;code>/proc/&amp;lt;pid&amp;gt;/net/dev&lt;/code>에서 프로세스의 네트워크 관련 메트릭들을 가져오는데, 프로세스가 실행되면서 값이 누적되고, 재시작하면 다시 0부터 시작합니다. 그래서 Pod를 내리고 다시 올릴 때, 같은 컨테이너 이름의 경우 이전 값보다 현재 값이 더 작아지면서 언더플로우 버그가 발생한 것으로 이해할 수 있었습니다.&lt;/p>
 &lt;p>이 문제와 관련하여 Helm이나 다른 예제에서 Pod 이름이 항상 다른 것과 관련이 있는지는 아직 확실하지 않습니다. 🤔&lt;/p>
 &lt;h4 id="여담">여담&lt;/h4>
 &lt;ul>
@@ -211,15 +254,15 @@ fmt.&lt;span style="color:#06b;font-weight:bold">Printf&lt;/span>(&lt;span style
 이러한 로그는, 로그를 분석하거나, 로그를 수집하여 다른 시스템에 전달할 때, 어떤 로그인지, 어떤 서비스에서 로그인을 시도했는지 등의 정보를 알 수 없기 때문에, 의미가 없습니다.&lt;/p>
 &lt;p>때문에 로그를 구조화 된 로그로 작성하는 것이 중요합니다.
 구조화 된 로그의 예시는 다음과 같습니다.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-json" data-lang="json">{
-&lt;span style="color:#b06;font-weight:bold">&amp;#34;timestamp&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;2023-03-03 12:00:00.0000000&amp;#34;&lt;/span>,
-&lt;span style="color:#b06;font-weight:bold">&amp;#34;level&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;INFO&amp;#34;&lt;/span>,
-&lt;span style="color:#b06;font-weight:bold">&amp;#34;service&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;User&amp;#34;&lt;/span>,
-&lt;span style="color:#b06;font-weight:bold">&amp;#34;user&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;suho.lee&amp;#34;&lt;/span>,
-&lt;span style="color:#b06;font-weight:bold">&amp;#34;action&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;Login&amp;#34;&lt;/span>,
-&lt;span style="color:#b06;font-weight:bold">&amp;#34;result&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;Success&amp;#34;&lt;/span>
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>Serilog는 이런 형태의 구조화 된 로그를 쉽게 작성할 수 있도록 도와주는 라이브러리입니다.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b06;font-weight:bold">&amp;#34;timestamp&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;2023-03-03 12:00:00.0000000&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b06;font-weight:bold">&amp;#34;level&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;INFO&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b06;font-weight:bold">&amp;#34;service&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;User&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b06;font-weight:bold">&amp;#34;user&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;suho.lee&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b06;font-weight:bold">&amp;#34;action&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;Login&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b06;font-weight:bold">&amp;#34;result&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;Success&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Serilog는 이런 형태의 구조화 된 로그를 쉽게 작성할 수 있도록 도와주는 라이브러리입니다.&lt;/p>
 &lt;h1 id="serilog">Serilog&lt;/h1>
 &lt;p>다른 언어와 마찬가지로, C#에서도 로그를 작성하는 라이브러리가 많이 있습니다.
 Serilog는 이 중 하나입니다.
@@ -238,14 +281,14 @@ Serilog는 다음과 같은 특징을 가지고 있습니다.&lt;/p>
 &lt;/code>&lt;/pre>&lt;ol start="2">
 &lt;li>Serilog를 초기화합니다.&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="color:#888;font-weight:bold">var&lt;/span> logger = &lt;span style="color:#080;font-weight:bold">new&lt;/span> LoggerConfiguration()
-.WriteTo.Console()
-.CreateLogger();
-&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#888;font-weight:bold">var&lt;/span> logger = &lt;span style="color:#080;font-weight:bold">new&lt;/span> LoggerConfiguration()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .WriteTo.Console()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> .CreateLogger();
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
 &lt;li>로그를 작성합니다.&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-csharp" data-lang="csharp">logger.Information(&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;Hello, Serilog!&amp;#34;&lt;/span>);
-&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>logger.Information(&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;Hello, Serilog!&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="4">
 &lt;li>로그를 수집합니다.&lt;/li>
 &lt;/ol>
 &lt;pre tabindex="0">&lt;code>2023-03-03 12:00:00.0000000 [INF] Hello, Serilog!
@@ -254,47 +297,47 @@ Serilog는 다음과 같은 특징을 가지고 있습니다.&lt;/p>
 &lt;ol>
 &lt;li>로그를 구조화 된 로그로 변경합니다.&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-csharp" data-lang="csharp">logger.Information(&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;Hello, {name}!&amp;#34;&lt;/span>, &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;Serilog&amp;#34;&lt;/span>);
-&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>logger.Information(&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;Hello, {name}!&amp;#34;&lt;/span>, &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;Serilog&amp;#34;&lt;/span>);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
 &lt;li>로그를 수집합니다.&lt;/li>
 &lt;/ol>
 &lt;pre tabindex="0">&lt;code>2023-03-03 12:00:00.0000000 [INF] Hello, Serilog!
 &lt;/code>&lt;/pre>&lt;ol start="3">
 &lt;li>로그를 구조화 된 표현법으로 변경하면 다음과 같습니다.&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-json" data-lang="json">{
-&lt;span style="color:#b06;font-weight:bold">&amp;#34;timestamp&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;2023-03-03 12:00:00.0000000&amp;#34;&lt;/span>,
-&lt;span style="color:#b06;font-weight:bold">&amp;#34;level&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;INFO&amp;#34;&lt;/span>,
-&lt;span style="color:#b06;font-weight:bold">&amp;#34;messageTemplate&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;Hello, {name}!&amp;#34;&lt;/span>,
-&lt;span style="color:#b06;font-weight:bold">&amp;#34;properties&amp;#34;&lt;/span>: {
-&lt;span style="color:#b06;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;Serilog&amp;#34;&lt;/span>
-}
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>또한 Deconstruct를 이용하여 데이터를 펼쳐 볼 수 있습니다.
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b06;font-weight:bold">&amp;#34;timestamp&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;2023-03-03 12:00:00.0000000&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b06;font-weight:bold">&amp;#34;level&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;INFO&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b06;font-weight:bold">&amp;#34;messageTemplate&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;Hello, {name}!&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b06;font-weight:bold">&amp;#34;properties&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b06;font-weight:bold">&amp;#34;name&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;Serilog&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>또한 Deconstruct를 이용하여 데이터를 펼쳐 볼 수 있습니다.
 다음과 같은 좌표를 나타내는 클래스가 있다고 가정해봅시다.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#080;font-weight:bold">class&lt;/span> &lt;span style="color:#b06;font-weight:bold">Coordinate&lt;/span>
-{
-&lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#888;font-weight:bold">double&lt;/span> Latitude { &lt;span style="color:#080;font-weight:bold">get&lt;/span>; &lt;span style="color:#080;font-weight:bold">set&lt;/span>; }
-&lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#888;font-weight:bold">double&lt;/span> Longitude { &lt;span style="color:#080;font-weight:bold">get&lt;/span>; &lt;span style="color:#080;font-weight:bold">set&lt;/span>; }
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>이 클래스를 다음과 같이 로그에 작성할 수 있습니다.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="color:#888;font-weight:bold">var&lt;/span> coordinate = &lt;span style="color:#080;font-weight:bold">new&lt;/span> Coordinate { Latitude = &lt;span style="color:#00d;font-weight:bold">37.566535&lt;/span>, Longitude = &lt;span style="color:#00d;font-weight:bold">126.9779692&lt;/span> };
-logger.Information(&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;Hello, {@coordinate}!&amp;#34;&lt;/span>, coordinate);
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>이렇게 작성된 로그를 수집하면 다음과 같이 나옵니다.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#080;font-weight:bold">class&lt;/span> &lt;span style="color:#b06;font-weight:bold">Coordinate&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#888;font-weight:bold">double&lt;/span> Latitude { &lt;span style="color:#080;font-weight:bold">get&lt;/span>; &lt;span style="color:#080;font-weight:bold">set&lt;/span>; }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#888;font-weight:bold">double&lt;/span> Longitude { &lt;span style="color:#080;font-weight:bold">get&lt;/span>; &lt;span style="color:#080;font-weight:bold">set&lt;/span>; }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>이 클래스를 다음과 같이 로그에 작성할 수 있습니다.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#888;font-weight:bold">var&lt;/span> coordinate = &lt;span style="color:#080;font-weight:bold">new&lt;/span> Coordinate { Latitude = &lt;span style="color:#00d;font-weight:bold">37.566535&lt;/span>, Longitude = &lt;span style="color:#00d;font-weight:bold">126.9779692&lt;/span> };
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>logger.Information(&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;Hello, {@coordinate}!&amp;#34;&lt;/span>, coordinate);
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>이렇게 작성된 로그를 수집하면 다음과 같이 나옵니다.&lt;/p>
 &lt;pre tabindex="0">&lt;code>2023-03-03 12:00:00.0000000 [INF] Hello, { Latitude: 37.566535, Longitude: 126.9779692 }!
 &lt;/code>&lt;/pre>&lt;p>구조화 된 표현법으론 다음과 같이 나옵니다.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-json" data-lang="json">{
-&lt;span style="color:#b06;font-weight:bold">&amp;#34;timestamp&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;2023-03-03 12:00:00.0000000&amp;#34;&lt;/span>,
-&lt;span style="color:#b06;font-weight:bold">&amp;#34;level&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;INFO&amp;#34;&lt;/span>,
-&lt;span style="color:#b06;font-weight:bold">&amp;#34;messageTemplate&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;Hello, {@coordinate}!&amp;#34;&lt;/span>,
-&lt;span style="color:#b06;font-weight:bold">&amp;#34;properties&amp;#34;&lt;/span>: {
-&lt;span style="color:#b06;font-weight:bold">&amp;#34;coordinate&amp;#34;&lt;/span>: {
-&lt;span style="color:#b06;font-weight:bold">&amp;#34;Latitude&amp;#34;&lt;/span>: &lt;span style="color:#00d;font-weight:bold">37.566535&lt;/span>,
-&lt;span style="color:#b06;font-weight:bold">&amp;#34;Longitude&amp;#34;&lt;/span>: &lt;span style="color:#00d;font-weight:bold">126.9779692&lt;/span>
-}
-}
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="serilog를-이용한-로그-수집serilogsinks">Serilog를 이용한 로그 수집(Serilog.Sinks)&lt;/h1>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b06;font-weight:bold">&amp;#34;timestamp&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;2023-03-03 12:00:00.0000000&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b06;font-weight:bold">&amp;#34;level&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;INFO&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b06;font-weight:bold">&amp;#34;messageTemplate&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;Hello, {@coordinate}!&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b06;font-weight:bold">&amp;#34;properties&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b06;font-weight:bold">&amp;#34;coordinate&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b06;font-weight:bold">&amp;#34;Latitude&amp;#34;&lt;/span>: &lt;span style="color:#00d;font-weight:bold">37.566535&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b06;font-weight:bold">&amp;#34;Longitude&amp;#34;&lt;/span>: &lt;span style="color:#00d;font-weight:bold">126.9779692&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="serilog를-이용한-로그-수집serilogsinks">Serilog를 이용한 로그 수집(Serilog.Sinks)&lt;/h1>
 &lt;p>Serilog는 다양한 로그 저장소에 로그를 저장할 수 있도록 다양한 &lt;a href="https://github.com/serilog/serilog/wiki/Provided-Sinks">Sink&lt;/a>를 제공합니다.
 이 글에서는 &lt;a href="https://github.com/serilog-contrib/Serilog.Sinks.AmazonS3">Serilog.Sinks.AmazonS3&lt;/a>를 사용하여 S3에 로그를 저장해 보겠습니다.&lt;/p>
 &lt;ol>
@@ -304,23 +347,23 @@ logger.Information(&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34
 &lt;/code>&lt;/pre>&lt;ol start="2">
 &lt;li>Serilog를 appsettings.json을 이용해 초기화합니다.&lt;/li>
 &lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-json" data-lang="json">{
-&lt;span style="color:#b06;font-weight:bold">&amp;#34;Serilog&amp;#34;&lt;/span>: {
-&lt;span style="color:#b06;font-weight:bold">&amp;#34;MinimumLevel&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;Information&amp;#34;&lt;/span>,
-&lt;span style="color:#b06;font-weight:bold">&amp;#34;WriteTo&amp;#34;&lt;/span>: [
-{
-&lt;span style="color:#b06;font-weight:bold">&amp;#34;Name&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;AmazonS3&amp;#34;&lt;/span>,
-&lt;span style="color:#b06;font-weight:bold">&amp;#34;Args&amp;#34;&lt;/span>: {
-&lt;span style="color:#b06;font-weight:bold">&amp;#34;Path&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;log.json&amp;#34;&lt;/span>,
-&lt;span style="color:#b06;font-weight:bold">&amp;#34;BucketName&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;bucket-name&amp;#34;&lt;/span>,
-&lt;span style="color:#b06;font-weight:bold">&amp;#34;RollingInterval&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;Day&amp;#34;&lt;/span>,
-&lt;span style="color:#b06;font-weight:bold">&amp;#34;ServiceUrl&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;https://s3.ap-northeast-2.amazonaws.com&amp;#34;&lt;/span>
-}
-}
-]
-}
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>권한 등 잘 설정이 되었다면 지정한 버킷에 로그가 저장됩니다.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b06;font-weight:bold">&amp;#34;Serilog&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b06;font-weight:bold">&amp;#34;MinimumLevel&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;Information&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b06;font-weight:bold">&amp;#34;WriteTo&amp;#34;&lt;/span>: [
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b06;font-weight:bold">&amp;#34;Name&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;AmazonS3&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b06;font-weight:bold">&amp;#34;Args&amp;#34;&lt;/span>: {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b06;font-weight:bold">&amp;#34;Path&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;log.json&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b06;font-weight:bold">&amp;#34;BucketName&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;bucket-name&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b06;font-weight:bold">&amp;#34;RollingInterval&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;Day&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b06;font-weight:bold">&amp;#34;ServiceUrl&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;https://s3.ap-northeast-2.amazonaws.com&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ]
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>권한 등 잘 설정이 되었다면 지정한 버킷에 로그가 저장됩니다.&lt;/p>
 &lt;h1 id="amazon-glue를-이용한-로그-크롤링">Amazon Glue를 이용한 로그 크롤링&lt;/h1>
 &lt;p>Amazon S3에 저장된 로그를 Amazon Athena를 이용하여 분석할 수 있습니다.
 하지만 Amazon Athena는 JSON 형식의 로그를 분석하기에는 한계가 있습니다.
@@ -330,41 +373,41 @@ logger.Information(&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34
 &lt;h1 id="amazon-athena를-이용한-로그-분석">Amazon Athena를 이용한 로그 분석&lt;/h1>
 &lt;p>Amazon Athena는 여러 빅데이터 분석 툴과 마찬가지로 SQL을 이용하여 데이터를 분석할 수 있습니다.
 다음과 같이 Amazon Athena를 이용하여 로그를 분석할 수 있습니다.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-sql" data-lang="sql">&lt;span style="color:#080;font-weight:bold">SELECT&lt;/span>&lt;span style="color:#bbb">
-&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-weight:bold">timestamp&lt;/span>,&lt;span style="color:#bbb">
-&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-weight:bold">level&lt;/span>,&lt;span style="color:#bbb">
-&lt;/span>&lt;span style="color:#bbb"> &lt;/span>messageTemplate,&lt;span style="color:#bbb">
-&lt;/span>&lt;span style="color:#bbb"> &lt;/span>properties.coordinate.Latitude,&lt;span style="color:#bbb">
-&lt;/span>&lt;span style="color:#bbb"> &lt;/span>properties.coordinate.Longitude&lt;span style="color:#bbb">
-&lt;/span>&lt;span style="color:#bbb">&lt;/span>&lt;span style="color:#080;font-weight:bold">FROM&lt;/span>&lt;span style="color:#bbb">
-&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;database-name&amp;#34;&lt;/span>.&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;table-name&amp;#34;&lt;/span>&lt;span style="color:#bbb">
-&lt;/span>&lt;span style="color:#bbb">&lt;/span>&lt;span style="color:#080;font-weight:bold">WHERE&lt;/span>&lt;span style="color:#bbb">
-&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-weight:bold">timestamp&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-weight:bold">BETWEEN&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#d20;background-color:#fff0f0">&amp;#39;2023-03-03 00:00:00&amp;#39;&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-weight:bold">AND&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#d20;background-color:#fff0f0">&amp;#39;2023-03-03 23:59:59&amp;#39;&lt;/span>&lt;span style="color:#bbb">
-&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>이를 이용하여 여러 분산 네트워크 상의 노드들의 로그를 분석할 수 있습니다.
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;">&lt;code class="language-sql" data-lang="sql">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#080;font-weight:bold">SELECT&lt;/span>&lt;span style="color:#bbb">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-weight:bold">timestamp&lt;/span>,&lt;span style="color:#bbb">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-weight:bold">level&lt;/span>,&lt;span style="color:#bbb">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#bbb"> &lt;/span>messageTemplate,&lt;span style="color:#bbb">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#bbb"> &lt;/span>properties.coordinate.Latitude,&lt;span style="color:#bbb">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#bbb"> &lt;/span>properties.coordinate.Longitude&lt;span style="color:#bbb">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#bbb">&lt;/span>&lt;span style="color:#080;font-weight:bold">FROM&lt;/span>&lt;span style="color:#bbb">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;database-name&amp;#34;&lt;/span>.&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;table-name&amp;#34;&lt;/span>&lt;span style="color:#bbb">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#bbb">&lt;/span>&lt;span style="color:#080;font-weight:bold">WHERE&lt;/span>&lt;span style="color:#bbb">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-weight:bold">timestamp&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-weight:bold">BETWEEN&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#d20;background-color:#fff0f0">&amp;#39;2023-03-03 00:00:00&amp;#39;&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-weight:bold">AND&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#d20;background-color:#fff0f0">&amp;#39;2023-03-03 23:59:59&amp;#39;&lt;/span>&lt;span style="color:#bbb">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>이를 이용하여 여러 분산 네트워크 상의 노드들의 로그를 분석할 수 있습니다.
 예시로, 두 노드 간에 통신이 이루어지는 시간을 분석해 보겠습니다.
 table1은 노드1의 로그를, table2는 노드2의 로그를 나타냅니다.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-sql" data-lang="sql">&lt;span style="color:#080;font-weight:bold">SELECT&lt;/span>&lt;span style="color:#bbb">
-&lt;/span>&lt;span style="color:#bbb"> &lt;/span>table1.&lt;span style="color:#080;font-weight:bold">timestamp&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-weight:bold">AS&lt;/span>&lt;span style="color:#bbb"> &lt;/span>node1_timestamp,&lt;span style="color:#bbb">
-&lt;/span>&lt;span style="color:#bbb"> &lt;/span>table1.&lt;span style="color:#080;font-weight:bold">level&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-weight:bold">AS&lt;/span>&lt;span style="color:#bbb"> &lt;/span>node1_level,&lt;span style="color:#bbb">
-&lt;/span>&lt;span style="color:#bbb"> &lt;/span>table1.messageTemplate&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-weight:bold">AS&lt;/span>&lt;span style="color:#bbb"> &lt;/span>node1_messageTemplate,&lt;span style="color:#bbb">
-&lt;/span>&lt;span style="color:#bbb"> &lt;/span>table1.properties.coordinate.Latitude&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-weight:bold">AS&lt;/span>&lt;span style="color:#bbb"> &lt;/span>node1_latitude,&lt;span style="color:#bbb">
-&lt;/span>&lt;span style="color:#bbb"> &lt;/span>table1.properties.coordinate.Longitude&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-weight:bold">AS&lt;/span>&lt;span style="color:#bbb"> &lt;/span>node1_longitude,&lt;span style="color:#bbb">
-&lt;/span>&lt;span style="color:#bbb"> &lt;/span>table2.&lt;span style="color:#080;font-weight:bold">timestamp&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-weight:bold">AS&lt;/span>&lt;span style="color:#bbb"> &lt;/span>node2_timestamp,&lt;span style="color:#bbb">
-&lt;/span>&lt;span style="color:#bbb"> &lt;/span>table2.&lt;span style="color:#080;font-weight:bold">level&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-weight:bold">AS&lt;/span>&lt;span style="color:#bbb"> &lt;/span>node2_level,&lt;span style="color:#bbb">
-&lt;/span>&lt;span style="color:#bbb"> &lt;/span>table2.messageTemplate&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-weight:bold">AS&lt;/span>&lt;span style="color:#bbb"> &lt;/span>node2_messageTemplate,&lt;span style="color:#bbb">
-&lt;/span>&lt;span style="color:#bbb"> &lt;/span>table2.properties.coordinate.Latitude&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-weight:bold">AS&lt;/span>&lt;span style="color:#bbb"> &lt;/span>node2_latitude,&lt;span style="color:#bbb">
-&lt;/span>&lt;span style="color:#bbb"> &lt;/span>table2.properties.coordinate.Longitude&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-weight:bold">AS&lt;/span>&lt;span style="color:#bbb"> &lt;/span>node2_longitude&lt;span style="color:#bbb">
-&lt;/span>&lt;span style="color:#bbb">&lt;/span>&lt;span style="color:#080;font-weight:bold">FROM&lt;/span>&lt;span style="color:#bbb">
-&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;database-name&amp;#34;&lt;/span>.&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;table1&amp;#34;&lt;/span>&lt;span style="color:#bbb">
-&lt;/span>&lt;span style="color:#bbb">&lt;/span>&lt;span style="color:#080;font-weight:bold">JOIN&lt;/span>&lt;span style="color:#bbb">
-&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;database-name&amp;#34;&lt;/span>.&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;table2&amp;#34;&lt;/span>&lt;span style="color:#bbb">
-&lt;/span>&lt;span style="color:#bbb">&lt;/span>&lt;span style="color:#080;font-weight:bold">ON&lt;/span>&lt;span style="color:#bbb">
-&lt;/span>&lt;span style="color:#bbb"> &lt;/span>table1.properties.coordinate.Latitude&lt;span style="color:#bbb"> &lt;/span>=&lt;span style="color:#bbb"> &lt;/span>table2.properties.coordinate.Latitude&lt;span style="color:#bbb">
-&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-weight:bold">AND&lt;/span>&lt;span style="color:#bbb"> &lt;/span>table1.properties.coordinate.Longitude&lt;span style="color:#bbb"> &lt;/span>=&lt;span style="color:#bbb"> &lt;/span>table2.properties.coordinate.Longitude&lt;span style="color:#bbb">
-&lt;/span>&lt;span style="color:#bbb">&lt;/span>&lt;span style="color:#080;font-weight:bold">WHERE&lt;/span>&lt;span style="color:#bbb">
-&lt;/span>&lt;span style="color:#bbb"> &lt;/span>table1.&lt;span style="color:#080;font-weight:bold">timestamp&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-weight:bold">BETWEEN&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#d20;background-color:#fff0f0">&amp;#39;2023-03-03 00:00:00&amp;#39;&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-weight:bold">AND&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#d20;background-color:#fff0f0">&amp;#39;2023-03-03 23:59:59&amp;#39;&lt;/span>&lt;span style="color:#bbb">
-&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-weight:bold">AND&lt;/span>&lt;span style="color:#bbb"> &lt;/span>table2.&lt;span style="color:#080;font-weight:bold">timestamp&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-weight:bold">BETWEEN&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#d20;background-color:#fff0f0">&amp;#39;2023-03-03 00:00:00&amp;#39;&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-weight:bold">AND&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#d20;background-color:#fff0f0">&amp;#39;2023-03-03 23:59:59&amp;#39;&lt;/span>&lt;span style="color:#bbb">
-&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>이런 식으로 로그를 분석하면 두 노드 사이의 통신 시간을 알 수 있습니다.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;">&lt;code class="language-sql" data-lang="sql">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#080;font-weight:bold">SELECT&lt;/span>&lt;span style="color:#bbb">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#bbb"> &lt;/span>table1.&lt;span style="color:#080;font-weight:bold">timestamp&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-weight:bold">AS&lt;/span>&lt;span style="color:#bbb"> &lt;/span>node1_timestamp,&lt;span style="color:#bbb">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#bbb"> &lt;/span>table1.&lt;span style="color:#080;font-weight:bold">level&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-weight:bold">AS&lt;/span>&lt;span style="color:#bbb"> &lt;/span>node1_level,&lt;span style="color:#bbb">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#bbb"> &lt;/span>table1.messageTemplate&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-weight:bold">AS&lt;/span>&lt;span style="color:#bbb"> &lt;/span>node1_messageTemplate,&lt;span style="color:#bbb">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#bbb"> &lt;/span>table1.properties.coordinate.Latitude&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-weight:bold">AS&lt;/span>&lt;span style="color:#bbb"> &lt;/span>node1_latitude,&lt;span style="color:#bbb">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#bbb"> &lt;/span>table1.properties.coordinate.Longitude&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-weight:bold">AS&lt;/span>&lt;span style="color:#bbb"> &lt;/span>node1_longitude,&lt;span style="color:#bbb">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#bbb"> &lt;/span>table2.&lt;span style="color:#080;font-weight:bold">timestamp&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-weight:bold">AS&lt;/span>&lt;span style="color:#bbb"> &lt;/span>node2_timestamp,&lt;span style="color:#bbb">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#bbb"> &lt;/span>table2.&lt;span style="color:#080;font-weight:bold">level&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-weight:bold">AS&lt;/span>&lt;span style="color:#bbb"> &lt;/span>node2_level,&lt;span style="color:#bbb">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#bbb"> &lt;/span>table2.messageTemplate&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-weight:bold">AS&lt;/span>&lt;span style="color:#bbb"> &lt;/span>node2_messageTemplate,&lt;span style="color:#bbb">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#bbb"> &lt;/span>table2.properties.coordinate.Latitude&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-weight:bold">AS&lt;/span>&lt;span style="color:#bbb"> &lt;/span>node2_latitude,&lt;span style="color:#bbb">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#bbb"> &lt;/span>table2.properties.coordinate.Longitude&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-weight:bold">AS&lt;/span>&lt;span style="color:#bbb"> &lt;/span>node2_longitude&lt;span style="color:#bbb">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#bbb">&lt;/span>&lt;span style="color:#080;font-weight:bold">FROM&lt;/span>&lt;span style="color:#bbb">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;database-name&amp;#34;&lt;/span>.&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;table1&amp;#34;&lt;/span>&lt;span style="color:#bbb">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#bbb">&lt;/span>&lt;span style="color:#080;font-weight:bold">JOIN&lt;/span>&lt;span style="color:#bbb">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;database-name&amp;#34;&lt;/span>.&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;table2&amp;#34;&lt;/span>&lt;span style="color:#bbb">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#bbb">&lt;/span>&lt;span style="color:#080;font-weight:bold">ON&lt;/span>&lt;span style="color:#bbb">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#bbb"> &lt;/span>table1.properties.coordinate.Latitude&lt;span style="color:#bbb"> &lt;/span>=&lt;span style="color:#bbb"> &lt;/span>table2.properties.coordinate.Latitude&lt;span style="color:#bbb">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-weight:bold">AND&lt;/span>&lt;span style="color:#bbb"> &lt;/span>table1.properties.coordinate.Longitude&lt;span style="color:#bbb"> &lt;/span>=&lt;span style="color:#bbb"> &lt;/span>table2.properties.coordinate.Longitude&lt;span style="color:#bbb">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#bbb">&lt;/span>&lt;span style="color:#080;font-weight:bold">WHERE&lt;/span>&lt;span style="color:#bbb">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#bbb"> &lt;/span>table1.&lt;span style="color:#080;font-weight:bold">timestamp&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-weight:bold">BETWEEN&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#d20;background-color:#fff0f0">&amp;#39;2023-03-03 00:00:00&amp;#39;&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-weight:bold">AND&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#d20;background-color:#fff0f0">&amp;#39;2023-03-03 23:59:59&amp;#39;&lt;/span>&lt;span style="color:#bbb">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-weight:bold">AND&lt;/span>&lt;span style="color:#bbb"> &lt;/span>table2.&lt;span style="color:#080;font-weight:bold">timestamp&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-weight:bold">BETWEEN&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#d20;background-color:#fff0f0">&amp;#39;2023-03-03 00:00:00&amp;#39;&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#080;font-weight:bold">AND&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#d20;background-color:#fff0f0">&amp;#39;2023-03-03 23:59:59&amp;#39;&lt;/span>&lt;span style="color:#bbb">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>이런 식으로 로그를 분석하면 두 노드 사이의 통신 시간을 알 수 있습니다.&lt;/p>
 &lt;h1 id="마치며">마치며&lt;/h1>
 &lt;p>이 글에서는 Serilog를 이용하여 로그를 수집하고 Amazon Athena를 이용하여 로그를 분석하는 방법을 소개했습니다.
 오늘 소개한 방법을 응용하면 다양한 분산 네트워크 상의 노드들의 로그를 분석할 수 있을 것으로 기대합니다.
@@ -465,56 +508,56 @@ table1은 노드1의 로그를, table2는 노드2의 로그를 나타냅니다.&
 &lt;/ul>
 &lt;hr>
 &lt;p>(이 글은 제 &lt;a href="https://gist.github.com/longfin">개인 Gist&lt;/a>에 올해 10월 &lt;a href="https://gist.github.com/longfin/019e0067275d134f4302539d2ddbff06">게시한 글&lt;/a>을 옮긴 것입니다.)&lt;/p>
-&lt;section class="footnotes" role="doc-endnotes">
+&lt;div class="footnotes" role="doc-endnotes">
 &lt;hr>
 &lt;ol>
-&lt;li id="fn:1" role="doc-endnote">
+&lt;li id="fn:1">
 &lt;p>사실 비트코인이 이들의 유일한 부산물인 것은 아닙니다. &lt;a href="https://en.wikipedia.org/wiki/Pretty_Good_Privacy#Criminal_investigation">미국의 소프트웨어 수출 제재를 피하기 위해 소스 코드를 출력해서 배포한 전설적인 일화&lt;/a>로 유명한 암호 프로그램인 &lt;a href="https://en.wikipedia.org/wiki/Pretty_Good_Privacy">PGP(Pretty Good Privacy)&lt;/a>는 당대 사이퍼펑크로 유명했던 &lt;a href="https://en.wikipedia.org/wiki/Phil_Zimmermann">필 짐머만(Phil Zimmermann)&lt;/a>의 저작물이며, 넷스케이프(Netscape)의 공동 설립자였던 &lt;a href="https://en.wikipedia.org/wiki/Marc_Andreessen">마크 안데르센(Marc Andreessen)&lt;/a>을 포함한 많은 엔지니어가 &lt;a href="https://en.wikipedia.org/wiki/Transport_Layer_Security#SSL_1.0,_2.0,_and_3.0">Secure Socket Layer(SSL)&lt;/a>과 관련된 소프트웨어들을 만들기도 했죠.&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:2" role="doc-endnote">
+&lt;li id="fn:2">
 &lt;p>개인적으로 자유 소프트웨어 진영과 오픈 소스 소프트웨어 진영의 대립을 보는 것 같기도 해서 흥미로운 부분입니다. 하지만 객관적인 비교가 가능할 만큼 충분한 정보가 없다고 생각하여 다루진 못했습니다.&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:3" role="doc-endnote">
+&lt;li id="fn:3">
 &lt;p>&amp;ldquo;이더리움 재단의 정의가 전체 Web3를 대표할 만큼 대표성이 있는가.&amp;rdquo; 라는 지적이 있을 수 있으며 동의합니다. 이 글이 작성되는 2022년 10월경 제가 접할 수 있는 자료를 기준으로 판단하였으며 이것과 다르면서 더 보편적으로 알려져 있는 정의가 있으면 본 내용은 수정될 수 있습니다.&amp;#160;&lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:4" role="doc-endnote">
+&lt;li id="fn:4">
 &lt;p>&lt;a href="https://en.wikipedia.org/wiki/Status_quo_bias">현상 유지 편향(Status quo bias)&lt;/a>이나 &lt;a href="https://en.wikipedia.org/wiki/Prospect_theory">전망이론(Prospect theory)&lt;/a> 등이 흔히 일컬어지는 예시입니다.&amp;#160;&lt;a href="#fnref:4" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:5" role="doc-endnote">
+&lt;li id="fn:5">
 &lt;p>정확히는 &lt;a href="https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm">타원 곡선 전자 서명(Elliptic Curve Digital Signature Algorithm)&lt;/a>에 사용되는 숫자로, 자세한 사항은 Bitcoin 위키의 &lt;a href="https://en.bitcoin.it/wiki/Secp256k1">secp256k1&lt;/a> 문서를 참고하시면 됩니다.&amp;#160;&lt;a href="#fnref:5" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:6" role="doc-endnote">
+&lt;li id="fn:6">
 &lt;p>네트워크가 호환되지 않는 나인 크로니클이 이더리움과 같은 개인키를 사용할때 같은 주소가 나오는 것 또한 이런 까닭입니다.&amp;#160;&lt;a href="#fnref:6" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:7" role="doc-endnote">
+&lt;li id="fn:7">
 &lt;p>MetaMask를 개발한 블록체인 기술 기업입니다. &lt;a href="https://infura.io">Infura&lt;/a>처럼 이더리움 생태계에 필요한 소프트웨어들을 만드는 것으로 유명합니다.&amp;#160;&lt;a href="#fnref:7" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:8" role="doc-endnote">
+&lt;li id="fn:8">
 &lt;p>미리 밑밥(?)을 깔아두자면, 저는 학문으로의 철학을 공부하거나 엄밀하게 사고하도록 훈련한 적이 없는 소프트웨어 엔지니어입니다. 때문에 &amp;ldquo;철학&amp;quot;은 학문을 지칭하기보다 일반어로 이해하여 주시면 감사하겠습니다.&amp;#160;&lt;a href="#fnref:8" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:9" role="doc-endnote">
+&lt;li id="fn:9">
 &lt;p>주장을 개진하다 보니 단언적으로 이야기했지만, &amp;ldquo;무신뢰를 지향하는 시스템에서 이런 의정 활동이 유효한 부분이 전혀 없는가.&amp;rdquo; 저에게도 답이 있는 문제는 아닙니다. 그렇기에 나인 크로니클 DAO에 대해서도 &amp;ldquo;잘은 모르겠지만, 일단 실험해보자&amp;quot;라는 쪽의 생각에 가깝긴 합니다.&amp;#160;&lt;a href="#fnref:9" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:10" role="doc-endnote">
+&lt;li id="fn:10">
 &lt;p>소스를 부어서 먹는 걸 지지하는 분들은, 본래 탕수육이 원래 소스와 볶아서 먹는 요리였음을 주장하는 전통(?)적인 노선과 찍어 먹는 과정에서 생길 수 있는 여러 위생상의 문제를 걱정하는 실리(?)적인 노선이 있습니다.&amp;#160;&lt;a href="#fnref:10" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:11" role="doc-endnote">
+&lt;li id="fn:11">
 &lt;p>&amp;ldquo;찍먹&amp;quot;을 주장하시는 분들은 주로 식감이나 소스의 배합 자유도를 중요시한다고 알려져 있습니다.&amp;#160;&lt;a href="#fnref:11" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:12" role="doc-endnote">
+&lt;li id="fn:12">
 &lt;p>나인 크로니클의 온보딩포탈이나 플레이어 커뮤니티 등의 사례를 봤을 때, 이것이 실질적으로 가능한 선택인가라는 점은 다소 논쟁적이라고는 봅니다.&amp;#160;&lt;a href="#fnref:12" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:13" role="doc-endnote">
+&lt;li id="fn:13">
 &lt;p>그럼 탈중앙화에 &amp;ldquo;자동화된 행정&amp;quot;이 꼭 필요한 것인가라는 반론이 가능합니다. 그에 대한 생각도 정리해보았는데, 글의 분량 관계상 별도로 내어 적으려고 합니다.&amp;#160;&lt;a href="#fnref:13" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:14" role="doc-endnote">
+&lt;li id="fn:14">
 &lt;p>노파심에 계속 적는 거지만, 저는 이게 가치 없다는 주장을 하는 것이 아닙니다. 단지 제가 블록체인 기술로 잘할 수 없는 일이라는 것입니다.&amp;#160;&lt;a href="#fnref:14" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:15" role="doc-endnote">
+&lt;li id="fn:15">
 &lt;p>지금으로 충분하지 않다. 라는 착안에서 의견이 다른 분도 계시겠지만&amp;hellip; 더 이야기하면 지겨우시겠지만, 그래도 이야기하자면 저는 그 의견에 반대하지 않습니다.&amp;#160;&lt;a href="#fnref:15" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></content><author><name>문성원</name><uri>https://github.com/longfin</uri><email>swen@planetariumhq.com</email></author></entry><entry><title>오픈 소스, 블록체인 그리고 탈중앙 애플리케이션</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2022/12/oss-blockchain-and-decentralized/" title="오픈 소스, 블록체인 그리고 탈중앙 애플리케이션"/><id>https://snack.planetarium.dev/kor/2022/12/oss-blockchain-and-decentralized/</id><published>2022-12-07T00:00:00+00:00</published><updated>2022-12-07T00:00:00+00:00</updated><content type="html">&lt;p>이 글에선 &lt;a href="https://ko.wikipedia.org/wiki/%EC%98%A4%ED%94%88_%EC%86%8C%EC%8A%A4">오픈 소스&lt;/a> 운동과 &lt;a href="https://ko.wikipedia.org/wiki/%EB%B8%94%EB%A1%9D%EC%B2%B4%EC%9D%B8">블록체인&lt;/a> 기술이 어떤 특성들을 담보하며, 탈중앙 애플리케이션을 만드는데 어떤 역할을 하는지에 대해 저의 이해를 바탕으로 설명합니다. 이 글의 목적은 &amp;ldquo;진정한 탈중앙 애플리케이션을 만들려면 반드시 오픈 소스를 해야 한다.&amp;ldquo;라기보다는&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>, 오픈 소스나 블록체인 기술이 차지하고 있는 역할을 공유함으로써, 추후 이러한 이해 상충이 벌어지는 부분들을 보다 명확히 하기 위함입니다.&lt;/p>
+&lt;/div></content><author><name>문성원</name><uri>https://github.com/longfin</uri><email>swen@planetariumhq.com</email></author></entry><entry><title>오픈 소스, 블록체인 그리고 탈중앙 애플리케이션</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2022/12/oss-blockchain-and-decentralized/" title="오픈 소스, 블록체인 그리고 탈중앙 애플리케이션"/><id>https://snack.planetarium.dev/kor/2022/12/oss-blockchain-and-decentralized/</id><published>2022-12-07T00:00:00+00:00</published><updated>2022-12-07T00:00:00+00:00</updated><content type="html">&lt;p>이 글에선 &lt;a href="https://ko.wikipedia.org/wiki/%EC%98%A4%ED%94%88_%EC%86%8C%EC%8A%A4">오픈 소스&lt;/a> 운동과 &lt;a href="https://ko.wikipedia.org/wiki/%EB%B8%94%EB%A1%9D%EC%B2%B4%EC%9D%B8">블록체인&lt;/a> 기술이 어떤 특성들을 담보하며, 탈중앙 애플리케이션을 만드는데 어떤 역할을 하는지에 대해 저의 이해를 바탕으로 설명합니다. 이 글의 목적은 &amp;ldquo;진정한 탈중앙 애플리케이션을 만들려면 반드시 오픈 소스를 해야 한다.&amp;ldquo;라기보다는&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>, 오픈 소스나 블록체인 기술이 차지하고 있는 역할을 공유함으로써, 추후 이러한 이해 상충이 벌어지는 부분들을 보다 명확히 하기 위함입니다.&lt;/p>
 &lt;h1 id="오픈-소스">오픈 소스&lt;/h1>
 &lt;p>오픈 소스, 혹은 오픈 소스 운동은 다양한 정의를 가지고 있습니다. &lt;a href="https://ko.wikipedia.org/wiki/%EC%9E%90%EC%9C%A0_%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4">자유 소프트웨어&lt;/a> 운동을 지지하는 쪽에서는 오픈 소스가 자유 소프트웨어의 부분 집합이라고 주장하지만, 오픈 소스를 지지하는 사람들은 오픈 소스가 자유 소프트웨어를 포함하는 더 넓은 개념이라고 이야기하기도 합니다. 이 둘의 차이나 주장도 흥미로운 부분이 많지만, 이 글에서 제가 밝히고 싶은 제 이해의 관점에선 크게 차이가 나진 않으므로 생략하도록 하겠습니다.&lt;/p>
 &lt;p>&lt;a href="https://opensource.org/osd">오픈 소스 이니셔티브의 정의&lt;/a>에 따르면, 오픈 소스는 단순히 코드를 공개하는 것 이상의 기준을 갖추고 있습니다. 가령 파생 제작물(Derived Works)에 대해서도 원본 소프트웨어와 같은 라이선스를 유지해야 한다든지, 개인이나 집단을 차별해서는 안 된다는, 일종의 사회 운동과 같은 성격을 지니고 있기도 합니다.&lt;/p>
@@ -556,44 +599,44 @@ table1은 노드1의 로그를, table2는 노드2의 로그를 나타냅니다.&
 &lt;/ul>
 &lt;hr>
 &lt;p>(이 글은 제 &lt;a href="https://gist.github.com/longfin">개인 Gist&lt;/a>에 올해 10월 &lt;a href="https://gist.github.com/longfin/0951c39b566e58e4e0a80faf513bb4b1">게시한 글&lt;/a>을 옮긴 것입니다.)&lt;/p>
-&lt;section class="footnotes" role="doc-endnotes">
+&lt;div class="footnotes" role="doc-endnotes">
 &lt;hr>
 &lt;ol>
-&lt;li id="fn:1" role="doc-endnote">
+&lt;li id="fn:1">
 &lt;p>물론 저는 이 주장을 지지합니다. 하지만 이 주장을 지지하기에 앞서, 그 까닭을 말씀드리는 것이 먼저라고 생각합니다.&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:2" role="doc-endnote">
+&lt;li id="fn:2">
 &lt;p>실제로 나인 크로니클이 채택하고 있는 라이선스인 &lt;a href="https://www.gnu.org/licenses/agpl-3.0.en.html">AGPL&lt;/a>은 &lt;a href="https://www.gnu.org/licenses/gpl-3.0.html">GPL&lt;/a>의 변형으로, GPL이 가정하던 배포가 바이너리를 직접 제공하는 것 외에도 서버를 통해 서비스를 제공하거나 하는 식으로 바뀐 시대상을 따라가기 위해 제안되었습니다.&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:3" role="doc-endnote">
+&lt;li id="fn:3">
 &lt;p>&amp;ldquo;이를 촉진하기 위해서 얼마만큼의 제약을 가해야 하는가&amp;quot;가 오픈 소스와 자유 소프트웨어 진영의 가장 큰 논쟁 거리입니다만, 글의 주요한 주제가 아니므로 생략합니다.&amp;#160;&lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:4" role="doc-endnote">
+&lt;li id="fn:4">
 &lt;p>근래의 많은 오픈 소스 커뮤니티에서 (설사 당장의 기술적인 이득이 생기지 않거나, 혹은 오히려 손해가 발생하더라도) 정치적 올바름과 같은 주제에 대해서 신중하고 포용력 있는 결정을 내리기 위해 고민하는 것은, 이러한 철학이 깔려 있기 때문이라고 생각합니다. 다만 이 또한 글의 주요한 주제가 아니므로 생략합니다.&amp;#160;&lt;a href="#fnref:4" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:5" role="doc-endnote">
+&lt;li id="fn:5">
 &lt;p>보다 구체적으로는, 이더리움 등에서 제안하는 분산 상태 기계로서의 블록체인을 이야기합니다.&amp;#160;&lt;a href="#fnref:5" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:6" role="doc-endnote">
+&lt;li id="fn:6">
 &lt;p>물론 지미 송 같은 비트코인 지지자들은 &lt;a href="https://www.coindeskkorea.com/news/articleView.html?idxno=41885">이더리움이 허가형 네트워크라고 비판하기도 합니다.&lt;/a> 하지만 이는 이더리움이 취하고 있는 접근 방향 자체가 잘못되었다기 보단, 비탈릭을 위시한 이더리움 재단이 &lt;a href="https://www.gemini.com/cryptopedia/the-dao-hack-makerdao">&amp;ldquo;The DAO&amp;rdquo; 사태&lt;/a> 등에서 통제권을 발휘하고 있다는 점의 비판이므로 여기서는 길게 다루지 않겠습니다.&amp;#160;&lt;a href="#fnref:6" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:7" role="doc-endnote">
+&lt;li id="fn:7">
 &lt;p>어떤 네트워크가 비허가형이라고 할 때에는 반드시 어떠한 통제도 없어야 한다는 것을 의미하진 않습니다.&amp;#160;&lt;a href="#fnref:7" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:8" role="doc-endnote">
+&lt;li id="fn:8">
 &lt;p>구성원의 선호를 완벽하게 반영하는 투표가 가능한가에 대한 논의(e.g., &lt;a href="https://ko.wikipedia.org/wiki/%ED%88%AC%ED%91%9C%EC%9D%98_%EC%97%AD%EC%84%A4">콩도르세의 역설&lt;/a>)도 흥미로운 주제이지만, 이 사고 실험의 주된 주제는 아니기에 생략하고, 가능하다고 가정합니다.&amp;#160;&lt;a href="#fnref:8" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:9" role="doc-endnote">
+&lt;li id="fn:9">
 &lt;p>이 역시도 오픈 소스가 효율성에 대해 많이 비판 받는 지점입니다. 왜냐하면 이러한 장점은 꼭 객관적인 기능의 우열뿐 아니라 개인이 지지하는 가치 등도 포함되기 때문입니다.&amp;#160;&lt;a href="#fnref:9" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:10" role="doc-endnote">
+&lt;li id="fn:10">
 &lt;p>블록체인 포크를 기술적으로 보면 &lt;a href="https://ethereum.org/ko/upgrades/merge/">더 머지(The Merge)&lt;/a>와 같은 체인 호환성이 없는 소프트웨어 업데이트를 일컫는 용어이지만 기술적 논의를 다루는 것이 목표는 아니기에, 여기서는 적대적인 포크로 한정해서 다룹니다.&amp;#160;&lt;a href="#fnref:10" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:11" role="doc-endnote">
+&lt;li id="fn:11">
 &lt;p>어쩌면 이 시각은 독점 소프트웨어를 바라보는 오픈 소스 진영의 논리와 비슷하다는 느낌도 받습니다. 저는 제가 생각하는 탈중앙 애플리케이션이 세상의 모든 애플리케이션을 대체하는 것은 아마도 불가능할 것이라고 생각합니다.&amp;#160;&lt;a href="#fnref:11" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></content><author><name>문성원</name><uri>https://github.com/longfin</uri><email>swen@planetariumhq.com</email></author></entry><entry><title>블록체인? 채굴해서 코인 나오는 건 알겠는데...</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2022/11/the-simple-of-blockchain/" title="블록체인? 채굴해서 코인 나오는 건 알겠는데..."/><id>https://snack.planetarium.dev/kor/2022/11/the-simple-of-blockchain/</id><published>2022-11-15T00:00:00+00:00</published><updated>2022-11-15T00:00:00+00:00</updated><content type="html">&lt;h2 id="알림">알림&lt;/h2>
+&lt;/div></content><author><name>문성원</name><uri>https://github.com/longfin</uri><email>swen@planetariumhq.com</email></author></entry><entry><title>블록체인? 채굴해서 코인 나오는 건 알겠는데...</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2022/11/the-simple-of-blockchain/" title="블록체인? 채굴해서 코인 나오는 건 알겠는데..."/><id>https://snack.planetarium.dev/kor/2022/11/the-simple-of-blockchain/</id><published>2022-11-15T00:00:00+00:00</published><updated>2022-11-15T00:00:00+00:00</updated><content type="html">&lt;h2 id="알림">알림&lt;/h2>
 &lt;p>이번 스낵 글은 이전에 개인 &lt;a href="https://www.getrevue.co/profile/bin_bash_shell/issues/issue-1-838950">뉴스레터&lt;/a>에서 발행했던 내용을
 필사하여 스낵에 올리는 포스트입니다.&lt;/p>
 &lt;h2 id="들어가며">들어가며&lt;/h2>
@@ -648,7 +691,7 @@ table1은 노드1의 로그를, table2는 노드2의 로그를 나타냅니다.&
 &lt;p>그래서 플라네타리움 구성원들 중에서는 오픈 소스 커뮤니티와 개발에 관심이 많았던 분들이 많습니다.&lt;/p>
 &lt;p>그럼 립플래닛을 통해 오픈 소스 프로젝트에 기여를 해볼까요? 물론 말처럼 쉽게 시작되진 않습니다. 그리고 시작 전에 알아야 할 몇가지 파일(README, CONTRIBUTING, LICENSE)들이 있습니다. 이 파일들을 통해서 립플래닛에 대해 소개하고 어떤게 립플래닛에 기여할 수 있는지 말씀드리고자 합니다.&lt;/p>
 &lt;h2 id="1-readme-파일">1. README 파일&lt;/h2>
-&lt;p>&lt;img src="images/1.png" alt="">&lt;/p>
+&lt;p>&lt;img src="images/1.png">&lt;/p>
 &lt;p>립플래닛(Libplanet)은 탈중앙 방식으로 멀티플레이 온라인 게임을 만들기 위한 .NET 라이브러리입니다. 이는 전체 게임 플레이가 승인된 중앙 서버가 아닌 동일한 노드 사이의 P2P 네트워크에서 발생하는 것을 의미합니다. 내부적으로 블록체인의 많은 기능(예: 전자 서명, 비잔틴 장애 허용(BFT) 합의, 데이터 복제)을 통합합니다.&lt;/p>
 &lt;blockquote>
 &lt;p>💡 &lt;strong>립플래닛을 써야하는 3가지 이유&lt;/strong>
@@ -679,10 +722,10 @@ Libplanet은 .NET 라이브러리이므로 모든 게임 로직을 동일한 언
 &lt;p>선호하는 설정이 없는 경우 Visual Studio Code를 사용하는 것을 추천합니다. .NET을 만든 Microsoft에서 만든 무료 에디터입니다.&lt;/p>
 &lt;h3 id="빌드">빌드&lt;/h3>
 &lt;p>다음 명령은 종속성(필수 라이브러리 패키지)을 설치하고 전체 Libplanet 솔루션을 빌드합니다.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-bash" data-lang="bash">dotnet build
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>SonarAnalyzer를 사용하여 코드 품질을 확인하지만 빌드하는 데 시간이 더 오래 걸립니다. 분석기를 건너뛰려면 다음을 사용할 수 있습니다.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-bash" data-lang="bash">dotnet build -p:SkipSonar=&lt;span style="color:#038">true&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="프로젝트">프로젝트&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>dotnet build
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>SonarAnalyzer를 사용하여 코드 품질을 확인하지만 빌드하는 데 시간이 더 오래 걸립니다. 분석기를 건너뛰려면 다음을 사용할 수 있습니다.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>dotnet build -p:SkipSonar=&lt;span style="color:#038">true&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="프로젝트">프로젝트&lt;/h3>
 &lt;p>GitHub의 &lt;a href="https://github.com/planetarium/libplanet">planetarium/libplanet&lt;/a> 저장소는 여러 프로젝트로 구성됩니다.&lt;/p>
 &lt;ul>
 &lt;li>Libplanet: 대부분의 구현 코드를 포함하는 메인 프로젝트. Libplanet이라는 이름의 NuGet 패키지로 배포됩니다.&lt;/li>
@@ -703,7 +746,7 @@ Libplanet은 .NET 라이브러리이므로 모든 게임 로직을 동일한 언
 &lt;p>이 주제에 관한 릴리스 가이드를 읽어주세요.&lt;/p>
 &lt;h2 id="3-license-파일">3. LICENSE 파일&lt;/h2>
 &lt;p>&lt;a href="https://github.com/planetarium/libplanet">planetarium/libplanet&lt;/a>은 &lt;strong>GNU Lesser General Public License v2.1&lt;/strong>에 따라 사용이 허가되었습니다.&lt;/p>
-&lt;p>&lt;img src="images/2.png" alt="">&lt;/p>
+&lt;p>&lt;img src="images/2.png">&lt;/p>
 &lt;blockquote>
 &lt;table>
 &lt;thead>
@@ -851,7 +894,7 @@ alt="DelayedActionRenderer 가 가장 많은 메모리 사용량을 차지하고
 &lt;p>설명이 조금 모자라거나 틀린 부분이 있으면 의견 남겨주시면 감사하겠습니다.&lt;/p></content><author><name>이수호</name><uri>https://github.com/riemannulus</uri><email>suho@planetariumhq.com</email></author></entry><entry><title>탈중앙 게임과 AWS re:Invent</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2022/01/2021-aws-reinvent/" title="탈중앙 게임과 AWS re:Invent"/><id>https://snack.planetarium.dev/kor/2022/01/2021-aws-reinvent/</id><published>2022-01-25T00:00:00+00:00</published><updated>2022-01-25T00:00:00+00:00</updated><content type="html">&lt;p>안녕하세요. &lt;a href="https://libplanet.io/">Libplanet&lt;/a>을 만들고 있는 &lt;a href="https://planetariumhq.com/">플라네타리움&lt;/a>의 문성원입니다.
 오늘은 작년 11월 29일부터 12월 3일까지 열린, &lt;a href="https://reinvent.awsevents.com/">AWS re:Invent&lt;/a>에 참석하게 된 계기에 대해서 짤막하게나마 공유토록 하겠습니다.&lt;/p>
 &lt;h1 id="aws-reinvent">AWS re:Invent&lt;/h1>
-&lt;p>&lt;img src="images/reinvent2021.png" alt="">&lt;/p>
+&lt;p>&lt;img src="images/reinvent2021.png">&lt;/p>
 &lt;p>AWS re:Invent는 2012년부터 (코로나 19로 연기된 2019년을 제외하고) 매해 열린 개발자
 행사입니다. 클라우드가 단순히 서비스 운영을 넘어, 소프트웨어 개발에 걸쳐서 막대한
 영향력을 끼치는 현대에 들어서는 가장 큰 개발자 행사라고 해도 과언이 아니죠.&lt;/p>
@@ -874,7 +917,7 @@ IaaS들이 가져온 변화는 상상 이상의 것입니다. 많은 개발자�
 되었습니다. 블록체인 역시 소프트웨어이기 때문에 예외가 아닙니다.
 실제로, AWS나 Azure, GCP 모두 블록체인(주로 이더리움) 노드에 대한 템플릿, 혹은
 관리형 서비스를 제공합니다.&lt;/p>
-&lt;p>&lt;img src="images/aws-blockchain-template.png" alt="">&lt;/p>
+&lt;p>&lt;img src="images/aws-blockchain-template.png">&lt;/p>
 &lt;p>이런 템플릿으로 노드를 쉽게 띄워서 돌려볼 수 있게 하므로, 엔지니어가 서비스나
 애플리케이션(저희의 경우 게임)의 공개까지 개발 기간을 단축 시키는 효과를 가져올 뿐
 아니라, 운영 환경에서 얻을 수 있는 정보들을 빠르게 개발팀으로 피드백 시키는 수단으로
@@ -889,7 +932,7 @@ IaaS로의 이전을 검토하고, &lt;a href="https://aws.amazon.com/ko/gaming/
 아닙니다. 주요한 이유 중 하나는, 개인이나 작은 규모의 팀들이 고민하는
 &amp;ldquo;작은 규모로 먼저 시작할 수 있다&amp;quot;라는 강점이 그리 크게 받아들여지기 어렵기 때문일
 것입니다.&lt;/p>
-&lt;p>&lt;img src="images/9c-structure.jpg" alt="">&lt;/p>
+&lt;p>&lt;img src="images/9c-structure.jpg">&lt;/p>
 &lt;p>하지만 탈중앙 게임을 지향하는 나인 크로니클과 같은 게임에서, 저희는 노드를 운영하는
 사람들이 초기 투자를 많이 하지 않고도 본인들이 원하는 규모에서
 &lt;a href="https://en.wikipedia.org/wiki/Scalability#Horizontal_(scale_out)_and_vertical_scaling_(scale_up)">스케일 아웃&lt;/a> 할 수 있는 환경을 제공하는 것은 대단히 중요하다고
@@ -958,7 +1001,7 @@ Rider 또는 Visual Studio Code를 쓴다는 가정 하에 Libplanet의 개발 �
 &lt;h2 id="질문-및-대화방">질문 및 대화방&lt;/h2>
 &lt;p>궁금한 게 있으시면 &lt;a href="https://discord.gg/YaHPjcrdrw">저희 Discord 서버&lt;/a>에 오셔서 물어보셔도 됩니다. 행사 전에
 미리 들어오셔서 물어보셔도 좋고, 행사 끝난 뒤라도 좋습니다. 물론 가볍게 놀러 오시는
-것도 환영입니다!&lt;/p></content><author><name>문성원</name><uri>https://github.com/longfin</uri><email>swen@planetariumhq.com</email></author></entry><entry><title>Libplanet 0.11–0.19 업데이트 요약</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2021/10/libplanet-0.11-0.19/" title="Libplanet 0.11–0.19 업데이트 요약"/><link rel="alternate" href="https://snack.planetarium.dev/eng/2021/10/libplanet-0.11-0.19/" hreflang="en" title="What's new in Libplanet 0.11–0.19"/><id>https://snack.planetarium.dev/kor/2021/10/libplanet-0.11-0.19/</id><published>2021-10-29T00:00:00+00:00</published><updated>2021-10-29T00:00:00+00:00</updated><content type="html">&lt;p>안녕하세요. 오랜만에 소식 전합니다. &lt;a href="https://libplanet.io/">Libplanet&lt;/a>&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>은 지난 몇 달 동안, 여러
+것도 환영입니다!&lt;/p></content><author><name>문성원</name><uri>https://github.com/longfin</uri><email>swen@planetariumhq.com</email></author></entry><entry><title>Libplanet 0.11–0.19 업데이트 요약</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2021/10/libplanet-0.11-0.19/" title="Libplanet 0.11–0.19 업데이트 요약"/><link rel="alternate" href="https://snack.planetarium.dev/eng/2021/10/libplanet-0.11-0.19/" hreflang="" title="What's new in Libplanet 0.11–0.19"/><id>https://snack.planetarium.dev/kor/2021/10/libplanet-0.11-0.19/</id><published>2021-10-29T00:00:00+00:00</published><updated>2021-10-29T00:00:00+00:00</updated><content type="html">&lt;p>안녕하세요. 오랜만에 소식 전합니다. &lt;a href="https://libplanet.io/">Libplanet&lt;/a>&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>은 지난 몇 달 동안, 여러
 마이너 버전을 릴리스했습니다. 그렇지만 저희의 릴리스 정책과 주기가 바뀜에 따라,
 그리고 Libplanet으로 만들어진 첫 게임 〈&lt;a href="https://nine-chronicles.com/">나인 크로니클&lt;/a>〉 메인넷의 여러 문제들에
 대응하느라 차분히 그간의 업데이트를 정리된 글로 쓸 여유가 없었습니다.
@@ -1030,11 +1073,11 @@ Libplanet을 쓸 수 있도록, NetMQ에 의존하지 않고도 네트워크 통
 라이브러리인 &lt;a href="https://github.com/planetarium/RandomXSharp">RandomXSharp&lt;/a> 역시 &lt;code>HashAlgorithm&lt;/code>의 서브클래스를 제공합니다.&lt;/p>
 &lt;p>다음 코드는 1만번째 블록까지는 SHA-256을 쓰고 그 뒤부터는 SHA-512를 쓰도록
 블록체인 정책을 설정하는 예입니다.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-csharp" data-lang="csharp">HashAlgorithmType GetHashAlgorithm(&lt;span style="color:#888;font-weight:bold">long&lt;/span> index) =&amp;gt;
-index &amp;lt;= &lt;span style="color:#00d;font-weight:bold">10_000&lt;/span>
-? HashAlgorithmType.Of&amp;lt;SHA256&amp;gt;()
-: HashAlgorithmType.Of&amp;lt;SHA512&amp;gt;();
-&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="논블로킹-렌더러">논블로킹 렌더러&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;">&lt;code class="language-csharp" data-lang="csharp">&lt;span style="display:flex;">&lt;span>HashAlgorithmType GetHashAlgorithm(&lt;span style="color:#888;font-weight:bold">long&lt;/span> index) =&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> index &amp;lt;= &lt;span style="color:#00d;font-weight:bold">10_000&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ? HashAlgorithmType.Of&amp;lt;SHA256&amp;gt;()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> : HashAlgorithmType.Of&amp;lt;SHA512&amp;gt;();
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="논블로킹-렌더러">논블로킹 렌더러&lt;/h2>
 &lt;p>&lt;em>&lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.14.0">0.14.0&lt;/a> 버전에서 추가됨.&lt;/em>&lt;/p>
 &lt;p>노드의 로컬 블록체인의 상태가 변화를 이벤트로 수신할 수 있는
 &lt;a href="https://docs.libplanet.io/0.19.0/api/Libplanet.Blockchain.Renderers.IRenderer-1.html">&lt;code>IRenderer&amp;lt;T&amp;gt;&lt;/code>&lt;/a> 및 &lt;a href="https://docs.libplanet.io/0.19.0/api/Libplanet.Blockchain.Renderers.IActionRenderer-1.html">&lt;code>IActionRenderer&amp;lt;T&amp;gt;&lt;/code>&lt;/a>
@@ -1081,25 +1124,25 @@ index &amp;lt;= &lt;span style="color:#00d;font-weight:bold">10_000&lt;/span>
 각 버전의 &lt;a href="https://github.com/planetarium/libplanet/blob/0.19.0/CHANGES.md">전체 변경 내역&lt;/a>에서 확인해 주세요.&lt;/p>
 &lt;p>호기심이 생기신 분들은 설치해서 이용해 보시고, 궁금한 점이 있으시다면 저희 팀이
 상주해 있는 &lt;a href="https://discord.gg/planetarium">디스코드&lt;/a>에도 놀러오세요!&lt;/p>
-&lt;section class="footnotes" role="doc-endnotes">
+&lt;div class="footnotes" role="doc-endnotes">
 &lt;hr>
 &lt;ol>
-&lt;li id="fn:1" role="doc-endnote">
+&lt;li id="fn:1">
 &lt;p>Libplanet은 분산 P2P로 돌아가는 온라인 멀티플레이어 게임을 만들 때,
 매번 구현해야 하는 P2P 통신이나 데이터 동기화 등의 문제를 푸는
 공용 라이브러리입니다.&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:2" role="doc-endnote">
+&lt;li id="fn:2">
 &lt;p>모든 메이저 및 마이너 릴리스가 프로토콜 버전을 증가시키는 것은 아닙니다.
 사실, 대부분의 릴리스는 프로토콜 버전을 증가시키지 않습니다.&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:3" role="doc-endnote">
+&lt;li id="fn:3">
 &lt;p>물론 같은 서명자의 트랜잭션들 사이에는
 &lt;a href="https://docs.libplanet.io/0.19.0/api/Libplanet.Tx.Transaction-1.html#Libplanet_Tx_Transaction_1_Nonce">&lt;code>Transaction&amp;lt;T&amp;gt;.Nonce&lt;/code>&lt;/a>를 기준으로 정해지는 순서가
 있습니다.&amp;#160;&lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></content><author><name>홍민희</name><uri>https://github.com/dahlia</uri><email>hong.minhee@planetariumhq.com</email></author></entry><entry><title>Libplanet 0.10 릴리스</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/12/libplanet-0.10/" title="Libplanet 0.10 릴리스"/><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/12/libplanet-0.10/" hreflang="en" title="Libplanet 0.10 Released"/><id>https://snack.planetarium.dev/kor/2020/12/libplanet-0.10/</id><published>2020-12-08T00:00:00+00:00</published><updated>2020-12-08T00:00:00+00:00</updated><content type="html">&lt;p>안녕하세요. &lt;a href="https://libplanet.io/">Libplanet&lt;/a>의 열 번째 마이너 버전인 &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.10.0">0.10 버전&lt;/a>이
+&lt;/div></content><author><name>홍민희</name><uri>https://github.com/dahlia</uri><email>hong.minhee@planetariumhq.com</email></author></entry><entry><title>Libplanet 0.10 릴리스</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/12/libplanet-0.10/" title="Libplanet 0.10 릴리스"/><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/12/libplanet-0.10/" hreflang="" title="Libplanet 0.10 Released"/><id>https://snack.planetarium.dev/kor/2020/12/libplanet-0.10/</id><published>2020-12-08T00:00:00+00:00</published><updated>2020-12-08T00:00:00+00:00</updated><content type="html">&lt;p>안녕하세요. &lt;a href="https://libplanet.io/">Libplanet&lt;/a>의 열 번째 마이너 버전인 &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.10.0">0.10 버전&lt;/a>이
 릴리스되었습니다.&lt;/p>
 &lt;p>Libplanet은 분산 P2P로 돌아가는 온라인 멀티플레이어 게임을 만들 때,
 매번 구현해야 하는 P2P 통신이나 데이터 동기화 등의 문제를 푸는
@@ -1207,20 +1250,20 @@ index &amp;lt;= &lt;span style="color:#00d;font-weight:bold">10_000&lt;/span>
 &lt;h2 id="그-외">그 외&lt;/h2>
 &lt;p>그 외에도 여러 성능 개선이나 자잘한 마이너 패치가 있었습니다. 자세한 내용은 &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.10.0">전체 변경 내용&lt;/a> 에서 확인해 주세요.&lt;/p>
 &lt;p>질문이나 관심이 있으신 분들은 또한 저희 &lt;a href="https://discord.gg/planetarium">Discord&lt;/a> 채널에 놀러와 주세요!&lt;/p>
-&lt;section class="footnotes" role="doc-endnotes">
+&lt;div class="footnotes" role="doc-endnotes">
 &lt;hr>
 &lt;ol>
-&lt;li id="fn:1" role="doc-endnote">
+&lt;li id="fn:1">
 &lt;p>Java와 달리 C#에는 익명 클래스가 없습니다.&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:2" role="doc-endnote">
+&lt;li id="fn:2">
 &lt;p>리오그에 관해서는 김무훈 님의 지난 스낵 글 &lt;a href="https://snack.planetarium.dev/kor/2020/10/decentralized-and-online-game-intersect/">〈탈중앙과 온라인 게임이 교차하다〉&lt;/a>를 참고하세요.&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:3" role="doc-endnote">
+&lt;li id="fn:3">
 &lt;p>현재 UI로 설정 가능하지는 않지만, 설정 파일을 직접 고칠 수 있습니다.&amp;#160;&lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></content><author><name>이수호</name><uri>https://github.com/riemannulus</uri><email>suho@planetariumhq.com</email></author></entry><entry><title>탈중앙과 온라인 게임이 교차하다</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/10/decentralized-and-online-game-intersect/" title="탈중앙과 온라인 게임이 교차하다"/><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/10/decentralized-and-online-game-intersect/" hreflang="en" title="Decentralization Intersects with Online Game"/><id>https://snack.planetarium.dev/kor/2020/10/decentralized-and-online-game-intersect/</id><published>2020-10-08T00:00:00+00:00</published><updated>2020-10-08T00:00:00+00:00</updated><content type="html">&lt;p>안녕하세요! 지난 2개월 간 플라네타리움의 엔지니어링 인턴으로 일한 김무훈입니다. 저는 &lt;a href="https://nine-chronicles.com">나인 크로니클&lt;/a> 출시 직전의 베타 과정을 함께했는데요.&lt;/p>
+&lt;/div></content><author><name>이수호</name><uri>https://github.com/riemannulus</uri><email>suho@planetariumhq.com</email></author></entry><entry><title>탈중앙과 온라인 게임이 교차하다</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/10/decentralized-and-online-game-intersect/" title="탈중앙과 온라인 게임이 교차하다"/><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/10/decentralized-and-online-game-intersect/" hreflang="" title="Decentralization Intersects with Online Game"/><id>https://snack.planetarium.dev/kor/2020/10/decentralized-and-online-game-intersect/</id><published>2020-10-08T00:00:00+00:00</published><updated>2020-10-08T00:00:00+00:00</updated><content type="html">&lt;p>안녕하세요! 지난 2개월 간 플라네타리움의 엔지니어링 인턴으로 일한 김무훈입니다. 저는 &lt;a href="https://nine-chronicles.com">나인 크로니클&lt;/a> 출시 직전의 베타 과정을 함께했는데요.&lt;/p>
 &lt;p>간단히 블록체인과 게임을 결합하며 특이하다고 생각한 기술적인 사례를 소개하겠습니다.&lt;/p>
 &lt;h2 id="탈중앙">탈중앙&lt;/h2>
 &lt;p>온라인 게임은 멀티 플레이와 사용자의 데이터를 저장하는 등 서비스를 운영하기 위한 용도로 서버를 이용합니다. 그러나 운영사가 폐업하는 등 여러 이유로 서비스가 중단되면 더 이상 게임을 즐길 수 없게 됩니다.&lt;/p>
@@ -1270,92 +1313,41 @@ alt="어제 10,000 골드를 보유했던 사용자가 1,000 미만의 골드를
 &lt;h2 id="블록체인-네트워크-초기화">블록체인 네트워크 초기화&lt;/h2>
 &lt;p>나인 크로니클은 베타 기간 동안 체인 네트워크를 일곱 번 초기화했습니다. 체인 네트워크가 초기화되면 게임 플레이어가 일구었던 게임 데이터가 모두 사라지게 됩니다. 이런 위험을 감수하고도 초기화를 감행한 이유는 다음과 같습니다.&lt;/p>
 &lt;p>블록체인 네트워크 코어 &lt;a href="https://libplanet.io/">Libplanet&lt;/a>에서는 게임의 상태를 블록에 저장합니다. 사용자의 행동은 경우 &lt;a href="https://docs.libplanet.io/0.9.5/api/Libplanet.Action.IAction.html">액션&lt;/a>이라는 이름의 자료 구조에 맞추어 저장됩니다.&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff">&lt;code class="language-json" data-lang="json">{
-&lt;span style="color:#b06;font-weight:bold">&amp;#34;stageId&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;123&amp;#34;&lt;/span>,
-&lt;span style="color:#b06;font-weight:bold">&amp;#34;id&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;ntPSdIREOUOARaRYJHlGEg==&amp;#34;&lt;/span>,
-&lt;span style="color:#b06;font-weight:bold">&amp;#34;equipments&amp;#34;&lt;/span>: [&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;KTm6cLkrtEWs6k4A821K3Q==&amp;#34;&lt;/span>],
-&lt;span style="color:#b06;font-weight:bold">&amp;#34;avatarAddress&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;sGo0bo0VwrYA7ubq6yV8ctiU2vc=&amp;#34;&lt;/span>,
-&lt;span style="color:#b06;font-weight:bold">&amp;#34;foods&amp;#34;&lt;/span>: [],
-&lt;span style="color:#b06;font-weight:bold">&amp;#34;worldId&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;3&amp;#34;&lt;/span>
-}
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>만약 게임 내에서 의상 요소가 업데이트된다면 &lt;code>costumes&lt;/code> 같이 새로운 속성이 추가되고, 이 정보가 담긴 블록의 해시가&lt;sup id="fnref:4">&lt;a href="#fn:4" class="footnote-ref" role="doc-noteref">4&lt;/a>&lt;/sup> 이전 블록의 해시를 만드는 규약(protocol)과 맞지 않게 됩니다. 규약이 달라지면 이전의 블록 데이터를 이어서 사용할 수 없게 됩니다.&lt;sup id="fnref:5">&lt;a href="#fn:5" class="footnote-ref" role="doc-noteref">5&lt;/a>&lt;/sup> 이 외에도 유니크한 값이 다르게 되거나, Libplanet이나 그 SDK의 코드 중에 해시에 영향이 가는 수정이 생긴다면 달라집니다.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#fff;">&lt;code class="language-json" data-lang="json">&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b06;font-weight:bold">&amp;#34;stageId&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;123&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b06;font-weight:bold">&amp;#34;id&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;ntPSdIREOUOARaRYJHlGEg==&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b06;font-weight:bold">&amp;#34;equipments&amp;#34;&lt;/span>: [&lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;KTm6cLkrtEWs6k4A821K3Q==&amp;#34;&lt;/span>],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b06;font-weight:bold">&amp;#34;avatarAddress&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;sGo0bo0VwrYA7ubq6yV8ctiU2vc=&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b06;font-weight:bold">&amp;#34;foods&amp;#34;&lt;/span>: [],
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#b06;font-weight:bold">&amp;#34;worldId&amp;#34;&lt;/span>: &lt;span style="color:#d20;background-color:#fff0f0">&amp;#34;3&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>만약 게임 내에서 의상 요소가 업데이트된다면 &lt;code>costumes&lt;/code> 같이 새로운 속성이 추가되고, 이 정보가 담긴 블록의 해시가&lt;sup id="fnref:4">&lt;a href="#fn:4" class="footnote-ref" role="doc-noteref">4&lt;/a>&lt;/sup> 이전 블록의 해시를 만드는 규약(protocol)과 맞지 않게 됩니다. 규약이 달라지면 이전의 블록 데이터를 이어서 사용할 수 없게 됩니다.&lt;sup id="fnref:5">&lt;a href="#fn:5" class="footnote-ref" role="doc-noteref">5&lt;/a>&lt;/sup> 이 외에도 유니크한 값이 다르게 되거나, Libplanet이나 그 SDK의 코드 중에 해시에 영향이 가는 수정이 생긴다면 달라집니다.&lt;/p>
 &lt;p>이런 경우의 대개 다른 블록체인에서는 몇 번째 블록 이후부터 블록을 다르게 해석하도록 규약을 추가합니다. 나인 크로니클도 그럴 수 있지만, 크고 작은 변경이 잦은 베타 기간에 이런 방법을 취하는 것은 무리라고 판단했습니다. 그래서 체인을 매번 초기화하는 것을 감행한 것입니다.&lt;/p>
 &lt;p>정식 출시 이후에는 체인을 유지할 예정입니다. 그러기 위한 여러 제안이 검토된 상황으로, 기회가 된다면 이후에 스낵에서 이를 소개하겠습니다.&lt;/p>
 &lt;h2 id="마치며">마치며&lt;/h2>
 &lt;p>플라네타리움은 &amp;ldquo;커뮤니티가 운영하는 온라인 게임&amp;quot;이라는 매력으로 새로운 형태의 게임 문화를 정착시키는 것에 큰 기대를 하고 있습니다. 간혹 온라인 게임의 운영사 직원이 게임의 자원을 횡령하여 게임의 생태계를 무너뜨리는 일이 언론에 보도되는데요. 나인 크로니클은 게임의 규칙이 프로토콜 수준으로 투명해져서 그런 일이 원칙적으로 일어날 수 없습니다.&lt;/p>
 &lt;p>이러한 장점에도 불구하고 Libplanet이 사용하는 블록체인 프로토콜이 진입 장벽으로 느껴질 수 있습니다. 작업 내역을 라인 단위로 분산하고 자동으로 병합이 되는 Git을 처음 보고 느낀 충격이랄까요. 그래서 여러분이 게임을 플레이하면 겪는 아쉬움, 개선점을 &lt;a href="https://discord.gg/planetarium">디스코드 채널&lt;/a>과 GitHub&lt;sup id="fnref:6">&lt;a href="#fn:6" class="footnote-ref" role="doc-noteref">6&lt;/a>&lt;/sup>에서 받고 있습니다.&lt;/p>
 &lt;p>이 글은 앞으로 시리즈로 연재되며, 다음 발행 때에는 나인 크로니클이 리오그 현상과 체인 리셋을 어떻게 대처하였는지 소개하는 시간을 가질 예정입니다. 읽어주셔서 감사합니다.&lt;/p>
-&lt;section class="footnotes" role="doc-endnotes">
+&lt;div class="footnotes" role="doc-endnotes">
 &lt;hr>
 &lt;ol>
-&lt;li id="fn:1" role="doc-endnote">
+&lt;li id="fn:1">
 &lt;p>엔지니어링 팀 내부에서는 플레이했던 기록이 꿈처럼 되어 버린다고 해서 &lt;dfn>신기루&lt;/dfn> 현상으로 부릅니다.&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:2" role="doc-endnote">
+&lt;li id="fn:2">
 &lt;p>블록체인 네트워크에 참여하는 컴퓨터를 의미합니다.&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:3" role="doc-endnote">
+&lt;li id="fn:3">
 &lt;p>블록체인 코리빙·코워킹 커뮤니티 논스(nonce) 공동 창립자 하시은 님이 쓴 &lt;a href="https://www.facebook.com/unseenone.flohsdpsyphle/posts/1027765500973348">게임 후기&lt;/a>에서 사용자 입장의 상황이 잘 설명되었습니다.&amp;#160;&lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:4" role="doc-endnote">
+&lt;li id="fn:4">
 &lt;p>블록체인은 그 이전 블록의 해시를 메타 정보 삼아 체인을 이읍니다. 연결 리스트를 떠오르면 이해하기 쉽습니다.&amp;#160;&lt;a href="#fnref:4" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:5" role="doc-endnote">
+&lt;li id="fn:5">
 &lt;p>확장한 명세가 들어간 게임 클라이언트가 이전 블록을 제대로 해석하지 못할 가능성이 있습니다.&amp;#160;&lt;a href="#fnref:5" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
-&lt;li id="fn:6" role="doc-endnote">
+&lt;li id="fn:6">
 &lt;p>P2P 온라인 게임을 위한 블록체인 코어 — &lt;a href="https://github.com/planetarium/libplanet">libplanet&lt;/a>, 나인 크로니클을 위한 Libplanet 기반의 SDK — &lt;a href="https://github.com/planetarium/lib9c">Lib9c&lt;/a>, 나인 크로니클 클라이언트 전용의 블록체인 노드 서비스 — &lt;a href="https://github.com/planetarium/ninechronicles.standalone">NineChronicles.Standalone&lt;/a>, 이 밖에도 나인 크로니클 론처와 게임 클라이언트의 저장소를 공개할 예정입니다.&amp;#160;&lt;a href="#fnref:6" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/section></content><author><name>김무훈</name><uri>https://github.com/x86chi</uri><email>iam@muhun.kim</email></author></entry><entry><title>플라네타리움에서 한 달동안 경험한 이야기</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/06/junior-experience/" title="플라네타리움에서 한 달동안 경험한 이야기"/><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/06/junior-experience/" hreflang="en" title="My First Month at Planetarium"/><id>https://snack.planetarium.dev/kor/2020/06/junior-experience/</id><published>2020-06-02T00:00:00+00:00</published><updated>2020-06-02T00:00:00+00:00</updated><content type="html">&lt;p>안녕하세요. 이번에 &lt;a href="https://planetariumhq.com/">플라네타리움&lt;/a>에 합류하게 된 이수호입니다. 합류한 지 한 달이 된 기념(?)으로 제가 이 회사에 어떤 기대를 하고 입사하였는지, 한 달 동안 무엇을 했고 플라네타리움은 어떻게 일하는지 간단하게 소개해 보는 시간을 가지고자 합니다.&lt;/p>
-&lt;h2 id="입사-계기">입사 계기&lt;/h2>
-&lt;p>작년 6월경, &lt;a href="https://www.sprintseoul.org/2019-06-29/">2019 스프린트 서울&lt;/a>이라는 행사에 참여하게 되었습니다. 무슨 오픈 소스에 기여할까 고민하던 저에게 당시 플라네타리움 팀원이셨던 홍민희 님이 &lt;a href="https://libplanet.io/">Libplanet&lt;/a>에 기여를 해 보면 어떻겠냐는 제안을 해 오셨습니다. 그렇게 즐겁게 기여를 마치고 나서 잊지 않고 있다가, 플라네타리움 구인 기간에 지원하여 입사하게 되었습니다. 이 곳이라면 내가 얻었던 즐거운 경험을 남들에게도 줄 수 있고, 나 자신도 그런 경험을 계속 쌓아나갈 수 있을 것이라고 판단하였기 때문입니다.&lt;/p>
-&lt;h2 id="한-달-동안-한-것">한 달 동안 한 것&lt;/h2>
-&lt;p>한 달 동안은 기본적으로 Libplanet의 구조와 C#에 대한 이해를 끌어올렸습니다. 개념 증명(&lt;abbr title="proof of concept">PoC&lt;/abbr>) 수준의 Libplanet을 새로 작성해 보고, 각 모듈별 설명을 들을 때마다 그 모듈에 대한 이슈를 하나씩 제거해 나갔습니다.&lt;/p>
-&lt;figure>&lt;img src="images/resolved-issue.png"
-alt="한 달 동안 제거해나간 이슈 목록"/>&lt;figcaption>
-&lt;p>한 달 동안 제거해나간 이슈 목록&lt;/p>
-&lt;/figcaption>
-&lt;/figure>
-&lt;p>개인적으로 매우 효과를 본 방법이라고 생각합니다. 설명을 들을 때는 높은 문맥의 이야기만 대부분 듣기 때문에, 이 높은 문맥에서 일어나는 일들이 낮은 문맥에서 어떻게 일어나는지 직접 알아가며 체득하고, 실제로 문제를 해결하기 위해 분석하다 보니 이해도가 높았습니다.&lt;/p>
-&lt;p>또한 일일 업무일지를 저 개인적으로 적어나갔습니다.&lt;/p>
-&lt;figure>&lt;img src="images/daily-reports.png"
-alt="업무일지 목록"/>&lt;figcaption>
-&lt;p>업무일지 목록&lt;/p>
-&lt;/figcaption>
-&lt;/figure>
-&lt;figure>&lt;img src="images/daily-report.png"
-alt="업무일지"/>&lt;figcaption>
-&lt;p>업무일지&lt;/p>
-&lt;/figcaption>
-&lt;/figure>
-&lt;p>이렇게 간단하게 독백하듯 막히는 것을 적어놓는 습관을 들이게 된 이유는 바로 &lt;em>데일리 미팅&lt;/em> 때문입니다.&lt;/p>
-&lt;h2 id="회의-문화">회의 문화&lt;/h2>
-&lt;p>Libplanet팀에서 하는 회의 종류에는 총 3가지 있습니다.&lt;/p>
-&lt;ul>
-&lt;li>데일리 미팅&lt;/li>
-&lt;li>주간 미팅&lt;/li>
-&lt;li>분기별 회고&lt;/li>
-&lt;/ul>
-&lt;p>이 중 &lt;dfn>데일리 미팅&lt;/dfn>(줄여서 &lt;dfn>데일리&lt;/dfn>)은 간단하게 현재 하고 있는 일을 오후 2시에 공유하는 미팅입니다. 보통 자기가 &amp;lsquo;집중 모드&amp;rsquo;에 들어간 경우, 누군가 깨워 주거나 아이디어를 주기 전까지는 계속 오버엔지니어링 혹은 이른바 삽질을 계속 하게 됩니다. 하지만 데일리 미팅을 진행하므로써 그것을 미연에 방지하고 서로의 일을 조금씩 도와줄 수 있다는 점이 좋았습니다. 또한 저 개인적으로는 데일리용 업무일지를 적으면서 자기객관화가 쉽게 이루어져, 업무 자체에도 도움이 많이 되었습니다.&lt;/p>
-&lt;p>데일리는 많은 곳에서 진행하지만, 이걸 자신의 &lt;em>일 했다는 알리바이 증명 용도&lt;/em>로 사용하게 되는 경우가 많습니다 (예: 수직적 의사결정 구조에서 하급자가 상급자에게 보고하는 형태). 하지만 저희 팀은 데일리 미팅 때 내가 하는 일을 부풀리거나 보고하는 게 아닌 막히고 있는 부분을 솔직하게 밝히고, 모르는 부분이 있으면 물어보는 등 서로에게 정보를 공유하는 점이 매우 마음에 들었습니다.&lt;/p>
-&lt;h2 id="실천하는-팀원들">실천하는 팀원들&lt;/h2>
-&lt;p>의사 결정에 있어 실패에 대한 책임을 묻는 것은 아무 의미도 없다는 말은 진부할 정도로 누구나 잘 알고 있습니다. 실패하면 빠르게 공유·피드백하고, 이를 통해 대안책을 찾아 나가는 것이 좋다는 것도 누구나 알고 있습니다. 하지만 실천하는 것은 말처럼 쉽지가 않습니다.&lt;/p>
-&lt;p>제가 들어온 지 얼마 안 됐을 때, Windows와 macOS에서 모두 동작하는 작은 GUI 앱을 만들 일이 있었는데, 보름 전에 쓰기로 결정했던 크로스플랫폼 GUI 프레임워크가 저희가 풀려는 문제 상황에 적합하지 않다는 것을 뒤늦게 깨닫게 되었습니다. 그렇지만 해당 작업을 진행하던 사람은 어떻게든 문제를 해결하려고 집중하다 보니 이미 일주일도 넘는 시간이 훌쩍 지나 있었고, 결과적으로 GUI 프레임워크를 교체하자는 결정을 늦게 내리게 되어서 이로 인해 일정이 뒤로 밀리게 되었습니다. 이러한 실패는 보통 회고 시간에 당연히 에둘러서라도 아쉬운 소리를 한다든가, 여태 얼마나 오랜 시간을 허비하였는지에 대해 (설령 그럴 의지가 없었다 하더라도) 비난하게 됩니다.&lt;/p>
-&lt;p>하지만 오히려 &lt;q>우리는 이런 선택이 잘못되었음을 알았다. 얻은 게 있으니 상관없다&lt;/q>라고 말하며 앞으로 이런 결정을 하지 않을 방법을 찾았고, &lt;q>좀 더 자주 모여 얘기하면 문제를 해결하는 데 집중하느라 놓치는 것들을 알 수 있을 것&lt;/q>이라는 결론에 도달했습니다. 그리고 구체적인 방안으로, 데일리 이외에 저녁의 짧은 공유 세션을 하나 더 만들었습니다.&lt;/p>
-&lt;p>이후 팀 내에서 오전에는 작업이 순조롭다 생각했으나 몰입하다 보니 오후까지 같은 걸 붙잡고 늘어지고 있었단 걸 저녁 공유 세션을 통해 깨닫게 되어서 좋았다는 피드백이 있었습니다.&lt;/p>
-&lt;p>이런 식으로 무슨 일이 순조롭게 되지 않았을 때 &lt;q>왜 계획대로 하지 못했냐&lt;/q>고 다그치는 게 아닌, &lt;q>그럼 다른 방법으로 해보자&lt;/q>라는 팀 분위기가 매우 좋았습니다.&lt;/p>
-&lt;h2 id="그-외-복지">그 외 복지&lt;/h2>
-&lt;p>여러 복지가 있지만, 그 중에서도 기억에 남는 복지들입니다.&lt;/p>
-&lt;ul>
-&lt;li>리모트 근무&lt;/li>
-&lt;li>(진짜) 수평적 의사결정&lt;/li>
-&lt;li>멋지고 뛰어난 사람들&lt;/li>
-&lt;/ul>
-&lt;h2 id="마치며">마치며&lt;/h2>
-&lt;p>이 글을 쓰고 있던 도중, 엔지니어링 워크샵에서 이런 발언이 나왔습니다.&lt;/p>
-&lt;blockquote>
-&lt;p>우리 이름을 스낵이라고 지어 놓고, 너무 무거운 글들이 올라오는 거 아니에요? (웃음)&lt;/p>
-&lt;/blockquote>
-&lt;p>생각해보니 그렇습니다. 그래서 최대한 글 양을 줄이고 스크린숏을 넣는 등 여러 시도를 해 보았는데 어떠셨을지 모르겠네요. 읽는 데 편안했었으면 좋겠습니다.&lt;/p>
-&lt;p>마지막으로 &lt;a href="https://libplanet.io/">Libplanet&lt;/a>은 여러분의 기여를 언제나 기다리고 있습니다! 오픈 소스에 관심있는 분들은 저희 &lt;a href="https://discord.gg/planetarium">디스코드 채널&lt;/a>에도 놀러오세요. 감사합니다!&lt;/p></content><author><name>이수호</name><uri>https://github.com/riemannulus</uri><email>suho@planetariumhq.com</email></author></entry></feed>
+&lt;/div></content><author><name>김무훈</name><uri>https://github.com/x86chi</uri><email>iam@muhun.kim</email></author></entry></feed>
