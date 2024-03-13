@@ -15,7 +15,7 @@
 <meta property="og:description" content="{{ .Description }}" />
 <meta property="og:title" content="{{ .Title }}" />
 <meta property="og:site_name" content="{{ .Site.Title }}" />
-{{ if isset .Params "ogimage" }}
+{{ if isset site.Params "ogimage" }}
 {{- /* FIXME: restrict them to bring exactly the same resources */ -}}
 <meta property="og:image"
   content="{{ (.Resources.GetMatch .Params.ogimage).Permalink }}"
