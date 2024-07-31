@@ -1,6 +1,6 @@
 ---
 title: "라이브 게임 에셋 관리 개선기 - 1.어드레서블 에셋 도입"
-date: 2023-08-01
+date: 2024-08-01
 authors: [eugene-doobu]
 ogimage: images/og.kor.jpeg
 ---
