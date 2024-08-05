@@ -219,33 +219,33 @@ https://github.com/planetarium/NineChronicles/pull/4725
 // in **BattleRenderer.cs**
 
 ```cs
-        public IEnumerator LoadStageResources(BattleLog battleLog)
-        {
-            ReleaseMonsterResources();
-            yield return LoadMonsterResources(battleLog.GetMonsterIds());
-            _onStageStart?.Invoke(battleLog);
-        }
+public IEnumerator LoadStageResources(BattleLog battleLog)
+{
+    ReleaseMonsterResources();
+    yield return LoadMonsterResources(battleLog.GetMonsterIds());
+    _onStageStart?.Invoke(battleLog);
+}
 
-        // TODO: 필요한 것만 로드
-        private IEnumerator LoadMonsterResources(HashSet<int> monsterIds)
-        {
-            var resourceManager = ResourceManager.Instance;
-            foreach (var monsterId in monsterIds)
-            {
-                yield return resourceManager.LoadAsync<GameObject>(monsterId.ToString()).ToCoroutine();
-                loadedMonsterIds.Add(monsterId);
-            }
-        }
+// TODO: 필요한 것만 로드
+private IEnumerator LoadMonsterResources(HashSet<int> monsterIds)
+{
+    var resourceManager = ResourceManager.Instance;
+    foreach (var monsterId in monsterIds)
+    {
+        yield return resourceManager.LoadAsync<GameObject>(monsterId.ToString()).ToCoroutine();
+        loadedMonsterIds.Add(monsterId);
+    }
+}
 
-        public void ReleaseMonsterResources()
-        {
-            var resourceManager = ResourceManager.Instance;
-            foreach (var loadedMonsterId in loadedMonsterIds)
-            {
-                resourceManager.Release(loadedMonsterId.ToString());
-            }
-            loadedMonsterIds.Clear();
-        }
+public void ReleaseMonsterResources()
+{
+    var resourceManager = ResourceManager.Instance;
+    foreach (var loadedMonsterId in loadedMonsterIds)
+    {
+        resourceManager.Release(loadedMonsterId.ToString());
+    }
+    loadedMonsterIds.Clear();
+}
 ```
 
 1. 먼저 스테이지 시작 시 전투 시뮬레이션 결과를 불러와 렌더링에 필요한 모든 에셋목록을 긁어온다
