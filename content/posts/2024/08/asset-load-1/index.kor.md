@@ -302,3 +302,4 @@ https://github.com/planetarium/NineChronicles/pull/4736
 ![끝](https://velog.velcdn.com/images/eugene-doobu/post/6b5d1129-ee9d-4a2c-b206-de8783f5d974/image.png)
 
 
+[블로그 원본](https://velog.io/@eugene-doobu/%EB%9D%BC%EC%9D%B4%EB%B8%8C-%EA%B2%8C%EC%9E%84-%EC%97%90%EC%85%8B-%EA%B4%80%EB%A6%AC-%EA%B0%9C%EC%84%A0%EA%B8%B0-1.%EC%96%B4%EB%93%9C%EB%A0%88%EC%84%9C%EB%B8%94-%EC%97%90%EC%85%8B-%EB%8F%84%EC%9E%85)
