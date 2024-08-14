@@ -11,7 +11,7 @@ is compiled into static web pages using [Hugo].
 Local setup
 -----------
 
- 1. Install [Hugo] 0.88.1.
+ 1. Install [Hugo] 0.123.8
 
     (You can install it by `brew install hugo` on macOS or
     `choco install hugo-extended` on Windows.)
