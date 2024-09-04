@@ -1,4 +1,4 @@
-<feed xmlns="http://www.w3.org/2005/Atom" xml:lang=""><title>Planetarium Engineering Snack</title><link rel="self" href="https://snack.planetarium.dev/eng/index.xml"/><link rel="alternate" href="https://snack.planetarium.dev/eng/" title="Planetarium Engineering Snack"/><link rel="alternate" href="https://snack.planetarium.dev/kor/" hreflang="ko" title="플라네타리움 엔지니어링 스낵"/><updated>2023-04-24T00:00:00+00:00</updated><id>https://snack.planetarium.dev/eng/</id><entry><title>Libplanet PBFT Transitioner Episode 0 - Why did you switch to PBFT?</title><link rel="alternate" href="https://snack.planetarium.dev/eng/2023/04/pbft-0/" title="Libplanet PBFT Transitioner Episode 0 - Why did you switch to PBFT?"/><link rel="alternate" href="https://snack.planetarium.dev/kor/2023/04/pbft-0/" hreflang="ko" title="Libplanet PBFT 전환 제 0화 - 왜 PBFT로 전환을 시작했나요?"/><id>https://snack.planetarium.dev/eng/2023/04/pbft-0/</id><published>2023-04-24T00:00:00+00:00</published><updated>2023-04-24T00:00:00+00:00</updated><content type="html">&lt;p>Hello. My name is Suho Lee, and I am working as a Libplanet team in the blockchain division at Planetarium. Today, I would like to share the first episode of an article that explains the reasons and process for Libplanet to switch to PBFT. In this blog post, we will discuss the Libplanet blockchain consensus change process, including the reasons for the change, the specific changes made, and the advantages of the new consensus algorithm.&lt;/p>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><title/><link rel="self" href="https://snack.planetarium.dev/eng/index.xml"/><link rel="alternate" href="https://snack.planetarium.dev/eng/" title=""/><link rel="alternate" href="https://snack.planetarium.dev/kor/" hreflang="ko" title=""/><updated>2023-04-24T00:00:00+00:00</updated><id>https://snack.planetarium.dev/eng/</id><entry><title>Libplanet PBFT Transitioner Episode 0 - Why did you switch to PBFT?</title><link rel="alternate" href="https://snack.planetarium.dev/eng/2023/04/pbft-0/" title="Libplanet PBFT Transitioner Episode 0 - Why did you switch to PBFT?"/><link rel="alternate" href="https://snack.planetarium.dev/kor/2023/04/pbft-0/" hreflang="ko" title="Libplanet PBFT 전환 제 0화 - 왜 PBFT로 전환을 시작했나요?"/><link rel="alternate" href="https://snack.planetarium.dev/1/01/pbft-0/" hreflang="" title=""/><id>https://snack.planetarium.dev/eng/2023/04/pbft-0/</id><published>2023-04-24T00:00:00+00:00</published><updated>2023-04-24T00:00:00+00:00</updated><content type="html">&lt;p>Hello. My name is Suho Lee, and I am working as a Libplanet team in the blockchain division at Planetarium. Today, I would like to share the first episode of an article that explains the reasons and process for Libplanet to switch to PBFT. In this blog post, we will discuss the Libplanet blockchain consensus change process, including the reasons for the change, the specific changes made, and the advantages of the new consensus algorithm.&lt;/p>
 &lt;h2 id="introduction">Introduction&lt;/h2>
 &lt;p>Blockchain technology is revolutionizing the world, and Libplanet is one of the leading blockchains. &lt;code>Libplanet&lt;/code> is highly scalable and decentralized, built on the .NET platform, and is open-source. The platform is highly efficient and secure, using a unique consensus algorithm that ensures network integrity.&lt;/p>
 &lt;h2 id="lets-talk-about-nine-chronicles">Let’s talk about Nine Chronicles&lt;/h2>
@@ -238,7 +238,7 @@ Also, in the new rendering API, the &lt;a href="https://docs.libplanet.io/0.10.2
 &lt;p>The number of confirmations currently can&amp;rsquo;t be adjusted on the UI, but it can be changed directly in the configuration file.&amp;#160;&lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/div></content><author><name>Suho Lee</name><uri>https://github.com/riemannulus</uri><email>suho@planetariumhq.com</email></author></entry><entry><title>Decentralization Intersects with Online Game</title><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/10/decentralized-and-online-game-intersect/" title="Decentralization Intersects with Online Game"/><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/10/decentralized-and-online-game-intersect/" hreflang="ko" title="탈중앙과 온라인 게임이 교차하다"/><id>https://snack.planetarium.dev/eng/2020/10/decentralized-and-online-game-intersect/</id><published>2020-10-08T00:00:00+00:00</published><updated>2020-10-08T00:00:00+00:00</updated><content type="html">&lt;p>Hello all! I&amp;rsquo;m Muhun Kim, an engineering intern at Planetarium for the past two months. I was involved in the beta process prior to the launch of &lt;a href="https://nine-chronicles.com">Nine Chronicles&lt;/a>.&lt;/p>
+&lt;/div></content><author><name>Suho Lee</name><uri>https://github.com/riemannulus</uri><email>suho@planetariumhq.com</email></author></entry><entry><title>Decentralization Intersects with Online Game</title><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/10/decentralized-and-online-game-intersect/" title="Decentralization Intersects with Online Game"/><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/10/decentralized-and-online-game-intersect/" hreflang="ko" title="탈중앙과 온라인 게임이 교차하다"/><link rel="alternate" href="https://snack.planetarium.dev/1/01/decentralized-and-online-game-intersect/" hreflang="" title=""/><id>https://snack.planetarium.dev/eng/2020/10/decentralized-and-online-game-intersect/</id><published>2020-10-08T00:00:00+00:00</published><updated>2020-10-08T00:00:00+00:00</updated><content type="html">&lt;p>Hello all! I&amp;rsquo;m Muhun Kim, an engineering intern at Planetarium for the past two months. I was involved in the beta process prior to the launch of &lt;a href="https://nine-chronicles.com">Nine Chronicles&lt;/a>.&lt;/p>
 &lt;p>In this post, I’d like to introduce a technical example that I thought was unique when combining blockchain and games.&lt;/p>
 &lt;h2 id="decentralization">Decentralization&lt;/h2>
 &lt;p>Online games use servers to operate services, such as multi-play and user data. However, if services go down for a number of reasons, such as when game companies shut down, you will no longer be able to play the games.&lt;/p>
@@ -246,21 +246,21 @@ Also, in the new rendering API, the &lt;a href="https://docs.libplanet.io/0.10.2
 &lt;h2 id="chain-reorganization">Chain Reorganization&lt;/h2>
 &lt;p>Planetarium utilizes blockchain among many decentralized technologies to preserve data such as game assets, user items, and quests achieved.&lt;/p>
 &lt;p>Meanwhile, when you store game data in the blockchain, sometimes the information reverts back a few hours. This is a known defect called &lt;dfn>reorganization&lt;/dfn> in the blockchain network.&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup> In the blockchain community, this is called &lt;dfn>reorg&lt;/dfn> for short. I’ll also refer to this concept as reorg.&lt;/p>
-&lt;figure>&lt;img src="images/single-chain.png"
-alt="Blocks connected in order are called a chain."/>&lt;figcaption>
+&lt;figure>&lt;img src="/1/01/decentralized-and-online-game-intersect/images/single-chain.png"
+alt="Blocks connected in order are called a chain.">&lt;figcaption>
 &lt;p>Blocks connected in order are called a chain.&lt;/p>
 &lt;/figcaption>
 &lt;/figure>
 &lt;p>Before explaining reorg, I’d like to point out that a blockchain network always points to a single chain as its original copy.&lt;/p>
 &lt;p>Blocks in a blockchain can be created by anyone. However, if nodes&lt;sup id="fnref:2">&lt;a href="#fn:2" class="footnote-ref" role="doc-noteref">2&lt;/a>&lt;/sup> create blocks simultaneously, multiple chains with the same beginning but different ends appear. If so, how can we adopt a chain as the original even though there’s no central figure to decide?&lt;/p>
-&lt;figure>&lt;img src="images/orphaned-block.png"
-alt="At similar points in time, the chain with more resources used will be adopted."/>&lt;figcaption>
+&lt;figure>&lt;img src="/1/01/decentralized-and-online-game-intersect/images/orphaned-block.png"
+alt="At similar points in time, the chain with more resources used will be adopted.">&lt;figcaption>
 &lt;p>At similar points in time, the chain with more resources used will be adopted.&lt;/p>
 &lt;/figcaption>
 &lt;/figure>
 &lt;p>Instead of choosing its own chain, each node chooses the chain that best fits the rule shared by all nodes. The &lt;abbr title="proof-of-work">PoW&lt;/abbr> approach used by Nine Chronicles and Libplanet, adopts the chain with more resources invested in among blocks created at a similar time.&lt;/p>
-&lt;figure>&lt;img src="images/orphaned-blocks.png"
-alt="The blue chain with 5 blocks, is reorg-ed to red blocks. (Deep Reorg)"/>&lt;figcaption>
+&lt;figure>&lt;img src="/1/01/decentralized-and-online-game-intersect/images/orphaned-blocks.png"
+alt="The blue chain with 5 blocks, is reorg-ed to red blocks. (Deep Reorg)">&lt;figcaption>
 &lt;p>The blue chain with 5 blocks, is reorg-ed to red blocks. (Deep Reorg)&lt;/p>
 &lt;/figcaption>
 &lt;/figure>
@@ -279,8 +279,8 @@ width: 60%
 }
 }
 &lt;/style>
-&lt;figure>&lt;img src="images/bug-report.png"
-alt="A user who owned 10,000 gold yesterday reported having less than 1,000 gold."/>&lt;figcaption>
+&lt;figure>&lt;img src="/1/01/decentralized-and-online-game-intersect/images/bug-report.png"
+alt="A user who owned 10,000 gold yesterday reported having less than 1,000 gold.">&lt;figcaption>
 &lt;p>A user who owned 10,000 gold yesterday reported having less than 1,000 gold.&lt;/p>
 &lt;/figcaption>
 &lt;/figure>
@@ -326,25 +326,25 @@ alt="A user who owned 10,000 gold yesterday reported having less than 1,000 gold
 Libplanet-based SDK for Nine Chronicles — &lt;a href="https://github.com/planetarium/lib9c">Lib9c&lt;/a>, Blockchain Node Service dedicated to Nine Chronicle Clients — &lt;a href="https://github.com/planetarium/ninechronicles.standalone">NineChronicles.Standalone&lt;/a>, we will also be releasing the repositories of the launcher and game client for Nine Chronicles.&amp;#160;&lt;a href="#fnref:6" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/div></content><author><name>Muhun Kim</name><uri>https://github.com/x86chi</uri><email>iam@muhun.kim</email></author></entry><entry><title>My First Month at Planetarium</title><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/06/junior-experience/" title="My First Month at Planetarium"/><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/06/junior-experience/" hreflang="ko" title="플라네타리움에서 한 달동안 경험한 이야기"/><id>https://snack.planetarium.dev/eng/2020/06/junior-experience/</id><published>2020-06-02T00:00:00+00:00</published><updated>2020-06-02T00:00:00+00:00</updated><content type="html">&lt;p>Hello, I’m Suho Lee, the newest member of Team Libplanet at &lt;a href="https://planetariumhq.com/">Planetarium&lt;/a>. To celebrate my first month of working in the company, I would like to take this opportunity to talk about my expectations joining the team, what I did for a month, and how we work at Planetarium.&lt;/p>
+&lt;/div></content><author><name>Muhun Kim</name><uri>https://github.com/x86chi</uri><email>iam@muhun.kim</email></author></entry><entry><title>My First Month at Planetarium</title><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/06/junior-experience/" title="My First Month at Planetarium"/><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/06/junior-experience/" hreflang="ko" title="플라네타리움에서 한 달동안 경험한 이야기"/><link rel="alternate" href="https://snack.planetarium.dev/1/01/junior-experience/" hreflang="" title=""/><id>https://snack.planetarium.dev/eng/2020/06/junior-experience/</id><published>2020-06-02T00:00:00+00:00</published><updated>2020-06-02T00:00:00+00:00</updated><content type="html">&lt;p>Hello, I’m Suho Lee, the newest member of Team Libplanet at &lt;a href="https://planetariumhq.com/">Planetarium&lt;/a>. To celebrate my first month of working in the company, I would like to take this opportunity to talk about my expectations joining the team, what I did for a month, and how we work at Planetarium.&lt;/p>
 &lt;h2 id="how-i-applied-to-planetarium">How I Applied to Planetarium&lt;/h2>
 &lt;p>In June 2019, I participated in an event called &lt;a href="https://www.sprintseoul.org/2019-06-29/">2019 Sprint Seoul&lt;/a>. While deciding which open-source project to contribute to, Hong Minhee, a member of Planetarium reached out to me and suggested me to take a look at &lt;a href="https://libplanet.io/">Libplanet&lt;/a>. My experience contributing to Libplanet turned out to be extremely memorable and I decided to apply for a job at Planetarium as soon as open positions were posted. My main motivation for applying was that I wanted to continue this positive experience working with the members at Planetarium and I also wanted to make an impact in the company by sharing my positivity.&lt;/p>
 &lt;h2 id="what-i-did-in-the-first-month">What I Did in the First Month&lt;/h2>
 &lt;p>During the first month, I spent most of my time reviewing the structure of Libplanet and C#. I developed Libplanet from scratch to a &lt;abbr title="proof of concept">PoC&lt;/abbr> level to get a deeper understanding of the project. Also, every time I was introduced to a module, I fixed issues in that module to further my understanding.&lt;/p>
-&lt;figure>&lt;img src="images/resolved-issue.png"
-alt="List of Fixed Issues in the First Month"/>&lt;figcaption>
+&lt;figure>&lt;img src="/1/01/junior-experience/images/resolved-issue.png"
+alt="List of Fixed Issues in the First Month">&lt;figcaption>
 &lt;p>List of Fixed Issues in the First Month&lt;/p>
 &lt;/figcaption>
 &lt;/figure>
 &lt;p>Personally, I felt that this was a very effective way of understanding the material within a short amount of time. Because overall briefings on project structure and modules are quite conceptual in general, it was my job to dive deeper into the concepts and to understand how things work in low-level. Therefore, going head first and experiencing the workings of the project directly by solving real-issues really helped me solidify the concepts in and out.&lt;/p>
 &lt;p>I also personally started writing daily reports on my work.&lt;/p>
-&lt;figure>&lt;img src="images/daily-reports.png"
-alt="List of Daily Reports"/>&lt;figcaption>
+&lt;figure>&lt;img src="/1/01/junior-experience/images/daily-reports.png"
+alt="List of Daily Reports">&lt;figcaption>
 &lt;p>List of Daily Reports&lt;/p>
 &lt;/figcaption>
 &lt;/figure>
-&lt;figure>&lt;img src="images/daily-report.png"
-alt="Daily Report"/>&lt;figcaption>
+&lt;figure>&lt;img src="/1/01/junior-experience/images/daily-report.png"
+alt="Daily Report">&lt;figcaption>
 &lt;p>Daily Report&lt;/p>
 &lt;/figcaption>
 &lt;/figure>
@@ -426,7 +426,7 @@ alt="Daily Report"/>&lt;figcaption>
 &lt;li>&lt;cite>&lt;a href="https://blog.hanaoto.me/sprint_seoul_2019_june/">After participating in the 2019 Sprint Seoul June event…&lt;/a>&lt;/cite> by Suho Lee&lt;/li>
 &lt;/ul>
 &lt;h2 id="questions--conversations">Questions &amp;amp; Conversations&lt;/h2>
-&lt;p>If you have any questions or concerns, please join the #libplanet-users channel at &lt;a href="https://discord.gg/planetarium">our Discord server&lt;/a> and ask away! We’re open for any questions before the event and after the event. If you want to just come and hang out, our doors always open!&lt;/p></content><author><name>Suho Lee</name><uri>https://github.com/riemannulus</uri><email>suho@planetariumhq.com</email></author></entry><entry><title>How to Use Unity DOTS DynamicBuffer</title><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/05/unity-dots-start-to-use-dynamic-buffer/" title="How to Use Unity DOTS DynamicBuffer"/><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/05/unity-dots-start-to-use-dynamic-buffer/" hreflang="ko" title="Unity DOTS DynamicBuffer 사용하기"/><id>https://snack.planetarium.dev/eng/2020/05/unity-dots-start-to-use-dynamic-buffer/</id><published>2020-05-18T00:00:00+00:00</published><updated>2020-05-18T00:00:00+00:00</updated><content type="html">&lt;p>Hello, I&amp;rsquo;m Hyun Seungmin, &lt;a href="https://nine-chronicles.com/">Nine Chronicles&lt;/a> developer at &lt;a href="https://planetariumhq.com/">Planetarium&lt;/a>. Our project is not yet using Unity &lt;a href="https://unity.com/dots">&lt;abbr title="Data-Oriented Technology Stack">DOTS&lt;/abbr>&lt;/a> but we are working hard to apply it to our next project. So from now on, I will be sharing what I&amp;rsquo;ve learned in my studies.&lt;/p>
+&lt;p>If you have any questions or concerns, please join the #libplanet-users channel at &lt;a href="https://discord.gg/planetarium">our Discord server&lt;/a> and ask away! We’re open for any questions before the event and after the event. If you want to just come and hang out, our doors always open!&lt;/p></content><author><name>Suho Lee</name><uri>https://github.com/riemannulus</uri><email>suho@planetariumhq.com</email></author></entry><entry><title>How to Use Unity DOTS DynamicBuffer</title><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/05/unity-dots-start-to-use-dynamic-buffer/" title="How to Use Unity DOTS DynamicBuffer"/><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/05/unity-dots-start-to-use-dynamic-buffer/" hreflang="ko" title="Unity DOTS DynamicBuffer 사용하기"/><link rel="alternate" href="https://snack.planetarium.dev/1/01/unity-dots-start-to-use-dynamic-buffer/" hreflang="" title=""/><id>https://snack.planetarium.dev/eng/2020/05/unity-dots-start-to-use-dynamic-buffer/</id><published>2020-05-18T00:00:00+00:00</published><updated>2020-05-18T00:00:00+00:00</updated><content type="html">&lt;p>Hello, I&amp;rsquo;m Hyun Seungmin, &lt;a href="https://nine-chronicles.com/">Nine Chronicles&lt;/a> developer at &lt;a href="https://planetariumhq.com/">Planetarium&lt;/a>. Our project is not yet using Unity &lt;a href="https://unity.com/dots">&lt;abbr title="Data-Oriented Technology Stack">DOTS&lt;/abbr>&lt;/a> but we are working hard to apply it to our next project. So from now on, I will be sharing what I&amp;rsquo;ve learned in my studies.&lt;/p>
 &lt;p>This time, let&amp;rsquo;s have a look at &lt;a href="https://docs.unity3d.com/Packages/com.unity.entities@0.10/api/Unity.Entities.DynamicBuffer-1.html">&lt;code>DynamicBuffer&amp;lt;T&amp;gt;&lt;/code>&lt;/a>. We’re going to talk about setting up a dynamic buffer on an entity and using it. Although we’re starting a few steps ahead for our very first DOTS article, I think you can catch on right away by following this piece because the skipped portion isn’t that substantial.&lt;/p>
 &lt;p>This article refers to the &lt;a href="https://docs.unity3d.com/Packages/com.unity.entities@0.10/manual/dynamic_buffers.html">Unity Official Docs&lt;/a> and the &lt;a href="https://www.youtube.com/watch?v=XC84bc95heI">tutorial video&lt;/a>.&lt;/p>
 &lt;h2 id="dev-environment">Dev Environment&lt;/h2>
@@ -478,11 +478,11 @@ alt="Daily Report"/>&lt;figcaption>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>
 &lt;p>I’ve created &lt;em>DOTS_DynamicBufferScene&lt;/em> and added the &lt;code>PlayModeTest&lt;/code> script to a game object with the same name.&lt;/p>
-&lt;p>&lt;img src="images/01.png">&lt;/p>
+&lt;p>&lt;img src="/1/01/unity-dots-start-to-use-dynamic-buffer/images/01.png">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>In play mode, you can check the entity created by the &lt;code>PlayModeTest.Awake()&lt;/code> method through &lt;em>Entity Debugger&lt;/em>. Can you see that the &lt;code>IntBufferElement&lt;/code> buffer has three values?&lt;/p>
-&lt;p>&lt;img src="images/02.png">&lt;/p>
+&lt;p>&lt;img src="/1/01/unity-dots-start-to-use-dynamic-buffer/images/02.png">&lt;/p>
 &lt;/li>
 &lt;/ul>
 &lt;h2 id="using-dynamicbuffertreinterpretudynamicbuffertreinterpretu">Using &lt;a href="https://docs.unity3d.com/Packages/com.unity.entities@0.10/api/Unity.Entities.DynamicBuffer-1.html#Unity_Entities_DynamicBuffer_1_Reinterpret__1">&lt;code>DynamicBuffer&amp;lt;T&amp;gt;.Reinterpret&amp;lt;U&amp;gt;()&lt;/code>&lt;/a>&lt;/h2>
@@ -509,7 +509,7 @@ alt="Daily Report"/>&lt;figcaption>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>
 &lt;p>Let’s check the play mode to see if the value has changed. Great! So our takeaway is that the buffer’s value changed despite not putting in the value of &lt;code>intDynamicBuffer[0]&lt;/code>back into &lt;code>dynamicBuffer[0]&lt;/code>.&lt;/p>
-&lt;p>&lt;img src="images/03.png">&lt;/p>
+&lt;p>&lt;img src="/1/01/unity-dots-start-to-use-dynamic-buffer/images/03.png">&lt;/p>
 &lt;/li>
 &lt;/ul>
 &lt;h2 id="using-entitymanagergetbuffertentitymanagergetbuffert">Using &lt;a href="https://docs.unity3d.com/Packages/com.unity.entities@0.10/api/Unity.Entities.EntityManager.html#Unity_Entities_EntityManager_GetBuffer__1_Unity_Entities_Entity_">&lt;code>EntityManager.GetBuffer&amp;lt;T&amp;gt;()&lt;/code>&lt;/a>&lt;/h2>
@@ -552,7 +552,7 @@ alt="Daily Report"/>&lt;figcaption>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>
 &lt;p>Let’s check if it works well. All values in the buffer have increased by one! &lt;code>Reinterpret&amp;lt;T&amp;gt;()&lt;/code> is fascinating.&lt;/p>
-&lt;p>&lt;img src="images/04.png">&lt;/p>
+&lt;p>&lt;img src="/1/01/unity-dots-start-to-use-dynamic-buffer/images/04.png">&lt;/p>
 &lt;/li>
 &lt;/ul>
 &lt;h2 id="authoring">Authoring&lt;/h2>
@@ -568,11 +568,11 @@ alt="Daily Report"/>&lt;figcaption>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>
 &lt;p>And I’ve added &lt;code>IntBufferElementAuthoring&lt;/code> component that was automatically generated by modifying Scene and added value to the game object. I’ve also added &lt;code>ConvertToEntity&lt;/code> component to make the game object into an entity.&lt;/p>
-&lt;p>&lt;img src="images/05.png">&lt;/p>
+&lt;p>&lt;img src="/1/01/unity-dots-start-to-use-dynamic-buffer/images/05.png">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>The &lt;em>Entity Debugger&lt;/em> shows that an entity with the same name is created as a game object with &lt;strong>Authoring&lt;/strong> components.&lt;/p>
-&lt;p>&lt;img src="images/06.png">&lt;/p>
+&lt;p>&lt;img src="/1/01/unity-dots-start-to-use-dynamic-buffer/images/06.png">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>For our next step, let’s write &lt;code>UnitTag&lt;/code>, &lt;code>PlayerTag&lt;/code> and &lt;code>EnemyTag&lt;/code> components and add an &lt;code>IntBufferElement&lt;/code> buffer to the entity that includes each component.&lt;/p>
@@ -589,8 +589,8 @@ alt="Daily Report"/>&lt;figcaption>
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#369"> [GenerateAuthoringComponent]&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#080;font-weight:bold">public&lt;/span> &lt;span style="color:#080;font-weight:bold">struct&lt;/span> &lt;span style="color:#b06;font-weight:bold">EnemyTag&lt;/span> : IComponentData { }
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="images/07.png">&lt;/p>
-&lt;p>&lt;img src="images/08.png">&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="/1/01/unity-dots-start-to-use-dynamic-buffer/images/07.png">&lt;/p>
+&lt;p>&lt;img src="/1/01/unity-dots-start-to-use-dynamic-buffer/images/08.png">&lt;/p>
 &lt;/li>
 &lt;/ul>
 &lt;h2 id="using-the-dynamicbuffer-in-componentsystem">Using the &lt;code>DynamicBuffer&lt;/code> in &lt;code>ComponentSystem&lt;/code>&lt;/h2>
@@ -635,7 +635,7 @@ alt="Daily Report"/>&lt;figcaption>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>
 &lt;p>If you look at &lt;em>Entity Debugger&lt;/em> in play mode, you can see that the value of &lt;code>UnitTag&lt;/code> component including entity&amp;rsquo;s &lt;code>IntBufferElement&lt;/code> &lt;code>DynamicBuffer&lt;/code> changes.&lt;/p>
-&lt;p>&lt;img src="images/09.png">&lt;/p>
+&lt;p>&lt;img src="/1/01/unity-dots-start-to-use-dynamic-buffer/images/09.png">&lt;/p>
 &lt;/li>
 &lt;/ul>
 &lt;h2 id="using-the-dynamicbuffer-in-jobcomponentsystem">Using the &lt;code>DynamicBuffer&lt;/code> in &lt;code>JobComponentSystem&lt;/code>&lt;/h2>
@@ -669,7 +669,7 @@ alt="Daily Report"/>&lt;figcaption>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>
 &lt;p>It&amp;rsquo;s working! The value is increasing just like we wanted.&lt;/p>
-&lt;p>&lt;img src="images/10.png">&lt;/p>
+&lt;p>&lt;img src="/1/01/unity-dots-start-to-use-dynamic-buffer/images/10.png">&lt;/p>
 &lt;/li>
 &lt;/ul>
 &lt;h2 id="additional-tips">Additional Tips&lt;/h2>
@@ -689,11 +689,11 @@ alt="Daily Report"/>&lt;figcaption>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>
 &lt;p>And to hold tests in the same chunk, I’ve copied two more &lt;code>Enemy&lt;/code> game objects that includes &lt;code>EnemyTag&lt;/code>.&lt;/p>
-&lt;p>&lt;img src="images/11.png">&lt;/p>
+&lt;p>&lt;img src="/1/01/unity-dots-start-to-use-dynamic-buffer/images/11.png">&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>Let’s check the &lt;em>Entity Debugger&lt;/em>. But it looks like &lt;code>IntBufferElement&lt;/code> is still in the chunk. This may be for convenience even though the buffer has been moved to the heap memory.&lt;/p>
-&lt;p>&lt;img src="images/12.png">&lt;/p>
+&lt;p>&lt;img src="/1/01/unity-dots-start-to-use-dynamic-buffer/images/12.png">&lt;/p>
 &lt;/li>
 &lt;/ul>
 &lt;h3 id="implicit-operator">&lt;code>implicit&lt;/code> Operator&lt;/h3>
@@ -798,12 +798,12 @@ And if you were unlucky, you might request blocks from a peer with a very slow c
 &lt;p>We took this approach during this phase because Nine Chronicles was being tested to only a small number of players, enabling us to distribute files without an installer. However, now that we’re deploying Nine Chronicles with an installer, other approaches have been developed. We will introduce some of them on Snack in the near future.&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/div></content><author><name>Seunghun Lee</name><uri>https://github.com/earlbread</uri><email>seunghun@planetariumhq.com</email></author></entry><entry><title>Libplanet Game Jam</title><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/03/libplanet-gamejam/" title="Libplanet Game Jam"/><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/03/libplanet-gamejam/" hreflang="ko" title="Libplanet 게임잼"/><id>https://snack.planetarium.dev/eng/2020/03/libplanet-gamejam/</id><published>2020-03-19T00:00:00+00:00</published><updated>2020-03-19T00:00:00+00:00</updated><content type="html">&lt;p>Hello, I&amp;rsquo;m Seunggeol Song, a game client programmer at Planetarium. This time, I&amp;rsquo;d like to share with you my experience in the in-house &lt;a href="https://en.wikipedia.org/wiki/Game_jam">game jam&lt;/a>
+&lt;/div></content><author><name>Seunghun Lee</name><uri>https://github.com/earlbread</uri><email>seunghun@planetariumhq.com</email></author></entry><entry><title>Libplanet Game Jam</title><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/03/libplanet-gamejam/" title="Libplanet Game Jam"/><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/03/libplanet-gamejam/" hreflang="ko" title="Libplanet 게임잼"/><link rel="alternate" href="https://snack.planetarium.dev/1/01/libplanet-gamejam/" hreflang="" title=""/><id>https://snack.planetarium.dev/eng/2020/03/libplanet-gamejam/</id><published>2020-03-19T00:00:00+00:00</published><updated>2020-03-19T00:00:00+00:00</updated><content type="html">&lt;p>Hello, I&amp;rsquo;m Seunggeol Song, a game client programmer at Planetarium. This time, I&amp;rsquo;d like to share with you my experience in the in-house &lt;a href="https://en.wikipedia.org/wiki/Game_jam">game jam&lt;/a>
 held at Planetarium.&lt;/p>
 &lt;p>Here at Planetarium, we use our own blockchain game library, &lt;a href="https://github.com/planetarium/libplanet">Libplanet&lt;/a>, to create games. Because Libplanet is currently being developed with the assumption that it will be primarily used in &lt;a href="https://unity.com/">Unity&lt;/a>, we have decided to build an &lt;a href="https://en.wikipedia.org/wiki/Software_development_kit">SDK&lt;/a> for Unity to enhance usability within the engine. To aid our development process, we held an in-house game Jam of creating small example Unity projects using Libplanet.&lt;/p>
 &lt;p>Groups of 2 or 3 people were formed and for 2 days before the opening day, we got together to brainstorm potential game projects and eventually came up with 5 dazzling game proposals to apply blockchain technology. I teamed up with &lt;a href="https://github.com/limebell">Chanhyuck Ko&lt;/a> to make a game of &lt;a href="https://en.wikipedia.org/wiki/Gomoku">Omok (Five in a Row)&lt;/a>. To make two players battle, we implemented the concept of a session (i.e. the &lt;strong>room&lt;/strong> of the game), using the concept of &lt;code>Action&lt;/code> and &lt;code>State&lt;/code> in Libplanet.&lt;/p>
-&lt;figure>&lt;img src="screenshot.png"
-alt="The Great Looking Omok Game We Created!"/>&lt;figcaption>
+&lt;figure>&lt;img src="/1/01/libplanet-gamejam/screenshot.png"
+alt="The Great Looking Omok Game We Created!">&lt;figcaption>
 &lt;p>The Great Looking Omok Game We Created!&lt;/p>
 &lt;/figcaption>
 &lt;/figure>
@@ -840,12 +840,12 @@ alt="The Great Looking Omok Game We Created!"/>&lt;figcaption>
 &lt;p>Since change in status value only occurred through an action, a separate action was required to eliminate any changes that were no longer needed. If a target status value is changed to stack changes of Action A, and Action B is used to remove changes that are no longer needed, should those changes be put in the target status value? Yes, there was a logical exception so I&amp;rsquo;ve put this plan on hold.&lt;/p>
 &lt;hr>
 &lt;p>Even while writing this piece, Libplanet has become continuously powerful. The &lt;code>IActionContext&lt;/code> type factor, which is achieved in the execution stage of an action, provides an &lt;code>IRandom&lt;/code> interface so that the same result can be conclusively obtained across all nodes regardless of the action&amp;rsquo;s status value. While the random object provided by Unity cannot provide the same result across all nodes, the &lt;code>IRandom&lt;/code> interface can provide one. Do you see how option 2 might once again be possible?&lt;/p>
-&lt;p>Next time, I&amp;rsquo;ll talk about the &lt;code>IRandom&lt;/code> interface and how to create a beautiful client environment.&lt;/p></content><author><name>Hyun Seungmin</name><uri>https://github.com/boscohyun</uri><email>seungmin@planetariumhq.com</email></author></entry><entry><title>Software from Year 2562 Emerges in Thailand?</title><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/02/thai-in-2562/" title="Software from Year 2562 Emerges in Thailand?"/><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/02/thai-in-2562/" hreflang="ko" title="태국에서만 2562년으로 가는 소프트웨어?"/><id>https://snack.planetarium.dev/eng/2020/02/thai-in-2562/</id><published>2020-02-25T00:00:00+00:00</published><updated>2020-02-25T00:00:00+00:00</updated><content type="html">&lt;h2 id="guest-from-the-future">Guest from the Future&lt;/h2>
+&lt;p>Next time, I&amp;rsquo;ll talk about the &lt;code>IRandom&lt;/code> interface and how to create a beautiful client environment.&lt;/p></content><author><name>Hyun Seungmin</name><uri>https://github.com/boscohyun</uri><email>seungmin@planetariumhq.com</email></author></entry><entry><title>Software from Year 2562 Emerges in Thailand?</title><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/02/thai-in-2562/" title="Software from Year 2562 Emerges in Thailand?"/><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/02/thai-in-2562/" hreflang="ko" title="태국에서만 2562년으로 가는 소프트웨어?"/><link rel="alternate" href="https://snack.planetarium.dev/1/01/thai-in-2562/" hreflang="" title=""/><id>https://snack.planetarium.dev/eng/2020/02/thai-in-2562/</id><published>2020-02-25T00:00:00+00:00</published><updated>2020-02-25T00:00:00+00:00</updated><content type="html">&lt;h2 id="guest-from-the-future">Guest from the Future&lt;/h2>
 &lt;p>Last December, we finally conducted our first alpha test, and thankfully, many people from all over the world participated. It was both a great opportunity and a challenge for the team. Of course, there were big and small problems. Among them, one problem that took us by surprise was IBD.&lt;/p>
 &lt;p>&lt;abbr title="initial block download">IBD&lt;/abbr> is a stage that occurs when you turn on a game, download blocks from other peers in the network and sync them to the latest state. Since we had participants from all over the world, IBD often took a long time or even ended abnormally due to network delays.&lt;/p>
 &lt;p>One of our participants reported a very unusual symptom. Unlike other problems we had at that time, the participant successfully downloaded the first block but couldn’t download the rest afterward.&lt;/p>
-&lt;figure>&lt;img src="1.png"
-alt="Screenshot of Our Participant"/>&lt;figcaption>
+&lt;figure>&lt;img src="/1/01/thai-in-2562/1.png"
+alt="Screenshot of Our Participant">&lt;figcaption>
 &lt;p>Screenshot of Our Participant&lt;/p>
 &lt;/figcaption>
 &lt;/figure>
@@ -854,8 +854,8 @@ alt="Screenshot of Our Participant"/>&lt;figcaption>
 &lt;h2 id="the-date-was-not-wrong">The Date Was Not Wrong&lt;/h2>
 &lt;p>Fortunately, the user experiencing this problem kindly accepted our request for remote access. And once we were able to access the desktop, we saw that the date was still in 2562 as it appeared in the screenshot. First, we opened the Control Panel to sync time. Like most modern operating systems, Windows has the ability to synchronize time over the network. But when we resynchronized time, the control panel and the system&amp;rsquo;s year didn&amp;rsquo;t change and remained in 2562. Notably, apart from the year, date and time were no different from the system on our side.&lt;/p>
 &lt;p>We decided to explore the problem a little bit more, and while checking out the control panel, one detail caught our attention.&lt;/p>
-&lt;figure>&lt;img src="2.png"
-alt="Year Displayed as 2019 in Gregorian calendar"/>&lt;figcaption>
+&lt;figure>&lt;img src="/1/01/thai-in-2562/2.png"
+alt="Year Displayed as 2019 in Gregorian calendar">&lt;figcaption>
 &lt;p>Year Displayed as 2019 in Gregorian calendar&lt;/p>
 &lt;/figcaption>
 &lt;/figure>
@@ -881,7 +881,7 @@ alt="Year Displayed as 2019 in Gregorian calendar"/>&lt;figcaption>
 &lt;p>In addition, because similar mistakes can happen in the future, we have &lt;a href="https://github.com/planetarium/libplanet/pull/737">introduced static analysis&lt;/a> that finds codes whose behavior depends on the locale of the execution environment.&lt;/p>
 &lt;h2 id="closing">Closing&lt;/h2>
 &lt;p>As mentioned earlier, using APIs with non-determinant behaviors such as formatting in functions that calculate the cryptographic hash is not a good decision in the long run. Typically, because strings are heavily formatted, it&amp;rsquo;s safe to avoid them from data level perspective.&lt;/p>
-&lt;p>But unfortunately, we found this problem in the middle of the test, and we haven&amp;rsquo;t made any major modifications yet because changing the hash method was a decision that would break the compatibility of previous data. However, these parts will be modified before releasing Libplanet 1.0.&lt;/p></content><author><name>Hong Minhee</name><uri>https://github.com/dahlia</uri><email>hong.minhee@planetariumhq.com</email></author><author><name>Swen Mun</name><uri>https://github.com/longfin</uri><email>swen@planetariumhq.com</email></author></entry><entry><title>Testing P2P Game with Kubernetes</title><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/02/k8s-1/" title="Testing P2P Game with Kubernetes"/><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/02/k8s-1/" hreflang="ko" title="쿠버네티스로 P2P 게임 테스트하기"/><id>https://snack.planetarium.dev/eng/2020/02/k8s-1/</id><published>2020-02-20T00:00:00+00:00</published><updated>2020-02-20T00:00:00+00:00</updated><content type="html">&lt;p>Hello, I am Swen Mun, &lt;a href="https://libplanet.io">Libplanet&lt;/a> developer at &lt;a href="https://planetariumhq.com">Planetarium&lt;/a>. From December 16th last year, we held a 2-week alpha test of &lt;a href="https://nine-chronicles.com">Nine Chronicles&lt;/a>, a fully decentralized MMORPG. Today, we&amp;rsquo;re going to share our experience deploying headless games on &lt;a href="https://kubernetes.io/">Kubernetes&lt;/a>.&lt;/p>
+&lt;p>But unfortunately, we found this problem in the middle of the test, and we haven&amp;rsquo;t made any major modifications yet because changing the hash method was a decision that would break the compatibility of previous data. However, these parts will be modified before releasing Libplanet 1.0.&lt;/p></content><author><name>Hong Minhee</name><uri>https://github.com/dahlia</uri><email>hong.minhee@planetariumhq.com</email></author><author><name>Swen Mun</name><uri>https://github.com/longfin</uri><email>swen@planetariumhq.com</email></author></entry><entry><title>Testing P2P Game with Kubernetes</title><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/02/k8s-1/" title="Testing P2P Game with Kubernetes"/><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/02/k8s-1/" hreflang="ko" title="쿠버네티스로 P2P 게임 테스트하기"/><link rel="alternate" href="https://snack.planetarium.dev/1/01/k8s-1/" hreflang="" title=""/><id>https://snack.planetarium.dev/eng/2020/02/k8s-1/</id><published>2020-02-20T00:00:00+00:00</published><updated>2020-02-20T00:00:00+00:00</updated><content type="html">&lt;p>Hello, I am Swen Mun, &lt;a href="https://libplanet.io">Libplanet&lt;/a> developer at &lt;a href="https://planetariumhq.com">Planetarium&lt;/a>. From December 16th last year, we held a 2-week alpha test of &lt;a href="https://nine-chronicles.com">Nine Chronicles&lt;/a>, a fully decentralized MMORPG. Today, we&amp;rsquo;re going to share our experience deploying headless games on &lt;a href="https://kubernetes.io/">Kubernetes&lt;/a>.&lt;/p>
 &lt;h2 id="what-did-we-need">What Did We Need?&lt;/h2>
 &lt;p>A game developed with Libplanet is considered a blockchain node, and the same goes for Nine Chronicles. That is, every game client can play a role that is in itself similar to a typical game server (data storage, refereeing). To hold a test as close to a game environment in this P2P environment, we needed to run as many of these game clients at the same time.&lt;/p>
 &lt;p>Although we will be running the games, we’re focused on executing as many game clients at the same time so it&amp;rsquo;s not that important to see the screen of each client. Therefore, we’re OK with running headless without any UI.&lt;/p>
@@ -896,8 +896,8 @@ alt="Year Displayed as 2019 in Gregorian calendar"/>&lt;figcaption>
 &lt;h2 id="kubernetes">Kubernetes&lt;/h2>
 &lt;p>Even though we used a Docker to make a container that easily runs a game build, that wasn&amp;rsquo;t the end. Our goal was to easily run/end/update many clients while maintaining a test environment. To do this, just using Docker wasn’t enough.&lt;/p>
 &lt;p>Our first option was the execution environment offered by cloud providers, such as &lt;abbr title="Elastic Container Service">&lt;a href="https://aws.amazon.com/ecs/?nc1=h_ls">ECS&lt;/a>&lt;/abbr>. These execution environments are designed to efficiently set up complex workflows. But in other words, they&amp;rsquo;re complex to set up and we wouldn’t be using a lot of functionality provided since we’re just using it in a test environment. Also, a test environment dependent on a particular cloud provider would likely to be a burden on future operations.&lt;/p>
-&lt;figure>&lt;img src="comparison.png"
-alt="AWS Container Orchestration Comparison"/>&lt;figcaption>
+&lt;figure>&lt;img src="/1/01/k8s-1/comparison.png"
+alt="AWS Container Orchestration Comparison">&lt;figcaption>
 &lt;p>AWS Container Orchestration Comparison&lt;/p>
 &lt;/figcaption>
 &lt;/figure>

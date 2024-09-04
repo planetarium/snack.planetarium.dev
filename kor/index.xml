@@ -1,4 +1,4 @@
-<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><title>플라네타리움 엔지니어링 스낵</title><link rel="self" href="https://snack.planetarium.dev/kor/index.xml"/><link rel="alternate" href="https://snack.planetarium.dev/kor/" title="플라네타리움 엔지니어링 스낵"/><link rel="alternate" href="https://snack.planetarium.dev/eng/" hreflang="" title="Planetarium Engineering Snack"/><updated>2024-08-01T00:00:00+00:00</updated><id>https://snack.planetarium.dev/kor/</id><entry><title>라이브 게임 에셋 관리 개선기 - 1.어드레서블 에셋 도입</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2024/08/asset-load-1/" title="라이브 게임 에셋 관리 개선기 - 1.어드레서블 에셋 도입"/><id>https://snack.planetarium.dev/kor/2024/08/asset-load-1/</id><published>2024-08-01T00:00:00+00:00</published><updated>2024-08-01T00:00:00+00:00</updated><content type="html">&lt;h1 id="인트로">인트로&lt;/h1>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><title/><link rel="self" href="https://snack.planetarium.dev/kor/index.xml"/><link rel="alternate" href="https://snack.planetarium.dev/kor/" title=""/><link rel="alternate" href="https://snack.planetarium.dev/eng/" hreflang="en" title=""/><updated>2024-08-01T00:00:00+00:00</updated><id>https://snack.planetarium.dev/kor/</id><entry><title>라이브 게임 에셋 관리 개선기 - 1.어드레서블 에셋 도입</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2024/08/asset-load-1/" title="라이브 게임 에셋 관리 개선기 - 1.어드레서블 에셋 도입"/><id>https://snack.planetarium.dev/kor/2024/08/asset-load-1/</id><published>2024-08-01T00:00:00+00:00</published><updated>2024-08-01T00:00:00+00:00</updated><content type="html">&lt;h1 id="인트로">인트로&lt;/h1>
 &lt;hr>
 &lt;p>&lt;img alt="나나이트" src="https://velog.velcdn.com/images/eugene-doobu/post/e5dd641b-c37f-416d-ac5f-38666cf72a45/image.png">&lt;/p>
 &lt;p>게임에는 일반적으로 서비스 앱보다 훨씬 많은 리소스가 사용된다. 이는 게임이 사용자에게 지속해서 재미와 몰입감을 제공하기 위해 풍부한 컨텐츠와 동적인 경험이 필요하기. 만약 우리가 게임을 다운받았는데 게임 캐릭터는 다 똑같이 생긴 졸라맨 뿐이고 공격 커맨드가 하나뿐인 액션게임이었다고 생각해보자. ~~(엥 이거 개꿀잼 게임 슈퍼액션히어로아닌가?)~~ 이렇게 만들어도 게임이 재밌을 수는 있으나, 대부분은 대충 만든 디지털 쓰레기 게임이라고 생각하고 게이머들이 관심을 안 줄 것이다.&lt;/p>
@@ -344,7 +344,7 @@ S2 --> Agent
 &lt;p>이런 이야기에 흥미가 있으시다면, 여기로 연락주시기 바랍니다: {charlie,doug}@paradigm.xyz&lt;/p>
 &lt;h1 id="감사의-말">감사의 말&lt;/h1>
 &lt;p>이 글을 작성하기 위해 여러 시간을 기여해 준 동료 &lt;a href="https://twitter.com/transmissions11">t11s&lt;/a>에 감사 드리며, 함께 논의하고 리뷰 해 준 &lt;a href="https://twitter.com/matthuang">Matt Huang&lt;/a>, &lt;a href="https://twitter.com/danrobinson">Dan Robinson&lt;/a>, &lt;a href="https://twitter.com/_Dave__White_">Dave White&lt;/a>, &lt;a href="https://twitter.com/FrankieIsLost">Frankie&lt;/a>에게도 감사 드립니다.&lt;/p>
-&lt;p>피드백을 준 &lt;a href="https://twitter.com/DangerWillRobin">Will Robinson&lt;/a>, &lt;a href="https://twitter.com/guiltygyoza">GuiltyGyzoa&lt;/a>, &lt;a href="https://twitter.com/nagual_ape">Rafael Morado&lt;/a>, &lt;a href="https://twitter.com/smsunarto">Scott Sunarto&lt;/a>, &lt;a href="https://twitter.com/bertcmiller">Robert Miller&lt;/a>, &lt;a href="https://twitter.com/0xhank">0xhank&lt;/a> 에게 감사드리며, 함께 논의 한 &lt;a href="https://twitter.com/l_udens">Ludens&lt;/a>, &lt;a href="https://twitter.com/phildaian">Phil Daian&lt;/a>, &lt;a href="https://twitter.com/jtguibas">John Guibas&lt;/a>, &lt;a href="https://twitter.com/ArthurRoingBaer">Arthur Roeing Bear&lt;/a>, &lt;a href="https://twitter.com/hilmarveigar">Hilmar Veigar Pétursson&lt;/a> 에게도 감사의 말을 전합니다.&lt;/p></content><author><name>이로운</name><uri>https://github.com/lounlee</uri><email>loun@planetariumhq.com</email></author></entry><entry><title>Libplanet PBFT 전환 제 0화 - 왜 PBFT로 전환을 시작했나요?</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2023/04/pbft-0/" title="Libplanet PBFT 전환 제 0화 - 왜 PBFT로 전환을 시작했나요?"/><link rel="alternate" href="https://snack.planetarium.dev/eng/2023/04/pbft-0/" hreflang="" title="Libplanet PBFT Transitioner Episode 0 - Why did you switch to PBFT?"/><id>https://snack.planetarium.dev/kor/2023/04/pbft-0/</id><published>2023-04-24T00:00:00+00:00</published><updated>2023-04-24T00:00:00+00:00</updated><content type="html">&lt;p>안녕하세요. Planetarium 에서 블록체인 디비전의 Libplanet 팀으로 근무하고 있는 이수호라고 합니다. 오늘은 Libplanet이 PBFT로 전환하게 된 계기와 그 과정에 대해 설명하는 글의 첫 번째 에피소드를 이야기하고자 합니다. 이 블로그 글에서는 Libplanet 블록체인의 합의 변경 과정, 변경 이유, 구체적인 변경 내용 및 새로운 합의 알고리즘의 이점에 대해 논의하겠습니다.&lt;/p>
+&lt;p>피드백을 준 &lt;a href="https://twitter.com/DangerWillRobin">Will Robinson&lt;/a>, &lt;a href="https://twitter.com/guiltygyoza">GuiltyGyzoa&lt;/a>, &lt;a href="https://twitter.com/nagual_ape">Rafael Morado&lt;/a>, &lt;a href="https://twitter.com/smsunarto">Scott Sunarto&lt;/a>, &lt;a href="https://twitter.com/bertcmiller">Robert Miller&lt;/a>, &lt;a href="https://twitter.com/0xhank">0xhank&lt;/a> 에게 감사드리며, 함께 논의 한 &lt;a href="https://twitter.com/l_udens">Ludens&lt;/a>, &lt;a href="https://twitter.com/phildaian">Phil Daian&lt;/a>, &lt;a href="https://twitter.com/jtguibas">John Guibas&lt;/a>, &lt;a href="https://twitter.com/ArthurRoingBaer">Arthur Roeing Bear&lt;/a>, &lt;a href="https://twitter.com/hilmarveigar">Hilmar Veigar Pétursson&lt;/a> 에게도 감사의 말을 전합니다.&lt;/p></content><author><name>이로운</name><uri>https://github.com/lounlee</uri><email>loun@planetariumhq.com</email></author></entry><entry><title>Libplanet PBFT 전환 제 0화 - 왜 PBFT로 전환을 시작했나요?</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2023/04/pbft-0/" title="Libplanet PBFT 전환 제 0화 - 왜 PBFT로 전환을 시작했나요?"/><link rel="alternate" href="https://snack.planetarium.dev/eng/2023/04/pbft-0/" hreflang="en" title="Libplanet PBFT Transitioner Episode 0 - Why did you switch to PBFT?"/><link rel="alternate" href="https://snack.planetarium.dev/1/01/pbft-0/" hreflang="" title=""/><id>https://snack.planetarium.dev/kor/2023/04/pbft-0/</id><published>2023-04-24T00:00:00+00:00</published><updated>2023-04-24T00:00:00+00:00</updated><content type="html">&lt;p>안녕하세요. Planetarium 에서 블록체인 디비전의 Libplanet 팀으로 근무하고 있는 이수호라고 합니다. 오늘은 Libplanet이 PBFT로 전환하게 된 계기와 그 과정에 대해 설명하는 글의 첫 번째 에피소드를 이야기하고자 합니다. 이 블로그 글에서는 Libplanet 블록체인의 합의 변경 과정, 변경 이유, 구체적인 변경 내용 및 새로운 합의 알고리즘의 이점에 대해 논의하겠습니다.&lt;/p>
 &lt;h2 id="소개">소개&lt;/h2>
 &lt;p>블록체인 기술은 혁신을 이루고 있으며, Libplanet은 주요 블록체인 엔진 중 하나입니다. &lt;code>Libplanet&lt;/code>은 .NET 플랫폼으로 구축된 고도로 확장 가능하고 탈중앙화된 오픈소스 플랫폼입니다. 이 플랫폼은 독특한 합의 알고리즘을 사용하여 네트워크 무결성을 보장하며, 높은 효율성과 안정성을 갖추고 있습니다.&lt;/p>
 &lt;h2 id="nine-chronicles에-대해-이야기해-보겠습니다">Nine Chronicles에 대해 이야기해 보겠습니다.&lt;/h2>
@@ -378,7 +378,7 @@ S2 --> Agent
 &lt;h2 id="결론">결론&lt;/h2>
 &lt;p>Libplanet 팀은 모든 사용자들에게 더 나은 블록체인 게임 경험을 제공하기 위해 노력하고 있습니다. Delegated Proof of Stake (DPoS) 합의 알고리즘으로 전환함으로써 더 나은 최종성 보장을 제공하고 체인 전환 관련 문제를 피할 수 있습니다. DPoS는 이해관계자들이 검증 과정에 참여할 수 있도록 하여 PoW나 Practical Byzantine Fault Tolerance (PBFT)보다 더 민주적인 시스템입니다. 하지만 바로 DPoS로 합의 알고리즘을 변경하기에는 여러 고려할 점이 많으므로 PBFT로의 전환을 우선하기로 결정하였습니다.&lt;/p>
 &lt;h2 id="다음-이야기">다음 이야기&lt;/h2>
-&lt;p>PoW -&amp;gt; PBFT를 전환하면서 고려해야 했던 것들에 대해 이야기하도록 하겠습니다.&lt;/p></content><author><name>이수호</name><uri>https://github.com/riemannulus</uri><email>suho@planetariumhq.com</email></author></entry><entry><title>페타바이트 트래픽 원인 분석기</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2023/03/cloudwatch/" title="페타바이트 트래픽 원인 분석기"/><id>https://snack.planetarium.dev/kor/2023/03/cloudwatch/</id><published>2023-03-15T00:00:00+00:00</published><updated>2023-03-15T00:00:00+00:00</updated><content type="html">&lt;p>안녕하세요, Nine Corparation, 게임 디비전에서 DX Engineer로 근무하고 있는 moreal입니다. 이 글에서는 작년 이맘때 회사에서 발견한 문제를 디버깅한 경험을 공유하려고 합니다.&lt;/p>
+&lt;p>PoW -&amp;gt; PBFT를 전환하면서 고려해야 했던 것들에 대해 이야기하도록 하겠습니다.&lt;/p></content><author><name>이수호</name><uri>https://github.com/riemannulus</uri><email>suho@planetariumhq.com</email></author></entry><entry><title>페타바이트 트래픽 원인 분석기</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2023/03/cloudwatch/" title="페타바이트 트래픽 원인 분석기"/><link rel="alternate" href="https://snack.planetarium.dev/1/01/cloudwatch/" hreflang="" title=""/><id>https://snack.planetarium.dev/kor/2023/03/cloudwatch/</id><published>2023-03-15T00:00:00+00:00</published><updated>2023-03-15T00:00:00+00:00</updated><content type="html">&lt;p>안녕하세요, Nine Corparation, 게임 디비전에서 DX Engineer로 근무하고 있는 moreal입니다. 이 글에서는 작년 이맘때 회사에서 발견한 문제를 디버깅한 경험을 공유하려고 합니다.&lt;/p>
 &lt;h2 id="대시보드에-보이는-이상한-단위">대시보드에 보이는 이상한 단위&lt;/h2>
 &lt;p>회사에서는 운영하는 서비스의 상태를 확인하고 주의 사항을 공유하기 위한 주간 미팅을 진행합니다. 서비스는 EKS를 사용하고 있으며, 상태 확인을 위해 AWS CloudWatch Container Insights를 활용하고 있습니다. 그런데 어느 날 대시보드를 확인하다 이상한 수치들을 발견했습니다.&lt;/p>
 &lt;p>&lt;img src="https://velog.velcdn.com/images/moreal/post/3165dcad-605a-4e2d-8ad0-fd083993608d/image.png">&lt;/p>
@@ -430,7 +430,7 @@ S2 --> Agent
 &lt;li>다행히 요금에 큰 문제가 발생하는 문제는 아니었습니다 💭&lt;/li>
 &lt;li>아직도 발생하는 문제입니다. 🙀&lt;/li>
 &lt;li>ChatGPT에게 한 번 정리해달라고 해봤는데 괜찮은 것 같습니다. 👀&lt;/li>
-&lt;/ul></content><author><name>이도건</name><uri>https://github.com/moreal</uri><email>dogeon@planetariumhq.com</email></author></entry><entry><title>Serilog를 통해 애플리케이션 데이터를 수집하고 분석하자</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2023/03/serilog/" title="Serilog를 통해 애플리케이션 데이터를 수집하고 분석하자"/><id>https://snack.planetarium.dev/kor/2023/03/serilog/</id><published>2023-03-03T00:00:00+00:00</published><updated>2023-03-03T00:00:00+00:00</updated><content type="html">&lt;h1 id="들어가며">들어가며&lt;/h1>
+&lt;/ul></content><author><name>이도건</name><uri>https://github.com/moreal</uri><email>dogeon@planetariumhq.com</email></author></entry><entry><title>Serilog를 통해 애플리케이션 데이터를 수집하고 분석하자</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2023/03/serilog/" title="Serilog를 통해 애플리케이션 데이터를 수집하고 분석하자"/><link rel="alternate" href="https://snack.planetarium.dev/1/01/serilog/" hreflang="" title=""/><id>https://snack.planetarium.dev/kor/2023/03/serilog/</id><published>2023-03-03T00:00:00+00:00</published><updated>2023-03-03T00:00:00+00:00</updated><content type="html">&lt;h1 id="들어가며">들어가며&lt;/h1>
 &lt;p>분산 네트워크나 마이크로서비스 아키텍처 상에서는 각 어플리케이션 간의 로그를 수집하고, 어플리케이션 간의 로그를 짝 맞춰야 할 일이 종종 있습니다.
 이 글에서는 Serilog 와 S3를 이용하여 로그를 수집하고, 이를 Athena나 다른 로그 서치 엔진에 응용할 수 있는 방법을 안내하고자 합니다.&lt;/p>
 &lt;h1 id="구조화-된-로그structured-log">구조화 된 로그(Structured Log)&lt;/h1>
@@ -603,7 +603,7 @@ table1은 노드1의 로그를, table2는 노드2의 로그를 나타냅니다.&
 또한 이 글에서는 성능이나 여러 가지 제약 사항들을 고려하지 않았습니다.
 이 글에서 소개한 방법을 실제로 사용할 때는 성능과 여러 제약 사항들을 고려해야 합니다.&lt;/p>
 &lt;hr>
-&lt;p>(이 글은 &lt;a href="https://www.dotnetconf.kr/2023">.NET Conf 2023 x Seoul&lt;/a>에 올해 2월 &lt;a href="https://www.dotnetconf.kr/f2ea6fa1-f802-4dba-be87-539d32d3584b">발표한 내용&lt;/a>을 각색한 것입니다.)&lt;/p></content><author><name>이수호</name><uri>https://github.com/riemannulus</uri><email>suho@planetariumhq.com</email></author></entry><entry><title>신뢰하지 않을 자유</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2022/12/about-trustless/" title="신뢰하지 않을 자유"/><id>https://snack.planetarium.dev/kor/2022/12/about-trustless/</id><published>2022-12-30T00:00:00+00:00</published><updated>2022-12-30T00:00:00+00:00</updated><content type="html">&lt;h1 id="목적">목적&lt;/h1>
+&lt;p>(이 글은 &lt;a href="https://www.dotnetconf.kr/2023">.NET Conf 2023 x Seoul&lt;/a>에 올해 2월 &lt;a href="https://www.dotnetconf.kr/f2ea6fa1-f802-4dba-be87-539d32d3584b">발표한 내용&lt;/a>을 각색한 것입니다.)&lt;/p></content><author><name>이수호</name><uri>https://github.com/riemannulus</uri><email>suho@planetariumhq.com</email></author></entry><entry><title>신뢰하지 않을 자유</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2022/12/about-trustless/" title="신뢰하지 않을 자유"/><link rel="alternate" href="https://snack.planetarium.dev/1/01/about-trustless/" hreflang="" title=""/><id>https://snack.planetarium.dev/kor/2022/12/about-trustless/</id><published>2022-12-30T00:00:00+00:00</published><updated>2022-12-30T00:00:00+00:00</updated><content type="html">&lt;h1 id="목적">목적&lt;/h1>
 &lt;p>이 글에서는 무신뢰성(Trustless), 그리고 무신뢰성에 기반한 시스템(Trustleses System)에 대해서 소개하고, 무신뢰성이 탈중앙 애플리케이션/네트워크를 만들때 어떤 역할을 한다고 알려져있는지 보편적인 이해에 대해 기술합니다. 또한 이러한 이해를 바탕으로, &lt;a href="https://nine-chronicles.com">나인 크로니클&lt;/a>이나 &lt;a href="https://libplanet.io">Libplanet&lt;/a>과 같은, &lt;a href="https://planetariumhq.com">플라네타리움&lt;/a>이 만드는 탈중앙 소프트웨어들에서 어떤 관점으로 수용해야 할지 제 나름의 의견도 남깁니다.&lt;/p>
 &lt;h1 id="사이퍼펑크cypherpunk">사이퍼펑크(Cypherpunk)&lt;/h1>
 &lt;p>무신뢰성에 대한 다양한 견해를 언급할 때에, 가장 먼저 설명해야만 하는 개념이 바로 &lt;a href="https://en.wikipedia.org/wiki/Cypherpunk">사이퍼펑크(Cypherpunk)&lt;/a>입니다. 브루스 베스키의 단편 소설 제목이자 이후 유사한 SF 소설이나 영화 장르로도 알려진 &lt;a href="https://en.wikipedia.org/wiki/Cyberpunk">사이버펑크(Cyberpunk)&lt;/a>와, 암호(Cipher)에서 유래한 이 장난기 어린 단어는, 1992년 &lt;a href="https://en.wikipedia.org/wiki/Jude_Milhon">주드 밀론(Jude Milhon)&lt;/a>이 처음 쓰기 시작했다고 합니다. 이들의 주된 관심사는 프라이버시(Pricvacy)였는데, 이는 &lt;a href="https://en.wikipedia.org/wiki/Eric_Hughes_(cypherpunk)">에릭 휴즈(Eric Huhhes)&lt;/a>가 1993년 발표한 &lt;a href="https://www.activism.net/cypherpunk/manifesto.html">〈사이퍼펑크 선언〉(&amp;ldquo;A Cypherpunk&amp;rsquo;s Manifesto&amp;rdquo;)&lt;/a>에서 엿볼 수 있습니다.&lt;/p>
@@ -746,7 +746,7 @@ table1은 노드1의 로그를, table2는 노드2의 로그를 나타냅니다.&
 &lt;p>지금으로 충분하지 않다. 라는 착안에서 의견이 다른 분도 계시겠지만&amp;hellip; 더 이야기하면 지겨우시겠지만, 그래도 이야기하자면 저는 그 의견에 반대하지 않습니다.&amp;#160;&lt;a href="#fnref:15" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/div></content><author><name>문성원</name><uri>https://github.com/longfin</uri><email>swen@planetariumhq.com</email></author></entry><entry><title>오픈 소스, 블록체인 그리고 탈중앙 애플리케이션</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2022/12/oss-blockchain-and-decentralized/" title="오픈 소스, 블록체인 그리고 탈중앙 애플리케이션"/><id>https://snack.planetarium.dev/kor/2022/12/oss-blockchain-and-decentralized/</id><published>2022-12-07T00:00:00+00:00</published><updated>2022-12-07T00:00:00+00:00</updated><content type="html">&lt;p>이 글에선 &lt;a href="https://ko.wikipedia.org/wiki/%EC%98%A4%ED%94%88_%EC%86%8C%EC%8A%A4">오픈 소스&lt;/a> 운동과 &lt;a href="https://ko.wikipedia.org/wiki/%EB%B8%94%EB%A1%9D%EC%B2%B4%EC%9D%B8">블록체인&lt;/a> 기술이 어떤 특성들을 담보하며, 탈중앙 애플리케이션을 만드는데 어떤 역할을 하는지에 대해 저의 이해를 바탕으로 설명합니다. 이 글의 목적은 &amp;ldquo;진정한 탈중앙 애플리케이션을 만들려면 반드시 오픈 소스를 해야 한다.&amp;ldquo;라기보다는&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>, 오픈 소스나 블록체인 기술이 차지하고 있는 역할을 공유함으로써, 추후 이러한 이해 상충이 벌어지는 부분들을 보다 명확히 하기 위함입니다.&lt;/p>
+&lt;/div></content><author><name>문성원</name><uri>https://github.com/longfin</uri><email>swen@planetariumhq.com</email></author></entry><entry><title>오픈 소스, 블록체인 그리고 탈중앙 애플리케이션</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2022/12/oss-blockchain-and-decentralized/" title="오픈 소스, 블록체인 그리고 탈중앙 애플리케이션"/><link rel="alternate" href="https://snack.planetarium.dev/1/01/oss-blockchain-and-decentralized/" hreflang="" title=""/><id>https://snack.planetarium.dev/kor/2022/12/oss-blockchain-and-decentralized/</id><published>2022-12-07T00:00:00+00:00</published><updated>2022-12-07T00:00:00+00:00</updated><content type="html">&lt;p>이 글에선 &lt;a href="https://ko.wikipedia.org/wiki/%EC%98%A4%ED%94%88_%EC%86%8C%EC%8A%A4">오픈 소스&lt;/a> 운동과 &lt;a href="https://ko.wikipedia.org/wiki/%EB%B8%94%EB%A1%9D%EC%B2%B4%EC%9D%B8">블록체인&lt;/a> 기술이 어떤 특성들을 담보하며, 탈중앙 애플리케이션을 만드는데 어떤 역할을 하는지에 대해 저의 이해를 바탕으로 설명합니다. 이 글의 목적은 &amp;ldquo;진정한 탈중앙 애플리케이션을 만들려면 반드시 오픈 소스를 해야 한다.&amp;ldquo;라기보다는&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>, 오픈 소스나 블록체인 기술이 차지하고 있는 역할을 공유함으로써, 추후 이러한 이해 상충이 벌어지는 부분들을 보다 명확히 하기 위함입니다.&lt;/p>
 &lt;h1 id="오픈-소스">오픈 소스&lt;/h1>
 &lt;p>오픈 소스, 혹은 오픈 소스 운동은 다양한 정의를 가지고 있습니다. &lt;a href="https://ko.wikipedia.org/wiki/%EC%9E%90%EC%9C%A0_%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4">자유 소프트웨어&lt;/a> 운동을 지지하는 쪽에서는 오픈 소스가 자유 소프트웨어의 부분 집합이라고 주장하지만, 오픈 소스를 지지하는 사람들은 오픈 소스가 자유 소프트웨어를 포함하는 더 넓은 개념이라고 이야기하기도 합니다. 이 둘의 차이나 주장도 흥미로운 부분이 많지만, 이 글에서 제가 밝히고 싶은 제 이해의 관점에선 크게 차이가 나진 않으므로 생략하도록 하겠습니다.&lt;/p>
 &lt;p>&lt;a href="https://opensource.org/osd">오픈 소스 이니셔티브의 정의&lt;/a>에 따르면, 오픈 소스는 단순히 코드를 공개하는 것 이상의 기준을 갖추고 있습니다. 가령 파생 제작물(Derived Works)에 대해서도 원본 소프트웨어와 같은 라이선스를 유지해야 한다든지, 개인이나 집단을 차별해서는 안 된다는, 일종의 사회 운동과 같은 성격을 지니고 있기도 합니다.&lt;/p>
@@ -825,7 +825,7 @@ table1은 노드1의 로그를, table2는 노드2의 로그를 나타냅니다.&
 &lt;p>어쩌면 이 시각은 독점 소프트웨어를 바라보는 오픈 소스 진영의 논리와 비슷하다는 느낌도 받습니다. 저는 제가 생각하는 탈중앙 애플리케이션이 세상의 모든 애플리케이션을 대체하는 것은 아마도 불가능할 것이라고 생각합니다.&amp;#160;&lt;a href="#fnref:11" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/div></content><author><name>문성원</name><uri>https://github.com/longfin</uri><email>swen@planetariumhq.com</email></author></entry><entry><title>블록체인? 채굴해서 코인 나오는 건 알겠는데...</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2022/11/the-simple-of-blockchain/" title="블록체인? 채굴해서 코인 나오는 건 알겠는데..."/><id>https://snack.planetarium.dev/kor/2022/11/the-simple-of-blockchain/</id><published>2022-11-15T00:00:00+00:00</published><updated>2022-11-15T00:00:00+00:00</updated><content type="html">&lt;h2 id="알림">알림&lt;/h2>
+&lt;/div></content><author><name>문성원</name><uri>https://github.com/longfin</uri><email>swen@planetariumhq.com</email></author></entry><entry><title>블록체인? 채굴해서 코인 나오는 건 알겠는데...</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2022/11/the-simple-of-blockchain/" title="블록체인? 채굴해서 코인 나오는 건 알겠는데..."/><link rel="alternate" href="https://snack.planetarium.dev/1/01/the-simple-of-blockchain/" hreflang="" title=""/><id>https://snack.planetarium.dev/kor/2022/11/the-simple-of-blockchain/</id><published>2022-11-15T00:00:00+00:00</published><updated>2022-11-15T00:00:00+00:00</updated><content type="html">&lt;h2 id="알림">알림&lt;/h2>
 &lt;p>이번 스낵 글은 이전에 개인 &lt;a href="https://www.getrevue.co/profile/bin_bash_shell/issues/issue-1-838950">뉴스레터&lt;/a>에서 발행했던 내용을
 필사하여 스낵에 올리는 포스트입니다.&lt;/p>
 &lt;h2 id="들어가며">들어가며&lt;/h2>
@@ -875,12 +875,12 @@ table1은 노드1의 로그를, table2는 노드2의 로그를 나타냅니다.&
 이런 블록체인의 특성을 이용하여 게임을 만든다던가, 송금 애플리케이션을 만든다던가, 부동산 증서 거래 애플리케이션을 만드는 방식으로 네트워크에 참여하는 사람들이 있고, 이 사람들의 애플리케이션을 이용하기 위해 코인은 가치를 가지며, 이 코인이 가치를 가지기에 검증인은 검증을 하는 동인이 생기게 됩니다.
 즉, 진정한 블록체인의 가치와 그에 따라오는 코인의 가치는 커뮤니티가 만들어 나가는 네트워크에 있다고 저는 생각합니다.&lt;/p>
 &lt;h2 id="마치며">마치며&lt;/h2>
-&lt;p>최대한 풀어 쓰기 위해 복잡한 내용은 많이 덜어내고 최대한 간결하게 설명하려고 노력해 봤는 데 어떨지 모르겠군요. 잘 읽혔으면 좋겠습니다. 다음 호가 나올 진 모르겠지만 나온다면 조금 더 재미있는 내용으로 찾아뵈려 합니다. 감사합니다.&lt;/p></content><author><name>이수호</name><uri>https://github.com/riemannulus</uri><email>suho@planetariumhq.com</email></author></entry><entry><title>오픈 소스인 립플래닛 프로젝트에 기여 하기 전에 알아야 할 파일들</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2022/09/files-you-would-better-to-know-while-contributing-oss-projects/" title="오픈 소스인 립플래닛 프로젝트에 기여 하기 전에 알아야 할 파일들"/><id>https://snack.planetarium.dev/kor/2022/09/files-you-would-better-to-know-while-contributing-oss-projects/</id><published>2022-09-14T00:00:00+00:00</published><updated>2022-09-14T00:00:00+00:00</updated><content type="html">&lt;p>개발자 커리어와 오픈 소스는 떼려야 뗄 수 없는 관계입니다. 오픈소스를 통해 얻을 수 있는 것은 경력상의 혜택 뿐 아니라, 안전한 환경에서 새로운 기술을 배우며 효율적이고 효과적으로 의사소통하는 방법과 같은 소프트 스킬을 배울 수 있는 기술적 혜택, 그리고 이와 더불어 인맥적 혜택도 있습니다.&lt;/p>
+&lt;p>최대한 풀어 쓰기 위해 복잡한 내용은 많이 덜어내고 최대한 간결하게 설명하려고 노력해 봤는 데 어떨지 모르겠군요. 잘 읽혔으면 좋겠습니다. 다음 호가 나올 진 모르겠지만 나온다면 조금 더 재미있는 내용으로 찾아뵈려 합니다. 감사합니다.&lt;/p></content><author><name>이수호</name><uri>https://github.com/riemannulus</uri><email>suho@planetariumhq.com</email></author></entry><entry><title>오픈 소스인 립플래닛 프로젝트에 기여 하기 전에 알아야 할 파일들</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2022/09/files-you-would-better-to-know-while-contributing-oss-projects/" title="오픈 소스인 립플래닛 프로젝트에 기여 하기 전에 알아야 할 파일들"/><link rel="alternate" href="https://snack.planetarium.dev/1/01/files-you-would-better-to-know-while-contributing-oss-projects/" hreflang="" title=""/><id>https://snack.planetarium.dev/kor/2022/09/files-you-would-better-to-know-while-contributing-oss-projects/</id><published>2022-09-14T00:00:00+00:00</published><updated>2022-09-14T00:00:00+00:00</updated><content type="html">&lt;p>개발자 커리어와 오픈 소스는 떼려야 뗄 수 없는 관계입니다. 오픈소스를 통해 얻을 수 있는 것은 경력상의 혜택 뿐 아니라, 안전한 환경에서 새로운 기술을 배우며 효율적이고 효과적으로 의사소통하는 방법과 같은 소프트 스킬을 배울 수 있는 기술적 혜택, 그리고 이와 더불어 인맥적 혜택도 있습니다.&lt;/p>
 &lt;p>플라네타리움의 핵심 기술인 립플래닛은 오픈 소스 입니다. 회사 업무를 병행하며 오픈 소스 기여를 하기란 쉽지 않은데, 립플래닛 개발 자체가 오픈 소스 기여가 되는 것이죠.&lt;/p>
 &lt;p>그래서 플라네타리움 구성원들 중에서는 오픈 소스 커뮤니티와 개발에 관심이 많았던 분들이 많습니다.&lt;/p>
 &lt;p>그럼 립플래닛을 통해 오픈 소스 프로젝트에 기여를 해볼까요? 물론 말처럼 쉽게 시작되진 않습니다. 그리고 시작 전에 알아야 할 몇가지 파일(README, CONTRIBUTING, LICENSE)들이 있습니다. 이 파일들을 통해서 립플래닛에 대해 소개하고 어떤게 립플래닛에 기여할 수 있는지 말씀드리고자 합니다.&lt;/p>
 &lt;h2 id="1-readme-파일">1. README 파일&lt;/h2>
-&lt;p>&lt;img src="images/1.png">&lt;/p>
+&lt;p>&lt;img src="/1/01/files-you-would-better-to-know-while-contributing-oss-projects/images/1.png">&lt;/p>
 &lt;p>립플래닛(Libplanet)은 탈중앙 방식으로 멀티플레이 온라인 게임을 만들기 위한 .NET 라이브러리입니다. 이는 전체 게임 플레이가 승인된 중앙 서버가 아닌 동일한 노드 사이의 P2P 네트워크에서 발생하는 것을 의미합니다. 내부적으로 블록체인의 많은 기능(예: 전자 서명, 비잔틴 장애 허용(BFT) 합의, 데이터 복제)을 통합합니다.&lt;/p>
 &lt;blockquote>
 &lt;p>💡 &lt;strong>립플래닛을 써야하는 3가지 이유&lt;/strong>
@@ -935,95 +935,95 @@ Libplanet은 .NET 라이브러리이므로 모든 게임 로직을 동일한 언
 &lt;p>이 주제에 관한 릴리스 가이드를 읽어주세요.&lt;/p>
 &lt;h2 id="3-license-파일">3. LICENSE 파일&lt;/h2>
 &lt;p>&lt;a href="https://github.com/planetarium/libplanet">planetarium/libplanet&lt;/a>은 &lt;strong>GNU Lesser General Public License v2.1&lt;/strong>에 따라 사용이 허가되었습니다.&lt;/p>
-&lt;p>&lt;img src="images/2.png">&lt;/p>
+&lt;p>&lt;img src="/1/01/files-you-would-better-to-know-while-contributing-oss-projects/images/2.png">&lt;/p>
 &lt;blockquote>
 &lt;table>
 &lt;thead>
 &lt;tr>
-&lt;th>라이선스의 특징 및 의무사항&lt;/th>
-&lt;th style="text-align:center">GPL 2.0&lt;/th>
-&lt;th style="text-align:center">GPL 3.0&lt;/th>
-&lt;th style="text-align:center">&lt;strong>LGPL&lt;/strong>&lt;/th>
-&lt;th style="text-align:center">AGPL 3.0&lt;/th>
+&lt;th style="text-align: left">라이선스의 특징 및 의무사항&lt;/th>
+&lt;th style="text-align: center">GPL 2.0&lt;/th>
+&lt;th style="text-align: center">GPL 3.0&lt;/th>
+&lt;th style="text-align: center">&lt;strong>LGPL&lt;/strong>&lt;/th>
+&lt;th style="text-align: center">AGPL 3.0&lt;/th>
 &lt;/tr>
 &lt;/thead>
 &lt;tbody>
 &lt;tr>
-&lt;td>복제·배포·수정의 권한 부여&lt;/td>
-&lt;td style="text-align:center">◯&lt;/td>
-&lt;td style="text-align:center">◯&lt;/td>
-&lt;td style="text-align:center">&lt;strong>◯&lt;/strong>&lt;/td>
-&lt;td style="text-align:center">◯&lt;/td>
+&lt;td style="text-align: left">복제·배포·수정의 권한 부여&lt;/td>
+&lt;td style="text-align: center">◯&lt;/td>
+&lt;td style="text-align: center">◯&lt;/td>
+&lt;td style="text-align: center">&lt;strong>◯&lt;/strong>&lt;/td>
+&lt;td style="text-align: center">◯&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>배포시 라이선스 사본 첨부&lt;/td>
-&lt;td style="text-align:center">◯&lt;/td>
-&lt;td style="text-align:center">◯&lt;/td>
-&lt;td style="text-align:center">&lt;strong>◯&lt;/strong>&lt;/td>
-&lt;td style="text-align:center">◯&lt;/td>
+&lt;td style="text-align: left">배포시 라이선스 사본 첨부&lt;/td>
+&lt;td style="text-align: center">◯&lt;/td>
+&lt;td style="text-align: center">◯&lt;/td>
+&lt;td style="text-align: center">&lt;strong>◯&lt;/strong>&lt;/td>
+&lt;td style="text-align: center">◯&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>저작권고지사항 또는 attribution 고지사항 유지&lt;/td>
-&lt;td style="text-align:center">◯&lt;/td>
-&lt;td style="text-align:center">◯&lt;/td>
-&lt;td style="text-align:center">&lt;strong>◯&lt;/strong>&lt;/td>
-&lt;td style="text-align:center">◯&lt;/td>
+&lt;td style="text-align: left">저작권고지사항 또는 attribution 고지사항 유지&lt;/td>
+&lt;td style="text-align: center">◯&lt;/td>
+&lt;td style="text-align: center">◯&lt;/td>
+&lt;td style="text-align: center">&lt;strong>◯&lt;/strong>&lt;/td>
+&lt;td style="text-align: center">◯&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>배포시 소스코드 제공 의무(reciprocity)와 범위&lt;/td>
-&lt;td style="text-align:center">derived work&lt;/td>
-&lt;td style="text-align:center">work based on the program&lt;/td>
-&lt;td style="text-align:center">&lt;strong>derived work&lt;/strong>&lt;/td>
-&lt;td style="text-align:center">derived work&lt;/td>
+&lt;td style="text-align: left">배포시 소스코드 제공 의무(reciprocity)와 범위&lt;/td>
+&lt;td style="text-align: center">derived work&lt;/td>
+&lt;td style="text-align: center">work based on the program&lt;/td>
+&lt;td style="text-align: center">&lt;strong>derived work&lt;/strong>&lt;/td>
+&lt;td style="text-align: center">derived work&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>조합저작물(larger work) 작성 및 타 라이선스 배포 허용&lt;/td>
-&lt;td style="text-align:center">&lt;/td>
-&lt;td style="text-align:center">&lt;/td>
-&lt;td style="text-align:center">&lt;strong>◯&lt;/strong>&lt;/td>
-&lt;td style="text-align:center">&lt;/td>
+&lt;td style="text-align: left">조합저작물(larger work) 작성 및 타 라이선스 배포 허용&lt;/td>
+&lt;td style="text-align: center">&lt;/td>
+&lt;td style="text-align: center">&lt;/td>
+&lt;td style="text-align: center">&lt;strong>◯&lt;/strong>&lt;/td>
+&lt;td style="text-align: center">&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>수정시 수정내용 고지&lt;/td>
-&lt;td style="text-align:center">◯&lt;/td>
-&lt;td style="text-align:center">◯&lt;/td>
-&lt;td style="text-align:center">&lt;strong>◯&lt;/strong>&lt;/td>
-&lt;td style="text-align:center">◯&lt;/td>
+&lt;td style="text-align: left">수정시 수정내용 고지&lt;/td>
+&lt;td style="text-align: center">◯&lt;/td>
+&lt;td style="text-align: center">◯&lt;/td>
+&lt;td style="text-align: center">&lt;strong>◯&lt;/strong>&lt;/td>
+&lt;td style="text-align: center">◯&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>명시적 특허라이선스의 부여&lt;/td>
-&lt;td style="text-align:center">&lt;/td>
-&lt;td style="text-align:center">◯&lt;/td>
-&lt;td style="text-align:center">&lt;strong>​&lt;/strong>&lt;/td>
-&lt;td style="text-align:center">◯&lt;/td>
+&lt;td style="text-align: left">명시적 특허라이선스의 부여&lt;/td>
+&lt;td style="text-align: center">&lt;/td>
+&lt;td style="text-align: center">◯&lt;/td>
+&lt;td style="text-align: center">&lt;strong>​&lt;/strong>&lt;/td>
+&lt;td style="text-align: center">◯&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>라이선시가 특허소송 제기시 라이선스 종료&lt;/td>
-&lt;td style="text-align:center">&lt;/td>
-&lt;td style="text-align:center">◯&lt;/td>
-&lt;td style="text-align:center">&lt;strong>​&lt;/strong>&lt;/td>
-&lt;td style="text-align:center">◯&lt;/td>
+&lt;td style="text-align: left">라이선시가 특허소송 제기시 라이선스 종료&lt;/td>
+&lt;td style="text-align: center">&lt;/td>
+&lt;td style="text-align: center">◯&lt;/td>
+&lt;td style="text-align: center">&lt;strong>​&lt;/strong>&lt;/td>
+&lt;td style="text-align: center">◯&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>이름, 상표, 상호에 대한 사용제한&lt;/td>
-&lt;td style="text-align:center">&lt;/td>
-&lt;td style="text-align:center">&lt;/td>
-&lt;td style="text-align:center">&lt;strong>​&lt;/strong>&lt;/td>
-&lt;td style="text-align:center">&lt;/td>
+&lt;td style="text-align: left">이름, 상표, 상호에 대한 사용제한&lt;/td>
+&lt;td style="text-align: center">&lt;/td>
+&lt;td style="text-align: center">&lt;/td>
+&lt;td style="text-align: center">&lt;strong>​&lt;/strong>&lt;/td>
+&lt;td style="text-align: center">&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>보증의 부인&lt;/td>
-&lt;td style="text-align:center">◯&lt;/td>
-&lt;td style="text-align:center">◯&lt;/td>
-&lt;td style="text-align:center">&lt;strong>◯&lt;/strong>&lt;/td>
-&lt;td style="text-align:center">◯&lt;/td>
+&lt;td style="text-align: left">보증의 부인&lt;/td>
+&lt;td style="text-align: center">◯&lt;/td>
+&lt;td style="text-align: center">◯&lt;/td>
+&lt;td style="text-align: center">&lt;strong>◯&lt;/strong>&lt;/td>
+&lt;td style="text-align: center">◯&lt;/td>
 &lt;/tr>
 &lt;tr>
-&lt;td>책임의 제한&lt;/td>
-&lt;td style="text-align:center">◯&lt;/td>
-&lt;td style="text-align:center">◯&lt;/td>
-&lt;td style="text-align:center">&lt;strong>◯&lt;/strong>&lt;/td>
-&lt;td style="text-align:center">◯&lt;/td>
+&lt;td style="text-align: left">책임의 제한&lt;/td>
+&lt;td style="text-align: center">◯&lt;/td>
+&lt;td style="text-align: center">◯&lt;/td>
+&lt;td style="text-align: center">&lt;strong>◯&lt;/strong>&lt;/td>
+&lt;td style="text-align: center">◯&lt;/td>
 &lt;/tr>
 &lt;/tbody>
 &lt;/table>
@@ -1035,7 +1035,7 @@ Libplanet은 .NET 라이브러리이므로 모든 게임 로직을 동일한 언
 &lt;p>책 ‘오픈 소스로 미래를 연마하라&amp;rsquo;에 써있는 래블업 CEO 신정규님의 추천사로 글을 마무리할까 합니다.&lt;/p>
 &lt;blockquote>
 &lt;p>오픈 소스 문화는 사람의 문화입니다. 그래서 코드만큼 빨리 변하지 않습니다. 오픈 소스 소프트웨어의 코드를 만드는 주체는 서로를 잘 모르는 사람들입니다. 서로 모르는 사람들이 프로그램의 기능이라는 목표를 이루기 위해 지켜야할 규칙이 존재하고, 한 명의 머리로 따라가기 힘든 방대한 양의 코드를 관리하기 위한 다양한 기술적, 문화적 장치가 있습니다. 그러한 ‘문화&amp;rsquo;와 ‘방법론&amp;rsquo;에 대해 이해라는 것이 오픈 소스 생태계에 뛰어들기 위해 필요한 일입니다. 하지만 그만큼 복잡하기에 배우기 쉽지 않기도 합니다.&lt;/p>
-&lt;/blockquote></content><author><name>황혜경</name><uri>https://github.com/hyekyunghwang</uri><email>hyekyung@planetariumhq.com</email></author></entry><entry><title>세상을 늦게 보기 위해 잃었던 것들</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2022/03/things-i-lost-to-see-the-world-late/" title="세상을 늦게 보기 위해 잃었던 것들"/><id>https://snack.planetarium.dev/kor/2022/03/things-i-lost-to-see-the-world-late/</id><published>2022-03-29T00:00:00+00:00</published><updated>2022-03-29T00:00:00+00:00</updated><content type="html">&lt;p>안녕하세요. 플라네타리움 엔진팀에서 &lt;a href="https://libplanet.io/">Libplanet&lt;/a>을 개발하고 있는 이수호입니다.
+&lt;/blockquote></content><author><name>황혜경</name><uri>https://github.com/hyekyunghwang</uri><email>hyekyung@planetariumhq.com</email></author></entry><entry><title>세상을 늦게 보기 위해 잃었던 것들</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2022/03/things-i-lost-to-see-the-world-late/" title="세상을 늦게 보기 위해 잃었던 것들"/><link rel="alternate" href="https://snack.planetarium.dev/1/01/things-i-lost-to-see-the-world-late/" hreflang="" title=""/><id>https://snack.planetarium.dev/kor/2022/03/things-i-lost-to-see-the-world-late/</id><published>2022-03-29T00:00:00+00:00</published><updated>2022-03-29T00:00:00+00:00</updated><content type="html">&lt;p>안녕하세요. 플라네타리움 엔진팀에서 &lt;a href="https://libplanet.io/">Libplanet&lt;/a>을 개발하고 있는 이수호입니다.
 오늘은 &lt;a href="https://libplanet.io/">Libplanet&lt;/a>을 개발하면서 생겼던 문제 중 블록체인에서 흔히 말하는 확정(&lt;code>Confirmation&lt;/code>)으로 인해 생긴 문제와
 그 문제를 발견하고 해결하는 과정을 이야기하고자 합니다.&lt;/p>
 &lt;h2 id="확정confirmation">확정(&lt;code>Confirmation&lt;/code>)&lt;/h2>
@@ -1059,8 +1059,8 @@ Libplanet은 .NET 라이브러리이므로 모든 게임 로직을 동일한 언
 &lt;h2 id="문제-발생">문제 발생&lt;/h2>
 &lt;p>어느 순간, 사용자들에게서 메모리 사용량이 급증한다는 제보를 받았습니다. 켜놓은 지 약 1시간이 지나면 메모리 누수가 심각하게 일어나는 것을 확인할 수 있었습니다.
 특정하는 것은 어렵지 않았습니다. &lt;a href="https://www.jetbrains.com/ko-kr/dotmemory/">dotMemory&lt;/a>를 사용하니 어떤 클래스에서 메모리를 가장 많이 사용하는지 특정할 수 있었습니다.&lt;/p>
-&lt;figure>&lt;img src="images/dot-memory.png"
-alt="DelayedActionRenderer 가 가장 많은 메모리 사용량을 차지하고 있는 dotMemory 분석 결과"/>&lt;figcaption>
+&lt;figure>&lt;img src="/1/01/things-i-lost-to-see-the-world-late/images/dot-memory.png"
+alt="DelayedActionRenderer 가 가장 많은 메모리 사용량을 차지하고 있는 dotMemory 분석 결과">&lt;figcaption>
 &lt;p>DelayedActionRenderer 가 가장 많은 메모리 사용량을 차지하고 있는 dotMemory 분석 결과&lt;/p>
 &lt;/figcaption>
 &lt;/figure>
@@ -1080,10 +1080,10 @@ alt="DelayedActionRenderer 가 가장 많은 메모리 사용량을 차지하고
 &lt;h2 id="마치며">마치며&lt;/h2>
 &lt;p>일련의 모든 블록체인 합의 과정에서의 설명은 모두 작업 기반 증명(Proof-Of-Work, PoW)을 기반으로 설명되었습니다.
 지분 기반 증명(Proof-Of-Stake, PoS)나 다른 합의 알고리즘에서는 필요 없는 이야기일 수도 있습니다.&lt;/p>
-&lt;p>설명이 조금 모자라거나 틀린 부분이 있으면 의견 남겨주시면 감사하겠습니다.&lt;/p></content><author><name>이수호</name><uri>https://github.com/riemannulus</uri><email>suho@planetariumhq.com</email></author></entry><entry><title>탈중앙 게임과 AWS re:Invent</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2022/01/2021-aws-reinvent/" title="탈중앙 게임과 AWS re:Invent"/><id>https://snack.planetarium.dev/kor/2022/01/2021-aws-reinvent/</id><published>2022-01-25T00:00:00+00:00</published><updated>2022-01-25T00:00:00+00:00</updated><content type="html">&lt;p>안녕하세요. &lt;a href="https://libplanet.io/">Libplanet&lt;/a>을 만들고 있는 &lt;a href="https://planetariumhq.com/">플라네타리움&lt;/a>의 문성원입니다.
+&lt;p>설명이 조금 모자라거나 틀린 부분이 있으면 의견 남겨주시면 감사하겠습니다.&lt;/p></content><author><name>이수호</name><uri>https://github.com/riemannulus</uri><email>suho@planetariumhq.com</email></author></entry><entry><title>탈중앙 게임과 AWS re:Invent</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2022/01/2021-aws-reinvent/" title="탈중앙 게임과 AWS re:Invent"/><link rel="alternate" href="https://snack.planetarium.dev/1/01/2021-aws-reinvent/" hreflang="" title=""/><id>https://snack.planetarium.dev/kor/2022/01/2021-aws-reinvent/</id><published>2022-01-25T00:00:00+00:00</published><updated>2022-01-25T00:00:00+00:00</updated><content type="html">&lt;p>안녕하세요. &lt;a href="https://libplanet.io/">Libplanet&lt;/a>을 만들고 있는 &lt;a href="https://planetariumhq.com/">플라네타리움&lt;/a>의 문성원입니다.
 오늘은 작년 11월 29일부터 12월 3일까지 열린, &lt;a href="https://reinvent.awsevents.com/">AWS re:Invent&lt;/a>에 참석하게 된 계기에 대해서 짤막하게나마 공유토록 하겠습니다.&lt;/p>
 &lt;h1 id="aws-reinvent">AWS re:Invent&lt;/h1>
-&lt;p>&lt;img src="images/reinvent2021.png">&lt;/p>
+&lt;p>&lt;img src="/1/01/2021-aws-reinvent/images/reinvent2021.png">&lt;/p>
 &lt;p>AWS re:Invent는 2012년부터 (코로나 19로 연기된 2019년을 제외하고) 매해 열린 개발자
 행사입니다. 클라우드가 단순히 서비스 운영을 넘어, 소프트웨어 개발에 걸쳐서 막대한
 영향력을 끼치는 현대에 들어서는 가장 큰 개발자 행사라고 해도 과언이 아니죠.&lt;/p>
@@ -1106,7 +1106,7 @@ IaaS들이 가져온 변화는 상상 이상의 것입니다. 많은 개발자�
 되었습니다. 블록체인 역시 소프트웨어이기 때문에 예외가 아닙니다.
 실제로, AWS나 Azure, GCP 모두 블록체인(주로 이더리움) 노드에 대한 템플릿, 혹은
 관리형 서비스를 제공합니다.&lt;/p>
-&lt;p>&lt;img src="images/aws-blockchain-template.png">&lt;/p>
+&lt;p>&lt;img src="/1/01/2021-aws-reinvent/images/aws-blockchain-template.png">&lt;/p>
 &lt;p>이런 템플릿으로 노드를 쉽게 띄워서 돌려볼 수 있게 하므로, 엔지니어가 서비스나
 애플리케이션(저희의 경우 게임)의 공개까지 개발 기간을 단축 시키는 효과를 가져올 뿐
 아니라, 운영 환경에서 얻을 수 있는 정보들을 빠르게 개발팀으로 피드백 시키는 수단으로
@@ -1121,7 +1121,7 @@ IaaS로의 이전을 검토하고, &lt;a href="https://aws.amazon.com/ko/gaming/
 아닙니다. 주요한 이유 중 하나는, 개인이나 작은 규모의 팀들이 고민하는
 &amp;ldquo;작은 규모로 먼저 시작할 수 있다&amp;quot;라는 강점이 그리 크게 받아들여지기 어렵기 때문일
 것입니다.&lt;/p>
-&lt;p>&lt;img src="images/9c-structure.jpg">&lt;/p>
+&lt;p>&lt;img src="/1/01/2021-aws-reinvent/images/9c-structure.jpg">&lt;/p>
 &lt;p>하지만 탈중앙 게임을 지향하는 나인 크로니클과 같은 게임에서, 저희는 노드를 운영하는
 사람들이 초기 투자를 많이 하지 않고도 본인들이 원하는 규모에서
 &lt;a href="https://en.wikipedia.org/wiki/Scalability#Horizontal_(scale_out)_and_vertical_scaling_(scale_up)">스케일 아웃&lt;/a> 할 수 있는 환경을 제공하는 것은 대단히 중요하다고
@@ -1190,7 +1190,7 @@ Rider 또는 Visual Studio Code를 쓴다는 가정 하에 Libplanet의 개발 �
 &lt;h2 id="질문-및-대화방">질문 및 대화방&lt;/h2>
 &lt;p>궁금한 게 있으시면 &lt;a href="https://discord.gg/YaHPjcrdrw">저희 Discord 서버&lt;/a>에 오셔서 물어보셔도 됩니다. 행사 전에
 미리 들어오셔서 물어보셔도 좋고, 행사 끝난 뒤라도 좋습니다. 물론 가볍게 놀러 오시는
-것도 환영입니다!&lt;/p></content><author><name>문성원</name><uri>https://github.com/longfin</uri><email>swen@planetariumhq.com</email></author></entry><entry><title>Libplanet 0.11–0.19 업데이트 요약</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2021/10/libplanet-0.11-0.19/" title="Libplanet 0.11–0.19 업데이트 요약"/><link rel="alternate" href="https://snack.planetarium.dev/eng/2021/10/libplanet-0.11-0.19/" hreflang="" title="What's new in Libplanet 0.11–0.19"/><id>https://snack.planetarium.dev/kor/2021/10/libplanet-0.11-0.19/</id><published>2021-10-29T00:00:00+00:00</published><updated>2021-10-29T00:00:00+00:00</updated><content type="html">&lt;p>안녕하세요. 오랜만에 소식 전합니다. &lt;a href="https://libplanet.io/">Libplanet&lt;/a>&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>은 지난 몇 달 동안, 여러
+것도 환영입니다!&lt;/p></content><author><name>문성원</name><uri>https://github.com/longfin</uri><email>swen@planetariumhq.com</email></author></entry><entry><title>Libplanet 0.11–0.19 업데이트 요약</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2021/10/libplanet-0.11-0.19/" title="Libplanet 0.11–0.19 업데이트 요약"/><link rel="alternate" href="https://snack.planetarium.dev/eng/2021/10/libplanet-0.11-0.19/" hreflang="en" title="What's new in Libplanet 0.11–0.19"/><id>https://snack.planetarium.dev/kor/2021/10/libplanet-0.11-0.19/</id><published>2021-10-29T00:00:00+00:00</published><updated>2021-10-29T00:00:00+00:00</updated><content type="html">&lt;p>안녕하세요. 오랜만에 소식 전합니다. &lt;a href="https://libplanet.io/">Libplanet&lt;/a>&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>은 지난 몇 달 동안, 여러
 마이너 버전을 릴리스했습니다. 그렇지만 저희의 릴리스 정책과 주기가 바뀜에 따라,
 그리고 Libplanet으로 만들어진 첫 게임 〈&lt;a href="https://nine-chronicles.com/">나인 크로니클&lt;/a>〉 메인넷의 여러 문제들에
 대응하느라 차분히 그간의 업데이트를 정리된 글로 쓸 여유가 없었습니다.
@@ -1331,7 +1331,7 @@ Libplanet을 쓸 수 있도록, NetMQ에 의존하지 않고도 네트워크 통
 있습니다.&amp;#160;&lt;a href="#fnref:3" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
 &lt;/li>
 &lt;/ol>
-&lt;/div></content><author><name>홍민희</name><uri>https://github.com/dahlia</uri><email>hong.minhee@planetariumhq.com</email></author></entry><entry><title>Libplanet 0.10 릴리스</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/12/libplanet-0.10/" title="Libplanet 0.10 릴리스"/><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/12/libplanet-0.10/" hreflang="" title="Libplanet 0.10 Released"/><id>https://snack.planetarium.dev/kor/2020/12/libplanet-0.10/</id><published>2020-12-08T00:00:00+00:00</published><updated>2020-12-08T00:00:00+00:00</updated><content type="html">&lt;p>안녕하세요. &lt;a href="https://libplanet.io/">Libplanet&lt;/a>의 열 번째 마이너 버전인 &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.10.0">0.10 버전&lt;/a>이
+&lt;/div></content><author><name>홍민희</name><uri>https://github.com/dahlia</uri><email>hong.minhee@planetariumhq.com</email></author></entry><entry><title>Libplanet 0.10 릴리스</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2020/12/libplanet-0.10/" title="Libplanet 0.10 릴리스"/><link rel="alternate" href="https://snack.planetarium.dev/eng/2020/12/libplanet-0.10/" hreflang="en" title="Libplanet 0.10 Released"/><id>https://snack.planetarium.dev/kor/2020/12/libplanet-0.10/</id><published>2020-12-08T00:00:00+00:00</published><updated>2020-12-08T00:00:00+00:00</updated><content type="html">&lt;p>안녕하세요. &lt;a href="https://libplanet.io/">Libplanet&lt;/a>의 열 번째 마이너 버전인 &lt;a href="https://github.com/planetarium/libplanet/releases/tag/0.10.0">0.10 버전&lt;/a>이
 릴리스되었습니다.&lt;/p>
 &lt;p>Libplanet은 분산 P2P로 돌아가는 온라인 멀티플레이어 게임을 만들 때,
 매번 구현해야 하는 P2P 통신이나 데이터 동기화 등의 문제를 푸는
