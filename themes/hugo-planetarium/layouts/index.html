@@ -1,4 +1,4 @@
-{{- if (and .Site.IsMultiLingual (eq .Site.Language.Lang "mis")) }}
+{{- if (and hugo.IsMultilingual (eq .Site.Language.Lang "mis")) }}
   {{ partial "header.html" . }}
   <body class="sans-serif w-90 w-60-ns center center-ns mv2 mv5-ns">
     <script>

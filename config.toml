@@ -13,16 +13,16 @@ disableKinds = ["RSS"]  # We use Atom instead.  See the below.
 # HTML lang attribute, etc.
 defaultContentLanguage = "mis"
 disableLanguages = []
-[languages.mis]
+[languages.mis.params]
 title = "Planetarium Engineering Snack"
 weight = 999
-[languages.eng]
+[languages.eng.params]
 weight = 1
 title = "Planetarium Engineering Snack"
 languageName = "English"
 ianaSubtag = "en"
 dateFormat = "January 2, 2006"
-[languages.kor]
+[languages.kor.params]
 weight = 2
 title = "플라네타리움 엔지니어링 스낵"
 languageName = "한국어"

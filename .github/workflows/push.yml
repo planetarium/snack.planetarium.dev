@@ -9,7 +9,7 @@ jobs:
     steps:
     - uses: peaceiris/actions-hugo@v2
       with:
-        hugo-version: '0.123.8'
+        hugo-version: '0.134.0'
         extended: true
     - uses: actions/checkout@master
     - name: snack-og-image
