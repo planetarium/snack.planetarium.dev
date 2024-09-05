@@ -285,7 +285,7 @@ https://github.com/planetarium/NineChronicles/pull/4736
 
 에셋을 패치 하려면 유저들이 앱 실행 중 항상 접근할 수 있는 웹 서버에 사용할 에셋들을 업로드해야 한다. 나는 회사에서 적극 사용 중인 AWS에서 제공해주는 S3 버킷에 에셋을 업로드하고 게임에서 이를 로드해서 사용해보는 테스트를 하였다.
 
-!youtube[6qXSP9vJ06s?si=RusxbkGKXnIVDUKv]
+{{< youtube 6qXSP9vJ06s >}}
 
 (위 영상에서 '바로 로드 안됨'이라고 나오는 부분의 문제는 해결했는데, 어이없게도 에셋 로드를 하고 로드가 완료되는 걸 기다리지 않고 오브젝트를 생성하고 있었다.)
 
@@ -302,3 +302,4 @@ https://github.com/planetarium/NineChronicles/pull/4736
 ![끝](https://velog.velcdn.com/images/eugene-doobu/post/6b5d1129-ee9d-4a2c-b206-de8783f5d974/image.png)
 
 
+[블로그 원본](https://velog.io/@eugene-doobu/%EB%9D%BC%EC%9D%B4%EB%B8%8C-%EA%B2%8C%EC%9E%84-%EC%97%90%EC%85%8B-%EA%B4%80%EB%A6%AC-%EA%B0%9C%EC%84%A0%EA%B8%B0-1.%EC%96%B4%EB%93%9C%EB%A0%88%EC%84%9C%EB%B8%94-%EC%97%90%EC%85%8B-%EB%8F%84%EC%9E%85)
