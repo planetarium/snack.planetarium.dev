@@ -14,7 +14,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:description" content="{{ .Description }}" />
 <meta property="og:title" content="{{ .Title }}" />
-<meta property="og:site_name" content="{{ .Site.Title }}" />
+<meta property="og:site_name" content="{{ .Site.Params.Title }}" />
 {{ if isset site.Params "ogimage" }}
 {{- /* FIXME: restrict them to bring exactly the same resources */ -}}
 <meta property="og:image"
@@ -51,7 +51,7 @@
 <meta name="twitter:creator" content="@{{ .Site.Params.twitter }}" />
 <meta
   name="twitter:title"
-  content="{{ if .Title }}{{ .Title }} | {{ end }}{{ .Site.Title }}"
+  content="{{ if .Title }}{{ .Title }} | {{ end }}{{ .Site.Params.Title }}"
 />
 <meta
   name="twitter:description"
