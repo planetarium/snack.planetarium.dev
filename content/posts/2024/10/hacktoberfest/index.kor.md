@@ -1,6 +1,6 @@
 ---
 title: "Hacktoberfest 2024 후기"
-date: 2024-11-11
+date: 2024-11-12
 authors: [dogeon.lee]
 ogimage: images/og.kor.png
 ---
@@ -64,7 +64,7 @@ figure
 figure
   src="images/hacktoberfest-offline-contribution.jpg"
   width="500"
-  caption="회의실에서 DX팀 [승민](https://github.com/boscohyun)이 기여를 도와드리는 중"
+  caption="회의실에서 DX팀 [승민](https://github.com/boscohyun)님이 기여를 도와드리는 중"
 >}}
 
 ## 🙏 기여받은 부분들
