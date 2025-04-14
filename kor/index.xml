@@ -1,4 +1,67 @@
-<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><title/><link rel="self" href="https://snack.planetarium.dev/kor/index.xml"/><link rel="alternate" href="https://snack.planetarium.dev/kor/" title=""/><link rel="alternate" href="https://snack.planetarium.dev/eng/" hreflang="en" title=""/><updated>2025-02-11T00:00:00+00:00</updated><id>https://snack.planetarium.dev/kor/</id><entry><title>라이브 게임 에셋 관리 개선기 - 번외1.리소스 최적화 기법</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2025/02/asset-load-extra1/" title="라이브 게임 에셋 관리 개선기 - 번외1.리소스 최적화 기법"/><id>https://snack.planetarium.dev/kor/2025/02/asset-load-extra1/</id><published>2025-02-11T00:00:00+00:00</published><updated>2025-02-11T00:00:00+00:00</updated><content type="html">&lt;p>이번 글은 이전 글에서 이야기한 최적화 기법의 세부 내용을 다루는 글입니다. 이 글을 읽기 전에 이전 글을 읽어보는 걸 추천합니다.&lt;/p>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko"><title/><link rel="self" href="https://snack.planetarium.dev/kor/index.xml"/><link rel="alternate" href="https://snack.planetarium.dev/kor/" title=""/><link rel="alternate" href="https://snack.planetarium.dev/eng/" hreflang="en" title=""/><updated>2025-03-20T00:00:00+00:00</updated><id>https://snack.planetarium.dev/kor/</id><entry><title>라이브 게임 에셋 관리 개선기 - 3.DLC를 통한 에셋 패치 시스템</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2025/03/asset-load-3/" title="라이브 게임 에셋 관리 개선기 - 3.DLC를 통한 에셋 패치 시스템"/><id>https://snack.planetarium.dev/kor/2025/03/asset-load-3/</id><published>2025-03-20T00:00:00+00:00</published><updated>2025-03-20T00:00:00+00:00</updated><content type="html">&lt;h1 id="인트로">인트로&lt;/h1>
+&lt;hr>
+&lt;p>지금까지 클라이언트 단에서 사용하는 에셋들을 최적화하고 관리하는 방법들에 대해 알아보았다. 이제는 클라이언트만의 영역을 넘어 외부 서버에서 게임 에셋을 다운로드 하여 사용하는 패치 시스템에 대한 내용을 정리해 볼 것이다. 이번 편에서는 어드레서블 에셋과 AWS를 이용한 게임의 에셋 패치 시스템에 대한 내용을 다룬다. 관련 내용은 이전 글에서도 설명하였으니 이 글을 보기 전에 같이 보고오면 좋을 것이다.&lt;/p>
+&lt;p>&lt;a href="https://velog.io/@eugene-doobu/%EB%9D%BC%EC%9D%B4%EB%B8%8C-%EA%B2%8C%EC%9E%84-%EC%97%90%EC%85%8B-%EA%B4%80%EB%A6%AC-%EA%B0%9C%EC%84%A0%EA%B8%B0-1.%EC%96%B4%EB%93%9C%EB%A0%88%EC%84%9C%EB%B8%94-%EC%97%90%EC%85%8B-%EB%8F%84%EC%9E%85">라이브-게임-에셋-관리-개선기-1.어드레서블-에셋-도입&lt;/a>&lt;/p>
+&lt;p>1부. 어드레서블 에셋 도입&lt;br>
+2부. 메모리 사용 구조 개선 / 리소스 최적화&lt;br>
+번외1. 리소스 최적화 기법&lt;br>
+&lt;strong>3부. DLC를 통한 패치 시스템&lt;/strong> &amp;lt;- 현재 글&lt;/p>
+&lt;h1 id="에셋-패치-시스템이-필요한-이유">에셋 패치 시스템이 필요한 이유&lt;/h1>
+&lt;hr>
+&lt;p>DLC를 통한 패치 시스템이 모바일 프로젝트의 에셋 관리에서 가장 핵심적인 부분이 될 가능성이 높다. 이미 패치 시스템이 도입된 다른 게임들을 예시로 그 이유를 알아보자.&lt;/p>
+&lt;h3 id="1-에셋-메타데이터">1. 에셋 메타데이터&lt;/h3>
+&lt;p>&lt;img alt="번들 구조" src="https://velog.velcdn.com/images/eugene-doobu/post/a7a9a353-b1e9-4fc7-993d-dc2d09a84320/image.png">&lt;/p>
+&lt;p>&lt;em>&amp;ldquo;출처: UniteSeoul2018 - 에셋번들 실전 가이드 (AssetBundle Best Practices)&amp;rdquo;&lt;/em>&lt;/p>
+&lt;p>기존의 방식대로 프로젝트 빌드에 모든 에셋을 포함시키면 일어나는 문제 중 하나가 &lt;code>Lookup Table&lt;/code>과 프로젝트 로드에 필요한 &lt;code>에셋 메타데이터&lt;/code>의 크기가 비대해진다는 것이다. 관련 데이터 파일들은 생각보다 무겁고, Lookup Table은 트리 구조(플랫폼에 따라 RB트리, BST)로 되어있는데 모든 에셋을 로드하기 위해 &lt;code>nlogn&lt;/code>의 복잡도를 가지기 때문에 이를 로드하기 위한 시간이 생각보다 오래 걸릴 수 있다. 이 작업은 특히 디바이스의 사양이 낮은 모바일에 치명적으로 작용할 수 있다.&lt;/p>
+&lt;p>이를 에셋번들로 분리함으로써 번들마다 별도의 테이블을 갖게 만들고, 필요한 순간 비동기적으로 로드해서 사용하게 한다면 앱 실행시 에셋을 로드하는 부담을 크게 줄일 수 있게 된다.&lt;/p>
+&lt;h3 id="2-패치시스템--앱-용량-줄이기">2. 패치시스템 + 앱 용량 줄이기&lt;/h3>
+&lt;p>&lt;img alt="프커업뎃" src="https://velog.velcdn.com/images/eugene-doobu/post/16e88043-d629-48ed-b874-806831075476/image.png">&lt;/p>
+&lt;p>&lt;em>&amp;ldquo;게임 프린세스 커넥트! Re:Dive 추가 다운로드 팝업&amp;rdquo;&lt;/em>&lt;/p>
+&lt;p>위 게임은 내가 몰래 숨어서 플레이하고 있는 미소녀 수집형 게임인 &amp;lsquo;프리코네&amp;rsquo;의 업데이트 팝업이다. 2024년 4월 18일 기준, iOS 앱스토어에 업로드 된 이 게임의 기본 크기는 &lt;strong>290.1MB&lt;/strong> 이정도는 &amp;lsquo;일반적인 서비스 어플&amp;rsquo;들보다 약간 큰 정도이다. 하지만 게임을 실제로 플레이하기 위해서는 추가적으로 10.73GB의 데이터를 다운로드 받아야 한다.&lt;/p>
+&lt;p>이처럼 대부분의 모바일 게임들은 실제 앱스토어에는 앱을 구동시키기 위한 코드와 최소한의 에셋들만 포함되어있는 빌드파일을 올려놓고, 대부분의 핵심 에셋들은 별도로 다운받는 구조로 제작되어 있다. 위에 예시로 든 프리코네의 경우, 신규 캐릭터 획득시마다 그 캐릭터와 관련된 리소스나 게임 스토리를 보기 위한 리소스도 필요시마다 추가로 다운로드 하고 있어 실제로 게임 플레이를 하면서 다운받는 리소스의 양은 훨씬 많아질 수 있다.&lt;/p>
+&lt;p>이렇게 외부에서 리소스를 다운 받는 이유는 다음과 같다.&lt;/p>
+&lt;ol>
+&lt;li>앱 스토어에서 보이는 앱 용량이 진입장벽으로 느껴질 수 있다.&lt;/li>
+&lt;li>안드로이드는 apk로 앱을 업로드 시 150MB 이하로 유지해야 하는 전통이 있었다.&lt;/li>
+&lt;li>그리고 패치 시스템을 이용하면 &lt;strong>번거로운 앱 심사 과정을 회피하고 업데이트&lt;/strong>를 할 수 있다&lt;/li>
+&lt;/ol>
+&lt;p>사실 개인적인 입장에서는 3번이 핵심이라고 생각한다. 게임개발을 하다 보면 추가로 빌드 과정을 진행하는 것도 엄청난 일이며 이를 앱스토어에 심사받고 정해진 기간까지 심사가 통과할지 기도하는 일도 회사 팀원들의 마음을 힘들게 한다. 이 과정은 많은 시간과 정성이 필요하며, 때로는 예상치 못한 심사 지연이나 거절 사유를 해결하기 위해 추가적인 노력(과 야근)이 필요할 수 있다.&lt;/p>
+&lt;h3 id="앱-패치-심사">앱 패치 심사&lt;/h3>
+&lt;pre tabindex="0">&lt;code>애플의 앱스토어 심사는 구글 마켓에 비해
+까다롭고 오래 걸리는 것으로 유명합니다.
+몇 시간 정도 걸리는 안드로이드 심사와 달리
+애플 앱 심사는 약 일주일 정도 걸리는데요.
+일주일을 기다린 앱 심사 결과가
+거부(reject)면 재심사까지 더해 약 2주일,
+한번 더 reject되면 3주까지 늘어나기도 하죠.
+그렇기에 앱스토어 심사를 가장 빨리 통과하는
+방법은 거부(reject)당하지 않는 거죠.
+- 디스이즈게임, [카드뉴스] 거부를 거부한다! 앱스토어 심사에서 리젝당하지 않는 법
+&lt;/code>&lt;/pre>&lt;p>&lt;a href="https://www.thisisgame.com/webzine/nboard/257/?n=61254?n">https://www.thisisgame.com/webzine/nboard/257/?n=61254?n&lt;/a>&lt;/p>
+&lt;p>모바일게임을 만들고 앱 마켓에 등록하기 위해서는 필수적으로 심사 과정을 거쳐야 한다. 앱 심사는 대부분 첫 심사가 매우 까다롭고 이후 심사는 상대적으로 너그럽게 진행되는 편인 것 같다. 하지만 첫 심사가 아니라고 방심하면은 안 된다. 앱 심사 거절은 언제 어디서 일어날지 모른다.&lt;/p>
+&lt;p>만약 코드 수정이 아닌 단순 리소스 수정이라면, 위와 같은 패치 시스템을 이용해서 앱 심사를 우회하고 바로 유저들에게 콘텐츠 업데이트를 할 수 있다. 한번 DLC 업데이트에 익숙해지고 나면, 단순 리소스 수정 같은 일로 하루 이상의 딜레이를 가질 수 있는 앱 심사 과정을 거쳐야 하는 것이 매우 번거로운 일로 느껴질 수 있을 것이다.&lt;/p>
+&lt;h1 id="적용사례">적용사례&lt;/h1>
+&lt;hr>
+&lt;p>에셋을 패치 하려면 유저들이 앱 실행 중 항상 접근할 수 있는 웹 서버에 사용할 에셋들을 업로드해야 한다. 나는 회사에서 사용 중인 AWS S3 버킷에 에셋을 업로드하고 게임에서 이를 로드해서 사용해보는 테스트를 하였다.&lt;/p>
+&lt;div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+&lt;iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/6qXSP9vJ06s?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+>&lt;/iframe>
+&lt;/div>
+&lt;p>(위 영상에서 &amp;lsquo;바로 로드 안됨&amp;rsquo;이라고 나오는 부분의 문제는 해결했는데, 어이없게도 에셋 로드를 하고 로드가 완료되는 걸 기다리지 않고 오브젝트를 생성하고 있었다.)&lt;/p>
+&lt;p>위 어드레서블의 장점에서 &amp;lsquo;Remote&amp;rsquo;로 에셋을 저장해주는 세팅을 하면 에셋이 원격 저장소에 저장된다고 말했다. 위 영상이 바로 &lt;strong>ActorPrefab&lt;/strong> 그룹을 Remote에 저장되도록 세팅하고 그 에셋들을 S3 원격 저장소에 올려서 사용하는 영상이다. 영상을 보면 알 수 있듯이, 어드레서블에서 제공해주는 기능만을 이용하면 프로젝트의 외딴곳에 에셋이 빌드되고 이를 수동으로 손으로 옮겨서 S3 버킷에 업로드해주는걸 볼 수 있을 것이다.&lt;/p>
+&lt;p>또한 현재 클라이언트에 있는 에셋이 최신 에셋인지 파악하기 위해 해시 값들을 관리해야 하고, 이러한 해시 값을 관리해주는 카탈로그 개념에 대해 인지하고 있어야 한다. 이에 대한 경험과 자세한 설명들은 추후 DLC를 통한 패치 시스템에 대한 글을 쓸 때 다뤄보려고 했으나..&lt;/p>
+&lt;h2 id="적용-중단">적용 중단&lt;/h2>
+&lt;p>다양한 이유로 해당 작업이 중단되었다. 내부 판단으로 굳이 패치시스템까지 적용할 필요가 없다는 결론이 났다. 해당 작업을 위해 리서치한 내용들이 있었는데 이 내용들은 다음 기회에 따로 다뤄보도록 하겠다.&lt;/p>
+&lt;ul>
+&lt;li>S3에서 에셋 관리 전략&lt;/li>
+&lt;li>프로젝트에서의 에셋 관리 전략&lt;/li>
+&lt;li>에셋 그룹화 및 번들 패킹 전략&lt;/li>
+&lt;li>CloudFront와 캐시무효화&lt;/li>
+&lt;/ul>
+&lt;h1 id="끝">끝&lt;/h1>
+&lt;hr>
+&lt;p>드디어 첫 글을 작성한 2024년 7월부터 2025년 3월까지, 긴 시간동안 나태함에 빠져 빠르게 진행하지 못했던 라이브 게임 에셋 관리 개선기에 대한 글 시리즈 작성을 마무리 하였다. 결국 첫 글에서 약속했던 패치시스템을 적용하는 모습은 보여주진 못했지만 지금도 다양한 일을 진행하고 있다. 다음에 재미있는 주제로 새로운 시리즈를 연재할 수 있게 다양한 시도를 하면서 개발자 생활을 이어나가야겠다.&lt;/p>
+&lt;p>&lt;img alt="끝" src="https://velog.velcdn.com/images/eugene-doobu/post/90050fa4-f365-4df1-892d-c069ea731f08/image.png">&lt;/p></content><author><name>홍유진</name><uri>https://github.com/eugene-doobu</uri><email>eugene@planetariumhq.com</email></author></entry><entry><title>라이브 게임 에셋 관리 개선기 - 번외1.리소스 최적화 기법</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2025/02/asset-load-extra1/" title="라이브 게임 에셋 관리 개선기 - 번외1.리소스 최적화 기법"/><id>https://snack.planetarium.dev/kor/2025/02/asset-load-extra1/</id><published>2025-02-11T00:00:00+00:00</published><updated>2025-02-11T00:00:00+00:00</updated><content type="html">&lt;p>이번 글은 이전 글에서 이야기한 최적화 기법의 세부 내용을 다루는 글입니다. 이 글을 읽기 전에 이전 글을 읽어보는 걸 추천합니다.&lt;/p>
 &lt;p>&lt;a href="https://velog.io/@eugene-doobu/%EB%9D%BC%EC%9D%B4%EB%B8%8C-%EA%B2%8C%EC%9E%84-%EC%97%90%EC%85%8B-%EA%B4%80%EB%A6%AC-%EA%B0%9C%EC%84%A0%EA%B8%B0-2.%EB%A9%94%EB%AA%A8%EB%A6%AC-%EC%82%AC%EC%9A%A9-%EC%A0%88%EA%B0%90%EB%82%98%EC%9D%B8%ED%81%AC%EB%A1%9C%EB%8B%88%ED%81%B4">라이브 게임 에셋 관리 개선기 - 2.메모리 사용 절감
 &lt;/a>&lt;/p>
 &lt;p>1부. 어드레서블 에셋 도입 &lt;br>
@@ -1606,57 +1669,4 @@ alt="DelayedActionRenderer 가 가장 많은 메모리 사용량을 차지하고
 &lt;h2 id="마치며">마치며&lt;/h2>
 &lt;p>일련의 모든 블록체인 합의 과정에서의 설명은 모두 작업 기반 증명(Proof-Of-Work, PoW)을 기반으로 설명되었습니다.
 지분 기반 증명(Proof-Of-Stake, PoS)나 다른 합의 알고리즘에서는 필요 없는 이야기일 수도 있습니다.&lt;/p>
-&lt;p>설명이 조금 모자라거나 틀린 부분이 있으면 의견 남겨주시면 감사하겠습니다.&lt;/p></content><author><name>이수호</name><uri>https://github.com/riemannulus</uri><email>suho@planetariumhq.com</email></author></entry><entry><title>탈중앙 게임과 AWS re:Invent</title><link rel="alternate" href="https://snack.planetarium.dev/kor/2022/01/2021-aws-reinvent/" title="탈중앙 게임과 AWS re:Invent"/><link rel="alternate" href="https://snack.planetarium.dev/1/01/2021-aws-reinvent/" hreflang="" title=""/><id>https://snack.planetarium.dev/kor/2022/01/2021-aws-reinvent/</id><published>2022-01-25T00:00:00+00:00</published><updated>2022-01-25T00:00:00+00:00</updated><content type="html">&lt;p>안녕하세요. &lt;a href="https://libplanet.io/">Libplanet&lt;/a>을 만들고 있는 &lt;a href="https://planetariumhq.com/">플라네타리움&lt;/a>의 문성원입니다.
-오늘은 작년 11월 29일부터 12월 3일까지 열린, &lt;a href="https://reinvent.awsevents.com/">AWS re:Invent&lt;/a>에 참석하게 된 계기에 대해서 짤막하게나마 공유토록 하겠습니다.&lt;/p>
-&lt;h1 id="aws-reinvent">AWS re:Invent&lt;/h1>
-&lt;p>&lt;img src="/1/01/2021-aws-reinvent/images/reinvent2021.png">&lt;/p>
-&lt;p>AWS re:Invent는 2012년부터 (코로나 19로 연기된 2019년을 제외하고) 매해 열린 개발자
-행사입니다. 클라우드가 단순히 서비스 운영을 넘어, 소프트웨어 개발에 걸쳐서 막대한
-영향력을 끼치는 현대에 들어서는 가장 큰 개발자 행사라고 해도 과언이 아니죠.&lt;/p>
-&lt;p>AWS는 re:Invent를 통해서 자사의 비전이나 새로운 제품/기능을 소개하는 것을 넘어서
-자사 제품을 사용하여 구축한 모범 사례나 개발 방법론을 공유하기도 합니다.&lt;/p>
-&lt;h1 id="탈중앙-애플리케이션을-만드는-사람들이-왜">탈중앙 애플리케이션을 만드는 사람들이 왜?&lt;/h1>
-&lt;p>저희가 만드는 Libplanet은 탈중앙 게임을 만들기 위한 블록체인 라이브러리입니다.
-저희는 이 Libplanet을 통해서 별도의 중앙 서버 없이도 영원히 플레이 가능한
-멀티플레이어 게임이 만들어지는 것을 기대하며, 목표로 하고 있습니다. 실제로 이
-Libplanet을 사용해서 만들어진 최초의 MMO 게임인 &lt;a href="https://nine-chronicles.com">나인 크로니클&lt;/a> 역시, 현재는 비록
-불완전하지만 이런 탈중앙화 된 게임을 목표로 하여 개발/운영되고 있습니다.&lt;/p>
-&lt;p>여기까지만 보면 Libplanet과 나인 크로니클을 만드는 저희가 AWS 같은 중앙화 된
-&lt;abbr title="Infrastructure as a Service">&lt;a href="https://en.wikipedia.org/wiki/Infrastructure_as_a_service">IaaS&lt;/a>&lt;/abbr>를 쓰는 것, 그리고 그런
-서비스의 제품군을 소개하는 행사에 참석하는 것이 아이러니하게 보일 수 있습니다.&lt;/p>
-&lt;p>여기에는 크게 2가지 이야기할 거리가 있을 것 같습니다.&lt;/p>
-&lt;h2 id="aws는-단순한-운영-도구-이상입니다">AWS는 단순한 운영 도구 이상입니다.&lt;/h2>
-&lt;p>서두에 말씀드린 것처럼, 현대 소프트웨어 개발에 있어서 AWS와 같은 클라우드 기반
-IaaS들이 가져온 변화는 상상 이상의 것입니다. 많은 개발자가 물리 서버 기반의
-초기 투자 없이도 자신의 서비스를 가볍게 시험해보고, 또 릴리스해 볼 수 있게
-되었습니다. 블록체인 역시 소프트웨어이기 때문에 예외가 아닙니다.
-실제로, AWS나 Azure, GCP 모두 블록체인(주로 이더리움) 노드에 대한 템플릿, 혹은
-관리형 서비스를 제공합니다.&lt;/p>
-&lt;p>&lt;img src="/1/01/2021-aws-reinvent/images/aws-blockchain-template.png">&lt;/p>
-&lt;p>이런 템플릿으로 노드를 쉽게 띄워서 돌려볼 수 있게 하므로, 엔지니어가 서비스나
-애플리케이션(저희의 경우 게임)의 공개까지 개발 기간을 단축 시키는 효과를 가져올 뿐
-아니라, 운영 환경에서 얻을 수 있는 정보들을 빠르게 개발팀으로 피드백 시키는 수단으로
-활용 할 수 있습니다.&lt;/p>
-&lt;h2 id="결국-운영-그리고-운영">결국 운영, 그리고 운영&lt;/h2>
-&lt;p>저희가 만들고 있는 나인 크로니클은 특정 중앙 주체가 도맡아서 운영하는 대신, 분산된
-노드들을 여러 주체가 운영하는 것을 목표로 합니다. 하지만 과연 노드를 어디서 어떻게
-실행해야 할까요?&lt;/p>
-&lt;p>종래의 중앙화 된 게임 서버들은 &lt;a href="https://en.wikipedia.org/wiki/On-premises_software">온 프레미스&lt;/a>(on-premises)라고 불리는
-호스팅 환경에서 실행되어왔습니다. 최근에 와서는 운영 효율 등을 고려하여 클라우드
-IaaS로의 이전을 검토하고, &lt;a href="https://aws.amazon.com/ko/gaming/gaming-customer-references/">성공 사례들&lt;/a>이 나오고 있지만, 크게 대중화된 방식은
-아닙니다. 주요한 이유 중 하나는, 개인이나 작은 규모의 팀들이 고민하는
-&amp;ldquo;작은 규모로 먼저 시작할 수 있다&amp;quot;라는 강점이 그리 크게 받아들여지기 어렵기 때문일
-것입니다.&lt;/p>
-&lt;p>&lt;img src="/1/01/2021-aws-reinvent/images/9c-structure.jpg">&lt;/p>
-&lt;p>하지만 탈중앙 게임을 지향하는 나인 크로니클과 같은 게임에서, 저희는 노드를 운영하는
-사람들이 초기 투자를 많이 하지 않고도 본인들이 원하는 규모에서
-&lt;a href="https://en.wikipedia.org/wiki/Scalability#Horizontal_(scale_out)_and_vertical_scaling_(scale_up)">스케일 아웃&lt;/a> 할 수 있는 환경을 제공하는 것은 대단히 중요하다고
-생각합니다. 이는 AWS와 같은 클라우드 IaaS가 제공하는 강점과 정확히 부합하죠.&lt;/p>
-&lt;h1 id="남은-이야기들">남은 이야기들&lt;/h1>
-&lt;p>거창하게 여러 가지 이유를 이야기했지만, 아쉽게도 저는 re:Invent 행사장에서 많은
-세션을 듣지는 못했습니다. 하지만 걱정 마세요. 곧 이어서 다른 분들의 re:Invent
-후기를 이곳에 공유토록 하겠습니다.&lt;/p>
-&lt;p>또한, 저희와 함께 AWS와 같은 클라우드에 탈중앙 게임 노드를 배포 / 운영하는
-도구를 함께 만들 인프라 엔지니어를 &lt;a href="https://recruit.planetariumhq.com/e2ba3fcc-ce76-456a-bea9-0be97622cb48">모시고 있습니다.&lt;/a> 블록체인이나 C# 경험이
-없더라도, AWS와 같은 IaaS를 사용해보신 경험이 있으신 분들이라면 가벼운 마음으로
-많은 지원 부탁드립니다.&lt;/p></content><author><name>문성원</name><uri>https://github.com/longfin</uri><email>swen@planetariumhq.com</email></author></entry></feed>
+&lt;p>설명이 조금 모자라거나 틀린 부분이 있으면 의견 남겨주시면 감사하겠습니다.&lt;/p></content><author><name>이수호</name><uri>https://github.com/riemannulus</uri><email>suho@planetariumhq.com</email></author></entry></feed>
