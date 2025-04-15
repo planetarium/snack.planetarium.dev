@@ -1,7 +1,7 @@
 baseURL = "https://snack.planetarium.dev/"
 theme = "hugo-planetarium"
 copyright = '''
-    &copy; 2019&ndash;2023
+    &copy; 2019&ndash;2025
     <a href="https://planetariumlabs.com/"
         style="color: inherit; text-decoration: inherit;">Planetarium</a>.
 '''
